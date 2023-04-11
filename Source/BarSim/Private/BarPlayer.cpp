@@ -2,9 +2,6 @@
 
 
 #include "BarPlayer.h"
-#include "Kismet/KismetSystemLibrary.h"
-#include "Kismet/GameplayStatics.h"
-#include "Components/BoxComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "MotionControllerComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
@@ -122,6 +119,8 @@ void ABarPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 		InputSystem->BindAction(IA_Look, ETriggerEvent::Triggered, this, &ABarPlayer::Turn);
 		InputSystem->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &ABarPlayer::Jump);
 		InputSystem->BindAction(IA_Jump, ETriggerEvent::Completed, this, &ABarPlayer::JumpEnd);
+		InputSystem->BindAction(IA_Grab_Left, ETriggerEvent::Triggered, this, &ABarPlayer::TryGrabLeft);
+		InputSystem->BindAction(IA_Grab_Left, ETriggerEvent::Triggered, this, &ABarPlayer::TryGrabRight);
 	}
 	
 }
@@ -150,4 +149,12 @@ void ABarPlayer::Jump()
 void ABarPlayer::JumpEnd()
 {
 	ACharacter::StopJumping();
+}
+
+void ABarPlayer::TryGrabLeft()
+{
+}
+
+void ABarPlayer::TryGrabRight()
+{
 }

@@ -24,6 +24,8 @@ public:
 	void Move(const FInputActionValue& Values);
 	void Jump();
 	void JumpEnd();
+	void TryGrabLeft();
+	void TryGrabRight();
 
 	UPROPERTY(BlueprintReadOnly)
 	class UCameraComponent* FPSCamera;
@@ -43,6 +45,10 @@ public:
 	class UInputAction* IA_Jump;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputAction* IA_Fire;
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* IA_Grab_Left;
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* IA_Grab_Right;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	float XMovement;
