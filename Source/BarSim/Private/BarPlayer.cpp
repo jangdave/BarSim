@@ -104,6 +104,8 @@ void ABarPlayer::Tick(float DeltaTime)
 		RightHand->SetRelativeRotation(FPSCamera->GetRelativeRotation());
 		RightAim->SetRelativeRotation(FPSCamera->GetRelativeRotation());
 	}
+
+	Grabbing();
 }
 
 // Called to bind functionality to input
@@ -119,8 +121,10 @@ void ABarPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 		InputSystem->BindAction(IA_Look, ETriggerEvent::Triggered, this, &ABarPlayer::Turn);
 		InputSystem->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &ABarPlayer::Jump);
 		InputSystem->BindAction(IA_Jump, ETriggerEvent::Completed, this, &ABarPlayer::JumpEnd);
-		InputSystem->BindAction(IA_Grab_Left, ETriggerEvent::Triggered, this, &ABarPlayer::TryGrabLeft);
-		InputSystem->BindAction(IA_Grab_Left, ETriggerEvent::Triggered, this, &ABarPlayer::TryGrabRight);
+		InputSystem->BindAction(IA_Grab_Left, ETriggerEvent::Started, this, &ABarPlayer::TryGrabLeft);
+		InputSystem->BindAction(IA_Grab_Left, ETriggerEvent::Completed, this, &ABarPlayer::UnTryGrabLeft);
+		InputSystem->BindAction(IA_Grab_Right, ETriggerEvent::Started, this, &ABarPlayer::TryGrabRight);
+		InputSystem->BindAction(IA_Grab_Right, ETriggerEvent::Completed, this, &ABarPlayer::UnTryGrabRight);
 	}
 	
 }
@@ -168,8 +172,6 @@ void ABarPlayer::TryGrabLeft()
 		return;
 	}
 	// 가장 가까운 물체를 잡도록 하자
-	// 잡은 대상이 있는지 여부를 기억할 변수
-	bool IsGrabbed = false;
 	// 가장 가까운 물체 인덱스
 	int32 Closest = 0;
 	for (int i = 0; i < HitObj.Num(); ++i)
@@ -180,7 +182,7 @@ void ABarPlayer::TryGrabLeft()
 			continue;
 		}
 		// 잡기에 성공했다
-		IsGrabbed = true;
+		IsGrabbedLeft = true;
 		// 2.. 현재 손과 가장 가까운 대상과 이번에 검출할 대상과 더 가까운 대상이 있다면		
 		// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 		float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
@@ -197,14 +199,14 @@ void ABarPlayer::TryGrabLeft()
 	}
 
 	// 잡기에 성공했다면
-	if (IsGrabbed)
+	if (IsGrabbedLeft)
 	{
 		// 물체 물리기능 비활성화
 		GrabbedObject = HitObj[Closest].GetComponent();
 		GrabbedObject->SetSimulatePhysics(false);
 		GrabbedObject->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		// 손에 붙여주자
-		GrabbedObject->AttachToComponent(RightHand, FAttachmentTransformRules::KeepWorldTransform);
+		GrabbedObject->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
 	}
 }
 
@@ -213,7 +215,7 @@ void ABarPlayer::TryGrabRight()
 	// 중심점
 	FVector Center = RightHand->GetComponentLocation();
 	// 충돌체크(구충돌)
-	DrawDebugSphere(GetWorld(), Center, 100.0f, 30, FColor::Red, true, 2.0f);
+	DrawDebugSphere(GetWorld(), Center, 100.0f, 30, FColor::Red, false, 2.0f);
 	// 충돌한 물체를 기억할 배열
 	TArray<FOverlapResult> HitObj;
 	FCollisionQueryParams params;
@@ -225,8 +227,6 @@ void ABarPlayer::TryGrabRight()
 		return;
 	}
 	// 가장 가까운 물체를 잡도록 하자
-	// 잡은 대상이 있는지 여부를 기억할 변수
-	bool IsGrabbed = false;
 	// 가장 가까운 물체 인덱스
 	int32 Closest = 0;
 	for (int i = 0; i < HitObj.Num(); ++i)
@@ -237,7 +237,7 @@ void ABarPlayer::TryGrabRight()
 			continue;
 		}
 		// 잡기에 성공했다
-		IsGrabbed = true;
+		IsGrabbedRight = true;
 		// 2.. 현재 손과 가장 가까운 대상과 이번에 검출할 대상과 더 가까운 대상이 있다면		
 		// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 		float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
@@ -254,7 +254,7 @@ void ABarPlayer::TryGrabRight()
 	}
 
 	// 잡기에 성공했다면
-	if (IsGrabbed)
+	if (IsGrabbedRight)
 	{
 		// 물체 물리기능 비활성화
 		GrabbedObject = HitObj[Closest].GetComponent();
@@ -263,4 +263,87 @@ void ABarPlayer::TryGrabRight()
 		// 손에 붙여주자
 		GrabbedObject->AttachToComponent(RightHand, FAttachmentTransformRules::KeepWorldTransform);
 	}
+}
+void ABarPlayer::UnTryGrabLeft()
+{
+	if (IsGrabbedLeft == false)
+	{
+		return;
+	}
+
+	// 1. 잡지않은 상태로 전환
+	IsGrabbedLeft = false;
+	// 2. 손에서 떼어내기
+	GrabbedObject->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	// 3. 물리기능 활성화
+	GrabbedObject->SetSimulatePhysics(true);
+	// 4. 충돌기능 활성화
+	GrabbedObject->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	// 던지기
+	GrabbedObject->AddForce(ThrowDirection * ThrowPower * GrabbedObject->GetMass());
+
+	// 회전 시키기
+	// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+	float Angle;
+	FVector Axis;
+	DeltaRotation.ToAxisAndAngle(Axis, Angle);
+	float dt = GetWorld()->DeltaTimeSeconds;
+	FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+	GrabbedObject->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+
+	GrabbedObject = nullptr;
+}
+
+void ABarPlayer::UnTryGrabRight()
+{
+	if (IsGrabbedRight == false)
+	{
+		return;
+	}
+
+	// 1. 잡지않은 상태로 전환
+	IsGrabbedRight = false;
+	// 2. 손에서 떼어내기
+	GrabbedObject->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	// 3. 물리기능 활성화
+	GrabbedObject->SetSimulatePhysics(true);
+	// 4. 충돌기능 활성화
+	GrabbedObject->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	// 던지기
+	GrabbedObject->AddForce(ThrowDirection * ThrowPower * GrabbedObject->GetMass());
+
+	// 회전 시키기
+	// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+	float Angle;
+	FVector Axis;
+	DeltaRotation.ToAxisAndAngle(Axis, Angle);
+	float dt = GetWorld()->DeltaTimeSeconds;
+	FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+	GrabbedObject->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+
+	GrabbedObject = nullptr;
+}
+
+// 던질 정보를 업데이트하기위한 기능
+void ABarPlayer::Grabbing()
+{
+	if (IsGrabbedLeft&&IsGrabbedRight == false)
+	{
+		return;
+	}
+
+	// 던질방향 업데이트
+	ThrowDirection = RightHand->GetComponentLocation() - PrevPos;
+	// 회전방향 업데이트
+	// 쿼터니온 공식
+	// Angle1 = Q1, Angle2 = Q2
+	// Angle1 + Angle2 = Q1 * Q2
+	// -Angle1 = Q1.Inverse()
+	// Angle2 - Angle1 = Q2 * Q1.Inverse()
+	DeltaRotation = RightHand->GetComponentQuat() * PrevRot.Inverse();
+
+	// 이전위치 업데이트
+	PrevPos = RightHand->GetComponentLocation();
+	// 이전회전값 업데이트
+	PrevRot = RightHand->GetComponentQuat();
 }

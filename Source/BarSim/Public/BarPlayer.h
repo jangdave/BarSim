@@ -18,19 +18,19 @@ public:
 	// Sets default values for this character's properties
 	ABarPlayer();
 
-	// ȸ��ó�� �Լ�
 	void Turn(const FInputActionValue& Values);
-	// �̵�ó�� �Լ�
 	void Move(const FInputActionValue& Values);
 	void Jump();
 	void JumpEnd();
 	void TryGrabLeft();
 	void TryGrabRight();
+	void UnTryGrabLeft();
+	void UnTryGrabRight();
+	void Grabbing();
 
 	UPROPERTY(BlueprintReadOnly)
 	class UCameraComponent* FPSCamera;
-
-	// �ʿ�Ӽ� : �̵��ӵ�, �Է¾׼�, �Է¸������ؽ�Ʈ
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	float moveSpeed = 500.0f;
 	// Input Mapping Context
@@ -82,9 +82,30 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditDefaultsOnly)
-	float GrabRange = 100;
+	float GrabRange = 150;
 
 	UPROPERTY()
 	class UPrimitiveComponent* GrabbedObject;
+
+	// 잡은 녀석이 있는지 여부 기억할 변수
+	bool IsGrabbedLeft = false;
+	bool IsGrabbedRight = false;
+
+
+	// 던지면 원하는 방향으로 날아가도록 하고싶다.
+	// 던질 방향
+	FVector ThrowDirection;
+	// 던질 힘
+	UPROPERTY(EditAnywhere, Category="Grab")
+	float ThrowPower = 1000;
+	// 직전 위치
+	FVector PrevPos;
+	// 이전 회전값
+	FQuat PrevRot;
+	// 회전방향
+	FQuat DeltaRotation;
+	// 회전빠르기
+	UPROPERTY(EditAnywhere, Category="Grab")
+	float ToquePower = 100;
 
 };
