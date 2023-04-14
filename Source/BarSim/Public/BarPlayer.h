@@ -98,8 +98,8 @@ public:
 	// 잡은 대상이 있는지 여부 기억할 변수
 	bool IsGrabbedLeft = false;
 	bool IsGrabbedRight = false;
-
-	bool isGrabbingTongs = false;
+	bool isGrabbingTongsLeft = false;
+	bool isGrabbingTongsRight = false;
 	// 던질 방향
 	FVector ThrowDirection;
 	// 던질 힘

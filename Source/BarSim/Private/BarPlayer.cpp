@@ -9,6 +9,7 @@
 #include "EnhancedInputComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
+#include "Chaos/ChaosPerfTest.h"
 
 
 // Sets default values
@@ -107,6 +108,7 @@ void ABarPlayer::Tick(float DeltaTime)
 	}
 
 	Grabbing();
+	
 }
 
 // Called to bind functionality to input
@@ -160,7 +162,7 @@ void ABarPlayer::JumpEnd()
 
 void ABarPlayer::Fire()
 {
-	if(isGrabbingTongs)
+	if(isGrabbingTongsRight||isGrabbingTongsLeft)
 	{
 		/*FLatentActionInfo LatentInfo;
 		LatentInfo.CallbackTarget=this;
@@ -233,6 +235,7 @@ void ABarPlayer::TryGrabLeft()
 		// 손에 붙여주자
 		GrabbedObjectLeft->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
 	}
+
 }
 
 void ABarPlayer::TryGrabRight()
@@ -287,7 +290,13 @@ void ABarPlayer::TryGrabRight()
 		//GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		// 손에 붙여주자
 		GrabbedObjectRight->AttachToComponent(RightHand, FAttachmentTransformRules::KeepWorldTransform);
+		if(GrabbedObjectRight->GetName().Contains(TEXT("BP_HuchuTong")))
+		{
+			isGrabbingTongsRight=true;
+			UE_LOG(LogTemp, Warning, TEXT("grab huchu"))
+		}
 	}
+
 }
 void ABarPlayer::UnTryGrabLeft()
 {
