@@ -7,6 +7,7 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 
 
@@ -125,6 +126,8 @@ void ABarPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 		InputSystem->BindAction(IA_Grab_Left, ETriggerEvent::Completed, this, &ABarPlayer::UnTryGrabLeft);
 		InputSystem->BindAction(IA_Grab_Right, ETriggerEvent::Started, this, &ABarPlayer::TryGrabRight);
 		InputSystem->BindAction(IA_Grab_Right, ETriggerEvent::Completed, this, &ABarPlayer::UnTryGrabRight);
+		InputSystem->BindAction(IA_Fire, ETriggerEvent::Started, this, &ABarPlayer::Fire);
+		InputSystem->BindAction(IA_Fire, ETriggerEvent::Completed, this, &ABarPlayer::FireReleased);
 	}
 	
 }
@@ -154,6 +157,28 @@ void ABarPlayer::JumpEnd()
 {
 	ACharacter::StopJumping();
 }
+
+void ABarPlayer::Fire()
+{
+	if(isGrabbingTongs)
+	{
+		/*FLatentActionInfo LatentInfo;
+		LatentInfo.CallbackTarget=this;
+		UKismetSystemLibrary::MoveComponentTo();*/
+
+
+
+
+		
+	}
+
+	
+}
+
+void ABarPlayer::FireReleased()
+{
+}
+
 
 void ABarPlayer::TryGrabLeft()
 {
@@ -259,7 +284,7 @@ void ABarPlayer::TryGrabRight()
 		// 물체 물리기능 비활성화
 		GrabbedObjectRight = HitObj[Closest].GetComponent();
 		GrabbedObjectRight->SetSimulatePhysics(false);
-		GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		//GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		// 손에 붙여주자
 		GrabbedObjectRight->AttachToComponent(RightHand, FAttachmentTransformRules::KeepWorldTransform);
 	}
@@ -358,3 +383,4 @@ if(IsGrabbedRight)
 		PrevRotLeft = RightHand->GetComponentQuat();
 	}
 }
+

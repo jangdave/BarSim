@@ -32,6 +32,8 @@ public:
 	void UnTryGrabRight();
 	// 그랩한 대상 위치값 업데이트
 	void Grabbing();
+	void Fire();
+	void FireReleased();
 
 	UPROPERTY(BlueprintReadOnly)
 	class UCameraComponent* FPSCamera;
@@ -97,6 +99,7 @@ public:
 	bool IsGrabbedLeft = false;
 	bool IsGrabbedRight = false;
 
+	bool isGrabbingTongs = false;
 	// 던질 방향
 	FVector ThrowDirection;
 	// 던질 힘
