@@ -160,7 +160,7 @@ void ABarPlayer::TryGrabLeft()
 	// 중심점
 	FVector Center = LeftHand->GetComponentLocation();
 	// 충돌체크(구충돌)
-	
+	//DrawDebugSphere(GetWorld(), Center, 100, 30, FColor::Red, false, 2.0f);
 	// 충돌한 물체를 기억할 배열
 	TArray<FOverlapResult> HitObj;
 	FCollisionQueryParams params;
@@ -202,11 +202,11 @@ void ABarPlayer::TryGrabLeft()
 	if (IsGrabbedLeft)
 	{
 		// 물체 물리기능 비활성화
-		GrabbedObject = HitObj[Closest].GetComponent();
-		GrabbedObject->SetSimulatePhysics(false);
-		GrabbedObject->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GrabbedObjectLeft = HitObj[Closest].GetComponent();
+		GrabbedObjectLeft->SetSimulatePhysics(false);
+		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		// 손에 붙여주자
-		GrabbedObject->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
+		GrabbedObjectLeft->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
 	}
 }
 
@@ -215,7 +215,7 @@ void ABarPlayer::TryGrabRight()
 	// 중심점
 	FVector Center = RightHand->GetComponentLocation();
 	// 충돌체크(구충돌)
-	DrawDebugSphere(GetWorld(), Center, 100.0f, 30, FColor::Red, false, 2.0f);
+	//DrawDebugSphere(GetWorld(), Center, 100, 30, FColor::Red, false, 2.0f);
 	// 충돌한 물체를 기억할 배열
 	TArray<FOverlapResult> HitObj;
 	FCollisionQueryParams params;
@@ -257,11 +257,11 @@ void ABarPlayer::TryGrabRight()
 	if (IsGrabbedRight)
 	{
 		// 물체 물리기능 비활성화
-		GrabbedObject = HitObj[Closest].GetComponent();
-		GrabbedObject->SetSimulatePhysics(false);
-		GrabbedObject->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GrabbedObjectRight = HitObj[Closest].GetComponent();
+		GrabbedObjectRight->SetSimulatePhysics(false);
+		GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		// 손에 붙여주자
-		GrabbedObject->AttachToComponent(RightHand, FAttachmentTransformRules::KeepWorldTransform);
+		GrabbedObjectRight->AttachToComponent(RightHand, FAttachmentTransformRules::KeepWorldTransform);
 	}
 }
 void ABarPlayer::UnTryGrabLeft()
@@ -274,13 +274,13 @@ void ABarPlayer::UnTryGrabLeft()
 	// 1. 잡지않은 상태로 전환
 	IsGrabbedLeft = false;
 	// 2. 손에서 떼어내기
-	GrabbedObject->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	GrabbedObjectLeft->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 	// 3. 물리기능 활성화
-	GrabbedObject->SetSimulatePhysics(true);
+	GrabbedObjectLeft->SetSimulatePhysics(true);
 	// 4. 충돌기능 활성화
-	GrabbedObject->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	// 던지기
-	GrabbedObject->AddForce(ThrowDirection * ThrowPower * GrabbedObject->GetMass());
+	GrabbedObjectLeft->AddForce(ThrowDirection * ThrowPower * GrabbedObjectLeft->GetMass());
 
 	// 회전 시키기
 	// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
@@ -289,9 +289,9 @@ void ABarPlayer::UnTryGrabLeft()
 	DeltaRotation.ToAxisAndAngle(Axis, Angle);
 	float dt = GetWorld()->DeltaTimeSeconds;
 	FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-	GrabbedObject->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+	GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 
-	GrabbedObject = nullptr;
+	GrabbedObjectLeft = nullptr;
 }
 
 void ABarPlayer::UnTryGrabRight()
@@ -304,13 +304,13 @@ void ABarPlayer::UnTryGrabRight()
 	// 1. 잡지않은 상태로 전환
 	IsGrabbedRight = false;
 	// 2. 손에서 떼어내기
-	GrabbedObject->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	GrabbedObjectRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 	// 3. 물리기능 활성화
-	GrabbedObject->SetSimulatePhysics(true);
+	GrabbedObjectRight->SetSimulatePhysics(true);
 	// 4. 충돌기능 활성화
-	GrabbedObject->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	// 던지기
-	GrabbedObject->AddForce(ThrowDirection * ThrowPower * GrabbedObject->GetMass());
+	GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
 
 	// 회전 시키기
 	// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
@@ -319,9 +319,9 @@ void ABarPlayer::UnTryGrabRight()
 	DeltaRotation.ToAxisAndAngle(Axis, Angle);
 	float dt = GetWorld()->DeltaTimeSeconds;
 	FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-	GrabbedObject->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+	GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 
-	GrabbedObject = nullptr;
+	GrabbedObjectRight = nullptr;
 }
 
 // 던질 정보를 업데이트하기위한 기능
@@ -331,19 +331,30 @@ void ABarPlayer::Grabbing()
 	{
 		return;
 	}
-
+if(IsGrabbedRight)
+{
 	// 던질방향 업데이트
-	ThrowDirection = RightHand->GetComponentLocation() - PrevPos;
+	ThrowDirection = RightHand->GetComponentLocation() - PrevPosRight;
 	// 회전방향 업데이트
 	// 쿼터니온 공식
-	// Angle1 = Q1, Angle2 = Q2
-	// Angle1 + Angle2 = Q1 * Q2
-	// -Angle1 = Q1.Inverse()
-	// Angle2 - Angle1 = Q2 * Q1.Inverse()
-	DeltaRotation = RightHand->GetComponentQuat() * PrevRot.Inverse();
+	DeltaRotation = RightHand->GetComponentQuat() * PrevRotRight.Inverse();
 
 	// 이전위치 업데이트
-	PrevPos = RightHand->GetComponentLocation();
+	PrevPosRight = RightHand->GetComponentLocation();
 	// 이전회전값 업데이트
-	PrevRot = RightHand->GetComponentQuat();
+	PrevRotRight = RightHand->GetComponentQuat();
+}
+	if(IsGrabbedLeft)
+	{
+		// 던질방향 업데이트
+		ThrowDirection = RightHand->GetComponentLocation() - PrevPosLeft;
+		// 회전방향 업데이트
+		// 쿼터니온 공식
+		DeltaRotation = RightHand->GetComponentQuat() * PrevRotLeft.Inverse();
+
+		// 이전위치 업데이트
+		PrevPosLeft = RightHand->GetComponentLocation();
+		// 이전회전값 업데이트
+		PrevRotLeft = RightHand->GetComponentQuat();
+	}
 }

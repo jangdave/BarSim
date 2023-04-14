@@ -22,10 +22,15 @@ public:
 	void Move(const FInputActionValue& Values);
 	void Jump();
 	void JumpEnd();
+	// 왼손 그랩
 	void TryGrabLeft();
+	// 오른손 그랩
 	void TryGrabRight();
+	// 왼손 그랩 해제
 	void UnTryGrabLeft();
+	// 오른손 그랩 해제
 	void UnTryGrabRight();
+	// 그랩한 대상 위치값 업데이트
 	void Grabbing();
 
 	UPROPERTY(BlueprintReadOnly)
@@ -49,12 +54,6 @@ public:
 	class UInputAction* IA_Grab_Left;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputAction* IA_Grab_Right;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	float XMovement;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	float YMovement;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MotionController")
 	class UMotionControllerComponent* LeftHand;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MotionController")
@@ -62,13 +61,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MotionController")
 	class USkeletalMeshComponent* LeftHandMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MotionController")
-	class USkeletalMeshComponent* RightHandMesh;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp", meta = (AllowPrivateAccess = true))
+	class USkeletalMeshComponent* RightHandMesh;	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
 	class UMotionControllerComponent* RightAim;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
 
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	float XMovement;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	float YMovement;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -82,30 +85,35 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditDefaultsOnly)
-	float GrabRange = 150;
-
+	float GrabRange = 100;
+	// 오른손 그랩 컴포넌트
 	UPROPERTY()
-	class UPrimitiveComponent* GrabbedObject;
+	class UPrimitiveComponent* GrabbedObjectRight;
+	// 왼손 그랩 컴포넌트
+	UPROPERTY()
+	class UPrimitiveComponent* GrabbedObjectLeft;
 
-	// 잡은 녀석이 있는지 여부 기억할 변수
+	// 잡은 대상이 있는지 여부 기억할 변수
 	bool IsGrabbedLeft = false;
 	bool IsGrabbedRight = false;
 
-
-	// 던지면 원하는 방향으로 날아가도록 하고싶다.
 	// 던질 방향
 	FVector ThrowDirection;
 	// 던질 힘
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ThrowPower = 1000;
-	// 직전 위치
-	FVector PrevPos;
-	// 이전 회전값
-	FQuat PrevRot;
+	float ThrowPower = 300;
+	// 오른 손 직전 위치
+	FVector PrevPosRight;
+	// 오른 손 이전 회전값
+	FQuat PrevRotRight;
+	// 왼손 직전 위치
+	FVector PrevPosLeft;
+	// 왼손 이전 회전값
+	FQuat PrevRotLeft;
 	// 회전방향
 	FQuat DeltaRotation;
 	// 회전빠르기
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ToquePower = 100;
+	float ToquePower = 20;
 
 };
