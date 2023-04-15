@@ -21,7 +21,8 @@ AHuchuTong::AHuchuTong()
 	tongRight->SetupAttachment(tongLeft, TEXT("TongSocket"));
 
 	tongLeft->SetSimulatePhysics(true);
-	tongRight->SetSimulatePhysics(true);
+	tongRight->SetSimulatePhysics(false);
+
 	
 }
 

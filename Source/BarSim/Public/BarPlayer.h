@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HuchuTong.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "BarPlayer.generated.h"
@@ -34,6 +35,11 @@ public:
 	void Grabbing();
 	void Fire();
 	void FireReleased();
+	UFUNCTION()
+	void TongsMovementExec();
+
+	// Tongs Movement Bool
+	bool IsTongsMovementFinished = true;
 
 	UPROPERTY(BlueprintReadOnly)
 	class UCameraComponent* FPSCamera;
@@ -88,12 +94,21 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	float GrabRange = 100;
+	// 오른손 그랩 액터
+	UPROPERTY()
+	class AActor* GrabbedActorRight;
 	// 오른손 그랩 컴포넌트
 	UPROPERTY()
 	class UPrimitiveComponent* GrabbedObjectRight;
 	// 왼손 그랩 컴포넌트
 	UPROPERTY()
 	class UPrimitiveComponent* GrabbedObjectLeft;
+	UPROPERTY()
+	class AHuchuTong* huchuTong;
+	//UPROPERTY(EditDefaultsOnly, Category = "PlayerSettings")
+	//TSubclassOf<class AHuchuTong> huchuFactory;
+	
+
 
 	// 잡은 대상이 있는지 여부 기억할 변수
 	bool IsGrabbedLeft = false;
@@ -104,7 +119,7 @@ public:
 	FVector ThrowDirection;
 	// 던질 힘
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ThrowPower = 300;
+	float ThrowPower = 100;
 	// 오른 손 직전 위치
 	FVector PrevPosRight;
 	// 오른 손 이전 회전값
@@ -117,6 +132,6 @@ public:
 	FQuat DeltaRotation;
 	// 회전빠르기
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ToquePower = 20;
+	float ToquePower = 10;
 
 };

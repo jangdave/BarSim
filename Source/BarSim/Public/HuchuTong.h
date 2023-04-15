@@ -25,6 +25,7 @@ UPROPERTY(EditAnywhere, Category=TongSettings)
 	class UStaticMeshComponent* baseMesh;
 
 
+
 	class ABarPlayer* player;
 
 protected:
