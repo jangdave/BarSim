@@ -37,9 +37,12 @@ public:
 	void FireReleased();
 	UFUNCTION()
 	void TongsMovementExec();
+	UFUNCTION()
+	void TongsReleaseMovementExec();
 
 	// Tongs Movement Bool
 	bool IsTongsMovementFinished = true;
+	bool IsTongsReleaseMovementFinished = true;
 
 	UPROPERTY(BlueprintReadOnly)
 	class UCameraComponent* FPSCamera;
@@ -105,8 +108,9 @@ public:
 	class UPrimitiveComponent* GrabbedObjectLeft;
 	UPROPERTY()
 	class AHuchuTong* huchuTong;
-	//UPROPERTY(EditDefaultsOnly, Category = "PlayerSettings")
-	//TSubclassOf<class AHuchuTong> huchuFactory;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "PlayerSettings")
+	TSubclassOf<class ATongCollision> tongCol;
 	
 
 

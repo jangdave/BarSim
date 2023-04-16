@@ -9,13 +9,13 @@
 AHuchuTong::AHuchuTong()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
-	baseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("baseMesh"));
-	SetRootComponent(baseMesh);
+	//baseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("baseMesh"));
+	//SetRootComponent(baseMesh);
 
 	tongLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("tongLeft"));
-	tongLeft->SetupAttachment(baseMesh);
+	tongLeft->SetupAttachment(RootComponent);
 
 	tongRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("tongRight"));
 	tongRight->SetupAttachment(tongLeft, TEXT("TongSocket"));
@@ -33,6 +33,7 @@ void AHuchuTong::BeginPlay()
 
 
 	player = Cast<ABarPlayer>(GetAttachParentActor());
+	
 	
 }
 

@@ -21,8 +21,8 @@ UPROPERTY(EditAnywhere, Category=TongSettings)
 	UPROPERTY(EditAnywhere, Category=TongSettings)
 	class UStaticMeshComponent* tongRight;
 
-	UPROPERTY(EditAnywhere, Category=TongSettings)
-	class UStaticMeshComponent* baseMesh;
+	//UPROPERTY(EditAnywhere, Category=TongSettings)
+	//class UStaticMeshComponent* baseMesh;
 
 
 

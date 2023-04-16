@@ -8,6 +8,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "HuchuTong.h"
+#include "TongCollision.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 #include "Chaos/ChaosPerfTest.h"
@@ -92,8 +93,6 @@ void ABarPlayer::BeginPlay()
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
 		FPSCamera->bUsePawnControlRotation = false;
 	}
-
-	//huchuTong=Cast<AHuchuTong>(GetWorld()->GetClass());
 	
 }
 
@@ -102,11 +101,11 @@ void ABarPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled() == false)
+/*	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled() == false)
 	{
 		RightHand->SetRelativeRotation(FPSCamera->GetRelativeRotation());
 		RightAim->SetRelativeRotation(FPSCamera->GetRelativeRotation());
-	}
+	}*/
 
 	Grabbing();
 	
@@ -162,39 +161,63 @@ void ABarPlayer::JumpEnd()
 }
 
 void ABarPlayer::Fire()
-{
+{	
 	if(isGrabbingTongsRight||isGrabbingTongsLeft)
 	{
-		if(IsTongsMovementFinished==true)
+		if(IsTongsMovementFinished==true&&IsTongsReleaseMovementFinished==true)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire"))
+			FVector tongAttachLoc = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
+			FRotator tongAttachRot = huchuTong->tongRight->GetSocketRotation(FName("TongAttach"));
+			ATongCollision* tongColRef = GetWorld()->SpawnActor<ATongCollision>(tongCol, tongAttachLoc, tongAttachRot);
+			FVector attachColScale = tongColRef->compScale;
+			FVector attachActorScale = tongColRef->actorScale;
+			tongColRef->huchuTongRef=huchuTong;
+			UE_LOG(LogTemp, Warning, TEXT("X:%f, Y:%f, Z:%f"), attachColScale.X, attachColScale.Y, attachColScale.Z);
+			UE_LOG(LogTemp, Warning, TEXT("X:%f, Y:%f, Z:%f"), attachActorScale.X, attachActorScale.Y, attachActorScale.Z);
 			IsTongsMovementFinished=false;
+			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
+			FLatentActionInfo LatentInfoL;
+			LatentInfoL.CallbackTarget = this;
 			LatentInfo.ExecutionFunction = FName(TEXT("TongsMovementExec"));
 			LatentInfo.Linkage = 0;
 			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.2, false, EMoveComponentAction::Move, LatentInfo);
+			auto tongCompRefL=huchuTong->tongLeft;
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+		}
+		else
+		{
+			return;
 		}
 	}
 }
 
-void ABarPlayer::FireReleased()
-{
+void ABarPlayer::FireReleased(){
+	
 	if(isGrabbingTongsRight||isGrabbingTongsLeft)
 	{
-		if(IsTongsMovementFinished==true)
+		if(IsTongsMovementFinished==true&&IsTongsReleaseMovementFinished==true)
 		{
+			IsTongsReleaseMovementFinished=false;
 			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire Released"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
+			FLatentActionInfo LatentInfoL;
+			LatentInfoL.CallbackTarget = this;
+			LatentInfo.ExecutionFunction = FName(TEXT("TongsReleaseMovementExec"));
+			LatentInfo.Linkage = 0;
+			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-10, 0, 0), false, false, 0.2, false, EMoveComponentAction::Move, LatentInfo);
+			auto tongCompRefL=huchuTong->tongLeft;
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 		}
 		else
 		{
-			
+			return;
 		}
 	}
 }
@@ -203,6 +226,11 @@ void ABarPlayer::TongsMovementExec()
 {
 	IsTongsMovementFinished=true;
 	
+}
+
+void ABarPlayer::TongsReleaseMovementExec()
+{
+	IsTongsReleaseMovementFinished=true;
 }
 
 
@@ -320,13 +348,15 @@ void ABarPlayer::TryGrabRight()
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
 			isGrabbingTongsRight=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
+			//GrabbedActorRight->K2_AttachToComponent(RightHand, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
+			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepRelative,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
+			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu"))
 		}
 		else
 		{
-			GrabbedObjectRight->AttachToComponent(RightHand, FAttachmentTransformRules::KeepWorldTransform);
+			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
 
 		}
 
@@ -364,7 +394,7 @@ void ABarPlayer::UnTryGrabLeft()
 }
 
 void ABarPlayer::UnTryGrabRight()
-{
+{	
 	if (IsGrabbedRight == false)
 	{
 		return;
@@ -376,6 +406,7 @@ void ABarPlayer::UnTryGrabRight()
 		IsGrabbedRight = false;
 		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->SetSimulatePhysics(true);
+		GrabbedActorRight->SetActorEnableCollision(true);
 		GrabbedObjectRight = nullptr;
 		RightHandMesh->SetVisibility(true);
 		UE_LOG(LogTemp, Warning, TEXT("release huchu"))
