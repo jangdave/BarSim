@@ -7,35 +7,209 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57a45322-dc5a-466f-9962-a4dd3b201ad7" name="Changes" comment="" />
+    <list default="true" id="126b5f21-98e3-4766-bdfe-05683d5885b5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_Animations/rp_manuel_animated_001_dancing_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_Animations/rp_manuel_animated_001_dancing_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_Animations/rp_nathan_animated_003_walking_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_Animations/rp_nathan_animated_003_walking_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_Animations/rp_sophia_animated_003_idling_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_Animations/rp_sophia_animated_003_idling_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/M_UE4Man_Body.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/M_UE4Man_Body_Inst.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/M_UE4Man_Body_Inst2.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/M_UE4Man_Body_Inst3.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/M_UE4Man_ChestLogo.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/M_UE4Man_ChestLogo_Inst.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/MaterialLayers/ML_GlossyBlack_Latex_UE4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/MaterialLayers/ML_Plastic_Shiny_Beige.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/MaterialLayers/ML_Plastic_Shiny_Beige_LOGO.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/MaterialLayers/ML_SoftMetal_UE4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/MaterialLayers/T_ML_Aluminum01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/MaterialLayers/T_ML_Aluminum01_N.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/MaterialLayers/T_ML_Rubber_Blue_01_D.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Materials/MaterialLayers/T_ML_Rubber_Blue_01_N.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Textures/UE4_Logo_MASK.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Textures/UE4_Logo_N.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Textures/UE4_Mannequin_MAT_MASKA.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/Textures/UE4_Mannequin_N.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/UE4_Mannequin.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/UE4_Mannequin_PhysicsAsset.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/UE4_Mannequin_Skeleton.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Materials/RP_Rigged_MasterMaterial.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Materials/RP_Rigged_MasterMaterial_Inst.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Materials/rp_master_placeholder/rp_master_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Materials/rp_master_placeholder/rp_master_normal.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Materials/rp_master_placeholder/rp_master_texture.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_Mobile_ue4/Materials/rp_carla_rigged_001_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_Mobile_ue4/Materials/rp_carla_rigged_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_Mobile_ue4/Materials/rp_carla_rigged_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_Mobile_ue4/Materials/rp_carla_rigged_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_Mobile_ue4/Materials/rp_carla_rigged_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_Mobile_ue4/Materials/rp_carla_rigged_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_Mobile_ue4/rp_carla_rigged_001_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/Materials/rp_carla_rigged_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/Materials/rp_carla_rigged_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/Materials/rp_carla_rigged_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/Materials/rp_carla_rigged_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/Materials/rp_carla_rigged_001_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/Materials/rp_carla_rigged_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/rp_carla_rigged_001_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_Mobile_ue4/Materials/rp_claudia_rigged_002_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_Mobile_ue4/Materials/rp_claudia_rigged_002_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_Mobile_ue4/Materials/rp_claudia_rigged_002_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_Mobile_ue4/Materials/rp_claudia_rigged_002_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_Mobile_ue4/Materials/rp_claudia_rigged_002_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_Mobile_ue4/Materials/rp_claudia_rigged_002_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_Mobile_ue4/rp_claudia_rigged_002_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_ue4/Materials/rp_claudia_rigged_002_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_ue4/Materials/rp_claudia_rigged_002_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_ue4/Materials/rp_claudia_rigged_002_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_ue4/Materials/rp_claudia_rigged_002_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_ue4/Materials/rp_claudia_rigged_002_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_ue4/Materials/rp_claudia_rigged_002_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_claudia_rigged_002_ue4/rp_claudia_rigged_002_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_Mobile_ue4/Materials/rp_dennis_posed_004_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_Mobile_ue4/Materials/rp_dennis_posed_004_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_Mobile_ue4/Materials/rp_dennis_posed_004_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_Mobile_ue4/Materials/rp_dennis_posed_004_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_Mobile_ue4/Materials/rp_dennis_posed_004_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_Mobile_ue4/Materials/rp_dennis_posed_004_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_Mobile_ue4/rp_dennis_posed_004_Mobile.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_ue4/Materials/rp_dennis_posed_004_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_ue4/Materials/rp_dennis_posed_004_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_ue4/Materials/rp_dennis_posed_004_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_ue4/Materials/rp_dennis_posed_004_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_ue4/Materials/rp_dennis_posed_004_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_ue4/Materials/rp_dennis_posed_004_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_dennis_posed_004_ue4/rp_dennis_posed_004.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_Mobile_ue4/Materials/rp_eric_rigged_001_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_Mobile_ue4/Materials/rp_eric_rigged_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_Mobile_ue4/Materials/rp_eric_rigged_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_Mobile_ue4/Materials/rp_eric_rigged_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_Mobile_ue4/Materials/rp_eric_rigged_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_Mobile_ue4/Materials/rp_eric_rigged_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_Mobile_ue4/rp_eric_rigged_001_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_ue4/Materials/rp_eric_rigged_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_ue4/Materials/rp_eric_rigged_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_ue4/Materials/rp_eric_rigged_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_ue4/Materials/rp_eric_rigged_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_ue4/Materials/rp_eric_rigged_001_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_ue4/Materials/rp_eric_rigged_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_eric_rigged_001_ue4/rp_eric_rigged_001_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_Mobile_ue4/Materials/rp_fabienne_percy_posed_001_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_Mobile_ue4/Materials/rp_fabienne_percy_posed_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_Mobile_ue4/Materials/rp_fabienne_percy_posed_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_Mobile_ue4/Materials/rp_fabienne_percy_posed_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_Mobile_ue4/Materials/rp_fabienne_percy_posed_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_Mobile_ue4/Materials/rp_fabienne_percy_posed_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_Mobile_ue4/rp_fabienne_percy_posed_001_Mobile.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_ue4/Materials/rp_fabienne_percy_posed_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_ue4/Materials/rp_fabienne_percy_posed_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_ue4/Materials/rp_fabienne_percy_posed_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_ue4/Materials/rp_fabienne_percy_posed_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_ue4/Materials/rp_fabienne_percy_posed_001_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_ue4/Materials/rp_fabienne_percy_posed_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_fabienne_percy_posed_001_ue4/rp_fabienne_percy_posed_001.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_Mobile_ue4/Materials/rp_manuel_rigged_001_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_Mobile_ue4/Materials/rp_manuel_rigged_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_Mobile_ue4/Materials/rp_manuel_rigged_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_Mobile_ue4/Materials/rp_manuel_rigged_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_Mobile_ue4/Materials/rp_manuel_rigged_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_Mobile_ue4/Materials/rp_manuel_rigged_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_Mobile_ue4/rp_manuel_rigged_001_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_ue4/Materials/rp_manuel_rigged_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_ue4/Materials/rp_manuel_rigged_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_ue4/Materials/rp_manuel_rigged_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_ue4/Materials/rp_manuel_rigged_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_ue4/Materials/rp_manuel_rigged_001_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_ue4/Materials/rp_manuel_rigged_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_manuel_rigged_001_ue4/rp_manuel_rigged_001_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_Mobile_ue4/Materials/rp_mei_posed_001_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_Mobile_ue4/Materials/rp_mei_posed_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_Mobile_ue4/Materials/rp_mei_posed_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_Mobile_ue4/Materials/rp_mei_posed_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_Mobile_ue4/Materials/rp_mei_posed_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_Mobile_ue4/Materials/rp_mei_posed_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_Mobile_ue4/rp_mei_posed_001_Mobile.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_ue4/Materials/rp_mei_posed_001_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_ue4/Materials/rp_mei_posed_001_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_ue4/Materials/rp_mei_posed_001_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_ue4/Materials/rp_mei_posed_001_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_ue4/Materials/rp_mei_posed_001_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_ue4/Materials/rp_mei_posed_001_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_mei_posed_001_ue4/rp_mei_posed_001.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_Mobile_ue4/Materials/rp_nathan_rigged_003_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_Mobile_ue4/Materials/rp_nathan_rigged_003_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_Mobile_ue4/Materials/rp_nathan_rigged_003_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_Mobile_ue4/Materials/rp_nathan_rigged_003_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_Mobile_ue4/Materials/rp_nathan_rigged_003_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_Mobile_ue4/Materials/rp_nathan_rigged_003_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_Mobile_ue4/rp_nathan_rigged_003_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_ue4/Materials/rp_nathan_rigged_003_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_ue4/Materials/rp_nathan_rigged_003_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_ue4/Materials/rp_nathan_rigged_003_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_ue4/Materials/rp_nathan_rigged_003_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_ue4/Materials/rp_nathan_rigged_003_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_ue4/Materials/rp_nathan_rigged_003_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_nathan_rigged_003_ue4/rp_nathan_rigged_003_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_Mobile_ue4/Materials/rp_sophia_rigged_003_Mobile_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_Mobile_ue4/Materials/rp_sophia_rigged_003_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_Mobile_ue4/Materials/rp_sophia_rigged_003_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_Mobile_ue4/Materials/rp_sophia_rigged_003_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_Mobile_ue4/Materials/rp_sophia_rigged_003_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_Mobile_ue4/Materials/rp_sophia_rigged_003_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_Mobile_ue4/rp_sophia_rigged_003_Mobile_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_ue4/Materials/rp_sophia_rigged_003_dif.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_ue4/Materials/rp_sophia_rigged_003_gloss.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_ue4/Materials/rp_sophia_rigged_003_mask01.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_ue4/Materials/rp_sophia_rigged_003_mask02.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_ue4/Materials/rp_sophia_rigged_003_mat.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_ue4/Materials/rp_sophia_rigged_003_norm.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_sophia_rigged_003_ue4/rp_sophia_rigged_003_ue4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/Scenes/RP_Scene.umap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/Scenes/RP_Scene_Mobile.umap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Jang/testmap.umap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerFSM.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_CustomerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_CustomerCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Particles/Materials/M_smoke_subUV.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Particles/Materials/M_smoke_subUV.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Props/Materials/M_Statue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Props/Materials/M_Statue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Props/Materials/M_StatueGlass.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Props/Materials/M_StatueGlass.uasset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="2OGpu1Gv5e14QchHLiS4yAn1Itc" />
+  <component name="ProjectId" id="2OPLuL1PlSiYL0DPtNjWDhDymsM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BarSim" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -97,13 +271,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="57a45322-dc5a-466f-9962-a4dd3b201ad7" name="Changes" comment="" />
-      <created>1681196993454</created>
+      <changelist id="126b5f21-98e3-4766-bdfe-05683d5885b5" name="Changes" comment="" />
+      <created>1681457493426</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1681196993454</updated>
-      <workItem from="1681196994544" duration="235000" />
-      <workItem from="1681202904405" duration="606000" />
+      <updated>1681457493426</updated>
+      <workItem from="1681457494560" duration="1778000" />
+      <workItem from="1681459315930" duration="1710000" />
+      <workItem from="1681704963322" duration="285000" />
     </task>
     <servers />
   </component>
