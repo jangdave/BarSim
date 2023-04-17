@@ -39,4 +39,10 @@ public:
 	class UNiagaraComponent* waterStream;
 
 	bool bStreamOn = false;
+
+	UPROPERTY(EditAnywhere, Category = "Bottle")
+	float remains;
+
+	UPROPERTY(EditAnywhere, Category = "Bottle")
+	TSubclassOf<class ADropBase> liquorDrop;
 };
