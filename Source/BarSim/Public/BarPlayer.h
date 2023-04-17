@@ -77,12 +77,6 @@ public:
 	class UMotionControllerComponent* RightAim;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
-
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	float XMovement;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	float YMovement;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -97,6 +91,8 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	float GrabRange = 100;
+	UPROPERTY(EditDefaultsOnly)
+	float TongsGrabRange = 12;
 	// 오른손 그랩 액터
 	UPROPERTY()
 	class AActor* GrabbedActorRight;
@@ -106,6 +102,11 @@ public:
 	// 왼손 그랩 컴포넌트
 	UPROPERTY()
 	class UPrimitiveComponent* GrabbedObjectLeft;
+	UPROPERTY()
+	class UPrimitiveComponent* GrabbedObjectWithTongsRight;
+	UPROPERTY()
+	class UPrimitiveComponent* GrabbedObjectWithTongsLeft;
+	
 	UPROPERTY()
 	class AHuchuTong* huchuTong;
 	
@@ -119,6 +120,7 @@ public:
 	bool IsGrabbedRight = false;
 	bool isGrabbingTongsLeft = false;
 	bool isGrabbingTongsRight = false;
+	bool isGrabbingWithTongsRight=false;
 	// 던질 방향
 	FVector ThrowDirection;
 	// 던질 힘
@@ -136,6 +138,12 @@ public:
 	FQuat DeltaRotation;
 	// 회전빠르기
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ToquePower = 10;
+	float ToquePower = 5;
+	// Grab한 대상의 크기
+	UPROPERTY()
+	double grabbingObjectSize;
+	// index Finger Input value
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
+	double fingerPressedActionValue;
 
 };

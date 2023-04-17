@@ -4,6 +4,7 @@
 #include "TongCollision.h"
 
 #include "HuchuTong.h"
+#include "IceCube.h"
 #include "Components/BoxComponent.h"
 
 // Sets default values
@@ -28,9 +29,9 @@ void ATongCollision::BeginPlay()
 
 	tongCol->OnComponentBeginOverlap.AddDynamic(this, &ATongCollision::OnOverlap);
 	tongCol->SetGenerateOverlapEvents(true);
-
+	
 	SetLifeSpan(0.02f);
-}
+} 
 
 // Called every frame
 void ATongCollision::Tick(float DeltaTime)
@@ -42,15 +43,19 @@ void ATongCollision::Tick(float DeltaTime)
 void ATongCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	bFromSweep = true;
 	actorScale = SweepResult.GetActor()->GetActorScale3D();
 	compScale = SweepResult.GetComponent()->GetComponentScale();
+	auto iceActor = Cast<AIceCube>(OtherActor);
 	auto attachedComponent = SweepResult.GetComponent();
 	auto attachedActor = SweepResult.GetActor();
+	if(iceActor!=nullptr&&huchuTongRef!=nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Grabb Ice"))
+		iceActor->K2_AttachToComponent(huchuTongRef->tongRight, TEXT("TongAttach"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
+	}
 	if(attachedComponent!=nullptr&&huchuTongRef!=nullptr)
 	{
 		attachedComponent->K2_AttachToComponent(huchuTongRef->tongRight, TEXT("TongAttach"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
-
 	}
 	if(attachedActor!=nullptr&&huchuTongRef!=nullptr)
 	{

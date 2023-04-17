@@ -4,6 +4,8 @@
 #include "HuchuTong.h"
 
 #include "BarPlayer.h"
+#include "IceCube.h"
+#include "Components/BoxComponent.h"
 
 // Sets default values
 AHuchuTong::AHuchuTong()
@@ -22,7 +24,6 @@ AHuchuTong::AHuchuTong()
 
 	tongLeft->SetSimulatePhysics(true);
 	tongRight->SetSimulatePhysics(false);
-
 	
 }
 
@@ -30,10 +31,6 @@ AHuchuTong::AHuchuTong()
 void AHuchuTong::BeginPlay()
 {
 	Super::BeginPlay();
-
-
-	player = Cast<ABarPlayer>(GetAttachParentActor());
-	
 	
 }
 
@@ -43,4 +40,24 @@ void AHuchuTong::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+void AHuchuTong::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	actorScale = SweepResult.GetActor()->GetActorScale3D();
+	compScale = SweepResult.GetComponent()->GetComponentScale();
+	FCollisionQueryParams params;
+	params.AddIgnoredActor(this);
+	auto iceActor = Cast<AIceCube>(OtherActor);
+	auto attachedComponent = SweepResult.GetComponent();
+	auto attachedActor = SweepResult.GetActor();
+	if(iceActor!=nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Grabb Ice"))
+		iceActor->K2_AttachToComponent(tongRight, TEXT("TongAttach"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepWorld,false);
+	}
+
+
+}
+
 

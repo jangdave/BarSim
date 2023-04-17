@@ -24,7 +24,7 @@ public:
 	UPROPERTY()
 	FVector actorScale;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	class AHuchuTong* huchuTongRef;
 
 	UFUNCTION()
