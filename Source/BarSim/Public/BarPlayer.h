@@ -141,7 +141,7 @@ public:
 	float ToquePower = 5;
 	// Grab한 대상의 크기
 	UPROPERTY()
-	double grabbingObjectSize;
+	double grabbingObjectSize = 0;
 	// index Finger Input value
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;

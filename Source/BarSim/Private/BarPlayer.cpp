@@ -285,14 +285,14 @@ void ABarPlayer::TryGrabRight()
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
 			isGrabbingTongsRight=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,false);
+			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu"))
 		}
 		else
 		{
-			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
+			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("ComponentGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 
 		}
 
@@ -346,6 +346,13 @@ void ABarPlayer::UnTryGrabRight()
 		GrabbedObjectRight = nullptr;
 		RightHandMesh->SetVisibility(true);
 		UE_LOG(LogTemp, Warning, TEXT("release huchu"))
+		// Tongs에 잡혀 있는 대상이 있었다면
+		if(isGrabbingWithTongsRight)
+		{
+			GrabbedObjectWithTongsRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);	
+			GrabbedObjectWithTongsRight->SetSimulatePhysics(true);
+
+		}
 		return;
 	}
 	// 1. 잡지않은 상태로 전환
@@ -369,6 +376,7 @@ void ABarPlayer::UnTryGrabRight()
 	GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 
 	GrabbedObjectRight = nullptr;
+	GrabbedObjectWithTongsRight = nullptr;
 }
 
 // 던질 정보를 업데이트하기위한 기능
@@ -539,10 +547,12 @@ void ABarPlayer::FireReleased(){
 				auto tongCompRefL=huchuTong->tongLeft;
 				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/10), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/10), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				grabbingObjectSize = 0;
 			}
 			// Tongs 로 잡고 있는 대상이 없었다면
 			else
 			{
+				isGrabbingWithTongsRight = false;
 				IsTongsReleaseMovementFinished=false;
 				UE_LOG(LogTemp, Warning, TEXT("Huchu Fire Released"))
 				FLatentActionInfo LatentInfo;
@@ -556,6 +566,7 @@ void ABarPlayer::FireReleased(){
 				auto tongCompRefL=huchuTong->tongLeft;
 				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				grabbingObjectSize = 0;
 				return;
 			}
 
