@@ -123,11 +123,11 @@ void UCustomerFSM::TickLeave()
 	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 500;
 
 	auto result = ai->MoveToLocation(loc);
-
-	spawnManager->bIsSit[idx] = false;
-
+	
 	if(result == EPathFollowingRequestResult::AlreadyAtGoal)
 	{
+		spawnManager->bIsSit[idx] = false;
+		
 		owner->Destroy();
 	}
 }
