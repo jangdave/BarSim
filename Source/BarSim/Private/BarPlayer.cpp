@@ -14,6 +14,7 @@
 #include "Camera/CameraComponent.h"
 #include "Chaos/ChaosPerfTest.h"
 #include "Components/BoxComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 // Sets default values
@@ -103,22 +104,24 @@ void ABarPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-/*	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled() == false)
+	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled() == false)
 	{
 		RightHand->SetRelativeRotation(FPSCamera->GetRelativeRotation());
 		RightAim->SetRelativeRotation(FPSCamera->GetRelativeRotation());
-	}*/
+	}
 
 	Grabbing();
-	// 검지 Input Action Value 값 로그
-	//UE_LOG(LogTemp, Warning, TEXT("Pressed Action Value : %f"), fingerPressedActionValue)
+	
 	if(huchuTong!=nullptr)
 	{
 		// 왼손 혹은 오른손에 Tongs를 쥐고 있다면
 		if(isGrabbingTongsRight||isGrabbingTongsLeft)
 		{
-			float actionValue = fingerPressedActionValue;
-			huchuTong->tongLeft->SetRelativeRotation(huchuTong->tongRight->GetRelativeRotation()+FRotator(actionValue*10, 0, 0));
+			if(isTongsTickEnabled == true)
+			{
+				huchuTong->tongRight->SetRelativeRotation(FRotator(fingerPressedActionValue*15, 0, 0));
+			}
+			
 		}
 	}
 }
@@ -294,14 +297,14 @@ void ABarPlayer::TryGrabRight()
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
 			isGrabbingTongsRight=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu"))
 		}
 		else
 		{
-			GrabbedObjectRight->K2_AttachToComponent(RightHand, TEXT("ComponentGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 
 		}
 
@@ -428,9 +431,7 @@ void ABarPlayer::Fire()
 	// 왼손 혹은 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight||isGrabbingTongsLeft)
 	{
-		// Tongs의 MoveComponentTo의 Movement Time이 모두 경과하였다면
-		if(IsTongsMovementFinished==true&&IsTongsReleaseMovementFinished==true)
-		{
+		
 			FVector tongAttachLoc = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
 			FRotator tongAttachRot = huchuTong->tongRight->GetSocketRotation(FName("TongAttach"));
 			IsTongsMovementFinished=false;
@@ -453,23 +454,23 @@ void ABarPlayer::Fire()
 			FHitResult leftTrace;
 			FHitResult rightTrace;
 			// Tongs 양쪽에서 LineTrace롤 통해 Grab할 대상의 크기를 측정한다.
-			bool bHitR = GetWorld()->LineTraceSingleByChannel(rightTrace,tongLoc+tongRightVector*100.0f, tongLoc+tongRightVector*-100.0f, ECC_Visibility,params1);
-			bool bHitL = GetWorld()->LineTraceSingleByChannel(leftTrace,tongLoc+tongRightVector*-100.0f, tongLoc+tongRightVector*100.0f, ECC_Visibility,params1);
-			DrawDebugLine(GetWorld(), tongLoc+tongRightVector*100.0f, tongLoc+tongRightVector*-100.0f, FColor::Red, false, 2.0f, 0, 0.5);
+			bool bHitR = GetWorld()->LineTraceSingleByChannel(rightTrace,tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, ECC_Visibility,params1);
+			bool bHitL = GetWorld()->LineTraceSingleByChannel(leftTrace,tongLoc+tongRightVector*-25.0f, tongLoc+tongRightVector*25.0f, ECC_Visibility,params1);
+			DrawDebugLine(GetWorld(), tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, FColor::Red, false, 2.0f, 0, 0.5);
 			// LineTrace가 양쪽 모두 적중했다면
 			if(bHitL&&bHitR)
 			{
+				isTongsTickEnabled = false;
 				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
 				grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(grabbingObjectSize/10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-(grabbingObjectSize/10), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(grabbingObjectSize/25, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-(grabbingObjectSize/25), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 				UE_LOG(LogTemp, Warning, TEXT("grabbingObjectSize : %f"), grabbingObjectSize)
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
 			else
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				isTongsTickEnabled=true;
 
 			}
 
@@ -531,15 +532,14 @@ void ABarPlayer::Fire()
 		{
 			return;
 		}
-	}
+	
 }
 
 void ABarPlayer::FireReleased(){
 	
 	if(isGrabbingTongsRight||isGrabbingTongsLeft)
 	{
-		if(IsTongsMovementFinished==true&&IsTongsReleaseMovementFinished==true)
-		{
+		
 			// Tongs로 잡고 있는 대상이 있었다면
 			if (isGrabbingWithTongsRight)
 			{
@@ -554,8 +554,9 @@ void ABarPlayer::FireReleased(){
 				LatentInfo.UUID = 0; 
 				auto tongCompRef = huchuTong->tongRight;
 				auto tongCompRefL=huchuTong->tongLeft;
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/10), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/10), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/25), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/25), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				isTongsTickEnabled = true;
 				grabbingObjectSize = 0;
 			}
 			// Tongs 로 잡고 있는 대상이 없었다면
@@ -573,8 +574,7 @@ void ABarPlayer::FireReleased(){
 				LatentInfo.UUID = 0; 
 				auto tongCompRef = huchuTong->tongRight;
 				auto tongCompRefL=huchuTong->tongLeft;
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				isTongsTickEnabled = true;
 				grabbingObjectSize = 0;
 				return;
 			}
@@ -596,6 +596,6 @@ void ABarPlayer::FireReleased(){
 		{
 			return;
 		}
-	}
+	
 }
 

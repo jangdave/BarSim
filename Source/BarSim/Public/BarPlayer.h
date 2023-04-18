@@ -121,11 +121,12 @@ public:
 	bool isGrabbingTongsLeft = false;
 	bool isGrabbingTongsRight = false;
 	bool isGrabbingWithTongsRight=false;
+	bool isTongsTickEnabled = true;
 	// 던질 방향
 	FVector ThrowDirection;
 	// 던질 힘
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ThrowPower = 100;
+	float ThrowPower = 200;
 	// 오른 손 직전 위치
 	FVector PrevPosRight;
 	// 오른 손 이전 회전값
@@ -138,7 +139,7 @@ public:
 	FQuat DeltaRotation;
 	// 회전빠르기
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ToquePower = 5;
+	float ToquePower = 3;
 	// Grab한 대상의 크기
 	UPROPERTY()
 	double grabbingObjectSize = 0;
