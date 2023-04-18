@@ -112,6 +112,15 @@ void ABarPlayer::Tick(float DeltaTime)
 	Grabbing();
 	// 검지 Input Action Value 값 로그
 	//UE_LOG(LogTemp, Warning, TEXT("Pressed Action Value : %f"), fingerPressedActionValue)
+	if(huchuTong!=nullptr)
+	{
+		// 왼손 혹은 오른손에 Tongs를 쥐고 있다면
+		if(isGrabbingTongsRight||isGrabbingTongsLeft)
+		{
+			float actionValue = fingerPressedActionValue;
+			huchuTong->tongLeft->SetRelativeRotation(huchuTong->tongRight->GetRelativeRotation()+FRotator(actionValue*10, 0, 0));
+		}
+	}
 }
 
 // Called to bind functionality to input
