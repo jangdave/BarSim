@@ -3,17 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Chair.h"
 #include "GameFramework/Actor.h"
-#include "Chair.generated.h"
+#include "SpawnManager.generated.h"
 
 UCLASS()
-class BARSIM_API AChair : public AActor
+class BARSIM_API ASpawnManager : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AChair();
+	ASpawnManager();
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,13 +23,24 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+	UFUNCTION()
+	void SpawnCustom();
 
-	UPROPERTY(EditAnywhere, Category=ChairSetting)
-	class UBoxComponent* boxComp;
+	UPROPERTY()
+	TArray<AActor*> chairs;
 
-	UPROPERTY(EditAnywhere, Category=ChairSetting)
-	class UStaticMeshComponent* meshComp;
+	UPROPERTY()
+	TArray<bool> bIsSit;
+
+	UPROPERTY()
+	int32 checkCount = 0;
+
+	bool bCheckSit;
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class ACustomerCharacter> customerFactory;
 
 	UPROPERTY(EditAnywhere)
-	bool bCheck;
+	TSubclassOf<class ACustomerCharacter> customerFactory2;
 };

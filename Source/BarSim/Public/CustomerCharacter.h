@@ -26,4 +26,22 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=FSM)
+	class UCustomerFSM* costomerFSM;
+
+	UPROPERTY()
+	class UCustomerAnimInstance* customerAnim;
+
+	class ASpawnManager* spawnManager;
+	
+	// 스폰시 메쉬 설정 함수
+	void SetMesh();
+	
+	int32 SetRandRange(int32 idxStart, int32 idxEnd);
+
+	// 남성 메쉬
+	TArray<ConstructorHelpers::FObjectFinder<USkeletalMesh>> manMesh;
+
+	// 여성 메쉬
+	TArray<ConstructorHelpers::FObjectFinder<USkeletalMesh>> womenMesh;
 };
