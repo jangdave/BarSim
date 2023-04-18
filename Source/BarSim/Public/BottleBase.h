@@ -23,8 +23,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = "Bottle")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bottle")
 	class UStaticMeshComponent* meshComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bottle")
+	class UStaticMeshComponent* pourer;
 
 	UPROPERTY(VisibleAnywhere, Category = "Bottle")
 	FVector upVector = FVector(0,0,1);
@@ -41,6 +44,9 @@ public:
 	bool bStreamOn = false;
 
 	UPROPERTY(EditAnywhere, Category = "Bottle")
+	float maxContents = 25.36f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bottle")
 	float remains;
 
 	UPROPERTY(EditAnywhere, Category = "Bottle")
