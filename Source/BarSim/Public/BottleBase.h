@@ -44,7 +44,7 @@ public:
 	bool bStreamOn = false;
 
 	UPROPERTY(EditAnywhere, Category = "Bottle")
-	float maxContents = 25.36f;
+	float maxContents = 25.4f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bottle")
 	float remains;
