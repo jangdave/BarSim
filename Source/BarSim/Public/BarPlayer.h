@@ -44,7 +44,7 @@ public:
 	bool IsTongsMovementFinished = true;
 	bool IsTongsReleaseMovementFinished = true;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* FPSCamera;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
@@ -92,7 +92,7 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	float GrabRange = 100;
 	UPROPERTY(EditDefaultsOnly)
-	float TongsGrabRange = 12;
+	float TongsGrabRange = 15;
 	// 오른손 그랩 액터
 	UPROPERTY()
 	class AActor* GrabbedActorRight;
@@ -110,8 +110,6 @@ public:
 	UPROPERTY()
 	class AHuchuTong* huchuTong;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "PlayerSettings")
-	TSubclassOf<class ATongCollision> tongCol;
 	
 
 

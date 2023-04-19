@@ -9,7 +9,6 @@
 #include "EnhancedInputComponent.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
-#include "TongCollision.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 #include "Chaos/ChaosPerfTest.h"
@@ -109,14 +108,17 @@ void ABarPlayer::Tick(float DeltaTime)
 		RightHand->SetRelativeRotation(FPSCamera->GetRelativeRotation());
 		RightAim->SetRelativeRotation(FPSCamera->GetRelativeRotation());
 	}
-
-	Grabbing();
 	
+	// 잡은 대상 위치값 실시간 업데이트
+	Grabbing();
+
+	// Tongs가 nullptr이 아니면서
 	if(huchuTong!=nullptr)
 	{
 		// 왼손 혹은 오른손에 Tongs를 쥐고 있다면
 		if(isGrabbingTongsRight||isGrabbingTongsLeft)
 		{
+			// Oculus Trigger Input Value에 따른 Tongs Rotation 제어 Tick 활성화
 			if(isTongsTickEnabled == true)
 			{
 				huchuTong->tongRight->SetRelativeRotation(FRotator(fingerPressedActionValue*15, 0, 0));
@@ -430,8 +432,7 @@ void ABarPlayer::Fire()
 {
 	// 왼손 혹은 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight||isGrabbingTongsLeft)
-	{
-		
+	{		
 			FVector tongAttachLoc = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
 			FRotator tongAttachRot = huchuTong->tongRight->GetSocketRotation(FName("TongAttach"));
 			IsTongsMovementFinished=false;
@@ -445,7 +446,6 @@ void ABarPlayer::Fire()
 			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
 			auto tongCompRefL=huchuTong->tongLeft;
-
 			auto tongLoc =  huchuTong->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
 			auto tongRightVector = huchuTong->GetActorForwardVector();
 			FCollisionQueryParams params1;
@@ -463,13 +463,15 @@ void ABarPlayer::Fire()
 				isTongsTickEnabled = false;
 				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
 				grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(grabbingObjectSize/25, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-(grabbingObjectSize/25), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(grabbingObjectSize/20, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-(grabbingObjectSize/20), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 				UE_LOG(LogTemp, Warning, TEXT("grabbingObjectSize : %f"), grabbingObjectSize)
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
 			else
 			{
+				// Oculus Trigger Input Value에 따른 Tongs Rotation 제어 Tick 활성화
 				isTongsTickEnabled=true;
 
 			}
@@ -554,8 +556,8 @@ void ABarPlayer::FireReleased(){
 				LatentInfo.UUID = 0; 
 				auto tongCompRef = huchuTong->tongRight;
 				auto tongCompRefL=huchuTong->tongLeft;
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/25), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/25), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/20), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/20), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 				isTongsTickEnabled = true;
 				grabbingObjectSize = 0;
 			}
@@ -588,8 +590,6 @@ void ABarPlayer::FireReleased(){
 			// 4. 충돌기능 활성화
 			GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 			GrabbedObjectWithTongsRight = nullptr;
-
-
 
 		}
 		else
