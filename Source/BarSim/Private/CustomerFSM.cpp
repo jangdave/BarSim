@@ -3,8 +3,11 @@
 
 #include "CustomerFSM.h"
 #include "AIController.h"
+#include "BarPlayer.h"
+#include "CustomerAnimInstance.h"
 #include "CustomerCharacter.h"
 #include "SpawnManager.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -25,6 +28,8 @@ void UCustomerFSM::BeginPlay()
 
 	owner = Cast<ACustomerCharacter>(GetOwner());
 
+	player = Cast<ABarPlayer>(UGameplayStatics::GetActorOfClass(GetWorld(), ABarPlayer::StaticClass()));
+	
 	ai = Cast<AAIController>(owner->GetController());
 
 	spawnManager = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
@@ -32,6 +37,8 @@ void UCustomerFSM::BeginPlay()
 	state = ECustomerState::IDLE;
 
 	sitState =ECustomerSitState::ORDER;
+	
+	owner->GetCharacterMovement()->MaxWalkSpeed = 200.0f;
 }
 
 
@@ -57,12 +64,12 @@ void UCustomerFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	}
 }
 
+// ------------------------------------------------------------------------------------idle state
 void UCustomerFSM::SetState(ECustomerState next)
 {
 	state = next;
 }
 
-// ----------------------------------------------idle state
 void UCustomerFSM::TickIdle()
 {
 	if(spawnManager != nullptr)
@@ -86,7 +93,7 @@ void UCustomerFSM::TickMove()
 	auto result = ai->MoveToLocation(loc);
 
 	spawnManager->bIsSit[idx] = true;
-
+	
 	if(result == EPathFollowingRequestResult::AlreadyAtGoal)
 	{
 		SetState(ECustomerState::SIT);
@@ -95,6 +102,8 @@ void UCustomerFSM::TickMove()
 
 void UCustomerFSM::TickSit()
 {
+	curTime += GetWorld()->GetDeltaSeconds();
+
 	switch (sitState)
 	{
 	case ECustomerSitState::ORDER:
@@ -132,30 +141,58 @@ void UCustomerFSM::TickLeave()
 	}
 }
 
-// ------------------------------------sit
+// -----------------------------------------------------------------------------------------sit
 void UCustomerFSM::SetSitState(ECustomerSitState next)
 {
 	sitState = next;
+
+	curTime = 0;
+
+	bCheckPlayAnim = false;
 }
 
 void UCustomerFSM::TickOrder()
 {
-	curTime += GetWorld()->GetDeltaSeconds();
+	FVector lookDist = player->GetActorLocation() - owner->GetActorLocation();
 
-	if(curTime > 10)
-	{
-		SetState(ECustomerState::LEAVE);
+	FRotator lookRot = FRotationMatrix::MakeFromX(lookDist).Rotator();
+
+	owner->SetActorRotation(FMath::Lerp(owner->GetActorRotation(), lookRot, 0.1f));
+	
+	if(curTime > 1)
+	{		
+		SetSitState(ECustomerSitState::WAIT);
 	}
 }
 
 void UCustomerFSM::TickWait()
 {
-	
+	if(curTime > 1 && bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("Talking"));
+	}
+	// 음료가 나오면
+	//if()
+	//{
+		
+	//}
 }
 
 void UCustomerFSM::TickWaitLong()
 {
-	
+	if(curTime > 5 && bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("WaitLong"));
+	}
+	// 음료가 나오면
+	//if()
+	//{
+		
+	//}
 }
 
 void UCustomerFSM::TickDrink()
@@ -172,4 +209,3 @@ void UCustomerFSM::TickAwesome()
 {
 	
 }
-

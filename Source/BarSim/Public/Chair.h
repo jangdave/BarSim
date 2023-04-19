@@ -31,4 +31,13 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	bool bCheck;
+
+	UPROPERTY(EditAnywhere)
+	bool bCheckCoctail;
+
+	UPROPERTY(EditAnywhere, Category=CocktailZone)
+	class UBoxComponent* coctailBoxComp;
+
+	UFUNCTION()
+	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 };

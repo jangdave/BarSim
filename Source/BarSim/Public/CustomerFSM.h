@@ -55,16 +55,24 @@ public:
 	UPROPERTY()
 	class ASpawnManager* spawnManager;
 
+	UPROPERTY()
+	class ABarPlayer* player;
+	
 	int32 idx;
 
 	float curTime;
+
+	bool bCheckPlayAnim;
+
+	bool bCheckEndAnim;	
 	
 	class AAIController* ai;
 
 	void SetState(ECustomerState next);
 
+	UFUNCTION()
 	void SetSitState(ECustomerSitState next);
-	
+
 private:
 	void TickIdle();
 

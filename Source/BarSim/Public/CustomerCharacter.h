@@ -29,7 +29,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=FSM)
 	class UCustomerFSM* costomerFSM;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	class UCustomerAnimInstance* customerAnim;
 
 	class ASpawnManager* spawnManager;
