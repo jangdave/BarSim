@@ -300,6 +300,7 @@ void ABarPlayer::TryGrabRight()
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
 			isGrabbingTongsRight=true;
+			GrabbedObjectWithTongsRight = nullptr;
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
@@ -352,8 +353,37 @@ void ABarPlayer::UnTryGrabRight()
 	}
 	// 오른손에 Tongs를 잡고 있었다면
 	if(isGrabbingTongsRight)
-	{
-		isGrabbingTongsRight=false;
+	{		
+		// Tongs에 잡혀 있는 대상이 있었다면
+		if(isGrabbingWithTongsRight)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Something was on tongs"))
+			IsTongsReleaseMovementFinished=false;
+			FLatentActionInfo LatentInfo;
+			LatentInfo.CallbackTarget = this;
+			FLatentActionInfo LatentInfoL;
+			LatentInfoL.CallbackTarget = this;
+			auto tongCompRef = huchuTong->tongRight;
+			auto tongCompRefL=huchuTong->tongLeft;
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+			isTongsTickEnabled = true;
+			grabbingObjectSize = 0;
+			// 1. 잡지않은 상태로 전환
+			isGrabbingWithTongsRight = false;
+			// 2. 손에서 떼어내기
+			GrabbedObjectWithTongsRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+			// 3. 물리기능 활성화
+			GrabbedObjectWithTongsRight->SetSimulatePhysics(true);
+			// 4. 충돌기능 활성화
+			GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			GrabbedObjectWithTongsRight = nullptr;
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Nothing was on tongs"))
+
+		}
 		IsGrabbedRight = false;
 		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->SetSimulatePhysics(true);
@@ -361,37 +391,31 @@ void ABarPlayer::UnTryGrabRight()
 		GrabbedObjectRight = nullptr;
 		RightHandMesh->SetVisibility(true);
 		UE_LOG(LogTemp, Warning, TEXT("release huchu"))
-		// Tongs에 잡혀 있는 대상이 있었다면
-		if(isGrabbingWithTongsRight)
-		{
-			GrabbedObjectWithTongsRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);	
-			GrabbedObjectWithTongsRight->SetSimulatePhysics(true);
-
-		}
-		return;
 	}
-	// 1. 잡지않은 상태로 전환
-	IsGrabbedRight = false;
-	// 2. 손에서 떼어내기
-	GrabbedObjectRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-	// 3. 물리기능 활성화
-	GrabbedObjectRight->SetSimulatePhysics(true);
-	// 4. 충돌기능 활성화
-	GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	// 던지기
-	GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+	else
+	{
+		// 1. 잡지않은 상태로 전환
+		IsGrabbedRight = false;
+		// 2. 손에서 떼어내기
+		GrabbedObjectRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+		// 3. 물리기능 활성화
+		GrabbedObjectRight->SetSimulatePhysics(true);
+		// 4. 충돌기능 활성화
+		GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		// 던지기
+		GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
 
-	// 회전 시키기
-	// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
-	float Angle;
-	FVector Axis;
-	DeltaRotation.ToAxisAndAngle(Axis, Angle);
-	float dt = GetWorld()->DeltaTimeSeconds;
-	FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-	GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		float Angle;
+		FVector Axis;
+		DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		float dt = GetWorld()->DeltaTimeSeconds;
+		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 
-	GrabbedObjectRight = nullptr;
-	GrabbedObjectWithTongsRight = nullptr;
+		GrabbedObjectRight = nullptr;
+	}
 }
 
 // 던질 정보를 업데이트하기위한 기능
@@ -433,7 +457,58 @@ void ABarPlayer::Fire()
 {
 	// 왼손 혹은 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight||isGrabbingTongsLeft)
-	{		
+	{
+		// 중심점
+		FVector Center = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
+		// 충돌체크(구충돌)
+		// 충돌한 물체를 기억할 배열
+		TArray<FOverlapResult> HitObj;
+		FCollisionQueryParams params;
+		params.AddIgnoredActor(this);
+		params.AddIgnoredActor(huchuTong);
+		DrawDebugSphere(GetWorld(), Center, TongsGrabRange, 30, FColor::Red, false, 2.0, 0, 0.1);
+		bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(TongsGrabRange), params);
+		if (bHit == false)
+		{
+			return;
+		}
+		// 가장 가까운 물체를 잡도록 하자
+		// 가장 가까운 물체 인덱스
+		int32 Closest = 0;
+		for (int i = 0; i < HitObj.Num(); ++i)
+		{
+			// 1. 물리기능이 활성화 되어 있는 대상만 판단
+			if (HitObj[i].GetComponent()->IsSimulatingPhysics() == false)
+			{
+				continue;
+			}
+			// 잡기에 성공했다
+			isGrabbingWithTongsRight = true;
+			// 2.. 현재 손과 가장 가까운 대상과 이번에 검출할 대상과 더 가까운 대상이 있다면		
+			// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
+			float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
+			// 필요속성 : 이번에 검출할 대상과 손과의 거리
+			float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+
+			// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
+			if (NextDist < ClosestDist)
+			{
+
+				// 가장 가까운 대상으로 변경하기
+				Closest = i;
+			}
+		}
+
+		// 잡기에 성공했다면
+		if (isGrabbingWithTongsRight)
+		{
+			// 물체 물리기능 비활성화
+			GrabbedObjectWithTongsRight = HitObj[Closest].GetComponent();
+			GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
+			GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
+			GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
+								
+		}		
 			FVector tongAttachLoc = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
 			FRotator tongAttachRot = huchuTong->tongRight->GetSocketRotation(FName("TongAttach"));
 			IsTongsMovementFinished=false;
@@ -450,7 +525,7 @@ void ABarPlayer::Fire()
 			auto tongLoc =  huchuTong->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
 			auto tongRightVector = huchuTong->GetActorForwardVector();
 			FCollisionQueryParams params1;
-			params1.AddIgnoredActor(huchuTong);
+			params1.AddIgnoredActor(huchuTong);  
 			params1.AddIgnoredActor(this);				
 			FHitResult leftTrace;
 			FHitResult rightTrace;
@@ -465,8 +540,8 @@ void ABarPlayer::Fire()
 				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
 				grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
 				// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(grabbingObjectSize/20, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-(grabbingObjectSize/20), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(grabbingObjectSize/30, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 				UE_LOG(LogTemp, Warning, TEXT("grabbingObjectSize : %f"), grabbingObjectSize)
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -477,59 +552,7 @@ void ABarPlayer::Fire()
 
 			}
 
-			// 중심점
-			FVector Center = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
-			// 충돌체크(구충돌)
-			// 충돌한 물체를 기억할 배열
-			TArray<FOverlapResult> HitObj;
-			FCollisionQueryParams params;
-			params.AddIgnoredActor(this);
-			params.AddIgnoredActor(huchuTong);
-			DrawDebugSphere(GetWorld(), Center, TongsGrabRange, 30, FColor::Red, false, 2.0, 0, 0.1);
-			bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(TongsGrabRange), params);
-			if (bHit == false)
-			{
-				return;
-			}
-			// 가장 가까운 물체를 잡도록 하자
-			// 가장 가까운 물체 인덱스
-			int32 Closest = 0;
-			for (int i = 0; i < HitObj.Num(); ++i)
-			{
-				// 1. 물리기능이 활성화 되어 있는 대상만 판단
-				if (HitObj[i].GetComponent()->IsSimulatingPhysics() == false)
-				{
-					continue;
-				}
-				// 잡기에 성공했다
-				isGrabbingWithTongsRight = true;
-				// 2.. 현재 손과 가장 가까운 대상과 이번에 검출할 대상과 더 가까운 대상이 있다면		
-				// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
-				float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
-				// 필요속성 : 이번에 검출할 대상과 손과의 거리
-				float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
-
-				// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
-				if (NextDist < ClosestDist)
-				{
-
-					// 가장 가까운 대상으로 변경하기
-					Closest = i;
-				}
-			}
-
-			// 잡기에 성공했다면
-			if (isGrabbingWithTongsRight)
-			{
-				// 물체 물리기능 비활성화
-				GrabbedObjectWithTongsRight = HitObj[Closest].GetComponent();
-				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
-				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
-				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
-								
-			}
-			
-		}
+	}
 		// 왼손, 오른손 모두 Tongs를 쥐고 있지 않다면
 		else
 		{
@@ -541,8 +564,7 @@ void ABarPlayer::Fire()
 void ABarPlayer::FireReleased(){
 	
 	if(isGrabbingTongsRight||isGrabbingTongsLeft)
-	{
-		
+	{		
 			// Tongs로 잡고 있는 대상이 있었다면
 			if (isGrabbingWithTongsRight)
 			{
@@ -557,10 +579,19 @@ void ABarPlayer::FireReleased(){
 				LatentInfo.UUID = 0; 
 				auto tongCompRef = huchuTong->tongRight;
 				auto tongCompRefL=huchuTong->tongLeft;
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/20), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/20), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 				isTongsTickEnabled = true;
 				grabbingObjectSize = 0;
+				// 1. 잡지않은 상태로 전환
+				isGrabbingWithTongsRight = false;
+				// 2. 손에서 떼어내기
+				GrabbedObjectWithTongsRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+				// 3. 물리기능 활성화
+				GrabbedObjectWithTongsRight->SetSimulatePhysics(true);
+				// 4. 충돌기능 활성화
+				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+				GrabbedObjectWithTongsRight = nullptr;
 			}
 			// Tongs 로 잡고 있는 대상이 없었다면
 			else
@@ -580,18 +611,7 @@ void ABarPlayer::FireReleased(){
 				isTongsTickEnabled = true;
 				grabbingObjectSize = 0;
 				return;
-			}
-
-			// 1. 잡지않은 상태로 전환
-			isGrabbingWithTongsRight = false;
-			// 2. 손에서 떼어내기
-			GrabbedObjectWithTongsRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-			// 3. 물리기능 활성화
-			GrabbedObjectWithTongsRight->SetSimulatePhysics(true);
-			// 4. 충돌기능 활성화
-			GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-			GrabbedObjectWithTongsRight = nullptr;
-
+			}	
 		}
 		else
 		{
