@@ -2,6 +2,8 @@
 
 
 #include "BarPlayer.h"
+
+#include "BottleBase.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "MotionControllerComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
@@ -325,6 +327,7 @@ void ABarPlayer::TryGrabRight()
 		// 손에 붙여주자
 		// Tong Casting
 		huchuTong=Cast<AHuchuTong>(GrabbedActorRight);
+		bottle = Cast<ABottleBase>(GrabbedActorRight);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
@@ -334,6 +337,15 @@ void ABarPlayer::TryGrabRight()
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu on Right"))
+		}
+		// 잡은 대상이 Bottle 이라면
+		else if(GrabbedActorRight == bottle&&bottle!=nullptr)
+		{
+			isGrabbingBottleRight = true;
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("BottleSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			RightHandMesh->SetVisibility(false);
+			//GrabbedActorRight->SetActorEnableCollision(false);
+			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Right"))
 		}
 		else
 		{
@@ -381,11 +393,12 @@ void ABarPlayer::UnTryGrabLeft()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Nothing was on Left tongs"))
 		}
-		isGrabbingTongsLeft = false;
+		isGrabbingTongsLeft=false;
 		IsGrabbedLeft = false;
-		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);
 		GrabbedActorLeft->SetActorEnableCollision(true);
+		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft = nullptr;
 		LeftHandMesh->SetVisibility(true);
 		UE_LOG(LogTemp, Warning, TEXT("release Left huchu"))
@@ -462,6 +475,29 @@ void ABarPlayer::UnTryGrabRight()
 		RightHandMesh->SetVisibility(true);
 		UE_LOG(LogTemp, Warning, TEXT("release Right huchu"))
 	}
+	// 오른손에 Bottle을 쥐고 있었다면
+	else if(isGrabbingBottleRight)
+	{
+		isGrabbingBottleRight=false;
+		IsGrabbedRight = false;
+		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectRight->SetSimulatePhysics(true);
+		GrabbedActorRight->SetActorEnableCollision(true);
+		GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		float Angle;
+		FVector Axis;
+		DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		float dt = GetWorld()->DeltaTimeSeconds;
+		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectRight = nullptr;
+		RightHandMesh->SetVisibility(true);
+
+		UE_LOG(LogTemp, Warning, TEXT("release Right Bottle"))
+	}
+	// 쥐고 있는 대상이 Bottle, Tongs 이외의 것이라면
 	else
 	{
 		// 1. 잡지않은 상태로 전환
