@@ -43,43 +43,54 @@ void ABottleBase::Tick(float DeltaTime)
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), angle);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);
 
-	//기울어진 각도가 45도 이상이라면
-	if(angle > 90.0f)
+	if(remains > 0)
 	{
-		//물줄기 없을때에만 한 번 스폰 시키기
-		if(!bStreamOn)
+		//기울어진 각도가 45도 이상이라면
+		if(angle > 90.0f)
 		{
-			//UE_LOG(LogTemp, Warning, TEXT("streamOn"));
-			waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
-			waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 800);
-			waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
-			//물방울 액터 스폰
-			ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(liquorDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
-			drop->dropMass = 0.05f * streamWidth * DeltaTime;
-			remains = remains - drop->dropMass;
-			bStreamOn = true;
-		}
-		else
-		{
-			//이미 물줄기가 스폰된 상태라면 물줄기 두께 변경, 
-			if(waterStream)
+			//물줄기 없을때에만 한 번 스폰 시키기
+			if(!bStreamOn)
 			{
-				//UE_LOG(LogTemp, Warning, TEXT("waterStream On"));
+				//UE_LOG(LogTemp, Warning, TEXT("streamOn"));
+				waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
 				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 800);
 				waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
-				waterStream->SetRelativeLocation(pourer->GetSocketLocation(FName("Pourer")));
-				waterStream->SetRelativeRotation(pourer->GetSocketRotation(FName("Pourer")));
 				//물방울 액터 스폰
 				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(liquorDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
 				drop->dropMass = 0.05f * streamWidth * DeltaTime;
 				remains = remains - drop->dropMass;
-				UE_LOG(LogTemp, Warning, TEXT("%f"), remains);
+				bStreamOn = true;
+			}
+			else
+			{
+				//이미 물줄기가 스폰된 상태라면 물줄기 두께 변경, 
+				if(waterStream)
+				{
+					//UE_LOG(LogTemp, Warning, TEXT("waterStream On"));
+					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 800);
+					waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+					waterStream->SetRelativeLocation(pourer->GetSocketLocation(FName("Pourer")));
+					waterStream->SetRelativeRotation(pourer->GetSocketRotation(FName("Pourer")));
+					//물방울 액터 스폰
+					ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(liquorDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
+					drop->dropMass = 0.05f * streamWidth * DeltaTime;
+					remains = remains - drop->dropMass;
+					UE_LOG(LogTemp, Warning, TEXT("%f"), remains);
+				}
+			}
+		}
+		else
+		{
+			//UE_LOG(LogTemp, Warning, TEXT("streamOff"));
+			if(waterStream)
+			{
+				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
+				bStreamOn = false;
 			}
 		}
 	}
 	else
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("streamOff"));
 		if(waterStream)
 		{
 			waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
