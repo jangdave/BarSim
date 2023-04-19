@@ -8,21 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/ABP_CustomerAnimInstance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/ABP_CustomerAnimInstance.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Montage_Customer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/Montage_Customer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_CustomerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_CustomerCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/UE4_Mannequin_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/00_rp_master/Mannequin/UE4_Mannequin_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/testmap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/testmap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerAnimInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/Chair.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/Chair.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CustomerAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerAnimInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CustomerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CustomerFSM.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerFSM.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Materials/Instances/Quinn/MI_Quinn_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Materials/Instances/Quinn/MI_Quinn_02.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/ABP_MannequinsXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/ABP_MannequinsXR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Inputs/IMC_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Inputs/IMC_Default.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Inputs/InputActions/IA_Fire.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Inputs/InputActions/IA_Fire.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Materials/HandMat/M_PlayerHands.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Materials/HandMat/M_PlayerHands.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,25 +28,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BarSim" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -120,6 +114,8 @@
       <option name="presentableId" value="Default" />
       <updated>1681883004008</updated>
       <workItem from="1681883005211" duration="1714000" />
+      <workItem from="1681888417763" duration="648000" />
+      <workItem from="1681889372938" duration="335000" />
     </task>
     <servers />
   </component>
