@@ -57,6 +57,7 @@ ABarPlayer::ABarPlayer()
 
 	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("VRCamera"));
 	FPSCamera->SetupAttachment(RootComponent);
+	FPSCamera->SetRelativeLocation(FVector(0, 0, 30));
 	FPSCamera->bUsePawnControlRotation = false;
 
 }
