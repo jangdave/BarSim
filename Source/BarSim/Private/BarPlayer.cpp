@@ -381,6 +381,7 @@ void ABarPlayer::UnTryGrabLeft()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Nothing was on Left tongs"))
 		}
+		isGrabbingTongsLeft = false;
 		IsGrabbedLeft = false;
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);
@@ -452,6 +453,7 @@ void ABarPlayer::UnTryGrabRight()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Nothing was on Right tongs"))
 		}
+		isGrabbingTongsRight=false;
 		IsGrabbedRight = false;
 		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->SetSimulatePhysics(true);
