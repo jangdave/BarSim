@@ -121,6 +121,8 @@ public:
 	// HuchuTong Ref Left
 	UPROPERTY()
 	class AHuchuTong* huchuTongL;
+	UPROPERTY()
+	class ABottleBase* bottle;
 	
 	
 	bool IsGrabbedLeft = false;
@@ -132,6 +134,8 @@ public:
 	bool isTongsTickEnabled = true;
 	bool isTongsTickEnabledL = true;
 	bool isRecipeMode = false;
+	bool isGrabbingBottleRight = false;
+	bool isGrabbingBottleLeft = false;
 
 
 	
