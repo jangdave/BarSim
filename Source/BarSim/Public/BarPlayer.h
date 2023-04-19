@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HuchuTong.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "BarPlayer.generated.h"
@@ -33,9 +34,19 @@ public:
 	// 그랩한 대상 위치값 업데이트
 	void Grabbing();
 	void Fire();
+	void FireLeft();
 	void FireReleased();
+	void FireReleasedLeft();
+	UFUNCTION()
+	void TongsMovementExec();
+	UFUNCTION()
+	void TongsReleaseMovementExec();
 
-	UPROPERTY(BlueprintReadOnly)
+	// Tongs Movement Bool
+	bool IsTongsMovementFinished = true;
+	bool IsTongsReleaseMovementFinished = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* FPSCamera;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
@@ -53,6 +64,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputAction* IA_Fire;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* IA_FireLeft;
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputAction* IA_Grab_Left;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputAction* IA_Grab_Right;
@@ -68,12 +81,6 @@ public:
 	class UMotionControllerComponent* RightAim;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
-
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	float XMovement;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	float YMovement;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -88,23 +95,53 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	float GrabRange = 100;
+	UPROPERTY(EditDefaultsOnly)
+	float TongsGrabRange = 15;
+	// 오른손 그랩 액터
+	UPROPERTY()
+	class AActor* GrabbedActorRight;
+	// 왼손 그랩 액터
+	UPROPERTY()
+	class AActor* GrabbedActorLeft;
 	// 오른손 그랩 컴포넌트
 	UPROPERTY()
 	class UPrimitiveComponent* GrabbedObjectRight;
 	// 왼손 그랩 컴포넌트
 	UPROPERTY()
 	class UPrimitiveComponent* GrabbedObjectLeft;
-
-	// 잡은 대상이 있는지 여부 기억할 변수
+	// Tongs를 통한 그랩 오른쪽 컴포넌트
+	UPROPERTY()
+	class UPrimitiveComponent* GrabbedObjectWithTongsRight;
+	// Tongs를 통한 그랩 왼쪽 컴포넌트
+	UPROPERTY()
+	class UPrimitiveComponent* GrabbedObjectWithTongsLeft;
+	// HuchuTong Ref
+	UPROPERTY()
+	class AHuchuTong* huchuTong;
+	// HuchuTong Ref Left
+	UPROPERTY()
+	class AHuchuTong* huchuTongL;
+	
+	
 	bool IsGrabbedLeft = false;
 	bool IsGrabbedRight = false;
+	bool isGrabbingTongsLeft = false;
+	bool isGrabbingTongsRight = false;
+	bool isGrabbingWithTongsRight=false;
+	bool isGrabbingWithTongsLeft=false;
+	bool isTongsTickEnabled = true;
+	bool isTongsTickEnabledL = true;
+	bool isRecipeMode = false;
 
-	bool isGrabbingTongs = false;
+
+	
 	// 던질 방향
 	FVector ThrowDirection;
+	// 던질 방향
+	FVector ThrowDirectionLeft;
 	// 던질 힘
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ThrowPower = 300;
+	float ThrowPower = 400;
 	// 오른 손 직전 위치
 	FVector PrevPosRight;
 	// 오른 손 이전 회전값
@@ -115,8 +152,21 @@ public:
 	FQuat PrevRotLeft;
 	// 회전방향
 	FQuat DeltaRotation;
+	// 회전방향 왼쪽
+	FQuat DeltaRotationLeft;
 	// 회전빠르기
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ToquePower = 20;
+	float ToquePower = 3;
+	// Grab한 대상의 크기
+	UPROPERTY()
+	double grabbingObjectSize = 0;
+	// 왼쪽 Grab한 대상의 크기
+	UPROPERTY()
+	double grabbingObjectSizeL = 0;
+	// index Finger Input value
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
+	double fingerPressedActionValue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
+	double fingerPressedActionValueLeft;
 
 };
