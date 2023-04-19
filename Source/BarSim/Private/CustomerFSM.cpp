@@ -118,6 +118,9 @@ void UCustomerFSM::TickSit()
 	case ECustomerSitState::DRINK:
 		TickDrink();
 		break;
+	case ECustomerSitState::JUDGEMENT:
+		TickJudgement();
+		break;
 	case ECustomerSitState::ANGRY:
 		TickAngry();
 		break;
@@ -174,10 +177,10 @@ void UCustomerFSM::TickWait()
 		owner->customerAnim->OnSitAnim(TEXT("Talking"));
 	}
 	// 음료가 나오면
-	//if()
-	//{
-		
-	//}
+	if(spawnManager->bIsCoc[idx] != false)
+	{
+		SetSitState(ECustomerSitState::DRINK);
+	}
 }
 
 void UCustomerFSM::TickWaitLong()
@@ -189,23 +192,53 @@ void UCustomerFSM::TickWaitLong()
 		owner->customerAnim->OnSitAnim(TEXT("WaitLong"));
 	}
 	// 음료가 나오면
-	//if()
-	//{
-		
-	//}
+	if(spawnManager->bIsCoc[idx] != false)
+	{
+		SetSitState(ECustomerSitState::DRINK);
+	}
 }
 
 void UCustomerFSM::TickDrink()
 {
-	
+	if(curTime > 1 && bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("Drinking"));
+	}
+}
+
+void UCustomerFSM::TickJudgement()
+{
+	// 점수 판단
+	int32 result = FMath::RandRange(1,10);
+
+	if(result > 5)
+	{
+		SetSitState(ECustomerSitState::AWESOME);
+	}
+	else
+	{
+		SetSitState(ECustomerSitState::ANGRY);
+	}
 }
 
 void UCustomerFSM::TickAngry()
 {
-	
+	if(curTime > 1 && bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("TasteBad"));
+	}
 }
 
 void UCustomerFSM::TickAwesome()
 {
-	
+	if(curTime > 1 && bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("TasteGood"));
+	}
 }

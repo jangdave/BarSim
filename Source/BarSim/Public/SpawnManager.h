@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Chair.h"
 #include "GameFramework/Actor.h"
 #include "SpawnManager.generated.h"
 
@@ -34,13 +33,13 @@ public:
 	TArray<bool> bIsSit;
 
 	UPROPERTY()
+	TArray<bool> bIsCoc;
+	
+	UPROPERTY()
 	int32 checkCount = 0;
 
 	bool bCheckSit;
 	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ACustomerCharacter> customerFactory;
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<class ACustomerCharacter> customerFactory2;
 };

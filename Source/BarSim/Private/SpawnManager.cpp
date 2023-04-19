@@ -39,6 +39,13 @@ void ASpawnManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	bIsCoc.Empty();
+	
+	for(int i = 0; i<chairs.Num(); i++)
+	{
+		auto temp = Cast<AChair>(chairs[i]);
+		bIsCoc.Add(temp->bCheckCoctail);
+	}
 }
 
 void ASpawnManager::SpawnCustom()

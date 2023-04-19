@@ -44,15 +44,15 @@ void UCustomerAnimInstance::EndWaitLong()
 
 void UCustomerAnimInstance::EndDrinking()
 {
-	
+	owner->costomerFSM->SetSitState(ECustomerSitState::JUDGEMENT);
 }
 
 void UCustomerAnimInstance::EndBad()
 {
-	
+	owner->costomerFSM->SetState(ECustomerState::LEAVE);
 }
 
 void UCustomerAnimInstance::EndGood()
 {
-	
+	owner->costomerFSM->SetState(ECustomerState::LEAVE);
 }

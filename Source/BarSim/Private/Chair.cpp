@@ -2,6 +2,7 @@
 
 
 #include "Chair.h"
+#include "CupBase.h"
 #include "Components/BoxComponent.h"
 
 // Sets default values
@@ -26,6 +27,7 @@ void AChair::BeginPlay()
 	Super::BeginPlay();
 
 	coctailBoxComp->OnComponentBeginOverlap.AddDynamic(this, &AChair::OnOverlap);
+	coctailBoxComp->OnComponentEndOverlap.AddDynamic(this, &AChair::EndOverlap);
 }
 
 // Called every frame
@@ -38,6 +40,22 @@ void AChair::Tick(float DeltaTime)
 void AChair::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	
+	auto target = Cast<ACupBase>(OtherActor);
+
+	if(target != nullptr)
+	{
+		bCheckCoctail = true;
+	}
+}
+
+void AChair::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex)
+{
+	auto target = Cast<ACupBase>(OtherActor);
+
+	if(target != nullptr)
+	{
+		bCheckCoctail = false;
+	}
 }
 

@@ -22,6 +22,7 @@ enum class ECustomerSitState : uint8
 	WAIT,
 	WAITLONG,
 	DRINK,
+	JUDGEMENT,
 	ANGRY,
 	AWESOME,
 };
@@ -68,6 +69,7 @@ public:
 	
 	class AAIController* ai;
 
+	UFUNCTION()
 	void SetState(ECustomerState next);
 
 	UFUNCTION()
@@ -89,6 +91,8 @@ private:
 	void TickWaitLong();
 	
 	void TickDrink();
+
+	void TickJudgement();
 	
 	void TickAngry();
 

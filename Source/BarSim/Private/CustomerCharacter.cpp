@@ -47,7 +47,7 @@ ACustomerCharacter::ACustomerCharacter()
 		manMesh.Add(tempMesh5);
 	}
 	
-	ConstructorHelpers::FClassFinder<UAnimInstance> tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Jang/ABP_CustomerAnimInstance.ABP_CustomerAnimInstance_C'"));
+	ConstructorHelpers::FClassFinder<UAnimInstance> tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Jang/ABP_CustomerAnim.ABP_CustomerAnim_C'"));
 	if(tempAnim.Succeeded())
 	{
 		GetMesh()->SetAnimInstanceClass(tempAnim.Class);
