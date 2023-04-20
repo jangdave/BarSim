@@ -39,7 +39,7 @@ void ATablet::BeginPlay()
 	boxComp->SetSimulatePhysics(true);
 	tabletMesh->SetSimulatePhysics(true);
 
-	player = Cast<ABarPlayer>(GetAttachParentActor());
+	//player = Cast<ABarPlayer>(GetAttachParentActor());
 }
 
 // Called every frame

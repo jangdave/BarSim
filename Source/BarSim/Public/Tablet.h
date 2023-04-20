@@ -27,7 +27,7 @@ public:
 
 
 
-class ABarPlayer* player;
+//class ABarPlayer* player;
 	
 protected:
 	// Called when the game starts or when spawned
