@@ -320,7 +320,7 @@ void ABarPlayer::TryGrabLeft()
 		}
 		
 	}
-
+	HitObj.Reset();
 }
 
 void ABarPlayer::TryGrabRight()
@@ -414,17 +414,20 @@ void ABarPlayer::TryGrabRight()
 		}
 
 	}
-
+	HitObj.Reset();
 }
 void ABarPlayer::UnTryGrabLeft()
 {
-	if (IsGrabbedLeft == false)
+	// 왼손에 쥐고 있는 것이 없었다면,
+	if (IsGrabbedLeft == false&&isGrabbingTabletLeft==false&&isGrabbingBottleLeft==false&&isGrabbingTongsLeft==false)
 	{
 		return;
 	}
 	// 왼손에 Tongs를 잡고 있었다면
 	if(isGrabbingTongsLeft)
-	{		
+	{
+		isGrabbingTongsLeft=false;
+		IsGrabbedLeft = false;
 		// Tongs에 잡혀 있는 대상이 있었다면
 		if(isGrabbingWithTongsLeft)
 		{
@@ -453,8 +456,6 @@ void ABarPlayer::UnTryGrabLeft()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Nothing was on Left tongs"))
 		}
-		isGrabbingTongsLeft=false;
-		IsGrabbedLeft = false;
 		GrabbedObjectLeft->SetSimulatePhysics(true);
 		GrabbedActorLeft->SetActorEnableCollision(true);
 		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -468,9 +469,9 @@ void ABarPlayer::UnTryGrabLeft()
 	{
 		isGrabbingTabletLeft=false;
 		IsGrabbedLeft = false;
-		GrabbedObjectLeft->SetSimulatePhysics(true);		
-		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		GrabbedActorLeft->SetActorEnableCollision(true);
+		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);		
+		GrabbedObjectLeft->SetSimulatePhysics(true);			
 		//GrabbedActorLeft->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft = nullptr;
@@ -506,7 +507,8 @@ void ABarPlayer::UnTryGrabLeft()
 }
 
 void ABarPlayer::UnTryGrabRight()
-{	
+{
+	// 오른손에 쥐고 있는 것이 없었다면,
 	if (IsGrabbedRight == false&&isGrabbingTabletRight==false&&isGrabbingBottleRight==false&&isGrabbingTongsRight==false)
 	{
 		return;
