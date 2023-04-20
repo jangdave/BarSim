@@ -233,7 +233,7 @@ void ABarPlayer::TryGrabLeft()
 	params.AddIgnoredComponent(RightHand);
 	params.AddIgnoredComponent(RightHandMesh);	
 	params.AddIgnoredComponent(LeftHand);
-	params.AddIgnoredComponent(LeftHandMesh);
+	params.AddIgnoredComponent(LeftHandMesh);	
 	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(GrabRange), params);
 	if (bHit == false)
 	{
@@ -269,21 +269,15 @@ void ABarPlayer::TryGrabLeft()
 	// 잡기에 성공했다면
 	if (IsGrabbedLeft)
 	{
+		// 물체 물리기능 비활성화
 		GrabbedActorLeft=HitObj[Closest].GetComponent()->GetAttachmentRootActor();
 		GrabbedObjectLeft = HitObj[Closest].GetComponent();
-		if(GrabbedObjectLeft->IsSimulatingPhysics()==false)
-		{
-			IsGrabbedLeft=false;
-			GrabbedActorLeft=nullptr;
-			GrabbedObjectLeft=nullptr;
-			return;
-		}					
-		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		GrabbedObjectLeft->SetSimulatePhysics(false);
+		// 손에 붙여주자
 		// Left Grabbed Actor Casting
 		huchuTongL=Cast<AHuchuTong>(GrabbedActorLeft);
-		bottleL=Cast<ABottleBase>(GrabbedActorLeft);
-		tabletL=Cast<ATablet>(GrabbedActorLeft);
+		bottleL = Cast<ABottleBase>(GrabbedActorLeft);
+		tabletL = Cast<ATablet>(GrabbedActorLeft);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
 		{
@@ -291,7 +285,7 @@ void ABarPlayer::TryGrabLeft()
 			GrabbedObjectWithTongsLeft = nullptr;
 			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
-			//GrabbedActorLeft->SetActorEnableCollision(false);
+			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu on Left"))
 		}
 		// 잡은 대상이 Bottle 이라면
@@ -307,9 +301,7 @@ void ABarPlayer::TryGrabLeft()
 		else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
 		{
 			isGrabbingTabletLeft=true;
-			GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocketRight"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
-			GrabbedActorLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocketRight"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Left"))
 		}
@@ -318,7 +310,7 @@ void ABarPlayer::TryGrabLeft()
 			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 
 		}
-		
+
 	}
 	HitObj.Reset();
 }
