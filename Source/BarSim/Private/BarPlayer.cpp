@@ -10,8 +10,10 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "HuchuTong.h"
+#include "Tablet.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
+#include "Components/SphereComponent.h"
 
 
 // Sets default values
@@ -37,6 +39,11 @@ ABarPlayer::ABarPlayer()
 	RightAim->SetupAttachment(RootComponent);
 	RightAim->SetTrackingMotionSource(FName("RightAim"));
 
+	tabletIndexComp = CreateDefaultSubobject<USphereComponent>(TEXT("tabletIndexComp"));
+	tabletIndexComp->SetupAttachment(RightHandMesh);
+	tabletIndexComp->SetRelativeLocation(FVector(2.834404, 17.641268, -0.021906));
+	tabletIndexComp->SetSphereRadius(1.0f);
+
 	ConstructorHelpers::FObjectFinder<USkeletalMesh> TempMesh(TEXT("/Script/Engine.SkeletalMesh'/Game/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.SKM_QuinnXR_left'"));
 	if (TempMesh.Succeeded())
 	{
@@ -55,7 +62,7 @@ ABarPlayer::ABarPlayer()
 
 	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("VRCamera"));
 	FPSCamera->SetupAttachment(RootComponent);
-	FPSCamera->SetRelativeLocation(FVector(0, 0, 30));
+	FPSCamera->SetRelativeLocation(FVector(-15, 0, 30));
 	FPSCamera->bUsePawnControlRotation = false;
 
 }
@@ -212,7 +219,10 @@ void ABarPlayer::TryGrabLeft()
 	TArray<FOverlapResult> HitObj;
 	FCollisionQueryParams params;
 	params.AddIgnoredActor(this);
+	params.AddIgnoredComponent(RightHand);
+	params.AddIgnoredComponent(RightHandMesh);	
 	params.AddIgnoredComponent(LeftHand);
+	params.AddIgnoredComponent(LeftHandMesh);
 	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(GrabRange), params);
 	if (bHit == false)
 	{
@@ -253,8 +263,10 @@ void ABarPlayer::TryGrabLeft()
 		GrabbedObjectLeft = HitObj[Closest].GetComponent();
 		GrabbedObjectLeft->SetSimulatePhysics(false);
 		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		// Left Tong Casting
+		// Left Grabbed Actor Casting
 		huchuTongL=Cast<AHuchuTong>(GrabbedActorLeft);
+		bottleL=Cast<ABottleBase>(GrabbedActorLeft);
+		tabletL=Cast<ATablet>(GrabbedActorLeft);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
 		{
@@ -264,6 +276,23 @@ void ABarPlayer::TryGrabLeft()
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu on Left"))
+		}
+		// 잡은 대상이 Bottle 이라면
+		else if(GrabbedActorLeft == bottleL&&bottleL!=nullptr)
+		{
+			isGrabbingBottleLeft = true;
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("BottleSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			LeftHandMesh->SetVisibility(false);
+			//GrabbedActorRight->SetActorEnableCollision(false);
+			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Left"))
+		}
+		// 잡은 대상이 Tablet 이라면
+		else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
+		{
+			isGrabbingTabletLeft=true;
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			LeftHandMesh->SetVisibility(false);
+			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Left"))
 		}
 		else
 		{
@@ -285,6 +314,9 @@ void ABarPlayer::TryGrabRight()
 	FCollisionQueryParams params;
 	params.AddIgnoredActor(this);
 	params.AddIgnoredComponent(RightHand);
+	params.AddIgnoredComponent(RightHandMesh);	
+	params.AddIgnoredComponent(LeftHand);
+	params.AddIgnoredComponent(LeftHandMesh);	
 	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(GrabRange), params);
 	if (bHit == false)
 	{
@@ -325,9 +357,10 @@ void ABarPlayer::TryGrabRight()
 		GrabbedObjectRight = HitObj[Closest].GetComponent();
 		GrabbedObjectRight->SetSimulatePhysics(false);
 		// 손에 붙여주자
-		// Tong Casting
+		// Right Grabbed Actor Casting
 		huchuTong=Cast<AHuchuTong>(GrabbedActorRight);
 		bottle = Cast<ABottleBase>(GrabbedActorRight);
+		tablet = Cast<ATablet>(GrabbedActorRight);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
@@ -346,6 +379,14 @@ void ABarPlayer::TryGrabRight()
 			RightHandMesh->SetVisibility(false);
 			//GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Right"))
+		}
+		// 잡은 대상이 Tablet 이라면
+		else if(GrabbedActorRight==tablet&&tablet!=nullptr)
+		{
+			isGrabbingTabletRight=true;
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TabletSocketRight"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			RightHandMesh->SetVisibility(false);
+			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Right"))
 		}
 		else
 		{
@@ -403,6 +444,30 @@ void ABarPlayer::UnTryGrabLeft()
 		LeftHandMesh->SetVisibility(true);
 		UE_LOG(LogTemp, Warning, TEXT("release Left huchu"))
 	}
+	// 왼손에 Tablet을 쥐고 있었다면
+	else if(isGrabbingTabletLeft)
+	{
+		isGrabbingTabletLeft=false;
+		IsGrabbedLeft = false;
+		GrabbedObjectLeft->SetSimulatePhysics(true);
+		GrabbedActorLeft->SetActorEnableCollision(true);
+		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectLeft = nullptr;
+		LeftHandMesh->SetVisibility(true);
+		//GrabbedObjectLeft->AddForce(ThrowDirection * ThrowPower * GrabbedObjectLeft->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		float Angle;
+		FVector Axis;
+		DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		float dt = GetWorld()->DeltaTimeSeconds;
+		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+	
+
+		UE_LOG(LogTemp, Warning, TEXT("release Left Tablet"))
+	}
 	else
 	{
 		// 1. 잡지않은 상태로 전환
@@ -423,9 +488,11 @@ void ABarPlayer::UnTryGrabLeft()
 		DeltaRotationLeft.ToAxisAndAngle(Axis, Angle);
 		float dt = GetWorld()->DeltaTimeSeconds;
 		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		//GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		isGrabbingTabletLeft = false;
 		GrabbedObjectLeft = nullptr;
 	}
+	
 }
 
 void ABarPlayer::UnTryGrabRight()
@@ -491,11 +558,33 @@ void ABarPlayer::UnTryGrabRight()
 		DeltaRotation.ToAxisAndAngle(Axis, Angle);
 		float dt = GetWorld()->DeltaTimeSeconds;
 		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectRight = nullptr;
 		RightHandMesh->SetVisibility(true);
 
 		UE_LOG(LogTemp, Warning, TEXT("release Right Bottle"))
+	}
+	// 오른손에 Tablet을 쥐고 있었다면
+	else if(isGrabbingTabletRight)
+	{
+		isGrabbingTabletRight=false;
+		IsGrabbedRight = false;
+		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectRight->SetSimulatePhysics(true);
+		GrabbedActorRight->SetActorEnableCollision(true);
+		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		float Angle;
+		FVector Axis;
+		DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		float dt = GetWorld()->DeltaTimeSeconds;
+		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectRight = nullptr;
+		RightHandMesh->SetVisibility(true);
+
+		UE_LOG(LogTemp, Warning, TEXT("release Right Tablet"))
 	}
 	// 쥐고 있는 대상이 Bottle, Tongs 이외의 것이라면
 	else
@@ -518,8 +607,8 @@ void ABarPlayer::UnTryGrabRight()
 		DeltaRotation.ToAxisAndAngle(Axis, Angle);
 		float dt = GetWorld()->DeltaTimeSeconds;
 		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
-
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		isGrabbingTabletRight = false;
 		GrabbedObjectRight = nullptr;
 	}
 }

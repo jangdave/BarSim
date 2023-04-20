@@ -81,6 +81,8 @@ public:
 	class UMotionControllerComponent* RightAim;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	class USphereComponent* tabletIndexComp;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -123,6 +125,12 @@ public:
 	class AHuchuTong* huchuTongL;
 	UPROPERTY()
 	class ABottleBase* bottle;
+	UPROPERTY()
+	class ABottleBase* bottleL;
+	UPROPERTY()
+	class ATablet* tablet;
+	UPROPERTY()
+	class ATablet* tabletL;
 	
 	
 	bool IsGrabbedLeft = false;
@@ -136,6 +144,10 @@ public:
 	bool isRecipeMode = false;
 	bool isGrabbingBottleRight = false;
 	bool isGrabbingBottleLeft = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isGrabbingTabletRight = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isGrabbingTabletLeft = false;
 
 
 	
@@ -145,7 +157,7 @@ public:
 	FVector ThrowDirectionLeft;
 	// 던질 힘
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ThrowPower = 400;
+	float ThrowPower = 150;
 	// 오른 손 직전 위치
 	FVector PrevPosRight;
 	// 오른 손 이전 회전값
