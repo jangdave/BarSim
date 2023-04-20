@@ -79,10 +79,14 @@ public:
 	class USkeletalMeshComponent* RightHandMesh;	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
 	class UMotionControllerComponent* RightAim;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
+	class UMotionControllerComponent* LeftAim;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	class USphereComponent* tabletIndexComp;
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	class UWidgetInteractionComponent* widgetInteractionComp;
 	
 protected:
 	// Called when the game starts or when spawned

@@ -16,12 +16,19 @@ public:
 	ATablet();
 
 
-	UPROPERTY(EditAnywhere, Category=IceSettings)
+	UPROPERTY(EditAnywhere, Category=tabletSettings)
 	class UStaticMeshComponent* tabletMesh;
 
-	UPROPERTY(EditAnywhere, Category=IceSettings)
+	UPROPERTY(EditAnywhere, Category=tabletSettings)
 	class UBoxComponent* boxComp;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=tabletSettings)
+	class UWidgetComponent* widgetComp;
+
+
+
+class ABarPlayer* player;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

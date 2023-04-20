@@ -2,8 +2,9 @@
 
 
 #include "Tablet.h"
-
+#include "BarPlayer.h"
 #include "Components/BoxComponent.h"
+#include "Components/WidgetComponent.h"
 
 // Sets default values
 ATablet::ATablet()
@@ -22,6 +23,11 @@ ATablet::ATablet()
 	tabletMesh->SetupAttachment(boxComp);
 	tabletMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
+	widgetComp=CreateDefaultSubobject<UWidgetComponent>("widgetComp");
+	widgetComp->SetupAttachment(tabletMesh);
+	
+	boxComp->SetSimulatePhysics(true);
+	tabletMesh->SetSimulatePhysics(true);
 
 }
 
@@ -32,7 +38,8 @@ void ATablet::BeginPlay()
 
 	boxComp->SetSimulatePhysics(true);
 	tabletMesh->SetSimulatePhysics(true);
-	
+
+	player = Cast<ABarPlayer>(GetAttachParentActor());
 }
 
 // Called every frame
