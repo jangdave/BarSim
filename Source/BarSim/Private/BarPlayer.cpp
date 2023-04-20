@@ -45,12 +45,12 @@ ABarPlayer::ABarPlayer()
 
 	
 
-	tabletIndexComp = CreateDefaultSubobject<USphereComponent>(TEXT("tabletIndexComp"));
-	tabletIndexComp->SetupAttachment(RightHandMesh);
-	tabletIndexComp->SetRelativeLocation(FVector(2.834404, 17.641268, -0.021906));
-	tabletIndexComp->SetSphereRadius(1.0f);
-	tabletIndexComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	tabletIndexComp->SetVisibility(false);
+	//tabletIndexComp = CreateDefaultSubobject<USphereComponent>(TEXT("tabletIndexComp"));
+	//tabletIndexComp->SetupAttachment(RightHandMesh);
+	//tabletIndexComp->SetRelativeLocation(FVector(2.834404, 17.641268, -0.021906));
+	//tabletIndexComp->SetSphereRadius(1.0f);
+	//tabletIndexComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//tabletIndexComp->SetVisibility(false);
 
 	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
 	widgetInteractionComp->SetupAttachment(RightAim);
@@ -267,7 +267,7 @@ void ABarPlayer::TryGrabLeft()
 	}
 
 	// 잡기에 성공했다면
-	if (IsGrabbedLeft)
+	if (IsGrabbedLeft&&HitObj[Closest].GetComponent()->IsSimulatingPhysics() == true)
 	{
 		// 물체 물리기능 비활성화
 		GrabbedActorLeft=HitObj[Closest].GetComponent()->GetAttachmentRootActor();
@@ -283,7 +283,7 @@ void ABarPlayer::TryGrabLeft()
 		{
 			isGrabbingTongsLeft=true;
 			GrabbedObjectWithTongsLeft = nullptr;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TongsSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu on Left"))
@@ -292,7 +292,7 @@ void ABarPlayer::TryGrabLeft()
 		else if(GrabbedActorLeft == bottleL&&bottleL!=nullptr)
 		{
 			isGrabbingBottleLeft = true;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("BottleSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("BottleSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			//GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Left"))
@@ -301,13 +301,13 @@ void ABarPlayer::TryGrabLeft()
 		else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
 		{
 			isGrabbingTabletLeft=true;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Left"))
 		}
 		else
 		{
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
+			//GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 
 		}
 
@@ -361,7 +361,7 @@ void ABarPlayer::TryGrabRight()
 	}
 
 	// 잡기에 성공했다면
-	if (IsGrabbedRight)
+	if (IsGrabbedRight&&HitObj[Closest].GetComponent()->IsSimulatingPhysics() == true)
 	{
 		// 물체 물리기능 비활성화
 		GrabbedActorRight=HitObj[Closest].GetComponent()->GetAttachmentRootActor();
@@ -377,7 +377,7 @@ void ABarPlayer::TryGrabRight()
 		{
 			isGrabbingTongsRight=true;
 			GrabbedObjectWithTongsRight = nullptr;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TongsSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TongsSocketRight"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu on Right"))
@@ -386,7 +386,7 @@ void ABarPlayer::TryGrabRight()
 		else if(GrabbedActorRight == bottle&&bottle!=nullptr)
 		{
 			isGrabbingBottleRight = true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("BottleSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("BottleSocketRight"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
 			//GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Right"))
@@ -395,13 +395,13 @@ void ABarPlayer::TryGrabRight()
 		else if(GrabbedActorRight==tablet&&tablet!=nullptr)
 		{
 			isGrabbingTabletRight=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TabletSocketRight"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TabletSocketRight"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Right"))
 		}
 		else
 		{
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
+			//GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 
 		}
 
@@ -456,6 +456,28 @@ void ABarPlayer::UnTryGrabLeft()
 		LeftHandMesh->SetVisibility(true);
 		UE_LOG(LogTemp, Warning, TEXT("release Left huchu"))
 	}
+	// 왼손에 Bottle을 쥐고 있었다면
+	else if(isGrabbingBottleLeft)
+	{
+		isGrabbingBottleLeft=false;
+		IsGrabbedLeft = false;
+		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectLeft->SetSimulatePhysics(true);
+		GrabbedActorLeft->SetActorEnableCollision(true);
+		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		//float Angle;
+		//FVector Axis;
+		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		//float dt = GetWorld()->DeltaTimeSeconds;
+		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectLeft = nullptr;
+		LeftHandMesh->SetVisibility(true);
+
+		UE_LOG(LogTemp, Warning, TEXT("release Right Bottle"))
+	}
 	// 왼손에 Tablet을 쥐고 있었다면
 	else if(isGrabbingTabletLeft)
 	{
@@ -464,7 +486,7 @@ void ABarPlayer::UnTryGrabLeft()
 		GrabbedActorLeft->SetActorEnableCollision(true);
 		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);		
 		GrabbedObjectLeft->SetSimulatePhysics(true);			
-		//GrabbedActorLeft->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
+		GrabbedActorLeft->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft = nullptr;
 		GrabbedActorLeft = nullptr;
@@ -476,11 +498,11 @@ void ABarPlayer::UnTryGrabLeft()
 		// 1. 잡지않은 상태로 전환
 		IsGrabbedLeft = false;
 		// 2. 손에서 떼어내기
-		GrabbedObjectLeft->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+		//GrabbedObjectLeft->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 		// 3. 물리기능 활성화
-		GrabbedObjectLeft->SetSimulatePhysics(true);
+		//GrabbedObjectLeft->SetSimulatePhysics(true);
 		// 4. 충돌기능 활성화
-		GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		//GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		// 던지기
 		//GrabbedObjectLeft->AddForce(ThrowDirectionLeft * ThrowPower * GrabbedObjectLeft->GetMass());
 
@@ -492,7 +514,7 @@ void ABarPlayer::UnTryGrabLeft()
 		//float dt = GetWorld()->DeltaTimeSeconds;
 		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
 		//GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
-		isGrabbingTabletLeft = false;
+		//isGrabbingTabletLeft = false;
 		GrabbedObjectLeft = nullptr;
 	}
 	
@@ -573,9 +595,11 @@ void ABarPlayer::UnTryGrabRight()
 	{
 		isGrabbingTabletRight=false;
 		IsGrabbedRight = false;
-		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->SetSimulatePhysics(true);
 		GrabbedActorRight->SetActorEnableCollision(true);
+		GrabbedActorRight->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
+		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+
 		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
 		// 회전 시키기
 		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
@@ -585,6 +609,7 @@ void ABarPlayer::UnTryGrabRight()
 		//float dt = GetWorld()->DeltaTimeSeconds;
 		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
 		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedActorRight=nullptr;
 		GrabbedObjectRight = nullptr;
 		RightHandMesh->SetVisibility(true);
 
@@ -596,11 +621,11 @@ void ABarPlayer::UnTryGrabRight()
 		// 1. 잡지않은 상태로 전환
 		IsGrabbedRight = false;
 		// 2. 손에서 떼어내기
-		GrabbedObjectRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+		//GrabbedObjectRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 		// 3. 물리기능 활성화
-		GrabbedObjectRight->SetSimulatePhysics(true);
+		//GrabbedObjectRight->SetSimulatePhysics(true);
 		// 4. 충돌기능 활성화
-		GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		//GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		// 던지기
 		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
 
@@ -612,7 +637,7 @@ void ABarPlayer::UnTryGrabRight()
 		//float dt = GetWorld()->DeltaTimeSeconds;
 		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
 		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
-		isGrabbingTabletRight = false;
+		//isGrabbingTabletRight = false;
 		GrabbedObjectRight = nullptr;
 	}
 }
@@ -676,7 +701,7 @@ void ABarPlayer::Fire()
 		{
 			//UI에 이벤트를 전달하고 싶다.
 			widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
-			return;
+			
 		}
 	
 	// 왼손 혹은 오른손에 Tongs를 쥐고 있다면

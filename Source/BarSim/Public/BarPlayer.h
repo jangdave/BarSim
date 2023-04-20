@@ -83,8 +83,8 @@ public:
 	class UMotionControllerComponent* LeftAim;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
-	UPROPERTY(EditDefaultsOnly, Category="Input")
-	class USphereComponent* tabletIndexComp;
+	//UPROPERTY(EditDefaultsOnly, Category="Input")
+	//class USphereComponent* tabletIndexComp;
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionComp;
 	
