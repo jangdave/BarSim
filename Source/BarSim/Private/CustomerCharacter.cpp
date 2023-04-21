@@ -4,7 +4,9 @@
 #include "CustomerCharacter.h"
 #include "CustomerAnimInstance.h"
 #include "CustomerFSM.h"
+#include "CustomerOrderWidget.h"
 #include "SpawnManager.h"
+#include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -53,8 +55,11 @@ ACustomerCharacter::ACustomerCharacter()
 		GetMesh()->SetAnimInstanceClass(tempAnim.Class);
 	}
 	
-	costomerFSM = CreateDefaultSubobject<UCustomerFSM>(TEXT("costomerFSM"));
+	customerFSM = CreateDefaultSubobject<UCustomerFSM>(TEXT("costomerFSM"));
 
+	orderWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("orderWidget"));
+	orderWidget->SetupAttachment(GetMesh());
+		
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
@@ -66,6 +71,8 @@ void ACustomerCharacter::BeginPlay()
 	customerAnim = Cast<UCustomerAnimInstance>(GetMesh()->GetAnimInstance());
 
 	spawnManager = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
+
+	order_UI = Cast<UCustomerOrderWidget>(orderWidget->GetUserWidgetObject());
 	
 	SetMesh();
 }

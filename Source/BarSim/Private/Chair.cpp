@@ -2,6 +2,8 @@
 
 
 #include "Chair.h"
+#include "BarPlayer.h"
+#include "Coaster.h"
 #include "CupBase.h"
 #include "Components/BoxComponent.h"
 
@@ -19,6 +21,9 @@ AChair::AChair()
 
 	coctailBoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("coctailBoxComp"));
 	coctailBoxComp->SetupAttachment(boxComp);
+
+	playerBoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("playerBoxComp"));
+	playerBoxComp->SetupAttachment(boxComp);
 }
 
 // Called when the game starts or when spawned
@@ -26,8 +31,11 @@ void AChair::BeginPlay()
 {
 	Super::BeginPlay();
 
-	coctailBoxComp->OnComponentBeginOverlap.AddDynamic(this, &AChair::OnOverlap);
-	coctailBoxComp->OnComponentEndOverlap.AddDynamic(this, &AChair::EndOverlap);
+	coctailBoxComp->OnComponentBeginOverlap.AddDynamic(this, &AChair::OnCupOverlap);
+	coctailBoxComp->OnComponentEndOverlap.AddDynamic(this, &AChair::EndCupOverlap);
+
+	playerBoxComp->OnComponentBeginOverlap.AddDynamic(this, &AChair::OnPlayerOverlap);
+	playerBoxComp->OnComponentEndOverlap.AddDynamic(this, &AChair::EndPlayerOverlap);
 }
 
 // Called every frame
@@ -37,25 +45,57 @@ void AChair::Tick(float DeltaTime)
 
 }
 
-void AChair::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	auto target = Cast<ACupBase>(OtherActor);
-
-	if(target != nullptr)
+	auto coctail = Cast<ACupBase>(OtherActor);
+	auto coaster = Cast<ACoaster>(OtherActor);
+	
+	if(coctail != nullptr)
 	{
 		bCheckCoctail = true;
 	}
+	if(coaster != nullptr)
+	{
+		bCheckCoaster = true;
+	}
 }
 
-void AChair::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex)
 {
-	auto target = Cast<ACupBase>(OtherActor);
+	auto coctail = Cast<ACupBase>(OtherActor);
+	auto coaster = Cast<ACoaster>(OtherActor);
+
+	if(coctail != nullptr)
+	{
+		bCheckCoctail = false;
+	}
+	if(coaster != nullptr)
+	{
+		bCheckCoaster = false;	
+	}
+}
+
+void AChair::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	auto target = Cast<ABarPlayer>(OtherActor);
 
 	if(target != nullptr)
 	{
-		bCheckCoctail = false;
+		bCheckPlayer = true;
+	}
+}
+
+void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	auto target = Cast<ABarPlayer>(OtherActor);
+
+	if(target != nullptr)
+	{
+		bCheckPlayer = false;
 	}
 }
 

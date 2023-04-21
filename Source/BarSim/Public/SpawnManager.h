@@ -33,7 +33,13 @@ public:
 	TArray<bool> bIsSit;
 
 	UPROPERTY()
-	TArray<bool> bIsCoc;
+	TArray<bool> bIsCoctail;
+
+	UPROPERTY()
+	TArray<bool> bIsCoaster;
+	
+	UPROPERTY()
+	TArray<bool> bIsPlayer;
 	
 	UPROPERTY()
 	int32 checkCount = 0;

@@ -39,12 +39,16 @@ void ASpawnManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	bIsCoc.Empty();
+	bIsCoctail.Empty();
+	bIsPlayer.Empty();
+	bIsCoaster.Empty();
 	
 	for(int i = 0; i<chairs.Num(); i++)
 	{
 		auto temp = Cast<AChair>(chairs[i]);
-		bIsCoc.Add(temp->bCheckCoctail);
+		bIsCoctail.Add(temp->bCheckCoctail);
+		bIsCoaster.Add(temp->bCheckCoaster);
+		bIsPlayer.Add(temp->bCheckPlayer);
 	}
 }
 

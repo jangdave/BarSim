@@ -9,33 +9,18 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/ABP_CustomerAnimInstance.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Angry_UE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/Angry_UE.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Angry_UE1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/BS_CustomerMove.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Defeated_UE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/Defeated_UE.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Defeated_UE1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Drinking_UE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/Drinking_UE.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Drinking_UE1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/HappyIdle_UE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/HappyIdle_UE.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/HappyIdle_UE1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Montage_Customer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/Montage_Customer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Talking_UE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/Talking_UE.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/TwistDance_UE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/TwistDance_UE.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/TwistDance_UE1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Walk_UE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/Walk_UE.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Walk_UE1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarSim.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/BarSim.uproject" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BP_CustomerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_CustomerCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/IKRetargeter_carla.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/IKRig_carla.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Scanned3DPeoplePack/RP_Character/rp_carla_rigged_001_ue4/IKRig_carla.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/testmap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/testmap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerAnimInstance.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BarGameModeBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BarGameModeBase.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/Chair.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/Chair.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CustomerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CustomerFSM.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerFSM.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/SpawnManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/SpawnManager.h" afterDir="false" />
     </list>
@@ -43,6 +28,19 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2OdGN8AivJm9zCaLoyAIGX2PMc5" />
   <component name="ProjectViewState">
@@ -137,6 +135,8 @@
       <workItem from="1681883005211" duration="1714000" />
       <workItem from="1681885762227" duration="4000" />
       <workItem from="1681885792759" duration="8256000" />
+      <workItem from="1681957210718" duration="2971000" />
+      <workItem from="1682040069397" duration="30276000" />
     </task>
     <servers />
   </component>

@@ -27,12 +27,21 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=FSM)
-	class UCustomerFSM* costomerFSM;
+	class UCustomerFSM* customerFSM;
 
 	UPROPERTY(EditAnywhere)
 	class UCustomerAnimInstance* customerAnim;
 
+	UPROPERTY()
 	class ASpawnManager* spawnManager;
+
+	// 주문시 나타날 위젯 컴포넌트
+	UPROPERTY(EditAnywhere, Category=Widget)
+	class UWidgetComponent* orderWidget;
+
+	// 위젯 컴포넌트에 할당될 위젯
+	UPROPERTY()
+	class UCustomerOrderWidget* order_UI;
 	
 	// 스폰시 메쉬 설정 함수
 	void SetMesh();

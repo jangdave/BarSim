@@ -34,25 +34,32 @@ void UCustomerAnimInstance::OnSitAnim(FName sectionName)
 
 void UCustomerAnimInstance::EndTalking()
 {
-	owner->costomerFSM->SetSitState(ECustomerSitState::WAITLONG);
+	owner->customerFSM->SetSitState(ECustomerSitState::WAIT);
 }
 
 void UCustomerAnimInstance::EndWaitLong()
 {
-	owner->costomerFSM->SetSitState(ECustomerSitState::WAITLONG);
+	if(owner->customerFSM->sitState == ECustomerSitState::STANDBYWAITLONG)
+	{
+		owner->customerFSM->SetSitState(ECustomerSitState::STANDBYWAITLONG);
+	}
+	else
+	{
+		owner->customerFSM->SetSitState(ECustomerSitState::WAITLONG);
+	}
 }
 
 void UCustomerAnimInstance::EndDrinking()
 {
-	owner->costomerFSM->SetSitState(ECustomerSitState::JUDGEMENT);
+	owner->customerFSM->SetSitState(ECustomerSitState::JUDGEMENT);
 }
 
 void UCustomerAnimInstance::EndBad()
 {
-	owner->costomerFSM->SetState(ECustomerState::LEAVE);
+	owner->customerFSM->SetState(ECustomerState::LEAVE);
 }
 
 void UCustomerAnimInstance::EndGood()
 {
-	owner->costomerFSM->SetState(ECustomerState::LEAVE);
+	owner->customerFSM->SetState(ECustomerState::LEAVE);
 }

@@ -18,6 +18,8 @@ enum class ECustomerState : uint8
 UENUM(BlueprintType)
 enum class ECustomerSitState : uint8
 {
+	STANDBY,
+	STANDBYWAITLONG,
 	ORDER,
 	WAIT,
 	WAITLONG,
@@ -61,12 +63,14 @@ public:
 	
 	int32 idx;
 
+	int32 orderIdx;
+	
 	float curTime;
 
 	bool bCheckPlayAnim;
 
-	bool bCheckEndAnim;	
-	
+	bool bCheckEndAnim;
+
 	class AAIController* ai;
 
 	UFUNCTION()
@@ -75,6 +79,9 @@ public:
 	UFUNCTION()
 	void SetSitState(ECustomerSitState next);
 
+	void LookPlayer();
+
+	void LookOrder();
 private:
 	void TickIdle();
 
@@ -84,6 +91,10 @@ private:
 
 	void TickLeave();
 
+	void TickStandby();
+
+	void TickStandbyWaitLong();
+	
 	void TickOrder();
 
 	void TickWait();
