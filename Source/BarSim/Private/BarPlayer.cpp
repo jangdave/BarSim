@@ -44,14 +44,6 @@ ABarPlayer::ABarPlayer()
 	RightAim->SetTrackingMotionSource(FName("RightAim"));
 
 	
-
-	//tabletIndexComp = CreateDefaultSubobject<USphereComponent>(TEXT("tabletIndexComp"));
-	//tabletIndexComp->SetupAttachment(RightHandMesh);
-	//tabletIndexComp->SetRelativeLocation(FVector(2.834404, 17.641268, -0.021906));
-	//tabletIndexComp->SetSphereRadius(1.0f);
-	//tabletIndexComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	//tabletIndexComp->SetVisibility(false);
-
 	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
 	widgetInteractionComp->SetupAttachment(RightAim);
 
@@ -294,7 +286,7 @@ void ABarPlayer::TryGrabLeft()
 			isGrabbingBottleLeft = true;
 			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("BottleSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
-			//GrabbedActorLeft->SetActorEnableCollision(false);
+			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Left"))
 		}
 		// 잡은 대상이 Tablet 이라면
@@ -303,16 +295,28 @@ void ABarPlayer::TryGrabLeft()
 			isGrabbingTabletLeft=true;
 			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
+			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Left"))
 		}
 		else
 		{
+			if(GrabbedObjectLeft->IsSimulatingPhysics()==false)
+			{
+				GrabbedObjectLeft->SetSimulatePhysics(true);
+				IsGrabbedLeft=false;
+				GrabbedObjectLeft=nullptr;
+				GrabbedActorLeft=nullptr;
+			}
 			//GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 
 		}
-
+		HitObj.Reset();
 	}
-	HitObj.Reset();
+	else
+	{
+		return;
+	}
+	
 }
 
 void ABarPlayer::TryGrabRight()
@@ -403,17 +407,27 @@ void ABarPlayer::TryGrabRight()
 		}
 		else
 		{
+
+			if(GrabbedObjectRight->IsSimulatingPhysics()==false)
+			{
+				IsGrabbedRight=false;
+				GrabbedObjectRight=nullptr;
+				GrabbedActorRight=nullptr;
+			}
 			//GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 
 		}
-
+		HitObj.Reset();
 	}
-	HitObj.Reset();
+	else
+	{
+		return;
+	}
 }
 void ABarPlayer::UnTryGrabLeft()
 {
 	// 왼손에 쥐고 있는 것이 없었다면,
-	if (IsGrabbedLeft == false&&isGrabbingTabletLeft==false&&isGrabbingBottleLeft==false&&isGrabbingTongsLeft==false)
+	if (IsGrabbedLeft == false)
 	{
 		return;
 	}
@@ -489,7 +503,7 @@ void ABarPlayer::UnTryGrabLeft()
 		IsGrabbedLeft = false;
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);			
-		//GrabbedActorLeft->SetActorEnableCollision(true);
+		GrabbedActorLeft->SetActorEnableCollision(true);
 		//GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);		
 		//GrabbedActorLeft->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft = nullptr;
@@ -499,7 +513,7 @@ void ABarPlayer::UnTryGrabLeft()
 	}
 	else
 	{
-		// 1. 잡지않은 상태로 전환
+		// 잡지않은 상태로 전환
 		IsGrabbedLeft = false;
 		isGrabbingBottleLeft = false;
 		isGrabbingTabletLeft = false;
@@ -531,7 +545,7 @@ void ABarPlayer::UnTryGrabLeft()
 void ABarPlayer::UnTryGrabRight()
 {
 	// 오른손에 쥐고 있는 것이 없었다면,
-	if (IsGrabbedRight == false&&isGrabbingTabletRight==false&&isGrabbingBottleRight==false&&isGrabbingTongsRight==false)
+	if (IsGrabbedRight==false)
 	{
 		return;
 	}
@@ -694,29 +708,13 @@ void ABarPlayer::Grabbing()
 }
 
 void ABarPlayer::Fire()
-{
-	/*// 왼손에 Tablet을 쥐고 있다면
-	if(isGrabbingTabletLeft)
+{	
+	if(widgetInteractionComp)
 	{
-		// Index Finger의 Tablet Component를 0.1초간 활성화한다.
-		tabletIndexComp->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		tabletIndexComp->SetVisibility(true);
-		FTimerHandle indexHandle;
-		GetWorldTimerManager().SetTimer(indexHandle, FTimerDelegate::CreateLambda([this]()->void
-		{
-			tabletIndexComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-			tabletIndexComp->SetVisibility(false);
-		}),0.1f, false);
-		
-		return;
-	}*/
-	
-		if(widgetInteractionComp)
-		{
-			//UI에 이벤트를 전달하고 싶다.
-			widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
+		//UI에 이벤트를 전달하고 싶다.
+		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
 			
-		}
+	}
 	
 	// 왼손 혹은 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight)

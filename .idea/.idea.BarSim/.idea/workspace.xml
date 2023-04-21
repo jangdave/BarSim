@@ -9,15 +9,11 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Materials/Instances/Quinn/MI_Quinn_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Materials/Instances/Quinn/MI_Quinn_02.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/Tongs/HuchuTong_R.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/Tongs/HuchuTong_R.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Tablet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Tablet.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/Tablet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/Tablet.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +38,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\USER\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
@@ -120,6 +116,7 @@
       <workItem from="1681953210181" duration="9674000" />
       <workItem from="1681967572402" duration="11838000" />
       <workItem from="1681989691393" duration="7040000" />
+      <workItem from="1682037307841" duration="3841000" />
     </task>
     <servers />
   </component>
