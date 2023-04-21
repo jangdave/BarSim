@@ -56,7 +56,7 @@ void ABottleBase::Tick(float DeltaTime)
 				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 800);
 				waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
 				//물방울 액터 스폰
-				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(liquorDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
+				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
 				drop->dropMass = 0.05f * streamWidth * DeltaTime;
 				remains = remains - drop->dropMass;
 				bStreamOn = true;
@@ -72,7 +72,7 @@ void ABottleBase::Tick(float DeltaTime)
 					waterStream->SetRelativeLocation(pourer->GetSocketLocation(FName("Pourer")));
 					waterStream->SetRelativeRotation(pourer->GetSocketRotation(FName("Pourer")));
 					//물방울 액터 스폰
-					ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(liquorDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
+					ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
 					drop->dropMass = 0.05f * streamWidth * DeltaTime;
 					remains = remains - drop->dropMass;
 					UE_LOG(LogTemp, Warning, TEXT("%f"), remains);
