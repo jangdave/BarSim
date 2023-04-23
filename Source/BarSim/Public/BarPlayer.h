@@ -41,6 +41,10 @@ public:
 	void TongsMovementExec();
 	UFUNCTION()
 	void TongsReleaseMovementExec();
+	UFUNCTION()
+	float GetDoorAngle();
+	
+	
 
 	// Tongs Movement Bool
 	bool IsTongsMovementFinished = true;
@@ -100,7 +104,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditDefaultsOnly)
-	float GrabRange = 100;
+	float GrabRange = 150;
 	UPROPERTY(EditDefaultsOnly)
 	float TongsGrabRange = 15;
 	// 오른손 그랩 액터
@@ -135,6 +139,8 @@ public:
 	class ATablet* tablet;
 	UPROPERTY()
 	class ATablet* tabletL;
+	UPROPERTY()
+	class ABarFridge* barFridge;
 	
 	
 	bool IsGrabbedLeft = false;
@@ -148,6 +154,8 @@ public:
 	bool isRecipeMode = false;
 	bool isGrabbingBottleRight = false;
 	bool isGrabbingBottleLeft = false;
+	bool isGrabbingFridgeDoorRight=false;
+	bool isGrabbingFridgeDoorLeft=false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isGrabbingTabletRight = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

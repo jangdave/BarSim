@@ -2,6 +2,8 @@
 
 
 #include "BarPlayer.h"
+
+#include "BarFridge.h"
 #include "BottleBase.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "MotionControllerComponent.h"
@@ -12,8 +14,8 @@
 #include "Tablet.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
-#include "Components/SphereComponent.h"
 #include "Components/WidgetInteractionComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 // Sets default values
@@ -149,6 +151,24 @@ void ABarPlayer::Tick(float DeltaTime)
 			
 		}
 	}
+	// FridgeDoor가 nullptr이 아니면서
+	if(barFridge!=nullptr)
+	{
+		// 오른손에 Fridge Door를 잡고 있다면
+		if(isGrabbingFridgeDoorRight)
+		{
+			auto doorYaw = FMath::Clamp(GetDoorAngle(), 0, 90);
+			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYaw)
+			GrabbedObjectRight->SetWorldRotation(FRotator(0, doorYaw+90, 0));
+			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
+			auto rightVec = GrabbedObjectRight->GetRightVector();
+			auto upVec = GrabbedObjectRight->GetUpVector();
+			auto makeRot = UKismetMathLibrary::MakeRotFromYZ(rightVec, upVec);			
+			auto rInterpRot = UKismetMathLibrary::RInterpTo_Constant(doorPivotRot, makeRot, GetWorld()->GetDeltaSeconds(), 100.0f);
+			UE_LOG(LogTemp, Warning, TEXT("doorYaw X : %f, doorYaw Y : %f,doorYaw Z : %f"), rInterpRot.Pitch, rInterpRot.Yaw, rInterpRot.Roll);
+			*/
+		}
+	}
 }
 
 // Called to bind functionality to input
@@ -212,11 +232,28 @@ void ABarPlayer::TongsReleaseMovementExec()
 	IsTongsReleaseMovementFinished=true;
 }
 
+float ABarPlayer::GetDoorAngle()
+{
+	//bool crossBoolean = false;
+	auto initDoorLocation= GrabbedObjectRight->GetComponentLocation();
+	auto rightHandLoc = RightHand->GetComponentLocation();
+	float doorDist = (initDoorLocation-rightHandLoc).Y;
+	//auto doorPivotLoc = GrabbedObjectRight->GetComponentLocation();
+	//doorVec.Normalize();
+	//auto doorVecDot = FVector::DotProduct(doorVec, initDoorDirection);
+	//auto doorACOSd = UKismetMathLibrary::DegAcos(doorVecDot);
+	//auto doorVecCross = UKismetMathLibrary::Cross_VectorVector(doorVec, initDoorDirection).Z;
+	//doorVecCross <0 ? crossBoolean = true : crossBoolean = false;
+	//auto selectFl = UKismetMathLibrary::SelectFloat(-1.0f, 1.0f, crossBoolean);
+	
+	return doorDist;
+}
+
 
 void ABarPlayer::TryGrabLeft()
 {
 	// 중심점
-	FVector Center = LeftHand->GetComponentLocation();
+	FVector Center = LeftHandMesh->GetComponentLocation();
 	// 충돌체크(구충돌)
 	// 충돌한 물체를 기억할 배열
 	TArray<FOverlapResult> HitObj;
@@ -322,7 +359,7 @@ void ABarPlayer::TryGrabLeft()
 void ABarPlayer::TryGrabRight()
 {
 	// 중심점
-	FVector Center = RightHand->GetComponentLocation();
+	FVector Center = RightHandMesh->GetComponentLocation();
 	// 충돌체크(구충돌)
 	// 충돌한 물체를 기억할 배열
 	TArray<FOverlapResult> HitObj;
@@ -331,7 +368,7 @@ void ABarPlayer::TryGrabRight()
 	params.AddIgnoredComponent(RightHand);
 	params.AddIgnoredComponent(RightHandMesh);	
 	params.AddIgnoredComponent(LeftHand);
-	params.AddIgnoredComponent(LeftHandMesh);	
+	params.AddIgnoredComponent(LeftHandMesh);
 	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(GrabRange), params);
 	if (bHit == false)
 	{
@@ -376,6 +413,7 @@ void ABarPlayer::TryGrabRight()
 		huchuTong=Cast<AHuchuTong>(GrabbedActorRight);
 		bottle = Cast<ABottleBase>(GrabbedActorRight);
 		tablet = Cast<ATablet>(GrabbedActorRight);
+		barFridge=Cast<ABarFridge>(GrabbedActorRight);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
@@ -404,6 +442,16 @@ void ABarPlayer::TryGrabRight()
 			GrabbedActorRight->SetActorEnableCollision(false);
 
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Right"))
+		}
+		// 잡은 대상이 Fridge Door 라면
+		else if(GrabbedActorRight==barFridge&&barFridge!=nullptr)
+		{
+			isGrabbingFridgeDoorRight=true;			
+			RightHandMesh->SetVisibility(false);
+			//GrabbedActorRight->SetActorEnableCollision(false);
+
+			UE_LOG(LogTemp, Warning, TEXT("grab Fridge Door on Right"))
+
 		}
 		else
 		{
@@ -639,6 +687,29 @@ void ABarPlayer::UnTryGrabRight()
 
 		UE_LOG(LogTemp, Warning, TEXT("release Right Tablet"))
 	}
+	// 오른손에 Fridge Door를 쥐고 있었다면
+	else if(isGrabbingFridgeDoorRight)
+	{
+		isGrabbingFridgeDoorRight=false;
+		IsGrabbedRight = false;
+		GrabbedObjectRight->SetSimulatePhysics(true);
+		//GrabbedActorRight->SetActorEnableCollision(true);
+		//GrabbedActorRight->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
+		//GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+
+		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		//float Angle;
+		//FVector Axis;
+		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		//float dt = GetWorld()->DeltaTimeSeconds;
+		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectRight = nullptr;
+		GrabbedActorRight=nullptr;
+		RightHandMesh->SetVisibility(true);
+	}
 	// 쥐고 있는 대상이 Bottle, Tongs 이외의 것이라면
 	else
 	{
@@ -647,6 +718,8 @@ void ABarPlayer::UnTryGrabRight()
 		isGrabbingBottleRight = false;
 		isGrabbingTabletRight = false;
 		isGrabbingTongsRight = false;
+		GrabbedObjectRight = nullptr;
+		GrabbedActorRight = nullptr;
 		// 2. 손에서 떼어내기
 		//GrabbedObjectRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 		// 3. 물리기능 활성화
@@ -665,8 +738,7 @@ void ABarPlayer::UnTryGrabRight()
 		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
 		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		//isGrabbingTabletRight = false;
-		GrabbedObjectRight = nullptr;
-		GrabbedActorRight = nullptr;
+		
 	}
 }
 
