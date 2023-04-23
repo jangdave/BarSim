@@ -97,6 +97,7 @@ void ABarPlayer::BeginPlay()
 		RightAim->SetRelativeLocation(FVector(20, 20, 0));
 		RightHand->SetRelativeLocation(FVector(20, 20, 0));
 		FPSCamera->bUsePawnControlRotation = true;
+		GrabRange = 45.0f;
 
 		FPSCamera->AddRelativeLocation(FVector(0, 0, 22));
 
@@ -106,6 +107,7 @@ void ABarPlayer::BeginPlay()
 	{
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
 		FPSCamera->bUsePawnControlRotation = false;
+		GrabRange=25.0f;
 	}
 	
 }
