@@ -160,7 +160,7 @@ void ABarPlayer::Tick(float DeltaTime)
 		// 오른손에 Fridge Door를 잡고 있다면
 		if(isGrabbingFridgeDoorRight)
 		{
-			auto doorYaw = FMath::Clamp(GetDoorAngle(), 0, 90);
+			auto doorYaw = FMath::Clamp(GetDoorAngle()*1.35, 0, 90);
 			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYaw)
 			GrabbedObjectRight->SetRelativeRotation(FRotator(0, doorYaw+90, 0));
 			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
@@ -178,7 +178,7 @@ void ABarPlayer::Tick(float DeltaTime)
 		// 왼손에 Fridge Door를 잡고 있다면
 		if(isGrabbingFridgeDoorLeft)
 		{
-			auto doorYawLeft = FMath::Clamp(GetDoorAngleLeft(), 0, 90);
+			auto doorYawLeft = FMath::Clamp(GetDoorAngleLeft()*1.35, 0, 90);
 			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYawLeft)
 			GrabbedObjectLeft->SetRelativeRotation(FRotator(0, doorYawLeft+90, 0));
 			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
