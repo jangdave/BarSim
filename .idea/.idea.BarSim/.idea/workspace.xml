@@ -9,9 +9,11 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/Fridge/FridgeNoDoor/BarFridgeNoDoor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/Fridge/FridgeNoDoor/BarFridgeNoDoor.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BarPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BarPlayer.h" afterDir="false" />
     </list>

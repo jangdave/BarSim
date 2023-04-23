@@ -145,6 +145,10 @@ public:
 	class ABarFridge* barFridge;
 	UPROPERTY()
 	class ABarFridge* barFridgeL;
+	UPROPERTY()
+	class AOpener* opener;
+	UPROPERTY()
+	class AOpener* openerL;
 	
 	
 	bool IsGrabbedLeft = false;
@@ -164,6 +168,9 @@ public:
 	bool isGrabbingTabletRight = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isGrabbingTabletLeft = false;
+	bool isGrabbingOpenerRight = false;
+	bool isGrabbingOpenerLeft = false;
+	
 
 
 	

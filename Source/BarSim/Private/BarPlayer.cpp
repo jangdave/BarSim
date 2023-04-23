@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "HuchuTong.h"
+#include "Opener.h"
 #include "Tablet.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
@@ -344,6 +345,7 @@ void ABarPlayer::TryGrabLeft()
 		bottleL = Cast<ABottleBase>(GrabbedActorLeft);
 		tabletL = Cast<ATablet>(GrabbedActorLeft);
 		barFridgeL=Cast<ABarFridge>(GrabbedActorLeft);
+		openerL=Cast<AOpener>(GrabbedActorLeft);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
 		{
@@ -383,6 +385,15 @@ void ABarPlayer::TryGrabLeft()
 
 			UE_LOG(LogTemp, Warning, TEXT("grab Fridge Door on Left"))
 
+		}
+		// 잡은 대상이 Opener 이라면
+		else if(GrabbedActorLeft==openerL&&openerL!=nullptr)
+		{
+			isGrabbingOpenerLeft=true;
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("OpenerSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			LeftHandMesh->SetVisibility(false);
+			GrabbedActorLeft->SetActorEnableCollision(false);
+			UE_LOG(LogTemp, Warning, TEXT("grab opener on Left"))			
 		}
 		else
 		{
@@ -464,6 +475,7 @@ void ABarPlayer::TryGrabRight()
 		bottle = Cast<ABottleBase>(GrabbedActorRight);
 		tablet = Cast<ATablet>(GrabbedActorRight);
 		barFridge=Cast<ABarFridge>(GrabbedActorRight);
+		opener=Cast<AOpener>(GrabbedActorRight);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
@@ -504,6 +516,15 @@ void ABarPlayer::TryGrabRight()
 
 			UE_LOG(LogTemp, Warning, TEXT("grab Fridge Door on Right"))
 
+		}
+		// 잡은 대상이 Opener 이라면
+		else if(GrabbedActorRight==opener&&opener!=nullptr)
+		{
+			isGrabbingOpenerRight=true;
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			RightHandMesh->SetVisibility(false);
+			GrabbedActorRight->SetActorEnableCollision(false);
+			UE_LOG(LogTemp, Warning, TEXT("grab opener on Right"))			
 		}
 		else
 		{
@@ -635,6 +656,29 @@ void ABarPlayer::UnTryGrabLeft()
 		GrabbedObjectLeft = nullptr;
 		GrabbedActorLeft=nullptr;
 		LeftHandMesh->SetVisibility(true);
+	}
+	// 왼손에 Opener를 쥐고 있었다면
+	else if(isGrabbingOpenerLeft)
+	{
+		isGrabbingOpenerLeft=false;
+		IsGrabbedLeft = false;
+		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectLeft->SetSimulatePhysics(true);
+		GrabbedActorLeft->SetActorEnableCollision(true);
+		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		//float Angle;
+		//FVector Axis;
+		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		//float dt = GetWorld()->DeltaTimeSeconds;
+		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectLeft = nullptr;
+		GrabbedActorLeft=nullptr;
+		LeftHandMesh->SetVisibility(true);
+
+		UE_LOG(LogTemp, Warning, TEXT("release Left Opener"))
 	}
 	else
 	{
@@ -789,6 +833,29 @@ void ABarPlayer::UnTryGrabRight()
 		GrabbedObjectRight = nullptr;
 		GrabbedActorRight=nullptr;
 		RightHandMesh->SetVisibility(true);
+	}
+	// 오른손에 Opener를 쥐고 있었다면
+	else if(isGrabbingOpenerRight)
+	{
+		isGrabbingOpenerRight=false;
+		IsGrabbedRight = false;
+		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectRight->SetSimulatePhysics(true);
+		GrabbedActorRight->SetActorEnableCollision(true);
+		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		//float Angle;
+		//FVector Axis;
+		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		//float dt = GetWorld()->DeltaTimeSeconds;
+		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectRight = nullptr;
+		GrabbedActorRight=nullptr;
+		RightHandMesh->SetVisibility(true);
+
+		UE_LOG(LogTemp, Warning, TEXT("release Right Opener"))
 	}
 	// 쥐고 있는 대상이 설정 대상 이외의 것이라면
 	else
