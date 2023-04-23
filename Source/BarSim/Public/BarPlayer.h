@@ -43,6 +43,8 @@ public:
 	void TongsReleaseMovementExec();
 	UFUNCTION()
 	float GetDoorAngle();
+	UFUNCTION()
+	float GetDoorAngleLeft();
 	
 	
 
@@ -104,7 +106,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditDefaultsOnly)
-	float GrabRange = 150;
+	float GrabRange = 45;
 	UPROPERTY(EditDefaultsOnly)
 	float TongsGrabRange = 15;
 	// 오른손 그랩 액터
@@ -141,6 +143,8 @@ public:
 	class ATablet* tabletL;
 	UPROPERTY()
 	class ABarFridge* barFridge;
+	UPROPERTY()
+	class ABarFridge* barFridgeL;
 	
 	
 	bool IsGrabbedLeft = false;
