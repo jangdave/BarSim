@@ -45,7 +45,7 @@ void ABottleBase::Tick(float DeltaTime)
 
 	if(remains > 0)
 	{
-		//기울어진 각도가 45도 이상이라면
+		//기울어진 각도가 90도 이상이라면
 		if(angle > 90.0f)
 		{
 			//물줄기 없을때에만 한 번 스폰 시키기
