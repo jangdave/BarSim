@@ -101,11 +101,11 @@ void ACustomerCharacter::SetMesh()
 		int32 womanIdx = SetRandRange(0, 2);
 
 		// 전에 나온 것과 똑같지 않으면
-		if(womanIdx != spawnManager->checkCount)
+		if(womanIdx != checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(womenMesh[womanIdx].Object);
 			
-			spawnManager->checkCount = womanIdx;
+			checkMeshCount = womanIdx;
 		}
 		// 똑같다면
 		else
@@ -119,11 +119,11 @@ void ACustomerCharacter::SetMesh()
 		int32 manIdx = SetRandRange(0, 2);
 
 		// 전에 나온 것과 똑같지 않으면
-		if(manIdx != spawnManager->checkCount)
+		if(manIdx != checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(manMesh[manIdx].Object);
 			
-			spawnManager->checkCount = manIdx;
+			checkMeshCount = manIdx;
 		}
 		// 똑같다면
 		else

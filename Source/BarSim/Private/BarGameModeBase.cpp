@@ -2,6 +2,7 @@
 
 
 #include "BarGameModeBase.h"
+#include "BarGameInstance.h"
 
 ABarGameModeBase::ABarGameModeBase()
 {
@@ -12,9 +13,11 @@ ABarGameModeBase::ABarGameModeBase()
 void ABarGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
+
 }
 
 void ABarGameModeBase::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
 }

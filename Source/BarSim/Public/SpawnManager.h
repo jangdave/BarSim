@@ -41,11 +41,14 @@ public:
 	UPROPERTY()
 	TArray<bool> bIsPlayer;
 	
-	UPROPERTY()
-	int32 checkCount = 0;
-
 	bool bCheckSit;
+
+	int32 checkCustomerNum;
 	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ACustomerCharacter> customerFactory;
+
+	void CheckArray();
+
+	void CheckChairSit();
 };
