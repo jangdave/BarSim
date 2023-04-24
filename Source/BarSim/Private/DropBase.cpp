@@ -15,6 +15,7 @@ ADropBase::ADropBase()
 	sphereComp->SetSphereRadius(1.0f);
 	SetRootComponent(sphereComp);
 	sphereComp->SetSimulatePhysics(true);
+	sphereComp->SetCollisionProfileName(FName("Fluid"));
 }
 
 // Called when the game starts or when spawned

@@ -4,6 +4,7 @@
 #include "CupBase.h"
 
 #include "DropBase.h"
+#include "VorbisAudioInfo.h"
 
 // Sets default values
 ACupBase::ACupBase()
@@ -45,6 +46,29 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 
 	if(drop)
 	{
+		overlappedNum ++;
+		//들어온 방울 액터가 가진 이름을 OrderArrary에, 유량을 ContentsArray에 저장한다.
+		//OrderArray 배열의 마지막 원소와 현재 닿은 물방울의 이름이 같다면
+		if(!OrderArray.IsEmpty())
+		{
+			if(OrderArray[OrderArray.Num()-1] == drop->name)
+			{
+				//들어온 방울 액터의 이름이 마지막 배열 원소의 이름과 같다면 그 배열에 ContentsArray에 더한다.
+				ContentsArray[ContentsArray.Num()-1] += drop->dropMass;
+			}
+			else
+			{
+				//들어온 방울 액터의 이름이 마지막 배열 원소의 이름과 다르다면 다음 원소로 orderArray와 ContentsArray를 넣는다.
+				OrderArray.Emplace(drop->name);
+				ContentsArray.Add(drop->dropMass);
+			}
+		}
+		else
+			//배열이 비어있을 경우 값 하나 일단 넣기
+		{
+			OrderArray.Emplace(drop->name);
+			ContentsArray.Add(drop->dropMass);
+		}
 		contents = contents + drop->dropMass;
 		float insideContents = FMath::Clamp(contents, 0, cupSize);
 		liquorComp->SetVisibility(true);

@@ -49,6 +49,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bottle")
 	float remains;
 
+	//UPROPERTY(EditAnywhere, Category = "Bottle")
+	//TSubclassOf<class ADropBase> liquorDrop;
+
 	UPROPERTY(EditAnywhere, Category = "Bottle")
-	TSubclassOf<class ADropBase> liquorDrop;
+	TSubclassOf<class ADropBase> streamDrop;
 };
