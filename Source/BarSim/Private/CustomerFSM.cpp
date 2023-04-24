@@ -208,23 +208,33 @@ void UCustomerFSM::TickOrder()
 		
 		owner->customerAnim->OnSitAnim(TEXT("Talking"));
 		
-		int32 result = FMath::RandRange(1,9);
+		int32 result = FMath::RandRange(1,8);
 
 		if(result > 6)
 		{
+			// 진라임
 			orderIdx = 1;
 			
 			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
 		}
-		else if(result <= 6 && result > 3)
+		else if(result <= 6 && result > 4)
 		{
+			// 다이키리
 			orderIdx = 2;
 			
 			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
 		}
-		else if(result <= 3)
+		else if(result <= 4 && result > 2)
 		{
+			// 마타니
 			orderIdx = 3;
+			
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+		else if(result <= 2)
+		{
+			// 올드팔
+			orderIdx = 4;
 			
 			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
 		}

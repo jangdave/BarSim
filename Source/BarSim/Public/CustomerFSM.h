@@ -60,9 +60,11 @@ public:
 
 	UPROPERTY()
 	class ABarPlayer* player;
-	
+
+	UPROPERTY()
 	int32 idx;
 
+	UPROPERTY()
 	int32 orderIdx;
 	
 	float curTime;

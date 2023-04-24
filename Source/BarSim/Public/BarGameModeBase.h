@@ -21,4 +21,35 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+	void GetCup(TArray<FString> cocName, TArray<float> cocliter);
+
+	float amountOfRum;
+
+	float amountOfGin;
+
+	float amountOfWhisky;
+
+	float amountOfLime;
+	
+	float amountOfVermouth;
+	
+	float amountOfCampari;
+
+	int32 totalScore = 100;
+
+	void CheckGin();
+
+	void CheckWhisky();
+
+	void CheckRum();
+
+	void CheckGinLime();
+
+	void CheckMartini();
+
+	void CheckOldPal();
+
+	void CheckDaiquiri();
+
+	void SomethingElse();
 };

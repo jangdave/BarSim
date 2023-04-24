@@ -29,7 +29,7 @@ void AGameStartManager::BeginPlay()
 void AGameStartManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
 
 void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -39,6 +39,7 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 	if(player != nullptr)
 	{
+		
 		auto gi = Cast<UBarGameInstance>(GetGameInstance());
 
 		gi->goToMainMapDele.Execute();

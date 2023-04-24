@@ -29,6 +29,12 @@ public:
 	UPROPERTY(EditAnywhere, Category=ChairSetting)
 	class UStaticMeshComponent* meshComp;
 
+	UPROPERTY(EditAnywhere, Category=Widget)
+	class UWidgetComponent* coctailWidget;
+
+	UPROPERTY()
+	class UCoctailScoreWidget* score_UI;
+	
 	UPROPERTY(EditAnywhere)
 	bool bCheck;
 
@@ -58,4 +64,7 @@ public:
 
 	UFUNCTION()
 	void EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	UFUNCTION()
+	void ViewScore(int32 score);
 };

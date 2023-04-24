@@ -4,27 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "CustomerOrderWidget.generated.h"
+#include "CoctailScoreWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BARSIM_API UCustomerOrderWidget : public UUserWidget
+class BARSIM_API UCoctailScoreWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
 public:
 	virtual void NativeConstruct() override;
-
-	void GetImage();
 	
-	UFUNCTION()
-	void SetImage(UTexture2D* setTexture);
-
 	UPROPERTY(VisibleAnywhere, meta=(BindWidget))
-	class UImage* image_Order;
+	class UTextBlock* text_Score;
 
-	UPROPERTY()
-	TArray<UTexture2D*> orderImage;
 };

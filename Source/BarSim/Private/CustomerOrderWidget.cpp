@@ -19,17 +19,21 @@ void UCustomerOrderWidget::GetImage()
 	
 	orderImage.Add(question);
 	
-	auto jackCoc = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Jang/jackcoc.jackcoc'"));
+	auto GinLime = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Jang/Ginlime.Ginlime'"));
 
-	orderImage.Add(jackCoc);
+	orderImage.Add(GinLime);
 
-	auto jinLime = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Jang/jinlime.jinlime'"));
+	auto Daiquiri = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Jang/Daiquiri.Daiquiri'"));
 
-	orderImage.Add(jinLime);
+	orderImage.Add(Daiquiri);
 
-	auto cubaLibre = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Jang/cubalibre.cubalibre'"));
+	auto Martini = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Jang/Martini.Martini'"));
 
-	orderImage.Add(cubaLibre);
+	orderImage.Add(Martini);
+
+	auto OldPal = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Jang/OldPal.OldPal'"));
+
+	orderImage.Add(OldPal);
 }
 
 void UCustomerOrderWidget::SetImage(UTexture2D* setTexture)
