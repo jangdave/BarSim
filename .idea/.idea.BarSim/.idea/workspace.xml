@@ -9,14 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6db2cc6a-c17b-40c6-9e05-18df38299b65" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/testmap.umap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarGameModeBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CustomerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/SpawnManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/SpawnManager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,6 +115,7 @@
       <updated>1682148478949</updated>
       <workItem from="1682148480042" duration="538000" />
       <workItem from="1682297261282" duration="10249000" />
+      <workItem from="1682310518406" duration="1806000" />
     </task>
     <servers />
   </component>
