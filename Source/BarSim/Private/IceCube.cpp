@@ -13,7 +13,7 @@ AIceCube::AIceCube()
 
 	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("boxComp"));
 	SetRootComponent(boxComp);
-	boxComp->SetBoxExtent(FVector(10.0f));
+	boxComp->SetBoxExtent(FVector(5.0f));
 	boxComp->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
 	
