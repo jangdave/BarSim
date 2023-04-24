@@ -41,7 +41,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	float cupSize = 16.0f;
 	
-	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	UPROPERTY(EditAnywhere, Category = "Cup")
 	float contents;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
