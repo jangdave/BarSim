@@ -113,7 +113,6 @@ void ACupBase::ExtractIce(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		cupSize = cupSizeOrigin - iceCount * 2;
 		float insideContents = FMath::Clamp(contents, 0, cupSize);
 		liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
-		ice->boxComp->
 	}
 }
 
