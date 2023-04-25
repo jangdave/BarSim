@@ -8,19 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarSim.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/BarSim.uproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_DropBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_DropBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/DropBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/DropBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" afterDir="false" />
-    </list>
+    <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -232,7 +220,7 @@
       <workItem from="1682063217264" duration="7491000" />
       <workItem from="1682257661697" duration="2954000" />
       <workItem from="1682311165330" duration="680000" />
-      <workItem from="1682397639822" duration="10228000" />
+      <workItem from="1682397639822" duration="10822000" />
     </task>
     <servers />
   </component>
