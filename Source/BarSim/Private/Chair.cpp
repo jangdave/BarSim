@@ -112,10 +112,16 @@ void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 	}
 }
 
-void AChair::ViewScore(int32 score)
+void AChair::ViewScore(int32 procedureScore, int32 ratioScore, int32 amountScore)
 {
 	score_UI->SetVisibility(ESlateVisibility::Visible);
 	
-	score_UI->text_Score->SetText(FText::AsNumber(score));
+	score_UI->text_Score->SetText(FText::AsNumber(procedureScore + ratioScore + amountScore));
+
+	score_UI->text_ProcedureScore->SetText(FText::AsNumber(procedureScore));
+
+	score_UI->text_RatioScore->SetText(FText::AsNumber(ratioScore));
+
+	score_UI->text_AmountScore->SetText(FText::AsNumber(amountScore));
 }
 

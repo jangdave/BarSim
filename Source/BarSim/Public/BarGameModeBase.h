@@ -23,6 +23,14 @@ public:
 
 	void GetCup(TArray<FString> cocName, TArray<float> cocliter);
 
+	TArray<FString> GinLime = {"Gin", "Lime"};
+
+	TArray<FString> Martini = {"Gin", "Vermouth"};
+
+	TArray<FString> OldPal = {"Whisky", "Vermouth", "Campari"};
+
+	TArray<FString> Daiquiri = {"Rum", "Lime"};
+	
 	float amountOfRum;
 
 	float amountOfGin;
@@ -35,13 +43,17 @@ public:
 	
 	float amountOfCampari;
 
-	int32 totalScore = 100;
+	int32 procedureScore = 20;
 
-	void CheckGin();
+	int32 ratioScore = 70;
 
-	void CheckWhisky();
+	int32 amountScore = 10;
 
-	void CheckRum();
+	void CheckGin(TArray<FString> cocName);
+
+	void CheckWhisky(TArray<FString> cocName);
+
+	void CheckRum(TArray<FString> cocName);
 
 	void CheckGinLime();
 

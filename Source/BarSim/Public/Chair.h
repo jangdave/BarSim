@@ -66,5 +66,5 @@ public:
 	void EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION()
-	void ViewScore(int32 score);
+	void ViewScore(int32 procedureScore, int32 ratioScore, int32 amountScore);
 };

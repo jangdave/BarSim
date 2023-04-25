@@ -20,4 +20,12 @@ public:
 	UPROPERTY(VisibleAnywhere, meta=(BindWidget))
 	class UTextBlock* text_Score;
 
+	UPROPERTY(VisibleAnywhere, meta=(BindWidget))
+	class UTextBlock* text_ProcedureScore;
+	
+	UPROPERTY(VisibleAnywhere, meta=(BindWidget))
+	class UTextBlock* text_RatioScore;
+	
+	UPROPERTY(VisibleAnywhere, meta=(BindWidget))
+	class UTextBlock* text_AmountScore;
 };
