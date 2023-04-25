@@ -4,7 +4,9 @@
 #include "CupBase.h"
 
 #include "DropBase.h"
+#include "IceCube.h"
 #include "VorbisAudioInfo.h"
+#include "Components/BoxComponent.h"
 
 // Sets default values
 ACupBase::ACupBase()
@@ -20,7 +22,9 @@ ACupBase::ACupBase()
 	
 	measureComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Measure"));
 	measureComp->SetupAttachment(cupComp);
-	
+
+	igCheckerComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("IGChecker"));
+	igCheckerComp->SetupAttachment(cupComp);
 }
 
 // Called when the game starts or when spawned
@@ -28,8 +32,12 @@ void ACupBase::BeginPlay()
 {
 	Super::BeginPlay();
 
+	cupSize = cupSizeOrigin;
+
 	liquorComp->SetVisibility(false);
 	measureComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddLiquor);
+	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
+	igCheckerComp->OnComponentEndOverlap.AddDynamic(this, &ACupBase::ExtractIce);
 }
 
 // Called every frame
@@ -75,6 +83,37 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 		liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
 		UE_LOG(LogTemp, Warning, TEXT("%f"), insideContents);
 		drop->Destroy();
+	}
+}
+
+void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	ice = Cast<AIceCube>(OtherActor);
+	//igchecker에 얼음이 오버랩되었을 때
+	if(ice)
+	{
+		iceCount += 1;
+		//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+		cupSize = cupSizeOrigin - iceCount * 2;
+		float insideContents = FMath::Clamp(contents, 0, cupSize);
+		liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
+	}
+}
+
+void ACupBase::ExtractIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex)
+{
+	ice = Cast<AIceCube>(OtherActor);
+	//igchecker에 얼음이 오버랩해제되었을 때
+	if(ice)
+	{
+		iceCount -= 1;
+		//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+		cupSize = cupSizeOrigin - iceCount * 2;
+		float insideContents = FMath::Clamp(contents, 0, cupSize);
+		liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
+		ice->boxComp->
 	}
 }
 

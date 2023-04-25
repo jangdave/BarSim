@@ -12,7 +12,7 @@ ADropBase::ADropBase()
 	PrimaryActorTick.bCanEverTick = true;
 
 	sphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
-	sphereComp->SetSphereRadius(1.0f);
+	sphereComp->SetSphereRadius(0.4f);
 	SetRootComponent(sphereComp);
 	sphereComp->SetSimulatePhysics(true);
 	sphereComp->SetCollisionProfileName(FName("Fluid"));

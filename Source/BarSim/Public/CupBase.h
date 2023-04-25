@@ -30,16 +30,26 @@ public:
 	class UStaticMeshComponent* liquorComp;
 
 	UPROPERTY(EditAnywhere, Category = "Cup")
+	class UStaticMeshComponent* igCheckerComp;
+
+	UPROPERTY(EditAnywhere, Category = "Cup")
 	class UStaticMeshComponent* cupComp;
 
 	UFUNCTION()
 	void AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION()
+	void AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION()
+	void ExtractIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	class ADropBase* drop;
 
 	UPROPERTY(EditAnywhere, Category = "Cup")
-	float cupSize = 16.0f;
+	float cupSizeOrigin = 8.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Cup")
+	float cupSize;
 	
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	float contents;
@@ -53,5 +63,10 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	TArray<float> ContentsArray;
 
+	UPROPERTY(EditAnywhere, Category = "Cup")
+	int iceCount = 0;
+	
+	class AIceCube* ice;
+	
 	
 };

@@ -6,6 +6,7 @@
 #include "DropBase.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 ABottleBase::ABottleBase()
@@ -58,6 +59,8 @@ void ABottleBase::Tick(float DeltaTime)
 				//물방울 액터 스폰
 				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
 				drop->dropMass = 0.05f * streamWidth * DeltaTime;
+				drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
+				//UE_LOG(LogTemp, Warning, TEXT("%f, %f, %f"), pourer->GetSocketRotation(FName("Pourer")).Vector().X, pourer->GetSocketRotation(FName("Pourer")).Vector().Y, pourer->GetSocketRotation(FName("Pourer")).Vector().Z);
 				remains = remains - drop->dropMass;
 				bStreamOn = true;
 			}
@@ -74,6 +77,8 @@ void ABottleBase::Tick(float DeltaTime)
 					//물방울 액터 스폰
 					ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
 					drop->dropMass = 0.05f * streamWidth * DeltaTime;
+					drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
+					//UE_LOG(LogTemp, Warning, TEXT("%f, %f, %f"), pourer->GetSocketRotation(FName("Pourer")).Vector().X, pourer->GetSocketRotation(FName("Pourer")).Vector().Y, pourer->GetSocketRotation(FName("Pourer")).Vector().Z);
 					remains = remains - drop->dropMass;
 					UE_LOG(LogTemp, Warning, TEXT("%f"), remains);
 				}
