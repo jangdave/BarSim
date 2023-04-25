@@ -63,10 +63,20 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	TArray<float> ContentsArray;
 
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	TArray<int> GinArray;
+
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	float ginInside;
+
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	TArray<int> LimeArray;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	float limeInside;
+
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	int iceCount = 0;
 	
 	class AIceCube* ice;
-	
-	
 };
