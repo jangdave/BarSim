@@ -6,6 +6,7 @@
 #include "BarPlayer.h"
 #include "CustomerAnimInstance.h"
 #include "CustomerCharacter.h"
+#include "CustomerOrderWidget.h"
 #include "SpawnManager.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -36,7 +37,7 @@ void UCustomerFSM::BeginPlay()
 	
 	state = ECustomerState::IDLE;
 
-	sitState =ECustomerSitState::ORDER;
+	sitState =ECustomerSitState::STANDBY;
 	
 	owner->GetCharacterMovement()->MaxWalkSpeed = 200.0f;
 }
@@ -106,6 +107,12 @@ void UCustomerFSM::TickSit()
 
 	switch (sitState)
 	{
+	case ECustomerSitState::STANDBY:
+		TickStandby();
+		break;
+	case ECustomerSitState::STANDBYWAITLONG:
+		TickStandbyWaitLong();
+		break;
 	case ECustomerSitState::ORDER:
 		TickOrder();
 		break;
@@ -117,6 +124,9 @@ void UCustomerFSM::TickSit()
 		break;
 	case ECustomerSitState::DRINK:
 		TickDrink();
+		break;
+	case ECustomerSitState::JUDGEMENT:
+		TickJudgement();
 		break;
 	case ECustomerSitState::ANGRY:
 		TickAngry();
@@ -151,61 +161,189 @@ void UCustomerFSM::SetSitState(ECustomerSitState next)
 	bCheckPlayAnim = false;
 }
 
+void UCustomerFSM::TickStandby()
+{
+	LookPlayer();
+
+	owner->order_UI->SetVisibility(ESlateVisibility::Visible);
+
+	owner->order_UI->SetImage(owner->order_UI->orderImage[0]);
+	
+	if(curTime < 10 && spawnManager->bIsCoaster[idx] != false)
+	{
+		SetSitState(ECustomerSitState::ORDER);
+	}
+	else if(curTime >= 10 && spawnManager->bIsCoaster[idx] != true)
+	{
+		SetSitState(ECustomerSitState::STANDBYWAITLONG);
+	}
+}
+
+void UCustomerFSM::TickStandbyWaitLong()
+{
+	owner->order_UI->SetVisibility(ESlateVisibility::Visible);
+
+	owner->order_UI->SetImage(owner->order_UI->orderImage[0]);
+	
+	if(bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("WaitLong"));
+	}
+	// 코스터가 있으면
+	else if(spawnManager->bIsCoaster[idx] != false)
+	{
+		SetSitState(ECustomerSitState::ORDER);
+	}
+}
+
 void UCustomerFSM::TickOrder()
 {
-	FVector lookDist = player->GetActorLocation() - owner->GetActorLocation();
-
-	FRotator lookRot = FRotationMatrix::MakeFromX(lookDist).Rotator();
-
-	owner->SetActorRotation(FMath::Lerp(owner->GetActorRotation(), lookRot, 0.1f));
+	LookPlayer();
 	
-	if(curTime > 1)
-	{		
-		SetSitState(ECustomerSitState::WAIT);
+	if(bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("Talking"));
+		
+		int32 result = FMath::RandRange(1,8);
+
+		if(result > 6)
+		{
+			// 진라임
+			orderIdx = 1;
+			
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+		else if(result <= 6 && result > 4)
+		{
+			// 다이키리
+			orderIdx = 2;
+			
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+		else if(result <= 4 && result > 2)
+		{
+			// 마타니
+			orderIdx = 3;
+			
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+		else if(result <= 2)
+		{
+			// 올드팔
+			orderIdx = 4;
+			
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+	}
+	else
+	{
+		LookOrder();
 	}
 }
 
 void UCustomerFSM::TickWait()
 {
-	if(curTime > 1 && bCheckPlayAnim != true)
+	LookOrder();
+	
+	if(curTime < 10 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
 	{
-		bCheckPlayAnim = true;
-		
-		owner->customerAnim->OnSitAnim(TEXT("Talking"));
+		SetSitState(ECustomerSitState::DRINK);
+
+		owner->order_UI->SetVisibility(ESlateVisibility::Hidden);
 	}
-	// 음료가 나오면
-	//if()
-	//{
-		
-	//}
+	else if(curTime >= 10 && spawnManager->bIsCoctail[idx] != true)
+	{
+		SetSitState(ECustomerSitState::WAITLONG);
+	}
 }
 
 void UCustomerFSM::TickWaitLong()
 {
-	if(curTime > 5 && bCheckPlayAnim != true)
+	LookOrder();
+	
+	if(bCheckPlayAnim != true)
 	{
 		bCheckPlayAnim = true;
 		
 		owner->customerAnim->OnSitAnim(TEXT("WaitLong"));
 	}
 	// 음료가 나오면
-	//if()
-	//{
-		
-	//}
+	else if(spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
+	{
+		SetSitState(ECustomerSitState::DRINK);
+
+		owner->order_UI->SetVisibility(ESlateVisibility::Hidden);
+	}
 }
 
 void UCustomerFSM::TickDrink()
 {
-	
+	if(curTime > 1 && bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("Drinking"));
+	}
+}
+
+void UCustomerFSM::TickJudgement()
+{
+	// 점수 판단
+	int32 result = FMath::RandRange(1,10);
+
+	if(result > 5)
+	{
+		SetSitState(ECustomerSitState::AWESOME);
+	}
+	else
+	{
+		SetSitState(ECustomerSitState::ANGRY);
+	}
 }
 
 void UCustomerFSM::TickAngry()
 {
-	
+	if(bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("TasteBad"));
+	}
 }
 
 void UCustomerFSM::TickAwesome()
 {
-	
+	if(bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("TasteGood"));
+	}
+}
+
+void UCustomerFSM::LookPlayer()
+{
+	FVector lookDist = player->GetActorLocation() - owner->GetActorLocation();
+
+	FRotator lookRot = FRotationMatrix::MakeFromX(lookDist).Rotator();
+
+	owner->SetActorRotation(FMath::Lerp(owner->GetActorRotation(), lookRot, 0.1f));
+}
+
+void UCustomerFSM::LookOrder()
+{
+	owner->order_UI->SetVisibility(ESlateVisibility::Visible);
+
+	if(spawnManager->bIsPlayer[idx] != false)
+	{
+		owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+	}
+	else
+	{
+		owner->order_UI->SetImage(owner->order_UI->orderImage[0]);
+	}
 }

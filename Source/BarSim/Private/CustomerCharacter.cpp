@@ -4,7 +4,9 @@
 #include "CustomerCharacter.h"
 #include "CustomerAnimInstance.h"
 #include "CustomerFSM.h"
+#include "CustomerOrderWidget.h"
 #include "SpawnManager.h"
+#include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -47,14 +49,17 @@ ACustomerCharacter::ACustomerCharacter()
 		manMesh.Add(tempMesh5);
 	}
 	
-	ConstructorHelpers::FClassFinder<UAnimInstance> tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Jang/ABP_CustomerAnimInstance.ABP_CustomerAnimInstance_C'"));
+	ConstructorHelpers::FClassFinder<UAnimInstance> tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Jang/ABP_CustomerAnim.ABP_CustomerAnim_C'"));
 	if(tempAnim.Succeeded())
 	{
 		GetMesh()->SetAnimInstanceClass(tempAnim.Class);
 	}
 	
-	costomerFSM = CreateDefaultSubobject<UCustomerFSM>(TEXT("costomerFSM"));
+	customerFSM = CreateDefaultSubobject<UCustomerFSM>(TEXT("costomerFSM"));
 
+	orderWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("orderWidget"));
+	orderWidget->SetupAttachment(GetMesh());
+		
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
@@ -66,6 +71,8 @@ void ACustomerCharacter::BeginPlay()
 	customerAnim = Cast<UCustomerAnimInstance>(GetMesh()->GetAnimInstance());
 
 	spawnManager = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
+
+	order_UI = Cast<UCustomerOrderWidget>(orderWidget->GetUserWidgetObject());
 	
 	SetMesh();
 }
@@ -94,11 +101,11 @@ void ACustomerCharacter::SetMesh()
 		int32 womanIdx = SetRandRange(0, 2);
 
 		// 전에 나온 것과 똑같지 않으면
-		if(womanIdx != spawnManager->checkCount)
+		if(womanIdx != checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(womenMesh[womanIdx].Object);
 			
-			spawnManager->checkCount = womanIdx;
+			checkMeshCount = womanIdx;
 		}
 		// 똑같다면
 		else
@@ -112,11 +119,11 @@ void ACustomerCharacter::SetMesh()
 		int32 manIdx = SetRandRange(0, 2);
 
 		// 전에 나온 것과 똑같지 않으면
-		if(manIdx != spawnManager->checkCount)
+		if(manIdx != checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(manMesh[manIdx].Object);
 			
-			spawnManager->checkCount = manIdx;
+			checkMeshCount = manIdx;
 		}
 		// 똑같다면
 		else
