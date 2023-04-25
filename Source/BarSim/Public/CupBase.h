@@ -43,4 +43,15 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	float contents;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	int overlappedNum;
+
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	TArray<FString> OrderArray;
+
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	TArray<float> ContentsArray;
+
+	
 };

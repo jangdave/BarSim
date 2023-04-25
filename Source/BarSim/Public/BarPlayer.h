@@ -41,6 +41,12 @@ public:
 	void TongsMovementExec();
 	UFUNCTION()
 	void TongsReleaseMovementExec();
+	UFUNCTION()
+	float GetDoorAngle();
+	UFUNCTION()
+	float GetDoorAngleLeft();
+	
+	
 
 	// Tongs Movement Bool
 	bool IsTongsMovementFinished = true;
@@ -79,8 +85,14 @@ public:
 	class USkeletalMeshComponent* RightHandMesh;	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
 	class UMotionControllerComponent* RightAim;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
+	class UMotionControllerComponent* LeftAim;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
+	//UPROPERTY(EditDefaultsOnly, Category="Input")
+	//class USphereComponent* tabletIndexComp;
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	class UWidgetInteractionComponent* widgetInteractionComp;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -94,7 +106,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditDefaultsOnly)
-	float GrabRange = 100;
+	float GrabRange = 45;
 	UPROPERTY(EditDefaultsOnly)
 	float TongsGrabRange = 15;
 	// 오른손 그랩 액터
@@ -123,6 +135,20 @@ public:
 	class AHuchuTong* huchuTongL;
 	UPROPERTY()
 	class ABottleBase* bottle;
+	UPROPERTY()
+	class ABottleBase* bottleL;
+	UPROPERTY()
+	class ATablet* tablet;
+	UPROPERTY()
+	class ATablet* tabletL;
+	UPROPERTY()
+	class ABarFridge* barFridge;
+	UPROPERTY()
+	class ABarFridge* barFridgeL;
+	UPROPERTY()
+	class AOpener* opener;
+	UPROPERTY()
+	class AOpener* openerL;
 	
 	
 	bool IsGrabbedLeft = false;
@@ -136,6 +162,15 @@ public:
 	bool isRecipeMode = false;
 	bool isGrabbingBottleRight = false;
 	bool isGrabbingBottleLeft = false;
+	bool isGrabbingFridgeDoorRight=false;
+	bool isGrabbingFridgeDoorLeft=false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isGrabbingTabletRight = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isGrabbingTabletLeft = false;
+	bool isGrabbingOpenerRight = false;
+	bool isGrabbingOpenerLeft = false;
+	
 
 
 	
@@ -145,7 +180,7 @@ public:
 	FVector ThrowDirectionLeft;
 	// 던질 힘
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ThrowPower = 400;
+	float ThrowPower = 150;
 	// 오른 손 직전 위치
 	FVector PrevPosRight;
 	// 오른 손 이전 회전값
