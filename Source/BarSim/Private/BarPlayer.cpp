@@ -6,6 +6,7 @@
 #include "BarFridge.h"
 #include "BottleBase.h"
 #include "Coaster.h"
+#include "CupBase.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "MotionControllerComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
@@ -350,6 +351,7 @@ void ABarPlayer::TryGrabLeft()
 		barFridgeL=Cast<ABarFridge>(GrabbedActorLeft);
 		openerL=Cast<AOpener>(GrabbedActorLeft);
 		coasterL=Cast<ACoaster>(GrabbedActorLeft);
+		cupL=Cast<ACupBase>(GrabbedActorLeft);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
 		{
@@ -407,6 +409,15 @@ void ABarPlayer::TryGrabLeft()
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab coaster on Left"))			
+		}
+		// 잡은 대상이 CupBase라면
+		else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
+		{
+			isGrabbingCupLeft=true;
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("OpenerSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			LeftHandMesh->SetVisibility(false);
+			GrabbedActorLeft->SetActorEnableCollision(false);
+			UE_LOG(LogTemp, Warning, TEXT("grab cup on Left"))			
 		}		
 		else
 		{
@@ -490,6 +501,7 @@ void ABarPlayer::TryGrabRight()
 		barFridge=Cast<ABarFridge>(GrabbedActorRight);
 		opener=Cast<AOpener>(GrabbedActorRight);
 		coaster=Cast<ACoaster>(GrabbedActorRight);
+		cup=Cast<ACupBase>(GrabbedActorRight);
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
@@ -549,9 +561,17 @@ void ABarPlayer::TryGrabRight()
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab coaster on Right"))			
 		}
+		// 잡은 대상이 Cup이라면
+		else if(GrabbedActorRight==cup&&cup!=nullptr)
+		{
+			isGrabbingCupRight=true;
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			RightHandMesh->SetVisibility(false);
+			GrabbedActorRight->SetActorEnableCollision(false);
+			UE_LOG(LogTemp, Warning, TEXT("grab cup on Right"))			
+		}
 		else
 		{
-
 			if(GrabbedObjectRight->IsSimulatingPhysics()==false)
 			{
 				IsGrabbedRight=false;
@@ -725,6 +745,29 @@ void ABarPlayer::UnTryGrabLeft()
 		LeftHandMesh->SetVisibility(true);
 
 		UE_LOG(LogTemp, Warning, TEXT("release Left Coaster"))
+	}
+	// 왼손에 Cup을 쥐고 있었다면
+	else if(isGrabbingCupLeft)
+	{
+		isGrabbingCupLeft=false;
+		IsGrabbedLeft = false;
+		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectLeft->SetSimulatePhysics(true);
+		GrabbedActorLeft->SetActorEnableCollision(true);
+		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		//float Angle;
+		//FVector Axis;
+		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		//float dt = GetWorld()->DeltaTimeSeconds;
+		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectLeft = nullptr;
+		GrabbedActorLeft=nullptr;
+		LeftHandMesh->SetVisibility(true);
+
+		UE_LOG(LogTemp, Warning, TEXT("release Left Cup"))
 	}
 	else
 	{
@@ -926,7 +969,29 @@ void ABarPlayer::UnTryGrabRight()
 
 		UE_LOG(LogTemp, Warning, TEXT("release Right Coaster"))
 	}
-	
+	// 오른손에 Cup을 쥐고 있었다면
+	else if(isGrabbingCupRight)
+	{
+		isGrabbingCupRight=false;
+		IsGrabbedRight = false;
+		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectRight->SetSimulatePhysics(true);
+		GrabbedActorRight->SetActorEnableCollision(true);
+		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		// 회전 시키기
+		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		//float Angle;
+		//FVector Axis;
+		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		//float dt = GetWorld()->DeltaTimeSeconds;
+		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectRight = nullptr;
+		GrabbedActorRight=nullptr;
+		RightHandMesh->SetVisibility(true);
+
+		UE_LOG(LogTemp, Warning, TEXT("release Right Cup"))
+	}
 	// 쥐고 있는 대상이 설정 대상 이외의 것이라면
 	else
 	{

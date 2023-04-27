@@ -153,6 +153,10 @@ public:
 	class ACoaster* coaster;
 	UPROPERTY()
 	class ACoaster* coasterL;
+	UPROPERTY()
+	class ACupBase* cup;
+	UPROPERTY()
+	class ACupBase* cupL;
 	
 	
 	
@@ -177,6 +181,8 @@ public:
 	bool isGrabbingOpenerLeft = false;
 	bool isGrabbingCoasterRight=false;
 	bool isGrabbingCoasterLeft = false;
+	bool isGrabbingCupLeft = false;
+	bool isGrabbingCupRight = false;
 	
 
 

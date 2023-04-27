@@ -11,7 +11,6 @@
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/Fridge/FridgeDoor/Material_006.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/Fridge/FridgeDoor/Material_006.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BarPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BarPlayer.h" afterDir="false" />
     </list>
@@ -228,7 +227,7 @@
       <workItem from="1682311165330" duration="680000" />
       <workItem from="1682397639822" duration="10822000" />
       <workItem from="1682415841720" duration="7529000" />
-      <workItem from="1682561356601" duration="3322000" />
+      <workItem from="1682561356601" duration="5968000" />
     </task>
     <servers />
   </component>
