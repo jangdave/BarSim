@@ -10,23 +10,12 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidLime.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidLime.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Cup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Cup.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleLimeTemp.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleLimeTemp.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleRumTemp.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleRumTemp.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/FX/FX_StreamLiquid.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/FX/FX_StreamLiquid.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/FX/FX_StreamLiquidLime.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/FX/FX_StreamLiquidLime.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Materials/MPC_LiquidParameter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Materials/MPC_LiquidParameter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Materials/M_StreamLime.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Materials/M_StreamLime.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Materials/M_Trans.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Materials/M_Trans.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/IceCube/source/Material__25.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/IceCube/source/Material__25.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_OldPal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_OldPal.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_TestCupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_TestCupBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,6 +230,7 @@
       <workItem from="1682311165330" duration="680000" />
       <workItem from="1682397639822" duration="10822000" />
       <workItem from="1682415841720" duration="7529000" />
+      <workItem from="1682557696944" duration="4541000" />
     </task>
     <servers />
   </component>
