@@ -86,6 +86,7 @@ void ASpawnManager::CheckChairSit()
 	{
 		auto temp = Cast<AChair>(chairs[i]);
 		bIsSit.Add(temp->bCheck);
+		aChairs.Add(temp);
 	}
 }
 

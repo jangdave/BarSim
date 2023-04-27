@@ -38,6 +38,8 @@ void AChair::BeginPlay()
 {
 	Super::BeginPlay();
 
+	UE_LOG(LogTemp, Warning, TEXT("dddddddddddddddddddd"))
+	
 	coctailBoxComp->OnComponentBeginOverlap.AddDynamic(this, &AChair::OnCupOverlap);
 	coctailBoxComp->OnComponentEndOverlap.AddDynamic(this, &AChair::EndCupOverlap);
 
@@ -59,6 +61,8 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 {
 	auto coaster = Cast<ACoaster>(OtherActor);
 	auto coctail = Cast<ACupBase>(OtherActor);
+
+	UE_LOG(LogTemp, Warning, TEXT("SSSSSSSSSSSSSSSSSSSS"))
 	
 	if(coctail != nullptr)
 	{
@@ -115,8 +119,10 @@ void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 void AChair::ViewScore(int32 procedureScore, int32 ratioScore, int32 amountScore)
 {
 	score_UI->SetVisibility(ESlateVisibility::Visible);
+
+	totalScore = procedureScore + ratioScore + amountScore;
 	
-	score_UI->text_Score->SetText(FText::AsNumber(procedureScore + ratioScore + amountScore));
+	score_UI->text_Score->SetText(FText::AsNumber(totalScore));
 
 	score_UI->text_ProcedureScore->SetText(FText::AsNumber(procedureScore));
 

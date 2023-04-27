@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Chair.h"
 #include "GameFramework/Actor.h"
 #include "SpawnManager.generated.h"
 
@@ -29,6 +30,9 @@ public:
 	UPROPERTY()
 	TArray<AActor*> chairs;
 
+	UPROPERTY()
+	TArray<AChair*> aChairs;
+	
 	UPROPERTY()
 	TArray<bool> bIsSit;
 

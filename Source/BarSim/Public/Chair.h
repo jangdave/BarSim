@@ -46,6 +46,9 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 	bool bCheckPlayer;
+
+	UPROPERTY()
+	int32 totalScore;
 	
 	UPROPERTY(EditAnywhere, Category=CocktailZone)
 	class UBoxComponent* coctailBoxComp;

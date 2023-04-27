@@ -293,9 +293,9 @@ void UCustomerFSM::TickDrink()
 void UCustomerFSM::TickJudgement()
 {
 	// 점수 판단
-	int32 result = FMath::RandRange(1,10);
+	auto result = spawnManager->aChairs[idx]->totalScore;
 
-	if(result > 5)
+	if(result > 60)
 	{
 		SetSitState(ECustomerSitState::AWESOME);
 	}
