@@ -109,7 +109,7 @@ void ABarPlayer::BeginPlay()
 	{
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
 		FPSCamera->bUsePawnControlRotation = false;
-		GrabRange=25.0f;
+		GrabRange=15.0f;
 	}
 	
 }
@@ -260,7 +260,7 @@ float ABarPlayer::GetDoorAngle()
 	//bool crossBoolean = false;
 	auto initDoorLocation= GrabbedObjectRight->GetComponentLocation();
 	auto rightHandLoc = RightHand->GetComponentLocation();
-	float doorDist = (initDoorLocation-rightHandLoc).Y;
+	float doorDist = (initDoorLocation-rightHandLoc).X;
 	//auto doorPivotLoc = GrabbedObjectRight->GetComponentLocation();
 	//doorVec.Normalize();
 	//auto doorVecDot = FVector::DotProduct(doorVec, initDoorDirection);
@@ -277,7 +277,7 @@ float ABarPlayer::GetDoorAngleLeft()
 	//bool crossBoolean = false;
 	auto initDoorLocation= GrabbedObjectLeft->GetComponentLocation();
 	auto leftHandLoc = LeftHand->GetComponentLocation();
-	float doorDist = (initDoorLocation-leftHandLoc).Y;
+	float doorDist = (initDoorLocation-leftHandLoc).X;
 	//auto doorPivotLoc = GrabbedObjectRight->GetComponentLocation();
 	//doorVec.Normalize();
 	//auto doorVecDot = FVector::DotProduct(doorVec, initDoorDirection);
@@ -325,7 +325,7 @@ void ABarPlayer::TryGrabLeft()
 		// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 		float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
 		// 필요속성 : 이번에 검출할 대상과 손과의 거리
-		float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+		float NextDist = FVector::Dist(HitObj[i].GetActor()->GetActorLocation(), Center);
 
 		// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
 		if (NextDist < ClosestDist)
@@ -475,7 +475,7 @@ void ABarPlayer::TryGrabRight()
 		// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 		float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
 		// 필요속성 : 이번에 검출할 대상과 손과의 거리
-		float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+		float NextDist = FVector::Dist(HitObj[i].GetActor()->GetActorLocation(), Center);
 
 		// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
 		if (NextDist < ClosestDist)
@@ -1103,7 +1103,7 @@ void ABarPlayer::Fire()
 			// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 			float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
 			// 필요속성 : 이번에 검출할 대상과 손과의 거리
-			float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+			float NextDist = FVector::Dist(HitObj[i].GetActor()->GetActorLocation(), Center);
 
 			// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
 			if (NextDist < ClosestDist)
@@ -1211,7 +1211,7 @@ void ABarPlayer::FireLeft()
 			// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 			float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
 			// 필요속성 : 이번에 검출할 대상과 손과의 거리
-			float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+			float NextDist = FVector::Dist(HitObj[i].GetActor()->GetActorLocation(), Center);
 
 			// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
 			if (NextDist < ClosestDist)

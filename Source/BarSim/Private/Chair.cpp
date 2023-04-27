@@ -60,8 +60,6 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 	auto coaster = Cast<ACoaster>(OtherActor);
 	auto coctail = Cast<ACupBase>(OtherActor);
 
-	UE_LOG(LogTemp, Warning, TEXT("SSSSSSSSSSSSSSSSSSSS"))
-	
 	if(coctail != nullptr)
 	{
 		bCheckCoctail = true;
