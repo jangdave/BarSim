@@ -18,7 +18,7 @@
       <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
