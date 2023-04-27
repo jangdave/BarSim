@@ -10,10 +10,13 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Cup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Cup.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleLimeTemp.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleLimeTemp.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_OldPal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_OldPal.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_TestCupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_TestCupBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" afterDir="false" />
     </list>
@@ -30,25 +33,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C++ Project.BarSim">
     <configuration name="BarSim" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -231,6 +234,7 @@
       <workItem from="1682397639822" duration="10822000" />
       <workItem from="1682415841720" duration="7529000" />
       <workItem from="1682557696944" duration="4541000" />
+      <workItem from="1682570392180" duration="850000" />
     </task>
     <servers />
   </component>
