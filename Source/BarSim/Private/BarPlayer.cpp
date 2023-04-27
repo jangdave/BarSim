@@ -260,7 +260,7 @@ float ABarPlayer::GetDoorAngle()
 	//bool crossBoolean = false;
 	auto initDoorLocation= GrabbedObjectRight->GetComponentLocation();
 	auto rightHandLoc = RightHand->GetComponentLocation();
-	float doorDist = (initDoorLocation-rightHandLoc).Y;
+	float doorDist = (initDoorLocation-rightHandLoc).X;
 	//auto doorPivotLoc = GrabbedObjectRight->GetComponentLocation();
 	//doorVec.Normalize();
 	//auto doorVecDot = FVector::DotProduct(doorVec, initDoorDirection);
@@ -277,7 +277,7 @@ float ABarPlayer::GetDoorAngleLeft()
 	//bool crossBoolean = false;
 	auto initDoorLocation= GrabbedObjectLeft->GetComponentLocation();
 	auto leftHandLoc = LeftHand->GetComponentLocation();
-	float doorDist = (initDoorLocation-leftHandLoc).Y;
+	float doorDist = (initDoorLocation-leftHandLoc).X;
 	//auto doorPivotLoc = GrabbedObjectRight->GetComponentLocation();
 	//doorVec.Normalize();
 	//auto doorVecDot = FVector::DotProduct(doorVec, initDoorDirection);
