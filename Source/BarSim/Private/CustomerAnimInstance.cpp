@@ -24,12 +24,12 @@ void UCustomerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	FVector velocity = owner->GetVelocity();
 	FVector forVelocity = owner->GetActorForwardVector();
-	forwordVelocity = FVector::DotProduct(velocity, forVelocity);
+	forwardVelocity = FVector::DotProduct(velocity, forVelocity);
 }
 
 void UCustomerAnimInstance::OnSitAnim(FName sectionName)
 {
-	owner->PlayAnimMontage(customerSitMontageFactory, 1, sectionName);
+	owner->PlayAnimMontage(customerMontageFactory, 1, sectionName);
 }
 
 void UCustomerAnimInstance::EndTalking()

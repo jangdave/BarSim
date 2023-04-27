@@ -13,5 +13,21 @@ UCLASS()
 class BARSIM_API UOldPalAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
+
+public:
+	virtual void NativeBeginPlay() override;
 	
+	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+
+	UPROPERTY()
+	class AOldPalCharacter* owner;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float forwardVelocity;
+	
+	UPROPERTY(EditAnywhere)
+	class UAnimMontage* oldPalMontageFactory;
+
+	UFUNCTION()
+	void OnSitAnim(FName sectionName);
 };

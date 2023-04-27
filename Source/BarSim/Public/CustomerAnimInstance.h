@@ -15,18 +15,18 @@ class BARSIM_API UCustomerAnimInstance : public UAnimInstance
 	GENERATED_BODY()
 
 public:
-	void NativeBeginPlay() override;
+	virtual void NativeBeginPlay() override;
 	
-	void NativeUpdateAnimation(float DeltaSeconds) override;
+	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
 	UPROPERTY()
 	class ACustomerCharacter* owner;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float forwordVelocity;
+	float forwardVelocity;
 
 	UPROPERTY(EditAnywhere)
-	class UAnimMontage* customerSitMontageFactory;
+	class UAnimMontage* customerMontageFactory;
 
 	UFUNCTION()
 	void OnSitAnim(FName sectionName);
