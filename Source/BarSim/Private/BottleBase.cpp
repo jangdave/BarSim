@@ -54,7 +54,7 @@ void ABottleBase::Tick(float DeltaTime)
 			{
 				//UE_LOG(LogTemp, Warning, TEXT("streamOn"));
 				waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
-				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 800);
+				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 				waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
 				//물방울 액터 스폰
 				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
@@ -70,7 +70,7 @@ void ABottleBase::Tick(float DeltaTime)
 				if(waterStream)
 				{
 					//UE_LOG(LogTemp, Warning, TEXT("waterStream On"));
-					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 800);
+					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 					waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
 					waterStream->SetRelativeLocation(pourer->GetSocketLocation(FName("Pourer")));
 					waterStream->SetRelativeRotation(pourer->GetSocketRotation(FName("Pourer")));
@@ -80,7 +80,7 @@ void ABottleBase::Tick(float DeltaTime)
 					drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
 					//UE_LOG(LogTemp, Warning, TEXT("%f, %f, %f"), pourer->GetSocketRotation(FName("Pourer")).Vector().X, pourer->GetSocketRotation(FName("Pourer")).Vector().Y, pourer->GetSocketRotation(FName("Pourer")).Vector().Z);
 					remains = remains - drop->dropMass;
-					UE_LOG(LogTemp, Warning, TEXT("%f"), remains);
+					//UE_LOG(LogTemp, Warning, TEXT("%f"), remains);
 				}
 			}
 		}

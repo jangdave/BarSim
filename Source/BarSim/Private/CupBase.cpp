@@ -5,8 +5,10 @@
 
 #include "DropBase.h"
 #include "IceCube.h"
+#include "LimeDrop.h"
 #include "VorbisAudioInfo.h"
 #include "Components/BoxComponent.h"
+#include "Materials/MaterialParameterCollection.h"
 
 // Sets default values
 ACupBase::ACupBase()
@@ -45,6 +47,40 @@ void ACupBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//전체 부피 중 특정 액체가 차지하는 비율만큼 머테리얼 섞기
+	//오더 어레이와 컨텐츠 어레이가 있을때만
+	if(OrderArray.Num() != 0 && ContentsArray.Num() != 0)
+	{
+		// 내용물 초기화
+		ginInside = 0;
+		limeInside = 0;
+		//오더 어레이 중 Gin 이라는 값을 가진 배열 원소의 순서를 구함
+		for(int i = 0; i < OrderArray.Num(); i++)
+		{
+			if(OrderArray[i] == FString("Gin"))
+			{
+				//GinArray.Add(i);
+				ginInside = ginInside + ContentsArray[i];
+			}
+		}
+		UE_LOG(LogTemp, Warning, TEXT("%f"), ginInside);
+
+		//오더 어레이 중 Lime 이라는 값을 가진 배열 원소의 순서를 구함
+		for(int i = 0; i < OrderArray.Num(); i++)
+		{
+			if(OrderArray[i] == FString("Lime"))
+			{
+				//GinArray.Add(i);
+				limeInside = limeInside + ContentsArray[i];
+			}
+		}
+		UE_LOG(LogTemp, Warning, TEXT("%f"), limeInside)
+
+		float all = ginInside + limeInside;
+		
+		liquorComp->SetScalarParameterValueOnMaterials(FName("Lime"), limeInside / all);
+	}
+
 }
 
 void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
@@ -81,7 +117,7 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 		float insideContents = FMath::Clamp(contents, 0, cupSize);
 		liquorComp->SetVisibility(true);
 		liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
-		UE_LOG(LogTemp, Warning, TEXT("%f"), insideContents);
+		//UE_LOG(LogTemp, Warning, TEXT("%f"), insideContents);
 		drop->Destroy();
 	}
 }
