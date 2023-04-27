@@ -10,15 +10,8 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Cup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Cup.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleLimeTemp.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BottleLimeTemp.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,9 +39,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
@@ -235,6 +228,7 @@
       <workItem from="1682415841720" duration="7529000" />
       <workItem from="1682557696944" duration="4541000" />
       <workItem from="1682570392180" duration="850000" />
+      <workItem from="1682572803146" duration="6122000" />
     </task>
     <servers />
   </component>

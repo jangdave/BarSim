@@ -109,7 +109,7 @@ void ABarPlayer::BeginPlay()
 	{
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
 		FPSCamera->bUsePawnControlRotation = false;
-		GrabRange=25.0f;
+		GrabRange=15.0f;
 	}
 	
 }
@@ -325,7 +325,7 @@ void ABarPlayer::TryGrabLeft()
 		// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 		float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
 		// 필요속성 : 이번에 검출할 대상과 손과의 거리
-		float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+		float NextDist = FVector::Dist(HitObj[i].GetActor()->GetActorLocation(), Center);
 
 		// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
 		if (NextDist < ClosestDist)
@@ -475,7 +475,7 @@ void ABarPlayer::TryGrabRight()
 		// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 		float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
 		// 필요속성 : 이번에 검출할 대상과 손과의 거리
-		float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+		float NextDist = FVector::Dist(HitObj[i].GetActor()->GetActorLocation(), Center);
 
 		// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
 		if (NextDist < ClosestDist)
@@ -1103,7 +1103,7 @@ void ABarPlayer::Fire()
 			// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 			float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
 			// 필요속성 : 이번에 검출할 대상과 손과의 거리
-			float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+			float NextDist = FVector::Dist(HitObj[i].GetActor()->GetActorLocation(), Center);
 
 			// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
 			if (NextDist < ClosestDist)
@@ -1115,7 +1115,7 @@ void ABarPlayer::Fire()
 		}
 
 		// 잡기에 성공했다면
-		if (isGrabbingWithTongsRight)
+		if (isGrabbingWithTongsRight&&HitObj[Closest].GetComponent()->IsSimulatingPhysics() == true)
 		{
 			// 물체 물리기능 비활성화
 			GrabbedObjectWithTongsRight = HitObj[Closest].GetComponent();
@@ -1211,7 +1211,7 @@ void ABarPlayer::FireLeft()
 			// 필요속성 : 현재 가장 가까운 대상과 손과의 거리
 			float ClosestDist = FVector::Dist(HitObj[Closest].GetActor()->GetActorLocation(), Center);
 			// 필요속성 : 이번에 검출할 대상과 손과의 거리
-			float NextDist = FVector::Dist(HitObj[0].GetActor()->GetActorLocation(), Center);
+			float NextDist = FVector::Dist(HitObj[i].GetActor()->GetActorLocation(), Center);
 
 			// 3. 만약 이번 대상이 현재 대상보다 가깝다면,
 			if (NextDist < ClosestDist)
@@ -1223,7 +1223,7 @@ void ABarPlayer::FireLeft()
 		}
 
 		// 잡기에 성공했다면
-		if (isGrabbingWithTongsLeft)
+		if (isGrabbingWithTongsLeft&&HitObj[Closest].GetComponent()->IsSimulatingPhysics() == true)
 		{
 			// 물체 물리기능 비활성화
 			GrabbedObjectWithTongsLeft = HitObj[Closest].GetComponent();
@@ -1335,7 +1335,7 @@ void ABarPlayer::FireReleased()
 			return;
 		}
 	
-}
+} 
 
 void ABarPlayer::FireReleasedLeft()
 {
