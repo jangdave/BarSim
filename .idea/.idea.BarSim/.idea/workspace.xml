@@ -10,12 +10,25 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_BottleBasetest.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/Daiquiri.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/Daiquiri.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/Ginlime.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/Ginlime.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/Martini.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/Martini.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/OldPal.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/OldPal.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/questionmark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/questionmark.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerOrderWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerOrderWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CustomerFSM.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerFSM.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,6 +248,7 @@
       <workItem from="1682572803146" duration="6459000" />
       <workItem from="1682648719672" duration="5538000" />
       <workItem from="1682662717539" duration="1565000" />
+      <workItem from="1682666533162" duration="7218000" />
     </task>
     <servers />
   </component>

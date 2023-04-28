@@ -84,6 +84,7 @@ public:
 	void LookPlayer();
 
 	void LookOrder();
+	
 private:
 	void TickIdle();
 
