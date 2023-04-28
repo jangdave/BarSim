@@ -26,4 +26,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=FSM)
+	class UOldPalFSM* oldPalFSM;
+
+	UPROPERTY(EditAnywhere)
+	class UOldPalAnimInstance* oldPalAnim;
+
+	UPROPERTY(EditAnywhere, Category=Widget)
+	class UWidgetComponent* oldPalWidget;
 };

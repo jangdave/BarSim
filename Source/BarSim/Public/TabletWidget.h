@@ -13,5 +13,12 @@ UCLASS()
 class BARSIM_API UTabletWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	virtual void NativeConstruct() override;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UWidgetSwitcher* WidgetSwitcher_Tablet;
+
 	
 };
