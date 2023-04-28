@@ -79,4 +79,9 @@ public:
 	int iceCount = 0;
 	
 	class AIceCube* ice;
+
+	float insideContents;
+
+	UFUNCTION()
+	virtual void LiquorScale();
 };

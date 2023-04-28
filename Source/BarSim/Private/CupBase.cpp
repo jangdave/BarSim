@@ -18,15 +18,23 @@ ACupBase::ACupBase()
 
 	cupComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cup"));
 	SetRootComponent(cupComp);
+	cupComp->SetCollisionProfileName(FName("Check"));
 
 	liquorComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Liquor"));
 	liquorComp->SetupAttachment(cupComp);
+	liquorComp->SetRelativeScale3D(FVector(0.01f));
+	liquorComp->SetCollisionProfileName(FName("Contents"));
+	liquorComp->SetVisibility(false);
 	
 	measureComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Measure"));
 	measureComp->SetupAttachment(cupComp);
+	measureComp->SetCollisionProfileName(FName("Cup"));
+	measureComp->SetVisibility(false);
 
 	igCheckerComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("IGChecker"));
 	igCheckerComp->SetupAttachment(cupComp);
+	igCheckerComp->SetCollisionProfileName(FName("IGChecker"));
+	igCheckerComp->SetVisibility(false);
 }
 
 // Called when the game starts or when spawned
@@ -35,8 +43,7 @@ void ACupBase::BeginPlay()
 	Super::BeginPlay();
 
 	cupSize = cupSizeOrigin;
-
-	liquorComp->SetVisibility(false);
+	
 	measureComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddLiquor);
 	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
 	igCheckerComp->OnComponentEndOverlap.AddDynamic(this, &ACupBase::ExtractIce);
@@ -114,9 +121,9 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			ContentsArray.Add(drop->dropMass);
 		}
 		contents = contents + drop->dropMass;
-		float insideContents = FMath::Clamp(contents, 0, cupSize);
+		insideContents = FMath::Clamp(contents, 0, cupSize);
 		liquorComp->SetVisibility(true);
-		liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
+		LiquorScale();
 		//UE_LOG(LogTemp, Warning, TEXT("%f"), insideContents);
 		drop->Destroy();
 	}
@@ -132,8 +139,8 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 		iceCount += 1;
 		//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
 		cupSize = cupSizeOrigin - iceCount * 2;
-		float insideContents = FMath::Clamp(contents, 0, cupSize);
-		liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
+		insideContents = FMath::Clamp(contents, 0, cupSize);
+		LiquorScale();
 	}
 }
 
@@ -147,8 +154,14 @@ void ACupBase::ExtractIce(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		iceCount -= 1;
 		//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
 		cupSize = cupSizeOrigin - iceCount * 2;
-		float insideContents = FMath::Clamp(contents, 0, cupSize);
-		liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
+		insideContents = FMath::Clamp(contents, 0, cupSize);
+		LiquorScale();
+
 	}
+}
+
+void ACupBase::LiquorScale()
+{
+	liquorComp->SetRelativeScale3D(FVector(1,1,insideContents / cupSize));
 }
 
