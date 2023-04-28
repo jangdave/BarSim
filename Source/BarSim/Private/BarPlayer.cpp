@@ -19,6 +19,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 #include "Components/WidgetInteractionComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
 
@@ -74,6 +75,7 @@ ABarPlayer::ABarPlayer()
 	FPSCamera->SetRelativeLocation(FVector(-15, 0, 30));
 
 
+
 }
 
 // Called when the game starts or when spawned
@@ -81,8 +83,6 @@ void ABarPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FPSCamera->bUsePawnControlRotation = true;
-	
 	// Enhanced Input 
 	auto PC = Cast<APlayerController>(GetWorld()->GetFirstPlayerController());
 	if (PC)
@@ -101,7 +101,7 @@ void ABarPlayer::BeginPlay()
 	{
 		RightAim->SetRelativeLocation(FVector(20, 20, 0));
 		RightHand->SetRelativeLocation(FVector(20, 20, 0));
-		//FPSCamera->bUsePawnControlRotation = true;
+		FPSCamera->bUsePawnControlRotation = true;
 		GrabRange = 45.0f;
 
 		FPSCamera->AddRelativeLocation(FVector(0, 0, 22));
@@ -111,13 +111,21 @@ void ABarPlayer::BeginPlay()
 	else
 	{
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
-		//FPSCamera->bUsePawnControlRotation = true;
+		FPSCamera->bUsePawnControlRotation = false;
 		GrabRange=15.0f;
 	}
-
+	widgetInteractionComp->DebugSphereLineThickness=0.5f;
+	widgetInteractionComp->DebugLineThickness=0.3f;
+	widgetInteractionComp->DebugColor=FColor::Red;
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;
 	widgetInteractionComp->SetAutoActivate(true);
+	widgetInteractionComp->InteractionDistance=50.0f;
+
+	FPSCamera->bUsePawnControlRotation = true;
+	
+	GetCharacterMovement()->bOrientRotationToMovement=true;
+	GetCharacterMovement()->bEnablePhysicsInteraction=false;
 }
 
 // Called every frame

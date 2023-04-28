@@ -10,11 +10,8 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/MannequinsXR/Meshes/SK_MannequinsXR.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Inputs/IMC_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Inputs/IMC_Default.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -234,7 +231,9 @@
       <workItem from="1682570392180" duration="850000" />
       <workItem from="1682572803146" duration="6459000" />
       <workItem from="1682648719672" duration="5538000" />
-      <workItem from="1682662717539" duration="1565000" />
+      <workItem from="1682662717539" duration="1929000" />
+      <workItem from="1682664822067" duration="1287000" />
+      <workItem from="1682666141320" duration="2751000" />
     </task>
     <servers />
   </component>
