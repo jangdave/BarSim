@@ -108,7 +108,7 @@ void ABarPlayer::BeginPlay()
 	else
 	{
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
-		FPSCamera->bUsePawnControlRotation = false;
+		FPSCamera->bUsePawnControlRotation = true;
 		GrabRange=15.0f;
 	}
 	
@@ -162,9 +162,9 @@ void ABarPlayer::Tick(float DeltaTime)
 		// 오른손에 Fridge Door를 잡고 있다면
 		if(isGrabbingFridgeDoorRight)
 		{
-			auto doorYaw = FMath::Clamp(GetDoorAngle()*1.35, 0, 90);
+			auto doorYaw = FMath::Clamp(GetDoorAngle()*1.8-27, 0, 150);
 			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYaw)
-			GrabbedObjectRight->SetRelativeRotation(FRotator(0, doorYaw+90, 0));
+			GrabbedObjectRight->SetRelativeRotation(FRotator(0, -(doorYaw)+200, 0));
 			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
 			auto rightVec = GrabbedObjectRight->GetRightVector();
 			auto upVec = GrabbedObjectRight->GetUpVector();
@@ -180,9 +180,9 @@ void ABarPlayer::Tick(float DeltaTime)
 		// 왼손에 Fridge Door를 잡고 있다면
 		if(isGrabbingFridgeDoorLeft)
 		{
-			auto doorYawLeft = FMath::Clamp(GetDoorAngleLeft()*1.35, 0, 90);
+			auto doorYawLeft = FMath::Clamp(GetDoorAngleLeft()*1.8-27, 0, 150);
 			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYawLeft)
-			GrabbedObjectLeft->SetRelativeRotation(FRotator(0, doorYawLeft+90, 0));
+			GrabbedObjectLeft->SetRelativeRotation(FRotator(0, -(doorYawLeft)+200, 0));
 			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
 			auto rightVec = GrabbedObjectRight->GetRightVector();
 			auto upVec = GrabbedObjectRight->GetUpVector();
@@ -545,7 +545,7 @@ void ABarPlayer::TryGrabRight()
 		}
 		// 잡은 대상이 Opener 이라면
 		else if(GrabbedActorRight==opener&&opener!=nullptr)
-		{
+		{ 
 			isGrabbingOpenerRight=true;
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
