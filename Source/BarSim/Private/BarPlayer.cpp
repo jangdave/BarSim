@@ -15,6 +15,7 @@
 #include "HuchuTong.h"
 #include "Opener.h"
 #include "Tablet.h"
+#include "UnrealWidgetFwd.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 #include "Components/WidgetInteractionComponent.h"
@@ -111,7 +112,8 @@ void ABarPlayer::BeginPlay()
 		FPSCamera->bUsePawnControlRotation = false;
 		GrabRange=15.0f;
 	}
-	
+
+	widgetInteractionComp->bEnableHitTesting=true;
 }
 
 // Called every frame
@@ -376,7 +378,7 @@ void ABarPlayer::TryGrabLeft()
 		{
 			isGrabbingTabletLeft=true;
 			widgetInteractionComp->bShowDebug=true;
-			widgetInteractionComp->bEnableHitTesting=true;
+			//widgetInteractionComp->bEnableHitTesting=true;
 			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
@@ -526,7 +528,7 @@ void ABarPlayer::TryGrabRight()
 		{
 			isGrabbingTabletRight=true;
 			widgetInteractionComp->bShowDebug=true;
-			widgetInteractionComp->bEnableHitTesting=true;
+			//widgetInteractionComp->bEnableHitTesting=true;
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TabletSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
@@ -666,7 +668,7 @@ void ABarPlayer::UnTryGrabLeft()
 		isGrabbingTabletLeft=false;
 		IsGrabbedLeft = false;
 		widgetInteractionComp->bShowDebug=false;
-		widgetInteractionComp->bEnableHitTesting=false;
+		//widgetInteractionComp->bEnableHitTesting=false;
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);			
 		GrabbedActorLeft->SetActorEnableCollision(true);
@@ -878,7 +880,7 @@ void ABarPlayer::UnTryGrabRight()
 	{
 		isGrabbingTabletRight=false;
 		widgetInteractionComp->bShowDebug=false;
-		widgetInteractionComp->bEnableHitTesting=false;
+		//widgetInteractionComp->bEnableHitTesting=false;
 		IsGrabbedRight = false;
 		GrabbedObjectRight->SetSimulatePhysics(true);
 		GrabbedActorRight->SetActorEnableCollision(true);

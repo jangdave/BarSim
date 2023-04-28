@@ -2,4 +2,10 @@
 
 
 #include "TabletWidget.h"
+#include "Components/WidgetSwitcher.h"
 
+void UTabletWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+}

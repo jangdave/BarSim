@@ -10,15 +10,13 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/ABP_OldPalAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/ABP_OldPalAnim.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/BS_OldPalSit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/BS_OldPalSit.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerAnimInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalAnimInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CustomerAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CustomerAnimInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/OldPalAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/OldPalAnimInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/OldPalCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/OldPalCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,6 +235,8 @@
       <workItem from="1682570392180" duration="850000" />
       <workItem from="1682572981528" duration="5239000" />
       <workItem from="1682584392738" duration="3928000" />
+      <workItem from="1682642595370" duration="2352000" />
+      <workItem from="1682648599010" duration="3935000" />
     </task>
     <servers />
   </component>
