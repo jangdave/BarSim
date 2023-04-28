@@ -72,7 +72,7 @@ ABarPlayer::ABarPlayer()
 	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("VRCamera"));
 	FPSCamera->SetupAttachment(RootComponent);
 	FPSCamera->SetRelativeLocation(FVector(-15, 0, 30));
-	FPSCamera->bUsePawnControlRotation = false;
+
 
 }
 
@@ -81,6 +81,8 @@ void ABarPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
+	FPSCamera->bUsePawnControlRotation = true;
+	
 	// Enhanced Input 
 	auto PC = Cast<APlayerController>(GetWorld()->GetFirstPlayerController());
 	if (PC)
@@ -99,7 +101,7 @@ void ABarPlayer::BeginPlay()
 	{
 		RightAim->SetRelativeLocation(FVector(20, 20, 0));
 		RightHand->SetRelativeLocation(FVector(20, 20, 0));
-		FPSCamera->bUsePawnControlRotation = true;
+		//FPSCamera->bUsePawnControlRotation = true;
 		GrabRange = 45.0f;
 
 		FPSCamera->AddRelativeLocation(FVector(0, 0, 22));
@@ -109,7 +111,7 @@ void ABarPlayer::BeginPlay()
 	else
 	{
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
-		FPSCamera->bUsePawnControlRotation = false;
+		//FPSCamera->bUsePawnControlRotation = true;
 		GrabRange=15.0f;
 	}
 
@@ -418,7 +420,7 @@ void ABarPlayer::TryGrabLeft()
 		else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 		{
 			isGrabbingCupLeft=true;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("OpenerSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("CupSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab cup on Left"))			
@@ -569,7 +571,7 @@ void ABarPlayer::TryGrabRight()
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
 		{
 			isGrabbingCupRight=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CupSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab cup on Right"))			
@@ -978,7 +980,7 @@ void ABarPlayer::UnTryGrabRight()
 	{
 		isGrabbingCupRight=false;
 		IsGrabbedRight = false;
-		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
+		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->SetSimulatePhysics(true);
 		GrabbedActorRight->SetActorEnableCollision(true);
 		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
