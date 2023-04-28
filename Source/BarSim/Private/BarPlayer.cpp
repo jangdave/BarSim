@@ -114,6 +114,8 @@ void ABarPlayer::BeginPlay()
 	}
 
 	widgetInteractionComp->bEnableHitTesting=true;
+	widgetInteractionComp->bShowDebug=false;
+	widgetInteractionComp->SetAutoActivate(true);
 }
 
 // Called every frame
@@ -164,9 +166,9 @@ void ABarPlayer::Tick(float DeltaTime)
 		// 오른손에 Fridge Door를 잡고 있다면
 		if(isGrabbingFridgeDoorRight)
 		{
-			auto doorYaw = FMath::Clamp(GetDoorAngle()*1.35, 0, 90);
+			auto doorYaw = FMath::Clamp(GetDoorAngle()*1.8-27, 0, 150);
 			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYaw)
-			GrabbedObjectRight->SetRelativeRotation(FRotator(0, doorYaw+90, 0));
+			GrabbedObjectRight->SetRelativeRotation(FRotator(0, -(doorYaw)+200, 0));
 			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
 			auto rightVec = GrabbedObjectRight->GetRightVector();
 			auto upVec = GrabbedObjectRight->GetUpVector();
@@ -182,9 +184,9 @@ void ABarPlayer::Tick(float DeltaTime)
 		// 왼손에 Fridge Door를 잡고 있다면
 		if(isGrabbingFridgeDoorLeft)
 		{
-			auto doorYawLeft = FMath::Clamp(GetDoorAngleLeft()*1.35, 0, 90);
+			auto doorYawLeft = FMath::Clamp(GetDoorAngleLeft()*1.8-27, 0, 150);
 			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYawLeft)
-			GrabbedObjectLeft->SetRelativeRotation(FRotator(0, doorYawLeft+90, 0));
+			GrabbedObjectLeft->SetRelativeRotation(FRotator(0, -(doorYawLeft)+200, 0));
 			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
 			auto rightVec = GrabbedObjectRight->GetRightVector();
 			auto upVec = GrabbedObjectRight->GetUpVector();
@@ -381,7 +383,7 @@ void ABarPlayer::TryGrabLeft()
 			//widgetInteractionComp->bEnableHitTesting=true;
 			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
-			GrabbedActorLeft->SetActorEnableCollision(false);
+			//GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Left"))
 		}
 		// 잡은 대상이 Fridge Door 라면
@@ -531,7 +533,7 @@ void ABarPlayer::TryGrabRight()
 			//widgetInteractionComp->bEnableHitTesting=true;
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TabletSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
-			GrabbedActorRight->SetActorEnableCollision(false);
+			//GrabbedActorRight->SetActorEnableCollision(false);
 
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Right"))
 		}
@@ -671,7 +673,7 @@ void ABarPlayer::UnTryGrabLeft()
 		//widgetInteractionComp->bEnableHitTesting=false;
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);			
-		GrabbedActorLeft->SetActorEnableCollision(true);
+		//GrabbedActorLeft->SetActorEnableCollision(true);
 		//GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);		
 		//GrabbedActorLeft->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft = nullptr;
@@ -883,7 +885,7 @@ void ABarPlayer::UnTryGrabRight()
 		//widgetInteractionComp->bEnableHitTesting=false;
 		IsGrabbedRight = false;
 		GrabbedObjectRight->SetSimulatePhysics(true);
-		GrabbedActorRight->SetActorEnableCollision(true);
+		//GrabbedActorRight->SetActorEnableCollision(true);
 		GrabbedActorRight->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 
