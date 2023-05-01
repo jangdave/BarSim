@@ -29,8 +29,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=FSM)
 	class UOldPalFSM* oldPalFSM;
 
-	UPROPERTY(EditAnywhere)
-	class UOldPalAnimInstance* oldPalAnim;
+	//UPROPERTY(EditAnywhere)
+	//class UOldPalAnimInstance* oldPalAnim;
 
 	UPROPERTY(EditAnywhere, Category=Widget)
 	class UWidgetComponent* oldPalWidget;

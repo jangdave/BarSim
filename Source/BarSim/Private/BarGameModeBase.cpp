@@ -65,6 +65,10 @@ void ABarGameModeBase::GetCup(TArray<FString> cocName, TArray<float> cocliter)
 	{
 		CheckWhisky(cocName);
 	}
+	else
+	{
+		SomethingElse();
+	}
 }
 
 void ABarGameModeBase::CheckGin(TArray<FString> cocName)

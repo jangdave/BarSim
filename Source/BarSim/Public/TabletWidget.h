@@ -17,6 +17,8 @@ class BARSIM_API UTabletWidget : public UUserWidget
 public:
 	virtual void NativeConstruct() override;
 
+	class ASpawnManager* spawnmg;
+	
 	// 테블렛 상단바
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UProgressBar* PB_Reputation;
@@ -44,11 +46,17 @@ public:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_OpenGinLime;
-
-	// 테블릿 진라임 레시피
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UButton* btn_BackRecipeMenu;
 	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_OpenGinLimeVideo;
+	
+	// 테블릿 진라임 레시피 & 영상
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackRecipeMenu0;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackRecipeMenu1;
+
 	UFUNCTION()
 	void OpenStore();
 
@@ -56,14 +64,15 @@ public:
 	void CloseStore();
 
 	UFUNCTION()
-	void OpenRecipePage();
-
+	void OpenMenuPage();
+	
 	UFUNCTION()
-	void BackMenuPage();
+	void OpenRecipePage();
 
 	UFUNCTION()
 	void OpenGinLime();
 
 	UFUNCTION()
-	void BackRecipePage();
+	void OpenGinLimeVideo();
+	
 };

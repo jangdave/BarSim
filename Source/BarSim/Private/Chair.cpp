@@ -127,3 +127,8 @@ void AChair::ViewScore(int32 procedureScore, int32 ratioScore, int32 amountScore
 	score_UI->text_AmountScore->SetText(FText::AsNumber(amountScore));
 }
 
+void AChair::HideScore()
+{
+	score_UI->SetVisibility(ESlateVisibility::Hidden);
+}
+
