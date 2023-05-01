@@ -22,6 +22,12 @@ ADropBase::ADropBase()
 void ADropBase::BeginPlay()
 {
 	Super::BeginPlay();
+
+	FTimerHandle timer;
+	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
+	{
+		Destroy();
+	}), 5.0f, false);
 }
 
 // Called every frame
