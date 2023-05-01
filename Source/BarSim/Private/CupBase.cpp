@@ -70,7 +70,7 @@ void ACupBase::Tick(float DeltaTime)
 				ginInside = ginInside + ContentsArray[i];
 			}
 		}
-		UE_LOG(LogTemp, Warning, TEXT("%f"), ginInside);
+		//UE_LOG(LogTemp, Warning, TEXT("%f"), ginInside);
 
 		//오더 어레이 중 Lime 이라는 값을 가진 배열 원소의 순서를 구함
 		for(int i = 0; i < OrderArray.Num(); i++)
@@ -81,7 +81,7 @@ void ACupBase::Tick(float DeltaTime)
 				limeInside = limeInside + ContentsArray[i];
 			}
 		}
-		UE_LOG(LogTemp, Warning, TEXT("%f"), limeInside)
+		//UE_LOG(LogTemp, Warning, TEXT("%f"), limeInside)
 
 		float all = ginInside + limeInside;
 		

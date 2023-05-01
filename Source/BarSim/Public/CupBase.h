@@ -48,10 +48,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	float cupSizeOrigin = 8.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Cup")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Cup")
 	float cupSize;
 	
-	UPROPERTY(EditAnywhere, Category = "Cup")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Cup")
 	float contents;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
@@ -84,4 +84,10 @@ public:
 
 	UFUNCTION()
 	virtual void LiquorScale();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cup")
+	bool bStirStarted;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Cup")
+	float stirRate;
 };
