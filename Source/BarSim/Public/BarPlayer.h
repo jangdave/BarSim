@@ -45,6 +45,10 @@ public:
 	float GetDoorAngle();
 	UFUNCTION()
 	float GetDoorAngleLeft();
+	UFUNCTION()
+	float GetDoorAngleR();
+	UFUNCTION()
+	float GetDoorAngleLeftR();
 	
 	
 
@@ -124,9 +128,13 @@ public:
 	// Tongs를 통한 그랩 오른쪽 컴포넌트
 	UPROPERTY()
 	class UPrimitiveComponent* GrabbedObjectWithTongsRight;
+	UPROPERTY()
+	class AActor* GrabbedActorWithTongsRight;
 	// Tongs를 통한 그랩 왼쪽 컴포넌트
 	UPROPERTY()
 	class UPrimitiveComponent* GrabbedObjectWithTongsLeft;
+	UPROPERTY()
+	class AActor* GrabbedActorWithTongsLeft;
 	// HuchuTong Ref
 	UPROPERTY()
 	class AHuchuTong* huchuTong;
@@ -157,6 +165,11 @@ public:
 	class ACupBase* cup;
 	UPROPERTY()
 	class ACupBase* cupL;
+	UPROPERTY()
+	class AIceCube* iceCube;
+	UPROPERTY()
+	class AIceCube* iceCubeL;
+	
 	
 	
 	
@@ -193,7 +206,7 @@ public:
 	FVector ThrowDirectionLeft;
 	// 던질 힘
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ThrowPower = 150;
+	float ThrowPower = 100;
 	// 오른 손 직전 위치
 	FVector PrevPosRight;
 	// 오른 손 이전 회전값
@@ -208,7 +221,7 @@ public:
 	FQuat DeltaRotationLeft;
 	// 회전빠르기
 	UPROPERTY(EditAnywhere, Category="Grab")
-	float ToquePower = 3;
+	float ToquePower = 2;
 	// Grab한 대상의 크기
 	UPROPERTY()
 	double grabbingObjectSize = 0;
@@ -220,5 +233,9 @@ public:
 	double fingerPressedActionValue;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValueLeft;
+	UPROPERTY()
+	FRotator initHandRot;
+	UPROPERTY()
+	FRotator initHandRotL;
 
 };
