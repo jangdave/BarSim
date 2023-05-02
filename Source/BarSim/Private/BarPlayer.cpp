@@ -15,11 +15,9 @@
 #include "HuchuTong.h"
 #include "Opener.h"
 #include "Tablet.h"
-#include "UnrealWidgetFwd.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 #include "Components/WidgetInteractionComponent.h"
-#include "Kismet/KismetMathLibrary.h"
 
 
 // Sets default values
@@ -101,7 +99,7 @@ void ABarPlayer::BeginPlay()
 	{
 		RightAim->SetRelativeLocation(FVector(20, 20, 0));
 		RightHand->SetRelativeLocation(FVector(20, 20, 0));
-		//FPSCamera->bUsePawnControlRotation = true;
+		FPSCamera->bUsePawnControlRotation = true;
 		GrabRange = 45.0f;
 
 		FPSCamera->AddRelativeLocation(FVector(0, 0, 22));
@@ -111,7 +109,7 @@ void ABarPlayer::BeginPlay()
 	else
 	{
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
-		//FPSCamera->bUsePawnControlRotation = true;
+		FPSCamera->bUsePawnControlRotation = false;
 		GrabRange=15.0f;
 	}
 

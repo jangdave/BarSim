@@ -21,10 +21,7 @@ void ASpawnManager::BeginPlay()
 	Super::BeginPlay();
 
 	CheckChairSit();
-
-	// 시간이 지날때마다 손님을 스폰한다
-	FTimerHandle spawnTime;
-	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 10, true);
+	
 }
 
 // Called every frame
@@ -88,5 +85,12 @@ void ASpawnManager::CheckChairSit()
 		bIsSit.Add(temp->bCheck);
 		aChairs.Add(temp);
 	}
+}
+
+void ASpawnManager::SpawnCustomer()
+{
+	// 시간이 지날때마다 손님을 스폰한다
+	FTimerHandle spawnTime;
+	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 2, true);
 }
 

@@ -292,6 +292,9 @@ void UCustomerFSM::TickDrink()
 
 void UCustomerFSM::TickJudgement()
 {
+	// score 가리기
+	spawnManager->aChairs[idx]->HideScore();
+	
 	// 점수 판단
 	auto result = spawnManager->aChairs[idx]->totalScore;
 
