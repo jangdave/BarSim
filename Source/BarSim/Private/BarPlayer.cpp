@@ -243,8 +243,8 @@ void ABarPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 void ABarPlayer::Move(const FInputActionValue& Values)
 {
 	FVector2D Axis = Values.Get<FVector2D>();
-	AddMovementInput(GetActorForwardVector(), Axis.Y);
-	AddMovementInput(GetActorRightVector(), Axis.X);
+	AddMovementInput(FPSCamera->GetForwardVector(), Axis.Y);
+	AddMovementInput(FPSCamera->GetRightVector(), Axis.X);
 }
 
 void ABarPlayer::Turn(const FInputActionValue& Values)
@@ -394,7 +394,7 @@ void ABarPlayer::TryGrabLeft()
 		{
 			isGrabbingTongsLeft=true;
 			GrabbedObjectWithTongsLeft = nullptr;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TongsSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TongsSocketLeft"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu on Left"))
@@ -403,7 +403,7 @@ void ABarPlayer::TryGrabLeft()
 		else if(GrabbedActorLeft == bottleL&&bottleL!=nullptr)
 		{
 			isGrabbingBottleLeft = true;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("BottleSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("BottleSocketLeft"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Left"))
@@ -414,7 +414,7 @@ void ABarPlayer::TryGrabLeft()
 			isGrabbingTabletLeft=true;
 			widgetInteractionComp->bShowDebug=true;
 			//widgetInteractionComp->bEnableHitTesting=true;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("TabletSocketLeft"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			//GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Left"))
@@ -433,7 +433,7 @@ void ABarPlayer::TryGrabLeft()
 		else if(GrabbedActorLeft==openerL&&openerL!=nullptr)
 		{
 			isGrabbingOpenerLeft=true;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("OpenerSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("OpenerSocketLeft"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab opener on Left"))			
@@ -442,7 +442,7 @@ void ABarPlayer::TryGrabLeft()
 		else if(GrabbedActorLeft==coasterL&&coasterL!=nullptr)
 		{
 			isGrabbingCoasterLeft=true;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("OpenerSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("OpenerSocketLeft"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab coaster on Left"))			
@@ -453,7 +453,7 @@ void ABarPlayer::TryGrabLeft()
 			// Cup을 쥔 순간의 Hand Rotation 값 저장
 			initHandRotL=LeftHand->GetRelativeRotation();
 			isGrabbingCupLeft=true;
-			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("CupSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("CupSocketLeft"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
 			GrabbedActorLeft->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab cup on Left"))			
@@ -546,7 +546,7 @@ void ABarPlayer::TryGrabRight()
 		{
 			isGrabbingTongsRight=true;
 			GrabbedObjectWithTongsRight = nullptr;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TongsSocketRight"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TongsSocketRight"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab huchu on Right"))
@@ -555,7 +555,7 @@ void ABarPlayer::TryGrabRight()
 		else if(GrabbedActorRight == bottle&&bottle!=nullptr)
 		{
 			isGrabbingBottleRight = true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("BottleSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("BottleSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Right"))
@@ -566,7 +566,7 @@ void ABarPlayer::TryGrabRight()
 			isGrabbingTabletRight=true;
 			widgetInteractionComp->bShowDebug=true;
 			//widgetInteractionComp->bEnableHitTesting=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TabletSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,false);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TabletSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,false);
 			RightHandMesh->SetVisibility(false);
 			//GrabbedActorRight->SetActorEnableCollision(false);
 
@@ -586,7 +586,7 @@ void ABarPlayer::TryGrabRight()
 		else if(GrabbedActorRight==opener&&opener!=nullptr)
 		{
 			isGrabbingOpenerRight=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab opener on Right"))			
@@ -595,7 +595,7 @@ void ABarPlayer::TryGrabRight()
 		else if(GrabbedActorRight==coaster&&coaster!=nullptr)
 		{
 			isGrabbingCoasterRight=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab coaster on Right"))			
@@ -611,7 +611,7 @@ void ABarPlayer::TryGrabRight()
 			//RightHandMesh->BodyInstance.bLockZRotation=true;
 			//RightHandMesh->BodyInstance.bLockRotation=true;
 			//RightHandMesh->SetConstraintMode(EDOFMode::SixDOF);
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CupSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CupSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab cup on Right"))			
