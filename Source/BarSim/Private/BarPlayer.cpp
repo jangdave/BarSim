@@ -13,11 +13,15 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "HuchuTong.h"
+#include "IceCube.h"
 #include "Opener.h"
 #include "Tablet.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 #include "Components/WidgetInteractionComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+
 
 
 // Sets default values
@@ -72,6 +76,7 @@ ABarPlayer::ABarPlayer()
 	FPSCamera->SetRelativeLocation(FVector(-15, 0, 30));
 
 
+
 }
 
 // Called when the game starts or when spawned
@@ -79,8 +84,6 @@ void ABarPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FPSCamera->bUsePawnControlRotation = true;
-	
 	// Enhanced Input 
 	auto PC = Cast<APlayerController>(GetWorld()->GetFirstPlayerController());
 	if (PC)
@@ -94,28 +97,32 @@ void ABarPlayer::BeginPlay()
 			subSystem->AddMappingContext(IMC_Hand, 0);
 		}
 	}
-
+	// HMD가 연결되어 있지 않다면,
 	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled() == false)
 	{
 		RightAim->SetRelativeLocation(FVector(20, 20, 0));
 		RightHand->SetRelativeLocation(FVector(20, 20, 0));
 		FPSCamera->bUsePawnControlRotation = true;
+		bUseControllerRotationYaw=true;
 		GrabRange = 45.0f;
-
 		FPSCamera->AddRelativeLocation(FVector(0, 0, 22));
-
-
 	}
+	// HMD가 연결되어 있다면,
 	else
 	{
 		UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(EHMDTrackingOrigin::Eye);
 		FPSCamera->bUsePawnControlRotation = false;
+		bUseControllerRotationYaw=false;
 		GrabRange=15.0f;
 	}
-
+	widgetInteractionComp->DebugSphereLineThickness=0.5f;
+	widgetInteractionComp->DebugLineThickness=0.3f;
+	widgetInteractionComp->DebugColor=FColor::Red;
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;
 	widgetInteractionComp->SetAutoActivate(true);
+	widgetInteractionComp->InteractionDistance=50.0f;
+	GetCharacterMovement()->bEnablePhysicsInteraction=false;
 }
 
 // Called every frame
@@ -130,7 +137,7 @@ void ABarPlayer::Tick(float DeltaTime)
 	}
 	
 	// 잡은 대상을 던질 위치값 실시간 업데이트
-	//Grabbing();
+	Grabbing();
 
 	// Tongs가 nullptr이 아니면서
 	if(huchuTong!=nullptr)
@@ -166,17 +173,11 @@ void ABarPlayer::Tick(float DeltaTime)
 		// 오른손에 Fridge Door를 잡고 있다면
 		if(isGrabbingFridgeDoorRight)
 		{
-			auto doorYaw = FMath::Clamp(GetDoorAngle()*1.8-27, 0, 150);
-			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYaw)
-			GrabbedObjectRight->SetRelativeRotation(FRotator(0, -(doorYaw)+200, 0));
-			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
-			auto rightVec = GrabbedObjectRight->GetRightVector();
-			auto upVec = GrabbedObjectRight->GetUpVector();
-			auto makeRot = UKismetMathLibrary::MakeRotFromYZ(rightVec, upVec);			
-			auto rInterpRot = UKismetMathLibrary::RInterpTo_Constant(doorPivotRot, makeRot, GetWorld()->GetDeltaSeconds(), 100.0f);
-			UE_LOG(LogTemp, Warning, TEXT("doorYaw X : %f, doorYaw Y : %f,doorYaw Z : %f"), rInterpRot.Pitch, rInterpRot.Yaw, rInterpRot.Roll);
-			*/
-		}
+			auto doorYaw = FMath::Clamp(GetDoorAngle()*1.8-27, 20, 150);
+			auto doorYawR = FMath::Clamp(GetDoorAngleR(), 0, 90);
+			
+			//UE_LOG(LogTemp, Warning, TEXT("%f"), doorYaw)
+			GrabbedObjectRight->SetRelativeRotation(FRotator(0, -((doorYaw/2)-(doorYawR/1.5))+130, 0));		}
 	}
 	// FridgeDoorL가 nullptr이 아니면서
 	if(barFridgeL!=nullptr)
@@ -184,17 +185,33 @@ void ABarPlayer::Tick(float DeltaTime)
 		// 왼손에 Fridge Door를 잡고 있다면
 		if(isGrabbingFridgeDoorLeft)
 		{
-			auto doorYawLeft = FMath::Clamp(GetDoorAngleLeft()*1.8-27, 0, 150);
-			UE_LOG(LogTemp, Warning, TEXT("%f"), doorYawLeft)
-			GrabbedObjectLeft->SetRelativeRotation(FRotator(0, -(doorYawLeft)+200, 0));
-			/*auto doorPivotRot = GrabbedObjectRight->GetComponentRotation();
-			auto rightVec = GrabbedObjectRight->GetRightVector();
-			auto upVec = GrabbedObjectRight->GetUpVector();
-			auto makeRot = UKismetMathLibrary::MakeRotFromYZ(rightVec, upVec);			
-			auto rInterpRot = UKismetMathLibrary::RInterpTo_Constant(doorPivotRot, makeRot, GetWorld()->GetDeltaSeconds(), 100.0f);
-			UE_LOG(LogTemp, Warning, TEXT("doorYaw X : %f, doorYaw Y : %f,doorYaw Z : %f"), rInterpRot.Pitch, rInterpRot.Yaw, rInterpRot.Roll);
-			*/
+			auto doorYawLeft = FMath::Clamp(GetDoorAngleLeft()*1.8-27, 20, 150);
+			auto doorYawLeftR = FMath::Clamp(GetDoorAngleLeftR(), 0, 90);
+			//UE_LOG(LogTemp, Warning, TEXT("%f"), doorYawLeft)
+			GrabbedObjectLeft->SetRelativeRotation(FRotator(0, -((doorYawLeft/2)-(doorYawLeftR/1.5))+130, 0));
 		}
+	}
+	// Cup이 nullptr이 아니면서, 오른손에 Cup을 쥐고 있다면
+	if(isGrabbingCupRight&&cup!=nullptr)
+	{
+		// cup의 contents가 0보다 크다면
+		if(cup->contents>0)
+		{
+			// 컵을 쥔 순간의 Rotation 값을 유지한다.
+			RightHand->SetRelativeRotation(initHandRot);
+		}
+	
+	}
+	// Cup이 nullptr이 아니면서, 왼손에 Cup을 쥐고 있다면
+	if(isGrabbingCupLeft&&cupL!=nullptr)
+	{
+		//cup 의 contents가 0보다 크다면,
+		if(cupL->contents>0)
+		{
+			// 컵을 쥔 순간의 Rotation 값을 유지한다.
+			LeftHand->SetRelativeRotation(initHandRotL);
+		}
+
 	}
 }
 
@@ -281,7 +298,7 @@ float ABarPlayer::GetDoorAngleLeft()
 	//bool crossBoolean = false;
 	auto initDoorLocation= GrabbedObjectLeft->GetComponentLocation();
 	auto leftHandLoc = LeftHand->GetComponentLocation();
-	float doorDist = (initDoorLocation-leftHandLoc).X;
+	float doorDist = (initDoorLocation-leftHandLoc).X;	
 	//auto doorPivotLoc = GrabbedObjectRight->GetComponentLocation();
 	//doorVec.Normalize();
 	//auto doorVecDot = FVector::DotProduct(doorVec, initDoorDirection);
@@ -291,6 +308,22 @@ float ABarPlayer::GetDoorAngleLeft()
 	//auto selectFl = UKismetMathLibrary::SelectFloat(-1.0f, 1.0f, crossBoolean);
 	
 	return doorDist;
+}
+
+float ABarPlayer::GetDoorAngleR()
+{
+	auto initDoorLocation= GrabbedObjectRight->GetComponentLocation();
+	auto rightHandLoc = RightHand->GetComponentLocation();
+	float doorDistR = (initDoorLocation-rightHandLoc).Y;
+	return  doorDistR;
+}
+
+float ABarPlayer::GetDoorAngleLeftR()
+{
+	auto initDoorLocation= GrabbedObjectLeft->GetComponentLocation();
+	auto leftHandLoc = LeftHand->GetComponentLocation();
+	float doorDistR = (initDoorLocation-leftHandLoc).Y;
+	return  doorDistR;
 }
 
 
@@ -417,6 +450,8 @@ void ABarPlayer::TryGrabLeft()
 		// 잡은 대상이 CupBase라면
 		else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 		{
+			// Cup을 쥔 순간의 Hand Rotation 값 저장
+			initHandRotL=LeftHand->GetRelativeRotation();
 			isGrabbingCupLeft=true;
 			GrabbedObjectLeft->K2_AttachToComponent(LeftHandMesh, TEXT("CupSocketLeft"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			LeftHandMesh->SetVisibility(false);
@@ -568,8 +603,15 @@ void ABarPlayer::TryGrabRight()
 		// 잡은 대상이 Cup이라면
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
 		{
+			// Cup을 쥔 순간의 Hand Rotation 값 저장
+			initHandRot=RightHand->GetRelativeRotation();
 			isGrabbingCupRight=true;
-			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CupSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,EAttachmentRule::KeepRelative,true);
+			//RightHandMesh->BodyInstance.bLockXRotation=true;
+			//RightHandMesh->BodyInstance.bLockYRotation=true;
+			//RightHandMesh->BodyInstance.bLockZRotation=true;
+			//RightHandMesh->BodyInstance.bLockRotation=true;
+			//RightHandMesh->SetConstraintMode(EDOFMode::SixDOF);
+			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CupSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
 			UE_LOG(LogTemp, Warning, TEXT("grab cup on Right"))			
@@ -649,15 +691,13 @@ void ABarPlayer::UnTryGrabLeft()
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);
 		GrabbedActorLeft->SetActorEnableCollision(true);
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		GrabbedObjectLeft->AddForce(ThrowDirection * ThrowPower * GrabbedObjectLeft->GetMass());
 		//float Angle;
 		//FVector Axis;
 		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
 		//float dt = GetWorld()->DeltaTimeSeconds;
 		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		//GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectLeft = nullptr;
 		GrabbedActorLeft=nullptr;
 		LeftHandMesh->SetVisibility(true);
@@ -672,7 +712,14 @@ void ABarPlayer::UnTryGrabLeft()
 		widgetInteractionComp->bShowDebug=false;
 		//widgetInteractionComp->bEnableHitTesting=false;
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
-		GrabbedObjectLeft->SetSimulatePhysics(true);			
+		GrabbedObjectLeft->SetSimulatePhysics(true);
+		//GrabbedObjectLeft->AddForce(ThrowDirection * ThrowPower * GrabbedObjectLeft->GetMass());
+		//float Angle;
+		//FVector Axis;
+		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		//float dt = GetWorld()->DeltaTimeSeconds;
+		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		//GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		//GrabbedActorLeft->SetActorEnableCollision(true);
 		//GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);		
 		//GrabbedActorLeft->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
@@ -687,19 +734,13 @@ void ABarPlayer::UnTryGrabLeft()
 		isGrabbingFridgeDoorLeft=false;
 		IsGrabbedLeft = false;
 		GrabbedObjectLeft->SetSimulatePhysics(true);
-		//GrabbedActorRight->SetActorEnableCollision(true);
-		//GrabbedActorRight->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
-		//GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
-
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		GrabbedObjectLeft->AddForce(ThrowDirection * ThrowPower * GrabbedObjectLeft->GetMass()*50);
 		//float Angle;
 		//FVector Axis;
 		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
 		//float dt = GetWorld()->DeltaTimeSeconds;
 		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		//GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectLeft = nullptr;
 		GrabbedActorLeft=nullptr;
 		LeftHandMesh->SetVisibility(true);
@@ -712,15 +753,13 @@ void ABarPlayer::UnTryGrabLeft()
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);
 		GrabbedActorLeft->SetActorEnableCollision(true);
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
-		//float Angle;
-		//FVector Axis;
-		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
-		//float dt = GetWorld()->DeltaTimeSeconds;
-		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectLeft->AddForce(ThrowDirection * ThrowPower * GrabbedObjectLeft->GetMass());
+		float Angle;
+		FVector Axis;
+		DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		float dt = GetWorld()->DeltaTimeSeconds;
+		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectLeft = nullptr;
 		GrabbedActorLeft=nullptr;
 		LeftHandMesh->SetVisibility(true);
@@ -735,15 +774,13 @@ void ABarPlayer::UnTryGrabLeft()
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);
 		GrabbedActorLeft->SetActorEnableCollision(true);
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
-		//float Angle;
-		//FVector Axis;
-		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
-		//float dt = GetWorld()->DeltaTimeSeconds;
-		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectLeft->AddForce(ThrowDirection * ThrowPower * GrabbedObjectLeft->GetMass());
+		float Angle;
+		FVector Axis;
+		DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		float dt = GetWorld()->DeltaTimeSeconds;
+		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectLeft = nullptr;
 		GrabbedActorLeft=nullptr;
 		LeftHandMesh->SetVisibility(true);
@@ -758,15 +795,13 @@ void ABarPlayer::UnTryGrabLeft()
 		GrabbedObjectLeft->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectLeft->SetSimulatePhysics(true);
 		GrabbedActorLeft->SetActorEnableCollision(true);
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		//GrabbedObjectLeft->AddForce(ThrowDirection * ThrowPower * GrabbedObjectLeft->GetMass());
 		//float Angle;
 		//FVector Axis;
 		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
 		//float dt = GetWorld()->DeltaTimeSeconds;
 		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		//GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectLeft = nullptr;
 		GrabbedActorLeft=nullptr;
 		LeftHandMesh->SetVisibility(true);
@@ -862,9 +897,7 @@ void ABarPlayer::UnTryGrabRight()
 		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->SetSimulatePhysics(true);
 		GrabbedActorRight->SetActorEnableCollision(true);
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
 		//float Angle;
 		//FVector Axis;
 		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
@@ -886,12 +919,10 @@ void ABarPlayer::UnTryGrabRight()
 		IsGrabbedRight = false;
 		GrabbedObjectRight->SetSimulatePhysics(true);
 		//GrabbedActorRight->SetActorEnableCollision(true);
+		
 		GrabbedActorRight->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
-
 		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
 		//float Angle;
 		//FVector Axis;
 		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
@@ -910,13 +941,7 @@ void ABarPlayer::UnTryGrabRight()
 		isGrabbingFridgeDoorRight=false;
 		IsGrabbedRight = false;
 		GrabbedObjectRight->SetSimulatePhysics(true);
-		//GrabbedActorRight->SetActorEnableCollision(true);
-		//GrabbedActorRight->K2_DetachFromActor(EDetachmentRule::KeepWorld,EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative);
-		//GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
-
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
+		GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
 		//float Angle;
 		//FVector Axis;
 		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
@@ -935,15 +960,13 @@ void ABarPlayer::UnTryGrabRight()
 		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->SetSimulatePhysics(true);
 		GrabbedActorRight->SetActorEnableCollision(true);
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
-		//float Angle;
-		//FVector Axis;
-		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
-		//float dt = GetWorld()->DeltaTimeSeconds;
-		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		float Angle;
+		FVector Axis;
+		DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		float dt = GetWorld()->DeltaTimeSeconds;
+		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectRight = nullptr;
 		GrabbedActorRight=nullptr;
 		RightHandMesh->SetVisibility(true);
@@ -958,15 +981,13 @@ void ABarPlayer::UnTryGrabRight()
 		GrabbedObjectRight->K2_DetachFromComponent(EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative);
 		GrabbedObjectRight->SetSimulatePhysics(true);
 		GrabbedActorRight->SetActorEnableCollision(true);
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
-		//float Angle;
-		//FVector Axis;
-		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
-		//float dt = GetWorld()->DeltaTimeSeconds;
-		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
+		GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
+		float Angle;
+		FVector Axis;
+		DeltaRotation.ToAxisAndAngle(Axis, Angle);
+		float dt = GetWorld()->DeltaTimeSeconds;
+		FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
+		GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectRight = nullptr;
 		GrabbedActorRight=nullptr;
 		RightHandMesh->SetVisibility(true);
@@ -982,8 +1003,6 @@ void ABarPlayer::UnTryGrabRight()
 		GrabbedObjectRight->SetSimulatePhysics(true);
 		GrabbedActorRight->SetActorEnableCollision(true);
 		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
 		//float Angle;
 		//FVector Axis;
 		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
@@ -1116,20 +1135,20 @@ void ABarPlayer::Fire()
 				// 가장 가까운 대상으로 변경하기
 				Closest = i;
 			}
-		}
-
-		// 잡기에 성공했다면
-		if (isGrabbingWithTongsRight)
-		{
-			// 물체 물리기능 비활성화
-			GrabbedObjectWithTongsRight = HitObj[Closest].GetComponent();
-			GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
-			GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
-			GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
-								
 		}		
-			FVector tongAttachLoc = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
-			FRotator tongAttachRot = huchuTong->tongRight->GetSocketRotation(FName("TongAttach"));
+		// ice cube 잡기에 성공했다면
+		if (isGrabbingWithTongsRight&&HitObj[Closest].GetComponent()->IsSimulatingPhysics() == true)
+		{
+			GrabbedActorWithTongsRight=HitObj[Closest].GetComponent()->GetAttachmentRootActor();
+			GrabbedObjectWithTongsRight = HitObj[Closest].GetComponent();
+			iceCube=Cast<AIceCube>(GrabbedActorWithTongsRight);
+			if(GrabbedActorWithTongsRight==iceCube&&iceCube!=nullptr)
+			{
+				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
+				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
+			}
+		}		
 			IsTongsMovementFinished=false;
 			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire"))
 			FLatentActionInfo LatentInfo;
@@ -1226,18 +1245,19 @@ void ABarPlayer::FireLeft()
 			}
 		}
 
-		// 잡기에 성공했다면
-		if (isGrabbingWithTongsLeft)
+		// ice cube 잡기에 성공했다면
+		if (isGrabbingWithTongsLeft&&HitObj[Closest].GetComponent()->IsSimulatingPhysics() == true)
 		{
-			// 물체 물리기능 비활성화
+			GrabbedActorWithTongsLeft=HitObj[Closest].GetComponent()->GetAttachmentRootActor();
 			GrabbedObjectWithTongsLeft = HitObj[Closest].GetComponent();
-			GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
-			GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
-			GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
-								
-		}		
-			FVector tongAttachLoc = huchuTongL->tongRight->GetSocketLocation(FName("TongAttach"));
-			FRotator tongAttachRot = huchuTongL->tongRight->GetSocketRotation(FName("TongAttach"));
+			iceCubeL=Cast<AIceCube>(GrabbedActorWithTongsLeft);
+			if(GrabbedActorWithTongsLeft==iceCubeL&&iceCubeL!=nullptr)
+			{
+				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
+			}
+		}	
 			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire Left"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
