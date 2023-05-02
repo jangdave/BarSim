@@ -34,7 +34,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				ADropBase* mixedDrop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")));
 				mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
 				mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
-				contents = contents - drop->dropMass;
+				contents = contents - mixedDrop->dropMass;
 				bStreamOn = true;
 			}
 			else
@@ -51,7 +51,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					ADropBase* mixedDrop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")));
 					mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
 					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
-					contents = contents - drop->dropMass;
+					contents = contents - mixedDrop->dropMass;
 				}
 			}
 		}

@@ -60,7 +60,6 @@ void ABottleBase::Tick(float DeltaTime)
 				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
 				drop->dropMass = 0.05f * streamWidth * DeltaTime;
 				drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
-				//UE_LOG(LogTemp, Warning, TEXT("%f, %f, %f"), pourer->GetSocketRotation(FName("Pourer")).Vector().X, pourer->GetSocketRotation(FName("Pourer")).Vector().Y, pourer->GetSocketRotation(FName("Pourer")).Vector().Z);
 				remains = remains - drop->dropMass;
 				bStreamOn = true;
 			}
@@ -76,11 +75,12 @@ void ABottleBase::Tick(float DeltaTime)
 					waterStream->SetRelativeRotation(pourer->GetSocketRotation(FName("Pourer")));
 					//물방울 액터 스폰
 					ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
-					drop->dropMass = 0.05f * streamWidth * DeltaTime;
-					drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
-					//UE_LOG(LogTemp, Warning, TEXT("%f, %f, %f"), pourer->GetSocketRotation(FName("Pourer")).Vector().X, pourer->GetSocketRotation(FName("Pourer")).Vector().Y, pourer->GetSocketRotation(FName("Pourer")).Vector().Z);
-					remains = remains - drop->dropMass;
-					//UE_LOG(LogTemp, Warning, TEXT("%f"), remains);
+					if(drop)
+					{
+						drop->dropMass = 0.05f * streamWidth * DeltaTime;
+						drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);	
+						remains = remains - drop->dropMass;
+					}
 				}
 			}
 		}

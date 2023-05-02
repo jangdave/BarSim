@@ -10,17 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquid.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquid.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquid_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquid_Inst.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Cup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Cup.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/BottleOpener/Metallic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/BottleOpener/Metallic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRTemplate/Maps/VRTemplateMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRTemplate/Maps/VRTemplateMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarSpoon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarSpoon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/DropBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/DropBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BottleBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BottleBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,9 +39,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
@@ -243,6 +233,7 @@
       <workItem from="1682662717539" duration="1565000" />
       <workItem from="1682925200741" duration="6354000" />
       <workItem from="1682934171302" duration="15007000" />
+      <workItem from="1682990107588" duration="487000" />
     </task>
     <servers />
   </component>
