@@ -194,14 +194,24 @@ void ABarPlayer::Tick(float DeltaTime)
 	// Cup이 nullptr이 아니면서, 오른손에 Cup을 쥐고 있다면
 	if(isGrabbingCupRight&&cup!=nullptr)
 	{
-		// 컵을 쥔 순간의 Rotation 값을 유지한다.
-		RightHand->SetRelativeRotation(initHandRot);
+		// cup의 contents가 0보다 크다면
+		if(cup->contents>0)
+		{
+			// 컵을 쥔 순간의 Rotation 값을 유지한다.
+			RightHand->SetRelativeRotation(initHandRot);
+		}
+	
 	}
 	// Cup이 nullptr이 아니면서, 왼손에 Cup을 쥐고 있다면
 	if(isGrabbingCupLeft&&cupL!=nullptr)
 	{
-		// 컵을 쥔 순간의 Rotation 값을 유지한다.
-		LeftHand->SetRelativeRotation(initHandRotL);
+		//cup 의 contents가 0보다 크다면,
+		if(cupL->contents>0)
+		{
+			// 컵을 쥔 순간의 Rotation 값을 유지한다.
+			LeftHand->SetRelativeRotation(initHandRotL);
+		}
+
 	}
 }
 
