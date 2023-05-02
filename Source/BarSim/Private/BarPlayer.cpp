@@ -849,30 +849,6 @@ void ABarPlayer::UnTryGrabLeft()
 	{
 		// 잡지않은 상태로 전환
 		IsGrabbedLeft = false;
-		//isGrabbingBottleLeft = false;
-		//isGrabbingTabletLeft = false;
-		//isGrabbingTongsLeft = false;
-		//GrabbedObjectLeft = nullptr;
-		//GrabbedActorLeft = nullptr;
-		// 2. 손에서 떼어내기
-		//GrabbedObjectLeft->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-		// 3. 물리기능 활성화
-		//GrabbedObjectLeft->SetSimulatePhysics(true);
-		// 4. 충돌기능 활성화
-		//GrabbedObjectLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		// 던지기
-		//GrabbedObjectLeft->AddForce(ThrowDirectionLeft * ThrowPower * GrabbedObjectLeft->GetMass());
-
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
-		//float Angle;
-		//FVector Axis;
-		//DeltaRotationLeft.ToAxisAndAngle(Axis, Angle);
-		//float dt = GetWorld()->DeltaTimeSeconds;
-		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectLeft->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
-		//isGrabbingTabletLeft = false;
-
 	}
 	
 }
@@ -1074,32 +1050,8 @@ void ABarPlayer::UnTryGrabRight()
 	// 쥐고 있는 대상이 설정 대상 이외의 것이라면
 	else
 	{
-		// 1. 잡지않은 상태로 전환
-		IsGrabbedRight = false;
-		//isGrabbingBottleRight = false;
-		//isGrabbingTabletRight = false;
-		//isGrabbingTongsRight = false;
-		//GrabbedObjectRight = nullptr;
-		//GrabbedActorRight = nullptr;
-		// 2. 손에서 떼어내기
-		//GrabbedObjectRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-		// 3. 물리기능 활성화
-		//GrabbedObjectRight->SetSimulatePhysics(true);
-		// 4. 충돌기능 활성화
-		//GrabbedObjectRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		// 던지기
-		//GrabbedObjectRight->AddForce(ThrowDirection * ThrowPower * GrabbedObjectRight->GetMass());
-
-		// 회전 시키기
-		// 각속도 = (1 / dt) * dTheta(특정 축 기준 변위 각도 Axis, angle)
-		//float Angle;
-		//FVector Axis;
-		//DeltaRotation.ToAxisAndAngle(Axis, Angle);
-		//float dt = GetWorld()->DeltaTimeSeconds;
-		//FVector AngularVelocity = (1.0f / dt) * Angle * Axis;
-		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
-		//isGrabbingTabletRight = false;
-		
+		// 잡지않은 상태로 전환
+		IsGrabbedRight = false;		
 	}
 }
 
