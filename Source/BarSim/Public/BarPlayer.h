@@ -169,7 +169,10 @@ public:
 	class AIceCube* iceCube;
 	UPROPERTY()
 	class AIceCube* iceCubeL;
-	
+	UPROPERTY()
+	class ABarSpoon* barSpoon;
+	UPROPERTY()
+	class ABarSpoon* barSpoonL;
 	
 	
 	
@@ -196,6 +199,8 @@ public:
 	bool isGrabbingCoasterLeft = false;
 	bool isGrabbingCupLeft = false;
 	bool isGrabbingCupRight = false;
+	bool isGrabbingBarSpoonLeft=false;
+	bool isGrabbingBarSpoonRight=false;
 	
 
 
