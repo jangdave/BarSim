@@ -34,10 +34,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Bottle")
 	class UNiagaraSystem* streamFX;
-
-	UPROPERTY(EditAnywhere, Category = "Bottle")
-	class UNiagaraComponent* stream;
-
+	
 	UPROPERTY(VisibleAnywhere, Category = "Bottle")
 	class UNiagaraComponent* waterStream;
 
