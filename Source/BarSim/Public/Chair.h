@@ -70,4 +70,7 @@ public:
 
 	UFUNCTION()
 	void ViewScore(int32 procedureScore, int32 ratioScore, int32 amountScore);
+
+	UFUNCTION()
+	void HideScore();
 };

@@ -57,6 +57,10 @@
 		{
 			"Name": "HairStrands",
 			"Enabled": true
+		},
+		{
+			"Name": "WebBrowserWidget",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [

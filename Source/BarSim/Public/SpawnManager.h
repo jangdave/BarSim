@@ -55,4 +55,7 @@ public:
 	void CheckArray();
 
 	void CheckChairSit();
+
+	UFUNCTION()
+	void SpawnCustomer();
 };
