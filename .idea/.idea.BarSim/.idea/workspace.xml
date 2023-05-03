@@ -9,10 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/Mannequin_Hand_Right_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/Mannequin_Hand_Right_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarPlayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/ABP_MannequinsRealisticXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/ABP_MannequinsRealisticXR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/A_MannequinsXR_Grasp_Right1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/A_MannequinsXR_Grasp_Right1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/A_MannequinsXR_Point_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/A_MannequinsXR_Point_Right.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
