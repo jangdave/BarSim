@@ -59,7 +59,7 @@ ABarPlayer::ABarPlayer()
 	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
 	widgetInteractionComp->SetupAttachment(RightAim);
 
-	ConstructorHelpers::FObjectFinder<USkeletalMesh> TempMesh(TEXT("/Script/Engine.SkeletalMesh'/Game/Characters/MannequinsXR/Meshes/SKM_QuinnXR_left.SKM_QuinnXR_left'"));
+	ConstructorHelpers::FObjectFinder<USkeletalMesh> TempMesh(TEXT("/Script/Engine.SkeletalMesh'/Game/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/realistic_hand_l_ue4.realistic_hand_l_ue4'"));
 	if (TempMesh.Succeeded())
 	{
 		LeftHandMesh->SetSkeletalMesh(TempMesh.Object);
@@ -67,7 +67,7 @@ ABarPlayer::ABarPlayer()
 		LeftHandMesh->SetRelativeRotation(FRotator(-25, -180, 90));
 	}
 
-	ConstructorHelpers::FObjectFinder<USkeletalMesh> TempMesh2(TEXT("/Script/Engine.SkeletalMesh'/Game/Characters/MannequinsXR/Meshes/SKM_QuinnXR_right.SKM_QuinnXR_right'"));
+	ConstructorHelpers::FObjectFinder<USkeletalMesh> TempMesh2(TEXT("/Script/Engine.SkeletalMesh'/Game/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/realistic_hand_r_ue4.realistic_hand_r_ue4'"));
 	if (TempMesh2.Succeeded())
 	{
 		RightHandMesh->SetSkeletalMesh(TempMesh2.Object);
