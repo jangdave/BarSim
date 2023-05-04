@@ -90,4 +90,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Cup")
 	float stirRate;
+
+	UPROPERTY(VisibleAnywhere, Category ="Cup")
+	float allInside;
 };

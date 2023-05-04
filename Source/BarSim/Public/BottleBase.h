@@ -36,7 +36,7 @@ public:
 	class UNiagaraSystem* streamFX;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Bottle")
-	class UNiagaraComponent* waterStream;
+	class UNiagaraComponent* waterStream;	
 
 	bool bStreamOn = false;
 

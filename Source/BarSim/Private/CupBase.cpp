@@ -68,7 +68,7 @@ void ACupBase::Tick(float DeltaTime)
 			{
 				//GinArray.Add(i);
 				ginInside = ginInside + ContentsArray[i];
-			}
+			}	
 		}
 		//UE_LOG(LogTemp, Warning, TEXT("%f"), ginInside);
 
@@ -83,9 +83,9 @@ void ACupBase::Tick(float DeltaTime)
 		}
 		//UE_LOG(LogTemp, Warning, TEXT("%f"), limeInside)
 
-		float all = ginInside + limeInside;
+		allInside = ginInside + limeInside;
 		
-		liquorComp->SetScalarParameterValueOnMaterials(FName("Lime"), limeInside / all);
+		liquorComp->SetScalarParameterValueOnMaterials(FName("Lime"), limeInside / allInside);
 	}
 
 }
