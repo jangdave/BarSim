@@ -21,15 +21,16 @@ void ASpawnManager::BeginPlay()
 	Super::BeginPlay();
 
 	CheckChairSit();
-	
+
+	FTimerHandle check;
+	GetWorldTimerManager().SetTimer(check, this, &ASpawnManager::CheckArray, 0.1, true);
 }
 
 // Called every frame
 void ASpawnManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	CheckArray();
+	
 }
 
 void ASpawnManager::SpawnCustom()

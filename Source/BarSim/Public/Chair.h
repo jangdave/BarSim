@@ -34,6 +34,9 @@ public:
 
 	UPROPERTY()
 	class UCoctailScoreWidget* score_UI;
+
+	UPROPERTY(EditAnywhere, Category=ChairSetting)
+	class USceneComponent* sitComp;
 	
 	UPROPERTY(EditAnywhere)
 	bool bCheck;

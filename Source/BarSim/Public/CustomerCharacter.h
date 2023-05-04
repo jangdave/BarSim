@@ -46,7 +46,7 @@ public:
 	// 스폰시 메쉬 설정 함수
 	void SetMesh();
 
-	int32 checkMeshCount;
+	int32 checkMeshCount = 3;
 	
 	int32 SetRandRange(int32 idxStart, int32 idxEnd);
 

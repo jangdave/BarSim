@@ -31,7 +31,7 @@ void AOldPalCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//oldPalAnim = Cast<UOldPalAnimInstance>(GetMesh()->GetAnimInstance());
+	oldPalAnim = Cast<UOldPalAnimInstance>(GetMesh()->GetAnimInstance());
 }
 
 // Called every frame

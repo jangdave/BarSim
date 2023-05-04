@@ -23,6 +23,9 @@ AChair::AChair()
 	meshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("meshComp"));
 	meshComp->SetupAttachment(boxComp);
 
+	sitComp = CreateDefaultSubobject<USceneComponent>(TEXT("sitComp"));
+	sitComp->SetupAttachment(meshComp);
+	
 	coctailBoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("coctailBoxComp"));
 	coctailBoxComp->SetupAttachment(boxComp);
 

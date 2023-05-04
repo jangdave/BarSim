@@ -43,9 +43,11 @@ public:
 	
 	float amountOfCampari;
 
+	int32 orderScore = 40;
+	
 	int32 procedureScore = 20;
 
-	int32 ratioScore = 70;
+	int32 ratioScore = 30;
 
 	int32 amountScore = 10;
 

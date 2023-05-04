@@ -17,14 +17,12 @@ class BARSIM_API UCustomerOrderWidget : public UUserWidget
 public:
 	virtual void NativeConstruct() override;
 
-	void GetImage();
-	
 	UFUNCTION()
 	void SetImage(UTexture2D* setTexture);
 
 	UPROPERTY(VisibleAnywhere, meta=(BindWidget))
 	class UImage* image_Order;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UTexture2D*> orderImage;
 };

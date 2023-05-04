@@ -11,6 +11,7 @@ enum class ECustomerState : uint8
 {
 	IDLE,
 	MOVE,
+	READYSIT,
 	SIT,
 	LEAVE,
 };
@@ -23,10 +24,19 @@ enum class ECustomerSitState : uint8
 	ORDER,
 	WAIT,
 	WAITLONG,
+	HOLDCUP,
 	DRINK,
 	JUDGEMENT,
 	ANGRY,
 	AWESOME,
+};
+
+UENUM(BlueprintType)
+enum class ECustomerDrinkState : uint8
+{
+	IDLE,
+	DRINK,
+	UNHOLDCUP,
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -51,6 +61,9 @@ public:
 
 	// 손님 착석 상태
 	ECustomerSitState sitState;
+
+	// 손님 마시기 상태
+	ECustomerDrinkState drinkState;
 	
 	UPROPERTY()
 	class ACustomerCharacter* owner;
@@ -71,29 +84,43 @@ public:
 
 	bool bCheckPlayAnim;
 
-	bool bCheckEndAnim;
-
 	class AAIController* ai;
 
+	// 상태 전환 함수
 	UFUNCTION()
 	void SetState(ECustomerState next);
 
 	UFUNCTION()
 	void SetSitState(ECustomerSitState next);
 
-	void LookPlayer();
+	UFUNCTION()
+	void SetDrinkState(ECustomerDrinkState next);
+	
+	void VisibleOrder();
 
-	void LookOrder();
+	// 손님 의자에 붙이고 떨어트리기
+	UFUNCTION()
+	void AttachCustomer();
+
+	UFUNCTION()
+	void DetachCustomer();
+
+	// 랜덤 함수
+	int32 SetRandRange(int32 idxStart, int32 idxEnd);
 	
 private:
+	// 기본 상태 함수
 	void TickIdle();
 
 	void TickMove();
+
+	void TickReadySit();
 
 	void TickSit();
 
 	void TickLeave();
 
+	// sit 상태 함수
 	void TickStandby();
 
 	void TickStandbyWaitLong();
@@ -104,6 +131,8 @@ private:
 
 	void TickWaitLong();
 	
+	void TickHoldCup();
+	
 	void TickDrink();
 
 	void TickJudgement();
@@ -111,5 +140,12 @@ private:
 	void TickAngry();
 
 	void TickAwesome();
+
+	// drink 상태 함수
+	void TickIdleCup();
+	
+	void TickDrinkCup();
+
+	void TickUnHoldCup();
 		
 };
