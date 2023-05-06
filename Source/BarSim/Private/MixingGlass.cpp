@@ -13,18 +13,26 @@ void AMixingGlass::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	float dot = FVector::DotProduct(GetActorUpVector(), upVector);
+	float dot = FVector::DotProduct(GetActorForwardVector(), upVector);
+	float dot2 = FVector::DotProduct(GetActorForwardVector(), FVector(-1,0,0));
+	
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
+	float angle2 = FMath::RadiansToDegrees(FMath::Acos(dot2));
+	
+	UE_LOG(LogTemp, Warning, TEXT("angle is %f"), angle);
+	UE_LOG(LogTemp, Warning, TEXT("angle2 is %f"), angle2);
+
+	
 	float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), angle);
 
 	if(contents > 0)
 	{
 		//기울어진 각도가 90도 이상이라면
-		if(angle > (1.1 - contents / cupSize) * 100)
+		if(180 - angle2 > (1.1 - contents / cupSize) * 100 && angle <= 90)
 		{
 			//물줄기 없을때에만 한 번 스폰 시키기
-	//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);
+			//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);
 			if(!bStreamOn)
 			{
 				//UE_LOG(LogTemp, Warning, TEXT("streamOn"));
@@ -37,8 +45,8 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
 				
 				// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
-				mixedDrop->OrderArray.Empty();
-				mixedDrop->OrderArray = OrderArray;
+				mixedDrop->NameArray.Empty();
+				mixedDrop->NameArray = NameArray;
 				mixedDrop->ContentsArray.Empty();
 				mixedDrop->ContentsArray = ContentsArray;
 
@@ -46,13 +54,13 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				{
 					float mixedPercent = mixedDrop->dropMass / contents;
 					mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-					UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
+					//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
 				}
 
 				mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
 
 				contents = contents - mixedDrop->dropMass;
-				
+				mixedDrop->bMixed = bMixed;
 				bStreamOn = true;
 			}
 			else
@@ -71,8 +79,8 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
 
 					// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
-					mixedDrop->OrderArray.Empty();
-					mixedDrop->OrderArray = OrderArray;
+					mixedDrop->NameArray.Empty();
+					mixedDrop->NameArray = NameArray;
 					mixedDrop->ContentsArray.Empty();
 					mixedDrop->ContentsArray = ContentsArray;
 
@@ -80,11 +88,10 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					{
 						float mixedPercent = mixedDrop->dropMass / contents;
 						mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-						UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
+						//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
 					}
-
-					
 					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
+					mixedDrop->bMixed = bMixed;
 					contents = contents - mixedDrop->dropMass;
 				}
 			}

@@ -16,8 +16,11 @@ class BARSIM_API AMixedDrop : public ADropBase
 	
 public:
 	UPROPERTY(VisibleAnywhere, Category = "MixedDrop")
-	TArray<FString> OrderArray;
+	TArray<FString> NameArray;
 
 	UPROPERTY(VisibleAnywhere, Category = "MixedDrop")
 	TArray<float> ContentsArray;
+
+	UPROPERTY(VisibleAnywhere, Category = "MixedDrop")
+	bool bMixed;
 };

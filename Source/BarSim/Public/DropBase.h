@@ -31,4 +31,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "Drop")
 	FString name;
+
+	UFUNCTION()
+	void DropDestroy();
 };

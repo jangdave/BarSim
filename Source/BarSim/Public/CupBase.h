@@ -46,6 +46,9 @@ public:
 	class ADropBase* drop;
 
 	UPROPERTY(EditAnywhere, Category = "Cup")
+	class AMixedDrop* mixedDropOverlapped;
+
+	UPROPERTY(EditAnywhere, Category = "Cup")
 	float cupSizeOrigin = 8.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Cup")
@@ -58,28 +61,27 @@ public:
 	int overlappedNum;
 
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
-	TArray<FString> OrderArray;
+	TArray<FString> NameArray;
 
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	TArray<float> ContentsArray;
 
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
-	TArray<int> GinArray;
+	TArray<bool> MixArray;
 
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	float ginInside;
-
-	UPROPERTY(VisibleAnywhere, Category = "Cup")
-	TArray<int> LimeArray;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	float limeInside;
 
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	int iceCount = 0;
-	
+
+	UPROPERTY(EditAnywhere, Category = "Cup")
 	class AIceCube* ice;
 
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	float insideContents;
 
 	UFUNCTION()
@@ -91,6 +93,19 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Cup")
 	float stirRate;
 
+	//스터해야하는 횟수, 에디터 수정 가능
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cup")
+	float stirNeeded;
+	
 	UPROPERTY(VisibleAnywhere, Category ="Cup")
 	float allInside;
+
+	UPROPERTY(EditAnywhere, Category = "Cup")
+	bool bMixed;
+
+	UPROPERTY(EditAnywhere, Category = "Cup")
+	bool bMixedLater;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Cup")
+	float timePassed;
 };

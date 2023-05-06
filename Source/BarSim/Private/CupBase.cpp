@@ -6,6 +6,7 @@
 #include "DropBase.h"
 #include "IceCube.h"
 #include "LimeDrop.h"
+#include "MixedDrop.h"
 #include "VorbisAudioInfo.h"
 #include "Components/BoxComponent.h"
 #include "Materials/MaterialParameterCollection.h"
@@ -56,36 +57,66 @@ void ACupBase::Tick(float DeltaTime)
 
 	//전체 부피 중 특정 액체가 차지하는 비율만큼 머테리얼 섞기
 	//오더 어레이와 컨텐츠 어레이가 있을때만
-	if(OrderArray.Num() != 0 && ContentsArray.Num() != 0)
+	if(NameArray.Num() != 0 && ContentsArray.Num() != 0)
 	{
 		// 내용물 초기화
 		ginInside = 0;
 		limeInside = 0;
 		//오더 어레이 중 Gin 이라는 값을 가진 배열 원소의 순서를 구함
-		for(int i = 0; i < OrderArray.Num(); i++)
+		for(int i = 0; i < NameArray.Num(); i++)
 		{
-			if(OrderArray[i] == FString("Gin"))
+			if(NameArray[i] == FString("Gin"))
 			{
-				//GinArray.Add(i);
 				ginInside = ginInside + ContentsArray[i];
 			}	
 		}
-		//UE_LOG(LogTemp, Warning, TEXT("%f"), ginInside);
 
 		//오더 어레이 중 Lime 이라는 값을 가진 배열 원소의 순서를 구함
-		for(int i = 0; i < OrderArray.Num(); i++)
+		for(int i = 0; i < NameArray.Num(); i++)
 		{
-			if(OrderArray[i] == FString("Lime"))
+			if(NameArray[i] == FString("Lime"))
 			{
-				//GinArray.Add(i);
 				limeInside = limeInside + ContentsArray[i];
 			}
 		}
-		//UE_LOG(LogTemp, Warning, TEXT("%f"), limeInside)
 
 		allInside = ginInside + limeInside;
-		
 		liquorComp->SetScalarParameterValueOnMaterials(FName("Lime"), limeInside / allInside);
+	}
+
+	//timePassed에 시간 누적
+	timePassed += DeltaTime;
+
+	//마지막으로 스터포인트 지나고 5초 지나면 stirRate 초기화
+	
+	//충분히 저어진 상태면
+	if(stirRate >= stirNeeded)
+	{
+		if(!MixArray.IsEmpty())
+		{
+			for(int i = 0; i < MixArray.Num(); i++)
+			{
+				MixArray[i] = true;
+			}
+		}
+		else
+		{
+			MixArray.Add(true);
+		}
+		bMixedLater = true;
+	}
+	
+	//MixArray에 false값인 원소가 하나라도 있거나 비어 있으면
+	if(MixArray.Find(false) != INDEX_NONE || MixArray.Num() == 0)
+	{
+		//안 섞인거
+		bMixed = false;
+	}
+	//MixArray에 false 값인 원소가 하나도 없고 MixArray가 비어있지 않다면
+	else
+	{
+		//섞인거
+		bMixed = true;
 	}
 
 }
@@ -93,40 +124,77 @@ void ACupBase::Tick(float DeltaTime)
 void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	drop = Cast<ADropBase>(OtherActor);
-
-	if(drop)
+	mixedDropOverlapped = Cast<AMixedDrop>(OtherActor);
+	// 섞인 방울이 컵에 담기면
+	if(mixedDropOverlapped)
 	{
 		overlappedNum ++;
-		//들어온 방울 액터가 가진 이름을 OrderArrary에, 유량을 ContentsArray에 저장한다.
-		//OrderArray 배열의 마지막 원소와 현재 닿은 물방울의 이름이 같다면
-		if(!OrderArray.IsEmpty())
+		//방울에 NameArray가 있다면
+		if(!mixedDropOverlapped->NameArray.IsEmpty())
 		{
-			if(OrderArray[OrderArray.Num()-1] == drop->name)
+			for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
 			{
-				//들어온 방울 액터의 이름이 마지막 배열 원소의 이름과 같다면 그 배열에 ContentsArray에 더한다.
-				ContentsArray[ContentsArray.Num()-1] += drop->dropMass;
+				//컵의 NameArray에 같은 이름을 가진 원소가 있다면
+				if(NameArray.Find(mixedDropOverlapped->NameArray[i]) != INDEX_NONE)
+				{
+					//해당 원소의 순서의 ContentsArray이 가진 기존 배열값에 새 방울이 가진 ContentsArray 값을 더해줌
+					ContentsArray[NameArray.Find(mixedDropOverlapped->NameArray[i])] = ContentsArray[NameArray.Find(mixedDropOverlapped->NameArray[i])] + mixedDropOverlapped->ContentsArray[i];
+				}
+				//컵의 NameArray에 같은 이름이 없다면
+				else
+				{
+					//새로 추가
+					NameArray.Emplace(mixedDropOverlapped->NameArray[i]);
+					ContentsArray.Add(mixedDropOverlapped->ContentsArray[i]);
+				}
+			}
+			MixArray.Add(mixedDropOverlapped->bMixed);
+			contents = contents + mixedDropOverlapped->dropMass;
+			insideContents = FMath::Clamp(contents, 0, cupSize);
+			liquorComp->SetVisibility(true);
+			LiquorScale();
+			mixedDropOverlapped->Destroy();
+		}
+	}
+	else
+	{
+		drop = Cast<ADropBase>(OtherActor);
+		if(drop)
+		{
+			overlappedNum ++;
+			//들어온 방울 액터가 가진 이름을 NameArrary에, 유량을 ContentsArray에 저장한다.
+			if(!NameArray.IsEmpty())
+			{
+				//NameArray에 이미 저장된 이름이라면
+				if(NameArray.Find(drop->name) != INDEX_NONE)
+				{
+					//해당 배열 순서의 ContentsArray에 기존값에 새로 오버랩된 방울 액터의 dropMass 값을 더해서 넣어주고
+					ContentsArray[NameArray.Find(drop->name)] = ContentsArray[NameArray.Find(drop->name)] + drop->dropMass;
+				}
+				//NameArray에 저장되어 있지 않은 이름이라면 
+				else
+				{
+					//새로운 NameArray와 ContentsArray에 넣는다.
+					NameArray.Emplace(drop->name);
+					ContentsArray.Add(drop->dropMass);
+				}
 			}
 			else
-			{
-				//들어온 방울 액터의 이름이 마지막 배열 원소의 이름과 다르다면 다음 원소로 orderArray와 ContentsArray를 넣는다.
-				OrderArray.Emplace(drop->name);
+				//배열이 비어있을 경우 값 하나 일단 넣기
+				{
+				NameArray.Emplace(drop->name);
 				ContentsArray.Add(drop->dropMass);
-			}
+				}
+			contents = contents + drop->dropMass;
+			insideContents = FMath::Clamp(contents, 0, cupSize);
+			liquorComp->SetVisibility(true);
+			LiquorScale();
+			MixArray.Add(false);
+			drop->Destroy();
+			
 		}
-		else
-			//배열이 비어있을 경우 값 하나 일단 넣기
-		{
-			OrderArray.Emplace(drop->name);
-			ContentsArray.Add(drop->dropMass);
-		}
-		contents = contents + drop->dropMass;
-		insideContents = FMath::Clamp(contents, 0, cupSize);
-		liquorComp->SetVisibility(true);
-		LiquorScale();
-		//UE_LOG(LogTemp, Warning, TEXT("%f"), insideContents);
-		drop->Destroy();
 	}
+	
 }
 
 void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,

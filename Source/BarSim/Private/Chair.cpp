@@ -66,7 +66,7 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 
 		auto gm = Cast<ABarGameModeBase>(GetWorld()->GetAuthGameMode());
 
-		gm->GetCup(coctail->OrderArray, coctail->ContentsArray);
+		gm->GetCup(coctail->NameArray, coctail->ContentsArray);
 	}
 	if(coaster != nullptr)
 	{

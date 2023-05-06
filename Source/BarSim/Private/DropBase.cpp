@@ -24,15 +24,17 @@ void ADropBase::BeginPlay()
 	Super::BeginPlay();
 
 	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
-	{
-		Destroy();
-	}), 5.0f, false);
+	GetWorldTimerManager().SetTimer(timer, this, &ADropBase::DropDestroy, 5.0f, false);
 }
 
 // Called every frame
 void ADropBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void ADropBase::DropDestroy()
+{
+	Destroy();
 }
 
