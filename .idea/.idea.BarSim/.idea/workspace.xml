@@ -9,10 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/ABP_MannequinsRealisticXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/ABP_MannequinsRealisticXR.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/A_MannequinsXR_Grasp_Right1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/A_MannequinsXR_Grasp_Right1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/A_MannequinsXR_Point_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/A_MannequinsXR_Point_Right.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,9 +42,9 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src&quot;
+      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\USER\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
 }</component>
@@ -244,6 +243,8 @@
       <workItem from="1682991758134" duration="5792000" />
       <workItem from="1683016355486" duration="1721000" />
       <workItem from="1683098358919" duration="2558000" />
+      <workItem from="1683118231273" duration="756000" />
+      <workItem from="1683426957376" duration="669000" />
     </task>
     <servers />
   </component>
