@@ -9,7 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/realistic_hand_r_ue4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/realistic_hand_r_ue4.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/ABP_MannequinsRealisticXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/ABP_MannequinsRealisticXR.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +244,7 @@
       <workItem from="1683118231273" duration="756000" />
       <workItem from="1683426957376" duration="2433000" />
       <workItem from="1683441449868" duration="1172000" />
-      <workItem from="1683449468060" duration="4056000" />
+      <workItem from="1683449468060" duration="4895000" />
     </task>
     <servers />
   </component>
