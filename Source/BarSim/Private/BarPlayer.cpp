@@ -343,7 +343,7 @@ void ABarPlayer::TryGrabLeft()
 	params.AddIgnoredComponent(RightHandMesh);	
 	params.AddIgnoredComponent(LeftHand);
 	params.AddIgnoredComponent(LeftHandMesh);
-	DrawDebugSphere(GetWorld(), Center, GrabRange, 30, FColor::Red, false, 0.3, 0, 0.1);
+	//DrawDebugSphere(GetWorld(), Center, GrabRange, 30, FColor::Red, false, 0.3, 0, 0.1);
 	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(GrabRange), params);
 	if (bHit == false)
 	{
@@ -505,7 +505,7 @@ void ABarPlayer::TryGrabRight()
 	params.AddIgnoredComponent(RightHandMesh);	
 	params.AddIgnoredComponent(LeftHand);
 	params.AddIgnoredComponent(LeftHandMesh);
-	DrawDebugSphere(GetWorld(), Center, GrabRange, 30, FColor::Red, false, 0.3, 0, 0.1);
+	//DrawDebugSphere(GetWorld(), Center, GrabRange, 30, FColor::Red, false, 0.3, 0, 0.1);
 	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(GrabRange), params);
 	if (bHit == false)
 	{
@@ -1112,7 +1112,7 @@ void ABarPlayer::Fire()
 		FCollisionQueryParams params;
 		params.AddIgnoredActor(this);
 		params.AddIgnoredActor(huchuTong);
-		DrawDebugSphere(GetWorld(), Center, TongsGrabRange, 30, FColor::Red, false, 2.0, 0, 0.1);
+		//DrawDebugSphere(GetWorld(), Center, TongsGrabRange, 30, FColor::Red, false, 2.0, 0, 0.1);
 		bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(TongsGrabRange), params);
 		if (bHit == false)
 		{
@@ -1178,7 +1178,7 @@ void ABarPlayer::Fire()
 			// Tongs 양쪽에서 LineTrace롤 통해 Grab할 대상의 크기를 측정한다.
 			bool bHitR = GetWorld()->LineTraceSingleByChannel(rightTrace,tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, ECC_Visibility,params1);
 			bool bHitL = GetWorld()->LineTraceSingleByChannel(leftTrace,tongLoc+tongRightVector*-25.0f, tongLoc+tongRightVector*25.0f, ECC_Visibility,params1);
-			DrawDebugLine(GetWorld(), tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, FColor::Red, false, 2.0f, 0, 0.5);
+			//DrawDebugLine(GetWorld(), tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, FColor::Red, false, 2.0f, 0, 0.5);
 			// LineTrace가 양쪽 모두 적중했다면
 			if(bHitL&&bHitR)
 			{
@@ -1220,7 +1220,7 @@ void ABarPlayer::FireLeft()
 		FCollisionQueryParams params;
 		params.AddIgnoredActor(this);
 		params.AddIgnoredActor(huchuTongL);
-		DrawDebugSphere(GetWorld(), Center, TongsGrabRange, 30, FColor::Red, false, 2.0, 0, 0.1);
+		//DrawDebugSphere(GetWorld(), Center, TongsGrabRange, 30, FColor::Red, false, 2.0, 0, 0.1);
 		bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(TongsGrabRange), params);
 		if (bHit == false)
 		{
@@ -1283,7 +1283,7 @@ void ABarPlayer::FireLeft()
 			// Tongs 양쪽에서 LineTrace롤 통해 Grab할 대상의 크기를 측정한다.
 			bool bHitR = GetWorld()->LineTraceSingleByChannel(rightTrace,tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, ECC_Visibility,params1);
 			bool bHitL = GetWorld()->LineTraceSingleByChannel(leftTrace,tongLoc+tongRightVector*-25.0f, tongLoc+tongRightVector*25.0f, ECC_Visibility,params1);
-			DrawDebugLine(GetWorld(), tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, FColor::Red, false, 2.0f, 0, 0.5);
+			//DrawDebugLine(GetWorld(), tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, FColor::Red, false, 2.0f, 0, 0.5);
 			// LineTrace가 양쪽 모두 적중했다면
 			if(bHitL&&bHitR)
 			{
