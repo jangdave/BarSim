@@ -14,9 +14,12 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "HuchuTong.h"
+#include "GripMotionControllerComponent.h"
 #include "IceCube.h"
 #include "Opener.h"
 #include "Tablet.h"
+#include "VRBaseCharacter.h"
+#include "XRMotionControllerBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -55,6 +58,29 @@ ABarPlayer::ABarPlayer()
 	RightAim->SetupAttachment(RootComponent);
 	RightAim->SetTrackingMotionSource(FName("RightAim"));
 
+	LeftMotionController = CreateDefaultSubobject<UGripMotionControllerComponent>(TEXT("LeftGripMotionController"));
+	if (IsValid(LeftMotionController))
+	{
+		LeftMotionController->SetupAttachment(LeftHand);
+		//LeftMotionController->MotionSource = FXRMotionControllerBase::LeftHandSourceId;
+		LeftMotionController->SetTrackingMotionSource(FXRMotionControllerBase::LeftHandSourceId);
+		//LeftMotionController->Hand = EControllerHand::Left;
+		LeftMotionController->bOffsetByHMD = false;
+		//LeftMotionController->bUpdateInCharacterMovement = true;
+		// Keep the controllers ticking after movement
+	}
+
+	RightMotionController = CreateDefaultSubobject<UGripMotionControllerComponent>(TEXT("RightGripMotionController"));
+	if (IsValid(RightMotionController))
+	{
+		RightMotionController->SetupAttachment(RightHand);
+		//RightMotionController->MotionSource = FXRMotionControllerBase::RightHandSourceId;
+		RightMotionController->SetTrackingMotionSource(FXRMotionControllerBase::RightHandSourceId);
+		//RightMotionController->Hand = EControllerHand::Right;
+		RightMotionController->bOffsetByHMD = false;
+		//RightMotionController->bUpdateInCharacterMovement = true;
+		// Keep the controllers ticking after movement
+	}
 	
 	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
 	widgetInteractionComp->SetupAttachment(RightAim);

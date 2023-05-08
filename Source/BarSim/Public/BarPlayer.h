@@ -97,6 +97,12 @@ public:
 	//class USphereComponent* tabletIndexComp;
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionComp;
+
+	UPROPERTY(Category = VRBaseCharacter, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UGripMotionControllerComponent> LeftMotionController;
+
+	UPROPERTY(Category = VRBaseCharacter, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UGripMotionControllerComponent> RightMotionController;
 	
 protected:
 	// Called when the game starts or when spawned
