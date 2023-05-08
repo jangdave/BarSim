@@ -91,6 +91,9 @@ public:
 
 	class AAIController* ai;
 
+	// 주문 칵테일 정하기
+	void SetOrderCoctail();
+	
 	// 상태 전환 함수
 	UFUNCTION()
 	void SetState(ECustomerState next);
@@ -101,13 +104,14 @@ public:
 	UFUNCTION()
 	void SetDrinkState(ECustomerDrinkState next);
 
-	// 오더내역 보이는 함수
+	// 주문내역 보이는 함수
 	void VisibleOrder();
 
-	// 손님 의자에 붙이고 떨어트리기
+	// 손님 의자에 붙이기
 	UFUNCTION()
 	void AttachCustomer();
 
+	// 손님 의자에서 떨어트리기
 	UFUNCTION()
 	void DetachCustomer();
 

@@ -2,14 +2,17 @@
 
 
 #include "Chair.h"
-#include "BarGameModeBase.h"
 #include "BarPlayer.h"
 #include "Coaster.h"
 #include "CoctailScoreWidget.h"
 #include "CupBase.h"
+#include "CustomerCharacter.h"
+#include "CustomerFSM.h"
+#include "SpawnManager.h"
 #include "Components/BoxComponent.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AChair::AChair()
@@ -41,13 +44,20 @@ void AChair::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// 손님 오버랩 함수 바인드
+	boxComp->OnComponentBeginOverlap.AddDynamic(this, &AChair::OnCustomerOverlap);
+
+	// 캌테일존 오버랩 함수 바인드
 	coctailBoxComp->OnComponentBeginOverlap.AddDynamic(this, &AChair::OnCupOverlap);
 	coctailBoxComp->OnComponentEndOverlap.AddDynamic(this, &AChair::EndCupOverlap);
 
+	// 플레이어 오버랩 함수 바인드
 	playerBoxComp->OnComponentBeginOverlap.AddDynamic(this, &AChair::OnPlayerOverlap);
 	playerBoxComp->OnComponentEndOverlap.AddDynamic(this, &AChair::EndPlayerOverlap);
 
 	score_UI = Cast<UCoctailScoreWidget>(coctailWidget->GetUserWidgetObject());
+
+	spawnManager = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
 }
 
 // Called every frame
@@ -57,8 +67,22 @@ void AChair::Tick(float DeltaTime)
 
 }
 
-void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AChair::OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	auto customer = Cast<ACustomerCharacter>(OtherActor);
+
+	if(customer != nullptr)
+	{
+		// 손님이 오버랩 되면 손님의 요소 스폰매니저로 보내기
+		auto orderTemp = customer->customerFSM->orderIdx;
+
+		customerIdx = customer->customerFSM->idx;
+
+		spawnManager->GetCustomerIdx(orderTemp, customerIdx);
+	}
+}
+
+void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	auto coaster = Cast<ACoaster>(OtherActor);
 	auto coctail = Cast<ACupBase>(OtherActor);
@@ -67,9 +91,12 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 	{
 		bCheckCoctail = true;
 
-		auto gm = Cast<ABarGameModeBase>(GetWorld()->GetAuthGameMode());
+		auto SM = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
 
-		gm->GetCup(coctail->NameArray, coctail->ContentsArray);
+		if(SM != nullptr)
+		{
+			SM->GetCup(coctail->NameArray, coctail->ContentsArray, coctail->bStirred, coctail->bStirredLater, coctail->bShaked, customerIdx);
+		}
 	}
 	else if(coaster != nullptr)
 	{
@@ -77,8 +104,7 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 	}
 }
 
-void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex)
+void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	auto coctail = Cast<ACupBase>(OtherActor);
 	auto coaster = Cast<ACoaster>(OtherActor);
@@ -93,8 +119,7 @@ void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	}
 }
 
-void AChair::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AChair::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	auto target = Cast<ABarPlayer>(OtherActor);
 
@@ -104,8 +129,7 @@ void AChair::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 	}
 }
 
-void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	auto target = Cast<ABarPlayer>(OtherActor);
 

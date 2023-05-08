@@ -44,6 +44,9 @@ void UCustomerFSM::BeginPlay()
 
 	// 걷기 속도 조절
 	owner->GetCharacterMovement()->MaxWalkSpeed = 200.0f;
+
+	// 주문 칵테일 정하기
+	SetOrderCoctail();
 }
 
 
@@ -84,6 +87,45 @@ void UCustomerFSM::DetachCustomer()
 	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitComp, FDetachmentTransformRules::KeepWorldTransform);
 }
 
+// 주문 칵테일 정하기
+void UCustomerFSM::SetOrderCoctail()
+{
+	if(owner != nullptr && owner->order_UI != nullptr)
+	{
+		// 랜덤으로 메뉴 선정
+		int32 result = FMath::RandRange(1,8);
+			
+		if(result > 6)
+		{
+			// 진라임
+			orderIdx = 1;
+				
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+		else if(result <= 6 && result > 4)
+		{
+			// 다이키리
+			orderIdx = 2;
+				
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+		else if(result <= 4 && result > 2)
+		{
+			// 마타니
+			orderIdx = 3;
+				
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+		else if(result <= 2)
+		{
+			// 올드팔
+			orderIdx = 4;
+				
+			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		}
+	}
+}
+
 // ------------------------------------------------------------------------------------idle state
 // 상태 설정 함수
 void UCustomerFSM::SetState(ECustomerState next)
@@ -106,9 +148,12 @@ void UCustomerFSM::TickIdle()
 			// 스폰 매니저에 있는 의자 배열에 착석 여부를 확인하는 배열 체크
 			if(spawnManager->bIsSit[i] == false)
 			{
-				// 비어 있는 의자가 있으면 의자의 순서를 저장하고 다음 단계로
+				// 비어 있는 의자가 있으면 의자의 순서를 저장하고
 				idx = i;
-
+				
+				// 앉은 의자 배열에 착석 여부 바꾸기
+				spawnManager->bIsSit[idx] = true;
+				
 				SetState(ECustomerState::MOVE);
 			}
 		}
@@ -135,9 +180,6 @@ void UCustomerFSM::TickReadySit()
 	auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -20;
 
 	auto result = ai->MoveToLocation(loc);
-
-	// 앉은 의자 배열에 착석 여부 바꾸기
-	spawnManager->bIsSit[idx] = true;
 
 	if(result == EPathFollowingRequestResult::AlreadyAtGoal)
 	{
@@ -279,38 +321,6 @@ void UCustomerFSM::TickOrder()
 
 		// 주문하는 애니메이션 실행
 		owner->customerAnim->OnSitAnim(TEXT("Order"));
-
-		// 랜덤으로 메뉴 선정
-		int32 result = FMath::RandRange(1,8);
-		
-		if(result > 6)
-		{
-			// 진라임
-			orderIdx = 1;
-			
-			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
-		}
-		else if(result <= 6 && result > 4)
-		{
-			// 다이키리
-			orderIdx = 2;
-			
-			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
-		}
-		else if(result <= 4 && result > 2)
-		{
-			// 마타니
-			orderIdx = 3;
-			
-			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
-		}
-		else if(result <= 2)
-		{
-			// 올드팔
-			orderIdx = 4;
-			
-			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
-		}
 	}
 	else
 	{
