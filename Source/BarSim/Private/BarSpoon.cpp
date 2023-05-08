@@ -55,7 +55,7 @@ void ABarSpoon::Tick(float DeltaTime)
 	//액체에서 나오면
 	{
 		//손에 있는 소켓 회전값으로 고정-------------------------------------------------------
-		SetActorRotation(FRotator(0,0,0));
+		//SetActorRotation(FRotator(0,0,0));
 	}
 
 }
