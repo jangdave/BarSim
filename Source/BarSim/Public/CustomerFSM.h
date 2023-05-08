@@ -24,9 +24,10 @@ enum class ECustomerSitState : uint8
 	ORDER,
 	WAIT,
 	WAITLONG,
+	ORDERJUDGE,
 	HOLDCUP,
 	DRINK,
-	JUDGEMENT,
+	TASTEJUDGE,
 	ANGRY,
 	AWESOME,
 };
@@ -74,14 +75,18 @@ public:
 	UPROPERTY()
 	class ABarPlayer* player;
 
+	// 의자 순서 저장 인자
 	UPROPERTY()
 	int32 idx;
 
+	// 주문 저장 인자
 	UPROPERTY()
 	int32 orderIdx;
-	
+
+	// 시간
 	float curTime;
 
+	// 애니메이션 플레이 여부
 	bool bCheckPlayAnim;
 
 	class AAIController* ai;
@@ -95,7 +100,8 @@ public:
 
 	UFUNCTION()
 	void SetDrinkState(ECustomerDrinkState next);
-	
+
+	// 오더내역 보이는 함수
 	void VisibleOrder();
 
 	// 손님 의자에 붙이고 떨어트리기
@@ -130,12 +136,14 @@ private:
 	void TickWait();
 
 	void TickWaitLong();
+
+	void TickOrderJudge();
 	
 	void TickHoldCup();
 	
 	void TickDrink();
 
-	void TickJudgement();
+	void TickTasteJudge();
 	
 	void TickAngry();
 

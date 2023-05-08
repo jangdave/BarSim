@@ -173,14 +173,17 @@ void UCustomerFSM::TickSit()
 	case ECustomerSitState::WAITLONG:
 		TickWaitLong();
 		break;
+	case ECustomerSitState::ORDERJUDGE:
+		TickOrderJudge();
+		break;
 	case ECustomerSitState::HOLDCUP:
 		TickHoldCup();
 		break;
 	case ECustomerSitState::DRINK:
 		TickDrink();
 		break;
-	case ECustomerSitState::JUDGEMENT:
-		TickJudgement();
+	case ECustomerSitState::TASTEJUDGE:
+		TickTasteJudge();
 		break;
 	case ECustomerSitState::ANGRY:
 		TickAngry();
@@ -322,7 +325,7 @@ void UCustomerFSM::TickWait()
 	// 일정 시간안에 코스터와 칵테일이 준비 되면 상태 이동
 	if(curTime < 10 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
 	{
-		SetSitState(ECustomerSitState::HOLDCUP);
+		SetSitState(ECustomerSitState::ORDERJUDGE);
 
 		owner->order_UI->SetVisibility(ESlateVisibility::Hidden);
 	}
@@ -357,10 +360,17 @@ void UCustomerFSM::TickWaitLong()
 	// 코스터와 칵테일이 준비 되면 상태 이동
 	else if(spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
 	{
-		SetSitState(ECustomerSitState::HOLDCUP);
+		SetSitState(ECustomerSitState::ORDERJUDGE);
 
 		owner->order_UI->SetVisibility(ESlateVisibility::Hidden);
 	}
+}
+
+void UCustomerFSM::TickOrderJudge()
+{
+	// 주문과 일치하면 holdcup으로 상태 이동
+
+	// 주문과 일치 하지 않으면 angry으로 상태 이동
 }
 
 void UCustomerFSM::TickHoldCup()
@@ -390,7 +400,7 @@ void UCustomerFSM::TickDrink()
 	}
 }
 
-void UCustomerFSM::TickJudgement()
+void UCustomerFSM::TickTasteJudge()
 {
 	// score 가리기
 	spawnManager->aChairs[idx]->HideScore();

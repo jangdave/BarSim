@@ -53,6 +53,8 @@ void ABarGameModeBase::GetCup(TArray<FString> cocName, TArray<float> cocliter)
 		}
 	}
 
+	UE_LOG(LogTemp, Warning, TEXT("SSSSSSS"))
+	
 	if(amountOfGin > 0)
 	{
 		CheckGin(cocName);

@@ -22,8 +22,8 @@ void ASpawnManager::BeginPlay()
 
 	CheckChairSit();
 
-	FTimerHandle check;
-	GetWorldTimerManager().SetTimer(check, this, &ASpawnManager::CheckArray, 0.1, true);
+	//FTimerHandle check;
+	//GetWorldTimerManager().SetTimer(check, this, &ASpawnManager::CheckArray, 0.1, true);
 }
 
 // Called every frame
