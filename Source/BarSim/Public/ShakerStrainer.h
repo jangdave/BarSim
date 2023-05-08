@@ -23,14 +23,27 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = "Shaker")
+	UPROPERTY(EditAnywhere, Category = "ShakerStrainer")
 	class UStaticMeshComponent* meshComp;
 
-	UPROPERTY(EditAnywhere, Category = "Shaker")
+	UPROPERTY(EditAnywhere, Category = "ShakerStrainer")
 	class USplineComponent* splineComp;
 
-	UPROPERTY(VisibleAnywhere, Category = "Shaker")
+	UPROPERTY(EditAnywhere, Category = "ShakerStrainer")
+	class USphereComponent* sphereComp;
+
+	UPROPERTY(VisibleAnywhere, Category = "ShakerStrainer")
 	FVector streamPoint;
+
+	UFUNCTION()
+	void LidOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void LidOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	
+	UPROPERTY()
+	class AShakerLid* lid;
+
+	UPROPERTY(EditAnywhere, Category = "ShakerStrainer")
+	bool bLidOn;
 };
-
-

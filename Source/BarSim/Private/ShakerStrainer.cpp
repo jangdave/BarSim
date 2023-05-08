@@ -4,6 +4,8 @@
 #include "ShakerStrainer.h"
 
 #include "Shaker.h"
+#include "ShakerLid.h"
+#include "Components/SphereComponent.h"
 #include "Components/SplineComponent.h"
 #include "Materials/MaterialExpressionChannelMaskParameterColor.h"
 
@@ -18,12 +20,20 @@ AShakerStrainer::AShakerStrainer()
 
 	splineComp = CreateDefaultSubobject<USplineComponent>(TEXT("splineComp"));
 	splineComp->SetupAttachment(meshComp);
+
+	sphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("sphereComp"));
+	sphereComp->SetupAttachment(meshComp);
+	sphereComp->SetSphereRadius(3.0f);
+	sphereComp->SetRelativeLocation(FVector(0,0,7.7f));
+	sphereComp->SetCollisionProfileName(FName("StrainerCheck"));
 }
 
 // Called when the game starts or when spawned
 void AShakerStrainer::BeginPlay()
 {
 	Super::BeginPlay();
+	sphereComp->OnComponentBeginOverlap.AddDynamic(this, &AShakerStrainer::LidOverlap);
+	sphereComp->OnComponentEndOverlap.AddDynamic(this, &AShakerStrainer::LidOverlapEnd);
 }
 
 // Called every frame
@@ -37,3 +47,26 @@ void AShakerStrainer::Tick(float DeltaTime)
 	DrawDebugSphere(GetWorld(), streamPoint, 0.3f, 32, FColor::Blue, false);
 }
 
+void AShakerStrainer::LidOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult)
+{
+	lid = Cast<AShakerLid>(OtherActor);
+
+	if(lid)
+	{
+		lid->AttachToComponent(meshComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Lid"));
+		lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
+		bLidOn = true;
+	}
+}
+
+void AShakerStrainer::LidOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	lid = Cast<AShakerLid>(OtherActor);
+
+	if(lid)
+	{
+		lid->meshComp->SetCollisionProfileName(FName("Strainer"));
+		bLidOn = false;
+		lid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	}
+}
