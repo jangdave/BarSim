@@ -95,17 +95,24 @@ public:
 
 	//스터해야하는 횟수, 에디터 수정 가능
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cup")
-	float stirNeeded;
+	float stirNeeded = 3;
 	
 	UPROPERTY(VisibleAnywhere, Category ="Cup")
 	float allInside;
 
 	UPROPERTY(EditAnywhere, Category = "Cup")
-	bool bMixed;
+	bool bStirred;
 
 	UPROPERTY(EditAnywhere, Category = "Cup")
-	bool bMixedLater;
+	bool bStirredLater;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Cup")
 	float timePassed;
+
+	//shake array에 shake 방울 담기
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	TArray<bool> ShakeArray;
+
+	UPROPERTY(EditAnywhere, Category = "Cup")
+	bool bShaked;
 };

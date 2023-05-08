@@ -10,6 +10,7 @@
 #include "VorbisAudioInfo.h"
 #include "Components/BoxComponent.h"
 #include "Materials/MaterialParameterCollection.h"
+#include "Sound/DialogueTypes.h"
 
 // Sets default values
 ACupBase::ACupBase()
@@ -88,6 +89,10 @@ void ACupBase::Tick(float DeltaTime)
 	timePassed += DeltaTime;
 
 	//마지막으로 스터포인트 지나고 5초 지나면 stirRate 초기화
+	if(timePassed >= 5.0f)
+	{
+		stirRate = 0;
+	}
 	
 	//충분히 저어진 상태면
 	if(stirRate >= stirNeeded)
@@ -103,20 +108,30 @@ void ACupBase::Tick(float DeltaTime)
 		{
 			MixArray.Add(true);
 		}
-		bMixedLater = true;
+		bStirredLater = true;
 	}
 	
 	//MixArray에 false값인 원소가 하나라도 있거나 비어 있으면
 	if(MixArray.Find(false) != INDEX_NONE || MixArray.Num() == 0)
 	{
 		//안 섞인거
-		bMixed = false;
+		bStirred = false;
 	}
 	//MixArray에 false 값인 원소가 하나도 없고 MixArray가 비어있지 않다면
 	else
 	{
 		//섞인거
-		bMixed = true;
+		bStirred = true;
+	}
+
+	//ShakeArray에 false값인 원소가 하나라도 있거나 비어 있으면
+	if(ShakeArray.Find(false) != INDEX_NONE || ShakeArray.Num() == 0)
+	{
+		bShaked = false;
+	}
+	else
+	{
+		bShaked = true;
 	}
 
 }
@@ -148,7 +163,8 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 					ContentsArray.Add(mixedDropOverlapped->ContentsArray[i]);
 				}
 			}
-			MixArray.Add(mixedDropOverlapped->bMixed);
+			MixArray.Add(mixedDropOverlapped->bStirred);
+			ShakeArray.Add(mixedDropOverlapped->bShaked);
 			contents = contents + mixedDropOverlapped->dropMass;
 			insideContents = FMath::Clamp(contents, 0, cupSize);
 			liquorComp->SetVisibility(true);
@@ -190,6 +206,7 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			liquorComp->SetVisibility(true);
 			LiquorScale();
 			MixArray.Add(false);
+			ShakeArray.Add(false);
 			drop->Destroy();
 			
 		}

@@ -19,9 +19,8 @@ void AMixingGlass::Tick(float DeltaSeconds)
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
 	float angle2 = FMath::RadiansToDegrees(FMath::Acos(dot2));
 	
-	UE_LOG(LogTemp, Warning, TEXT("angle is %f"), angle);
-	UE_LOG(LogTemp, Warning, TEXT("angle2 is %f"), angle2);
-
+	//UE_LOG(LogTemp, Warning, TEXT("angle is %f"), angle);
+	//UE_LOG(LogTemp, Warning, TEXT("angle2 is %f"), angle2);
 	
 	float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), angle);
@@ -60,7 +59,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
 
 				contents = contents - mixedDrop->dropMass;
-				mixedDrop->bMixed = bMixed;
+				mixedDrop->bStirred = bStirred;
 				bStreamOn = true;
 			}
 			else
@@ -91,7 +90,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 						//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
 					}
 					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
-					mixedDrop->bMixed = bMixed;
+					mixedDrop->bStirred = bStirred;
 					contents = contents - mixedDrop->dropMass;
 				}
 			}

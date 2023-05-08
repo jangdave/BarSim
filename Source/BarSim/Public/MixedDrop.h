@@ -22,5 +22,8 @@ public:
 	TArray<float> ContentsArray;
 
 	UPROPERTY(VisibleAnywhere, Category = "MixedDrop")
-	bool bMixed;
+	bool bStirred;
+
+	UPROPERTY(VisibleAnywhere, Category = "MixedDrop")
+	bool bShaked;
 };
