@@ -11,9 +11,6 @@
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarPlayer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/ABP_MannequinsRealisticXR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/ABP_MannequinsRealisticXR.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/realistic_hand_r_ue4_Physics.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/realistic_hand_r_ue4_Physics.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +246,7 @@
       <workItem from="1683426957376" duration="2433000" />
       <workItem from="1683441449868" duration="1172000" />
       <workItem from="1683449468060" duration="7397000" />
-      <workItem from="1683508929743" duration="3176000" />
+      <workItem from="1683508929743" duration="5383000" />
     </task>
     <servers />
   </component>
