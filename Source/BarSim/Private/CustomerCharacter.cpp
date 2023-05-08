@@ -104,6 +104,11 @@ void ACustomerCharacter::SetMesh()
 		if(womanIdx != checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(womenMesh[womanIdx].Object);
+
+			if(womanIdx == 0 || womanIdx == 1)
+			{
+				GetMesh()->SetRelativeScale3D(FVector(1.1));
+			}
 			
 			checkMeshCount = womanIdx;
 		}

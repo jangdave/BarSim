@@ -27,14 +27,23 @@ void UCustomerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	forwardVelocity = FVector::DotProduct(velocity, forVelocity);
 }
 
-void UCustomerAnimInstance::OnSitAnim(FName sectionName)
+//---------------------------------------------------------------------------------------stand
+void UCustomerAnimInstance::OnStandAnim(FName sectionName)
 {
 	owner->PlayAnimMontage(customerMontageFactory, 1, sectionName);
 }
 
-void UCustomerAnimInstance::EndTalking()
+void UCustomerAnimInstance::EndSitStoll()
 {
-	owner->customerFSM->SetSitState(ECustomerSitState::WAIT);
+	owner->customerFSM->SetState(ECustomerState::SIT);
+	
+	owner->customerFSM->AttachCustomer();
+}
+
+//------------------------------------------------------------------------------------sit
+void UCustomerAnimInstance::OnSitAnim(FName sectionName)
+{
+	owner->PlayAnimMontage(customerSitMontageFactory, 1, sectionName);
 }
 
 void UCustomerAnimInstance::EndWaitLong()
@@ -49,17 +58,35 @@ void UCustomerAnimInstance::EndWaitLong()
 	}
 }
 
+void UCustomerAnimInstance::EndOrder()
+{
+	owner->customerFSM->SetSitState(ECustomerSitState::WAIT);
+}
+
+void UCustomerAnimInstance::EndHoldCup()
+{
+	owner->customerFSM->SetSitState(ECustomerSitState::DRINK);
+}
+
 void UCustomerAnimInstance::EndDrinking()
 {
-	owner->customerFSM->SetSitState(ECustomerSitState::JUDGEMENT);
+	//owner->customerFSM->SetSitState(ECustomerSitState::JUDGEMENT);
 }
 
 void UCustomerAnimInstance::EndBad()
 {
-	owner->customerFSM->SetState(ECustomerState::LEAVE);
+	//owner->customerFSM->SetState(ECustomerState::LEAVE);
 }
 
 void UCustomerAnimInstance::EndGood()
 {
-	owner->customerFSM->SetState(ECustomerState::LEAVE);
+	//owner->customerFSM->SetState(ECustomerState::LEAVE);
 }
+
+//-------------------------------------------------------------------------------------drink
+void UCustomerAnimInstance::OnDrinkAnim(FName sectionName)
+{
+	owner->PlayAnimMontage(customerDrinkMontageFactory, 1, sectionName);
+}
+
+
