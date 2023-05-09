@@ -125,4 +125,6 @@ public:
 	// Fix bugs with replication and bReplicateMovement
 	virtual void OnRep_ReplicateMovement() override;
 	virtual void PostNetReceivePhysicState() override;
+
+	
 };
