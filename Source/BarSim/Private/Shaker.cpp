@@ -32,7 +32,8 @@ void AShaker::Tick(float DeltaSeconds)
 	
 	float dot = FVector::DotProduct(GetActorUpVector(), upVector);
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
-	float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
+	//float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
+	float streamWidth = 10.0f;
 
 	if(strainer)
 	{
@@ -58,6 +59,7 @@ void AShaker::Tick(float DeltaSeconds)
 					waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, strainer->streamPoint, GetActorRotation());
 					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 					waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+					waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 					//물방울 액터 스폰
 					AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, strainer->streamPoint, GetActorRotation());
 					mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
@@ -92,6 +94,7 @@ void AShaker::Tick(float DeltaSeconds)
 					{
 						waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 						waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+						waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 						
 						waterStream->SetRelativeLocation(strainer->streamPoint);
 						waterStream->SetRelativeRotation(GetActorRotation());

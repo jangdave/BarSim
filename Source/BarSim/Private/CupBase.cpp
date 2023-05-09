@@ -60,29 +60,48 @@ void ACupBase::Tick(float DeltaTime)
 	//오더 어레이와 컨텐츠 어레이가 있을때만
 	if(NameArray.Num() != 0 && ContentsArray.Num() != 0)
 	{
-		// 내용물 초기화
-		ginInside = 0;
-		limeInside = 0;
-		//오더 어레이 중 Gin 이라는 값을 가진 배열 원소의 순서를 구함
-		for(int i = 0; i < NameArray.Num(); i++)
+		if(NameArray.Find(FString("Gin")) != INDEX_NONE)
 		{
-			if(NameArray[i] == FString("Gin"))
-			{
-				ginInside = ginInside + ContentsArray[i];
-			}	
+			ginInside = ContentsArray[NameArray.Find(FString("Gin"))];
+		}
+		
+		if(NameArray.Find(FString("Lime")) != INDEX_NONE)
+		{
+			limeInside = ContentsArray[NameArray.Find(FString("Lime"))];
 		}
 
-		//오더 어레이 중 Lime 이라는 값을 가진 배열 원소의 순서를 구함
-		for(int i = 0; i < NameArray.Num(); i++)
+		if(NameArray.Find(FString("Rum")) != INDEX_NONE)
 		{
-			if(NameArray[i] == FString("Lime"))
-			{
-				limeInside = limeInside + ContentsArray[i];
-			}
+			rumInside = ContentsArray[NameArray.Find(FString("Rum"))];
 		}
 
-		allInside = ginInside + limeInside;
+		if(NameArray.Find(FString("Sugar")) != INDEX_NONE)
+		{
+			sugarInside = ContentsArray[NameArray.Find(FString("Sugar"))];
+		}
+
+		if(NameArray.Find(FString("Vermouth")) != INDEX_NONE)
+		{
+			vermouthInside = ContentsArray[NameArray.Find(FString("Vermouth"))];
+		}
+
+		if(NameArray.Find(FString("Campari")) != INDEX_NONE)
+		{
+			campariInside = ContentsArray[NameArray.Find(FString("Campari"))];
+		}
+
+		if(NameArray.Find(FString("Whiskey")) != INDEX_NONE)
+		{
+			whiskeyInside = ContentsArray[NameArray.Find(FString("Whiskey"))];
+		}
+		
+		allInside = ginInside + limeInside + rumInside + sugarInside + vermouthInside + campariInside + whiskeyInside;
+		float opacity = FMath::Clamp(limeInside / allInside * 2 + whiskeyInside / allInside * 5 + campariInside / allInside * 8, 0.2, 0.8);
+
 		liquorComp->SetScalarParameterValueOnMaterials(FName("Lime"), limeInside / allInside);
+		liquorComp->SetScalarParameterValueOnMaterials(FName("Campari"), campariInside / allInside);
+		liquorComp->SetScalarParameterValueOnMaterials(FName("Whiskey"), whiskeyInside / allInside);
+		liquorComp->SetScalarParameterValueOnMaterials(FName("Opacity"), opacity);
 	}
 
 	//timePassed에 시간 누적
