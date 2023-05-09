@@ -49,6 +49,11 @@ public:
 	float GetDoorAngleR();
 	UFUNCTION()
 	float GetDoorAngleLeftR();
+	UFUNCTION(BlueprintImplementableEvent)
+	void FinalizeAttach();
+	UFUNCTION(BlueprintImplementableEvent)
+	void FinalizeDetach();
+
 	
 	
 

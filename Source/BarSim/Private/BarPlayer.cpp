@@ -596,8 +596,10 @@ void ABarPlayer::TryGrabRight()
 		{
 			isGrabbingBottleRight = true;
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("BottleSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,false);
-			RightHandMesh->SetVisibility(false);
+			//RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
+			FinalizeAttach();
+
 			UE_LOG(LogTemp, Warning, TEXT("grab bottle on Right"))
 		}
 		// 잡은 대상이 Tablet 이라면
@@ -607,7 +609,7 @@ void ABarPlayer::TryGrabRight()
 			widgetInteractionComp->bShowDebug=true;
 			//widgetInteractionComp->bEnableHitTesting=true;
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("TabletSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,false);
-			RightHandMesh->SetVisibility(false);
+			//RightHandMesh->SetVisibility(false);
 			//GrabbedActorRight->SetActorEnableCollision(false);
 
 			UE_LOG(LogTemp, Warning, TEXT("grab tablet on Right"))
@@ -629,6 +631,7 @@ void ABarPlayer::TryGrabRight()
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
+
 			UE_LOG(LogTemp, Warning, TEXT("grab opener on Right"))			
 		}
 		// 잡은 대상이 Coaster이라면
@@ -638,6 +641,7 @@ void ABarPlayer::TryGrabRight()
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("OpenerSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
+
 			UE_LOG(LogTemp, Warning, TEXT("grab coaster on Right"))			
 		}
 		// 잡은 대상이 Cup이라면
@@ -649,6 +653,7 @@ void ABarPlayer::TryGrabRight()
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CupSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
+
 			UE_LOG(LogTemp, Warning, TEXT("grab cup on Right"))			
 		}
 		// 잡은 대상이 BarSpoon이라면
@@ -658,6 +663,7 @@ void ABarPlayer::TryGrabRight()
 			GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("SpoonSocket"),EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 			RightHandMesh->SetVisibility(false);
 			GrabbedActorRight->SetActorEnableCollision(false);
+
 			UE_LOG(LogTemp, Warning, TEXT("grab barspoon on Right"))			
 		}
 		else
@@ -667,6 +673,7 @@ void ABarPlayer::TryGrabRight()
 				IsGrabbedRight=false;
 				GrabbedObjectRight=nullptr;
 				GrabbedActorRight=nullptr;
+				FinalizeAttach();
 			}
 			//GrabbedObjectRight->K2_AttachToComponent(RightHandMesh, TEXT("CompGrabSocket"),EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld,EAttachmentRule::KeepRelative,true);
 
@@ -945,7 +952,7 @@ void ABarPlayer::UnTryGrabRight()
 		//GrabbedObjectRight->SetPhysicsAngularVelocityInRadians(AngularVelocity * ToquePower, true);
 		GrabbedObjectRight = nullptr;
 		GrabbedActorRight=nullptr;
-		RightHandMesh->SetVisibility(true);
+		//RightHandMesh->SetVisibility(true);
 
 		UE_LOG(LogTemp, Warning, TEXT("release Right Bottle"))
 	}
