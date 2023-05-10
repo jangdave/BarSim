@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "IceCube.generated.h"
 
 UCLASS()
-class BARSIM_API AIceCube : public AActor
+class BARSIM_API AIceCube : public AGrippableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AIceCube();
+	AIceCube(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, Category=IceSettings)
 	class UStaticMeshComponent* iceCubeMesh;

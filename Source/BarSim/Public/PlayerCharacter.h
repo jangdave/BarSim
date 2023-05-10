@@ -35,6 +35,17 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
 	
+UFUNCTION(BlueprintCallable)
+	void CheckGrabbedObjectRight();
+	UFUNCTION(BlueprintCallable)
+	void CheckGrabbedObjectLeft();
 
-	
+
+	// 오른손 그랩 액터
+	UPROPERTY()
+	class AActor* GrabbedActorRight;
+
+	// HuchuTong Ref
+	UPROPERTY()
+	class AHuchuTong* huchuTong;
 };

@@ -4,7 +4,7 @@
 
 #include "EnhancedInputSubsystems.h"
 #include "GripMotionControllerComponent.h"
-
+#include "HuchuTong.h"
 
 
 APlayerCharacter::APlayerCharacter()
@@ -32,7 +32,7 @@ void APlayerCharacter::BeginPlay()
 		}
 	}
 
-	//RightMotionController->GetAllGrips();
+
 
 	
 }
@@ -51,4 +51,26 @@ void APlayerCharacter::Tick(float DeltaTime)
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void APlayerCharacter::CheckGrabbedObjectRight()
+{
+	TArray<FBPActorGripInformation> RightGripArray;
+	RightMotionController->GetAllGrips(RightGripArray);
+	for(int i=0; i<RightGripArray.Num(); ++i)
+	{
+		GrabbedActorRight = RightGripArray[i].GetGrippedActor();
+	}
+
+	huchuTong=Cast<AHuchuTong>(GrabbedActorRight);
+	// 잡은 대상이 Tongs라면
+	if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Grabbed Huchu Right"));
+	}
+	
+}
+
+void APlayerCharacter::CheckGrabbedObjectLeft()
+{
 }
