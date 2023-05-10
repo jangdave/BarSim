@@ -64,20 +64,34 @@ public:
 	void EndOrder();
 
 	UFUNCTION(BlueprintCallable)
+	void AttachCup();
+	
+	UFUNCTION(BlueprintCallable)
 	void EndHoldCup();
 	
 	UFUNCTION(BlueprintCallable)
-	void EndDrinking();
-
-	UFUNCTION(BlueprintCallable)
-	void EndBad();
+	void EndAngry();
 
 	UFUNCTION(BlueprintCallable)
 	void EndGood();
 
+	UFUNCTION(BlueprintCallable)
+	void EndLeaveSit();
+	
 	// drink 상태 몽타주 플레이 함수
 	UFUNCTION()
 	void OnDrinkAnim(FName sectionName);
 
+	UFUNCTION(BlueprintCallable)
+	void EndCheers();
+
+	UFUNCTION(BlueprintCallable)
+	void EndDrinkAllLittle();
+
+	UFUNCTION(BlueprintCallable)
+	void DetachCup();
+
+	UFUNCTION(BlueprintCallable)
+	void EndUnHoldCup();
 
 };

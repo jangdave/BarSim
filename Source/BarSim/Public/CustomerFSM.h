@@ -30,6 +30,7 @@ enum class ECustomerSitState : uint8
 	TASTEJUDGE,
 	ANGRY,
 	AWESOME,
+	READYLEAVE,
 };
 
 UENUM(BlueprintType)
@@ -72,9 +73,6 @@ public:
 	UPROPERTY()
 	class ASpawnManager* spawnManager;
 
-	UPROPERTY()
-	class ABarPlayer* player;
-
 	// 의자 순서 저장 인자
 	UPROPERTY()
 	int32 idx;
@@ -89,8 +87,14 @@ public:
 	// 애니메이션 플레이 여부
 	bool bCheckPlayAnim;
 
+	// 주문 실패시 기회 소모 여부
+	bool bCheckOrder;
+	
 	class AAIController* ai;
 
+	// 주문 칵테일 정하기
+	void SetOrderCoctail();
+	
 	// 상태 전환 함수
 	UFUNCTION()
 	void SetState(ECustomerState next);
@@ -101,18 +105,24 @@ public:
 	UFUNCTION()
 	void SetDrinkState(ECustomerDrinkState next);
 
-	// 오더내역 보이는 함수
+	// 주문내역 보이는 함수
 	void VisibleOrder();
 
-	// 손님 의자에 붙이고 떨어트리기
+	// 손님 의자에 붙이기
 	UFUNCTION()
 	void AttachCustomer();
 
+	// 손님 의자에서 떨어트리기
 	UFUNCTION()
 	void DetachCustomer();
 
 	// 랜덤 함수
+	UFUNCTION()
 	int32 SetRandRange(int32 idxStart, int32 idxEnd);
+
+	// 마신 횟수
+	UPROPERTY()
+	int32 drinkCount = 0;
 	
 private:
 	// 기본 상태 함수
@@ -148,6 +158,8 @@ private:
 	void TickAngry();
 
 	void TickAwesome();
+
+	void TickReadyLeave();
 
 	// drink 상태 함수
 	void TickIdleCup();

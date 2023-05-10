@@ -6,6 +6,40 @@
 #include "Components/ActorComponent.h"
 #include "OldPalFSM.generated.h"
 
+UENUM(BlueprintType)
+enum class EOldPalState : uint8
+{
+	IDLE,
+	MOVE,
+	READYSIT,
+	SIT,
+	LEAVE,
+};
+
+UENUM(BlueprintType)
+enum class EOldPalSitState : uint8
+{
+	STANDBY,
+	STANDBYWAITLONG,
+	ORDER,
+	WAIT,
+	WAITLONG,
+	ORDERJUDGE,
+	HOLDCUP,
+	DRINK,
+	TASTEJUDGE,
+	ANGRY,
+	AWESOME,
+	READYLEAVE,
+};
+
+UENUM(BlueprintType)
+enum class EOldPalDrinkState : uint8
+{
+	IDLE,
+	DRINK,
+	UNHOLDCUP,
+};
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BARSIM_API UOldPalFSM : public UActorComponent
@@ -24,5 +58,24 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+	// 올드팔 기본 상태
+	EOldPalState state;
+
+	// 올드팔 착석 상태
+	EOldPalSitState sitState;
+
+	// 올드팔 마시기 상태
+	EOldPalDrinkState drinkState;
+	
+	UPROPERTY()
+	class AOldPalCharacter* owner;
+
+	UPROPERTY()
+	class ASpawnManager* spawnManager;
+
+	UPROPERTY()
+	int32 idx;
+
+	UPROPERTY()
+	int32 orderIdx;
 };

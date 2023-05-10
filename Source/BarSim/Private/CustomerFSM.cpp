@@ -7,6 +7,7 @@
 #include "CustomerAnimInstance.h"
 #include "CustomerCharacter.h"
 #include "CustomerOrderWidget.h"
+#include "MeshCardRepresentation.h"
 #include "SpawnManager.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -29,8 +30,6 @@ void UCustomerFSM::BeginPlay()
 
 	owner = Cast<ACustomerCharacter>(GetOwner());
 
-	player = Cast<ABarPlayer>(UGameplayStatics::GetActorOfClass(GetWorld(), ABarPlayer::StaticClass()));
-	
 	ai = Cast<AAIController>(owner->GetController());
 
 	spawnManager = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
@@ -44,6 +43,9 @@ void UCustomerFSM::BeginPlay()
 
 	// 걷기 속도 조절
 	owner->GetCharacterMovement()->MaxWalkSpeed = 200.0f;
+
+	// 주문 칵테일 정하기
+	SetOrderCoctail();
 }
 
 
@@ -84,6 +86,40 @@ void UCustomerFSM::DetachCustomer()
 	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitComp, FDetachmentTransformRules::KeepWorldTransform);
 }
 
+// 주문 칵테일 정하기
+void UCustomerFSM::SetOrderCoctail()
+{
+	if(owner != nullptr)
+	{
+		// 랜덤으로 메뉴 선정
+		int32 result = FMath::RandRange(1,8);
+			
+		if(result > 6)
+		{
+			// 진라임
+			orderIdx = 1;
+		}
+		else if(result <= 6 && result > 4)
+		{
+			// 다이키리
+			//orderIdx = 2;
+			orderIdx = 1;
+		}
+		else if(result <= 4 && result > 2)
+		{
+			// 마타니
+			//orderIdx = 3;
+			orderIdx = 1;
+		}
+		else if(result <= 2)
+		{
+			// 올드팔
+			//orderIdx = 4;
+			orderIdx = 1;
+		}
+	}
+}
+
 // ------------------------------------------------------------------------------------idle state
 // 상태 설정 함수
 void UCustomerFSM::SetState(ECustomerState next)
@@ -106,10 +142,15 @@ void UCustomerFSM::TickIdle()
 			// 스폰 매니저에 있는 의자 배열에 착석 여부를 확인하는 배열 체크
 			if(spawnManager->bIsSit[i] == false)
 			{
-				// 비어 있는 의자가 있으면 의자의 순서를 저장하고 다음 단계로
+				// 비어 있는 의자가 있으면 의자의 순서를 저장하고
 				idx = i;
-
+				
+				// 앉은 의자 배열에 착석 여부 바꾸기
+				spawnManager->bIsSit[idx] = true;
+				
 				SetState(ECustomerState::MOVE);
+
+				break;
 			}
 		}
 	}
@@ -136,9 +177,6 @@ void UCustomerFSM::TickReadySit()
 
 	auto result = ai->MoveToLocation(loc);
 
-	// 앉은 의자 배열에 착석 여부 바꾸기
-	spawnManager->bIsSit[idx] = true;
-
 	if(result == EPathFollowingRequestResult::AlreadyAtGoal)
 	{
 		if(bCheckPlayAnim != true)
@@ -156,6 +194,11 @@ void UCustomerFSM::TickSit()
 	// 대기시간 체크를 위한 시간 적립
 	curTime += GetWorld()->GetDeltaSeconds();
 
+	if(curTime > 20)
+	{
+		curTime = 0;
+	}
+	
 	switch (sitState)
 	{
 	case ECustomerSitState::STANDBY:
@@ -191,13 +234,16 @@ void UCustomerFSM::TickSit()
 	case ECustomerSitState::AWESOME:
 		TickAwesome();
 		break;
+	case ECustomerSitState::READYLEAVE:
+		TickReadyLeave();
+		break;
 	}
 }
 
 void UCustomerFSM::TickLeave()
 {
 	// 문 밖의 스폰매니저 주변으로 이동
-	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 500;
+	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 800;
 
 	auto result = ai->MoveToLocation(loc);
 	
@@ -239,7 +285,7 @@ void UCustomerFSM::TickStandby()
 		SetSitState(ECustomerSitState::ORDER);
 	}
 	// 일정 시간 이후에 코스터가 없다면 웨이트롱으로 상태 변경
-	else if(curTime >= 10 && spawnManager->bIsCoaster[idx] != true)
+	else if(curTime > 10)
 	{
 		SetSitState(ECustomerSitState::STANDBYWAITLONG);
 	}
@@ -247,6 +293,7 @@ void UCustomerFSM::TickStandby()
 
 void UCustomerFSM::TickStandbyWaitLong()
 {
+	UE_LOG(LogTemp, Warning, TEXT("ssssssssssssssssssss"))
 	// 오랜 기다림 불만을 표출하는 애니메이션 실행
 	if(bCheckPlayAnim != true && curTime > 5)
 	{
@@ -280,37 +327,7 @@ void UCustomerFSM::TickOrder()
 		// 주문하는 애니메이션 실행
 		owner->customerAnim->OnSitAnim(TEXT("Order"));
 
-		// 랜덤으로 메뉴 선정
-		int32 result = FMath::RandRange(1,8);
-		
-		if(result > 6)
-		{
-			// 진라임
-			orderIdx = 1;
-			
-			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
-		}
-		else if(result <= 6 && result > 4)
-		{
-			// 다이키리
-			orderIdx = 2;
-			
-			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
-		}
-		else if(result <= 4 && result > 2)
-		{
-			// 마타니
-			orderIdx = 3;
-			
-			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
-		}
-		else if(result <= 2)
-		{
-			// 올드팔
-			orderIdx = 4;
-			
-			owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
-		}
+		spawnManager->aChairs[idx]->bOnceOverlap = false;
 	}
 	else
 	{
@@ -369,8 +386,41 @@ void UCustomerFSM::TickWaitLong()
 void UCustomerFSM::TickOrderJudge()
 {
 	// 주문과 일치하면 holdcup으로 상태 이동
+	if(spawnManager->aChairs[idx]->bSameOrder == true)
+	{
+		SetSitState(ECustomerSitState::HOLDCUP);
 
-	// 주문과 일치 하지 않으면 angry으로 상태 이동
+		spawnManager->aChairs[idx]->MoveCup();
+	}
+	// 주문과 일치 하지 않고
+	else if(spawnManager->aChairs[idx]->bUnSameOrder == true)
+	{
+		// 한번 더 기회를 소모하지 않았으면
+		if(bCheckOrder != true)
+		{
+			// 화내는 애니메이션 실행
+			SetSitState(ECustomerSitState::ANGRY);
+			
+			// 컵을 치우라는 알림 띄우기
+
+			// 컵이 없다면
+			if(spawnManager->bIsCoctail[idx] != true)
+			{
+				bCheckOrder = true;
+
+				spawnManager->aChairs[idx]->bOnceOverlap = false;
+				
+				owner->order_UI->SetVisibility(ESlateVisibility::Visible);
+				
+				SetSitState(ECustomerSitState::ORDER);
+			}
+		}
+		// 한번의 기회를 소모했으면
+		else
+		{
+			SetSitState(ECustomerSitState::ANGRY);
+		}
+	}
 }
 
 void UCustomerFSM::TickHoldCup()
@@ -392,7 +442,7 @@ void UCustomerFSM::TickDrink()
 		TickIdleCup();
 		break;
 	case ECustomerDrinkState::DRINK:
-		TickDrink();
+		TickDrinkCup();
 		break;
 	case ECustomerDrinkState::UNHOLDCUP:
 		TickUnHoldCup();
@@ -402,9 +452,6 @@ void UCustomerFSM::TickDrink()
 
 void UCustomerFSM::TickTasteJudge()
 {
-	// score 가리기
-	spawnManager->aChairs[idx]->HideScore();
-	
 	// 점수 판단
 	auto result = spawnManager->aChairs[idx]->totalScore;
 
@@ -424,7 +471,7 @@ void UCustomerFSM::TickAngry()
 	{
 		bCheckPlayAnim = true;
 		
-		owner->customerAnim->OnSitAnim(TEXT("TasteBad"));
+		owner->customerAnim->OnSitAnim(TEXT("Angry"));
 	}
 }
 
@@ -434,7 +481,21 @@ void UCustomerFSM::TickAwesome()
 	{
 		bCheckPlayAnim = true;
 		
-		owner->customerAnim->OnSitAnim(TEXT("TasteGood"));
+		owner->customerAnim->OnSitAnim(TEXT("Good"));
+	}
+}
+
+void UCustomerFSM::TickReadyLeave()
+{
+	DetachCustomer();
+
+	owner->order_UI->SetVisibility(ESlateVisibility::Hidden);
+	
+	if(bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+		
+		owner->customerAnim->OnSitAnim(TEXT("LeaveSit"));
 	}
 }
 
@@ -455,20 +516,58 @@ void UCustomerFSM::TickIdleCup()
 {
 	if(curTime > 1 && bCheckPlayAnim != true)
 	{
-		bCheckPlayAnim = true;
+		spawnManager->aChairs[idx]->HideScore();
 		
+		bCheckPlayAnim = true;
+
+		// 잔을 들고 cheers 애니메이션 실행
 		owner->customerAnim->OnDrinkAnim(TEXT("Cheers"));
 	}
 }
 
 void UCustomerFSM::TickDrinkCup()
 {
-	
+	if(drinkCount < 4)
+	{
+		auto tempIdx = SetRandRange(1, 4);
+
+		if(tempIdx > 3 && curTime > 2)
+		{
+			if(bCheckPlayAnim != true)
+			{
+				bCheckPlayAnim = true;
+
+				drinkCount++;
+				
+				owner->customerAnim->OnDrinkAnim(TEXT("DrinkAll"));
+			}
+		}
+		else if(tempIdx > 0 && curTime > 2)
+		{
+			if(bCheckPlayAnim != true)
+			{
+				bCheckPlayAnim = true;
+
+				drinkCount++;
+				
+				owner->customerAnim->OnDrinkAnim(TEXT("DrinkLittle"));
+			}
+		}
+	}
+	else
+	{
+		SetDrinkState(ECustomerDrinkState::UNHOLDCUP);
+	}
 }
 
 void UCustomerFSM::TickUnHoldCup()
 {
-	
+	if(bCheckPlayAnim != true)
+	{
+		bCheckPlayAnim = true;
+
+		owner->customerAnim->OnDrinkAnim(TEXT("UnHoldCup"));
+	}
 }
 
 // 오더위젯 보이게 하는 함수

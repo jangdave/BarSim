@@ -20,7 +20,7 @@ public:
 	UFUNCTION()
 	void SetImage(UTexture2D* setTexture);
 
-	UPROPERTY(VisibleAnywhere, meta=(BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UImage* image_Order;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
