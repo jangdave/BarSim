@@ -29,7 +29,7 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Drop")
 	float dropMass;
 
-	UPROPERTY(VisibleAnywhere, Category = "Drop")
+	UPROPERTY(EditAnywhere, Category = "Drop")
 	FString name;
 
 	UFUNCTION()

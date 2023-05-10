@@ -7,7 +7,24 @@
 #include "MixedDrop.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Strainer.h"
 #include "Components/SphereComponent.h"
+
+AMixingGlass::AMixingGlass(const FObjectInitializer& ObjectInitializer)
+{
+	sphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
+	sphereComp->SetupAttachment(cupComp);
+	sphereComp->SetSphereRadius(5.0f);
+	sphereComp->SetRelativeLocation(FVector(0,0,17.0f));
+	sphereComp->SetCollisionProfileName(FName("StrainerCheck"));
+}
+
+void AMixingGlass::BeginPlay()
+{
+	Super::BeginPlay();
+	sphereComp->OnComponentBeginOverlap.AddDynamic(this, &AMixingGlass::StrainerOverlap);
+	sphereComp->OnComponentEndOverlap.AddDynamic(this, &AMixingGlass::StrainerOverlapEnd);
+}
 
 void AMixingGlass::Tick(float DeltaSeconds)
 {
@@ -19,15 +36,14 @@ void AMixingGlass::Tick(float DeltaSeconds)
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
 	float angle2 = FMath::RadiansToDegrees(FMath::Acos(dot2));
 	
-	//UE_LOG(LogTemp, Warning, TEXT("angle is %f"), angle);
-	//UE_LOG(LogTemp, Warning, TEXT("angle2 is %f"), angle2);
-	
-	float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
-	//UE_LOG(LogTemp, Warning, TEXT("%f"), angle);
+	//float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
+	float streamWidth = 10.0f;
 
 	if(contents > 0)
 	{
-		//기울어진 각도가 90도 이상이라면
+		if(bStrainerOn)
+		{
+			//기울어진 각도가 90도 이상이라면
 		if(180 - angle2 > (1.1 - contents / cupSize) * 100 && angle <= 90)
 		{
 			//물줄기 없을때에만 한 번 스폰 시키기
@@ -38,6 +54,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")));
 				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 				waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+				waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 				//물방울 액터 스폰
 				AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")));
 				mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
@@ -70,6 +87,8 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					//UE_LOG(LogTemp, Warning, TEXT("waterStream On"));
 					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 					waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+					waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
+					
 					waterStream->SetRelativeLocation(cupComp->GetSocketLocation(FName("Mouth")));
 					waterStream->SetRelativeRotation(cupComp->GetSocketRotation(FName("Mouth")));
 					//물방울 액터 스폰
@@ -103,6 +122,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				bStreamOn = false;
 			}
 		}
+		}
 	}
 	else
 	{
@@ -111,5 +131,28 @@ void AMixingGlass::Tick(float DeltaSeconds)
 			waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
 			bStreamOn = false;
 		}
+	}
+}
+
+void AMixingGlass::StrainerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult)
+{
+	strainer = Cast<AStrainer>(OtherActor);
+	if(strainer)
+	{
+		strainer->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
+		strainer->meshComp->SetCollisionProfileName(FName("Overlapped"));
+		bStrainerOn = true;
+	}
+}
+
+void AMixingGlass::StrainerOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	strainer = Cast<AStrainer>(OtherActor);
+
+	if(strainer)
+	{
+		strainer->meshComp->SetCollisionProfileName(FName("Strainer"));
+		bStrainerOn = false;
+		strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	}
 }

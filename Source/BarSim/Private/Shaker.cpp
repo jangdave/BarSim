@@ -6,6 +6,7 @@
 #include "MixedDrop.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "ShakerLid.h"
 #include "ShakerStrainer.h"
 #include "Components/SphereComponent.h"
 
@@ -22,6 +23,7 @@ void AShaker::BeginPlay()
 	Super::BeginPlay();
 
 	sphereComp->OnComponentBeginOverlap.AddDynamic(this, &AShaker::StrainerOverlap);
+	sphereComp->OnComponentEndOverlap.AddDynamic(this, &AShaker::StrainerOverlapEnd);
 }
 
 void AShaker::Tick(float DeltaSeconds)
@@ -30,7 +32,17 @@ void AShaker::Tick(float DeltaSeconds)
 	
 	float dot = FVector::DotProduct(GetActorUpVector(), upVector);
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
-	float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
+	//float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
+	float streamWidth = 10.0f;
+
+	if(strainer)
+	{
+		bLidOn = strainer->bLidOn;
+	}
+	else
+	{
+		bLidOn = false;
+	}
 	
 	if(contents > 0)
 	{
@@ -42,11 +54,12 @@ void AShaker::Tick(float DeltaSeconds)
 			if(!bStreamOn)
 			{
 				//UE_LOG(LogTemp, Warning, TEXT("streamOn"));
-				if(strainer)
+				if(strainer && bStrainerOn && !bLidOn)
 				{
 					waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, strainer->streamPoint, GetActorRotation());
 					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 					waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+					waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 					//물방울 액터 스폰
 					AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, strainer->streamPoint, GetActorRotation());
 					mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
@@ -77,10 +90,11 @@ void AShaker::Tick(float DeltaSeconds)
 				//이미 물줄기가 스폰된 상태라면 물줄기 두께 변경, 
 				if(waterStream)
 				{
-					if(strainer)
+					if(strainer && bStrainerOn && !bLidOn)
 					{
 						waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 						waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+						waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 						
 						waterStream->SetRelativeLocation(strainer->streamPoint);
 						waterStream->SetRelativeRotation(GetActorRotation());
@@ -171,11 +185,24 @@ void AShaker::LiquorScale()
 void AShaker::StrainerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult)
 {
 	strainer = Cast<AShakerStrainer>(OtherActor);
-
+	
 	if(strainer)
 	{
 		strainer->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
 		strainer->meshComp->SetCollisionProfileName(FName("Overlapped"));
-		UE_LOG(LogTemp, Warning, TEXT("strainer assembled"));
+		bStrainerOn = true;
+	}
+}
+
+void AShaker::StrainerOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	strainer = Cast<AShakerStrainer>(OtherActor);
+
+	if(strainer)
+	{
+		strainer->meshComp->SetCollisionProfileName(FName("Strainer"));
+		bStrainerOn = false;
+		strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		strainer = nullptr;
 	}
 }

@@ -75,6 +75,21 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	float limeInside;
 
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	float rumInside;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	float sugarInside;
+
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	float vermouthInside;
+
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	float campariInside;
+
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	float whiskeyInside;
+
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	int iceCount = 0;
 

@@ -72,6 +72,16 @@ public:
 	UFUNCTION()
 	void StrainerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult);
 
-	UPROPERTY()
+	UFUNCTION()
+	void StrainerOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	
+	UPROPERTY(EditAnywhere, Category = "Shaker")
 	class AShakerStrainer* strainer;
+
+	UPROPERTY(EditAnywhere, Category = "Shaker")
+	bool bStrainerOn;
+
+	UPROPERTY(EditAnywhere, Category = "Shaker")
+	bool bLidOn;
 };
+
