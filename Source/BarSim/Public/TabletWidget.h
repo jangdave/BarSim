@@ -17,6 +17,7 @@ class BARSIM_API UTabletWidget : public UUserWidget
 public:
 	virtual void NativeConstruct() override;
 
+	UPROPERTY()
 	class ASpawnManager* spawnmg;
 	
 	// 테블렛 상단바

@@ -5,6 +5,7 @@
 #include "BarGameInstance.h"
 #include "Chair.h"
 #include "CustomerCharacter.h"
+#include "CustomerFSM.h"
 #include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -33,7 +34,7 @@ void ASpawnManager::BeginPlay()
 void ASpawnManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+
 }
 
 void ASpawnManager::CheckChairSit()
@@ -79,7 +80,7 @@ void ASpawnManager::SpawnCustom()
 	auto gameInstance = Cast<UBarGameInstance>(GetGameInstance());
 
 	// 날짜가 지난만큼 더 많이 스폰
-	int32 idx = gameInstance->checkDayCount * 3 - 3;
+	int32 idx = (gameInstance->checkDayCount - 1) * 4;
 
 	// 전체 손님 수가 지정한 숫자보다 작을때
 	if(checkCustomerNum < idx)
@@ -111,8 +112,34 @@ void ASpawnManager::GetCustomerIdx(int32 orderIdx, int32 idx)
 	orderCoctailIdx[idx] = orderIdx;
 }
 
+void ASpawnManager::AllOut()
+{
+	// 모든 손님을 나가게 한다
+	for(TActorIterator<ACustomerCharacter> customer(GetWorld()); customer; ++customer)
+	{
+		auto cus = *customer;
+
+		if(cus->customerFSM->state == ECustomerState::SIT)
+		{
+			cus->customerFSM->SetSitState(ECustomerSitState::READYLEAVE);
+		}
+		else
+		{
+			cus->customerFSM->SetState(ECustomerState::LEAVE);
+		}
+	}
+
+	// 올드팔 스폰
+	SpawnOldPal();
+}
+
+void ASpawnManager::SpawnOldPal()
+{
+	
+}
+
 // 점수 체크------------------------------------------------------------------------------------------------------------
-void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool bStirred, bool bStirredLater, bool bShaked, int32 cutomerIdx)
+void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx)
 {
 	for(int i = 0; i<cocName.Num(); i++)
 	{
@@ -144,30 +171,30 @@ void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool
 
 	if(amountOfGin > 0)
 	{
-		CheckGin(cocName, bStirred, bStirredLater, cutomerIdx);
+		CheckGin(cocName, bStirred, bStirredLater, customerIdx);
 	}
 	else if(amountOfRum > 0)
 	{
-		CheckRum(cocName, bStirred, bStirredLater, bShaked, cutomerIdx);
+		CheckRum(cocName, bStirred, bStirredLater, bShake, customerIdx);
 	}
 	else if(amountOfWhisky > 0)
 	{
-		CheckWhisky(cocName, bStirred, bStirredLater, cutomerIdx);
+		CheckWhisky(cocName, bStirred, bStirredLater, customerIdx);
 	}
 	else
 	{
-		SomethingElse(cutomerIdx);
+		SomethingElse(customerIdx);
 	}
 }
 
-void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 cutomerIdx)
+void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx)
 {
 	// 진라임 판정
 	if(amountOfLime > 0 && amountOfVermouth <= 0 && amountOfCampari <= 0)
 	{
 		if(cocName.Num() == GinLime.Num())
 		{
-			CheckGinLime(cutomerIdx);
+			CheckGinLime(customerIdx);
 		}
 	}
 	// 마티니 판정
@@ -188,18 +215,18 @@ void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirr
 				orderScore -= 30;
 			}
 			
-			CheckMartini(cutomerIdx);
+			CheckMartini(customerIdx);
 		}
 	}
 	// 레시피 범위 밖
 	else
 	{
-		SomethingElse(cutomerIdx);
+		SomethingElse(customerIdx);
 	}
 	
 }
 
-void ASpawnManager::CheckWhisky(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 cutomerIdx)
+void ASpawnManager::CheckWhisky(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx)
 {
 	// 올드팔 판정
 	if(amountOfVermouth > 0 && amountOfCampari > 0 && amountOfLime <= 0)
@@ -219,17 +246,17 @@ void ASpawnManager::CheckWhisky(TArray<FString> cocName, bool bStirred, bool bSt
 				orderScore -= 30;
 			}
 			
-			CheckOldPal(cutomerIdx);
+			CheckOldPal(customerIdx);
 		}		
 	}
 	// 레시피 범위 밖
 	else
 	{
-		SomethingElse(cutomerIdx);
+		SomethingElse(customerIdx);
 	}
 }
 
-void ASpawnManager::CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShaked, int32 cutomerIdx)
+void ASpawnManager::CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShaked, int32 customerIdx)
 {
 	// 다이커리 판정
 	if(amountOfLime > 0)
@@ -258,17 +285,17 @@ void ASpawnManager::CheckRum(TArray<FString> cocName, bool bStirred, bool bStirr
 				orderScore -= 25;
 			}
 			
-			CheckDaiquiri(cutomerIdx);
+			CheckDaiquiri(customerIdx);
 		}		
 	}
 	// 레시피 범위 밖
 	else
 	{
-		SomethingElse(cutomerIdx);
+		SomethingElse(customerIdx);
 	}
 }
 
-void ASpawnManager::CheckGinLime(int32 cutomerIdx)
+void ASpawnManager::CheckGinLime(int32 customerIdx)
 {
 	float ginLime = amountOfLime + amountOfGin;
 
@@ -327,17 +354,21 @@ void ASpawnManager::CheckGinLime(int32 cutomerIdx)
 		orderScore -= 20;
 	}
 
-	if(orderCoctailIdx[cutomerIdx] == 1)
+	if(orderCoctailIdx[customerIdx] == 1)
 	{
-		//aChairs[cutomerIdx]->ViewScore();
+		aChairs[customerIdx]->ViewScore(orderScore);
+
+		aChairs[customerIdx]->SameOrder();
 	}
 	else
 	{
-		
+		aChairs[customerIdx]->UnSameOrder();
+
+		orderScore = 100;
 	}
 }
 
-void ASpawnManager::CheckMartini(int32 cutomerIdx)
+void ASpawnManager::CheckMartini(int32 customerIdx)
 {
 	float martini = amountOfVermouth + amountOfGin;
 
@@ -396,17 +427,21 @@ void ASpawnManager::CheckMartini(int32 cutomerIdx)
 		orderScore -= 10;
 	}
 
-	if(orderCoctailIdx[cutomerIdx] == 3)
+	if(orderCoctailIdx[customerIdx] == 3)
 	{
-		//aChairs[cutomerIdx]->ViewScore();
+		aChairs[customerIdx]->ViewScore(orderScore);
+
+		aChairs[customerIdx]->SameOrder();
 	}
 	else
 	{
-		
+		aChairs[customerIdx]->UnSameOrder();
+
+		orderScore = 100;
 	}
 }
 
-void ASpawnManager::CheckOldPal(int32 cutomerIdx)
+void ASpawnManager::CheckOldPal(int32 customerIdx)
 {
 	float oldPal = amountOfCampari + amountOfVermouth + amountOfWhisky;
 
@@ -484,17 +519,21 @@ void ASpawnManager::CheckOldPal(int32 cutomerIdx)
 		orderScore -= 10;
 	}
 
-	if(orderCoctailIdx[cutomerIdx] == 4)
+	if(orderCoctailIdx[customerIdx] == 4)
 	{
-		//aChairs[cutomerIdx]->ViewScore();
+		aChairs[customerIdx]->ViewScore(orderScore);
+
+		aChairs[customerIdx]->SameOrder();
 	}
 	else
 	{
+		aChairs[customerIdx]->UnSameOrder();
 		
+		orderScore = 100;
 	}
 }
 
-void ASpawnManager::CheckDaiquiri(int32 cutomerIdx)
+void ASpawnManager::CheckDaiquiri(int32 customerIdx)
 {
 	float daiquiri = amountOfLime + amountOfRum;
 
@@ -553,19 +592,21 @@ void ASpawnManager::CheckDaiquiri(int32 cutomerIdx)
 		orderScore -= 10;
 	}
 
-	if(orderCoctailIdx[cutomerIdx] == 2)
+	if(orderCoctailIdx[customerIdx] == 2)
 	{
-		//aChairs[cutomerIdx]->ViewScore();
+		aChairs[customerIdx]->ViewScore(orderScore);
+
+		aChairs[customerIdx]->SameOrder();
 	}
 	else
 	{
-		
+		aChairs[customerIdx]->UnSameOrder();
+
+		orderScore = 100;
 	}
 }
 
-void ASpawnManager::SomethingElse(int32 cutomerIdx)
+void ASpawnManager::SomethingElse(int32 customerIdx)
 {
-	orderScore = 0;
-
-	// 반납하기
+	aChairs[customerIdx]->UnSameOrder();
 }

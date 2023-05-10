@@ -33,6 +33,8 @@ void UTabletWidget::OpenStore()
 
 void UTabletWidget::CloseStore()
 {
+	//spawnmg->AllOut();
+	
 	UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
 }
 

@@ -12,11 +12,11 @@ AOldPalCharacter::AOldPalCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//ConstructorHelpers::FClassFinder<UAnimInstance> tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Jang/ABP_OldPalAnim.ABP_OldPalAnim_C'"));
-	//if(tempAnim.Succeeded())
-	//{
-	//	GetMesh()->SetAnimInstanceClass(tempAnim.Class);
-	//}
+	ConstructorHelpers::FClassFinder<UAnimInstance> tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Jang/ABP_OldPalAnim.ABP_OldPalAnim_C'"));
+	if(tempAnim.Succeeded())
+	{
+		GetMesh()->SetAnimInstanceClass(tempAnim.Class);
+	}
 	
 	oldPalFSM = CreateDefaultSubobject<UOldPalFSM>(TEXT("oldPalFSM"));
 

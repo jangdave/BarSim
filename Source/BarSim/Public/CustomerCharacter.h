@@ -32,9 +32,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	class UCustomerAnimInstance* customerAnim;
 
-	UPROPERTY()
-	class ASpawnManager* spawnManager;
-
 	// 주문시 나타날 위젯 컴포넌트
 	UPROPERTY(EditAnywhere, Category=Widget)
 	class UWidgetComponent* orderWidget;
@@ -46,13 +43,19 @@ public:
 	// 스폰시 메쉬 설정 함수
 	void SetMesh();
 
-	int32 checkMeshCount = 3;
-	
-	int32 SetRandRange(int32 idxStart, int32 idxEnd);
-
 	// 남성 메쉬
 	TArray<ConstructorHelpers::FObjectFinder<USkeletalMesh>> manMesh;
 
 	// 여성 메쉬
 	TArray<ConstructorHelpers::FObjectFinder<USkeletalMesh>> womenMesh;
+
+	// 캐릭터 컵 오버랩 바인드 함수
+	UFUNCTION()
+	void BindOverlap();
+
+	UPROPERTY()
+	class ACupBase* cup;
+
+	UFUNCTION()
+	void DetachCup();
 };

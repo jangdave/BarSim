@@ -68,9 +68,15 @@ public:
 	UFUNCTION()
 	void GetCustomerIdx(int32 orderIdx, int32 idx);
 
+	UFUNCTION()
+	void AllOut();
+
+	UFUNCTION()
+	void SpawnOldPal();
+
 	// 점수 체크------------------------------------------------------------------------------------
 public:
-	void GetCup(TArray<FString> cocName, TArray<float> cocliter, bool bStirred, bool bStirredLater, bool bShaked, int32 cutomerIdx);
+	void GetCup(TArray<FString> cocName, TArray<float> cocLiter, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx);
 
 	TArray<FString> GinLime = {"Gin", "Lime"};
 
@@ -94,20 +100,20 @@ public:
 
 	int32 orderScore = 100;
 	
-	void CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 cutomerIdx);
+	void CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx);
 
-	void CheckWhisky(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 cutomerIdx);
+	void CheckWhisky(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx);
 
-	void CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShaked, int32 cutomerIdx);
+	void CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx);
 
-	void CheckGinLime(int32 cutomerIdx);
+	void CheckGinLime(int32 customerIdx);
 
-	void CheckMartini(int32 cutomerIdx);
+	void CheckMartini(int32 customerIdx);
 
-	void CheckOldPal(int32 cutomerIdx);
+	void CheckOldPal(int32 customerIdx);
 
-	void CheckDaiquiri(int32 cutomerIdx);
+	void CheckDaiquiri(int32 customerIdx);
 
-	void SomethingElse(int32 cutomerIdx);
+	void SomethingElse(int32 customerIdx);
 	
 };

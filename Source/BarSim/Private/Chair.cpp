@@ -85,9 +85,9 @@ void AChair::OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	auto coaster = Cast<ACoaster>(OtherActor);
-	auto coctail = Cast<ACupBase>(OtherActor);
+	coctail = Cast<ACupBase>(OtherActor);
 
-	if(coctail != nullptr)
+	if(coctail != nullptr && bOnceOverlap != true)
 	{
 		bCheckCoctail = true;
 
@@ -96,6 +96,8 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		if(SM != nullptr)
 		{
 			SM->GetCup(coctail->NameArray, coctail->ContentsArray, coctail->bStirred, coctail->bStirredLater, coctail->bShaked, customerIdx);
+
+			bOnceOverlap = true;
 		}
 	}
 	else if(coaster != nullptr)
@@ -106,8 +108,8 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 
 void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	auto coctail = Cast<ACupBase>(OtherActor);
 	auto coaster = Cast<ACoaster>(OtherActor);
+	coctail = Cast<ACupBase>(OtherActor);
 
 	if(coctail != nullptr)
 	{
@@ -139,23 +141,33 @@ void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 	}
 }
 
-void AChair::ViewScore(int32 procedureScore, int32 ratioScore, int32 amountScore)
+void AChair::ViewScore(int32 score)
 {
-	score_UI->SetVisibility(ESlateVisibility::Visible);
-
-	totalScore = procedureScore + ratioScore + amountScore;
+	totalScore = score;
 	
-	score_UI->text_Score->SetText(FText::AsNumber(totalScore));
-
-	score_UI->text_ProcedureScore->SetText(FText::AsNumber(procedureScore));
-
-	score_UI->text_RatioScore->SetText(FText::AsNumber(ratioScore));
-
-	score_UI->text_AmountScore->SetText(FText::AsNumber(amountScore));
+	score_UI->SetVisibility(ESlateVisibility::Visible);
+	
+	score_UI->text_Score->SetText(FText::AsNumber(score));
 }
 
 void AChair::HideScore()
 {
 	score_UI->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void AChair::SameOrder()
+{
+	bSameOrder = true;
+}
+
+void AChair::UnSameOrder()
+{
+	bUnSameOrder = true;
+}
+
+void AChair::MoveCup()
+{
+	cupLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -35;
+	coctail->SetActorLocation(cupLoc);
 }
 

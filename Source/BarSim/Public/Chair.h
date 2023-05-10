@@ -46,6 +46,9 @@ public:
 
 	UPROPERTY()
 	class ASpawnManager* spawnManager;
+
+	UPROPERTY()
+	class ACupBase* coctail;
 	
 	UPROPERTY(EditAnywhere)
 	bool bCheck;
@@ -85,8 +88,28 @@ public:
 
 	// 점수 보이는 함수
 	UFUNCTION()
-	void ViewScore(int32 procedureScore, int32 ratioScore, int32 amountScore);
+	void ViewScore(int32 score);
 
 	UFUNCTION()
 	void HideScore();
+
+	UFUNCTION()
+	void SameOrder();
+
+	UFUNCTION()
+	void UnSameOrder();
+
+	UPROPERTY()
+	bool bSameOrder;
+
+	UPROPERTY()
+	bool bUnSameOrder;
+
+	UFUNCTION()
+	void MoveCup();
+
+	bool bOnceOverlap;
+
+	UPROPERTY()
+	FVector cupLoc;
 };

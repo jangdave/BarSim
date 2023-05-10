@@ -4,6 +4,7 @@
 #include "CustomerAnimInstance.h"
 #include "CustomerCharacter.h"
 #include "CustomerFSM.h"
+#include "SpawnManager.h"
 
 void UCustomerAnimInstance::NativeBeginPlay()
 {
@@ -63,30 +64,69 @@ void UCustomerAnimInstance::EndOrder()
 	owner->customerFSM->SetSitState(ECustomerSitState::WAIT);
 }
 
+void UCustomerAnimInstance::AttachCup()
+{
+	owner->BindOverlap();
+}
+
 void UCustomerAnimInstance::EndHoldCup()
 {
 	owner->customerFSM->SetSitState(ECustomerSitState::DRINK);
 }
 
-void UCustomerAnimInstance::EndDrinking()
+void UCustomerAnimInstance::EndAngry()
 {
-	//owner->customerFSM->SetSitState(ECustomerSitState::JUDGEMENT);
-}
-
-void UCustomerAnimInstance::EndBad()
-{
-	//owner->customerFSM->SetState(ECustomerState::LEAVE);
+	if(owner->customerFSM->spawnManager->aChairs[owner->customerFSM->idx]->bSameOrder == true)
+	{
+		owner->customerFSM->SetSitState(ECustomerSitState::READYLEAVE);
+	}
+	else if(owner->customerFSM->spawnManager->aChairs[owner->customerFSM->idx]->bUnSameOrder == true)
+	{
+		if(owner->customerFSM->bCheckOrder != true)
+		{
+			owner->customerFSM->SetSitState(ECustomerSitState::ORDERJUDGE);
+		}
+		else
+		{
+			owner->customerFSM->SetSitState(ECustomerSitState::READYLEAVE);
+		}
+	}
 }
 
 void UCustomerAnimInstance::EndGood()
 {
-	//owner->customerFSM->SetState(ECustomerState::LEAVE);
+	owner->customerFSM->SetSitState(ECustomerSitState::READYLEAVE);
+}
+
+void UCustomerAnimInstance::EndLeaveSit()
+{
+	owner->customerFSM->SetState(ECustomerState::LEAVE);
 }
 
 //-------------------------------------------------------------------------------------drink
 void UCustomerAnimInstance::OnDrinkAnim(FName sectionName)
 {
 	owner->PlayAnimMontage(customerDrinkMontageFactory, 1, sectionName);
+}
+
+void UCustomerAnimInstance::EndCheers()
+{
+	owner->customerFSM->SetDrinkState(ECustomerDrinkState::DRINK);
+}
+
+void UCustomerAnimInstance::EndDrinkAllLittle()
+{
+	owner->customerFSM->SetDrinkState(ECustomerDrinkState::DRINK);
+}
+
+void UCustomerAnimInstance::DetachCup()
+{
+	owner->DetachCup();
+}
+
+void UCustomerAnimInstance::EndUnHoldCup()
+{
+	owner->customerFSM->SetSitState(ECustomerSitState::TASTEJUDGE);
 }
 
 
