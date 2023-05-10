@@ -34,4 +34,10 @@ public:
 
 	UFUNCTION()
 	void DropDestroy();
+
+	UFUNCTION()
+	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult);
+
+	UPROPERTY()
+	class ACupBase* cup;
 };

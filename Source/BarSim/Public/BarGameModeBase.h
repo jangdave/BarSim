@@ -21,49 +21,7 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	void GetCup(TArray<FString> cocName, TArray<float> cocliter);
+	UPROPERTY()
+	int32 checkMeshCount = 3; 
 
-	TArray<FString> GinLime = {"Gin", "Lime"};
-
-	TArray<FString> Martini = {"Gin", "Vermouth"};
-
-	TArray<FString> OldPal = {"Whisky", "Vermouth", "Campari"};
-
-	TArray<FString> Daiquiri = {"Rum", "Lime"};
-	
-	float amountOfRum;
-
-	float amountOfGin;
-
-	float amountOfWhisky;
-
-	float amountOfLime;
-	
-	float amountOfVermouth;
-	
-	float amountOfCampari;
-
-	int32 orderScore = 40;
-	
-	int32 procedureScore = 20;
-
-	int32 ratioScore = 30;
-
-	int32 amountScore = 10;
-
-	void CheckGin(TArray<FString> cocName);
-
-	void CheckWhisky(TArray<FString> cocName);
-
-	void CheckRum(TArray<FString> cocName);
-
-	void CheckGinLime();
-
-	void CheckMartini();
-
-	void CheckOldPal();
-
-	void CheckDaiquiri();
-
-	void SomethingElse();
 };

@@ -2,12 +2,12 @@
 
 
 #include "CustomerCharacter.h"
+#include "BarGameModeBase.h"
+#include "CupBase.h"
 #include "CustomerAnimInstance.h"
 #include "CustomerFSM.h"
 #include "CustomerOrderWidget.h"
-#include "SpawnManager.h"
 #include "Components/WidgetComponent.h"
-#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ACustomerCharacter::ACustomerCharacter()
@@ -54,7 +54,7 @@ ACustomerCharacter::ACustomerCharacter()
 	{
 		GetMesh()->SetAnimInstanceClass(tempAnim.Class);
 	}
-	
+
 	customerFSM = CreateDefaultSubobject<UCustomerFSM>(TEXT("costomerFSM"));
 
 	orderWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("orderWidget"));
@@ -69,8 +69,6 @@ void ACustomerCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	customerAnim = Cast<UCustomerAnimInstance>(GetMesh()->GetAnimInstance());
-
-	spawnManager = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
 
 	order_UI = Cast<UCustomerOrderWidget>(orderWidget->GetUserWidgetObject());
 	
@@ -93,15 +91,17 @@ void ACustomerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 void ACustomerCharacter::SetMesh()
 {
-	int32 idx = SetRandRange(1, 10);
+	int32 idx = customerFSM->SetRandRange(1, 10);
 
+	auto gm = Cast<ABarGameModeBase>(GetWorld()->GetAuthGameMode());
+	
 	// 5보다 크면 여자
 	if(idx > 5)
 	{
-		int32 womanIdx = SetRandRange(0, 2);
+		int32 womanIdx = customerFSM->SetRandRange(0, 2);
 
 		// 전에 나온 것과 똑같지 않으면
-		if(womanIdx != checkMeshCount)
+		if(womanIdx != gm->checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(womenMesh[womanIdx].Object);
 
@@ -110,7 +110,7 @@ void ACustomerCharacter::SetMesh()
 				GetMesh()->SetRelativeScale3D(FVector(1.1));
 			}
 			
-			checkMeshCount = womanIdx;
+			gm->checkMeshCount = womanIdx;
 		}
 		// 똑같다면
 		else
@@ -121,14 +121,14 @@ void ACustomerCharacter::SetMesh()
 	// 5보다 작거나 같으면 남자
 	else
 	{
-		int32 manIdx = SetRandRange(0, 2);
+		int32 manIdx = customerFSM->SetRandRange(0, 2);
 
 		// 전에 나온 것과 똑같지 않으면
-		if(manIdx != checkMeshCount)
+		if(manIdx != gm->checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(manMesh[manIdx].Object);
 			
-			checkMeshCount = manIdx;
+			gm->checkMeshCount = manIdx;
 		}
 		// 똑같다면
 		else
@@ -138,11 +138,34 @@ void ACustomerCharacter::SetMesh()
 	}
 }
 
-// 랜덤 함수
-int32 ACustomerCharacter::SetRandRange(int32 idxStart, int32 idxEnd)
+void ACustomerCharacter::BindOverlap()
 {
-	int32 result = FMath::RandRange(idxStart, idxEnd);
+	TArray<FOverlapResult> hitsInfo;
+	FVector centerLoc = GetMesh()->GetSocketLocation(TEXT("hand_rSocket"));
+	FQuat centerRot = GetMesh()->GetSocketQuaternion(TEXT("hand_rSocket"));
+	FCollisionObjectQueryParams params;
+	FCollisionShape checkShape = FCollisionShape::MakeSphere(20);
+	params.AddObjectTypesToQuery(ECC_GameTraceChannel9);
+	
+	GetWorld()->OverlapMultiByObjectType(hitsInfo, centerLoc, centerRot, params, checkShape);
+	for(FOverlapResult hitInfo : hitsInfo)
+	{
+		cup = Cast<ACupBase>(hitInfo.GetActor());
 
-	return result;
+		if(cup != nullptr)
+		{
+			cup->cupComp->SetSimulatePhysics(false);
+			
+			cup->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, "hand_rSocket");
+		}
+	}
+
+	DrawDebugSphere(GetWorld(), centerLoc, 20, 1, FColor::Yellow, false, 1);
 }
 
+void ACustomerCharacter::DetachCup()
+{
+	cup->DetachAllSceneComponents(GetMesh(), FDetachmentTransformRules::KeepWorldTransform);
+
+	cup->cupComp->SetSimulatePhysics(true);
+}

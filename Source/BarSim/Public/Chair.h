@@ -32,11 +32,23 @@ public:
 	UPROPERTY(EditAnywhere, Category=Widget)
 	class UWidgetComponent* coctailWidget;
 
+	UPROPERTY(EditAnywhere, Category=ChairSetting)
+	class USceneComponent* sitComp;
+	
+	UPROPERTY(EditAnywhere, Category=CocktailZone)
+	class UBoxComponent* coctailBoxComp;
+
+	UPROPERTY(EditAnywhere, Category=PlayerZone)
+	class UBoxComponent* playerBoxComp;
+
 	UPROPERTY()
 	class UCoctailScoreWidget* score_UI;
 
-	UPROPERTY(EditAnywhere, Category=ChairSetting)
-	class USceneComponent* sitComp;
+	UPROPERTY()
+	class ASpawnManager* spawnManager;
+
+	UPROPERTY()
+	class ACupBase* coctail;
 	
 	UPROPERTY(EditAnywhere)
 	bool bCheck;
@@ -52,28 +64,52 @@ public:
 
 	UPROPERTY()
 	int32 totalScore;
+
+	UPROPERTY()
+	int32 customerIdx;
 	
-	UPROPERTY(EditAnywhere, Category=CocktailZone)
-	class UBoxComponent* coctailBoxComp;
+	// 손님 오버랩 함수
+	UFUNCTION()
+	void OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
-	UPROPERTY(EditAnywhere, Category=PlayerZone)
-	class UBoxComponent* playerBoxComp;
-
+	// 컵 오버랩 함수
 	UFUNCTION()
 	void OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
 	UFUNCTION()
 	void EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	// 플레이어 오버랩 함수
 	UFUNCTION()
 	void OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
 	UFUNCTION()
 	void EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	// 점수 보이는 함수
 	UFUNCTION()
-	void ViewScore(int32 procedureScore, int32 ratioScore, int32 amountScore);
+	void ViewScore(int32 score);
 
 	UFUNCTION()
 	void HideScore();
+
+	UFUNCTION()
+	void SameOrder();
+
+	UFUNCTION()
+	void UnSameOrder();
+
+	UPROPERTY()
+	bool bSameOrder;
+
+	UPROPERTY()
+	bool bUnSameOrder;
+
+	UFUNCTION()
+	void MoveCup();
+
+	bool bOnceOverlap;
+
+	UPROPERTY()
+	FVector cupLoc;
 };

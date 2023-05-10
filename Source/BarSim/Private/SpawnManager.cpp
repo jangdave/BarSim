@@ -5,6 +5,8 @@
 #include "BarGameInstance.h"
 #include "Chair.h"
 #include "CustomerCharacter.h"
+#include "CustomerFSM.h"
+#include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -20,58 +22,19 @@ void ASpawnManager::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// 맵 상의 모든 의자 확인
 	CheckChairSit();
 
-	//FTimerHandle check;
-	//GetWorldTimerManager().SetTimer(check, this, &ASpawnManager::CheckArray, 0.1, true);
+	// 일정 시간마다 배열 초기화
+	FTimerHandle check;
+	GetWorldTimerManager().SetTimer(check, this, &ASpawnManager::CheckArray, 0.1, true);
 }
 
 // Called every frame
 void ASpawnManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-}
 
-void ASpawnManager::SpawnCustom()
-{
-	auto gameInstance = Cast<UBarGameInstance>(GetGameInstance());
-
-	int32 idx = gameInstance->checkDayCount * 3 - 3;
-	
-	if(checkCustomerNum < idx)
-	{
-		for(int i = 0; i<bIsSit.Num(); i++)
-		{
-			if(bIsSit[i] != true)
-			{
-				bCheckSit = true;
-			}
-		}
-		if(bCheckSit != false)
-		{
-			GetWorld()->SpawnActor<ACustomerCharacter>(customerFactory, GetActorLocation(), GetActorRotation());
-
-			checkCustomerNum++;
-			
-			bCheckSit = false;
-		}
-	}
-}
-
-void ASpawnManager::CheckArray()
-{
-	bIsCoctail.Empty();
-	bIsPlayer.Empty();
-	bIsCoaster.Empty();
-	
-	for(int i = 0; i<chairs.Num(); i++)
-	{
-		auto temp = Cast<AChair>(chairs[i]);
-		bIsCoctail.Add(temp->bCheckCoctail);
-		bIsCoaster.Add(temp->bCheckCoaster);
-		bIsPlayer.Add(temp->bCheckPlayer);
-	}
 }
 
 void ASpawnManager::CheckChairSit()
@@ -79,12 +42,29 @@ void ASpawnManager::CheckChairSit()
 	// 인스턴스 상에 있는 모든 의자를 배열에 담는다
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AChair::StaticClass(), chairs);
 
-	// bIsSit 이라는 bool 배열에 의자 클래스의 변수를 담는다
+	// bIsSit 이라는 bool 배열에 의자가 비어 있는지 아닌지를 담는다
 	for(int i = 0; i<chairs.Num(); i++)
 	{
 		auto temp = Cast<AChair>(chairs[i]);
 		bIsSit.Add(temp->bCheck);
 		aChairs.Add(temp);
+	}
+}
+
+void ASpawnManager::CheckArray()
+{
+	// 배열을 초기화 하고
+	bIsCoctail.Empty();
+	bIsPlayer.Empty();
+	bIsCoaster.Empty();
+
+	// 모든 의자들을 확인해서 인자들 다시 채우기
+	for(int i = 0; i<chairs.Num(); i++)
+	{
+		auto temp = Cast<AChair>(chairs[i]);
+		bIsCoctail.Add(temp->bCheckCoctail);
+		bIsCoaster.Add(temp->bCheckCoaster);
+		bIsPlayer.Add(temp->bCheckPlayer);
 	}
 }
 
@@ -95,3 +75,538 @@ void ASpawnManager::SpawnCustomer()
 	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 2, true);
 }
 
+void ASpawnManager::SpawnCustom()
+{
+	auto gameInstance = Cast<UBarGameInstance>(GetGameInstance());
+
+	// 날짜가 지난만큼 더 많이 스폰
+	int32 idx = (gameInstance->checkDayCount - 1) * 4;
+
+	// 전체 손님 수가 지정한 숫자보다 작을때
+	if(checkCustomerNum < idx)
+	{
+		for(int i = 0; i<bIsSit.Num(); i++)
+		{
+			// 빈자리가 있으면
+			if(bIsSit[i] != true)
+			{
+				bCheckSit = true;
+			}
+		}
+		// 손님을 스폰하고
+		if(bCheckSit != false)
+		{
+			GetWorld()->SpawnActor<ACustomerCharacter>(customerFactory, GetActorLocation(), GetActorRotation());
+
+			// 한명씩 카운트하기
+			checkCustomerNum++;
+
+			// 빈자리 채움
+			bCheckSit = false;
+		}
+	}
+}
+
+void ASpawnManager::GetCustomerIdx(int32 orderIdx, int32 idx)
+{
+	orderCoctailIdx[idx] = orderIdx;
+}
+
+void ASpawnManager::AllOut()
+{
+	// 모든 손님을 나가게 한다
+	for(TActorIterator<ACustomerCharacter> customer(GetWorld()); customer; ++customer)
+	{
+		auto cus = *customer;
+
+		if(cus->customerFSM->state == ECustomerState::SIT)
+		{
+			cus->customerFSM->SetSitState(ECustomerSitState::READYLEAVE);
+		}
+		else
+		{
+			cus->customerFSM->SetState(ECustomerState::LEAVE);
+		}
+	}
+
+	// 올드팔 스폰
+	SpawnOldPal();
+}
+
+void ASpawnManager::SpawnOldPal()
+{
+	
+}
+
+// 점수 체크------------------------------------------------------------------------------------------------------------
+void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx)
+{
+	for(int i = 0; i<cocName.Num(); i++)
+	{
+		if(cocName[i] == "Whisky")
+		{
+			amountOfWhisky += cocliter[i];
+		}
+		else if(cocName[i] == "Rum")
+		{
+			amountOfRum += cocliter[i];
+		}
+		else if(cocName[i] == "Gin")
+		{
+			amountOfGin += cocliter[i];
+		}
+		else if(cocName[i] == "Vermouth")
+		{
+			amountOfVermouth += cocliter[i];
+		}
+		else if(cocName[i] == "Lime")
+		{
+			amountOfLime += cocliter[i];
+		}
+		else if(cocName[i] == "Campari")
+		{
+			amountOfCampari += cocliter[i];
+		}
+	}
+
+	if(amountOfGin > 0)
+	{
+		CheckGin(cocName, bStirred, bStirredLater, customerIdx);
+	}
+	else if(amountOfRum > 0)
+	{
+		CheckRum(cocName, bStirred, bStirredLater, bShake, customerIdx);
+	}
+	else if(amountOfWhisky > 0)
+	{
+		CheckWhisky(cocName, bStirred, bStirredLater, customerIdx);
+	}
+	else
+	{
+		SomethingElse(customerIdx);
+	}
+}
+
+void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx)
+{
+	// 진라임 판정
+	if(amountOfLime > 0 && amountOfVermouth <= 0 && amountOfCampari <= 0)
+	{
+		if(cocName.Num() == GinLime.Num())
+		{
+			CheckGinLime(customerIdx);
+		}
+	}
+	// 마티니 판정
+	else if(amountOfVermouth > 0 && amountOfLime <= 0 && amountOfCampari <= 0)
+	{
+		if(cocName.Num() == Martini.Num())
+		{
+			if(bStirred != false && bStirredLater != true)
+			{
+				orderScore -= 0;
+			}
+			else if(bStirred != false && bStirredLater != false)
+			{
+				orderScore -= 10;
+			}
+			else
+			{
+				orderScore -= 30;
+			}
+			
+			CheckMartini(customerIdx);
+		}
+	}
+	// 레시피 범위 밖
+	else
+	{
+		SomethingElse(customerIdx);
+	}
+	
+}
+
+void ASpawnManager::CheckWhisky(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx)
+{
+	// 올드팔 판정
+	if(amountOfVermouth > 0 && amountOfCampari > 0 && amountOfLime <= 0)
+	{
+		if(cocName.Num() == OldPal.Num())
+		{
+			if(bStirred != false && bStirredLater != true)
+			{
+				orderScore -= 0;
+			}
+			else if(bStirred != false && bStirredLater != false)
+			{
+				orderScore -= 10;
+			}
+			else
+			{
+				orderScore -= 30;
+			}
+			
+			CheckOldPal(customerIdx);
+		}		
+	}
+	// 레시피 범위 밖
+	else
+	{
+		SomethingElse(customerIdx);
+	}
+}
+
+void ASpawnManager::CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShaked, int32 customerIdx)
+{
+	// 다이커리 판정
+	if(amountOfLime > 0)
+	{
+		if(cocName.Num() == Daiquiri.Num())
+		{
+			if(bStirred != false && bStirredLater != true)
+			{
+				orderScore -= 0;
+			}
+			else if(bStirred != false && bStirredLater != false)
+			{
+				orderScore -= 10;
+			}
+			else
+			{
+				orderScore -= 25;
+			}
+
+			if(bShaked != false)
+			{
+				orderScore -= 0;
+			}
+			else
+			{
+				orderScore -= 25;
+			}
+			
+			CheckDaiquiri(customerIdx);
+		}		
+	}
+	// 레시피 범위 밖
+	else
+	{
+		SomethingElse(customerIdx);
+	}
+}
+
+void ASpawnManager::CheckGinLime(int32 customerIdx)
+{
+	float ginLime = amountOfLime + amountOfGin;
+
+	float ginRatio = amountOfGin/ginLime;
+
+	float limeRatio = amountOfLime/ginLime;
+	
+	if(ginRatio > 0.71 && ginRatio < 0.79)
+	{
+		orderScore -= 0;
+	}
+	else if(ginRatio > 0.6 && ginRatio <= 0.71)
+	{
+		orderScore -= 15;
+	}
+	else if(ginRatio < 0.9 && ginRatio >= 0.79)
+	{
+		orderScore -= 15;
+	}
+	else
+	{
+		orderScore -= 30;
+	}
+
+	if(limeRatio > 0.23 && limeRatio < 0.27)
+	{
+		orderScore -= 0;
+	}
+	else if(limeRatio > 0.2 && limeRatio <= 0.23)
+	{
+		orderScore -= 15;
+	}
+	else if(limeRatio < 0.3 && limeRatio >= 0.27)
+	{
+		orderScore -= 15;
+	}
+	else
+	{
+		orderScore -= 30;
+	}
+
+	if(ginLime > 1.9 && ginLime < 2.1)
+	{
+		orderScore -= 0;
+	}
+	else if(ginLime > 1.8 && ginLime <= 1.9)
+	{
+		orderScore -= 10;
+	}
+	else if(ginLime < 2.2 && ginLime >= 2.1)
+	{
+		orderScore -= 10;
+	}
+	else
+	{
+		orderScore -= 20;
+	}
+
+	if(orderCoctailIdx[customerIdx] == 1)
+	{
+		aChairs[customerIdx]->ViewScore(orderScore);
+
+		aChairs[customerIdx]->SameOrder();
+	}
+	else
+	{
+		aChairs[customerIdx]->UnSameOrder();
+
+		orderScore = 100;
+	}
+}
+
+void ASpawnManager::CheckMartini(int32 customerIdx)
+{
+	float martini = amountOfVermouth + amountOfGin;
+
+	float ginRatio = amountOfGin/martini;
+
+	float vermouthRatio = amountOfVermouth/martini;
+	
+	if(ginRatio > 0.82 && ginRatio < 0.9)
+	{
+		orderScore -= 0;
+	}
+	else if(ginRatio > 0.77 && ginRatio <= 0.82)
+	{
+		orderScore -= 15;
+	}
+	else if(ginRatio < 0.95 && ginRatio >= 0.9)
+	{
+		orderScore -= 15;
+	}
+	else
+	{
+		orderScore -= 30;
+	}
+
+	if(vermouthRatio > 0.13 && vermouthRatio < 0.15)
+	{
+		orderScore -= 0;
+	}
+	else if(vermouthRatio > 0.12 && vermouthRatio <= 0.13)
+	{
+		orderScore -= 15;
+	}
+	else if(vermouthRatio < 0.16 && vermouthRatio >= 0.15)
+	{
+		orderScore -= 15;
+	}
+	else
+	{
+		orderScore -= 30;
+	}
+
+	if(martini > 2.1 && martini < 2.6)
+	{
+		orderScore -= 0;
+	}
+	else if(martini > 2.0 && martini <= 2.1)
+	{
+		orderScore -= 5;
+	}
+	else if(martini < 2.7 && martini >= 2.6)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 10;
+	}
+
+	if(orderCoctailIdx[customerIdx] == 3)
+	{
+		aChairs[customerIdx]->ViewScore(orderScore);
+
+		aChairs[customerIdx]->SameOrder();
+	}
+	else
+	{
+		aChairs[customerIdx]->UnSameOrder();
+
+		orderScore = 100;
+	}
+}
+
+void ASpawnManager::CheckOldPal(int32 customerIdx)
+{
+	float oldPal = amountOfCampari + amountOfVermouth + amountOfWhisky;
+
+	float whiskyRatio = amountOfWhisky/oldPal;
+
+	float vermouthRatio = amountOfVermouth/oldPal;
+
+	float campariRatio = amountOfCampari/oldPal;
+	
+	if(whiskyRatio > 0.31 && whiskyRatio < 0.35)
+	{
+		orderScore -= 0;
+	}
+	else if(whiskyRatio > 0.3 && whiskyRatio <= 0.31)
+	{
+		orderScore -= 5;
+	}
+	else if(whiskyRatio < 0.36 && whiskyRatio >= 0.35)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 20;
+	}
+
+	if(vermouthRatio > 0.31 && vermouthRatio < 0.35)
+	{
+		orderScore -= 0;
+	}
+	else if(vermouthRatio > 0.3 && vermouthRatio <= 0.31)
+	{
+		orderScore -= 5;
+	}
+	else if(vermouthRatio < 0.36 && vermouthRatio >= 0.35)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 20;
+	}
+
+	if(campariRatio > 0.31 && campariRatio < 0.35)
+	{
+		orderScore -= 0;
+	}
+	else if(campariRatio > 0.3 && campariRatio <= 0.31)
+	{
+		orderScore -= 5;
+	}
+	else if(campariRatio < 0.36 && campariRatio >= 0.35)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 20;
+	}
+
+	if(oldPal > 2.85 && oldPal < 3.15)
+	{
+		orderScore -= 0;
+	}
+	else if(oldPal > 2.7 && oldPal <= 2.85)
+	{
+		orderScore -= 5;
+	}
+	else if(oldPal < 3.3 && oldPal >= 3.15)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 10;
+	}
+
+	if(orderCoctailIdx[customerIdx] == 4)
+	{
+		aChairs[customerIdx]->ViewScore(orderScore);
+
+		aChairs[customerIdx]->SameOrder();
+	}
+	else
+	{
+		aChairs[customerIdx]->UnSameOrder();
+		
+		orderScore = 100;
+	}
+}
+
+void ASpawnManager::CheckDaiquiri(int32 customerIdx)
+{
+	float daiquiri = amountOfLime + amountOfRum;
+
+	float rumRatio = amountOfRum/daiquiri;
+
+	float limeRatio = amountOfLime/daiquiri;
+	
+	if(rumRatio > 0.71 && rumRatio < 0.79)
+	{
+		orderScore -= 0;
+	}
+	else if(rumRatio > 0.67 && rumRatio <= 0.71)
+	{
+		orderScore -= 10;
+	}
+	else if(rumRatio < 0.82 && rumRatio >= 0.79)
+	{
+		orderScore -= 10;
+	}
+	else
+	{
+		orderScore -= 20;
+	}
+
+	if(limeRatio > 0.23 && limeRatio < 0.27)
+	{
+		orderScore -= 0;
+	}
+	else if(limeRatio > 0.22 && limeRatio <= 0.23)
+	{
+		orderScore -= 10;
+	}
+	else if(limeRatio < 0.28 && limeRatio >= 0.27)
+	{
+		orderScore -= 10;
+	}
+	else
+	{
+		orderScore -= 20;
+	}
+
+	if(daiquiri > 2.5 && daiquiri < 2.8)
+	{
+		orderScore -= 0;
+	}
+	else if(daiquiri > 2.4 && daiquiri <= 2.5)
+	{
+		orderScore -= 5;
+	}
+	else if(daiquiri < 3.0 && daiquiri >= 2.8)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 10;
+	}
+
+	if(orderCoctailIdx[customerIdx] == 2)
+	{
+		aChairs[customerIdx]->ViewScore(orderScore);
+
+		aChairs[customerIdx]->SameOrder();
+	}
+	else
+	{
+		aChairs[customerIdx]->UnSameOrder();
+
+		orderScore = 100;
+	}
+}
+
+void ASpawnManager::SomethingElse(int32 customerIdx)
+{
+	aChairs[customerIdx]->UnSameOrder();
+}
