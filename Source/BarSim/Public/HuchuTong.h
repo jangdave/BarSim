@@ -4,16 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "HuchuTong.generated.h"
 
 UCLASS()
-class BARSIM_API AHuchuTong : public AActor
+class BARSIM_API AHuchuTong : public AGrippableActor
 {
 	GENERATED_BODY()
 	
-public:	
+public:
 	// Sets default values for this actor's properties
-	AHuchuTong();
+	AHuchuTong(const FObjectInitializer& ObjectInitializer);
+	
 
 UPROPERTY(EditAnywhere, Category=TongSettings)
 	class UStaticMeshComponent* tongLeft;
