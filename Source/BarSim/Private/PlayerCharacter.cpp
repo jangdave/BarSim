@@ -5,10 +5,13 @@
 #include "EnhancedInputSubsystems.h"
 #include "GripMotionControllerComponent.h"
 #include "HuchuTong.h"
+#include "Components/WidgetInteractionComponent.h"
 
 
 APlayerCharacter::APlayerCharacter()
 {
+	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
+	widgetInteractionComp->SetupAttachment(RightMotionController);
 
 
 	
@@ -32,8 +35,12 @@ void APlayerCharacter::BeginPlay()
 		}
 	}
 
-
-
+	widgetInteractionComp->DebugSphereLineThickness=0.5f;
+	widgetInteractionComp->DebugLineThickness=0.3f;
+	widgetInteractionComp->DebugColor=FColor::Red;
+	widgetInteractionComp->bEnableHitTesting=true;
+	widgetInteractionComp->bShowDebug=false;	
+	widgetInteractionComp->InteractionDistance=50.0f;
 	
 }
 

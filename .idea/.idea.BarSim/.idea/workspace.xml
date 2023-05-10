@@ -10,26 +10,10 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_HuchuTong.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_HuchuTong.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/Fridge/FridgeNoDoor/BarFridgeNoDoor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/Fridge/FridgeNoDoor/BarFridgeNoDoor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/Fridge/FridgeNoDoor/Material_008.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/Fridge/FridgeNoDoor/Material_010.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Cabinet/Cabinet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Cabinet/Cabinet.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Cabinet/CabinetDoor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Cabinet/CabinetDoor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Door/door1_aldoor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Door/door1_aldoor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawerBase/DrawerBaseActor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawerBase/DrawerBaseActor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawingBoard/DrawingBoard.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawingBoard/DrawingBoard.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawingBoard/Eraser.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawingBoard/Eraser.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawingBoard/Marker.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawingBoard/Marker.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/BarSim.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/BarSim.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/HuchuTong.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/HuchuTong.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/IceCube.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/IceCube.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/HuchuTong.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/HuchuTong.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/IceCube.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/IceCube.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -266,7 +250,7 @@
       <workItem from="1683616474253" duration="4584000" />
       <workItem from="1683628047175" duration="7946000" />
       <workItem from="1683642557013" duration="557000" />
-      <workItem from="1683675879737" duration="9847000" />
+      <workItem from="1683675879737" duration="13791000" />
     </task>
     <servers />
   </component>
