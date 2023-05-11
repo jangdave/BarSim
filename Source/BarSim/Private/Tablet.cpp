@@ -2,6 +2,7 @@
 
 
 #include "Tablet.h"
+#include "TabletWidget.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
 
@@ -27,6 +28,7 @@ void ATablet::BeginPlay()
 {
 	Super::BeginPlay();
 
+	tablet_UI = Cast<UTabletWidget>(widgetComp->GetUserWidgetObject());
 }
 
 // Called every frame

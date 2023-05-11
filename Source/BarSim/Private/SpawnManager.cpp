@@ -5,8 +5,10 @@
 #include "BarGameInstance.h"
 #include "Chair.h"
 #include "CustomerCharacter.h"
-#include "CustomerFSM.h"
-#include "EngineUtils.h"
+#include "OldPalCharacter.h"
+#include "Tablet.h"
+#include "TabletWidget.h"
+#include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -25,6 +27,8 @@ void ASpawnManager::BeginPlay()
 	// 맵 상의 모든 의자 확인
 	CheckChairSit();
 
+	tablet = Cast<ATablet>(UGameplayStatics::GetActorOfClass(GetWorld(), ATablet::StaticClass()));
+	
 	// 일정 시간마다 배열 초기화
 	FTimerHandle check;
 	GetWorldTimerManager().SetTimer(check, this, &ASpawnManager::CheckArray, 0.1, true);
@@ -66,6 +70,19 @@ void ASpawnManager::CheckArray()
 		bIsCoaster.Add(temp->bCheckCoaster);
 		bIsPlayer.Add(temp->bCheckPlayer);
 	}
+
+	for(int i = 0; i<bIsSit.Num(); i++)
+	{
+		if(bIsSit[i] != false)
+		{
+			return;
+		}
+	}
+
+	if(tablet != nullptr && bCheckSpawn != false)
+	{
+		tablet->tablet_UI->btn_CloseStore->SetIsEnabled(true);
+	}
 }
 
 void ASpawnManager::SpawnCustomer()
@@ -103,6 +120,9 @@ void ASpawnManager::SpawnCustom()
 
 			// 빈자리 채움
 			bCheckSit = false;
+
+			// 가게 오픈했는지 체크
+			bCheckSpawn = true;
 		}
 	}
 }
@@ -112,30 +132,25 @@ void ASpawnManager::GetCustomerIdx(int32 orderIdx, int32 idx)
 	orderCoctailIdx[idx] = orderIdx;
 }
 
-void ASpawnManager::AllOut()
-{
-	// 모든 손님을 나가게 한다
-	for(TActorIterator<ACustomerCharacter> customer(GetWorld()); customer; ++customer)
-	{
-		auto cus = *customer;
-
-		if(cus->customerFSM->state == ECustomerState::SIT)
-		{
-			cus->customerFSM->SetSitState(ECustomerSitState::READYLEAVE);
-		}
-		else
-		{
-			cus->customerFSM->SetState(ECustomerState::LEAVE);
-		}
-	}
-
-	// 올드팔 스폰
-	SpawnOldPal();
-}
-
 void ASpawnManager::SpawnOldPal()
 {
-	
+	auto gi = Cast<UBarGameInstance>(GetWorld()->GetGameInstance());
+
+	if(gi != nullptr)
+	{
+		if(gi->checkDayCount == 1)
+		{
+			GetWorld()->SpawnActor<AOldPalCharacter>(oldPalFactory, GetActorLocation(), GetActorRotation());
+		}
+		else if(gi->checkDayCount == 2)
+		{
+			UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
+		}
+		else if(gi->checkDayCount == 3)
+		{
+			GetWorld()->SpawnActor<AOldPalCharacter>(oldPalFactory, GetActorLocation(), GetActorRotation());
+		}
+	}
 }
 
 // 점수 체크------------------------------------------------------------------------------------------------------------

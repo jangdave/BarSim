@@ -25,7 +25,44 @@ void UOldPalAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	forwardVelocity = FVector::DotProduct(velocity, forVelocity);
 }
 
-void UOldPalAnimInstance::OnSitAnim(FName sectionName)
+void UOldPalAnimInstance::OnStandAnim(float sectionTime)
 {
-	owner->PlayAnimMontage(oldPalMontageFactory, 1, sectionName);
+	owner->bodyComp->GetAnimInstance()->Montage_Play(oldPalMontageFactory, 1, EMontagePlayReturnType::MontageLength, sectionTime);
+}
+
+void UOldPalAnimInstance::EndLean()
+{
+	owner->oldPalFSM->SetState(EOldPalState::TALK);
+}
+
+void UOldPalAnimInstance::EndSitStoll()
+{
+	owner->oldPalFSM->SetState(EOldPalState::SIT);
+
+	owner->oldPalFSM->AttachCustomer();
+}
+
+void UOldPalAnimInstance::OnLeanAnim(float sectionTime)
+{
+	owner->bodyComp->GetAnimInstance()->Montage_Play(oldPalLeanMontageFactory, 1, EMontagePlayReturnType::MontageLength, sectionTime);
+}
+
+void UOldPalAnimInstance::EndTalk()
+{
+	OnLeanAnim(0);
+}
+
+void UOldPalAnimInstance::EndUnLean()
+{
+	owner->oldPalFSM->SetState(EOldPalState::READYMOVE);
+}
+
+void UOldPalAnimInstance::OnSitAnim(float sectionTime)
+{
+	owner->bodyComp->GetAnimInstance()->Montage_Play(oldPalSitMontageFactory, 1, EMontagePlayReturnType::MontageLength, sectionTime);
+}
+
+void UOldPalAnimInstance::OnDrinkAnim(float sectionTime)
+{
+	owner->bodyComp->GetAnimInstance()->Montage_Play(oldPalDrinkMontageFactory, 1, EMontagePlayReturnType::MontageLength, sectionTime);
 }

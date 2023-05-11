@@ -30,6 +30,9 @@ public:
 	UPROPERTY()
 	TArray<AChair*> aChairs;
 
+	UPROPERTY()
+	class ATablet* tablet;
+	
 	// 의자 비어있는지 bool 배열
 	UPROPERTY()
 	TArray<bool> bIsSit;
@@ -51,6 +54,8 @@ public:
 	
 	bool bCheckSit;
 
+	bool bCheckSpawn;
+	
 	int32 checkCustomerNum;
 	
 	UPROPERTY()
@@ -59,6 +64,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ACustomerCharacter> customerFactory;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AOldPalCharacter> oldPalFactory;
+	
 	void CheckChairSit();
 	
 	void CheckArray();
@@ -70,9 +78,6 @@ public:
 
 	UFUNCTION()
 	void GetCustomerIdx(int32 orderIdx, int32 idx);
-
-	UFUNCTION()
-	void AllOut();
 
 	UFUNCTION()
 	void SpawnOldPal();

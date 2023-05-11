@@ -102,20 +102,18 @@ void UCustomerFSM::SetOrderCoctail()
 		else if(result <= 6 && result > 4)
 		{
 			// 다이키리
-			//orderIdx = 2;
-			orderIdx = 1;
+			orderIdx = 2;
+			
 		}
 		else if(result <= 4 && result > 2)
 		{
 			// 마타니
-			//orderIdx = 3;
-			orderIdx = 1;
+			orderIdx = 3;
 		}
 		else if(result <= 2)
 		{
 			// 올드팔
-			//orderIdx = 4;
-			orderIdx = 1;
+			orderIdx = 4;
 		}
 	}
 }
@@ -243,7 +241,7 @@ void UCustomerFSM::TickSit()
 void UCustomerFSM::TickLeave()
 {
 	// 문 밖의 스폰매니저 주변으로 이동
-	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 800;
+	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 300;
 
 	auto result = ai->MoveToLocation(loc);
 	
@@ -293,7 +291,6 @@ void UCustomerFSM::TickStandby()
 
 void UCustomerFSM::TickStandbyWaitLong()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ssssssssssssssssssss"))
 	// 오랜 기다림 불만을 표출하는 애니메이션 실행
 	if(bCheckPlayAnim != true && curTime > 5)
 	{

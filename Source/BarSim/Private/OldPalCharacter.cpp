@@ -11,17 +11,20 @@ AOldPalCharacter::AOldPalCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	bodyComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("bodyComp"));
+	bodyComp->SetupAttachment(GetMesh());
 
 	ConstructorHelpers::FClassFinder<UAnimInstance> tempAnim(TEXT("/Script/Engine.AnimBlueprint'/Game/Jang/ABP_OldPalAnim.ABP_OldPalAnim_C'"));
 	if(tempAnim.Succeeded())
 	{
-		GetMesh()->SetAnimInstanceClass(tempAnim.Class);
+		bodyComp->SetAnimInstanceClass(tempAnim.Class);
 	}
 	
 	oldPalFSM = CreateDefaultSubobject<UOldPalFSM>(TEXT("oldPalFSM"));
 
-	oldPalWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("oldPalWidget"));
-	oldPalWidget->SetupAttachment(GetMesh());
+	//oldPalWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("oldPalWidget"));
+	//oldPalWidget->SetupAttachment(GetMesh());
 	
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
@@ -31,7 +34,7 @@ void AOldPalCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	oldPalAnim = Cast<UOldPalAnimInstance>(GetMesh()->GetAnimInstance());
+	oldPalAnim = Cast<UOldPalAnimInstance>(bodyComp->GetAnimInstance());
 }
 
 // Called every frame
