@@ -5,16 +5,17 @@
 #include "CoreMinimal.h"
 #include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "BarSpoon.generated.h"
 
 UCLASS()
-class BARSIM_API ABarSpoon : public AActor
+class BARSIM_API ABarSpoon : public AGrippableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABarSpoon();
+	ABarSpoon(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	

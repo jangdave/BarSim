@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "BottleBase.generated.h"
 
 UCLASS()
-class BARSIM_API ABottleBase : public AActor
+class BARSIM_API ABottleBase : public AGrippableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABottleBase();
+	ABottleBase(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	// Called when the game starts or when spawned

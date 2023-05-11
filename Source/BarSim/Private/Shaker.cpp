@@ -10,7 +10,7 @@
 #include "ShakerStrainer.h"
 #include "Components/SphereComponent.h"
 
-AShaker::AShaker(const FObjectInitializer& ObjectInitializer)
+AShaker::AShaker(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	sphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("sphereComp"));
 	sphereComp->SetupAttachment(cupComp);

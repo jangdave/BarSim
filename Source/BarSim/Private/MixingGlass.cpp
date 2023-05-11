@@ -10,7 +10,7 @@
 #include "Strainer.h"
 #include "Components/SphereComponent.h"
 
-AMixingGlass::AMixingGlass(const FObjectInitializer& ObjectInitializer)
+AMixingGlass::AMixingGlass(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	sphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
 	sphereComp->SetupAttachment(cupComp);

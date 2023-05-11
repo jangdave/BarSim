@@ -9,9 +9,9 @@
 #include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
-ABarSpoon::ABarSpoon()
+ABarSpoon::ABarSpoon(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	meshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("meshComp"));

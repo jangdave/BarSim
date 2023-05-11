@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "ShakerStrainer.generated.h"
 
 UCLASS()
-class BARSIM_API AShakerStrainer : public AActor
+class BARSIM_API AShakerStrainer : public AGrippableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AShakerStrainer();
+	AShakerStrainer(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	// Called when the game starts or when spawned

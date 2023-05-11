@@ -4,7 +4,7 @@
 #include "Strainer.h"
 
 // Sets default values
-AStrainer::AStrainer()
+AStrainer::AStrainer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;

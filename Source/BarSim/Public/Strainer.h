@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "Strainer.generated.h"
 
 UCLASS()
-class BARSIM_API AStrainer : public AActor
+class BARSIM_API AStrainer : public AGrippableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AStrainer();
+	AStrainer(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	// Called when the game starts or when spawned
