@@ -73,6 +73,8 @@ public:
 	UPROPERTY()
 	class ASpawnManager* spawnManager;
 
+	class AAIController* ai;
+	
 	// 의자 순서 저장 인자
 	UPROPERTY()
 	int32 idx;
@@ -90,8 +92,6 @@ public:
 	// 주문 실패시 기회 소모 여부
 	bool bCheckOrder;
 	
-	class AAIController* ai;
-
 	// 주문 칵테일 정하기
 	void SetOrderCoctail();
 	

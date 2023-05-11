@@ -21,7 +21,4 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	UPROPERTY()
-	int32 checkMeshCount = 3; 
-
 };
