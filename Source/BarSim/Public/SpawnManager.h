@@ -53,6 +53,9 @@ public:
 
 	int32 checkCustomerNum;
 	
+	UPROPERTY()
+	int32 checkMeshCount = 3;
+	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ACustomerCharacter> customerFactory;
 

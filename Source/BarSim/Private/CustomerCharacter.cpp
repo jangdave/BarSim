@@ -2,11 +2,11 @@
 
 
 #include "CustomerCharacter.h"
-#include "BarGameModeBase.h"
 #include "CupBase.h"
 #include "CustomerAnimInstance.h"
 #include "CustomerFSM.h"
 #include "CustomerOrderWidget.h"
+#include "SpawnManager.h"
 #include "Components/WidgetComponent.h"
 
 // Sets default values
@@ -93,15 +93,13 @@ void ACustomerCharacter::SetMesh()
 {
 	int32 idx = customerFSM->SetRandRange(1, 10);
 
-	auto gm = Cast<ABarGameModeBase>(GetWorld()->GetAuthGameMode());
-	
 	// 5보다 크면 여자
 	if(idx > 5)
 	{
 		int32 womanIdx = customerFSM->SetRandRange(0, 2);
 
 		// 전에 나온 것과 똑같지 않으면
-		if(womanIdx != gm->checkMeshCount)
+		if(womanIdx != customerFSM->spawnManager->checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(womenMesh[womanIdx].Object);
 
@@ -110,7 +108,7 @@ void ACustomerCharacter::SetMesh()
 				GetMesh()->SetRelativeScale3D(FVector(1.1));
 			}
 			
-			gm->checkMeshCount = womanIdx;
+			customerFSM->spawnManager->checkMeshCount = womanIdx;
 		}
 		// 똑같다면
 		else
@@ -124,11 +122,11 @@ void ACustomerCharacter::SetMesh()
 		int32 manIdx = customerFSM->SetRandRange(0, 2);
 
 		// 전에 나온 것과 똑같지 않으면
-		if(manIdx != gm->checkMeshCount)
+		if(manIdx != customerFSM->spawnManager->checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(manMesh[manIdx].Object);
 			
-			gm->checkMeshCount = manIdx;
+			customerFSM->spawnManager->checkMeshCount = manIdx;
 		}
 		// 똑같다면
 		else

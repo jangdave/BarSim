@@ -32,3 +32,38 @@ void UOldPalFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 	// ...
 }
 
+void UOldPalFSM::SetOrderCoctail()
+{
+}
+
+void UOldPalFSM::SetState(EOldPalState next)
+{
+}
+
+void UOldPalFSM::SetSitState(EOldPalSitState next)
+{
+}
+
+void UOldPalFSM::SetDrinkState(EOldPalDrinkState next)
+{
+}
+
+void UOldPalFSM::VisibleOrder()
+{
+}
+
+void UOldPalFSM::AttachCustomer()
+{
+}
+
+void UOldPalFSM::DetachCustomer()
+{
+}
+
+// 랜덤 함수
+int32 UOldPalFSM::SetRandRange(int32 idxStart, int32 idxEnd)
+{
+	int32 result = FMath::RandRange(idxStart, idxEnd);
+
+	return result;
+}

@@ -2,12 +2,12 @@
 
 
 #include "Chair.h"
-#include "BarPlayer.h"
 #include "Coaster.h"
 #include "CoctailScoreWidget.h"
 #include "CupBase.h"
 #include "CustomerCharacter.h"
 #include "CustomerFSM.h"
+#include "PlayerCharacter.h"
 #include "SpawnManager.h"
 #include "Components/BoxComponent.h"
 #include "Components/TextBlock.h"
@@ -123,7 +123,7 @@ void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 
 void AChair::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	auto target = Cast<ABarPlayer>(OtherActor);
+	auto target = Cast<APlayerCharacter>(OtherActor);
 
 	if(target != nullptr)
 	{
@@ -133,7 +133,7 @@ void AChair::OnPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 
 void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	auto target = Cast<ABarPlayer>(OtherActor);
+	auto target = Cast<APlayerCharacter>(OtherActor);
 
 	if(target != nullptr)
 	{
