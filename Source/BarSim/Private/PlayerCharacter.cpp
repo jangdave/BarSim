@@ -64,9 +64,6 @@ void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-
-		UE_LOG(LogTemp, Warning, TEXT("%f"), fingerPressedActionValueLeft)
-
 	// Tongs가 nullptr이 아니면서
 	if(huchuTong!=nullptr)
 	{
@@ -192,7 +189,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 void APlayerCharacter::CheckGrabbedObjectLeft()
 {
 	TArray<AActor*> LeftGrippedActors;
-	RightMotionController->GetGrippedActors(LeftGrippedActors);
+	LeftMotionController->GetGrippedActors(LeftGrippedActors);
 	for(int i=0; i<LeftGrippedActors.Num(); ++i)
 	{
 		GrabbedActorLeft = LeftGrippedActors[i];
@@ -223,6 +220,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
 	{
 		isGrabbingTabletLeft=true;
+		widgetInteractionComp->bShowDebug=true;	
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed tablet on Left"))
 	}		
 	// 잡은 대상이 Opener 이라면
@@ -268,8 +266,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 			LatentInfoL.CallbackTarget = this;
 			auto tongCompRef = huchuTong->tongRight;
 			auto tongCompRefL=huchuTong->tongLeft;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-			UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 			isTongsTickEnabled = true;
 			grabbingObjectSize = 0;
 			// 1. 잡지않은 상태로 전환
@@ -328,8 +326,8 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 			LatentInfoL.CallbackTarget = this;
 			auto tongCompRef = huchuTongL->tongRight;
 			auto tongCompRefL=huchuTongL->tongLeft;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-			UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 			isTongsTickEnabledL = true;
 			grabbingObjectSizeL = 0;
 			// 1. 잡지않은 상태로 전환
@@ -356,6 +354,10 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	else if(isGrabbingTabletLeft)
 	{
 		isGrabbingTabletLeft=false;
+		widgetInteractionComp->bShowDebug=false;
+		UE_LOG(LogTemp, Warning, TEXT("drop tablet"))
+
+
 	}
 	else if(isGrabbingCoasterLeft)
 	{
@@ -391,7 +393,6 @@ void APlayerCharacter::FireRight()
 		FCollisionQueryParams params;
 		params.AddIgnoredActor(this);
 		params.AddIgnoredActor(huchuTong);
-		//DrawDebugSphere(GetWorld(), Center, TongsGrabRange, 30, FColor::Red, false, 2.0, 0, 0.1);
 		bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(TongsGrabRange), params);
 		if (bHit == false)
 		{
@@ -441,7 +442,6 @@ void APlayerCharacter::FireRight()
 			LatentInfo.CallbackTarget = this;
 			FLatentActionInfo LatentInfoL;
 			LatentInfoL.CallbackTarget = this;
-			LatentInfo.ExecutionFunction = FName(TEXT("TongsMovementExec"));
 			LatentInfo.Linkage = 0;
 			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
@@ -464,8 +464,8 @@ void APlayerCharacter::FireRight()
 				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
 				grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
 				// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(grabbingObjectSize/30, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 				UE_LOG(LogTemp, Warning, TEXT("grabbingObjectSize : %f"), grabbingObjectSize)
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -567,8 +567,8 @@ void APlayerCharacter::FireLeft()
 				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
 				grabbingObjectSizeL = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
 				// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(grabbingObjectSize/30, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 				UE_LOG(LogTemp, Warning, TEXT("grabbingObjectSizeLeft : %f"), grabbingObjectSizeL)
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -604,13 +604,12 @@ void APlayerCharacter::FireReleasedRight()
 			LatentInfo.CallbackTarget = this;
 			FLatentActionInfo LatentInfoL;
 			LatentInfoL.CallbackTarget = this;
-			LatentInfo.ExecutionFunction = FName(TEXT("TongsReleaseMovementExec"));
 			LatentInfo.Linkage = 0;
 			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
 			auto tongCompRefL=huchuTong->tongLeft;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-			UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 			isTongsTickEnabled = true;
 			grabbingObjectSize = 0;
 			// 1. 잡지않은 상태로 전환
@@ -656,8 +655,8 @@ void APlayerCharacter::FireReleasedLeft()
 			LatentInfoL.CallbackTarget = this;
 			auto tongCompRef = huchuTongL->tongRight;
 			auto tongCompRefL=huchuTongL->tongLeft;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-(grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-			UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator((grabbingObjectSize/30), 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 			isTongsTickEnabledL = true;
 			grabbingObjectSizeL = 0;
 			// 1. 잡지않은 상태로 전환

@@ -10,12 +10,12 @@
   <component name="ChangeListManager">
     <list default="true" id="45ed3ac2-3fc1-4099-b42d-d6a0d0e00d1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_HuchuTong.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_HuchuTong.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_IceCube.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_IceCube.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,6 +253,7 @@
       <workItem from="1683642557013" duration="557000" />
       <workItem from="1683675879737" duration="13791000" />
       <workItem from="1683696425436" duration="7860000" />
+      <workItem from="1683762245819" duration="6405000" />
     </task>
     <servers />
   </component>
