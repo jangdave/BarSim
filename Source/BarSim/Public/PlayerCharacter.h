@@ -28,26 +28,145 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Widget Components
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionComp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
-	double fingerPressedActionValue;
-
+	// Inputs
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputMappingContext* VREInputMappingContext;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_Hand;
-	
-UFUNCTION(BlueprintCallable)
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* UseHeldObjectRight;
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* UseHeldObjectLeft;
+
+
+	// Functions
+	UFUNCTION(BlueprintCallable)
 	void CheckGrabbedObjectRight();
 	UFUNCTION(BlueprintCallable)
 	void CheckGrabbedObjectLeft();
+	UFUNCTION(BlueprintCallable)
+	void CheckDroppedObjectRight();
+	UFUNCTION(BlueprintCallable)
+	void CheckDroppedObjectLeft();
+	void FireRight();
+	void FireLeft();
+	void FireReleasedRight();
+	void FireReleasedLeft();
 
+	// Grabbing Boolean
+	bool IsGrabbedLeft = false;
+	bool IsGrabbedRight = false;
+	bool isGrabbingTongsLeft = false;
+	bool isGrabbingTongsRight = false;
+	bool isGrabbingWithTongsRight=false;
+	bool isGrabbingWithTongsLeft=false;
+	bool isTongsTickEnabled = true;
+	bool isTongsTickEnabledL = true;
+	bool isRecipeMode = false;
+	bool isGrabbingBottleRight = false;
+	bool isGrabbingBottleLeft = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isGrabbingTabletRight = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isGrabbingTabletLeft = false;
+	bool isGrabbingOpenerRight = false;
+	bool isGrabbingOpenerLeft = false;
+	bool isGrabbingCoasterRight=false;
+	bool isGrabbingCoasterLeft = false;
+	bool isGrabbingCupLeft = false;
+	bool isGrabbingCupRight = false;
+	bool isGrabbingBarSpoonLeft=false;
+	bool isGrabbingBarSpoonRight=false;
+	bool isGrabbingShakerRight=false;
+	bool isGrabbingShakerLeft=false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
+	double fingerPressedActionValue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
+	double fingerPressedActionValueLeft;
+
+	// Grab한 대상의 크기
+	UPROPERTY()
+	double grabbingObjectSize = 0;
+	// 왼쪽 Grab한 대상의 크기
+	UPROPERTY()
+	double grabbingObjectSizeL = 0;
+
+	UPROPERTY(EditDefaultsOnly)
+	float TongsGrabRange = 15;
+	
 	// 오른손 그랩 액터
 	UPROPERTY()
 	class AActor* GrabbedActorRight;
+	// 왼손 그랩 액터
+	UPROPERTY()
+	class AActor* GrabbedActorLeft;
 
-	// HuchuTong Ref
+	// Tongs를 통한 그랩 오른쪽 컴포넌트
+	UPROPERTY()
+	class UPrimitiveComponent* GrabbedObjectWithTongsRight;
+	UPROPERTY()
+	class AActor* GrabbedActorWithTongsRight;
+	// Tongs를 통한 그랩 왼쪽 컴포넌트
+	UPROPERTY()
+	class UPrimitiveComponent* GrabbedObjectWithTongsLeft;
+	UPROPERTY()
+	class AActor* GrabbedActorWithTongsLeft;
+
+	// References
 	UPROPERTY()
 	class AHuchuTong* huchuTong;
+	UPROPERTY()
+	class AHuchuTong* huchuTongL;
+	UPROPERTY()
+	class ABottleBase* bottle;
+	UPROPERTY()
+	class ABottleBase* bottleL;
+	UPROPERTY()
+	class ATablet* tablet;
+	UPROPERTY()
+	class ATablet* tabletL;
+	UPROPERTY()
+	class AOpener* opener;
+	UPROPERTY()
+	class AOpener* openerL;
+	UPROPERTY()
+	class ACoaster* coaster;
+	UPROPERTY()
+	class ACoaster* coasterL;
+	UPROPERTY()
+	class ACupBase* cup;
+	UPROPERTY()
+	class ACupBase* cupL;
+	UPROPERTY()
+	class AIceCube* iceCube;
+	UPROPERTY()
+	class AIceCube* iceCubeL;
+	UPROPERTY()
+	class ABarSpoon* barSpoon;
+	UPROPERTY()
+	class ABarSpoon* barSpoonL;
+	UPROPERTY()
+	class AShakerLid* shakerLid;
+	UPROPERTY()
+	class AShakerLid* shakerLidL;
+	UPROPERTY()
+	class AStrainer* strainer;
+	UPROPERTY()
+	class AStrainer* strainerL;
+	UPROPERTY()
+	class AShakerStrainer* shakerStrainer;
+	UPROPERTY()
+	class AShakerStrainer* shakerStrainerL;
+	UPROPERTY()
+	class AShaker* shaker;
+	UPROPERTY()
+	class AShaker* shakerL;
+
+
+	
 };
