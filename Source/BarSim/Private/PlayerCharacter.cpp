@@ -47,6 +47,11 @@ void APlayerCharacter::BeginPlay()
 		}
 	}
 
+	GetCharacterMovement()->bRequestedMoveUseAcceleration=false;
+	GetCharacterMovement()->bNetworkSkipProxyPredictionOnNetUpdate=true;
+	LeftMotionController->bSmoothHandTracking=true;
+	RightMotionController->bSmoothHandTracking=true;
+	
 	widgetInteractionComp->DebugSphereLineThickness=0;
 	widgetInteractionComp->DebugLineThickness=0.1f;
 	widgetInteractionComp->DebugColor=FColor::Red;
@@ -89,6 +94,28 @@ void APlayerCharacter::Tick(float DeltaTime)
 			}
 			
 		}
+	}
+	// Cup이 nullptr이 아니면서, 오른손에 Cup을 쥐고 있다면
+	if(isGrabbingCupRight&&cup!=nullptr)
+	{
+		// cup의 contents가 0보다 크다면
+		if(cup->contents>0)
+		{
+			// 컵을 쥔 순간의 Rotation 값을 유지한다.
+			RightMotionController->SetRelativeRotation(initHandRot);
+		}
+	
+	}
+	// Cup이 nullptr이 아니면서, 왼손에 Cup을 쥐고 있다면
+	if(isGrabbingCupLeft&&cupL!=nullptr)
+	{
+		//cup 의 contents가 0보다 크다면,
+		if(cupL->contents>0)
+		{
+			// 컵을 쥔 순간의 Rotation 값을 유지한다.
+			LeftMotionController->SetRelativeRotation(initHandRotL);
+		}
+
 	}
 	
 }
@@ -158,7 +185,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
 		{
 			// Cup을 쥔 순간의 Hand Rotation 값 저장
-			//initHandRot=RightHand->GetRelativeRotation();
+			initHandRot=RightMotionController->GetRelativeRotation();
 			isGrabbingCupRight=true;
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Right"))			
 		}
@@ -260,7 +287,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 	{
 		// Cup을 쥔 순간의 Hand Rotation 값 저장
-		//initHandRot=RightHand->GetRelativeRotation();
+		initHandRot=LeftMotionController->GetRelativeRotation();
 		isGrabbingCupLeft=true;
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Left"))			
 	}
@@ -339,7 +366,6 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingCupRight)
 	{
 		isGrabbingCupRight=false;
-
 	}
 	else if(isGrabbingShakerLidRight)
 	{

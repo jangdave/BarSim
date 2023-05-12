@@ -90,6 +90,11 @@ public:
 	bool isGrabbingShakerLidRight=false;
 	bool isGrabbingShakerLidLeft=false;
 
+	UPROPERTY()
+	FRotator initHandRot;
+	UPROPERTY()
+	FRotator initHandRotL;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
