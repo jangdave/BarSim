@@ -9,10 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e40f8abc-488a-452e-b49e-d921d4efda6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/StartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/StartMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +123,7 @@
       <workItem from="1683784612765" duration="5408000" />
       <workItem from="1683791320138" duration="13401000" />
       <workItem from="1683853238863" duration="7194000" />
+      <workItem from="1683882563361" duration="687000" />
     </task>
     <servers />
   </component>
