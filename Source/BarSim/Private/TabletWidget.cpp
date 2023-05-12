@@ -16,6 +16,7 @@ void UTabletWidget::NativeConstruct()
 	// 테블렛 메뉴
 	btn_OpenStore->OnClicked.AddDynamic(this, &UTabletWidget::OpenStore);
 	btn_CloseStore->OnClicked.AddDynamic(this, &UTabletWidget::CloseStore);
+	btn_CloseStore->SetIsEnabled(false);
 	btn_Recipe->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 	// 테블릿 레시피 메뉴
 	btn_BackMenu->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
@@ -33,9 +34,7 @@ void UTabletWidget::OpenStore()
 
 void UTabletWidget::CloseStore()
 {
-	//spawnmg->AllOut();
-	
-	UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
+	spawnmg->SpawnOldPal();
 }
 
 void UTabletWidget::OpenMenuPage()

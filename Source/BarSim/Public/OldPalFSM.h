@@ -10,6 +10,9 @@ UENUM(BlueprintType)
 enum class EOldPalState : uint8
 {
 	IDLE,
+	READYLEAN,
+	TALK,
+	READYMOVE,
 	MOVE,
 	READYSIT,
 	SIT,
@@ -72,9 +75,14 @@ public:
 
 	UPROPERTY()
 	class ASpawnManager* spawnManager;
+
+	UPROPERTY()
+	class AStandPoint* stand;
 	
 	class AAIController* ai;
 
+	class UBarGameInstance* gi;
+	
 	// 의자 순서 저장 인자
 	UPROPERTY()
 	int32 idx;
@@ -128,6 +136,12 @@ private:
 	// 기본 상태 함수
 	void TickIdle();
 
+	void TickReadyLean();
+
+	void TickTalk();
+
+	void TickReadyMove();
+	
 	void TickMove();
 
 	void TickReadySit();

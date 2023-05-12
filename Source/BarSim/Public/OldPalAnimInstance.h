@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "OldPalFSM.h"
 #include "Animation/AnimInstance.h"
 #include "OldPalAnimInstance.generated.h"
 
@@ -24,10 +25,48 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float forwardVelocity;
-	
+
+	// fsm에서 받아오는 oldpal 상태
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	EOldPalState ownerState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	EOldPalSitState ownerSitState;
+
+	// 몽타주
 	UPROPERTY(EditAnywhere)
 	class UAnimMontage* oldPalMontageFactory;
 
+	UPROPERTY(EditAnywhere)
+	class UAnimMontage* oldPalLeanMontageFactory;
+	
+	UPROPERTY(EditAnywhere)
+	class UAnimMontage* oldPalSitMontageFactory;
+	
+	UPROPERTY(EditAnywhere)
+	class UAnimMontage* oldPalDrinkMontageFactory;
+	
 	UFUNCTION()
-	void OnSitAnim(FName sectionName);
+	void OnStandAnim(float sectionTime);
+
+	UFUNCTION()
+	void OnLeanAnim(float sectionTime);
+
+	UFUNCTION()
+	void OnSitAnim(float sectionTime);
+
+	UFUNCTION()
+	void OnDrinkAnim(float sectionTime);
+
+	UFUNCTION(BlueprintCallable)
+	void EndLean();
+
+	UFUNCTION(BlueprintCallable)
+	void EndTalk();
+
+	UFUNCTION(BlueprintCallable)
+	void EndUnLean();
+
+	UFUNCTION(BlueprintCallable)
+	void EndSitStoll();
 };

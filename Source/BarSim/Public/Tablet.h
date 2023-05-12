@@ -26,7 +26,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=tabletSettings)
 	class UWidgetComponent* widgetComp;
 
-
+	UPROPERTY(EditAnywhere)
+	class UTabletWidget* tablet_UI;
 
 //class ABarPlayer* player;
 	
