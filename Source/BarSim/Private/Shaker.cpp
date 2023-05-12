@@ -184,13 +184,19 @@ void AShaker::LiquorScale()
 
 void AShaker::StrainerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult)
 {
-	strainer = Cast<AShakerStrainer>(OtherActor);
-	
-	if(strainer)
+	strainer = Cast<AShakerStrainer>(OtherActor);	
+	if(strainer&&strainer->isStrainerAttachable==true)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("strainer attach"))
+		strainer->DisableComponentsSimulatePhysics();
+		strainer->VRGripInterfaceSettings.bSimulateOnDrop=false;
+		auto strainerLoc = cupComp->GetSocketTransform(FName("Strainer"));
+		strainer->SetActorLocationAndRotation(strainerLoc.GetLocation(), strainerLoc.GetRotation());
 		strainer->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
-		strainer->meshComp->SetCollisionProfileName(FName("Overlapped"));
+		//strainer->meshComp->SetCollisionProfileName(FName("Overlapped"));
+		this->DisableComponentsSimulatePhysics();
 		bStrainerOn = true;
+		strainer->isStrainerAttachable=false;
 	}
 }
 
@@ -200,9 +206,10 @@ void AShaker::StrainerOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActo
 
 	if(strainer)
 	{
-		strainer->meshComp->SetCollisionProfileName(FName("Strainer"));
+		strainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
+		//strainer->meshComp->SetCollisionProfileName(FName("Strainer"));
 		bStrainerOn = false;
 		strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		strainer = nullptr;
+		//strainer = nullptr;
 	}
 }

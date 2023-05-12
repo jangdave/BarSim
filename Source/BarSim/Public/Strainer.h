@@ -26,4 +26,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Strainer")
 	class UStaticMeshComponent* meshComp;
+
+	UPROPERTY(EditAnywhere, Category = "Strainer")
+	bool isGlassStrainerAttachable=false;
 };

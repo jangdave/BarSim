@@ -73,8 +73,6 @@ public:
 	bool isGrabbingTabletRight = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isGrabbingTabletLeft = false;
-	bool isGrabbingOpenerRight = false;
-	bool isGrabbingOpenerLeft = false;
 	bool isGrabbingCoasterRight=false;
 	bool isGrabbingCoasterLeft = false;
 	bool isGrabbingCupLeft = false;
@@ -83,21 +81,27 @@ public:
 	bool isGrabbingBarSpoonRight=false;
 	bool isGrabbingShakerRight=false;
 	bool isGrabbingShakerLeft=false;
+	bool isGrabbingShakerStrainerRight=false;
+	bool isGrabbingShakerStrainerLeft=false;
+	bool isGrabbingStrainerRight=false;
+	bool isGrabbingStrainerLeft=false;
+	bool isGrabbingMixingGlassRight=false;
+	bool isGrabbingMixingGlassLeft=false;
+	bool isGrabbingShakerLidRight=false;
+	bool isGrabbingShakerLidLeft=false;
+
+	UPROPERTY()
+	FRotator initHandRot;
+	UPROPERTY()
+	FRotator initHandRotL;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValueLeft;
 
-	// Grab한 대상의 크기
-	UPROPERTY()
-	double grabbingObjectSize = 0;
-	// 왼쪽 Grab한 대상의 크기
-	UPROPERTY()
-	double grabbingObjectSizeL = 0;
-
 	UPROPERTY(EditDefaultsOnly)
-	float TongsGrabRange = 15;
+	float TongsGrabRange = 10;
 	
 	// 오른손 그랩 액터
 	UPROPERTY()
@@ -131,10 +135,6 @@ public:
 	UPROPERTY()
 	class ATablet* tabletL;
 	UPROPERTY()
-	class AOpener* opener;
-	UPROPERTY()
-	class AOpener* openerL;
-	UPROPERTY()
 	class ACoaster* coaster;
 	UPROPERTY()
 	class ACoaster* coasterL;
@@ -166,6 +166,11 @@ public:
 	class AShaker* shaker;
 	UPROPERTY()
 	class AShaker* shakerL;
+	UPROPERTY()
+	class AMixingGlass* mixingGlass;
+	UPROPERTY()
+	class AMixingGlass* mixingGlassL;
+	
 
 
 	

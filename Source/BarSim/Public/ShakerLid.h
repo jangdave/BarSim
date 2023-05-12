@@ -26,4 +26,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Lid")
 	class UStaticMeshComponent* meshComp;
+
+	UPROPERTY(EditAnywhere, Category = "Lid")
+	bool isLidAttachable = false;
 };

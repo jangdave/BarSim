@@ -47,4 +47,11 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "ShakerStrainer")
 	bool bLidOn;
+
+	UPROPERTY(EditAnywhere, Category = "ShakerStrainer")
+	bool isStrainerAttachable = false;
+
+
+
+	
 };

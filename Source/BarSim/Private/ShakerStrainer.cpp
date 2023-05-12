@@ -50,12 +50,17 @@ void AShakerStrainer::Tick(float DeltaTime)
 void AShakerStrainer::LidOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult)
 {
 	lid = Cast<AShakerLid>(OtherActor);
-
-	if(lid)
+	if(lid&&lid->isLidAttachable==true)
 	{
+		lid->DisableComponentsSimulatePhysics();
+		lid->VRGripInterfaceSettings.bSimulateOnDrop=false;
+		auto lidLoc = meshComp->GetSocketTransform(FName("Lid"));
+		lid->SetActorLocationAndRotation(lidLoc.GetLocation(), lidLoc.GetRotation());
 		lid->AttachToComponent(meshComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Lid"));
-		lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
+		//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
+		this->DisableComponentsSimulatePhysics();
 		bLidOn = true;
+		lid->isLidAttachable=false;
 	}
 }
 
@@ -65,8 +70,10 @@ void AShakerStrainer::LidOverlapEnd(UPrimitiveComponent* OverlappedComponent, AA
 
 	if(lid)
 	{
-		lid->meshComp->SetCollisionProfileName(FName("Strainer"));
+		lid->VRGripInterfaceSettings.bSimulateOnDrop=true;
+		//lid->meshComp->SetCollisionProfileName(FName("Strainer"));
 		bLidOn = false;
 		lid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		lid=nullptr;
 	}
 }

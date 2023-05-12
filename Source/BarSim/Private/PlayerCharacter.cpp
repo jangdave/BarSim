@@ -11,7 +11,7 @@
 #include "GripMotionControllerComponent.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
-#include "Opener.h"
+#include "MixingGlass.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
@@ -25,8 +25,6 @@ APlayerCharacter::APlayerCharacter()
 {
 	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
 	widgetInteractionComp->SetupAttachment(RightMotionController);
-
-
 	
 }
 
@@ -49,7 +47,12 @@ void APlayerCharacter::BeginPlay()
 		}
 	}
 
-	widgetInteractionComp->DebugSphereLineThickness=0.1f;
+	GetCharacterMovement()->bRequestedMoveUseAcceleration=false;
+	GetCharacterMovement()->bNetworkSkipProxyPredictionOnNetUpdate=true;
+	LeftMotionController->bSmoothHandTracking=true;
+	RightMotionController->bSmoothHandTracking=true;
+	
+	widgetInteractionComp->DebugSphereLineThickness=0;
 	widgetInteractionComp->DebugLineThickness=0.1f;
 	widgetInteractionComp->DebugColor=FColor::Red;
 	widgetInteractionComp->bEnableHitTesting=true;
@@ -92,6 +95,28 @@ void APlayerCharacter::Tick(float DeltaTime)
 			
 		}
 	}
+	// Cup이 nullptr이 아니면서, 오른손에 Cup을 쥐고 있다면
+	if(isGrabbingCupRight&&cup!=nullptr)
+	{
+		// cup의 contents가 0보다 크다면
+		if(cup->contents>0)
+		{
+			// 컵을 쥔 순간의 Rotation 값을 유지한다.
+			RightMotionController->SetRelativeRotation(initHandRot);
+		}
+	
+	}
+	// Cup이 nullptr이 아니면서, 왼손에 Cup을 쥐고 있다면
+	if(isGrabbingCupLeft&&cupL!=nullptr)
+	{
+		//cup 의 contents가 0보다 크다면,
+		if(cupL->contents>0)
+		{
+			// 컵을 쥔 순간의 Rotation 값을 유지한다.
+			LeftMotionController->SetRelativeRotation(initHandRotL);
+		}
+
+	}
 	
 }
 
@@ -123,7 +148,6 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 	huchuTong=Cast<AHuchuTong>(GrabbedActorRight);
 	bottle = Cast<ABottleBase>(GrabbedActorRight);
 	tablet = Cast<ATablet>(GrabbedActorRight);
-	opener=Cast<AOpener>(GrabbedActorRight);
 	coaster=Cast<ACoaster>(GrabbedActorRight);
 	cup=Cast<ACupBase>(GrabbedActorRight);
 	barSpoon=Cast<ABarSpoon>(GrabbedActorRight);
@@ -131,6 +155,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 	shakerStrainer=Cast<AShakerStrainer>(GrabbedActorRight);
 	shakerLid=Cast<AShakerLid>(GrabbedActorRight);
 	shaker=Cast<AShaker>(GrabbedActorRight);
+	mixingGlass=Cast<AMixingGlass>(GrabbedActorRight);
 	
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
@@ -150,12 +175,6 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingTabletRight=true;
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed tablet on Right"))
 		}		
-		// 잡은 대상이 Opener 이라면
-		else if(GrabbedActorRight==opener&&opener!=nullptr)
-		{
-			isGrabbingOpenerRight=true;
-			UE_LOG(LogTemp, Warning, TEXT("Grabbed opener on Right"))			
-		}
 		// 잡은 대상이 Coaster이라면
 		else if(GrabbedActorRight==coaster&&coaster!=nullptr)
 		{
@@ -166,7 +185,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
 		{
 			// Cup을 쥔 순간의 Hand Rotation 값 저장
-			//initHandRot=RightHand->GetRelativeRotation();
+			initHandRot=RightMotionController->GetRelativeRotation();
 			isGrabbingCupRight=true;
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Right"))			
 		}
@@ -181,6 +200,37 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		{
 		isGrabbingShakerRight=true;
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed shaker on Right"))			
+		}
+		// 잡은 대상이 ShakerLid라면
+		else if(GrabbedActorRight==shakerLid&&shakerLid!=nullptr)
+		{
+			isGrabbingShakerLidRight=true;
+			shakerLid->isLidAttachable=false;
+			shakerLid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Lid on Right"))			
+		}
+		// 잡은 대상이 ShakerStrainer 이라면
+		else if(GrabbedActorRight==shakerStrainer&&shakerStrainer!=nullptr)
+		{
+			isGrabbingShakerStrainerRight=true;
+			shakerStrainer->isStrainerAttachable = false;
+			shakerStrainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Strainer on Right"))			
+		}
+		// 잡은 대상이 MixingGlass 라면
+		else if(GrabbedActorRight==mixingGlass&&mixingGlass!=nullptr)
+		{
+			isGrabbingMixingGlassRight=true;
+			UE_LOG(LogTemp, Warning, TEXT("Grabbed Mixing Glass  on Right"))			
+		}
+		// 잡은 대상이 Glass Strainer 이라면
+		else if(GrabbedActorRight==strainer&&strainer!=nullptr)
+		{
+			isGrabbingStrainerRight=true;
+			strainer->isGlassStrainerAttachable=false;
+			strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			UE_LOG(LogTemp, Warning, TEXT("Grabbed Glass Strainer on Right"))			
+
 		}
 	
 	
@@ -199,10 +249,14 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	huchuTongL=Cast<AHuchuTong>(GrabbedActorLeft);
 	bottleL = Cast<ABottleBase>(GrabbedActorLeft);
 	tabletL = Cast<ATablet>(GrabbedActorLeft);
-	openerL=Cast<AOpener>(GrabbedActorLeft);
 	coasterL=Cast<ACoaster>(GrabbedActorLeft);
 	cupL=Cast<ACupBase>(GrabbedActorLeft);
 	barSpoonL=Cast<ABarSpoon>(GrabbedActorLeft);
+	strainerL=Cast<AStrainer>(GrabbedActorLeft);
+	shakerStrainerL=Cast<AShakerStrainer>(GrabbedActorLeft);
+	shakerLidL=Cast<AShakerLid>(GrabbedActorLeft);
+	shakerL=Cast<AShaker>(GrabbedActorLeft);
+	mixingGlassL=Cast<AMixingGlass>(GrabbedActorLeft);
 	
 	// 잡은 대상이 Tongs라면
 	if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
@@ -223,12 +277,6 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		widgetInteractionComp->bShowDebug=true;	
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed tablet on Left"))
 	}		
-	// 잡은 대상이 Opener 이라면
-	else if(GrabbedActorLeft==openerL&&openerL!=nullptr)
-	{
-		isGrabbingOpenerLeft=true;
-		UE_LOG(LogTemp, Warning, TEXT("Grabbed opener on Left"))			
-	}
 	// 잡은 대상이 Coaster이라면
 	else if(GrabbedActorLeft==coasterL&&coasterL!=nullptr)
 	{
@@ -239,7 +287,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 	{
 		// Cup을 쥔 순간의 Hand Rotation 값 저장
-		//initHandRot=RightHand->GetRelativeRotation();
+		initHandRot=LeftMotionController->GetRelativeRotation();
 		isGrabbingCupLeft=true;
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Left"))			
 	}
@@ -249,6 +297,29 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		isGrabbingBarSpoonLeft=true;
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed barspoon on Left"))			
 	}
+	// 잡은 대상이 Shaker이라면
+	else if(GrabbedActorLeft==shakerL&&shakerL!=nullptr)
+	{
+		isGrabbingShakerLeft=true;
+		UE_LOG(LogTemp, Warning, TEXT("Grabbed shaker on Left"))			
+	}
+	// 잡은 대상이 ShakerLid라면
+	else if(GrabbedActorLeft==shakerLidL&&shakerLidL!=nullptr)
+	{
+		isGrabbingShakerLidLeft=true;
+		shakerLidL->isLidAttachable=false;
+		shakerLidL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Lid on Left"))			
+	}
+	// 잡은 대상이 ShakerStrainer 이라면
+	else if(GrabbedActorLeft==shakerStrainerL&&shakerStrainerL!=nullptr)
+	{
+		isGrabbingShakerStrainerLeft=true;
+		shakerStrainerL->isStrainerAttachable = false;
+		shakerStrainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Strainer on Left"))			
+	}
+	
 }
 
 void APlayerCharacter::CheckDroppedObjectRight()
@@ -259,17 +330,11 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		// Tongs에 잡혀 있는 대상이 있었다면
 		if(isGrabbingWithTongsRight)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Something was on Right tongs"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
-			FLatentActionInfo LatentInfoL;
-			LatentInfoL.CallbackTarget = this;
 			auto tongCompRef = huchuTong->tongRight;
-			auto tongCompRefL=huchuTong->tongLeft;
 			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-			//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 			isTongsTickEnabled = true;
-			grabbingObjectSize = 0;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsRight = false;
 			// 2. 손에서 떼어내기
@@ -282,7 +347,6 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Nothing was on Right tongs"))
 		}
 		
 		isGrabbingTongsRight=false;
@@ -302,12 +366,20 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingCupRight)
 	{
 		isGrabbingCupRight=false;
-
 	}
-	else if(isGrabbingOpenerRight)
+	else if(isGrabbingShakerLidRight)
 	{
-		isGrabbingOpenerRight=false;
+		isGrabbingShakerLidRight=false;
+		if(shakerLid!=nullptr)
+		shakerLid->isLidAttachable=true;
 	}
+	else if(isGrabbingShakerStrainerRight)
+	{
+		isGrabbingShakerStrainerRight=false;
+		if(shakerStrainer!=nullptr)
+		shakerStrainer->isStrainerAttachable=true;
+	}
+	
 	
 }
 
@@ -319,17 +391,11 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		// Tongs에 잡혀 있는 대상이 있었다면
 		if(isGrabbingWithTongsLeft)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Something was on Left tongs"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
-			FLatentActionInfo LatentInfoL;
-			LatentInfoL.CallbackTarget = this;
 			auto tongCompRef = huchuTongL->tongRight;
-			auto tongCompRefL=huchuTongL->tongLeft;
 			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-			//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 			isTongsTickEnabledL = true;
-			grabbingObjectSizeL = 0;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsLeft = false;
 			// 2. 손에서 떼어내기
@@ -342,7 +408,6 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Nothing was on Left tongs"))
 		}
 
 		isGrabbingTongsLeft=false;
@@ -355,9 +420,6 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		isGrabbingTabletLeft=false;
 		widgetInteractionComp->bShowDebug=false;
-		UE_LOG(LogTemp, Warning, TEXT("drop tablet"))
-
-
 	}
 	else if(isGrabbingCoasterLeft)
 	{
@@ -366,11 +428,18 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	else if(isGrabbingCupLeft)
 	{
 		isGrabbingCupLeft=false;
-
 	}
-	else if(isGrabbingOpenerLeft)
+	else if(isGrabbingShakerLidLeft)
 	{
-		isGrabbingOpenerLeft=false;
+		isGrabbingShakerLidLeft=false;
+		if(shakerLidL!=nullptr)
+		shakerLidL->isLidAttachable=true;
+	}
+	else if(isGrabbingShakerStrainerLeft)
+	{
+		isGrabbingShakerStrainerLeft=false;
+		if(shakerStrainerL!=nullptr)
+		shakerStrainerL->isStrainerAttachable=true;
 	}
 }
 
@@ -437,15 +506,11 @@ void APlayerCharacter::FireRight()
 				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
 			}
 		}		
-			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
-			FLatentActionInfo LatentInfoL;
-			LatentInfoL.CallbackTarget = this;
 			LatentInfo.Linkage = 0;
 			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
-			auto tongCompRefL=huchuTong->tongLeft;
 			auto tongLoc =  huchuTong->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
 			auto tongRightVector = huchuTong->GetActorForwardVector();
 			FCollisionQueryParams params1;
@@ -456,17 +521,14 @@ void APlayerCharacter::FireRight()
 			// Tongs 양쪽에서 LineTrace롤 통해 Grab할 대상의 크기를 측정한다.
 			bool bHitR = GetWorld()->LineTraceSingleByChannel(rightTrace,tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, ECC_Visibility,params1);
 			bool bHitL = GetWorld()->LineTraceSingleByChannel(leftTrace,tongLoc+tongRightVector*-25.0f, tongLoc+tongRightVector*25.0f, ECC_Visibility,params1);
-			//DrawDebugLine(GetWorld(), tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, FColor::Red, false, 2.0f, 0, 0.5);
 			// LineTrace가 양쪽 모두 적중했다면
 			if(bHitL&&bHitR)
 			{
 				isTongsTickEnabled = false;
 				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
-				grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
+				//grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
 				// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
 				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
-				UE_LOG(LogTemp, Warning, TEXT("grabbingObjectSize : %f"), grabbingObjectSize)
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
 			else
@@ -542,13 +604,9 @@ void APlayerCharacter::FireLeft()
 				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
 			}
 		}	
-			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire Left"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
-			FLatentActionInfo LatentInfoL;
-			LatentInfoL.CallbackTarget = this;
 			auto tongCompRef = huchuTongL->tongRight;
-			auto tongCompRefL=huchuTongL->tongLeft;
 			auto tongLoc =  huchuTongL->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
 			auto tongRightVector = huchuTongL->GetActorForwardVector();
 			FCollisionQueryParams params1;
@@ -559,24 +617,20 @@ void APlayerCharacter::FireLeft()
 			// Tongs 양쪽에서 LineTrace롤 통해 Grab할 대상의 크기를 측정한다.
 			bool bHitR = GetWorld()->LineTraceSingleByChannel(rightTrace,tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, ECC_Visibility,params1);
 			bool bHitL = GetWorld()->LineTraceSingleByChannel(leftTrace,tongLoc+tongRightVector*-25.0f, tongLoc+tongRightVector*25.0f, ECC_Visibility,params1);
-			//DrawDebugLine(GetWorld(), tongLoc+tongRightVector*25.0f, tongLoc+tongRightVector*-25.0f, FColor::Red, false, 2.0f, 0, 0.5);
 			// LineTrace가 양쪽 모두 적중했다면
 			if(bHitL&&bHitR)
 			{
 				isTongsTickEnabledL = false;
 				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
-				grabbingObjectSizeL = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
+				//grabbingObjectSizeL = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
 				// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
 				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-				//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(-10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
-				UE_LOG(LogTemp, Warning, TEXT("grabbingObjectSizeLeft : %f"), grabbingObjectSizeL)
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
 			else
 			{
 				// Oculus Trigger Input Value에 따른 Tongs Rotation 제어 Tick 활성화
 				isTongsTickEnabledL=true;
-
 			}
 
 	}
@@ -599,19 +653,13 @@ void APlayerCharacter::FireReleasedRight()
 		// Tongs로 잡고 있는 대상이 있었다면
 		if (isGrabbingWithTongsRight)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire Released"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
-			FLatentActionInfo LatentInfoL;
-			LatentInfoL.CallbackTarget = this;
 			LatentInfo.Linkage = 0;
 			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
-			auto tongCompRefL=huchuTong->tongLeft;
 			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-			//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 			isTongsTickEnabled = true;
-			grabbingObjectSize = 0;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsRight = false;
 			// 2. 손에서 떼어내기
@@ -626,13 +674,7 @@ void APlayerCharacter::FireReleasedRight()
 		else
 		{
 			isGrabbingWithTongsRight = false;
-			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire Released"))
-			FLatentActionInfo LatentInfo;
-			LatentInfo.CallbackTarget = this;
-			FLatentActionInfo LatentInfoL;
-			LatentInfoL.CallbackTarget = this;
 			isTongsTickEnabled = true;
-			grabbingObjectSize = 0;
 		}	
 	}
 	else
@@ -648,17 +690,11 @@ void APlayerCharacter::FireReleasedLeft()
 		// Tongs로 잡고 있는 대상이 있었다면
 		if (isGrabbingWithTongsLeft)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire Released Left"))
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
-			FLatentActionInfo LatentInfoL;
-			LatentInfoL.CallbackTarget = this;
 			auto tongCompRef = huchuTongL->tongRight;
-			auto tongCompRefL=huchuTongL->tongLeft;
 			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
-			//UKismetSystemLibrary::MoveComponentTo(tongCompRefL, tongCompRefL->GetRelativeLocation(), tongCompRefL->GetRelativeRotation()+FRotator(10, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfoL);
 			isTongsTickEnabledL = true;
-			grabbingObjectSizeL = 0;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsLeft = false;
 			// 2. 손에서 떼어내기
@@ -673,13 +709,7 @@ void APlayerCharacter::FireReleasedLeft()
 		else
 		{
 			isGrabbingWithTongsLeft = false;
-			UE_LOG(LogTemp, Warning, TEXT("Huchu Fire Released Left"))
-			FLatentActionInfo LatentInfo;
-			LatentInfo.CallbackTarget = this;
-			FLatentActionInfo LatentInfoL;
-			LatentInfoL.CallbackTarget = this;
 			isTongsTickEnabledL = true;
-			grabbingObjectSizeL = 0;
 		}	
 	}
 	else
