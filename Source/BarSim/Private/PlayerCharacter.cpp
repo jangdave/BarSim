@@ -194,6 +194,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==mixingGlass&&mixingGlass!=nullptr)
 		{
 			isGrabbingMixingGlassRight=true;
+			UE_LOG(LogTemp, Warning, TEXT("Grabbed Mixing Glass  on Right"))			
 		}
 		// 잡은 대상이 Glass Strainer 이라면
 		else if(GrabbedActorRight==strainer&&strainer!=nullptr)
