@@ -9,50 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e40f8abc-488a-452e-b49e-d921d4efda6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/ABP_CustomerAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/ABP_CustomerAnim.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/ABP_OldPalAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/ABP_OldPalAnim.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_Exit_Left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_Exit_Right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_Exit_TurnAround.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_FistCheer_LeftHand.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_FistCheer_RightHand.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_HoldPintGlass_Chug.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_HoldPintGlass_Enter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_HoldPintGlass_Exit.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_HoldPintGlass_Loop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_HoldPintGlass_Sip.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_IdleLoop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_Quick_Enter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_RaiseGlassCheer.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_TalkGesture_Medium01.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_TalkGesture_Short01.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_TalkGesture_Short02.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Sit_Stool_TalkGesture_Short05.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Standing_BrowsingItems01.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/AnimationSequence_Customer_Standing_Drink_Pint_Chug.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/RTG_Mannequin.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/Walking_UE1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_OldPalCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_OldPalCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_SpawnManager.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_SpawnManager.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/StartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/StartMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/MetaHumans/Common/Female/Medium/NormalWeight/Body/metahuman_base_skel.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MetaHumans/Common/Female/Medium/NormalWeight/Body/metahuman_base_skel.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/MetaHumans/Stephane/MaleHair/Hair/Hair_M_SideSweptFringe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MetaHumans/Stephane/MaleHair/Hair/Hair_M_SideSweptFringe.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalAnimInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Tablet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Tablet.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/OldPalAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/OldPalAnimInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/OldPalCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/OldPalCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/OldPalFSM.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/OldPalFSM.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/SpawnManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/SpawnManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/Tablet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/Tablet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,6 +126,7 @@
       <workItem from="1683780668209" duration="3412000" />
       <workItem from="1683784612765" duration="5408000" />
       <workItem from="1683791320138" duration="13401000" />
+      <workItem from="1683853238863" duration="7194000" />
     </task>
     <servers />
   </component>
