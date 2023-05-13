@@ -9,12 +9,14 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GripMotionControllerComponent.h"
+#include "HalfSlicedLime.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
 #include "MixingGlass.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
+#include "SlicedLime.h"
 #include "Strainer.h"
 #include "Tablet.h"
 #include "Components/WidgetInteractionComponent.h"
@@ -499,11 +501,29 @@ void APlayerCharacter::FireRight()
 			GrabbedActorWithTongsRight=HitObj[Closest].GetComponent()->GetAttachmentRootActor();
 			GrabbedObjectWithTongsRight = HitObj[Closest].GetComponent();
 			iceCube=Cast<AIceCube>(GrabbedActorWithTongsRight);
+			slicedLime=Cast<ASlicedLime>(GrabbedActorWithTongsRight);
+			halfSlicedLime=Cast<AHalfSlicedLime>(GrabbedActorWithTongsRight);
+			
 			if(GrabbedActorWithTongsRight==iceCube&&iceCube!=nullptr)
 			{
+				isGrabbingIceWithTongsRight=true;
 				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
 				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
+			}
+			else if(GrabbedActorWithTongsRight==slicedLime&&slicedLime!=nullptr)
+			{
+				isGrabbingLimeWithTongsRight=true;
+				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
+				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
+			}
+			else if(GrabbedActorWithTongsRight==halfSlicedLime&&halfSlicedLime!=nullptr)
+			{
+				isGrabbingLimeWithTongsRight=true;
+				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
+				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
 			}
 		}		
 			FLatentActionInfo LatentInfo;
@@ -524,11 +544,19 @@ void APlayerCharacter::FireRight()
 			// LineTrace가 양쪽 모두 적중했다면
 			if(bHitL&&bHitR)
 			{
-				isTongsTickEnabled = false;
-				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
-				//grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
-				// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				if(isGrabbingIceWithTongsRight)
+				{
+					isTongsTickEnabled = false;
+					// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
+					//grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
+					// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
+					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				}
+				else if(isGrabbingLimeWithTongsRight)
+				{
+					isTongsTickEnabled = false;
+					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(7, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
 			else
@@ -597,11 +625,28 @@ void APlayerCharacter::FireLeft()
 			GrabbedActorWithTongsLeft=HitObj[Closest].GetComponent()->GetAttachmentRootActor();
 			GrabbedObjectWithTongsLeft = HitObj[Closest].GetComponent();
 			iceCubeL=Cast<AIceCube>(GrabbedActorWithTongsLeft);
+			slicedLimeL=Cast<ASlicedLime>(GrabbedActorWithTongsLeft);
+			halfSlicedLimeL=Cast<AHalfSlicedLime>(GrabbedActorWithTongsLeft);
 			if(GrabbedActorWithTongsLeft==iceCubeL&&iceCubeL!=nullptr)
 			{
+				isGrabbingIceWithTongsLeft=true;
 				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("TongGrabSizeSocket"));
+			}
+			else if(GrabbedActorWithTongsLeft==slicedLimeL&&slicedLimeL!=nullptr)
+			{
+				isGrabbingLimeWithTongsLeft=true;
+				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
+			}
+			else if(GrabbedActorWithTongsLeft==halfSlicedLimeL&&halfSlicedLimeL!=nullptr)
+			{
+				isGrabbingLimeWithTongsLeft=true;
+				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
 			}
 		}	
 			FLatentActionInfo LatentInfo;
@@ -620,11 +665,19 @@ void APlayerCharacter::FireLeft()
 			// LineTrace가 양쪽 모두 적중했다면
 			if(bHitL&&bHitR)
 			{
-				isTongsTickEnabledL = false;
-				// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
-				//grabbingObjectSizeL = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
-				// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				if(isGrabbingIceWithTongsLeft)
+				{
+					isTongsTickEnabledL = false;
+					// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
+					//grabbingObjectSizeL = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
+					// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
+					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				}
+				else if(isGrabbingLimeWithTongsLeft)
+				{
+					isTongsTickEnabledL = false;
+					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(7, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
 			else
@@ -658,10 +711,19 @@ void APlayerCharacter::FireReleasedRight()
 			LatentInfo.Linkage = 0;
 			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			if(isGrabbingIceWithTongsRight)
+			{
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			}
+			else if(isGrabbingLimeWithTongsRight)
+			{
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-7, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			}
 			isTongsTickEnabled = true;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsRight = false;
+			isGrabbingIceWithTongsRight=false;
+			isGrabbingLimeWithTongsRight=false;
 			// 2. 손에서 떼어내기
 			GrabbedObjectWithTongsRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 			// 3. 물리기능 활성화
@@ -674,6 +736,8 @@ void APlayerCharacter::FireReleasedRight()
 		else
 		{
 			isGrabbingWithTongsRight = false;
+			isGrabbingIceWithTongsRight=false;
+			isGrabbingLimeWithTongsRight=false;
 			isTongsTickEnabled = true;
 		}	
 	}
@@ -693,10 +757,19 @@ void APlayerCharacter::FireReleasedLeft()
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
 			auto tongCompRef = huchuTongL->tongRight;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			if(isGrabbingIceWithTongsLeft)
+			{
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			}
+			else if(isGrabbingLimeWithTongsLeft)
+			{
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-7, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			}
 			isTongsTickEnabledL = true;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsLeft = false;
+			isGrabbingIceWithTongsLeft=false;
+			isGrabbingLimeWithTongsLeft=false;
 			// 2. 손에서 떼어내기
 			GrabbedObjectWithTongsLeft->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 			// 3. 물리기능 활성화
@@ -709,6 +782,8 @@ void APlayerCharacter::FireReleasedLeft()
 		else
 		{
 			isGrabbingWithTongsLeft = false;
+			isGrabbingIceWithTongsLeft=false;
+			isGrabbingLimeWithTongsLeft=false;
 			isTongsTickEnabledL = true;
 		}	
 	}

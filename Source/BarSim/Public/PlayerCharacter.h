@@ -89,7 +89,12 @@ public:
 	bool isGrabbingMixingGlassLeft=false;
 	bool isGrabbingShakerLidRight=false;
 	bool isGrabbingShakerLidLeft=false;
-
+	bool isGrabbingIceWithTongsRight=false;
+	bool isGrabbingIceWithTongsLeft=false;
+	bool isGrabbingLimeWithTongsRight=false;
+	bool isGrabbingLimeWithTongsLeft=false;
+	
+	
 	UPROPERTY()
 	FRotator initHandRot;
 	UPROPERTY()
@@ -170,6 +175,14 @@ public:
 	class AMixingGlass* mixingGlass;
 	UPROPERTY()
 	class AMixingGlass* mixingGlassL;
+	UPROPERTY()
+	class ASlicedLime* slicedLime;
+	UPROPERTY()
+	class ASlicedLime* slicedLimeL;
+	UPROPERTY()
+	class AHalfSlicedLime* halfSlicedLime;
+	UPROPERTY()
+	class AHalfSlicedLime* halfSlicedLimeL;
 	
 
 
