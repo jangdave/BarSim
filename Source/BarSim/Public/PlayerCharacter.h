@@ -31,6 +31,8 @@ public:
 	// Widget Components
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionComp;
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	class UWidgetInteractionComponent* widgetInteractionCompLeft;
 
 	// Inputs
 	UPROPERTY(EditDefaultsOnly, Category = "Input")

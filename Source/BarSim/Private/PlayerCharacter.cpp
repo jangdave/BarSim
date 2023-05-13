@@ -27,7 +27,9 @@ APlayerCharacter::APlayerCharacter()
 {
 	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
 	widgetInteractionComp->SetupAttachment(RightMotionController);
-	
+
+	widgetInteractionCompLeft = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionCompLeft"));
+	widgetInteractionCompLeft->SetupAttachment(LeftMotionController);
 }
 
 
@@ -60,6 +62,13 @@ void APlayerCharacter::BeginPlay()
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;	
 	widgetInteractionComp->InteractionDistance=50.0f;
+
+	widgetInteractionCompLeft->DebugSphereLineThickness=0;
+	widgetInteractionCompLeft->DebugLineThickness=0.1f;
+	widgetInteractionCompLeft->DebugColor=FColor::Red;
+	widgetInteractionCompLeft->bEnableHitTesting=true;
+	widgetInteractionCompLeft->bShowDebug=false;	
+	widgetInteractionCompLeft->InteractionDistance=50.0f;
 	
 }
 
@@ -175,6 +184,8 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==tablet&&tablet!=nullptr)
 		{
 			isGrabbingTabletRight=true;
+			widgetInteractionComp->bShowDebug=false;
+			widgetInteractionCompLeft->bShowDebug=true;
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed tablet on Right"))
 		}		
 		// 잡은 대상이 Coaster이라면
@@ -276,7 +287,8 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
 	{
 		isGrabbingTabletLeft=true;
-		widgetInteractionComp->bShowDebug=true;	
+		widgetInteractionComp->bShowDebug=true;
+		widgetInteractionCompLeft->bShowDebug=false;
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed tablet on Left"))
 	}		
 	// 잡은 대상이 Coaster이라면
@@ -360,6 +372,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingTabletRight)
 	{
 		isGrabbingTabletRight=false;
+		widgetInteractionComp->bShowDebug=false;
+		widgetInteractionCompLeft->bShowDebug=false;
 	}
 	else if(isGrabbingCoasterRight)
 	{
@@ -422,6 +436,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		isGrabbingTabletLeft=false;
 		widgetInteractionComp->bShowDebug=false;
+		widgetInteractionCompLeft->bShowDebug=false;
 	}
 	else if(isGrabbingCoasterLeft)
 	{
@@ -450,8 +465,7 @@ void APlayerCharacter::FireRight()
 	if(widgetInteractionComp)
 	{
 		//UI에 이벤트를 전달하고 싶다.
-		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
-			
+		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));			
 	}
 	// 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight)
@@ -575,6 +589,10 @@ void APlayerCharacter::FireRight()
 
 void APlayerCharacter::FireLeft()
 {
+	if(widgetInteractionCompLeft)
+	{
+		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));			
+	}
 	// 왼손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsLeft)
 	{
@@ -749,6 +767,10 @@ void APlayerCharacter::FireReleasedRight()
 
 void APlayerCharacter::FireReleasedLeft()
 {
+	if (widgetInteractionCompLeft)
+	{
+		widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+	}
 	if(isGrabbingTongsLeft)
 	{		
 		// Tongs로 잡고 있는 대상이 있었다면

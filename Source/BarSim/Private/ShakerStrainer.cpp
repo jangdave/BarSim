@@ -32,8 +32,6 @@ AShakerStrainer::AShakerStrainer(const FObjectInitializer& ObjectInitializer) : 
 void AShakerStrainer::BeginPlay()
 {
 	Super::BeginPlay();
-	sphereComp->OnComponentBeginOverlap.AddDynamic(this, &AShakerStrainer::LidOverlap);
-	sphereComp->OnComponentEndOverlap.AddDynamic(this, &AShakerStrainer::LidOverlapEnd);
 }
 
 // Called every frame
@@ -47,10 +45,32 @@ void AShakerStrainer::Tick(float DeltaTime)
 	DrawDebugSphere(GetWorld(), streamPoint, 0.3f, 32, FColor::Blue, false);
 }
 
-void AShakerStrainer::LidOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult)
+void AShakerStrainer::LidOverlap()
 {
-	lid = Cast<AShakerLid>(OtherActor);
-	if(lid&&lid->isLidAttachable==true)
+	FVector Center = sphereComp->GetSocketLocation(FName("Lid"));
+	TArray<FOverlapResult> HitObj;
+	FCollisionQueryParams params;
+	params.AddIgnoredActor(this);
+	DrawDebugSphere(GetWorld(), Center, 10, 30, FColor::Red, false, 2.0, 0, 0.1);
+	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(10), params);
+	if (bHit == false)
+	{
+		return;
+	}
+
+	for(int i=0; i<HitObj.Num(); ++i)
+	{
+		lid = Cast<AShakerLid>(HitObj[i].GetActor());
+		{
+			if(lid)
+			{
+				isLidOverlapSuccess = true;
+				lidArrayNum = i;
+			}
+		}
+	}
+	
+	if(isLidOverlapSuccess)
 	{
 		lid->DisableComponentsSimulatePhysics();
 		lid->VRGripInterfaceSettings.bSimulateOnDrop=false;
@@ -64,16 +84,3 @@ void AShakerStrainer::LidOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	}
 }
 
-void AShakerStrainer::LidOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-	lid = Cast<AShakerLid>(OtherActor);
-
-	if(lid)
-	{
-		lid->VRGripInterfaceSettings.bSimulateOnDrop=true;
-		//lid->meshComp->SetCollisionProfileName(FName("Strainer"));
-		bLidOn = false;
-		lid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		lid=nullptr;
-	}
-}

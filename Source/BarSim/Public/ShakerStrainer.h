@@ -37,10 +37,7 @@ public:
 	FVector streamPoint;
 
 	UFUNCTION()
-	void LidOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void LidOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	void LidOverlap();
 	
 	UPROPERTY()
 	class AShakerLid* lid;
@@ -50,6 +47,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "ShakerStrainer")
 	bool isStrainerAttachable = false;
+
+	int32 lidArrayNum = 0;
+	bool isLidOverlapSuccess = false;
 
 
 
