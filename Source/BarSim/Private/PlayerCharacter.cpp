@@ -335,6 +335,22 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		shakerStrainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Strainer on Left"))			
 	}
+	// 잡은 대상이 MixingGlass 라면
+	else if(GrabbedActorLeft==mixingGlassL&&mixingGlassL!=nullptr)
+	{
+		isGrabbingMixingGlassLeft=true;
+		mixingGlassL->VRGripInterfaceSettings.bSimulateOnDrop=true;
+		UE_LOG(LogTemp, Warning, TEXT("Grabbed Mixing Glass  on Left"))			
+	}
+	// 잡은 대상이 Glass Strainer 이라면
+	else if(GrabbedActorLeft==strainerL&&strainerL!=nullptr)
+	{
+		isGrabbingStrainerLeft=true;
+		strainerL->VRGripInterfaceSettings.bSimulateOnDrop=true;
+		strainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		UE_LOG(LogTemp, Warning, TEXT("Grabbed Glass Strainer on Left"))			
+
+	}
 	
 }
 
@@ -608,7 +624,7 @@ void APlayerCharacter::FireRight()
 				else if(isGrabbingLimeWithTongsRight)
 				{
 					isTongsTickEnabled = false;
-					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(7, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -733,7 +749,7 @@ void APlayerCharacter::FireLeft()
 				else if(isGrabbingLimeWithTongsLeft)
 				{
 					isTongsTickEnabledL = false;
-					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(7, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -774,7 +790,7 @@ void APlayerCharacter::FireReleasedRight()
 			}
 			else if(isGrabbingLimeWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-7, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 			}
 			isTongsTickEnabled = true;
 			// 1. 잡지않은 상태로 전환
@@ -824,7 +840,7 @@ void APlayerCharacter::FireReleasedLeft()
 			}
 			else if(isGrabbingLimeWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-7, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 			}
 			isTongsTickEnabledL = true;
 			// 1. 잡지않은 상태로 전환
