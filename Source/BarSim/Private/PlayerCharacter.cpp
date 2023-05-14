@@ -219,7 +219,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==shakerLid&&shakerLid!=nullptr)
 		{
 			isGrabbingShakerLidRight=true;
-			shakerLid->isLidAttachable=false;
+			shakerLid->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			shakerLid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Lid on Right"))			
 		}
@@ -227,7 +227,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==shakerStrainer&&shakerStrainer!=nullptr)
 		{
 			isGrabbingShakerStrainerRight=true;
-			shakerStrainer->isStrainerAttachable = false;
+			shakerStrainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			shakerStrainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Strainer on Right"))			
 		}
@@ -235,13 +235,14 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==mixingGlass&&mixingGlass!=nullptr)
 		{
 			isGrabbingMixingGlassRight=true;
+			mixingGlass->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed Mixing Glass  on Right"))			
 		}
 		// 잡은 대상이 Glass Strainer 이라면
 		else if(GrabbedActorRight==strainer&&strainer!=nullptr)
 		{
 			isGrabbingStrainerRight=true;
-			strainer->isGlassStrainerAttachable=false;
+			strainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed Glass Strainer on Right"))			
 
@@ -388,13 +389,19 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	{
 		isGrabbingShakerLidRight=false;
 		if(shakerLid!=nullptr)
-		shakerLid->isLidAttachable=true;
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Dropped ShakerLid"))			
+			shakerLid->AttachToShakerStrainer();		
+		}
 	}
 	else if(isGrabbingShakerStrainerRight)
 	{
 		isGrabbingShakerStrainerRight=false;
 		if(shakerStrainer!=nullptr)
-		shakerStrainer->isStrainerAttachable=true;
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Dropped Shaker Strainer"))
+			shakerStrainer->AttachToShaker();
+		}
 	}
 	
 	
@@ -451,13 +458,19 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		isGrabbingShakerLidLeft=false;
 		if(shakerLidL!=nullptr)
-		shakerLidL->isLidAttachable=true;
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Dropped ShakerLid"))			
+			shakerLidL->AttachToShakerStrainer();		
+		}
 	}
 	else if(isGrabbingShakerStrainerLeft)
 	{
 		isGrabbingShakerStrainerLeft=false;
-		if(shakerStrainerL!=nullptr)
-		shakerStrainerL->isStrainerAttachable=true;
+		if(strainerL!=nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Dropped Shaker Strainer"))
+			shakerStrainerL->AttachToShaker();
+		}
 	}
 }
 

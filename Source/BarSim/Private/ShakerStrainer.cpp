@@ -32,6 +32,8 @@ AShakerStrainer::AShakerStrainer(const FObjectInitializer& ObjectInitializer) : 
 void AShakerStrainer::BeginPlay()
 {
 	Super::BeginPlay();
+
+
 }
 
 // Called every frame
@@ -45,9 +47,9 @@ void AShakerStrainer::Tick(float DeltaTime)
 	DrawDebugSphere(GetWorld(), streamPoint, 0.3f, 32, FColor::Blue, false);
 }
 
-void AShakerStrainer::LidOverlap()
+void AShakerStrainer::AttachToShaker()
 {
-	FVector Center = sphereComp->GetSocketLocation(FName("Lid"));
+	FVector Center = meshComp->GetComponentLocation();
 	TArray<FOverlapResult> HitObj;
 	FCollisionQueryParams params;
 	params.AddIgnoredActor(this);
@@ -57,30 +59,31 @@ void AShakerStrainer::LidOverlap()
 	{
 		return;
 	}
-
 	for(int i=0; i<HitObj.Num(); ++i)
 	{
-		lid = Cast<AShakerLid>(HitObj[i].GetActor());
+		shaker = Cast<AShaker>(HitObj[i].GetActor());
 		{
-			if(lid)
+			if(shaker)
 			{
-				isLidOverlapSuccess = true;
-				lidArrayNum = i;
+				isStrainerCasted = true;
+				shakerArrayNum = i;
+				UE_LOG(LogTemp, Warning, TEXT("Casting Success"))
 			}
 		}
 	}
-	
-	if(isLidOverlapSuccess)
+	shaker=Cast<AShaker>(HitObj[shakerArrayNum].GetActor());
+	if(isStrainerCasted&&shaker!=nullptr)
 	{
-		lid->DisableComponentsSimulatePhysics();
-		lid->VRGripInterfaceSettings.bSimulateOnDrop=false;
-		auto lidLoc = meshComp->GetSocketTransform(FName("Lid"));
-		lid->SetActorLocationAndRotation(lidLoc.GetLocation(), lidLoc.GetRotation());
-		lid->AttachToComponent(meshComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Lid"));
-		//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
+		UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
 		this->DisableComponentsSimulatePhysics();
-		bLidOn = true;
-		lid->isLidAttachable=false;
+		this->VRGripInterfaceSettings.bSimulateOnDrop=false;
+		auto shakerLoc = shaker->sphereComp->GetSocketTransform(FName("Strainer"));
+		this->SetActorLocationAndRotation(shakerLoc.GetLocation(), shakerLoc.GetRotation());
+		this->AttachToComponent(shaker->sphereComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
+		//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
+		shaker->DisableComponentsSimulatePhysics();
+		shaker->bStrainerOn=true;
 	}
 }
+
 

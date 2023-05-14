@@ -67,13 +67,7 @@ public:
 	float shakingTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shaker")
-	float acc;
-
-	UFUNCTION()
-	void StrainerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void StrainerOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	float acc;	
 	
 	UPROPERTY(EditAnywhere, Category = "Shaker")
 	class AShakerStrainer* strainer;

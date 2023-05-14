@@ -24,6 +24,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+
 	UPROPERTY(EditAnywhere, Category = "ShakerStrainer")
 	class UStaticMeshComponent* meshComp;
 
@@ -37,7 +38,7 @@ public:
 	FVector streamPoint;
 
 	UFUNCTION()
-	void LidOverlap();
+	void AttachToShaker();
 	
 	UPROPERTY()
 	class AShakerLid* lid;
@@ -49,7 +50,14 @@ public:
 	bool isStrainerAttachable = false;
 
 	int32 lidArrayNum = 0;
+	int32 shakerArrayNum = 0;
 	bool isLidOverlapSuccess = false;
+
+	UPROPERTY()
+	class AShaker* shaker;
+
+	bool isStrainerCasted = false;
+	
 
 
 

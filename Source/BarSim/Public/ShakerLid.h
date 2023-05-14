@@ -7,6 +7,7 @@
 #include "Grippables/GrippableActor.h"
 #include "ShakerLid.generated.h"
 
+
 UCLASS()
 class BARSIM_API AShakerLid : public AGrippableActor
 {
@@ -29,4 +30,16 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Lid")
 	bool isLidAttachable = false;
+
+	UFUNCTION()
+	void AttachToShakerStrainer();
+
+	UPROPERTY()
+	class AShakerStrainer* shakerStrainer;
+
+	UPROPERTY()
+	bool isShakerStrainerCasted = false;
+
+	int32 StrainerArrayNum = 0;
+	
 };
