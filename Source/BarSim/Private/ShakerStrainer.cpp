@@ -71,18 +71,23 @@ void AShakerStrainer::AttachToShaker()
 			}
 		}
 	}
-	shaker=Cast<AShaker>(HitObj[shakerArrayNum].GetActor());
-	if(isStrainerCasted&&shaker!=nullptr)
+	if(isStrainerCasted)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
-		this->DisableComponentsSimulatePhysics();
-		this->VRGripInterfaceSettings.bSimulateOnDrop=false;
-		auto shakerLoc = shaker->sphereComp->GetSocketTransform(FName("Strainer"));
-		this->SetActorLocationAndRotation(shakerLoc.GetLocation(), shakerLoc.GetRotation());
-		this->AttachToComponent(shaker->sphereComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
-		//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
-		shaker->DisableComponentsSimulatePhysics();
-		shaker->bStrainerOn=true;
+		shaker=Cast<AShaker>(HitObj[shakerArrayNum].GetActor());
+		if(shaker!=nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
+			this->DisableComponentsSimulatePhysics();
+			this->VRGripInterfaceSettings.bSimulateOnDrop=false;
+			auto shakerLoc = shaker->sphereComp->GetSocketTransform(FName("Strainer"));
+			this->SetActorLocationAndRotation(shakerLoc.GetLocation(), shakerLoc.GetRotation());
+			this->AttachToComponent(shaker->sphereComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
+			//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
+			shaker->DisableComponentsSimulatePhysics();
+			shaker->bStrainerOn=true;
+			isStrainerCasted=false;
+			HitObj.Reset();
+		}
 	}
 }
 

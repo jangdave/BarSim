@@ -39,12 +39,6 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "MixingGlass")
 	class USphereComponent* sphereComp;
-
-	UFUNCTION()
-	void StrainerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void StrainerOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
 	UPROPERTY()
 	class AStrainer* strainer;

@@ -22,8 +22,6 @@ AMixingGlass::AMixingGlass(const FObjectInitializer& ObjectInitializer) : Super(
 void AMixingGlass::BeginPlay()
 {
 	Super::BeginPlay();
-	sphereComp->OnComponentBeginOverlap.AddDynamic(this, &AMixingGlass::StrainerOverlap);
-	sphereComp->OnComponentEndOverlap.AddDynamic(this, &AMixingGlass::StrainerOverlapEnd);
 }
 
 void AMixingGlass::Tick(float DeltaSeconds)
@@ -134,32 +132,3 @@ void AMixingGlass::Tick(float DeltaSeconds)
 	}
 }
 
-void AMixingGlass::StrainerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult)
-{
-	strainer = Cast<AStrainer>(OtherActor);
-	if(strainer&&strainer->isGlassStrainerAttachable==true)
-	{
-		strainer->DisableComponentsSimulatePhysics();
-		strainer->VRGripInterfaceSettings.bSimulateOnDrop=false;
-		auto strainerTrans = cupComp->GetSocketTransform(FName("Strainer"));
-		strainer->SetActorLocationAndRotation(strainerTrans.GetLocation(), strainerTrans.GetRotation());
-		strainer->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
-		//strainer->meshComp->SetCollisionProfileName(FName("Overlapped"));
-		bStrainerOn = true;
-		strainer->isGlassStrainerAttachable=false;
-	}
-}
-
-void AMixingGlass::StrainerOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-	strainer = Cast<AStrainer>(OtherActor);
-
-	if(strainer)
-	{
-		//strainer->meshComp->SetCollisionProfileName(FName("Strainer"));
-		strainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
-		bStrainerOn = false;
-		strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		strainer=nullptr;
-	}
-}

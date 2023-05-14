@@ -29,4 +29,13 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Strainer")
 	bool isGlassStrainerAttachable=false;
+
+	UFUNCTION()
+	void AttachToMixingGlass();
+
+	UPROPERTY()
+	class AMixingGlass* mixingGlass;
+
+	bool isMixingGlassCasted=  false;
+	int32 mixingGlassArrayNum = 0;
 };

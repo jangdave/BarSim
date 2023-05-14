@@ -403,7 +403,19 @@ void APlayerCharacter::CheckDroppedObjectRight()
 			shakerStrainer->AttachToShaker();
 		}
 	}
-	
+	else if(isGrabbingMixingGlassRight)
+	{
+		isGrabbingMixingGlassRight=false;
+	}
+	else if(isGrabbingStrainerRight)
+	{
+		isGrabbingStrainerRight=false;
+		if(strainer!=nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Dropped Strainer"))
+			strainer->AttachToMixingGlass();
+		}
+	}
 	
 }
 
@@ -470,6 +482,19 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Dropped Shaker Strainer"))
 			shakerStrainerL->AttachToShaker();
+		}
+	}
+	else if(isGrabbingMixingGlassLeft)
+	{
+		isGrabbingMixingGlassLeft=false;
+	}
+	else if(isGrabbingStrainerLeft)
+	{
+		isGrabbingStrainerLeft=false;
+		if(strainerL!=nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Dropped Strainer"))
+			strainerL->AttachToMixingGlass();
 		}
 	}
 }
