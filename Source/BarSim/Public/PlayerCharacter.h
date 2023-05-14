@@ -113,6 +113,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValueLeft;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
+	double grabPressedActionValue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
+	double grabPressedActionValueLeft;
+
+
 	UPROPERTY(EditDefaultsOnly)
 	float TongsGrabRange = 10;
 	
