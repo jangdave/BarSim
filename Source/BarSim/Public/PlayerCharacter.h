@@ -34,6 +34,12 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionCompLeft;
 
+	// Aims
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
+	class UMotionControllerComponent* RightAim;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
+	class UMotionControllerComponent* LeftAim;
+
 	// Inputs
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* VREInputMappingContext;

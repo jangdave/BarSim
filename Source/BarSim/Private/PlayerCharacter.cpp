@@ -25,6 +25,7 @@
 
 APlayerCharacter::APlayerCharacter()
 {
+
 	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
 	widgetInteractionComp->SetupAttachment(RightMotionController);
 
@@ -57,18 +58,18 @@ void APlayerCharacter::BeginPlay()
 	RightMotionController->bSmoothHandTracking=true;
 	
 	widgetInteractionComp->DebugSphereLineThickness=0;
-	widgetInteractionComp->DebugLineThickness=0.1f;
-	widgetInteractionComp->DebugColor=FColor::Red;
+	widgetInteractionComp->DebugLineThickness=0.3f;
+	widgetInteractionComp->DebugColor=FColor::White;
 	widgetInteractionComp->bEnableHitTesting=true;
-	widgetInteractionComp->bShowDebug=false;	
-	widgetInteractionComp->InteractionDistance=50.0f;
+	widgetInteractionComp->bShowDebug=true;	
+	widgetInteractionComp->InteractionDistance=40.0f;
 
 	widgetInteractionCompLeft->DebugSphereLineThickness=0;
-	widgetInteractionCompLeft->DebugLineThickness=0.1f;
-	widgetInteractionCompLeft->DebugColor=FColor::Red;
+	widgetInteractionCompLeft->DebugLineThickness=0.3f;
+	widgetInteractionCompLeft->DebugColor=FColor::White;
 	widgetInteractionCompLeft->bEnableHitTesting=true;
-	widgetInteractionCompLeft->bShowDebug=false;	
-	widgetInteractionCompLeft->InteractionDistance=50.0f;
+	widgetInteractionCompLeft->bShowDebug=true;	
+	widgetInteractionCompLeft->InteractionDistance=40.0f;
 	
 }
 
