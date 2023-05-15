@@ -9,10 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e40f8abc-488a-452e-b49e-d921d4efda6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +34,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\USER\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
@@ -120,6 +117,7 @@
       <workItem from="1684030084214" duration="19835000" />
       <workItem from="1684059602634" duration="1357000" />
       <workItem from="1684114450632" duration="12697000" />
+      <workItem from="1684155663395" duration="912000" />
     </task>
     <servers />
   </component>
