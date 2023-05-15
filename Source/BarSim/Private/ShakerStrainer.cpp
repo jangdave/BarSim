@@ -86,6 +86,7 @@ void AShakerStrainer::AttachToShaker()
 			shaker->DisableComponentsSimulatePhysics();
 			shaker->bStrainerOn=true;
 			isStrainerCasted=false;
+			this->VRGripInterfaceSettings.bDenyGripping=true;
 			HitObj.Reset();
 		}
 	}

@@ -521,8 +521,6 @@ void APlayerCharacter::FireRight()
 	{
 		//UI에 이벤트를 전달하고 싶다.
 		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
-		UE_LOG(LogTemp, Warning, TEXT("WidgetInteractionInputPressedRight"))
-
 	}
 	// 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight)
@@ -649,8 +647,6 @@ void APlayerCharacter::FireLeft()
 	if(widgetInteractionCompLeft)
 	{
 		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));
-		UE_LOG(LogTemp, Warning, TEXT("WidgetInteractionInputPressedLeft"))
-
 	}
 	// 왼손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsLeft)
@@ -777,8 +773,6 @@ void APlayerCharacter::FireReleasedRight()
 	if (widgetInteractionComp)
 	{
 		widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
-		UE_LOG(LogTemp, Warning, TEXT("WidgetInteractionInputReleasedRight"))
-
 	}
 	if(isGrabbingTongsRight)
 	{		
@@ -831,8 +825,6 @@ void APlayerCharacter::FireReleasedLeft()
 	if (widgetInteractionCompLeft)
 	{
 		widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
-		UE_LOG(LogTemp, Warning, TEXT("WidgetInteractionInputReleasedLeft"))
-
 	}
 	if(isGrabbingTongsLeft)
 	{		
