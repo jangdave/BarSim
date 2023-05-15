@@ -36,6 +36,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	class UStaticMeshComponent* cupComp;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cup")
+	class UWidgetComponent* widgetComp;
+
 	UFUNCTION()
 	void AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION()
@@ -131,4 +134,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Cup")
 	bool bShaked;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Cup")
+	class APlayerCharacter* player;
 };
