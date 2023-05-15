@@ -101,13 +101,7 @@ public:
 	bool isGrabbingIceWithTongsLeft=false;
 	bool isGrabbingLimeWithTongsRight=false;
 	bool isGrabbingLimeWithTongsLeft=false;
-	
-	
-	UPROPERTY()
-	FRotator initHandRot;
-	UPROPERTY()
-	FRotator initHandRotL;
-
+		
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)

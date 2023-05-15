@@ -108,7 +108,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 		}
 	}
 	// Cup이 nullptr이 아니면서, 오른손에 Cup을 쥐고 있다면
-	if(isGrabbingCupRight&&cup!=nullptr)
+	/*if(isGrabbingCupRight&&cup!=nullptr)
 	{
 		// cup의 contents가 0보다 크다면
 		if(cup->contents>0)
@@ -128,7 +128,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 			LeftMotionController->SetRelativeRotation(initHandRotL);
 		}
 
-	}
+	}*/
 	
 }
 
@@ -198,8 +198,6 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		// 잡은 대상이 Cup이라면
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
 		{
-			// Cup을 쥔 순간의 Hand Rotation 값 저장
-			initHandRot=RightMotionController->GetRelativeRotation();
 			isGrabbingCupRight=true;
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Right"))			
 		}
@@ -302,8 +300,6 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	// 잡은 대상이 Cup이라면
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 	{
-		// Cup을 쥔 순간의 Hand Rotation 값 저장
-		initHandRot=LeftMotionController->GetRelativeRotation();
 		isGrabbingCupLeft=true;
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Left"))			
 	}
