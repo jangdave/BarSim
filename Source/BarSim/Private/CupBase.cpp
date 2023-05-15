@@ -3,12 +3,17 @@
 
 #include "CupBase.h"
 
+#include "BarPlayer.h"
 #include "DropBase.h"
 #include "IceCube.h"
 #include "LimeDrop.h"
 #include "MixedDrop.h"
+#include "PlayerCharacter.h"
+#include "UnrealWidgetFwd.h"
 #include "VorbisAudioInfo.h"
 #include "Components/BoxComponent.h"
+#include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Materials/MaterialParameterCollection.h"
 #include "Sound/DialogueTypes.h"
 
@@ -37,6 +42,9 @@ ACupBase::ACupBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectIn
 	igCheckerComp->SetupAttachment(cupComp);
 	igCheckerComp->SetCollisionProfileName(FName("IGChecker"));
 	igCheckerComp->SetVisibility(false);
+
+	widgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComp"));
+	widgetComp->SetupAttachment(cupComp);
 }
 
 // Called when the game starts or when spawned
@@ -49,12 +57,22 @@ void ACupBase::BeginPlay()
 	measureComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddLiquor);
 	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
 	igCheckerComp->OnComponentEndOverlap.AddDynamic(this, &ACupBase::ExtractIce);
+
+	player = Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
 // Called every frame
 void ACupBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	if(player)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("widget rotate"));
+		FVector playerDir = player->GetActorLocation() - GetActorLocation();
+		FRotator playerDirRot = playerDir.Rotation();
+		widgetComp->SetRelativeRotation(FRotator(0, playerDirRot.Yaw, 0));
+	}
 
 	//전체 부피 중 특정 액체가 차지하는 비율만큼 머테리얼 섞기
 	//오더 어레이와 컨텐츠 어레이가 있을때만
