@@ -28,9 +28,13 @@ APlayerCharacter::APlayerCharacter()
 
 	widgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionComp"));
 	widgetInteractionComp->SetupAttachment(RightMotionController);
+	widgetInteractionComp->SetRelativeLocation(FVector(9.1321, -2.7411, -8.8955));
+	widgetInteractionComp->SetRelativeRotation(FRotator(-59.678, -36.935, 52.896));
 
 	widgetInteractionCompLeft = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("widgetInteractionCompLeft"));
 	widgetInteractionCompLeft->SetupAttachment(LeftMotionController);
+	widgetInteractionCompLeft->SetRelativeLocation(FVector(9.0641, 5.1962, -10.4361));
+	widgetInteractionCompLeft->SetRelativeRotation(FRotator(-52.5329, 21.7898, -2.4338));
 }
 
 
@@ -516,7 +520,9 @@ void APlayerCharacter::FireRight()
 	if(widgetInteractionComp)
 	{
 		//UI에 이벤트를 전달하고 싶다.
-		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));			
+		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
+		UE_LOG(LogTemp, Warning, TEXT("WidgetInteractionInputPressedRight"))
+
 	}
 	// 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight)
@@ -642,7 +648,9 @@ void APlayerCharacter::FireLeft()
 {
 	if(widgetInteractionCompLeft)
 	{
-		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));			
+		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));
+		UE_LOG(LogTemp, Warning, TEXT("WidgetInteractionInputPressedLeft"))
+
 	}
 	// 왼손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsLeft)
@@ -769,6 +777,8 @@ void APlayerCharacter::FireReleasedRight()
 	if (widgetInteractionComp)
 	{
 		widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+		UE_LOG(LogTemp, Warning, TEXT("WidgetInteractionInputReleasedRight"))
+
 	}
 	if(isGrabbingTongsRight)
 	{		
@@ -821,6 +831,8 @@ void APlayerCharacter::FireReleasedLeft()
 	if (widgetInteractionCompLeft)
 	{
 		widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+		UE_LOG(LogTemp, Warning, TEXT("WidgetInteractionInputReleasedLeft"))
+
 	}
 	if(isGrabbingTongsLeft)
 	{		
