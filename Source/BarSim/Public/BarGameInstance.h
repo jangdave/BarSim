@@ -20,7 +20,8 @@ public:
 	virtual void Init() override;
 	
 	FGoMainDele goToMainMapDele;
-	
+
+	UPROPERTY()
 	class AGameStartManager* startManager;
 	
 	UFUNCTION()
@@ -31,4 +32,7 @@ public:
 
 	UPROPERTY()
 	int32 checkDayCount;
+	
+	UPROPERTY(EditAnywhere)
+	bool bCheckGameMode;
 };

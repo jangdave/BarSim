@@ -3,7 +3,6 @@
 
 #include "MenuWidget.h"
 #include "BarGameInstance.h"
-#include "GameStartManager.h"
 #include "MenuWidgetActor.h"
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
@@ -50,11 +49,11 @@ void UMenuWidget::QuitGame()
 
 void UMenuWidget::StoryMode()
 {
-	auto startManager = Cast<AGameStartManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameStartManager::StaticClass()));
+	auto gi = Cast<UBarGameInstance>(GetGameInstance());
 
-	if(startManager != nullptr)
+	if(gi != nullptr)
 	{
-		startManager->bCheckGameMode = true;
+		gi->bCheckGameMode = true;
 	}
 
 	auto parent = Cast<AMenuWidgetActor>(UGameplayStatics::GetActorOfClass(GetWorld(), AMenuWidgetActor::StaticClass()));
@@ -67,11 +66,11 @@ void UMenuWidget::StoryMode()
 
 void UMenuWidget::Tutorial()
 {
-	auto startManager = Cast<AGameStartManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameStartManager::StaticClass()));
+	auto gi = Cast<UBarGameInstance>(GetGameInstance());
 
-	if(startManager != nullptr)
+	if(gi != nullptr)
 	{
-		startManager->bCheckGameMode = false;
+		gi->bCheckGameMode = false;
 	}
 
 	auto parent = Cast<AMenuWidgetActor>(UGameplayStatics::GetActorOfClass(GetWorld(), AMenuWidgetActor::StaticClass()));

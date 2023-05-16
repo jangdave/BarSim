@@ -25,6 +25,10 @@ void UTabletWidget::NativeConstruct()
 	// 테블릿 진라임 레시피 & 영상
 	btn_BackRecipeMenu0->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 	btn_BackRecipeMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+
+
+
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(7);
 }
 
 void UTabletWidget::OpenStore()

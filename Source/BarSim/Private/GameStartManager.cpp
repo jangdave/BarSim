@@ -43,7 +43,7 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 		gi->goToMainMapDele.Execute();
 
-		if(bCheckGameMode != false)
+		if(gi->bCheckGameMode != false)
 		{
 			UGameplayStatics::OpenLevel(GetWorld(), FName("MainMap"));
 		}
@@ -51,7 +51,7 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		{
 			UGameplayStatics::OpenLevel(GetWorld(), FName("TutorialMap"));
 
-			bCheckGameMode = true;
+			gi->bCheckGameMode = true;
 		}
 	}
 }
