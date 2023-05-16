@@ -65,14 +65,14 @@ void APlayerCharacter::BeginPlay()
 	widgetInteractionComp->DebugLineThickness=0.3f;
 	widgetInteractionComp->DebugColor=FColor::White;
 	widgetInteractionComp->bEnableHitTesting=true;
-	widgetInteractionComp->bShowDebug=true;	
+	widgetInteractionComp->bShowDebug=false;	
 	widgetInteractionComp->InteractionDistance=40.0f;
 
 	widgetInteractionCompLeft->DebugSphereLineThickness=0;
 	widgetInteractionCompLeft->DebugLineThickness=0.3f;
 	widgetInteractionCompLeft->DebugColor=FColor::White;
 	widgetInteractionCompLeft->bEnableHitTesting=true;
-	widgetInteractionCompLeft->bShowDebug=true;	
+	widgetInteractionCompLeft->bShowDebug=false;	
 	widgetInteractionCompLeft->InteractionDistance=40.0f;
 	
 }
@@ -365,7 +365,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
 			auto tongCompRef = huchuTong->tongRight;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-9, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 			isTongsTickEnabled = true;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsRight = false;
@@ -446,7 +446,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
 			auto tongCompRef = huchuTongL->tongRight;
-			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+			UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-9, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 			isTongsTickEnabledL = true;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsLeft = false;
@@ -619,12 +619,14 @@ void APlayerCharacter::FireRight()
 					// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
 					//grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
 					// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
-					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+					tongCompRef->SetRelativeRotation(FRotator(9, 0, 0));
+					//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				}
 				else if(isGrabbingLimeWithTongsRight)
 				{
 					isTongsTickEnabled = false;
-					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
+					//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -744,12 +746,14 @@ void APlayerCharacter::FireLeft()
 					// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
 					//grabbingObjectSizeL = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
 					// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
-					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+					tongCompRef->SetRelativeRotation(FRotator(9, 0, 0));
+					//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				}
 				else if(isGrabbingLimeWithTongsLeft)
 				{
 					isTongsTickEnabledL = false;
-					UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
+					//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -786,11 +790,11 @@ void APlayerCharacter::FireReleasedRight()
 			auto tongCompRef = huchuTong->tongRight;
 			if(isGrabbingIceWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-9, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 			}
 			else if(isGrabbingLimeWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-14, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 			}
 			isTongsTickEnabled = true;
 			// 1. 잡지않은 상태로 전환
@@ -836,11 +840,11 @@ void APlayerCharacter::FireReleasedLeft()
 			auto tongCompRef = huchuTongL->tongRight;
 			if(isGrabbingIceWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-9, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 			}
 			else if(isGrabbingLimeWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-14, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 			}
 			isTongsTickEnabledL = true;
 			// 1. 잡지않은 상태로 전환
