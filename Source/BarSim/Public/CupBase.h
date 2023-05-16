@@ -137,4 +137,22 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Cup")
 	class APlayerCharacter* player;
+
+	UPROPERTY()
+	class UCupWidget* cupWidget;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cup")
+	TArray<FString> widgetNameArray;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cup")
+	TArray<float> widgetContentsArray;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Cup")
+	float widgetTime;
+
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	bool bWidgetOn;
+
+	UPROPERTY(VisibleAnywhere, Category	= "Cup")
+	bool bWidgetAnimOn;
 };
