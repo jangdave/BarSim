@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "GameStartManager.generated.h"
+#include "MenuWidgetActor.generated.h"
 
 UCLASS()
-class BARSIM_API AGameStartManager : public AActor
+class BARSIM_API AMenuWidgetActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AGameStartManager();
+	AMenuWidgetActor();
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,8 +25,10 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	class UBoxComponent* boxComp;
+	
+	UPROPERTY(EditAnywhere)
+	class UWidgetComponent* menuWidget;
 
 	UFUNCTION()
-	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
-
+	void Destroy();
 };
