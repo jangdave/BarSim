@@ -57,7 +57,9 @@ void ABottleBase::Tick(float DeltaTime)
 				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 				waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
 				//물방울 액터 스폰
-				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")), param);
 				drop->dropMass = 0.05f * streamWidth * DeltaTime;
 				drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
 				remains = remains - drop->dropMass;
@@ -74,7 +76,9 @@ void ABottleBase::Tick(float DeltaTime)
 					waterStream->SetRelativeLocation(pourer->GetSocketLocation(FName("Pourer")));
 					waterStream->SetRelativeRotation(pourer->GetSocketRotation(FName("Pourer")));
 					//물방울 액터 스폰
-					ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")));
+					FActorSpawnParameters param;
+					param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+					ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")), param);
 					if(drop)
 					{
 						drop->dropMass = 0.05f * streamWidth * DeltaTime;

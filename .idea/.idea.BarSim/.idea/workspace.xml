@@ -10,45 +10,27 @@
   <component name="ChangeListManager">
     <list default="true" id="e40f8abc-488a-452e-b49e-d921d4efda6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Bacardi_Carta_Blanca_White_Rum_700ml_2018-diffuse.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Bacardi_Carta_Blanca_White_Rum_700ml_2018-diffuse.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Bacardi_Carta_Blanca_White_Rum_700ml_2018-refraction.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Bacardi_Carta_Blanca_White_Rum_700ml_2018-refraction.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarInsideMat_BaseColor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarInsideMat_BaseColor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarInsideMat_Normal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarInsideMat_Normal.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarInsideMat_OcclusionRoughnessMetallic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarInsideMat_OcclusionRoughnessMetallic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarSdeMat_BaseColor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarSdeMat_BaseColor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarSdeMat_Normal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarSdeMat_Normal.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarSdeMat_OcclusionRoughnessMetallic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BarSdeMat_OcclusionRoughnessMetallic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BatTopMat_BaseColor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BatTopMat_BaseColor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BatTopMat_Normal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BatTopMat_Normal.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BatTopMat_OcclusionRoughnessMetallic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Barside04_lowpoly_BatTopMat_OcclusionRoughnessMetallic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/bottle1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/bottle1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/normal3.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/normal7.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/normal7.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/Bacardi_Carta_Blanca_White_Rum_700ml_2018-normal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/Bacardi_Carta_Blanca_White_Rum_700ml_2018-normal.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/LidAlpha_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/LidAlpha_4x.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/MixingGlassNormal_final.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/MixingGlassNormal_final.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/SugarSyrupFrontLabel_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/SugarSyrupFrontLabel_4x.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/cane_sugar_back_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/cane_sugar_back_4x.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/moninLimeFrontLabel_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/moninLimeFrontLabel_4x.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/monin_lime_back_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/monin_lime_back_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidLimeJice.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidLimeJice.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/CobblerShaker_Strainer7.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/CobblerShaker_Strainer7.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Dropcheck.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/HighballGlass_Dropcheck.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/KoblerShaker_Cup3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/KoblerShaker_Cup3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/KoblerShaker_Lid2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/KoblerShaker_Lid2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/MartiniGlass_Collision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/MartiniGlass_Collision.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/MixingGlass4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/MixingGlass4.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/monin_normal3_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Textures/monin_normal3_4x.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BarSpoon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_BarSpoon.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_MartiniCup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_MartiniCup.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_MixingGlass1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_MixingGlass1.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerCup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerCup.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerLid.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerLid.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerStrainer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerStrainer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_Strainer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_Strainer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_CupIngredient.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_CupIngredient.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/T_realistic_hand_ao.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/T_realistic_hand_ao.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/T_realistic_hand_diffuse.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/T_realistic_hand_diffuse.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/T_realistic_hand_met.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/T_realistic_hand_met.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/T_realistic_hand_norm.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/T_realistic_hand_norm.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Drops/BP_LimeDrop.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Drops/BP_LimeDrop.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Megascans/3D_Assets/Modular_Wooden_Pillar_wcusdcxdw/MI_Modular_Wooden_Pillar_wcusdcxdw_2K.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Megascans/3D_Assets/Modular_Wooden_Pillar_wcusdcxdw/MI_Modular_Wooden_Pillar_wcusdcxdw_2K.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Megascans/3D_Assets/Modular_Wooden_Pillar_wcusdcxdw/T_Modular_Wooden_Pillar_wcusdcxdw_2K_N.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Megascans/3D_Assets/Modular_Wooden_Pillar_wcusdcxdw/T_Modular_Wooden_Pillar_wcusdcxdw_2K_N.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupWidget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/DropBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/DropBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/DropBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/DropBase.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,6 +249,8 @@
       <workItem from="1684114450632" duration="12697000" />
       <workItem from="1684157129319" duration="2710000" />
       <workItem from="1684163480299" duration="18935000" />
+      <workItem from="1684219682666" duration="2049000" />
+      <workItem from="1684249157154" duration="11037000" />
     </task>
     <servers />
   </component>

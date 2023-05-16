@@ -54,3 +54,9 @@ void ADropBase::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 	}
 }
 
+void ADropBase::DropDestroyDelay()
+{
+	FTimerHandle destroyTimer;
+	GetWorldTimerManager().SetTimer(destroyTimer, this, &ADropBase::DropDestroy, 0.1f, false);
+}
+

@@ -40,4 +40,7 @@ public:
 
 	UPROPERTY()
 	class ACupBase* cup;
+
+	UFUNCTION()
+	void DropDestroyDelay();
 };
