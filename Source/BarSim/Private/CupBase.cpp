@@ -3,19 +3,16 @@
 
 #include "CupBase.h"
 
-#include "BarPlayer.h"
+#include "CupWidget.h"
 #include "DropBase.h"
 #include "IceCube.h"
-#include "LimeDrop.h"
 #include "MixedDrop.h"
 #include "PlayerCharacter.h"
-#include "UnrealWidgetFwd.h"
-#include "VorbisAudioInfo.h"
 #include "Components/BoxComponent.h"
+#include "Components/Overlay.h"
+#include "Components/TextBlock.h"
 #include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "Materials/MaterialParameterCollection.h"
-#include "Sound/DialogueTypes.h"
 
 // Sets default values
 ACupBase::ACupBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -171,6 +168,167 @@ void ACupBase::Tick(float DeltaTime)
 		bShaked = true;
 	}
 
+
+	//위젯 표현
+	if(bWidgetOn)
+	{
+		widgetComp->SetVisibility(true);
+		cupWidget = Cast<UCupWidget>(widgetComp->GetUserWidgetObject());
+		
+		if(cupWidget)
+		{
+			widgetTime = widgetTime + DeltaTime;
+			cupWidget->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+			
+			if(!bWidgetAnimOn)
+			{
+				cupWidget->StopAnimation(cupWidget->Disappearing);
+				cupWidget->PlayAnimation(cupWidget->Appearing);
+			}
+
+
+			if(widgetNameArray.Num() == 0)
+			{
+				// cupWidget->Name1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name2->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Name3->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Name4->SetVisibility(ESlateVisibility::Hidden);
+				//
+				// cupWidget->Contents1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents2->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Contents3->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Contents4->SetVisibility(ESlateVisibility::Hidden);
+
+				cupWidget->Overlay1->SetVisibility(ESlateVisibility::Hidden);
+				cupWidget->Overlay2->SetVisibility(ESlateVisibility::Hidden);
+				cupWidget->Overlay3->SetVisibility(ESlateVisibility::Hidden);
+				cupWidget->Overlay4->SetVisibility(ESlateVisibility::Hidden);
+			}
+			else if(widgetNameArray.Num() == 1)
+			{
+				// cupWidget->Name1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name2->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Name3->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Name4->SetVisibility(ESlateVisibility::Hidden);
+				//
+				// cupWidget->Contents1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents2->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Contents3->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Contents4->SetVisibility(ESlateVisibility::Hidden);
+
+				cupWidget->Overlay1->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay2->SetVisibility(ESlateVisibility::Hidden);
+				cupWidget->Overlay3->SetVisibility(ESlateVisibility::Hidden);
+				cupWidget->Overlay4->SetVisibility(ESlateVisibility::Hidden);
+				
+				cupWidget->Name1->SetText(FText::FromString(widgetNameArray[0]));
+
+				cupWidget->Contents1->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[0]) / 100) + "oz"));
+			}
+			else if(widgetNameArray.Num() == 2)
+			{
+				// cupWidget->Name1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name2->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name3->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Name4->SetVisibility(ESlateVisibility::Hidden);
+				//
+				// cupWidget->Contents1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents2->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents3->SetVisibility(ESlateVisibility::Hidden);
+				// cupWidget->Contents4->SetVisibility(ESlateVisibility::Hidden);
+
+				cupWidget->Overlay1->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay2->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay3->SetVisibility(ESlateVisibility::Hidden);
+				cupWidget->Overlay4->SetVisibility(ESlateVisibility::Hidden);
+				
+				cupWidget->Name1->SetText(FText::FromString(widgetNameArray[0]));
+				cupWidget->Name2->SetText(FText::FromString(widgetNameArray[1]));
+				
+				cupWidget->Contents1->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[0]) / 100) + "oz"));
+				cupWidget->Contents2->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[1]) / 100) + "oz"));
+			}
+			else if(widgetNameArray.Num() == 3)
+			{
+				// cupWidget->Name1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name2->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name3->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name4->SetVisibility(ESlateVisibility::Hidden);
+				//
+				// cupWidget->Contents1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents2->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents3->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents4->SetVisibility(ESlateVisibility::Hidden);
+
+				cupWidget->Overlay1->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay2->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay3->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay4->SetVisibility(ESlateVisibility::Hidden);
+				
+				cupWidget->Name1->SetText(FText::FromString(widgetNameArray[0]));
+				cupWidget->Name2->SetText(FText::FromString(widgetNameArray[1]));
+				cupWidget->Name3->SetText(FText::FromString(widgetNameArray[2]));
+				
+				cupWidget->Contents1->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[0]) / 100) + "oz"));
+				cupWidget->Contents2->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[1]) / 100) + "oz"));
+				cupWidget->Contents3->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[2]) / 100) + "oz"));
+			}
+			else if(widgetNameArray.Num() >= 4)
+			{
+				// cupWidget->Name1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name2->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name3->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Name4->SetVisibility(ESlateVisibility::Visible);
+				//
+				// cupWidget->Contents1->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents2->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents3->SetVisibility(ESlateVisibility::Visible);
+				// cupWidget->Contents4->SetVisibility(ESlateVisibility::Visible);
+				
+				cupWidget->Overlay1->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay2->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay3->SetVisibility(ESlateVisibility::Visible);
+				cupWidget->Overlay4->SetVisibility(ESlateVisibility::Visible);
+				
+				cupWidget->Name1->SetText(FText::FromString(widgetNameArray[0]));
+				cupWidget->Name2->SetText(FText::FromString(widgetNameArray[1]));
+				cupWidget->Name3->SetText(FText::FromString(widgetNameArray[2]));
+				cupWidget->Name4->SetText(FText::FromString(widgetNameArray[3]));
+				
+				cupWidget->Contents1->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[0]) / 100) + "oz"));
+				cupWidget->Contents2->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[1]) / 100) + "oz"));
+				cupWidget->Contents3->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[2]) / 100) + "oz"));
+				cupWidget->Contents4->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * widgetContentsArray[3]) / 100) + "oz"));
+			}
+
+			//2초 이상 지났으면 애니메이션 재생
+			if(widgetTime >= 2.0f)
+			{
+				if(!bWidgetAnimOn)
+				{
+					cupWidget->PlayAnimation(cupWidget->Disappearing);
+					bWidgetAnimOn = true;
+				}
+				else
+				{
+					if(widgetTime >= 3.2f)
+					{
+						cupWidget->SetVisibility(ESlateVisibility::Hidden);
+						bWidgetOn = false;
+						bWidgetAnimOn = false;
+						widgetTime = 0;
+						widgetNameArray.Empty();
+						widgetContentsArray.Empty();
+					}
+				}
+			}
+			
+		}
+	}
+	else
+	{
+		widgetComp->SetVisibility(false);
+	}
 }
 
 void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
@@ -200,6 +358,34 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 					ContentsArray.Add(mixedDropOverlapped->ContentsArray[i]);
 				}
 			}
+
+			// 이미 위젯 네임어레이에 믹스쳐라는 원소가 있다면 그대로 해당 순서의 위젯 컨텐츠 어레이에 더해줌
+			if(widgetNameArray.Find(FString("Mixture")) != INDEX_NONE)
+			{
+				float mixtureMass = 0;
+				for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
+				{
+					mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
+				}
+				widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] = widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] + mixtureMass; 
+			}
+			// 위젯 네임 어레이에 믹스쳐라는 원소가 없다면 새로 믹스쳐라는 이름의 원소를 위젯 네임어레이에 추가하고 믹스드드랍의 부피를 더해줌
+			else
+			{
+				widgetNameArray.Emplace(FString("Mixture"));
+				float mixtureMass = 0;
+				for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
+				{
+					mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
+				}
+				widgetContentsArray.Add(mixtureMass);
+			}
+
+			//위젯 나타내기
+			bWidgetOn = true;
+			widgetTime = 0;
+			bWidgetAnimOn = false;
+			
 			MixArray.Add(mixedDropOverlapped->bStirred);
 			ShakeArray.Add(mixedDropOverlapped->bShaked);
 			contents = contents + mixedDropOverlapped->dropMass;
@@ -238,6 +424,35 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 				NameArray.Emplace(drop->name);
 				ContentsArray.Add(drop->dropMass);
 				}
+
+			// 실시간으로 담기는 용량 위젯 표시용
+			// 이미 위젯 네임어레이가 비어있지 않다면
+			if(!widgetNameArray.IsEmpty())
+			{
+				// 위젯 네임 어레이에 새로 들어온 방울의 이름이 있다면 그대로 값에 더해줌
+				if(widgetNameArray.Find(drop->name) != INDEX_NONE)
+				{
+					widgetContentsArray[widgetNameArray.Find(drop->name)] = widgetContentsArray[widgetNameArray.Find(drop->name)] + drop->dropMass; 
+				}
+				// 위젯 네임 어레이에 새로 들어온 방울의 이름이 없다면 새로 추가해 줌
+				else
+				{
+					widgetNameArray.Emplace(drop->name);
+					widgetContentsArray.Add(drop->dropMass);
+				}
+			}
+			// 위젯 네임 어레이가 없다면 위젯 네임 어레이와 위젯 컨텐츠 어레이에 하나씩 새로 넣어줌
+			else
+			{
+				widgetNameArray.Emplace(drop->name);
+				widgetContentsArray.Add(drop->dropMass);
+			}
+
+			//위젯 나타내기
+			bWidgetOn = true;
+			widgetTime = 0;
+			bWidgetAnimOn = false;
+			
 			contents = contents + drop->dropMass;
 			insideContents = FMath::Clamp(contents, 0, cupSize);
 			liquorComp->SetVisibility(true);
@@ -245,7 +460,6 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			MixArray.Add(false);
 			ShakeArray.Add(false);
 			drop->Destroy();
-			
 		}
 	}
 	

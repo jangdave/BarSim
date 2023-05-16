@@ -38,5 +38,22 @@ public:
 
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* Contents4;
-	
+
+	UPROPERTY(meta = (BindWidget))
+	class UOverlay* Overlay1;
+
+	UPROPERTY(meta = (BindWidget))
+	class UOverlay* Overlay2;
+
+	UPROPERTY(meta = (BindWidget))
+	class UOverlay* Overlay3;
+
+	UPROPERTY(meta = (BindWidget))
+	class UOverlay* Overlay4;
+
+	UPROPERTY(BlueprintReadWrite, Transient, meta = (BindWidgetAnim))
+	class UWidgetAnimation* Disappearing;
+
+	UPROPERTY(BlueprintReadWrite, Transient, meta = (BindWidgetAnim))
+	class UWidgetAnimation* Appearing;
 };
