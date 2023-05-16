@@ -39,12 +39,20 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 	if(player != nullptr)
 	{
-		
 		auto gi = Cast<UBarGameInstance>(GetGameInstance());
 
 		gi->goToMainMapDele.Execute();
-		
-		UGameplayStatics::OpenLevel(GetWorld(), FName("MainMap"));
+
+		if(bCheckGameMode != false)
+		{
+			UGameplayStatics::OpenLevel(GetWorld(), FName("MainMap"));
+		}
+		else
+		{
+			UGameplayStatics::OpenLevel(GetWorld(), FName("TutorialMap"));
+
+			bCheckGameMode = true;
+		}
 	}
 }
 
