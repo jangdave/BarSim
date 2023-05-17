@@ -283,6 +283,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 	{
 		isGrabbingCupLeft=true;
+		cupL->isCupTickActivated=true;
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Left"))			
 	}
 	// 잡은 대상이 BarSpoon이라면
@@ -375,7 +376,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	{
 		isGrabbingCoasterRight=false;
 	}
-	else if(isGrabbingCupRight)
+	else if(isGrabbingCupRight&&cup!=nullptr)
 	{
 		cup->isCupTickActivated=false;
 		isGrabbingCupRight=false;
@@ -457,8 +458,9 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		isGrabbingCoasterLeft=false;
 	}
-	else if(isGrabbingCupLeft)
+	else if(isGrabbingCupLeft&&cupL!=nullptr)
 	{
+		cupL->isCupTickActivated=false;
 		isGrabbingCupLeft=false;
 	}
 	else if(isGrabbingShakerLidLeft)
