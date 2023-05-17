@@ -2,6 +2,8 @@
 
 
 #include "MenuWidgetActor.h"
+
+#include "BarGameInstance.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
 
@@ -22,7 +24,16 @@ AMenuWidgetActor::AMenuWidgetActor()
 void AMenuWidgetActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	auto gi = Cast<UBarGameInstance>(GetGameInstance());
+
+	if(gi != nullptr)
+	{
+		if(gi->checkDayCount != 0)
+		{
+			Destroy();
+		}
+	}
 }
 
 // Called every frame

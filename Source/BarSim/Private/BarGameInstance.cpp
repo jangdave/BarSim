@@ -17,7 +17,10 @@ void UBarGameInstance::Init()
 void UBarGameInstance::CheckDay()
 {
 	// 메인맵으로 넘어 갈때마다 1씩 올라가게 한다
-	checkDayCount++;
+	if(bCheckGameMode != false)
+	{
+		checkDayCount++;
+	}
 }
 
 void UBarGameInstance::BindFunction()
