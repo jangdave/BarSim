@@ -42,6 +42,7 @@ ACupBase::ACupBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectIn
 
 	widgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComp"));
 	widgetComp->SetupAttachment(cupComp);
+	widgetComp->SetCollisionProfileName(FName("NoCollision"));
 }
 
 // Called when the game starts or when spawned
@@ -66,6 +67,7 @@ void ACupBase::Tick(float DeltaTime)
 	if(player)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("widget rotate"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Widget Rotate"));
 		FVector playerDir = player->GetActorLocation() - GetActorLocation();
 		FRotator playerDirRot = playerDir.Rotation();
 		widgetComp->SetRelativeRotation(FRotator(0, playerDirRot.Yaw, 0));
@@ -392,7 +394,7 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			insideContents = FMath::Clamp(contents, 0, cupSize);
 			liquorComp->SetVisibility(true);
 			LiquorScale();
-			mixedDropOverlapped->Destroy();
+			mixedDropOverlapped->DropDestroyDelay();
 		}
 	}
 	else
@@ -459,7 +461,8 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			LiquorScale();
 			MixArray.Add(false);
 			ShakeArray.Add(false);
-			drop->Destroy();
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("drop overlapped"));
+			drop->DropDestroyDelay();
 		}
 	}
 	

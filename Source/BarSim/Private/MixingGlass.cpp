@@ -33,6 +33,9 @@ void AMixingGlass::Tick(float DeltaSeconds)
 	
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
 	float angle2 = FMath::RadiansToDegrees(FMath::Acos(dot2));
+
+	UE_LOG(LogTemp, Warning, TEXT("angle2 is %f"), angle2);
+	UE_LOG(LogTemp, Warning, TEXT("angle is %f"), angle);
 	
 	//float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
 	float streamWidth = 10.0f;
@@ -42,7 +45,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 		if(bStrainerOn)
 		{
 			//기울어진 각도가 90도 이상이라면
-		if(180 - angle2 > (1.1 - contents / cupSize) * 100 && angle <= 90)
+		if(angle2 > (1.1 - contents / cupSize) * 100 && angle <= 90)
 		{
 			//물줄기 없을때에만 한 번 스폰 시키기
 			//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);
@@ -54,7 +57,9 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
 				waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 				//물방울 액터 스폰
-				AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")));
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")), param);
 				mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
 				//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
 				
@@ -90,7 +95,9 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					waterStream->SetRelativeLocation(cupComp->GetSocketLocation(FName("Mouth")));
 					waterStream->SetRelativeRotation(cupComp->GetSocketRotation(FName("Mouth")));
 					//물방울 액터 스폰
-					AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")));
+					FActorSpawnParameters param;
+					param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+					AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")), param);
 					mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
 					//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
 
