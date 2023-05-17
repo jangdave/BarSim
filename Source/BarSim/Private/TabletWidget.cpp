@@ -7,11 +7,12 @@
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
 #include "Kismet/GameplayStatics.h"
+#include "Misc/GeneratedTypeName.h"
 
 void UTabletWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
-
+	
 	spawnmg = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
 
 	// 테블렛 메뉴
@@ -32,7 +33,7 @@ void UTabletWidget::NativeConstruct()
 
 
 
-	
+	// 임시
 	WidgetSwitcher_Tablet->SetActiveWidgetIndex(7);
 }
 
@@ -83,8 +84,13 @@ void UTabletWidget::SetCapsLock()
 		text_btn_0->SetText(FText::FromString(")"));
 		text_btn_minus->SetText(FText::FromString("_"));
 		text_btn_plus->SetText(FText::FromString("+"));
-		text_btn_reverseSlash->SetText(FText::FromString("|"));
-
+		text_btn_leftSquare->SetText(FText::FromString("{"));
+		text_btn_rightSquare->SetText(FText::FromString("}"));
+		text_btn_colon->SetText(FText::FromString(":"));
+		text_btn_comma->SetText(FText::FromString("<"));
+		text_btn_period->SetText(FText::FromString(">"));
+		text_btn_slash->SetText(FText::FromString("?"));
+		
 		bCheckCaps = true;
 	}
 	else
@@ -102,7 +108,12 @@ void UTabletWidget::SetCapsLock()
 		text_btn_0->SetText(FText::FromString("0"));
 		text_btn_minus->SetText(FText::FromString("-"));
 		text_btn_plus->SetText(FText::FromString("="));
-		//text_btn_reverseSlash->SetText(FText::FromString(""));
+		text_btn_leftSquare->SetText(FText::FromString("["));
+		text_btn_rightSquare->SetText(FText::FromString("]"));
+		text_btn_colon->SetText(FText::FromString(";"));
+		text_btn_comma->SetText(FText::FromString(","));
+		text_btn_period->SetText(FText::FromString("."));
+		text_btn_slash->SetText(FText::FromString("/"));
 
 		bCheckCaps = false;
 	}

@@ -9,14 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e359f7a5-4bb3-4876-a0c4-f1b787e9c567" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/MainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/MainMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/StartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/StartMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/UI/WB_TabletWidget.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" afterDir="false" />
     </list>
@@ -117,6 +111,7 @@
       <updated>1684219285820</updated>
       <workItem from="1684219287085" duration="3754000" />
       <workItem from="1684239956518" duration="2901000" />
+      <workItem from="1684287581037" duration="8853000" />
     </task>
     <servers />
   </component>
