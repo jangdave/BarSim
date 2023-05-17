@@ -642,6 +642,7 @@ void APlayerCharacter::FireRight()
 		{
 			return;
 		}
+	
 }
 
 void APlayerCharacter::FireLeft()
