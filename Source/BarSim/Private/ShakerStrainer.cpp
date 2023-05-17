@@ -79,9 +79,9 @@ void AShakerStrainer::AttachToShaker()
 			UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
 			this->DisableComponentsSimulatePhysics();
 			this->VRGripInterfaceSettings.bSimulateOnDrop=false;
-			auto shakerLoc = shaker->sphereComp->GetSocketTransform(FName("Strainer"));
+			auto shakerLoc = shaker->cupComp->GetSocketTransform(FName("Strainer"));
 			this->SetActorLocationAndRotation(shakerLoc.GetLocation(), shakerLoc.GetRotation());
-			this->AttachToComponent(shaker->sphereComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
+			this->AttachToComponent(shaker->cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
 			//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
 			//shaker->DisableComponentsSimulatePhysics();
 			shaker->bStrainerOn=true;

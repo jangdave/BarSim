@@ -643,6 +643,16 @@ void APlayerCharacter::FireRight()
 			return;
 		}
 	
+	if(isGrabbingCupRight&&cup!=nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
+		cup->SetCupEmpty();
+	}
+	if(isGrabbingCupLeft&&cupL!=nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
+		cupL->SetCupEmpty();
+	}
 }
 
 void APlayerCharacter::FireLeft()

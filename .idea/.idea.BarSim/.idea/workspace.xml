@@ -9,11 +9,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e40f8abc-488a-452e-b49e-d921d4efda6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/cupboardTop5_SM_Sink.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/cupboardTop5_SM_Sink.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +129,8 @@
       <workItem from="1684230093554" duration="807000" />
       <workItem from="1684285529142" duration="3185000" />
       <workItem from="1684294609520" duration="3757000" />
+      <workItem from="1684302683505" duration="2382000" />
+      <workItem from="1684305212280" duration="2955000" />
     </task>
     <servers />
   </component>

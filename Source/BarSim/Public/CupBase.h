@@ -155,4 +155,15 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category	= "Cup")
 	bool bWidgetAnimOn;
+
+	UFUNCTION()
+	void SetCupEmpty();
+
+	UPROPERTY()
+	class ASteelSink* steelSink;
+
+	UPROPERTY()
+	bool isSteelSinkCasted=false;
+
+	int32 sinkArrayNum=0;
 };
