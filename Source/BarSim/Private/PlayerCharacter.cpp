@@ -748,11 +748,6 @@ void APlayerCharacter::FireLeft()
 			}
 
 	}
-		// 오른손에 Tongs를 쥐고 있지 않다면
-		else
-		{
-			return;
-		}
 	if(isGrabbingCupLeft&&cupL!=nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
