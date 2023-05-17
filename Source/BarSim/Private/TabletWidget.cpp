@@ -30,7 +30,7 @@ void UTabletWidget::NativeConstruct()
 
 	// 테블릿 키보드 입력
 	btn_CapsLock->OnClicked.AddDynamic(this, &UTabletWidget::SetCapsLock);
-
+	btn_Enter->OnClicked.AddDynamic(this, &UTabletWidget::SetEnter);
 
 
 	// 임시

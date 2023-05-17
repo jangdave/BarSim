@@ -140,8 +140,14 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_CapsLock;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_Enter;
+	
 	UFUNCTION()
 	void SetCapsLock();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetEnter();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bCheckCaps;
