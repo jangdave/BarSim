@@ -15,7 +15,6 @@ class BARSIM_API AMixingGlass : public ACupBase
 	GENERATED_BODY()
 	AMixingGlass(const FObjectInitializer& ObjectInitializer);
 
-	
 public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginPlay() override;
@@ -42,4 +41,9 @@ public:
 	
 	UPROPERTY()
 	class AStrainer* strainer;
+	
+	virtual void CupStop() override;
+
+	UPROPERTY(EditAnywhere, Category = "MixingGlass")
+	class UWidgetComponent* stirWidget;
 };

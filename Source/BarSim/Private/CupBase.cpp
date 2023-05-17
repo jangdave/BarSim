@@ -332,10 +332,10 @@ void ACupBase::Tick(float DeltaTime)
 	{
 		widgetComp->SetVisibility(false);
 	}
+	
 	if(isCupTickActivated)
 	{
-		auto cupRotYaw = this->GetActorRotation().Yaw;
-		this->SetActorRelativeRotation(FRotator(0, cupRotYaw, 0));
+		CupStop();
 	}
 }
 
@@ -548,5 +548,11 @@ void ACupBase::SetCupEmpty()
 				isSteelSinkCasted=false;
 		}
 	}
+}
+
+void ACupBase::CupStop()
+{
+	auto cupRotYaw = this->GetActorRotation().Yaw;
+	this->SetActorRelativeRotation(FRotator(0, cupRotYaw, 0));
 }
 

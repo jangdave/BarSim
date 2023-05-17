@@ -9,6 +9,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "Strainer.h"
 #include "Components/SphereComponent.h"
+#include "Components/WidgetComponent.h"
 
 AMixingGlass::AMixingGlass(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -17,11 +18,24 @@ AMixingGlass::AMixingGlass(const FObjectInitializer& ObjectInitializer) : Super(
 	sphereComp->SetSphereRadius(5.0f);
 	sphereComp->SetRelativeLocation(FVector(0,0,17.0f));
 	sphereComp->SetCollisionProfileName(FName("StrainerCheck"));
+
+	stirWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("stirWidget"));
+	stirWidget->SetupAttachment(cupComp);
+	stirWidget->SetCollisionProfileName(TEXT("NoCollision"));
 }
 
 void AMixingGlass::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void AMixingGlass::CupStop()
+{
+	if(!bStrainerOn)
+	{
+		auto cupRotYaw = this->GetActorRotation().Yaw;
+		this->SetActorRelativeRotation(FRotator(0, cupRotYaw, 0));
+	}
 }
 
 void AMixingGlass::Tick(float DeltaSeconds)

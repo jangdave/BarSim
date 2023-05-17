@@ -169,4 +169,7 @@ public:
 
 	UPROPERTY()
 	bool isCupTickActivated = false;
+
+	UFUNCTION()
+	virtual void CupStop();
 };
