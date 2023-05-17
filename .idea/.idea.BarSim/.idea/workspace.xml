@@ -10,6 +10,9 @@
     <list default="true" id="e40f8abc-488a-452e-b49e-d921d4efda6c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerLid.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerLid.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Strainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Strainer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +124,7 @@
       <workItem from="1684192765357" duration="739000" />
       <workItem from="1684201796067" duration="4237000" />
       <workItem from="1684230093554" duration="807000" />
-      <workItem from="1684285529142" duration="1151000" />
+      <workItem from="1684285529142" duration="2588000" />
     </task>
     <servers />
   </component>

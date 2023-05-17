@@ -35,7 +35,7 @@ void AShakerLid::AttachToShakerStrainer()
 	TArray<FOverlapResult> HitObj;
 	FCollisionQueryParams params;
 	params.AddIgnoredActor(this);
-	DrawDebugSphere(GetWorld(), Center, 10, 30, FColor::Red, false, 2.0, 0, 0.1);
+	//DrawDebugSphere(GetWorld(), Center, 10, 30, FColor::Red, false, 2.0, 0, 0.1);
 	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(10), params);
 	if (bHit == false)
 	{
@@ -65,7 +65,7 @@ void AShakerLid::AttachToShakerStrainer()
 			this->SetActorLocationAndRotation(lidLoc.GetLocation(), lidLoc.GetRotation());
 			this->AttachToComponent(shakerStrainer->meshComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Lid"));
 			//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
-			shakerStrainer->DisableComponentsSimulatePhysics();
+			//shakerStrainer->DisableComponentsSimulatePhysics();
 			shakerStrainer->bLidOn=true;
 			isShakerStrainerCasted=false;
 			HitObj.Reset();

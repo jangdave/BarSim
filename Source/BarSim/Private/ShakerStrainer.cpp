@@ -44,7 +44,7 @@ void AShakerStrainer::Tick(float DeltaTime)
 	FVector splineLoc = splineComp->GetComponentLocation();
 	streamPoint = splineComp->FindLocationClosestToWorldLocation(FVector(splineLoc.X, splineLoc.Y, 0), ESplineCoordinateSpace::World);
 	//UE_LOG(LogTemp, Warning, TEXT("%f, %f, %f"), streamPoint.X, streamPoint.Y, streamPoint.Z);
-	DrawDebugSphere(GetWorld(), streamPoint, 0.3f, 32, FColor::Blue, false);
+	//DrawDebugSphere(GetWorld(), streamPoint, 0.3f, 32, FColor::Blue, false);
 }
 
 void AShakerStrainer::AttachToShaker()
@@ -83,7 +83,7 @@ void AShakerStrainer::AttachToShaker()
 			this->SetActorLocationAndRotation(shakerLoc.GetLocation(), shakerLoc.GetRotation());
 			this->AttachToComponent(shaker->sphereComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
 			//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
-			shaker->DisableComponentsSimulatePhysics();
+			//shaker->DisableComponentsSimulatePhysics();
 			shaker->bStrainerOn=true;
 			isStrainerCasted=false;
 			this->VRGripInterfaceSettings.bDenyGripping=true;
