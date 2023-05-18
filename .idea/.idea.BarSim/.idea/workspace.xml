@@ -10,13 +10,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/bottle1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_MixingGlass1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_MixingGlass1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_StirRate.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_StirRate.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/MixingGlass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/MixingGlass.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,6 +221,7 @@
       <workItem from="1684311703240" duration="3178000" />
       <workItem from="1684329797100" duration="1422000" />
       <workItem from="1684373529008" duration="4873000" />
+      <workItem from="1684379107827" duration="744000" />
     </task>
     <servers />
   </component>
