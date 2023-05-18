@@ -80,9 +80,7 @@ void UCustomerFSM::AttachCustomer()
 {
 	owner->GetCapsuleComponent()->SetEnableGravity(false);
 
-	owner->GetMesh()->SetEnableGravity(false);
-	
-	owner->AttachToComponent(spawnManager->aChairs[idx]->sitComp, FAttachmentTransformRules::SnapToTargetIncludingScale);
+	owner->AttachToComponent(spawnManager->aChairs[idx]->sitComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 }
 
 // 손님 의자에 detach
@@ -90,8 +88,6 @@ void UCustomerFSM::DetachCustomer()
 {
 	owner->GetCapsuleComponent()->SetEnableGravity(true);
 
-	owner->GetMesh()->SetEnableGravity(true);
-	
 	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitComp, FDetachmentTransformRules::KeepWorldTransform);
 }
 
@@ -106,12 +102,12 @@ void UCustomerFSM::SetOrderCoctail()
 		if(result > 6)
 		{
 			// 진라임
-			orderIdx = 1;
+			orderIdx = 3;
 		}
 		else if(result <= 6 && result > 4)
 		{
 			// 다이키리
-			orderIdx = 2;
+			orderIdx = 3;
 			
 		}
 		else if(result <= 4 && result > 2)
@@ -122,7 +118,7 @@ void UCustomerFSM::SetOrderCoctail()
 		else if(result <= 2)
 		{
 			// 올드팔
-			orderIdx = 4;
+			orderIdx = 3;
 		}
 	}
 }

@@ -86,8 +86,8 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 {
 	auto coaster = Cast<ACoaster>(OtherActor);
 	coctail = Cast<ACupBase>(OtherActor);
-
-	if(coctail != nullptr && bOnceOverlap != true)
+	
+	if(coctail != nullptr && bOnceOverlap != true && bCheckCoaster != false)
 	{
 		bCheckCoctail = true;
 
