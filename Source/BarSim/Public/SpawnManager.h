@@ -50,7 +50,7 @@ public:
 	TArray<bool> bIsPlayer;
 
 	UPROPERTY()
-	TArray<int32> orderCoctailIdx = {0, 0, 0};
+	TArray<int32> orderCoctailIdx = {0, 0, 0, 0};
 	
 	bool bCheckSit;
 

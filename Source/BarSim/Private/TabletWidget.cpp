@@ -18,33 +18,41 @@ void UTabletWidget::NativeConstruct()
 	// 테블렛 메뉴
 	btn_OpenStore->OnClicked.AddDynamic(this, &UTabletWidget::OpenStore);
 	btn_CloseStore->OnClicked.AddDynamic(this, &UTabletWidget::CloseStore);
-	btn_CloseStore->SetIsEnabled(false);
 	btn_Recipe->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_Internet->OnClicked.AddDynamic(this, &UTabletWidget::OpenInternet);
+	btn_CloseStore->SetIsEnabled(false);
+	
 	// 테블릿 레시피 메뉴
 	btn_BackMenu->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
 	btn_OpenGinLime->OnClicked.AddDynamic(this, &UTabletWidget::OpenGinLime);
 	btn_OpenGinLimeVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenGinLimeVideo);
+	
 	// 테블릿 진라임 레시피 & 영상
 	btn_BackRecipeMenu0->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 	btn_BackRecipeMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 
 	// 테블릿 키보드 입력
+	btn_BackMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
 	btn_CapsLock->OnClicked.AddDynamic(this, &UTabletWidget::SetCapsLock);
 	btn_Enter->OnClicked.AddDynamic(this, &UTabletWidget::SetEnter);
-
-
-	// 임시
-	WidgetSwitcher_Tablet->SetActiveWidgetIndex(7);
 }
 
 void UTabletWidget::OpenStore()
 {
 	spawnmg->SpawnCustomer();
+
+	btn_OpenStore->SetIsEnabled(false);
 }
 
 void UTabletWidget::CloseStore()
 {
-	spawnmg->SpawnOldPal();
+	UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
+	//spawnmg->SpawnOldPal();
+}
+
+void UTabletWidget::OpenInternet()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(7);
 }
 
 void UTabletWidget::OpenMenuPage()

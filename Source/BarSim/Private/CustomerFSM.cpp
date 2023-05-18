@@ -9,6 +9,7 @@
 #include "CustomerOrderWidget.h"
 #include "MeshCardRepresentation.h"
 #include "SpawnManager.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -77,12 +78,20 @@ void UCustomerFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 // 손님 의자에 attach
 void UCustomerFSM::AttachCustomer()
 {
+	owner->GetCapsuleComponent()->SetEnableGravity(false);
+
+	owner->GetMesh()->SetEnableGravity(false);
+	
 	owner->AttachToComponent(spawnManager->aChairs[idx]->sitComp, FAttachmentTransformRules::SnapToTargetIncludingScale);
 }
 
 // 손님 의자에 detach
 void UCustomerFSM::DetachCustomer()
 {
+	owner->GetCapsuleComponent()->SetEnableGravity(true);
+
+	owner->GetMesh()->SetEnableGravity(true);
+	
 	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitComp, FDetachmentTransformRules::KeepWorldTransform);
 }
 
@@ -145,6 +154,9 @@ void UCustomerFSM::TickIdle()
 				
 				// 앉은 의자 배열에 착석 여부 바꾸기
 				spawnManager->bIsSit[idx] = true;
+
+				// 가게 오픈했는지 체크
+				spawnManager->bCheckSpawn = true;
 				
 				SetState(ECustomerState::MOVE);
 
@@ -241,7 +253,7 @@ void UCustomerFSM::TickSit()
 void UCustomerFSM::TickLeave()
 {
 	// 문 밖의 스폰매니저 주변으로 이동
-	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 300;
+	auto loc = spawnManager->GetActorLocation();
 
 	auto result = ai->MoveToLocation(loc);
 	

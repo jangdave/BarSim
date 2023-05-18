@@ -41,6 +41,9 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_Recipe;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_Internet;
+	
 	// 테블릿 레시피 메뉴
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_BackMenu;
@@ -50,6 +53,10 @@ public:
 	
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_OpenGinLimeVideo;
+
+	// 테블릿 인터넷 창
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackMenu1;
 	
 	// 테블릿 진라임 레시피 & 영상
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
@@ -64,6 +71,9 @@ public:
 	UFUNCTION()
 	void CloseStore();
 
+	UFUNCTION()
+	void OpenInternet();
+	
 	UFUNCTION()
 	void OpenMenuPage();
 	
