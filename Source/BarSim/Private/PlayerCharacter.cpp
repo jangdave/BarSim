@@ -328,7 +328,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		strainerL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		strainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed Glass Strainer on Left"))			
-
+ 
 	}
 	
 }
