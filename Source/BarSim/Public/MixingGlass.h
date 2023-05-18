@@ -15,7 +15,6 @@ class BARSIM_API AMixingGlass : public ACupBase
 	GENERATED_BODY()
 	AMixingGlass(const FObjectInitializer& ObjectInitializer);
 
-	
 public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginPlay() override;
@@ -39,7 +38,39 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "MixingGlass")
 	class USphereComponent* sphereComp;
+
+	UPROPERTY(EditAnywhere, Category = "MixingGlass")
+	class USphereComponent* stirChecker1;
+
+	UPROPERTY(EditAnywhere, Category = "MixingGlass")
+	class USphereComponent* stirChecker2;
 	
 	UPROPERTY()
 	class AStrainer* strainer;
+	
+	virtual void CupStop() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MixingGlass")
+	class UWidgetComponent* widgetComp2;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MixingGlass")
+	bool bStirWidgetOn;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MixingGlass")
+	bool bStirWidgetAnimOn;
+
+	UFUNCTION()
+	void Stir(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bBFromSweep, const FHitResult& SweepResult);
+
+	UPROPERTY()
+	class ABarSpoon* spoon;
+
+	UPROPERTY()
+	class UStirWidget* stirWidget;
+
+	UPROPERTY(VisibleAnywhere, Category = "MixingGlass")
+	bool bIsStirStarted;
+
+	UPROPERTY(VisibleAnywhere, Category = "MixingGlass")
+	float widgetTime2;
 };

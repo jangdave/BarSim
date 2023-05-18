@@ -180,3 +180,12 @@ void AShaker::LiquorScale()
 	liquorComp->SetRelativeScale3D(FVector(contentsRatio * 0.3 + 0.7,contentsRatio * 0.3 + 0.7,contentsRatio));
 }
 
+void AShaker::CupStop()
+{
+	if(!bStrainerOn)
+	{
+		auto cupRotYaw = this->GetActorRotation().Yaw;
+		this->SetActorRelativeRotation(FRotator(0, cupRotYaw, 0));
+	}
+}
+

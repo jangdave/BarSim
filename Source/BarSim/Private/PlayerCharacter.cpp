@@ -110,30 +110,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 			}
 			
 		}
-	}
-	// Cup이 nullptr이 아니면서, 오른손에 Cup을 쥐고 있다면
-	/*if(isGrabbingCupRight&&cup!=nullptr)
-	{
-		// cup의 contents가 0보다 크다면
-		if(cup->contents>0)
-		{
-			// 컵을 쥔 순간의 Rotation 값을 유지한다.
-			RightMotionController->SetRelativeRotation(initHandRot);
-		}
-	
-	}
-	// Cup이 nullptr이 아니면서, 왼손에 Cup을 쥐고 있다면
-	if(isGrabbingCupLeft&&cupL!=nullptr)
-	{
-		//cup 의 contents가 0보다 크다면,
-		if(cupL->contents>0)
-		{
-			// 컵을 쥔 순간의 Rotation 값을 유지한다.
-			LeftMotionController->SetRelativeRotation(initHandRotL);
-		}
-
-	}*/
-	
+	}	
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -203,6 +180,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
 		{
 			isGrabbingCupRight=true;
+			cup->isCupTickActivated=true;
 			UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Right"))			
 		}
 		// 잡은 대상이 BarSpoon이라면
@@ -305,6 +283,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 	{
 		isGrabbingCupLeft=true;
+		cupL->isCupTickActivated=true;
 		UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Left"))			
 	}
 	// 잡은 대상이 BarSpoon이라면
@@ -397,8 +376,9 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	{
 		isGrabbingCoasterRight=false;
 	}
-	else if(isGrabbingCupRight)
+	else if(isGrabbingCupRight&&cup!=nullptr)
 	{
+		cup->isCupTickActivated=false;
 		isGrabbingCupRight=false;
 	}
 	else if(isGrabbingShakerLidRight)
@@ -478,8 +458,9 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		isGrabbingCoasterLeft=false;
 	}
-	else if(isGrabbingCupLeft)
+	else if(isGrabbingCupLeft&&cupL!=nullptr)
 	{
+		cupL->isCupTickActivated=false;
 		isGrabbingCupLeft=false;
 	}
 	else if(isGrabbingShakerLidLeft)
@@ -636,22 +617,14 @@ void APlayerCharacter::FireRight()
 				isTongsTickEnabled=true;
 			}
 
-	}
-		// 오른손에 Tongs를 쥐고 있지 않다면
-		else
-		{
-			return;
-		}
-	
+	}	
 	if(isGrabbingCupRight&&cup!=nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
-		cup->SetCupEmpty();
-	}
-	if(isGrabbingCupLeft&&cupL!=nullptr)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
-		cupL->SetCupEmpty();
+		if(cup->contents>0)
+		{
+			cup->SetCupEmpty();
+		}
 	}
 }
 
@@ -775,11 +748,14 @@ void APlayerCharacter::FireLeft()
 			}
 
 	}
-		// 오른손에 Tongs를 쥐고 있지 않다면
-		else
+	if(isGrabbingCupLeft&&cupL!=nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
+		if(cupL->contents>0)
 		{
-			return;
+			cupL->SetCupEmpty();
 		}
+	}
 }
 
 void APlayerCharacter::FireReleasedRight()

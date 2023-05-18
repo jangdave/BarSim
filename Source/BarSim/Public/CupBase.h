@@ -166,4 +166,10 @@ public:
 	bool isSteelSinkCasted=false;
 
 	int32 sinkArrayNum=0;
+
+	UPROPERTY()
+	bool isCupTickActivated = false;
+
+	UFUNCTION()
+	virtual void CupStop();
 };

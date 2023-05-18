@@ -46,9 +46,9 @@ void ABarSpoon::Tick(float DeltaTime)
 		if(cup)
 		{
 			//UE_LOG(LogTemp, Warning, TEXT("Spoon Overlapped"));
-			FVector cupDir = cup->GetActorLocation() - GetActorLocation();
-			FRotator cupRot = cupDir.Rotation();
-			SetActorRotation(FRotator(0, cupRot.Yaw, 0));
+			//FVector cupDir = cup->GetActorLocation() - GetActorLocation();
+			//FRotator cupRot = cupDir.Rotation();
+			//SetActorRotation(FRotator(0, cupRot.Yaw, 0));
 		}
 	}
 	else
