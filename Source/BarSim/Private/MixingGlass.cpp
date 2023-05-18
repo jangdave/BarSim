@@ -100,7 +100,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 	//스터 위젯 관련
 	if(bStirWidgetOn)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("stir started"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("stir started"));
 		widgetComp2->SetVisibility(true);
 		stirWidget = Cast<UStirWidget>(widgetComp2->GetUserWidgetObject());
 
