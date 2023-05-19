@@ -4,6 +4,7 @@
 #include "OldPalCharacter.h"
 #include "OldPalAnimInstance.h"
 #include "OldPalFSM.h"
+#include "OldPalOrderWidget.h"
 #include "Components/WidgetComponent.h"
 
 // Sets default values
@@ -23,8 +24,8 @@ AOldPalCharacter::AOldPalCharacter()
 	
 	oldPalFSM = CreateDefaultSubobject<UOldPalFSM>(TEXT("oldPalFSM"));
 
-	//oldPalWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("oldPalWidget"));
-	//oldPalWidget->SetupAttachment(GetMesh());
+	oldPalWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("oldPalWidget"));
+	oldPalWidget->SetupAttachment(GetMesh());
 	
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
@@ -35,6 +36,8 @@ void AOldPalCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	oldPalAnim = Cast<UOldPalAnimInstance>(bodyComp->GetAnimInstance());
+
+	oldPal_UI = Cast<UOldPalOrderWidget>(oldPalWidget->GetUserWidgetObject());
 }
 
 // Called every frame

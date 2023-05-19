@@ -9,8 +9,10 @@ void UBarGameInstance::Init()
 {
 	Super::Init();
 
+	// 스타트 매니저 캐스트
 	startManager = Cast<AGameStartManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameStartManager::StaticClass()));
 
+	//델리게이트 연결 함수 실행
 	BindFunction();
 }
 
@@ -25,5 +27,6 @@ void UBarGameInstance::CheckDay()
 
 void UBarGameInstance::BindFunction()
 {
+	// 체크데이 함수 델리케이트에 연결
 	goToMainMapDele.BindUFunction(this, FName("CheckDay"));
 }

@@ -62,9 +62,11 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool bCheckPlayer;
 
+	// 점수
 	UPROPERTY()
 	int32 totalScore;
 
+	// 손님의 위치 순서
 	UPROPERTY()
 	int32 customerIdx;
 	
@@ -90,23 +92,27 @@ public:
 	UFUNCTION()
 	void ViewScore(int32 score);
 
+	// 점수 가리기 함수
 	UFUNCTION()
 	void HideScore();
 
+	// 주문대로 나왔을때 변수 변경 함수
 	UFUNCTION()
 	void SameOrder();
 
+	// 주문대로 안나왔을때 변수 변경 함수
 	UFUNCTION()
 	void UnSameOrder();
 
+	// 컵 손님 앞으로 이동시키는 함수
+	UFUNCTION()
+	void MoveCup();
+	
 	UPROPERTY()
 	bool bSameOrder;
 
 	UPROPERTY()
 	bool bUnSameOrder;
-
-	UFUNCTION()
-	void MoveCup();
 
 	bool bOnceOverlap;
 

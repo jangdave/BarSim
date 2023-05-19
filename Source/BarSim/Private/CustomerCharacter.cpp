@@ -150,10 +150,13 @@ void ACustomerCharacter::BindOverlap()
 	{
 		cup = Cast<ACupBase>(hitInfo.GetActor());
 
+		// 컵이 오버랩 되면
 		if(cup != nullptr)
 		{
+			// 컵의 물리를 끄고
 			cup->cupComp->SetSimulatePhysics(false);
-			
+
+			// 컵을 손에 붙인다
 			cup->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, "hand_rSocket");
 		}
 	}
@@ -163,7 +166,9 @@ void ACustomerCharacter::BindOverlap()
 
 void ACustomerCharacter::DetachCup()
 {
+	// 컵을 떨어트리고
 	cup->DetachAllSceneComponents(GetMesh(), FDetachmentTransformRules::KeepWorldTransform);
 
+	// 컵의 물리를 킨다
 	cup->cupComp->SetSimulatePhysics(true);
 }

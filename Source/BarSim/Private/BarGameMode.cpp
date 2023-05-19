@@ -2,7 +2,9 @@
 
 
 #include "BarGameMode.h"
-#include "BarGameInstance.h"
+#include "MenuWidgetActor.h"
+#include "PlayerCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 ABarGameMode::ABarGameMode()
 {
@@ -14,7 +16,6 @@ void ABarGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	gi = Cast<UBarGameInstance>(GetGameInstance());
 }
 
 void ABarGameMode::Tick(float DeltaSeconds)
@@ -25,5 +26,12 @@ void ABarGameMode::Tick(float DeltaSeconds)
 
 void ABarGameMode::SpawnMenu()
 {
+	auto player = Cast<APlayerCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCharacter::StaticClass()));
 	
+	if(player != nullptr)
+	{
+		FRotator rot = FRotator::ZeroRotator;
+		FVector loc = player->GetActorLocation();
+		GetWorld()->SpawnActor<AMenuWidgetActor>(menuFactory, loc, rot);
+	}
 }

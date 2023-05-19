@@ -12,6 +12,8 @@
 void UMenuWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
+
+	menuActor = Cast<AMenuWidgetActor>(UGameplayStatics::GetActorOfClass(GetWorld(), AMenuWidgetActor::StaticClass()));
 	
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
 	
@@ -32,7 +34,7 @@ void UMenuWidget::GameStart()
 	}
 	else
 	{
-		
+		menuActor->Destroy();
 	}
 }
 

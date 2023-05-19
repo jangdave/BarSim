@@ -25,15 +25,6 @@ void AMenuWidgetActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto gi = Cast<UBarGameInstance>(GetGameInstance());
-
-	if(gi != nullptr)
-	{
-		if(gi->checkDayCount != 0)
-		{
-			Destroy();
-		}
-	}
 }
 
 // Called every frame
@@ -45,6 +36,6 @@ void AMenuWidgetActor::Tick(float DeltaTime)
 
 void AMenuWidgetActor::Destroy()
 {
-	this->Destroyed();
+	this->K2_DestroyActor();
 }
 

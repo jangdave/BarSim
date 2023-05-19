@@ -64,7 +64,7 @@ void UTabletWidget::CloseStore()
 
 void UTabletWidget::OpenInternet()
 {
-	WidgetSwitcher_Tablet->SetActiveWidgetIndex(7);
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(10);
 }
 
 void UTabletWidget::OpenMenuPage()

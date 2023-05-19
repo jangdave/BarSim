@@ -102,13 +102,12 @@ void UCustomerFSM::SetOrderCoctail()
 		if(result > 6)
 		{
 			// 진라임
-			orderIdx = 3;
+			orderIdx = 1;
 		}
 		else if(result <= 6 && result > 4)
 		{
 			// 다이키리
-			orderIdx = 3;
-			
+			orderIdx = 2;
 		}
 		else if(result <= 4 && result > 2)
 		{
@@ -118,7 +117,7 @@ void UCustomerFSM::SetOrderCoctail()
 		else if(result <= 2)
 		{
 			// 올드팔
-			orderIdx = 3;
+			orderIdx = 4;
 		}
 	}
 }
@@ -127,6 +126,7 @@ void UCustomerFSM::SetOrderCoctail()
 // 상태 설정 함수
 void UCustomerFSM::SetState(ECustomerState next)
 {
+	// 넘어온 상태로 변경
 	state = next;
 
 	// 플레이 되는 애니메이션 플레이 체크 초기화
@@ -151,11 +151,12 @@ void UCustomerFSM::TickIdle()
 				// 앉은 의자 배열에 착석 여부 바꾸기
 				spawnManager->bIsSit[idx] = true;
 
-				// 가게 오픈했는지 체크
+				// 가게 오픈했다고 바꾸기
 				spawnManager->bCheckSpawn = true;
-				
-				SetState(ECustomerState::MOVE);
 
+				// 상태 변경
+				SetState(ECustomerState::MOVE);
+				
 				break;
 			}
 		}
@@ -187,9 +188,9 @@ void UCustomerFSM::TickReadySit()
 	{
 		if(bCheckPlayAnim != true)
 		{
-			// 도착하면 앉는 애니메이션 실행
 			bCheckPlayAnim = true;
 		
+			// 도착하면 앉는 애니메이션 실행
 			owner->customerAnim->OnStandAnim(TEXT("SitStoll"));
 		}
 	}
@@ -266,6 +267,7 @@ void UCustomerFSM::TickLeave()
 // sit 상태 설정 함수
 void UCustomerFSM::SetSitState(ECustomerSitState next)
 {
+	// 상태 변경
 	sitState = next;
 
 	// 상태가 변경 될 때마다 대기시간 초기화
@@ -331,7 +333,7 @@ void UCustomerFSM::TickOrder()
 
 		// 주문하는 애니메이션 실행
 		owner->customerAnim->OnSitAnim(TEXT("Order"));
-
+		
 		spawnManager->aChairs[idx]->bOnceOverlap = false;
 	}
 	else
@@ -475,7 +477,8 @@ void UCustomerFSM::TickAngry()
 	if(bCheckPlayAnim != true)
 	{
 		bCheckPlayAnim = true;
-		
+
+		// 화내는 애니메이션 실행
 		owner->customerAnim->OnSitAnim(TEXT("Angry"));
 	}
 }
@@ -485,7 +488,8 @@ void UCustomerFSM::TickAwesome()
 	if(bCheckPlayAnim != true)
 	{
 		bCheckPlayAnim = true;
-		
+
+		// 좋아하는 애니메이션 실행
 		owner->customerAnim->OnSitAnim(TEXT("Good"));
 	}
 }
@@ -493,13 +497,14 @@ void UCustomerFSM::TickAwesome()
 void UCustomerFSM::TickReadyLeave()
 {
 	DetachCustomer();
-
+	
 	owner->order_UI->SetVisibility(ESlateVisibility::Hidden);
 	
 	if(bCheckPlayAnim != true)
 	{
 		bCheckPlayAnim = true;
-		
+
+		// 자리에서 일어나는 애니메이션 실행
 		owner->customerAnim->OnSitAnim(TEXT("LeaveSit"));
 	}
 }
@@ -508,6 +513,7 @@ void UCustomerFSM::TickReadyLeave()
 // drink 상태 설정 함수
 void UCustomerFSM::SetDrinkState(ECustomerDrinkState next)
 {
+	// 상태 변경
 	drinkState = next;
 
 	// 상태가 변경 될 때마다 대기시간 초기화
@@ -536,6 +542,7 @@ void UCustomerFSM::TickDrinkCup()
 	{
 		auto tempIdx = SetRandRange(1, 4);
 
+		// 3번 마시게 하고 애니메이션은 랜덤으로 한다
 		if(tempIdx > 3 && curTime > 2)
 		{
 			if(bCheckPlayAnim != true)
@@ -571,6 +578,7 @@ void UCustomerFSM::TickUnHoldCup()
 	{
 		bCheckPlayAnim = true;
 
+		// 컵 잡는 애니메이션 실행
 		owner->customerAnim->OnDrinkAnim(TEXT("UnHoldCup"));
 	}
 }

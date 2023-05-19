@@ -39,8 +39,6 @@ void ASpawnManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	auto gi = Cast<UBarGameInstance>(GetGameInstance());
-	UE_LOG(LogTemp, Warning, TEXT("%d"), gi->checkDayCount)
 }
 
 void ASpawnManager::CheckChairSit()

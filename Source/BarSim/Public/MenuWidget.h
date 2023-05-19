@@ -17,6 +17,9 @@ class BARSIM_API UMenuWidget : public UUserWidget
 public:
 	virtual void NativeConstruct() override;
 
+	UPROPERTY()
+	class AMenuWidgetActor* menuActor;
+	
 	// 위젯스위처
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UWidgetSwitcher* WidgetSwitcher_Menu;

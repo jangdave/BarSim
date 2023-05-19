@@ -74,8 +74,10 @@ void AChair::OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	if(customer != nullptr)
 	{
 		// 손님이 오버랩 되면 손님의 요소 스폰매니저로 보내기
+		// 주문한 칵테일 저장
 		auto orderTemp = customer->customerFSM->orderIdx;
 
+		// 손님의 위치 순서 저장
 		customerIdx = customer->customerFSM->idx;
 
 		spawnManager->GetCustomerIdx(orderTemp, customerIdx);
@@ -86,19 +88,16 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 {
 	auto coaster = Cast<ACoaster>(OtherActor);
 	coctail = Cast<ACupBase>(OtherActor);
-	
+
+	// 칵테일잔이 있고 코스터가 있고 한번만 오버랩 되었다면
 	if(coctail != nullptr && bOnceOverlap != true && bCheckCoaster != false)
 	{
 		bCheckCoctail = true;
 
-		auto SM = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
+		// 컵 정보를 보내준다
+		spawnManager->GetCup(coctail->NameArray, coctail->ContentsArray, coctail->bStirred, coctail->bStirredLater, coctail->bShaked, customerIdx);
 
-		if(SM != nullptr)
-		{
-			SM->GetCup(coctail->NameArray, coctail->ContentsArray, coctail->bStirred, coctail->bStirredLater, coctail->bShaked, customerIdx);
-
-			bOnceOverlap = true;
-		}
+		bOnceOverlap = true;
 	}
 	else if(coaster != nullptr)
 	{
@@ -141,6 +140,7 @@ void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 	}
 }
 
+// 점수 보이는 함수
 void AChair::ViewScore(int32 score)
 {
 	totalScore = score;
@@ -150,21 +150,25 @@ void AChair::ViewScore(int32 score)
 	score_UI->text_Score->SetText(FText::AsNumber(score));
 }
 
+// 점수 가리기 함수
 void AChair::HideScore()
 {
 	score_UI->SetVisibility(ESlateVisibility::Hidden);
 }
 
+// 주문대로 나왔을때 변수 변경 함수
 void AChair::SameOrder()
 {
 	bSameOrder = true;
 }
 
+// 주문대로 안나왔을때 변수 변경 함수
 void AChair::UnSameOrder()
 {
 	bUnSameOrder = true;
 }
 
+// 컵 손님 앞으로 이동시키는 함수
 void AChair::MoveCup()
 {
 	cupLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -20;
