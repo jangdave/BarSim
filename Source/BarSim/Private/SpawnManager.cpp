@@ -39,6 +39,8 @@ void ASpawnManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	auto gi = Cast<UBarGameInstance>(GetGameInstance());
+	UE_LOG(LogTemp, Warning, TEXT("%d"), gi->checkDayCount)
 }
 
 void ASpawnManager::CheckChairSit()
@@ -89,18 +91,23 @@ void ASpawnManager::SpawnCustomer()
 {
 	// 시간이 지날때마다 손님을 스폰한다
 	FTimerHandle spawnTime;
-	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 2, true);
+	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 5, true);
 }
 
 void ASpawnManager::SpawnCustom()
 {
 	auto gameInstance = Cast<UBarGameInstance>(GetGameInstance());
-
+	
 	// 날짜가 지난만큼 더 많이 스폰
 	int32 idx = (gameInstance->checkDayCount - 1) * 4;
-
+	
 	// 전체 손님 수가 지정한 숫자보다 작을때
-	if(checkCustomerNum < idx)
+	if(checkCustomerNum >= idx)
+	{
+		// 가게 오픈했는지 체크
+		bCheckSpawn = true;
+	}
+	else if(checkCustomerNum < idx)
 	{
 		for(int i = 0; i<bIsSit.Num(); i++)
 		{
@@ -120,9 +127,6 @@ void ASpawnManager::SpawnCustom()
 
 			// 빈자리 채움
 			bCheckSit = false;
-
-			// 가게 오픈했는지 체크
-			bCheckSpawn = true;
 		}
 	}
 }

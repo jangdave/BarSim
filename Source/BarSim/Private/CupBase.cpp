@@ -57,7 +57,7 @@ void ACupBase::BeginPlay()
 	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
 	igCheckerComp->OnComponentEndOverlap.AddDynamic(this, &ACupBase::ExtractIce);
 
-	player = Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 }
 
 // Called every frame
@@ -68,7 +68,7 @@ void ACupBase::Tick(float DeltaTime)
 	if(player)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("widget rotate"));
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Widget Rotate"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Widget Rotate"));
 		FVector playerDir = player->GetActorLocation() - GetActorLocation();
 		FRotator playerDirRot = playerDir.Rotation();
 		widgetComp->SetRelativeRotation(FRotator(0, playerDirRot.Yaw, 0));
@@ -467,7 +467,7 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			LiquorScale();
 			MixArray.Add(false);
 			ShakeArray.Add(false);
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("drop overlapped"));
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("drop overlapped"));
 			drop->DropDestroyDelay();
 		}
 	}

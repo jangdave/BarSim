@@ -13,5 +13,17 @@ UCLASS()
 class BARSIM_API ABarGameMode : public AGameMode
 {
 	GENERATED_BODY()
-	
+
+public:
+	ABarGameMode();
+
+	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaSeconds) override;
+
+	UPROPERTY()
+	class UBarGameInstance* gi;
+
+	UFUNCTION()
+	void SpawnMenu();
 };

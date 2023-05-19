@@ -167,7 +167,7 @@ void AChair::UnSameOrder()
 
 void AChair::MoveCup()
 {
-	cupLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -35;
+	cupLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -20;
 	coctail->SetActorLocation(cupLoc);
 }
 
