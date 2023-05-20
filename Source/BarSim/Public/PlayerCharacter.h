@@ -192,6 +192,9 @@ public:
 	UPROPERTY()
 	class AHalfSlicedLime* halfSlicedLimeL;
 
+	// Sounds
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* sinkSound;
 
 	
 };

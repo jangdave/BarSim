@@ -20,6 +20,7 @@
 #include "Strainer.h"
 #include "Tablet.h"
 #include "Components/WidgetInteractionComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 
@@ -623,6 +624,8 @@ void APlayerCharacter::FireRight()
 		UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
 		if(cup->contents>0)
 		{
+			double randPitch = FMath::FRandRange(1, 1.5);
+			UGameplayStatics::PlaySound2D(GetWorld(), sinkSound, 1, randPitch, 0);
 			cup->SetCupEmpty();
 		}
 	}
@@ -753,6 +756,8 @@ void APlayerCharacter::FireLeft()
 		UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
 		if(cupL->contents>0)
 		{
+			double randPitch = FMath::FRandRange(1, 1.5);
+			UGameplayStatics::PlaySound2D(GetWorld(), sinkSound, 1, randPitch, 0);
 			cupL->SetCupEmpty();
 		}
 	}
