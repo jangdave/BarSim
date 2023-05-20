@@ -62,6 +62,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool bCheckPlayer;
 
+	UPROPERTY()
+	bool bCheckCustomer;
+	
 	// 점수
 	UPROPERTY()
 	int32 totalScore;
@@ -74,6 +77,9 @@ public:
 	UFUNCTION()
 	void OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
+	UFUNCTION()
+	void EndCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	
 	// 컵 오버랩 함수
 	UFUNCTION()
 	void OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
@@ -107,6 +113,12 @@ public:
 	// 컵 손님 앞으로 이동시키는 함수
 	UFUNCTION()
 	void MoveCup();
+
+	void MoveCupSlow();
+
+	FTimerHandle moveTimer;
+
+	float curTime;
 	
 	UPROPERTY()
 	bool bSameOrder;
@@ -116,6 +128,4 @@ public:
 
 	bool bOnceOverlap;
 
-	UPROPERTY()
-	FVector cupLoc;
 };
