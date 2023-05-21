@@ -70,7 +70,7 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		if(huchuTong->isDropSoundEnabled==true)
 		{
 			auto huchuTongLoc = huchuTong->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), huchuTongDropSound, huchuTongLoc, 0.7, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), huchuTongDropSound, huchuTongLoc, soundVolume, randPitch, 0);
 			huchuTong->isDropSoundEnabled=false;
 		}
 	}
@@ -79,7 +79,7 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		if(bottle->isDropSoundEnabled==true)
 		{
 			auto bottleLoc = bottle->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), bottleDropSound, bottleLoc, 1, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), bottleDropSound, bottleLoc, soundVolume, randPitch, 0);
 			bottle->isDropSoundEnabled=false;
 		}
 	}
@@ -88,17 +88,8 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		if(tablet->isDropSoundEnabled==true)
 		{
 			auto tabletLoc = tablet->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), tabletDropSound, tabletLoc, 1, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), tabletDropSound, tabletLoc, soundVolume, randPitch, 0);
 			tablet->isDropSoundEnabled=false;
-		}
-	}
-	else if(cup)
-	{
-		if(cup->isDropSoundEnabled==true)
-		{
-			auto cupLoc = cup->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), cupDropSound, cupLoc, 1, randPitch, 0);
-			cup->isDropSoundEnabled=false;
 		}
 	}
 	else if(coaster)
@@ -106,17 +97,16 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		if(coaster->isDropSoundEnabled==true)
 		{
 			auto coasterLoc = coaster->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), coasterDropSound, coasterLoc, 1, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), coasterDropSound, coasterLoc, soundVolume, randPitch, 0);
 			coaster->isDropSoundEnabled=false;
 		}
 	}
 	else if(barSpoon)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Spoon drop"))
 		if(barSpoon->isDropSoundEnabled==true)
 		{
 			auto barSpoonLoc = barSpoon->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), barSpoonDropSound, barSpoonLoc, 1, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), barSpoonDropSound, barSpoonLoc, soundVolume, randPitch, 0.1);
 			barSpoon->isDropSoundEnabled=false;
 		}
 	}
@@ -125,7 +115,7 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		if(strainer->isDropSoundEnabled==true)
 		{
 			auto strainerLoc = strainer->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), strainerDropSound, strainerLoc, 1, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), strainerDropSound, strainerLoc, soundVolume, randPitch, 0);
 			strainer->isDropSoundEnabled=false;
 		}
 	}
@@ -134,7 +124,7 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		if(shakerStrainer->isDropSoundEnabled==true)
 		{
 			auto shakerStrainerLoc = shakerStrainer->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), shakerStrainerDropSound, shakerStrainerLoc, 1, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), shakerStrainerDropSound, shakerStrainerLoc, soundVolume, randPitch, 0.2);
 			shakerStrainer->isDropSoundEnabled=false;
 		}
 	}
@@ -143,26 +133,35 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		if(shakerLid->isDropSoundEnabled==true)
 		{
 			auto shakerLidLoc = shakerLid->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), shakerLidDropSound, shakerLidLoc, 1, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), shakerLidDropSound, shakerLidLoc, soundVolume, randPitch, 0.2);
 			shakerLid->isDropSoundEnabled=false;
 		}
 	}
 	else if(shaker)
 	{
-		if(shaker->isDropSoundEnabledS==true)
+		if(shaker->isDropSoundEnabled==true)
 		{
 			auto shakerLoc = shaker->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), shakerDropSound, shakerLoc, 1, randPitch, 0);	
-			shaker->isDropSoundEnabledS=false;
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), shakerDropSound, shakerLoc, soundVolume, randPitch, 0);	
+			shaker->isDropSoundEnabled=false;
 		}
 	}
 	else if(mixingGlass)
 	{
-		if(mixingGlass->isDropSoundEnabledM==true)
+		if(mixingGlass->isDropSoundEnabled==true)
 		{
 			auto mixingGlassLoc = mixingGlass->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), mixingGlassDropSound, mixingGlassLoc, 1, randPitch, 0);
-			mixingGlass->isDropSoundEnabledM=false;
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), mixingGlassDropSound, mixingGlassLoc, soundVolume, randPitch, 0);
+			mixingGlass->isDropSoundEnabled=false;
+		}
+	}
+	else if(cup)
+	{
+		if(cup->isDropSoundEnabled==true)
+		{
+			auto cupLoc = cup->GetActorLocation();
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), cupDropSound, cupLoc, soundVolume, randPitch, 0);
+			cup->isDropSoundEnabled=false;
 		}
 	}
 	else if(iceCube)
@@ -170,7 +169,7 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		if(iceCube->isDropSoundEnabled==true)
 		{
 			auto iceCubeLoc = iceCube->GetActorLocation();
-			UGameplayStatics::PlaySoundAtLocation(GetWorld(), iceCubeDropSound, iceCubeLoc, 1, randPitch, 0);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), iceCubeDropSound, iceCubeLoc, soundVolume, randPitch, 0);
 			iceCube->isDropSoundEnabled=false;
 		}
 	}

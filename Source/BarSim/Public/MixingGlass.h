@@ -74,6 +74,6 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "MixingGlass")
 	float widgetTime2;
 
-	UPROPERTY()
-	bool isDropSoundEnabledM = false;
+	//UPROPERTY()
+	//bool isDropSoundEnabledM = false;
 };

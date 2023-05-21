@@ -131,6 +131,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void APlayerCharacter::CheckGrabbedObjectRight()
 {
+	UGameplayStatics::PlaySound2D(GetWorld(), grabSound, 1.5, 1, 0);
+	
 	TArray<AActor*> RightGrippedActors;
 	RightMotionController->GetGrippedActors(RightGrippedActors);
 	for(int i=0; i<RightGrippedActors.Num(); ++i)
@@ -382,12 +384,20 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	}
 	else if(isGrabbingCupRight)
 	{
-		//if(cup!=nullptr)
-		//{
+		if(cup!=nullptr)
+		{
 			cup->isDropSoundEnabled=true;
 			cup->isCupTickActivated=false;
-		//}
+		}
 		isGrabbingCupRight=false;
+	}
+	else if(isGrabbingBarSpoonRight)
+	{
+		if(barSpoon!=nullptr)
+		{
+			barSpoon->isDropSoundEnabled=true;
+		}
+		isGrabbingBarSpoonRight=false;
 	}
 	else if(isGrabbingShakerLidRight)
 	{
@@ -411,7 +421,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingMixingGlassRight)
 	{
 		if(mixingGlass!=nullptr)
-		mixingGlass->isDropSoundEnabledM=true;
+		mixingGlass->isDropSoundEnabled=true;
 		isGrabbingMixingGlassRight=false;
 	}
 	else if(isGrabbingStrainerRight)
@@ -426,7 +436,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingShakerRight)
 	{
 		if(shaker!=nullptr)
-		shaker->isDropSoundEnabledS=true;
+		shaker->isDropSoundEnabled=true;
 		isGrabbingShakerRight=false;		
 	}
 }
@@ -495,7 +505,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	}
 	else if(isGrabbingMixingGlassLeft&&mixingGlassL!=nullptr)
 	{
-		mixingGlassL->isDropSoundEnabledM=true;
+		mixingGlassL->isDropSoundEnabled=true;
 		isGrabbingMixingGlassLeft=false;
 	}
 	else if(isGrabbingStrainerLeft&&strainerL!=nullptr)
@@ -506,7 +516,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	}
 	else if(isGrabbingShakerLeft&&shakerL!=nullptr)
 	{
-		shakerL->isDropSoundEnabledS=true;
+		shakerL->isDropSoundEnabled=true;
 		isGrabbingShakerLeft=false;		
 	}
 }

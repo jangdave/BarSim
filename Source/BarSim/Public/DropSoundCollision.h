@@ -84,4 +84,6 @@ public:
 	UPROPERTY(EditAnywhere, Category="Sounds")
 	class USoundBase* mixingGlassDropSound;
 
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	float soundVolume = 0.7;
 };

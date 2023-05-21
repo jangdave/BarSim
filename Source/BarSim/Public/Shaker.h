@@ -80,7 +80,7 @@ public:
 	
 	virtual void CupStop() override;
 
-	UPROPERTY()
-	bool isDropSoundEnabledS = false;
+	//UPROPERTY()
+	//bool isDropSoundEnabledS = false;
 };
 
