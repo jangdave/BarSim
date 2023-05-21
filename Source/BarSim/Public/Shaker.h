@@ -79,5 +79,8 @@ public:
 	bool bLidOn;
 	
 	virtual void CupStop() override;
+
+	UPROPERTY()
+	bool isDropSoundEnabledS = false;
 };
 

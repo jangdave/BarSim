@@ -41,5 +41,8 @@ public:
 	bool isShakerStrainerCasted = false;
 
 	int32 StrainerArrayNum = 0;
+
+	UPROPERTY()
+	bool isDropSoundEnabled = false;
 	
 };

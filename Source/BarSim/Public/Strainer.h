@@ -38,4 +38,7 @@ public:
 
 	bool isMixingGlassCasted=  false;
 	int32 mixingGlassArrayNum = 0;
+
+	UPROPERTY()
+	bool isDropSoundEnabled = false;
 };
