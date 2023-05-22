@@ -9,22 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_DropSoundCollision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_DropSoundCollision.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop2.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop3.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop4.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop5.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Sounds/StrainerDrop/StrainerDrop5.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/DropSoundCollision.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/DropSoundCollision.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/DropSoundCollision.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/DropSoundCollision.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/MixingGlass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/MixingGlass.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/Shaker.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/Shaker.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +114,7 @@
       <workItem from="1684583179526" duration="1096000" />
       <workItem from="1684631587658" duration="1206000" />
       <workItem from="1684648572668" duration="13420000" />
+      <workItem from="1684716661203" duration="913000" />
     </task>
     <servers />
   </component>
