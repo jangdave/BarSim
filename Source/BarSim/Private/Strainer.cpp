@@ -66,7 +66,7 @@ void AStrainer::AttachToMixingGlass()
 			this->SetActorLocationAndRotation(strainerLoc.GetLocation(), strainerLoc.GetRotation());
 			this->AttachToComponent(mixingGlass->cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
 			//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
-			//mixingGlass->DisableComponentsSimulatePhysics();
+			mixingGlass->DisableComponentsSimulatePhysics();
 			mixingGlass->bStrainerOn=true;
 			isMixingGlassCasted=false;
 			HitObj.Reset();

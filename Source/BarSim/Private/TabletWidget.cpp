@@ -26,10 +26,22 @@ void UTabletWidget::NativeConstruct()
 	btn_BackMenu->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
 	btn_OpenGinLime->OnClicked.AddDynamic(this, &UTabletWidget::OpenGinLime);
 	btn_OpenGinLimeVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenGinLimeVideo);
+	btn_OpenMartini->OnClicked.AddDynamic(this, &UTabletWidget::OpenMartini);
+	btn_OpenMartiniVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenMartiniVideo);
+	btn_OpenDaiquiri->OnClicked.AddDynamic(this, &UTabletWidget::OpenDaiquiri);
+	btn_OpenDaiquiriVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenDaiquiriVideo);
+	btn_OpenOldPal->OnClicked.AddDynamic(this, &UTabletWidget::OpenOldPal);
+	btn_OpenOldPalVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenOldPalVideo);
 	
 	// 테블릿 진라임 레시피 & 영상
 	btn_BackRecipeMenu0->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 	btn_BackRecipeMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu2->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu3->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu4->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu5->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu6->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu7->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 
 	// 테블릿 키보드 입력
 	btn_BackMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
@@ -52,7 +64,7 @@ void UTabletWidget::CloseStore()
 
 void UTabletWidget::OpenInternet()
 {
-	WidgetSwitcher_Tablet->SetActiveWidgetIndex(7);
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(10);
 }
 
 void UTabletWidget::OpenMenuPage()
@@ -73,6 +85,36 @@ void UTabletWidget::OpenGinLime()
 void UTabletWidget::OpenGinLimeVideo()
 {
 	WidgetSwitcher_Tablet->SetActiveWidgetIndex(3);
+}
+
+void UTabletWidget::OpenMartini()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(4);
+}
+
+void UTabletWidget::OpenMartiniVideo()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(5);
+}
+
+void UTabletWidget::OpenDaiquiri()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(6);
+}
+
+void UTabletWidget::OpenDaiquiriVideo()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(7);
+}
+
+void UTabletWidget::OpenOldPal()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(8);
+}
+
+void UTabletWidget::OpenOldPalVideo()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(9);
 }
 
 void UTabletWidget::SetCapsLock()

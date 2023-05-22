@@ -63,8 +63,13 @@ public:
 	bool bCheckPlayer;
 
 	UPROPERTY()
+	bool bCheckCustomer;
+	
+	// 점수
+	UPROPERTY()
 	int32 totalScore;
 
+	// 손님의 위치 순서
 	UPROPERTY()
 	int32 customerIdx;
 	
@@ -72,6 +77,9 @@ public:
 	UFUNCTION()
 	void OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
+	UFUNCTION()
+	void EndCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	
 	// 컵 오버랩 함수
 	UFUNCTION()
 	void OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
@@ -90,26 +98,34 @@ public:
 	UFUNCTION()
 	void ViewScore(int32 score);
 
+	// 점수 가리기 함수
 	UFUNCTION()
 	void HideScore();
 
+	// 주문대로 나왔을때 변수 변경 함수
 	UFUNCTION()
 	void SameOrder();
 
+	// 주문대로 안나왔을때 변수 변경 함수
 	UFUNCTION()
 	void UnSameOrder();
 
+	// 컵 손님 앞으로 이동시키는 함수
+	UFUNCTION()
+	void MoveCup();
+
+	void MoveCupSlow();
+
+	FTimerHandle moveTimer;
+
+	float curTime;
+	
 	UPROPERTY()
 	bool bSameOrder;
 
 	UPROPERTY()
 	bool bUnSameOrder;
 
-	UFUNCTION()
-	void MoveCup();
-
 	bool bOnceOverlap;
 
-	UPROPERTY()
-	FVector cupLoc;
 };

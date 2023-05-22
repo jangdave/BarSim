@@ -20,10 +20,10 @@ public:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
-
-	UPROPERTY()
-	class UBarGameInstance* gi;
-
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AMenuWidgetActor> menuFactory;
+	
 	UFUNCTION()
 	void SpawnMenu();
 };

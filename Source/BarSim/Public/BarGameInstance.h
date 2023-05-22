@@ -30,9 +30,11 @@ public:
 	UFUNCTION()
 	void BindFunction();
 
-	UPROPERTY()
+	// 날짜
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 checkDayCount;
-	
-	UPROPERTY(EditAnywhere)
+
+	// 게임모드 체크 불
+	UPROPERTY()
 	bool bCheckGameMode;
 };
