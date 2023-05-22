@@ -131,7 +131,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void APlayerCharacter::CheckGrabbedObjectRight()
 {
-	UGameplayStatics::PlaySound2D(GetWorld(), grabSound, 1.5, 1, 0);
+	UGameplayStatics::PlaySound2D(GetWorld(), grabSound, 1.2, 1, 0);
 	
 	TArray<AActor*> RightGrippedActors;
 	RightMotionController->GetGrippedActors(RightGrippedActors);
@@ -236,6 +236,8 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 
 void APlayerCharacter::CheckGrabbedObjectLeft()
 {
+	UGameplayStatics::PlaySound2D(GetWorld(), grabSound, 1.2, 1, 0);
+
 	TArray<AActor*> LeftGrippedActors;
 	LeftMotionController->GetGrippedActors(LeftGrippedActors);
 	for(int i=0; i<LeftGrippedActors.Num(); ++i)
