@@ -9,6 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawerBase/BarDrawer1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawerBase/BarDrawer1.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +116,7 @@
       <workItem from="1684583179526" duration="1096000" />
       <workItem from="1684631587658" duration="1206000" />
       <workItem from="1684648572668" duration="13420000" />
-      <workItem from="1684716661203" duration="913000" />
+      <workItem from="1684716661203" duration="1506000" />
     </task>
     <servers />
   </component>
