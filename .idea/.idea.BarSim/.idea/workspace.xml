@@ -10,6 +10,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/MSPresets/M_MS_Billboard_Material/M_MS_Billboard_Material.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MSPresets/M_MS_Billboard_Material/M_MS_Billboard_Material.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/MSPresets/M_MS_Default_Material/M_MS_Default_Material.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MSPresets/M_MS_Default_Material/M_MS_Default_Material.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/MSPresets/M_MS_Foliage_Material/M_MS_Foliage_Material.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MSPresets/M_MS_Foliage_Material/M_MS_Foliage_Material.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/MSPresets/M_MS_Surface_Material/M_MS_Surface_Material.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MSPresets/M_MS_Surface_Material/M_MS_Surface_Material.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/StartMap1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/StartMap1.umap" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +42,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
@@ -221,6 +226,7 @@
       <workItem from="1684373529008" duration="4873000" />
       <workItem from="1684379107827" duration="744000" />
       <workItem from="1684404723384" duration="602000" />
+      <workItem from="1684724761695" duration="1347000" />
     </task>
     <servers />
   </component>
