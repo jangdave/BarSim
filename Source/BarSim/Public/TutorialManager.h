@@ -3,17 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TutorialLight.h"
+#include "TutorialWall.h"
 #include "GameFramework/Actor.h"
-#include "TutorialLight.generated.h"
+#include "TutorialManager.generated.h"
 
 UCLASS()
-class BARSIM_API ATutorialLight : public AActor
+class BARSIM_API ATutorialManager : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATutorialLight();
+	ATutorialManager();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,15 +25,23 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = "Tutorial")
-	class USpotLightComponent* spotLight;
+	UPROPERTY()
+	TArray<ATutorialLight*> allLights;
 
-	UPROPERTY(EditAnywhere, Category = "Tutorial")
-	float lightIntensity = 0;
+	UPROPERTY()
+	TArray<ATutorialWall*> allWalls;
+	
+	void GetRights();
 
-	UFUNCTION()
-	void TurnOnLight();
+	void GetWalls();
 
-	UFUNCTION()
-	void TurnOffLight();
+	void StartTutorial();
+
+	void ClearFirstStage();
+
+	void ClearSecondStage();
+
+	void ClearThirdStage();
+
+	void ClearFourthStage();
 };

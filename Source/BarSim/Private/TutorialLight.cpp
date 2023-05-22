@@ -2,7 +2,6 @@
 
 
 #include "TutorialLight.h"
-
 #include "Components/SpotLightComponent.h"
 
 // Sets default values
@@ -13,7 +12,7 @@ ATutorialLight::ATutorialLight()
 
 	spotLight = CreateDefaultSubobject<USpotLightComponent>(TEXT("SpotLight"));	
 	SetRootComponent(spotLight);
-	spotLight->SetAttenuationRadius(3000.0f);
+	spotLight->SetAttenuationRadius(1500.0f);
 	spotLight->SetIntensity(lightIntensity);
 	spotLight->SetIntensityUnits(ELightUnits::Candelas);
 	spotLight->SetOuterConeAngle(30.0f);
@@ -25,9 +24,7 @@ ATutorialLight::ATutorialLight()
 void ATutorialLight::BeginPlay()
 {
 	Super::BeginPlay();
-	lightIntensity = 300.0f;
-	spotLight->SetIntensity(lightIntensity);
-	spotLight->SetRelativeRotation(FRotator(-90.0f, 0, 0));
+	
 }
 
 // Called every frame
@@ -35,5 +32,17 @@ void ATutorialLight::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ATutorialLight::TurnOnLight()
+{
+	lightIntensity = 300.0f;
+	spotLight->SetIntensity(lightIntensity);
+}
+
+void ATutorialLight::TurnOffLight()
+{
+	lightIntensity = 0.0f;
+	spotLight->SetIntensity(lightIntensity);
 }
 

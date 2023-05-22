@@ -99,7 +99,7 @@ void AChair::EndCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 
 void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	auto coaster = Cast<ACoaster>(OtherActor);
+	coaster = Cast<ACoaster>(OtherActor);
 	coctail = Cast<ACupBase>(OtherActor);
 
 	// 칵테일잔이 있고 코스터가 있고 한번만 오버랩 되었다면
@@ -120,7 +120,7 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 
 void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	auto coaster = Cast<ACoaster>(OtherActor);
+	coaster = Cast<ACoaster>(OtherActor);
 	coctail = Cast<ACupBase>(OtherActor);
 
 	if(coctail != nullptr)
@@ -184,26 +184,25 @@ void AChair::UnSameOrder()
 // 컵 손님 앞으로 이동시키는 함수
 void AChair::MoveCup()
 {
-	GetWorldTimerManager().SetTimer(moveTimer, this, &AChair::MoveCupSlow, 0.1f, true);
+	FVector targetLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -10;
 
-	curTime = 0;
+	coctail->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, coctail->GetActorLocation().Z));
+
+	if(coaster != nullptr)
+	{
+		coaster->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, coaster->GetActorLocation().Z));
+	}
 }
 
 void AChair::MoveCupSlow()
 {
-	curTime += 0.1;
+	FVector targetLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -10;
 
-	FVector startLoc = coctailBoxComp->GetComponentLocation();
-	FVector targetLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -20 + GetActorUpVector() * -2;
-	
-	auto alpha = FMath::Clamp(curTime / 0.5, 0.0f, 1.0f);
-	FVector newLoc = FMath::Lerp(startLoc, targetLoc, alpha);
+	coctail->SetActorLocation(targetLoc);
 
-	coctail->SetActorLocation(newLoc);
-
-	if(startLoc == targetLoc)
+	if(curTime > 1)
 	{
-		GetWorldTimerManager().ClearTimer(moveTimer);
+		GetWorldTimerManager().PauseTimer(moveTimer);
 	}
 }
 
