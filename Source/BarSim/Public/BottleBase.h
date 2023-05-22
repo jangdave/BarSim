@@ -52,4 +52,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Bottle")
 	TSubclassOf<class ADropBase> streamDrop;
+
+	UPROPERTY()
+	bool isDropSoundEnabled = false;
 };

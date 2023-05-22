@@ -57,6 +57,9 @@ public:
 	class AShaker* shaker;
 
 	bool isStrainerCasted = false;
+
+	UPROPERTY()
+	bool isDropSoundEnabled = false;
 	
 
 

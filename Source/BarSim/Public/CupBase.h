@@ -172,4 +172,7 @@ public:
 
 	UFUNCTION()
 	virtual void CupStop();
+
+	UPROPERTY()
+	bool isDropSoundEnabled = false;
 };

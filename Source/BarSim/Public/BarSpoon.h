@@ -48,4 +48,7 @@ public:
 
 	UFUNCTION()
 	void TurnSpoon(float Output);
+
+	UPROPERTY()
+	bool isDropSoundEnabled = false;
 };

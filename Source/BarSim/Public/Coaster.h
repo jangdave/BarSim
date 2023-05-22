@@ -29,4 +29,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category=Coaster)
 	class UStaticMeshComponent* staticMeshComp;
+
+	UPROPERTY()
+	bool isDropSoundEnabled = false;
 };
