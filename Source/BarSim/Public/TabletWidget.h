@@ -54,16 +54,52 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_OpenGinLimeVideo;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_OpenMartini;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_OpenMartiniVideo;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_OpenDaiquiri;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_OpenDaiquiriVideo;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_OpenOldPal;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_OpenOldPalVideo;
+	
 	// 테블릿 인터넷 창
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_BackMenu1;
 	
-	// 테블릿 진라임 레시피 & 영상
+	// 테블릿 칵테일 레시피 & 영상
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_BackRecipeMenu0;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_BackRecipeMenu1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackRecipeMenu2;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackRecipeMenu3;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackRecipeMenu4;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackRecipeMenu5;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackRecipeMenu6;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackRecipeMenu7;
 
 	UFUNCTION()
 	void OpenStore();
@@ -85,6 +121,24 @@ public:
 
 	UFUNCTION()
 	void OpenGinLimeVideo();
+
+	UFUNCTION()
+	void OpenMartini();
+
+	UFUNCTION()
+	void OpenMartiniVideo();
+
+	UFUNCTION()
+	void OpenDaiquiri();
+
+	UFUNCTION()
+	void OpenDaiquiriVideo();
+
+	UFUNCTION()
+	void OpenOldPal();
+
+	UFUNCTION()
+	void OpenOldPalVideo();
 
 	//------------------------------------------------------------------------------------- 키보드
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))

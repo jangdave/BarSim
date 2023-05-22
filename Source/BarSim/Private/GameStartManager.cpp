@@ -23,6 +23,7 @@ void AGameStartManager::BeginPlay()
 	Super::BeginPlay();
 
 	boxComp->OnComponentBeginOverlap.AddDynamic(this, &AGameStartManager::OnOverlap);
+
 }
 
 // Called every frame
@@ -37,7 +38,7 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	auto player = Cast<APlayerCharacter>(OtherActor);
 
-	if(player != nullptr && bCheckOnce != true)
+	if(player != nullptr)
 	{
 		auto gi = Cast<UBarGameInstance>(GetGameInstance());
 		
@@ -54,8 +55,6 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 			
 			gi->bCheckGameMode = true;
 		}
-
-		bCheckOnce = true;
 	}
 }
 

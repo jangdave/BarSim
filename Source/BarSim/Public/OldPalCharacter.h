@@ -32,9 +32,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	class UOldPalAnimInstance* oldPalAnim;
 
-	//UPROPERTY(EditAnywhere, Category=Widget)
-	//class UWidgetComponent* oldPalWidget;
+	UPROPERTY(EditAnywhere, Category=Widget)
+	class UWidgetComponent* oldPalWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USkeletalMeshComponent* bodyComp;
+
+	UPROPERTY()
+	class UOldPalOrderWidget* oldPal_UI;
 };

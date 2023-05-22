@@ -29,9 +29,6 @@ public:
 
 	UPROPERTY()
 	TArray<AChair*> aChairs;
-
-	UPROPERTY()
-	class ATablet* tablet;
 	
 	// 의자 비어있는지 bool 배열
 	UPROPERTY()
@@ -49,13 +46,17 @@ public:
 	UPROPERTY()
 	TArray<bool> bIsPlayer;
 
+	// 자리마다 오더 칵테일 저장 배열
 	UPROPERTY()
 	TArray<int32> orderCoctailIdx = {0, 0, 0, 0};
-	
+
+	// 앉아 있는지 확인
 	bool bCheckSit;
 
+	// 손님이 스폰되었는지 확인
 	bool bCheckSpawn;
-	
+
+	// 손님 명수
 	int32 checkCustomerNum;
 	
 	UPROPERTY()
@@ -66,6 +67,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class AOldPalCharacter> oldPalFactory;
+
+	UPROPERTY()
+	class ATablet* tablet;
 	
 	void CheckChairSit();
 	

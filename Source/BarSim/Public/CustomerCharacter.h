@@ -39,6 +39,9 @@ public:
 	// 위젯 컴포넌트에 할당될 위젯
 	UPROPERTY()
 	class UCustomerOrderWidget* order_UI;
+
+	UPROPERTY()
+	class ACupBase* cup;
 	
 	// 스폰시 메쉬 설정 함수
 	void SetMesh();
@@ -52,9 +55,6 @@ public:
 	// 캐릭터 컵 오버랩 바인드 함수
 	UFUNCTION()
 	void BindOverlap();
-
-	UPROPERTY()
-	class ACupBase* cup;
 
 	UFUNCTION()
 	void DetachCup();
