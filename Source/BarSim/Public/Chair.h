@@ -49,6 +49,9 @@ public:
 
 	UPROPERTY()
 	class ACupBase* coctail;
+
+	UPROPERTY()
+	class ACoaster* coaster;
 	
 	UPROPERTY(EditAnywhere)
 	bool bCheck;
@@ -118,6 +121,7 @@ public:
 
 	FTimerHandle moveTimer;
 
+	UPROPERTY()
 	float curTime;
 	
 	UPROPERTY()

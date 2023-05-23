@@ -99,12 +99,14 @@ void AChair::EndCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 
 void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	auto coaster = Cast<ACoaster>(OtherActor);
-	coctail = Cast<ACupBase>(OtherActor);
+	auto tempCoaster = Cast<ACoaster>(OtherActor);
+	auto tempCoctail = Cast<ACupBase>(OtherActor);
 
 	// 칵테일잔이 있고 코스터가 있고 한번만 오버랩 되었다면
-	if(coctail != nullptr && bOnceOverlap != true && bCheckCoaster != false && bCheckCustomer != false)
+	if(tempCoctail != nullptr && bOnceOverlap != true && bCheckCoaster != false && bCheckCustomer != false)
 	{
+		coctail = tempCoctail;
+		
 		bCheckCoctail = true;
 
 		// 컵 정보를 보내준다
@@ -112,23 +114,29 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 
 		bOnceOverlap = true;
 	}
-	else if(coaster != nullptr)
+	else if(tempCoaster != nullptr)
 	{
+		coaster = tempCoaster;
+		
 		bCheckCoaster = true;
 	}
 }
 
 void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	auto coaster = Cast<ACoaster>(OtherActor);
-	coctail = Cast<ACupBase>(OtherActor);
+	auto tempCoaster = Cast<ACoaster>(OtherActor);
+	auto tempCoctail = Cast<ACupBase>(OtherActor);
 
-	if(coctail != nullptr)
+	if(tempCoctail != nullptr)
 	{
+		coctail = nullptr;
+		
 		bCheckCoctail = false;
 	}
-	if(coaster != nullptr)
+	if(tempCoaster != nullptr)
 	{
+		coaster = nullptr;
+		
 		bCheckCoaster = false;	
 	}
 }
@@ -184,26 +192,9 @@ void AChair::UnSameOrder()
 // 컵 손님 앞으로 이동시키는 함수
 void AChair::MoveCup()
 {
-	GetWorldTimerManager().SetTimer(moveTimer, this, &AChair::MoveCupSlow, 0.1f, true);
+	FVector targetLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -10 + GetActorRightVector() * 5;
 
-	curTime = 0;
+	coctail->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, coctail->GetActorLocation().Z));
+
+	coaster->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, coaster->GetActorLocation().Z));
 }
-
-void AChair::MoveCupSlow()
-{
-	curTime += 0.1;
-
-	FVector startLoc = coctailBoxComp->GetComponentLocation();
-	FVector targetLoc = coctailBoxComp->GetComponentLocation() + GetActorForwardVector() * -20 + GetActorUpVector() * -2;
-	
-	auto alpha = FMath::Clamp(curTime / 0.5, 0.0f, 1.0f);
-	FVector newLoc = FMath::Lerp(startLoc, targetLoc, alpha);
-
-	coctail->SetActorLocation(newLoc);
-
-	if(startLoc == targetLoc)
-	{
-		GetWorldTimerManager().ClearTimer(moveTimer);
-	}
-}
-

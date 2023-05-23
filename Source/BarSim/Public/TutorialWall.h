@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TutorialLight.generated.h"
+#include "TutorialWall.generated.h"
 
 UCLASS()
-class BARSIM_API ATutorialLight : public AActor
+class BARSIM_API ATutorialWall : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATutorialLight();
+	ATutorialWall();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,15 +23,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = "Tutorial")
-	class USpotLightComponent* spotLight;
-
-	UPROPERTY(EditAnywhere, Category = "Tutorial")
-	float lightIntensity = 0;
+	UPROPERTY(EditAnywhere)
+	class UBoxComponent* boxComp;
 
 	UFUNCTION()
-	void TurnOnLight();
+	void OpenCollision();
 
 	UFUNCTION()
-	void TurnOffLight();
+	void CloseCollision();
 };

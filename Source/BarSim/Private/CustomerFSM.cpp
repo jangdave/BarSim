@@ -432,7 +432,7 @@ void UCustomerFSM::TickOrderJudge()
 
 void UCustomerFSM::TickHoldCup()
 {
-	if(bCheckPlayAnim != true && curTime > 1)
+	if(bCheckPlayAnim != true && curTime > 3)
 	{
 		bCheckPlayAnim = true;
 
