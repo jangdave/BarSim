@@ -82,7 +82,9 @@ void AShakerStrainer::AttachToShaker()
 			auto shakerLoc = shaker->cupComp->GetSocketTransform(FName("Strainer"));
 			this->SetActorLocationAndRotation(shakerLoc.GetLocation(), shakerLoc.GetRotation());
 			this->AttachToComponent(shaker->cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Strainer"));
-			//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
+
+			//튕겨나가지 않게 콜리전 프리셋 설정
+			meshComp->SetCollisionProfileName(FName("Overlapped"));
 			//shaker->DisableComponentsSimulatePhysics();
 			shaker->bStrainerOn=true;
 			isStrainerCasted=false;

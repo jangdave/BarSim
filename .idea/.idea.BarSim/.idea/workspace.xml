@@ -10,7 +10,12 @@
   <component name="ChangeListManager">
     <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/CobblerShaker_Strainer555.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/CobblerShaker_Strainer555.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/KoblerShaker_Lid555.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/KoblerShaker_Lid555.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerLid.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerLid.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,6 +231,8 @@
       <workItem from="1684821036025" duration="96000" />
       <workItem from="1684840567094" duration="836000" />
       <workItem from="1684842340510" duration="1505000" />
+      <workItem from="1684845085239" duration="3281000" />
+      <workItem from="1684867151817" duration="1237000" />
     </task>
     <servers />
   </component>

@@ -73,6 +73,10 @@ void ACupBase::Tick(float DeltaTime)
 		FRotator playerDirRot = playerDir.Rotation();
 		widgetComp->SetRelativeRotation(FRotator(0, playerDirRot.Yaw, 0));
 	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("player casting failed"));
+	}
 
 	//전체 부피 중 특정 액체가 차지하는 비율만큼 머테리얼 섞기
 	//오더 어레이와 컨텐츠 어레이가 있을때만
