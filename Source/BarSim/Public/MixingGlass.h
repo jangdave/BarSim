@@ -74,6 +74,9 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "MixingGlass")
 	float widgetTime2;
 
+	UPROPERTY(EditAnywhere, Category = "MixingGlass")
+	class USoundBase* stirSound;
+	
 	//UPROPERTY()
 	//bool isDropSoundEnabledM = false;
 };

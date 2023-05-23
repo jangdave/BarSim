@@ -14,6 +14,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 AMixingGlass::AMixingGlass(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -64,6 +65,7 @@ void AMixingGlass::Stir(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 
 	if(spoon)
 	{
+		UGameplayStatics::PlaySound2D(GetWorld(), stirSound, 1, 1, 0);
 		//cupComp->SetSimulatePhysics(false);
 		if(contents / cupSize >= 0.1f)
 		{
