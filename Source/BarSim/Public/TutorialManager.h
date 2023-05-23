@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TutorialCheckBox.h"
 #include "TutorialLight.h"
 #include "TutorialWall.h"
 #include "GameFramework/Actor.h"
@@ -30,10 +31,15 @@ public:
 
 	UPROPERTY()
 	TArray<ATutorialWall*> allWalls;
+
+	UPROPERTY()
+	TArray<ATutorialCheckBox*> allCheckBoxes;
 	
 	void GetRights();
 
 	void GetWalls();
+
+	void GetManagers();
 
 	void StartTutorial();
 

@@ -23,4 +23,39 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditDefaultsOnly)
+	class UBoxComponent* checkBoxComp;
+
+	UPROPERTY(EditDefaultsOnly)
+	class USceneComponent* playerStandComp;
+
+	UPROPERTY()
+	class ATutorialManager* tutorialManager;
+	
+	UFUNCTION()
+	void FirstStageStart();
+	
+	UFUNCTION()
+	void FirstStage();
+
+	UFUNCTION()
+	void SecondStageStart();
+
+	UFUNCTION()
+	void SecondStage();
+	
+	UFUNCTION()
+	void ThirdStageStart();
+
+	UFUNCTION()
+	void ThirdStage();
+
+	UFUNCTION()
+	void FourthStageStart();
+	
+	UFUNCTION()
+	void FourthStage();
+
+	UPROPERTY()
+	bool bCheckPlayerOnce;
 };

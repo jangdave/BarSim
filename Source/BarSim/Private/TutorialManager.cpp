@@ -22,6 +22,8 @@ void ATutorialManager::BeginPlay()
 
 	GetWalls();
 
+	GetManagers();
+	
 	StartTutorial();
 }
 
@@ -58,39 +60,58 @@ void ATutorialManager::GetWalls()
 	}
 }
 
+void ATutorialManager::GetManagers()
+{
+	for(TActorIterator<ATutorialCheckBox> checkBoxes(GetWorld()); checkBoxes; ++checkBoxes)
+	{
+		auto checkBox = *checkBoxes;
+
+		if(checkBox != nullptr)
+		{
+			allCheckBoxes.Add(checkBox);
+		}
+	}
+}
+
 void ATutorialManager::StartTutorial()
 {
 	allLights[0]->TurnOnLight();
+
+	allCheckBoxes[0]->FirstStageStart();
 }
 
 void ATutorialManager::ClearFirstStage()
 {
-	allLights[0]->TurnOffLight();
 	allLights[1]->TurnOnLight();
 	allWalls[0]->OpenCollision();
+
+	allCheckBoxes[0]->Destroy();
+	allCheckBoxes[1]->SecondStageStart();
 }
 
 void ATutorialManager::ClearSecondStage()
 {
-	allLights[1]->TurnOffLight();
 	allLights[2]->TurnOnLight();
-	allWalls[0]->CloseCollision();
 	allWalls[1]->OpenCollision();
+
+	allCheckBoxes[1]->Destroy();
+	allCheckBoxes[2]->ThirdStageStart();
 }
 
 void ATutorialManager::ClearThirdStage()
 {
-	allLights[2]->TurnOffLight();
 	allLights[3]->TurnOnLight();
-	allWalls[1]->CloseCollision();
 	allWalls[2]->OpenCollision();
+
+	allCheckBoxes[2]->Destroy();
+	allCheckBoxes[3]->FourthStageStart();
 }
 
 void ATutorialManager::ClearFourthStage()
 {
-	allLights[3]->TurnOffLight();
 	allLights[4]->TurnOnLight();
-	allWalls[2]->CloseCollision();
 	allWalls[3]->OpenCollision();
+
+	allCheckBoxes[3]->Destroy();
 }
 
