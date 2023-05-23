@@ -10,11 +10,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_MixingGlass1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_MixingGlass1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/StirSound/StirSound.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Sounds/StirSound/StirSound.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/MixingGlass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/MixingGlass.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealisticLeft.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealisticLeft.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +225,7 @@
       <workItem from="1684404723384" duration="602000" />
       <workItem from="1684724761695" duration="2033000" />
       <workItem from="1684821036025" duration="96000" />
-      <workItem from="1684823287790" duration="1557000" />
+      <workItem from="1684823287790" duration="18527000" />
     </task>
     <servers />
   </component>
