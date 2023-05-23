@@ -33,7 +33,9 @@ public:
 	class UWidgetInteractionComponent* widgetInteractionComp;
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionCompLeft;
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "PlayerSettings")
+	class UWidgetComponent* playerTextWidget;
+	
 	// Aims
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
 	class UMotionControllerComponent* RightAim;
@@ -202,5 +204,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* grabSound;
+
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* TongGrabSound;
+
 	
 };

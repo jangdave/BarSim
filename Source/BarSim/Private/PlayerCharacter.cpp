@@ -20,6 +20,7 @@
 #include "SlicedLime.h"
 #include "Strainer.h"
 #include "Tablet.h"
+#include "Components/WidgetComponent.h"
 #include "Components/WidgetInteractionComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -37,6 +38,9 @@ APlayerCharacter::APlayerCharacter()
 	widgetInteractionCompLeft->SetupAttachment(LeftMotionController);
 	widgetInteractionCompLeft->SetRelativeLocation(FVector(9.0641, 5.1962, -10.4361));
 	widgetInteractionCompLeft->SetRelativeRotation(FRotator(-52.5329, 21.7898, -2.4338));
+
+	playerTextWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("playerTextWidget"));
+	playerTextWidget->SetupAttachment(RootComponent);
 }
 
 
@@ -587,6 +591,7 @@ void APlayerCharacter::FireRight()
 			
 			if(GrabbedActorWithTongsRight==iceCube&&iceCube!=nullptr)
 			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
 				isGrabbingIceWithTongsRight=true;
 				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
@@ -594,6 +599,7 @@ void APlayerCharacter::FireRight()
 			}
 			else if(GrabbedActorWithTongsRight==slicedLime&&slicedLime!=nullptr)
 			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
 				isGrabbingLimeWithTongsRight=true;
 				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
@@ -601,6 +607,7 @@ void APlayerCharacter::FireRight()
 			}
 			else if(GrabbedActorWithTongsRight==halfSlicedLime&&halfSlicedLime!=nullptr)
 			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
 				isGrabbingLimeWithTongsRight=true;
 				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
@@ -710,8 +717,6 @@ void APlayerCharacter::FireLeft()
 				Closest = i;
 			}
 		}
-
-		// ice cube 잡기에 성공했다면
 		if (isGrabbingWithTongsLeft&&HitObj[Closest].GetComponent()->IsSimulatingPhysics() == true)
 		{
 			GrabbedActorWithTongsLeft=HitObj[Closest].GetComponent()->GetAttachmentRootActor();
@@ -721,6 +726,7 @@ void APlayerCharacter::FireLeft()
 			halfSlicedLimeL=Cast<AHalfSlicedLime>(GrabbedActorWithTongsLeft);
 			if(GrabbedActorWithTongsLeft==iceCubeL&&iceCubeL!=nullptr)
 			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
 				isGrabbingIceWithTongsLeft=true;
 				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -728,6 +734,7 @@ void APlayerCharacter::FireLeft()
 			}
 			else if(GrabbedActorWithTongsLeft==slicedLimeL&&slicedLimeL!=nullptr)
 			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
 				isGrabbingLimeWithTongsLeft=true;
 				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -735,6 +742,7 @@ void APlayerCharacter::FireLeft()
 			}
 			else if(GrabbedActorWithTongsLeft==halfSlicedLimeL&&halfSlicedLimeL!=nullptr)
 			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
 				isGrabbingLimeWithTongsLeft=true;
 				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);

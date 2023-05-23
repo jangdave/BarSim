@@ -9,11 +9,17 @@
   <component name="ChangeListManager">
     <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DoorSoundCollision/BP_DrawerSoundCollision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DoorSoundCollision/BP_DrawerSoundCollision.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/GrabSound/GrabSound2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/IceCubeDrop/IceCubeDrop.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Sounds/IceCubeDrop/IceCubeDrop.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/PourLiquid/PourLiquid.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Sounds/PourLiquid/PourLiquid.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Sounds/TabletDrop/TabletDrops.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawerBase/BarDrawer1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/DrawerBase/BarDrawer1.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/VRE/Input/VREInputMappingContext.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Input/VREInputMappingContext.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
     </list>
@@ -124,7 +130,7 @@
       <workItem from="1684716661203" duration="1506000" />
       <workItem from="1684729956250" duration="2557000" />
       <workItem from="1684748659018" duration="1288000" />
-      <workItem from="1684803076567" duration="2785000" />
+      <workItem from="1684803076567" duration="9510000" />
     </task>
     <servers />
   </component>
