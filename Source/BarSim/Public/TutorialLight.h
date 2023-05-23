@@ -33,5 +33,5 @@ public:
 	void TurnOnLight();
 
 	UFUNCTION()
-	void TurnOffLight();
+	void TurnWeakLight();
 };
