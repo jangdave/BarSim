@@ -33,7 +33,9 @@ public:
 	class UWidgetInteractionComponent* widgetInteractionComp;
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionCompLeft;
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "PlayerSettings")
+	class UWidgetComponent* playerTextWidget;
+	
 	// Aims
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
 	class UMotionControllerComponent* RightAim;
@@ -49,8 +51,9 @@ public:
 	class UInputAction* UseHeldObjectRight;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputAction* UseHeldObjectLeft;
-
-
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* ShowMenu;
+	
 	// Functions
 	UFUNCTION(BlueprintCallable)
 	void CheckGrabbedObjectRight();
@@ -64,6 +67,7 @@ public:
 	void FireLeft();
 	void FireReleasedRight();
 	void FireReleasedLeft();
+	void ShowMenuWidget();
 
 	// Grabbing Boolean
 	bool IsGrabbedLeft = false;
@@ -191,6 +195,8 @@ public:
 	class AHalfSlicedLime* halfSlicedLime;
 	UPROPERTY()
 	class AHalfSlicedLime* halfSlicedLimeL;
+	UPROPERTY()
+	class ABarGameMode* gameMode;
 
 	// Sounds
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
@@ -198,5 +204,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* grabSound;
+
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* TongGrabSound;
+
 	
 };
