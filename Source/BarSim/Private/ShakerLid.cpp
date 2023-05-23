@@ -64,7 +64,9 @@ void AShakerLid::AttachToShakerStrainer()
 			auto lidLoc = shakerStrainer->meshComp->GetSocketTransform(FName("Lid"));
 			this->SetActorLocationAndRotation(lidLoc.GetLocation(), lidLoc.GetRotation());
 			this->AttachToComponent(shakerStrainer->meshComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("Lid"));
-			//lid->meshComp->SetCollisionProfileName(FName("Overlapped"));
+
+			//튕겨나가지 않게 콜리전 프리셋 설정
+			meshComp->SetCollisionProfileName(FName("Overlapped"));
 			//shakerStrainer->DisableComponentsSimulatePhysics();
 			shakerStrainer->bLidOn=true;
 			isShakerStrainerCasted=false;
