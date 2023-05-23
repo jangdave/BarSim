@@ -2,6 +2,7 @@
 
 #include "PlayerCharacter.h"
 
+#include "BarGameMode.h"
 #include "BarSpoon.h"
 #include "BottleBase.h"
 #include "Coaster.h"
@@ -75,7 +76,8 @@ void APlayerCharacter::BeginPlay()
 	widgetInteractionCompLeft->bEnableHitTesting=true;
 	widgetInteractionCompLeft->bShowDebug=false;	
 	widgetInteractionCompLeft->InteractionDistance=40.0f;
-	
+
+	gameMode = Cast<ABarGameMode>(GetWorld()->GetAuthGameMode());
 }
 
 
@@ -126,6 +128,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		InputSystem->BindAction(UseHeldObjectRight, ETriggerEvent::Started, this, &APlayerCharacter::FireRight);
 		InputSystem->BindAction(UseHeldObjectLeft, ETriggerEvent::Completed, this, &APlayerCharacter::FireReleasedLeft);
 		InputSystem->BindAction(UseHeldObjectRight, ETriggerEvent::Completed, this, &APlayerCharacter::FireReleasedRight);
+		InputSystem->BindAction(ShowMenu, ETriggerEvent::Started, this, &APlayerCharacter::ShowMenuWidget);
+
 	}
 }
 
@@ -890,4 +894,10 @@ void APlayerCharacter::FireReleasedLeft()
 	{
 		return;
 	}
+}
+
+void APlayerCharacter::ShowMenuWidget()
+{
+	gameMode->SpawnMenu();
+	UE_LOG(LogTemp, Warning, TEXT("Spawn Menu"))
 }

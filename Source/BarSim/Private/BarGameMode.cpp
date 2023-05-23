@@ -30,8 +30,8 @@ void ABarGameMode::SpawnMenu()
 	
 	if(player != nullptr)
 	{
-		FRotator rot = FRotator::ZeroRotator;
-		FVector loc = player->GetActorLocation();
+		FRotator rot = player->GetActorRotation()+FRotator(0, 180, 0);
+		FVector loc = player->GetActorLocation()+(player->GetActorForwardVector()*100);
 		GetWorld()->SpawnActor<AMenuWidgetActor>(menuFactory, loc, rot);
 	}
 }
