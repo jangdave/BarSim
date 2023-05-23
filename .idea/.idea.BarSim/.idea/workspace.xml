@@ -8,7 +8,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="" />
+    <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -221,6 +223,7 @@
       <workItem from="1684404723384" duration="602000" />
       <workItem from="1684724761695" duration="2033000" />
       <workItem from="1684821036025" duration="96000" />
+      <workItem from="1684840567094" duration="836000" />
     </task>
     <servers />
   </component>
