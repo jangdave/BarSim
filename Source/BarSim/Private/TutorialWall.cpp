@@ -39,4 +39,3 @@ void ATutorialWall::CloseCollision()
 {
 	boxComp->SetCollisionResponseToAllChannels(ECR_Block);
 }
-

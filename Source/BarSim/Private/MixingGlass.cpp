@@ -148,14 +148,14 @@ void AMixingGlass::Tick(float DeltaSeconds)
 	}
 	
 
-	float dot = FVector::DotProduct(GetActorForwardVector(), upVector);
-	float dot2 = FVector::DotProduct(GetActorForwardVector(), FVector(-1,0,0));
+	float dot = FVector::DotProduct(GetActorUpVector(), upVector);
+	float dot2 = FVector::DotProduct(GetActorForwardVector(), upVector);
 	
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
 	float angle2 = FMath::RadiansToDegrees(FMath::Acos(dot2));
 
-	UE_LOG(LogTemp, Warning, TEXT("angle2 is %f"), angle2);
 	UE_LOG(LogTemp, Warning, TEXT("angle is %f"), angle);
+	UE_LOG(LogTemp, Warning, TEXT("angle2 is %f"), angle2);
 	
 	//float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
 	float streamWidth = 10.0f;
@@ -165,7 +165,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 		if(bStrainerOn)
 		{
 			//기울어진 각도가 90도 이상이라면
-		if(angle2 > (1.1 - contents / cupSize) * 100 && angle <= 90)
+		if(angle > (1.1 - contents / cupSize) * 100 && angle2 <= 90)
 		{
 			//물줄기 없을때에만 한 번 스폰 시키기
 			//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);

@@ -4,6 +4,7 @@
 #include "TutorialManager.h"
 #include "EngineUtils.h"
 #include "TutorialLight.h"
+#include "TutorialWidget.h"
 
 // Sets default values
 ATutorialManager::ATutorialManager()
@@ -75,22 +76,34 @@ void ATutorialManager::GetManagers()
 
 void ATutorialManager::StartTutorial()
 {
+	// 불키기
+	allLights[4]->TurnOnLight();
 	allLights[0]->TurnOnLight();
-
-	allCheckBoxes[0]->FirstStageStart();
+	
+	FTimerHandle timer;
+	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
+	{
+		// 1단계 시작하기
+		allCheckBoxes[0]->FirstStageStart();
+		allCheckBoxes[0]->StartWelcome();
+	}), 1.0f, false);
 }
 
 void ATutorialManager::ClearFirstStage()
 {
+	// 불키고 막힌곳 열기
 	allLights[1]->TurnOnLight();
 	allWalls[0]->OpenCollision();
 
+	// 2단계 시작하기
 	allCheckBoxes[0]->Destroy();
 	allCheckBoxes[1]->SecondStageStart();
+	allCheckBoxes[1]->StartWelcome();
 }
 
 void ATutorialManager::ClearSecondStage()
 {
+	// 불키고 막힌곳 열기
 	allLights[2]->TurnOnLight();
 	allWalls[1]->OpenCollision();
 
@@ -100,6 +113,7 @@ void ATutorialManager::ClearSecondStage()
 
 void ATutorialManager::ClearThirdStage()
 {
+	// 불키고 막힌곳 열기
 	allLights[3]->TurnOnLight();
 	allWalls[2]->OpenCollision();
 
@@ -109,7 +123,7 @@ void ATutorialManager::ClearThirdStage()
 
 void ATutorialManager::ClearFourthStage()
 {
-	allLights[4]->TurnOnLight();
+	// 막힌곳 열기
 	allWalls[3]->OpenCollision();
 
 	allCheckBoxes[3]->Destroy();

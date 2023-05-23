@@ -40,9 +40,9 @@ void ATutorialLight::TurnOnLight()
 	spotLight->SetIntensity(lightIntensity);
 }
 
-void ATutorialLight::TurnOffLight()
+void ATutorialLight::TurnWeakLight()
 {
-	lightIntensity = 0.0f;
+	lightIntensity = 50.0f;
 	spotLight->SetIntensity(lightIntensity);
 }
 
