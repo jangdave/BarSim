@@ -69,7 +69,4 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTimerHandle widgetDestroyHandle;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float widgetVisibilityTime = 1;
 };
