@@ -22,4 +22,13 @@ public:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_oldpal;
+
+	UFUNCTION()
+	void SetOldPalText(int32 idx);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartOldPal();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void EndOldPal();
 };
