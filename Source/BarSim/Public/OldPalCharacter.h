@@ -40,7 +40,4 @@ public:
 
 	UPROPERTY()
 	class UOldPalOrderWidget* oldPal_UI;
-
-	UPROPERTY(EditAnywhere, Category=Sound)
-	class USoundBase* enterSound;
 };

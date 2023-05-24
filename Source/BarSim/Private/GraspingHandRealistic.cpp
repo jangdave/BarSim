@@ -23,9 +23,6 @@
 
 AGraspingHandRealistic::AGraspingHandRealistic(const FObjectInitializer& ObjectInitializer):Super(ObjectInitializer)
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-	
 	actorInfoWidgetComp=CreateDefaultSubobject<UWidgetComponent>(TEXT("actorInfoWidgetComp"));
 	actorInfoWidgetComp->SetupAttachment(RootComponent);
 }
@@ -46,8 +43,6 @@ void AGraspingHandRealistic::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//auto widgetRot = actorInfoWidgetComp->GetComponentRotation();
-	//actorInfoWidgetComp->SetWorldRotation(FRotator(0, 0, 0));
 	
 }
 
@@ -91,111 +86,111 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	if(huchuTong)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("집게"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Bar Tongs"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);
+		}), 3.0f, false);
 	}
 	else if(barSpoon)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("바 스푼"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Bar Spoon"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(tablet)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("태블릿"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Tablet"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(coaster)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("코스터"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Coaster"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(strainer)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("스트레이너"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Strainer"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(shakerStrainer)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커 스트레이너"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Shaker Strainer"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(shakerLid)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커 뚜껑"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Shaker Lid"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(shaker)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Shaker"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(mixingGlass)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("믹싱 글래스"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Mixing Glass"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(iceCube)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("얼음"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Ice Cube"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(halfSlicedLime)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Half Sliced Lime"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}
+		}), 3.0f, false);	}
 	else if(slicedLime)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString("Sliced Lime"));
 		actorInfoWidgetComp->SetVisibility(true);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
 		{
 			actorInfoWidgetComp->SetVisibility(false);
-		}), widgetVisibilityTime, false);	}	
+		}), 3.0f, false);	}	
 	
 }
