@@ -43,7 +43,7 @@ APlayerCharacter::APlayerCharacter()
 	widgetInteractionCompLeft->SetRelativeRotation(FRotator(-52.5329, 21.7898, -2.4338));
 
 	playerTextWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("playerTextWidget"));
-	playerTextWidget->SetupAttachment(RootComponent);
+	playerTextWidget->SetupAttachment(VRReplicatedCamera);
 }
 
 
@@ -206,7 +206,8 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		// 잡은 대상이 Shaker이라면
 		else if(GrabbedActorRight==shaker&&shaker!=nullptr)
 		{
-		isGrabbingShakerRight=true;
+			isGrabbingShakerRight=true;
+			shaker->SetDenyGripping(true);
 		//UE_LOG(LogTemp, Warning, TEXT("Grabbed shaker on Right"))			
 		}
 		// 잡은 대상이 ShakerLid라면
@@ -230,6 +231,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		{
 			isGrabbingMixingGlassRight=true;
 			mixingGlass->VRGripInterfaceSettings.bSimulateOnDrop=true;
+			mixingGlass->SetDenyGripping(true);
 			//UE_LOG(LogTemp, Warning, TEXT("Grabbed Mixing Glass  on Right"))			
 		}
 		// 잡은 대상이 Glass Strainer 이라면
@@ -319,6 +321,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	{
 		isGrabbingShakerLidLeft=true;
 		shakerLidL->isLidAttachable=false;
+		shakerLidL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		shakerLidL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		//UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Lid on Left"))			
 	}
@@ -327,6 +330,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	{
 		isGrabbingShakerStrainerLeft=true;
 		shakerStrainerL->isStrainerAttachable = false;
+		shakerStrainerL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		shakerStrainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		//UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Strainer on Left"))			
 	}
@@ -435,6 +439,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	{
 		if(mixingGlass!=nullptr)
 		mixingGlass->isDropSoundEnabled=true;
+		mixingGlass->SetDenyGripping(false);
 		isGrabbingMixingGlassRight=false;
 	}
 	else if(isGrabbingStrainerRight)
@@ -450,6 +455,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	{
 		if(shaker!=nullptr)
 		shaker->isDropSoundEnabled=true;
+		shaker->SetDenyGripping(false);
 		isGrabbingShakerRight=false;		
 	}
 }
