@@ -58,26 +58,15 @@ void ACupBase::BeginPlay()
 	igCheckerComp->OnComponentEndOverlap.AddDynamic(this, &ACupBase::ExtractIce);
 
 	//player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
+	//player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 }
 
 // Called every frame
 void ACupBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	if(player)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("widget rotate"));
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Widget Rotate"));
-		FVector playerDir = player->GetActorLocation() - GetActorLocation();
-		FRotator playerDirRot = playerDir.Rotation();
-		widgetComp->SetRelativeRotation(FRotator(0, playerDirRot.Yaw, 0));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("player casting failed"));
-	}
+
+	WidgetRotate();
 
 	//전체 부피 중 특정 액체가 차지하는 비율만큼 머테리얼 섞기
 	//오더 어레이와 컨텐츠 어레이가 있을때만
@@ -559,5 +548,21 @@ void ACupBase::CupStop()
 {
 	auto cupRotYaw = this->GetActorRotation().Yaw;
 	this->SetActorRelativeRotation(FRotator(0, cupRotYaw, 0));
+}
+
+void ACupBase::WidgetRotate()
+{
+	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
+	if(player)
+	{
+		//FVector playerDir = player->GetActorLocation() - GetActorLocation();
+		FVector playerDir = player->VRReplicatedCamera->GetComponentLocation() - GetActorLocation();
+		FRotator playerDirRot = playerDir.Rotation();
+		widgetComp->SetWorldRotation(FRotator(playerDirRot));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("player casting failed"));
+	}
 }
 
