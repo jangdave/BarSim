@@ -6,6 +6,7 @@
 #include "OldPalFSM.h"
 #include "OldPalOrderWidget.h"
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AOldPalCharacter::AOldPalCharacter()
@@ -38,6 +39,8 @@ void AOldPalCharacter::BeginPlay()
 	oldPalAnim = Cast<UOldPalAnimInstance>(bodyComp->GetAnimInstance());
 
 	oldPal_UI = Cast<UOldPalOrderWidget>(oldPalWidget->GetUserWidgetObject());
+	
+	UGameplayStatics::PlaySoundAtLocation(GetWorld(), enterSound, GetActorLocation(), GetActorRotation());
 }
 
 // Called every frame
