@@ -14,6 +14,7 @@
 #include "HalfSlicedLimeVat.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
+#include "IceCubeVat.h"
 #include "MixingGlass.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
@@ -561,6 +562,7 @@ void APlayerCharacter::FireRight()
 		{
 			halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(VatHitObj[i].GetActor());
 			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[i].GetActor());
+			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[i].GetActor());
 			if(halfSlicedLimeVat)
 			{
 				FActorSpawnParameters param;
@@ -576,6 +578,14 @@ void APlayerCharacter::FireRight()
 				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("LimeSocket"));
 				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("LimeSocket"));
 				GetWorld()->SpawnActor<ASlicedLime>(slicedLimeFac, socketLoc, socketRot, param);
+			}
+			else if(iceCubeVat)
+			{
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
+				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("TongGrabSizeSocket"));
+				GetWorld()->SpawnActor<AIceCube>(iceCubeFac, socketLoc, socketRot, param);
 			}
 		}
 		// 집게에 집는 대상 오브젝트가 오버랩되었는지 판단하는 OverlapMulti

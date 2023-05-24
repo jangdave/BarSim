@@ -201,6 +201,8 @@ public:
 	class AHalfSlicedLimeVat* halfSlicedLimeVat;
 	UPROPERTY()
 	class ASlicedLimeVat* slicedLimeVat;
+	UPROPERTY()
+	class AIceCubeVat* iceCubeVat;
 	
 	// Sounds
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
