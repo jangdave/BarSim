@@ -58,21 +58,22 @@ void ACupBase::BeginPlay()
 	igCheckerComp->OnComponentEndOverlap.AddDynamic(this, &ACupBase::ExtractIce);
 
 	//player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
+	//player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 }
 
 // Called every frame
 void ACupBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 	
 	if(player)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("widget rotate"));
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Widget Rotate"));
-		FVector playerDir = player->GetActorLocation() - GetActorLocation();
+		//UE_LOG(LogTemp, Warning, TEXT("widget rotate"));
+		FVector playerDir = player->VRReplicatedCamera->GetComponentLocation() - GetActorLocation();
 		FRotator playerDirRot = playerDir.Rotation();
-		widgetComp->SetRelativeRotation(FRotator(0, playerDirRot.Yaw, 0));
+		widgetComp->SetWorldRotation(playerDirRot);
 	}
 	else
 	{
