@@ -143,31 +143,36 @@ void ATutorialCheckBox::SecondStage()
 			tutorial_UI->SetSecond();
 		}
 
-		auto mixing = Cast<AMixingGlass>(hitInfo.GetActor());
-
-		if(mixing != nullptr)
+		if(hitInfo.GetActor()->GetActorNameOrLabel() == "BP_MixingGlass1")
 		{
-			// 술의 양 체크
-			if(mixing->contents >= 2 && tutorial_UI->checkSecond1->GetCheckedState() != ECheckBoxState::Checked)
-			{
-				tutorial_UI->SetSecond1Check();
-			}
+			auto mixing = Cast<AMixingGlass>(hitInfo.GetActor());
 
-			// 스터 체크
-			if(mixing->bStirred != false && tutorial_UI->checkSecond2->GetCheckedState() != ECheckBoxState::Checked)
+			if(mixing != nullptr)
 			{
-				tutorial_UI->SetSecond2Check();
+				// 술의 양 체크
+				if(mixing->contents >= 2 && tutorial_UI->checkSecond1->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetSecond1Check();
+				}
+
+				// 스터 체크
+				if(mixing->bStirred != false && tutorial_UI->checkSecond2->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetSecond2Check();
+				}
 			}
 		}
-		
-		auto cup = Cast<ACupBase>(hitInfo.GetActor());
-
-		if(cup != nullptr && cup->GetActorNameOrLabel() == "BP_CupBase2")
+		else
 		{
-			// 술의 양 체크
-			if(cup->contents >= 2 && tutorial_UI->checkSecond3->GetCheckedState() != ECheckBoxState::Checked)
+			auto cup = Cast<ACupBase>(hitInfo.GetActor());
+
+			if(cup != nullptr)
 			{
-				tutorial_UI->SetSecond3Check();
+				// 술의 양 체크
+				if(cup->contents >= 2 && tutorial_UI->checkSecond3->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetSecond3Check();
+				}
 			}
 		}
 	}
@@ -247,16 +252,12 @@ void ATutorialCheckBox::FourthStage()
 	{
 		auto player = Cast<APlayerCharacter>(hitInfo.GetActor());
 
-		if(player != nullptr)
-		{
-			tutorialManager->ClearFourthStage();
-		}
-		
 		if(player != nullptr && bCheckPlayerOnce != true)
 		{
 			bCheckPlayerOnce = true;
 
 			// 위젯 플레이
+			tutorial_UI->SetFourth();
 		}
 		
 		auto cup = Cast<ACupBase>(hitInfo.GetActor());
