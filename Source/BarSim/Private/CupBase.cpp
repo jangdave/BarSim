@@ -57,7 +57,8 @@ void ACupBase::BeginPlay()
 	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
 	igCheckerComp->OnComponentEndOverlap.AddDynamic(this, &ACupBase::ExtractIce);
 
-	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	//player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 }
 
 // Called every frame
