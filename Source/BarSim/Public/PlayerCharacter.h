@@ -197,7 +197,11 @@ public:
 	class AHalfSlicedLime* halfSlicedLimeL;
 	UPROPERTY()
 	class ABarGameMode* gameMode;
-
+	UPROPERTY()
+	class AHalfSlicedLimeVat* halfSlicedLimeVat;
+	UPROPERTY()
+	class ASlicedLimeVat* slicedLimeVat;
+	
 	// Sounds
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* sinkSound;
@@ -208,5 +212,15 @@ public:
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* TongGrabSound;
 
+	// Lime BP
+	UPROPERTY(EditAnywhere, Category="Factory")
+	TSubclassOf<class AHalfSlicedLime> halfSlicedLimeFac;
+
+	UPROPERTY(EditAnywhere, Category="Factory")
+	TSubclassOf<class ASlicedLime> slicedLimeFac;
+
+	// Ice Cube BP
+	UPROPERTY(EditAnywhere, Category="Factory")
+	TSubclassOf<class AIceCube> iceCubeFac;
 	
 };

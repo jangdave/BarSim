@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "GripMotionControllerComponent.h"
 #include "HalfSlicedLime.h"
+#include "HalfSlicedLimeVat.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
 #include "MixingGlass.h"
@@ -18,6 +19,7 @@
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
 #include "SlicedLime.h"
+#include "SlicedLimeVat.h"
 #include "Strainer.h"
 #include "Tablet.h"
 #include "Components/WidgetComponent.h"
@@ -541,14 +543,47 @@ void APlayerCharacter::FireRight()
 	// 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight)
 	{
+		// 집게를 든채로 Vat에서 Trigger 되었는지 판단하는 OverlapMulti
+		// 중심점
+		FVector CenterTong = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
+		// 충돌체크(구충돌)
+		// 충돌한 물체를 기억할 배열
+		TArray<FOverlapResult> VatHitObj;
+		FCollisionQueryParams params;
+		params.AddIgnoredActor(this);
+		params.AddIgnoredActor(huchuTong);
+		bool bHitVat = GetWorld()->OverlapMultiByChannel(VatHitObj, CenterTong, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(3), params);
+		if (bHitVat == false)
+		{
+			return;
+		}		
+		for (int i = 0; i < VatHitObj.Num(); ++i)
+		{
+			halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(VatHitObj[i].GetActor());
+			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[i].GetActor());
+			if(halfSlicedLimeVat)
+			{
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("LimeSocket"));
+				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("LimeSocket"));
+				GetWorld()->SpawnActor<AHalfSlicedLime>(halfSlicedLimeFac, socketLoc, socketRot, param);
+			}
+			else if(slicedLimeVat)
+			{
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("LimeSocket"));
+				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("LimeSocket"));
+				GetWorld()->SpawnActor<ASlicedLime>(slicedLimeFac, socketLoc, socketRot, param);
+			}
+		}
+		// 집게에 집는 대상 오브젝트가 오버랩되었는지 판단하는 OverlapMulti
 		// 중심점
 		FVector Center = huchuTong->tongRight->GetSocketLocation(FName("TongAttach"));
 		// 충돌체크(구충돌)
 		// 충돌한 물체를 기억할 배열
 		TArray<FOverlapResult> HitObj;
-		FCollisionQueryParams params;
-		params.AddIgnoredActor(this);
-		params.AddIgnoredActor(huchuTong);
 		bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(TongsGrabRange), params);
 		if (bHit == false)
 		{
