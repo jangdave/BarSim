@@ -97,26 +97,21 @@ void UCustomerFSM::SetOrderCoctail()
 	if(owner != nullptr)
 	{
 		// 랜덤으로 메뉴 선정
-		int32 result = FMath::RandRange(1,8);
+		int32 result = FMath::RandRange(1,9);
 			
 		if(result > 6)
 		{
 			// 진라임
-			orderIdx = 3;
+			orderIdx = 1;
 		}
-		else if(result <= 6 && result > 4)
+		else if(result <= 6 && result > 3)
 		{
 			// 다이키리
-			orderIdx = 3;
+			orderIdx = 2;
 		}
-		else if(result <= 4 && result > 2)
+		else if(result <= 3)
 		{
 			// 마타니
-			orderIdx = 3;
-		}
-		else if(result <= 2)
-		{
-			// 올드팔
 			orderIdx = 3;
 		}
 	}

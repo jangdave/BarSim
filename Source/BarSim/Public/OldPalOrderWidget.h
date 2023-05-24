@@ -16,5 +16,10 @@ class BARSIM_API UOldPalOrderWidget : public UUserWidget
 
 public:
 	virtual void NativeConstruct() override;
-	
+
+	UPROPERTY()
+	TArray<FString> oldpalScript1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_oldpal;
 };
