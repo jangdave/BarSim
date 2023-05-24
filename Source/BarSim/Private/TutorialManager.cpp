@@ -117,8 +117,10 @@ void ATutorialManager::ClearThirdStage()
 	allLights[3]->TurnOnLight();
 	allWalls[2]->OpenCollision();
 
+	// 4단계 시작하기
 	allCheckBoxes[2]->Destroy();
 	allCheckBoxes[3]->FourthStageStart();
+	allCheckBoxes[3]->StartWelcome();
 }
 
 void ATutorialManager::ClearFourthStage()
@@ -126,6 +128,7 @@ void ATutorialManager::ClearFourthStage()
 	// 막힌곳 열기
 	allWalls[3]->OpenCollision();
 
+	// 마무리
 	allCheckBoxes[3]->Destroy();
 }
 
