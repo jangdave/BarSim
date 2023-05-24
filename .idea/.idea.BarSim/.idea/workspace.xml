@@ -11,8 +11,12 @@
     <list default="true" id="d29332ce-6dd9-498e-ab0b-6965915a912e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/DryVermouth2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/DryVermouth2.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/StartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/StartMap.umap" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarGameMode.uasset" afterDir="false" />
+>>>>>>> parent of c4cde05 (230524 컵 위젯 수정)
 =======
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_BarGameMode.uasset" afterDir="false" />
 >>>>>>> parent of c4cde05 (230524 컵 위젯 수정)
@@ -235,8 +239,11 @@
       <workItem from="1684892630614" duration="1293000" />
       <workItem from="1684904546880" duration="3698000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1684919297612" duration="2074000" />
       <workItem from="1684929555013" duration="2423000" />
+=======
+>>>>>>> parent of c4cde05 (230524 컵 위젯 수정)
 =======
 >>>>>>> parent of c4cde05 (230524 컵 위젯 수정)
     </task>
