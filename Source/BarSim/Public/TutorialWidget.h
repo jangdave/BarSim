@@ -37,6 +37,9 @@ public:
 
 	UFUNCTION()
 	void SetCheckCup();
+
+	UFUNCTION()
+	void SetCheckTablet();
 	
 	//-----------------------------------------------------------------first
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
@@ -79,26 +82,59 @@ public:
 	UFUNCTION()
 	void SetSecond1Check();
 	
-	UFUNCTION()
-	void SetSecond1UnCheck();
+	//UFUNCTION()
+	//void SetSecond1UnCheck();
 
 	UFUNCTION()
 	void SetSecond2Check();
 	
-	UFUNCTION()
-	void SetSecond2UnCheck();
+	//UFUNCTION()
+	//void SetSecond2UnCheck();
 
 	UFUNCTION()
 	void SetSecond3Check();
 
-	UFUNCTION()
-	void SetSecond3UnCheck();
+	//UFUNCTION()
+	//void SetSecond3UnCheck();
 	
 	//-----------------------------------------------------------------third
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UCheckBox* checkThird1;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UCheckBox* checkThird2;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UCheckBox* checkThird3;
+
+	UFUNCTION()
+	void SetThird1Check();
+
+	UFUNCTION()
+	void SetThird2Check();
+
+	UFUNCTION()
+	void SetThird3Check();
 
 	//-----------------------------------------------------------------fourth
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UCheckBox* checkFourth1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UCheckBox* checkFourth2;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UCheckBox* checkFourth3;
+
+	UFUNCTION()
+	void SetFourth1Check();
+
+	UFUNCTION()
+	void SetFourth2Check();
+
+	UFUNCTION()
+	void SetFourth3Check();
 
 
 
