@@ -175,7 +175,4 @@ public:
 
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
-
-	UFUNCTION()
-	virtual void WidgetRotate();
 };
