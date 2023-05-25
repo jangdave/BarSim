@@ -16,6 +16,7 @@
 #include "IceCube.h"
 #include "IceCubeVat.h"
 #include "MixingGlass.h"
+#include "PlayerDialogWidget.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
@@ -85,6 +86,8 @@ void APlayerCharacter::BeginPlay()
 	widgetInteractionCompLeft->InteractionDistance=40.0f;
 
 	gameMode = Cast<ABarGameMode>(GetWorld()->GetAuthGameMode());
+
+	playerText_UI = Cast<UPlayerDialogWidget>(playerTextWidget->GetUserWidgetObject());
 }
 
 

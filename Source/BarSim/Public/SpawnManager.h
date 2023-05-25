@@ -56,6 +56,9 @@ public:
 	// 손님이 스폰되었는지 확인
 	bool bCheckSpawn;
 
+	// 스폰 여부
+	bool bSpawnOld;
+	
 	// 손님 명수
 	int32 checkCustomerNum;
 	

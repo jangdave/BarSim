@@ -18,6 +18,9 @@ public:
 	virtual void NativeConstruct() override;
 
 	UPROPERTY()
+	int32 choiceCount;
+
+	UPROPERTY()
 	TArray<FString> playerScript1;
 
 	UPROPERTY()
@@ -25,7 +28,7 @@ public:
 	
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UWidgetSwitcher* WidgetSwitcher_Player;
-
+	
 	//------------------------------------------------------------------0페이지
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_Choice;
@@ -60,4 +63,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void EndPlayer();
+
+	UFUNCTION()
+	void LeftAnswer();
+
+	UFUNCTION()
+	void RightAnswer();
 };

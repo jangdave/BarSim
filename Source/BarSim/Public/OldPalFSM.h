@@ -12,6 +12,7 @@ enum class EOldPalState : uint8
 	IDLE,
 	READYLEAN,
 	TALK,
+	CHOICE,
 	READYMOVE,
 	MOVE,
 	READYSIT,
@@ -78,6 +79,9 @@ public:
 
 	UPROPERTY()
 	class AStandPoint* stand;
+
+	UPROPERTY()
+	class APlayerCharacter* player;
 	
 	class AAIController* ai;
 
@@ -99,6 +103,21 @@ public:
 
 	// 주문 실패시 기회 소모 여부
 	bool bCheckOrder;
+
+	// 시간 초기화 체크 여부
+	bool bCount;
+	
+	// 올드팔 대사 여부 체크
+	UPROPERTY()
+	bool bOldPalTalk;
+
+	// 플레이어 대사 여부 체크
+	UPROPERTY()
+	bool bPlayerTalk;
+
+	// 선택지
+	UPROPERTY()
+	int32 choiceCount;
 	
 	// 주문 칵테일 정하기
 	void SetOrderCoctail();
@@ -139,7 +158,9 @@ private:
 	void TickReadyLean();
 
 	void TickTalk();
-
+	
+	void TickChoice();
+	
 	void TickReadyMove();
 	
 	void TickMove();

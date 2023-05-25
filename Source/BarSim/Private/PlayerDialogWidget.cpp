@@ -2,14 +2,18 @@
 
 
 #include "PlayerDialogWidget.h"
+#include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
 
 void UPlayerDialogWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
-
+	
 	SetVisibility(ESlateVisibility::Hidden);
+		
+	btn_Left->OnClicked.AddDynamic(this, &UPlayerDialogWidget::LeftAnswer);
+	btn_Right->OnClicked.AddDynamic(this, &UPlayerDialogWidget::RightAnswer);
 	
 	playerScript1.Emplace(FString::Printf(TEXT("손님 오늘은 내부 사정으로 영업하지 않습니다"))); // 0
 	//---------------------------------------------------------------------------선택
@@ -46,4 +50,14 @@ void UPlayerDialogWidget::SetChoice1()
 	text_Choice->SetText(FText::FromString(playerChoice1[0]));
 	text_Left->SetText(FText::FromString(playerChoice1[1]));
 	text_Right->SetText(FText::FromString(playerChoice1[2]));
+}
+
+void UPlayerDialogWidget::LeftAnswer()
+{
+	choiceCount = 1;
+}
+
+void UPlayerDialogWidget::RightAnswer()
+{
+	choiceCount = 2;
 }
