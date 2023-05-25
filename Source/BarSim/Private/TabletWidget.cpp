@@ -58,8 +58,7 @@ void UTabletWidget::OpenStore()
 
 void UTabletWidget::CloseStore()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
-	//spawnmg->SpawnOldPal();
+	spawnmg->SpawnOldPal();
 }
 
 void UTabletWidget::OpenInternet()

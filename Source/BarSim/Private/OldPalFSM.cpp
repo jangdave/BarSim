@@ -8,6 +8,7 @@
 #include "OldPalCharacter.h"
 #include "SpawnManager.h"
 #include "StandPoint.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -60,7 +61,7 @@ void UOldPalFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 	// 대기시간 체크를 위한 시간 적립
 	curTime += GetWorld()->GetDeltaSeconds();
 
-	if(curTime > 30)
+	if(curTime > 20)
 	{
 		curTime = 0;
 	}
@@ -97,12 +98,16 @@ void UOldPalFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 // 손님 의자에 attach
 void UOldPalFSM::AttachCustomer()
 {
+	owner->GetCapsuleComponent()->SetEnableGravity(false);
+	
 	owner->AttachToComponent(spawnManager->aChairs[idx]->sitComp, FAttachmentTransformRules::SnapToTargetIncludingScale);
 }
 
 // 손님 의자에 detach
 void UOldPalFSM::DetachCustomer()
 {
+	owner->GetCapsuleComponent()->SetEnableGravity(true);
+	
 	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitComp, FDetachmentTransformRules::KeepWorldTransform);
 }
 
@@ -111,12 +116,7 @@ void UOldPalFSM::SetOrderCoctail()
 {
 	if(gi != nullptr)
 	{
-		if(gi->checkDayCount == 1)
-		{
-			// 진라임
-			orderIdx = 1;
-		}
-		else if(gi->checkDayCount == 3)
+		if(gi->checkDayCount == 3)
 		{
 			// 올드팔
 			orderIdx = 4;
