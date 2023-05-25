@@ -26,10 +26,6 @@ AGraspingHandRealisticLeft::AGraspingHandRealisticLeft(const FObjectInitializer&
 {
 	actorInfoWidgetComp=CreateDefaultSubobject<UWidgetComponent>(TEXT("actorInfoWidgetComp"));
 	actorInfoWidgetComp->SetupAttachment(RootComponent);
-
-	boxComp=CreateDefaultSubobject<UBoxComponent>(TEXT("boxComp"));
-	boxComp->SetupAttachment(RootComponent);
-	boxComp->SetGenerateOverlapEvents(true);
 }
 
 void AGraspingHandRealisticLeft::BeginPlay()
