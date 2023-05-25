@@ -9,13 +9,17 @@
 #include "Coaster.h"
 #include "CupBase.h"
 #include "HalfSlicedLime.h"
+#include "HalfSlicedLimeVat.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
+#include "IceCubeVat.h"
+#include "MartiniCup.h"
 #include "MixingGlass.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
 #include "SlicedLime.h"
+#include "SlicedLimeVat.h"
 #include "Strainer.h"
 #include "Tablet.h"
 #include "Components/BoxComponent.h"
@@ -83,7 +87,12 @@ void AGraspingHandRealisticLeft::OnOverlap(UPrimitiveComponent* OverlappedCompon
 	iceCube=Cast<AIceCube>(OtherActor);
 	slicedLime=Cast<ASlicedLime>(OtherActor);
 	halfSlicedLime=Cast<AHalfSlicedLime>(OtherActor);
-
+	cup=Cast<ACupBase>(OtherActor);
+	slicedLimeVat=Cast<ASlicedLimeVat>(OtherActor);
+	halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(OtherActor);
+	iceCubeVat=Cast<AIceCubeVat>(OtherActor);
+	martiniCup=Cast<AMartiniCup>(OtherActor);
+	
 	if(huchuTong)
 	{
 		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
@@ -193,8 +202,52 @@ void AGraspingHandRealisticLeft::OnOverlap(UPrimitiveComponent* OverlappedCompon
 		{
 			actorInfoWidgetComp->SetVisibility(false);
 		}), 1, false);	}	
-	
-	
+	else if(slicedLimeVat)
+	{
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임 컨테이너"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidgetComp->SetVisibility(false);
+		}), 1, false);	}
+	else if(halfSlicedLimeVat)
+	{
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임 컨테이너"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidgetComp->SetVisibility(false);
+		}), 1, false);	}
+	else if(iceCubeVat)
+	{
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("아이스 컨테이너"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidgetComp->SetVisibility(false);
+		}), 1, false);	}
+	else if(martiniCup)
+	{
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("마티니 컵"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidgetComp->SetVisibility(false);
+		}), 1, false);	}
+	else if(cup)
+	{
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("글래스 컵"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidgetComp->SetVisibility(false);
+		}), 1, false);	}
+
 	
 }
 
