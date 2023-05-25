@@ -43,7 +43,7 @@ APlayerCharacter::APlayerCharacter()
 	widgetInteractionCompLeft->SetRelativeRotation(FRotator(-52.5329, 21.7898, -2.4338));
 
 	playerTextWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("playerTextWidget"));
-	playerTextWidget->SetupAttachment(RootComponent);
+	playerTextWidget->SetupAttachment(VRReplicatedCamera);
 }
 
 
