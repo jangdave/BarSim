@@ -100,7 +100,7 @@ void UOldPalFSM::AttachCustomer()
 {
 	owner->GetCapsuleComponent()->SetEnableGravity(false);
 	
-	owner->AttachToComponent(spawnManager->aChairs[idx]->sitComp, FAttachmentTransformRules::SnapToTargetIncludingScale);
+	owner->AttachToComponent(spawnManager->aChairs[idx]->sitComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 }
 
 // 손님 의자에 detach
