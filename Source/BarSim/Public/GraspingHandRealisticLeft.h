@@ -67,6 +67,14 @@ public:
 	class ASlicedLime* slicedLime;
 	UPROPERTY()
 	class AHalfSlicedLime* halfSlicedLime;
+	UPROPERTY()
+	class AHalfSlicedLimeVat* halfSlicedLimeVat;
+	UPROPERTY()
+	class ASlicedLimeVat* slicedLimeVat;
+	UPROPERTY()
+	class AIceCubeVat* iceCubeVat;
+	UPROPERTY()
+	class AMartiniCup* martiniCup;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTimerHandle widgetDestroyHandle;

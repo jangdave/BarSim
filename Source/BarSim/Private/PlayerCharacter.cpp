@@ -556,7 +556,7 @@ void APlayerCharacter::FireRight()
 		FCollisionQueryParams params;
 		params.AddIgnoredActor(this);
 		params.AddIgnoredActor(huchuTong);
-		bool bHitVat = GetWorld()->OverlapMultiByChannel(VatHitObj, CenterTong, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(3), params);
+		bool bHitVat = GetWorld()->OverlapMultiByChannel(VatHitObj, CenterTong, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(5), params);
 		if (bHitVat == false)
 		{
 			return;
@@ -734,7 +734,7 @@ void APlayerCharacter::FireLeft()
 		FCollisionQueryParams params;
 		params.AddIgnoredActor(this);
 		params.AddIgnoredActor(huchuTongL);
-		bool bHitVat = GetWorld()->OverlapMultiByChannel(VatHitObj, CenterTong, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(3), params);
+		bool bHitVat = GetWorld()->OverlapMultiByChannel(VatHitObj, CenterTong, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(5), params);
 		if (bHitVat == false)
 		{
 			return;
