@@ -30,6 +30,7 @@ void ABottleBase::BeginPlay()
 {
 	Super::BeginPlay();
 	remains = maxContents;
+	SetActorTickEnabled(false);
 }
 
 // Called every frame

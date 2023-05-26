@@ -61,6 +61,7 @@ void ACupBase::BeginPlay()
 	//player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 	FTimerHandle castTimer;
 	GetWorldTimerManager().SetTimer(castTimer, this, &ACupBase::PlayerCast, 2.0f, false);
+	SetActorTickEnabled(false);
 }
 
 // Called every frame

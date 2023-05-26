@@ -177,6 +177,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight == bottle&&bottle!=nullptr)
 		{
 			isGrabbingBottleRight = true;
+			bottle->SetActorTickEnabled(true);
 			//UE_LOG(LogTemp, Warning, TEXT("Grabbed bottle on Right"))
 		}
 		// 잡은 대상이 Tablet 이라면
@@ -197,6 +198,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
 		{
 			isGrabbingCupRight=true;
+			cup->SetActorTickEnabled(true);
 			cup->isCupTickActivated=true;
 			//UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Right"))			
 		}
@@ -282,6 +284,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft == bottleL&&bottleL!=nullptr)
 	{
 		isGrabbingBottleLeft = true;
+		bottleL->SetActorTickEnabled(true);
 		//UE_LOG(LogTemp, Warning, TEXT("Grabbed bottle on Left"))
 	}
 	// 잡은 대상이 Tablet 이라면
@@ -302,6 +305,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 	{
 		isGrabbingCupLeft=true;
+		cupL->SetActorTickEnabled(true);
 		cupL->isCupTickActivated=true;
 		//UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Left"))			
 	}
