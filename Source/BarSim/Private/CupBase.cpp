@@ -59,14 +59,14 @@ void ACupBase::BeginPlay()
 
 	//player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	//player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
+	FTimerHandle castTimer;
+	GetWorldTimerManager().SetTimer(castTimer, this, &ACupBase::PlayerCast, 2.0f, false);
 }
 
 // Called every frame
 void ACupBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 	
 	if(player)
 	{
@@ -560,5 +560,10 @@ void ACupBase::CupStop()
 {
 	auto cupRotYaw = this->GetActorRotation().Yaw;
 	this->SetActorRelativeRotation(FRotator(0, cupRotYaw, 0));
+}
+
+void ACupBase::PlayerCast()
+{
+	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 }
 
