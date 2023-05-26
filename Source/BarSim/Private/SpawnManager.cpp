@@ -140,17 +140,21 @@ void ASpawnManager::SpawnOldPal()
 
 	if(gi != nullptr)
 	{
-		if(gi->checkDayCount == 1)
+		if(gi->checkDayCount == 1 && bSpawnOld != true)
 		{
 			GetWorld()->SpawnActor<AOldPalCharacter>(oldPalFactory, GetActorLocation(), GetActorRotation());
+
+			bSpawnOld = true;
 		}
 		else if(gi->checkDayCount == 2)
 		{
 			UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
 		}
-		else if(gi->checkDayCount == 3)
+		else if(gi->checkDayCount == 3 && bSpawnOld != true)
 		{
 			GetWorld()->SpawnActor<AOldPalCharacter>(oldPalFactory, GetActorLocation(), GetActorRotation());
+
+			bSpawnOld = true;
 		}
 	}
 }

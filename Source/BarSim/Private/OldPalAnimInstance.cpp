@@ -49,7 +49,7 @@ void UOldPalAnimInstance::OnLeanAnim(float sectionTime)
 
 void UOldPalAnimInstance::EndTalk()
 {
-	OnLeanAnim(0);
+	owner->oldPalFSM->SetState(EOldPalState::CHOICE);
 }
 
 void UOldPalAnimInstance::EndUnLean()

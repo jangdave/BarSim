@@ -35,6 +35,8 @@ public:
 	class UWidgetInteractionComponent* widgetInteractionCompLeft;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "PlayerSettings")
 	class UWidgetComponent* playerTextWidget;
+	UPROPERTY()
+	class UPlayerDialogWidget* playerText_UI;
 	
 	// Aims
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
