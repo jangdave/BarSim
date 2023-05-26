@@ -12,7 +12,7 @@ void UOldPalOrderWidget::NativeConstruct()
 	
 	oldpalScript1.Emplace(FString::Printf(TEXT("그러지 말고, 단골인데 한 잔 만들어 주지 그래?"))); // 0
 	//---------------------------------------------------------------------------선택
-	// 어떤 선택지 이든 답변
+	// 나오고 선택지
 	oldpalScript1.Emplace(FString::Printf(TEXT("아무 칵테일이나 좋으니 자신있는 걸로 하나 만들어 주게나"))); // 1
 	// 혼잣말
 	oldpalScript1.Emplace(FString::Printf(TEXT("이제는 여기 계단 내려오는 것도 힘이 들군"))); // 2

@@ -54,7 +54,7 @@ void UOldPalAnimInstance::EndTalk()
 
 void UOldPalAnimInstance::EndUnLean()
 {
-	owner->oldPalFSM->SetState(EOldPalState::READYMOVE);
+	owner->oldPalFSM->SetState(EOldPalState::MOVE);
 }
 
 void UOldPalAnimInstance::OnSitAnim(float sectionTime)

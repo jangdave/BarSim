@@ -236,6 +236,48 @@ void UOldPalFSM::TickChoice()
 {
 	if(gi->checkDayCount == 1)
 	{
+		if(bOldPalTalk != true && curTime > 1)
+		{
+			// 올드팔 대사 지우기
+			owner->oldPal_UI->EndOldPal();
+
+			bOldPalTalk = true;
+		}
+		
+		if(bCheckPlayAnim != true && curTime > 3)
+		{
+			// 올드팔 대사 1
+			owner->oldPal_UI->SetOldPalText(1);
+			owner->oldPal_UI->StartOldPal();
+			
+			bCheckPlayAnim = true;
+		
+			// 말하는 애니메이션 실행
+			owner->oldPalAnim->OnLeanAnim(4.51);
+		}
+
+		if(curTime > 5)
+		{
+			SetState(EOldPalState::READYMOVE);
+		}
+	}
+	else
+	{
+		//
+	}
+}
+
+void UOldPalFSM::TickReadyMove()
+{
+	if(gi->checkDayCount == 1)
+	{
+		// 의자의 저장하고
+		idx = 1;
+		
+		// 앉은 의자 배열에 착석 여부 바꾸기
+		spawnManager->bIsSit[idx] = true;
+
+		// 선택지 띄우기
 		if(player->playerText_UI->choiceCount == 0)
 		{
 			if(bPlayerTalk != true && curTime > 1)
@@ -256,6 +298,7 @@ void UOldPalFSM::TickChoice()
 				}
 			}
 		}
+		// 선택 왼쪽
 		else if(player->playerText_UI->choiceCount == 1)
 		{
 			if(bCount != true)
@@ -273,22 +316,20 @@ void UOldPalFSM::TickChoice()
 				bPlayerTalk = false;
 			}
 			
-			if(curTime > 1 && bPlayerTalk != true)
+			if(curTime > 1 && bCheckPlayAnim != true)
 			{
 				// 플레이어 대사 1
 				player->playerText_UI->SetSwitcher(0);
 				player->playerText_UI->SetPlayerText(1);
 				player->playerText_UI->StartPlayer();
 
-				if(bCheckPlayAnim != true)
-				{
-					bCheckPlayAnim = true;
+				bCheckPlayAnim = true;
 			
-					// 다시 일어서는 애니메이션 실행
-					owner->oldPalAnim->OnLeanAnim(0.01);
-				}		
+				// 다시 일어서는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(0.01);
 			}
 		}
+		// 선택 오른쪽
 		else if(player->playerText_UI->choiceCount == 2)
 		{
 			if(bCount != true)
@@ -306,51 +347,19 @@ void UOldPalFSM::TickChoice()
 				bPlayerTalk = false;
 			}
 
-			if(curTime > 1 && bPlayerTalk != true)
+			if(curTime > 1 && bCheckPlayAnim != true)
 			{
 				// 플레이어 대사 2
 				player->playerText_UI->SetSwitcher(0);
 				player->playerText_UI->SetPlayerText(2);
 				player->playerText_UI->StartPlayer();
 
-				if(bCheckPlayAnim != true)
-				{
-					bCheckPlayAnim = true;
+				bCheckPlayAnim = true;
 			
-					// 다시 일어서는 애니메이션 실행
-					owner->oldPalAnim->OnLeanAnim(0.01);
-				}		
+				// 다시 일어서는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(0.01);
 			}
 		}
-	}
-	else
-	{
-		//
-	}
-}
-
-void UOldPalFSM::TickReadyMove()
-{
-
-	if(gi->checkDayCount == 1)
-	{
-		// 의자의 저장하고
-		idx = 1;
-		
-		// 앉은 의자 배열에 착석 여부 바꾸기
-		spawnManager->bIsSit[idx] = true;
-
-		if(bOldPalTalk != true)
-		{
-			// 올드팔 대사 1
-			owner->oldPal_UI->SetOldPalText(1);
-			owner->oldPal_UI->StartOldPal();
-
-			bOldPalTalk = true;
-		}
-
-		SetState(EOldPalState::MOVE);
-	
 	}
 	else
 	{
@@ -366,19 +375,23 @@ void UOldPalFSM::TickReadyMove()
 
 void UOldPalFSM::TickMove()
 {
-
 	if(gi->checkDayCount == 1)
 	{
 		// 지정 된 의자 뒤로 이동
 		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -100;
 
 		auto result = ai->MoveToLocation(loc);
-
-
-		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
+		
+		if(bPlayerTalk != true && curTime > 1)
 		{
 			// 플레이어 대사 지우기
 			player->playerText_UI->EndPlayer();
+
+			bPlayerTalk = true;
+		}
+		
+		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
+		{
 			
 			// 도착하면 다음 단계로
 			SetState(EOldPalState::READYSIT);
@@ -401,18 +414,9 @@ void UOldPalFSM::TickReadySit()
 
 		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
 		{
-			
-			if(bOldPalTalk != true)
-			{
-				// 올드팔 대사 지우기
-				owner->oldPal_UI->EndOldPal();
-
-				bOldPalTalk = true;
-			}
-			
 			if(bPlayerTalk != true)
 			{
-				// 플레이어 대사 2
+				// 플레이어 대사 3
 				player->playerText_UI->SetSwitcher(0);
 				player->playerText_UI->SetPlayerText(3);
 				player->playerText_UI->StartPlayer();
@@ -509,7 +513,7 @@ void UOldPalFSM::TickStandby()
 {
 	if(gi->checkDayCount == 1)
 	{
-		if(bPlayerTalk != true && curTime > 1)
+		if(bPlayerTalk != true && curTime > 2)
 		{
 			// 플레이어 대사 지우기
 			player->playerText_UI->EndPlayer();
@@ -517,7 +521,7 @@ void UOldPalFSM::TickStandby()
 			bPlayerTalk = true;
 		}
 
-		if(bOldPalTalk != true && curTime > 2)
+		if(bOldPalTalk != true && curTime > 3)
 		{
 			// 올드팔 대사 2
 			owner->oldPal_UI->SetOldPalText(2);
@@ -613,7 +617,8 @@ void UOldPalFSM::TickOrder()
 				owner->oldPalAnim->OnSitAnim(0.01);
 			}
 		}
-		else if(curTime > 8)
+
+		if(curTime > 8)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -657,7 +662,7 @@ void UOldPalFSM::TickWait()
 			SetSitState(EOldPalSitState::ORDERJUDGE);
 		}
 		// 그렇지 않다면 불만표시로 상태 이동
-		else
+		else if(curTime > 10)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
