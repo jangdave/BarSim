@@ -184,6 +184,8 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==tablet&&tablet!=nullptr)
 		{
 			isGrabbingTabletRight=true;
+			tablet->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			tablet->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			widgetInteractionComp->bShowDebug=false;
 			widgetInteractionCompLeft->bShowDebug=true;
 		}		
@@ -215,7 +217,6 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		{
 			isGrabbingShakerLidRight=true;
 			shakerLid->VRGripInterfaceSettings.bSimulateOnDrop=true;
-			shakerLid->isLidAttachable=false;
 			shakerLid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		}
 		// 잡은 대상이 ShakerStrainer 이라면
@@ -283,6 +284,8 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
 	{
 		isGrabbingTabletLeft=true;
+		tabletL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		tabletL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		widgetInteractionComp->bShowDebug=true;
 		widgetInteractionCompLeft->bShowDebug=false;
 	}		
@@ -314,7 +317,6 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	{
 		isGrabbingShakerLidLeft=true;
 		shakerLidL->VRGripInterfaceSettings.bSimulateOnDrop=true;
-		shakerLidL->isLidAttachable=false;
 		shakerLidL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	}
 	// 잡은 대상이 ShakerStrainer 이라면
@@ -377,7 +379,10 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingTabletRight)
 	{
 		if(tablet!=nullptr)
-		tablet->isDropSoundEnabled=true;
+		{
+			tablet->isDropSoundEnabled=true;
+			tablet->AttachToTabletStand();
+		}
 		isGrabbingTabletRight=false;
 		widgetInteractionComp->bShowDebug=false;
 		widgetInteractionCompLeft->bShowDebug=false;
@@ -486,8 +491,9 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	}
 	else if(isGrabbingTabletLeft&&tabletL!=nullptr)
 	{
-		tabletL->isDropSoundEnabled=true;
 		isGrabbingTabletLeft=false;
+		tabletL->AttachToTabletStand();
+		tabletL->isDropSoundEnabled=true;
 		widgetInteractionComp->bShowDebug=false;
 		widgetInteractionCompLeft->bShowDebug=false;
 	}

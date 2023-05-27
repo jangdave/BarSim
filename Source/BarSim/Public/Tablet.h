@@ -42,4 +42,16 @@ public:
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
 
+	UPROPERTY()
+	class ATabletStand* tabletStand;
+
+	UFUNCTION()
+	void AttachToTabletStand();
+
+	UPROPERTY()
+	bool isTabletStandCasted = false;
+
+	UPROPERTY()
+	int32 tabletStandArrayNum = 0;
+
 };
