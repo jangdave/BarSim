@@ -16,6 +16,7 @@
 #include "IceCube.h"
 #include "IceCubeVat.h"
 #include "MixingGlass.h"
+#include "NiagaraComponent.h"
 #include "PlayerDialogWidget.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
@@ -26,7 +27,6 @@
 #include "Tablet.h"
 #include "Components/WidgetComponent.h"
 #include "Components/WidgetInteractionComponent.h"
-#include "Grippables/HandSocketComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -43,6 +43,12 @@ APlayerCharacter::APlayerCharacter()
 	widgetInteractionCompLeft->SetupAttachment(LeftMotionController);
 	widgetInteractionCompLeft->SetRelativeLocation(FVector(9.0641, 5.1962, -10.4361));
 	widgetInteractionCompLeft->SetRelativeRotation(FRotator(-52.5329, 21.7898, -2.4338));
+
+	WidgetTraceRight=CreateDefaultSubobject<UNiagaraComponent>(TEXT("WidgetTraceRight"));
+	WidgetTraceRight->SetupAttachment(widgetInteractionComp);
+
+	WidgetTraceLeft=CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraWidgetTraceLeft"));
+	WidgetTraceLeft->SetupAttachment(widgetInteractionCompLeft);
 
 	playerTextWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("playerTextWidget"));
 	playerTextWidget->SetupAttachment(VRReplicatedCamera);
@@ -72,23 +78,21 @@ void APlayerCharacter::BeginPlay()
 	LeftMotionController->bSmoothHandTracking=true;
 	RightMotionController->bSmoothHandTracking=true;
 	
-	widgetInteractionComp->DebugSphereLineThickness=0;
-	widgetInteractionComp->DebugLineThickness=0.3f;
-	widgetInteractionComp->DebugColor=FColor::White;
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;	
 	widgetInteractionComp->InteractionDistance=40.0f;
 
-	widgetInteractionCompLeft->DebugSphereLineThickness=0;
-	widgetInteractionCompLeft->DebugLineThickness=0.3f;
-	widgetInteractionCompLeft->DebugColor=FColor::White;
 	widgetInteractionCompLeft->bEnableHitTesting=true;
 	widgetInteractionCompLeft->bShowDebug=false;	
 	widgetInteractionCompLeft->InteractionDistance=40.0f;
 
+	WidgetTraceLeft->SetVisibility(false);
+	WidgetTraceRight->SetVisibility(false);
+
 	gameMode = Cast<ABarGameMode>(GetWorld()->GetAuthGameMode());
 
 	playerText_UI = Cast<UPlayerDialogWidget>(playerTextWidget->GetUserWidgetObject());
+	
 }
 
 
@@ -96,7 +100,7 @@ void APlayerCharacter::BeginPlay()
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	// Tongs가 nullptr이 아니면서
 	if(huchuTong!=nullptr)
 	{
@@ -124,6 +128,41 @@ void APlayerCharacter::Tick(float DeltaTime)
 			}
 			
 		}
+	}
+
+	// Tablet Widget Line Trace
+	FVector startPos = widgetInteractionComp->GetComponentLocation();
+	FVector endPos = startPos + widgetInteractionComp->GetForwardVector() * 40.0f;
+	FHitResult traceHit;
+	bool bOverWidget = widgetInteractionComp->IsOverHitTestVisibleWidget();
+	bool bHit = GetWorld()->LineTraceSingleByChannel(traceHit, startPos, endPos, ECC_Visibility);
+	if(bHit&&bOverWidget)
+	{
+		auto hitDist = traceHit.Distance;
+		auto hitLoc = traceHit.Location;
+		WidgetTraceRight->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
+		WidgetTraceRight->SetVisibility(true);
+	}
+	else
+	{
+		WidgetTraceRight->SetVisibility(false);
+	}
+	// Tablet Widget Line Trace Left
+	FVector startPosL = widgetInteractionCompLeft->GetComponentLocation();
+	FVector endPosL = startPosL + widgetInteractionCompLeft->GetForwardVector() * 40.0f;
+	FHitResult traceHitL;
+	bool bOverWidgetLeft = widgetInteractionCompLeft->IsOverHitTestVisibleWidget();
+	bool bHitL = GetWorld()->LineTraceSingleByChannel(traceHitL, startPosL, endPosL, ECC_Visibility);
+	if(bHitL&&bOverWidgetLeft)
+	{
+		auto hitDist = traceHitL.Distance;
+		auto hitLoc = traceHitL.Location;
+		WidgetTraceLeft->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
+		WidgetTraceLeft->SetVisibility(true);
+	}
+	else
+	{
+		WidgetTraceLeft->SetVisibility(false);	
 	}
 
 }
@@ -186,8 +225,8 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingTabletRight=true;
 			tablet->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 			tablet->VRGripInterfaceSettings.bSimulateOnDrop=true;
-			widgetInteractionComp->bShowDebug=false;
-			widgetInteractionCompLeft->bShowDebug=true;
+			//widgetInteractionComp->bShowDebug=false;
+			//widgetInteractionCompLeft->bShowDebug=true;
 		}		
 		// 잡은 대상이 Coaster이라면
 		else if(GrabbedActorRight==coaster&&coaster!=nullptr)
@@ -286,8 +325,8 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		isGrabbingTabletLeft=true;
 		tabletL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		tabletL->VRGripInterfaceSettings.bSimulateOnDrop=true;
-		widgetInteractionComp->bShowDebug=true;
-		widgetInteractionCompLeft->bShowDebug=false;
+		//widgetInteractionComp->bShowDebug=true;
+		//widgetInteractionCompLeft->bShowDebug=false;
 	}		
 	// 잡은 대상이 Coaster이라면
 	else if(GrabbedActorLeft==coasterL&&coasterL!=nullptr)
@@ -384,8 +423,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 			tablet->AttachToTabletStand();
 		}
 		isGrabbingTabletRight=false;
-		widgetInteractionComp->bShowDebug=false;
-		widgetInteractionCompLeft->bShowDebug=false;
+		//widgetInteractionComp->bShowDebug=false;
+		//widgetInteractionCompLeft->bShowDebug=false;
 	}
 	else if(isGrabbingCoasterRight)
 	{
@@ -494,8 +533,8 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		isGrabbingTabletLeft=false;
 		tabletL->AttachToTabletStand();
 		tabletL->isDropSoundEnabled=true;
-		widgetInteractionComp->bShowDebug=false;
-		widgetInteractionCompLeft->bShowDebug=false;
+		//widgetInteractionComp->bShowDebug=false;
+		//widgetInteractionCompLeft->bShowDebug=false;
 	}
 	else if(isGrabbingCoasterLeft&&coasterL!=nullptr)
 	{

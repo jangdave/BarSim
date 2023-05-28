@@ -29,14 +29,19 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// Widget Components
-	UPROPERTY(EditDefaultsOnly, Category="Input")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionComp;
-	UPROPERTY(EditDefaultsOnly, Category="Input")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Input")
 	class UWidgetInteractionComponent* widgetInteractionCompLeft;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "PlayerSettings")
 	class UWidgetComponent* playerTextWidget;
 	UPROPERTY()
 	class UPlayerDialogWidget* playerText_UI;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UNiagaraComponent* WidgetTraceRight;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UNiagaraComponent* WidgetTraceLeft;
+
 	
 	// Aims
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HandComp")
