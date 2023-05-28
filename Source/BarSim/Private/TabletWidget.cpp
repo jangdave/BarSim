@@ -2,9 +2,13 @@
 
 
 #include "TabletWidget.h"
+
+#include "PlayerCharacter.h"
 #include "SpawnManager.h"
 #include "Components/Button.h"
+#include "Components/Image.h"
 #include "Components/TextBlock.h"
+#include "Components/WidgetInteractionComponent.h"
 #include "Components/WidgetSwitcher.h"
 #include "Kismet/GameplayStatics.h"
 #include "Misc/GeneratedTypeName.h"
@@ -47,6 +51,52 @@ void UTabletWidget::NativeConstruct()
 	btn_BackMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
 	btn_CapsLock->OnClicked.AddDynamic(this, &UTabletWidget::SetCapsLock);
 	btn_Enter->OnClicked.AddDynamic(this, &UTabletWidget::SetEnter);
+
+	// 커서 Visibility 설정
+	CursorRight->SetVisibility(ESlateVisibility::Hidden);
+	CursorLeft->SetVisibility(ESlateVisibility::Hidden);
+
+	// Player Casting
+	FTimerHandle castHandle;
+	GetWorld()->GetTimerManager().SetTimer(castHandle, this, &UTabletWidget::CastToPlayerCharacter, 2.0f, false);
+
+
+}
+
+void UTabletWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	// Player가 Nullptr가 아닐 때
+	if(player!=nullptr)
+	{
+		// 플레이어의 Widget Interaction Component가 위젯과 닿아있다면
+		bool bIsCursorOn = player->widgetInteractionComp->IsOverHitTestVisibleWidget();
+		if(bIsCursorOn)
+		{
+			// 커서를 보이게 하고, 닿은 2D 위치값으로 커서를 위치시킨다.
+			FVector2D hitLoc = player->widgetInteractionComp->Get2DHitLocation();
+			CursorRight->SetVisibility(ESlateVisibility::Visible);
+			CursorRight->SetRenderTranslation(hitLoc);
+		}
+		else
+		{
+			CursorRight->SetVisibility(ESlateVisibility::Hidden);
+		}
+		// 플레이어의 Widget Interaction Component가 위젯과 닿아있다면
+		bool bIsCursorOnLeft = player->widgetInteractionCompLeft->IsOverHitTestVisibleWidget();
+		if(bIsCursorOnLeft)
+		{
+			// 커서를 보이게 하고, 닿은 2D 위치값으로 커서를 위치시킨다.
+			FVector2D hitLocLeft = player->widgetInteractionCompLeft->Get2DHitLocation();
+			CursorLeft->SetVisibility(ESlateVisibility::Visible);
+			CursorLeft->SetRenderTranslation(hitLocLeft);
+		}
+		else
+		{
+			CursorLeft->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
 }
 
 void UTabletWidget::OpenStore()
@@ -114,6 +164,11 @@ void UTabletWidget::OpenOldPal()
 void UTabletWidget::OpenOldPalVideo()
 {
 	WidgetSwitcher_Tablet->SetActiveWidgetIndex(9);
+}
+
+void UTabletWidget::CastToPlayerCharacter()
+{
+	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 }
 
 void UTabletWidget::SetCapsLock()

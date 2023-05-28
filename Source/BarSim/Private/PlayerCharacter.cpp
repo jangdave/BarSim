@@ -139,7 +139,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 	if(bHit&&bOverWidget)
 	{
 		auto hitDist = traceHit.Distance;
-		auto hitLoc = traceHit.Location;
+		auto hitLoc = widgetInteractionComp->Get2DHitLocation();
 		WidgetTraceRight->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
 		WidgetTraceRight->SetVisibility(true);
 	}
@@ -156,7 +156,6 @@ void APlayerCharacter::Tick(float DeltaTime)
 	if(bHitL&&bOverWidgetLeft)
 	{
 		auto hitDist = traceHitL.Distance;
-		auto hitLoc = traceHitL.Location;
 		WidgetTraceLeft->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
 		WidgetTraceLeft->SetVisibility(true);
 	}
@@ -586,6 +585,8 @@ void APlayerCharacter::FireRight()
 	{
 		//UI에 이벤트를 전달하고 싶다.
 		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
+		widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+
 	}
 	// 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight)
@@ -764,6 +765,8 @@ void APlayerCharacter::FireLeft()
 	if(widgetInteractionCompLeft)
 	{
 		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));
+		widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+
 	}
 	// 왼손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsLeft)

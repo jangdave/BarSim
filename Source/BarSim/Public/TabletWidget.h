@@ -17,8 +17,13 @@ class BARSIM_API UTabletWidget : public UUserWidget
 public:
 	virtual void NativeConstruct() override;
 
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
 	UPROPERTY()
 	class ASpawnManager* spawnmg;
+
+	UPROPERTY()
+	class APlayerCharacter* player;
 	
 	// 테블렛 상단바
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
@@ -140,6 +145,9 @@ public:
 	UFUNCTION()
 	void OpenOldPalVideo();
 
+	UFUNCTION()
+	void CastToPlayerCharacter();
+
 	//------------------------------------------------------------------------------------- 키보드
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_btn_1;
@@ -215,4 +223,11 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bCheckCaps;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
+	class UImage* CursorRight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
+	class UImage* CursorLeft;
+
 };
