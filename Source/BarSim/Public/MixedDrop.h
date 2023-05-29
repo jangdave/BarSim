@@ -22,6 +22,9 @@ public:
 	TArray<float> ContentsArray;
 
 	UPROPERTY(VisibleAnywhere, Category = "MixedDrop")
+	float mixedDropMass;
+
+	UPROPERTY(VisibleAnywhere, Category = "MixedDrop")
 	bool bStirred;
 
 	UPROPERTY(VisibleAnywhere, Category = "MixedDrop")

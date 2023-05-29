@@ -374,36 +374,56 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 				}
 			}
 
-			// 이미 위젯 네임어레이에 믹스쳐라는 원소가 있다면 그대로 해당 순서의 위젯 컨텐츠 어레이에 더해줌
-			if(widgetNameArray.Find(FString("Mixture")) != INDEX_NONE)
+			if(mixedDropOverlapped->NameArray.Num() >= 2)
 			{
-				float mixtureMass = 0;
-				for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
+				// 이미 위젯 네임어레이에 믹스쳐라는 원소가 있다면 그대로 해당 순서의 위젯 컨텐츠 어레이에 더해줌
+				if(widgetNameArray.Find(FString("Mixture")) != INDEX_NONE)
 				{
-					mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
+					float mixtureMass = 0;
+					for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
+					{
+						mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
+					}
+					widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] = widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] + mixtureMass; 
 				}
-				widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] = widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] + mixtureMass; 
+				// 위젯 네임 어레이에 믹스쳐라는 원소가 없다면 새로 믹스쳐라는 이름의 원소를 위젯 네임어레이에 추가하고 믹스드드랍의 부피를 더해줌
+				else
+				{
+					widgetNameArray.Emplace(FString("Mixture"));
+					float mixtureMass = 0;
+					for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
+					{
+						mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
+					}
+					widgetContentsArray.Add(mixtureMass);
+				}
 			}
-			// 위젯 네임 어레이에 믹스쳐라는 원소가 없다면 새로 믹스쳐라는 이름의 원소를 위젯 네임어레이에 추가하고 믹스드드랍의 부피를 더해줌
-			else
+			//mixedDrop에 한가지만 들어있을 경우 ( 섞이지 않고 하나의 술만 들어있을 경우)
+			else if(mixedDropOverlapped->NameArray.Num() == 1)
 			{
-				widgetNameArray.Emplace(FString("Mixture"));
-				float mixtureMass = 0;
-				for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
+				// 이미 위젯에 그 술이 들어가 있을 경우
+				if(widgetNameArray.Find(mixedDropOverlapped->NameArray[0]) != INDEX_NONE)
 				{
-					mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
+					widgetContentsArray[widgetNameArray.Find(mixedDropOverlapped->NameArray[0])] += mixedDropOverlapped->ContentsArray[0];
 				}
-				widgetContentsArray.Add(mixtureMass);
+				// 위젯에 그 술이 떠있지 않을 경우
+				else
+				{
+					widgetNameArray.Emplace(mixedDropOverlapped->NameArray[0]);
+					widgetContentsArray.Add(mixedDropOverlapped->ContentsArray[0]);
+				}
 			}
+				
 
 			//위젯 나타내기
+			SetActorTickEnabled(true);
 			bWidgetOn = true;
 			widgetTime = 0;
 			bWidgetAnimOn = false;
 			
 			MixArray.Add(mixedDropOverlapped->bStirred);
 			ShakeArray.Add(mixedDropOverlapped->bShaked);
-			contents = contents + mixedDropOverlapped->dropMass;
+			contents = contents + mixedDropOverlapped->mixedDropMass;
 			insideContents = FMath::Clamp(contents, 0, cupSize);
 			liquorComp->SetVisibility(true);
 			LiquorScale();
@@ -464,6 +484,7 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			}
 
 			//위젯 나타내기
+			SetActorTickEnabled(true);
 			bWidgetOn = true;
 			widgetTime = 0;
 			bWidgetAnimOn = false;

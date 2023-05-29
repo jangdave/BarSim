@@ -71,6 +71,7 @@ void AMixingGlass::Stir(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 		{
 			if(bIsStirStarted)
 			{
+				cupComp->SetSimulatePhysics(false);
 				bIsStirStarted = false;
 				bStirWidgetOn = true;
 				stirRate = stirRate + 0.5f;
@@ -79,6 +80,7 @@ void AMixingGlass::Stir(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 			}
 			else
 			{
+				cupComp->SetSimulatePhysics(false);
 				bIsStirStarted = true;
 				bStirWidgetOn = true;
 				stirRate = stirRate + 0.5f;
@@ -181,6 +183,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")), param);
 				mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
+
 				//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
 				
 				// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
@@ -189,16 +192,16 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				mixedDrop->ContentsArray.Empty();
 				mixedDrop->ContentsArray = ContentsArray;
 
-				for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++)
+				for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
 				{
 					float mixedPercent = mixedDrop->dropMass / contents;
 					mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-					//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
+					mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
 				}
 
 				mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
 
-				contents = contents - mixedDrop->dropMass;
+				contents = contents - mixedDrop->mixedDropMass;
 				mixedDrop->bStirred = bStirred;
 				bStreamOn = true;
 			}
@@ -219,6 +222,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 					AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")), param);
 					mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
+
 					//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
 
 					// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
@@ -231,11 +235,12 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					{
 						float mixedPercent = mixedDrop->dropMass / contents;
 						mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-						//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
+						mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
 					}
+
 					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
+					contents = contents - mixedDrop->mixedDropMass;
 					mixedDrop->bStirred = bStirred;
-					contents = contents - mixedDrop->dropMass;
 				}
 			}
 		}
