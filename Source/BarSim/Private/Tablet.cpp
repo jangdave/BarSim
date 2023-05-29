@@ -7,6 +7,7 @@
 #include "TabletWidget.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ATablet::ATablet(const FObjectInitializer& ObjectInitializer):Super(ObjectInitializer)
@@ -68,6 +69,7 @@ void ATablet::AttachToTabletStand()
 		tabletStand=Cast<ATabletStand>(HitObj[tabletStandArrayNum].GetActor());
 		if(tabletStand!=nullptr)
 		{
+			UGameplayStatics::PlaySound2D(GetWorld(), attachSound, 1, 1, 0);
 			UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
 			this->DisableComponentsSimulatePhysics();
 			this->VRGripInterfaceSettings.bSimulateOnDrop=false;

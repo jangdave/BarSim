@@ -4,6 +4,7 @@
 #include "ShakerLid.h"
 
 #include "ShakerStrainer.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AShakerLid::AShakerLid(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -59,6 +60,7 @@ void AShakerLid::AttachToShakerStrainer()
 		if(shakerStrainer!=nullptr)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
+			UGameplayStatics::PlaySound2D(GetWorld(), attachSound, 1, 1, 0);
 			this->DisableComponentsSimulatePhysics();
 			this->VRGripInterfaceSettings.bSimulateOnDrop=false;
 			auto lidLoc = shakerStrainer->meshComp->GetSocketTransform(FName("Lid"));

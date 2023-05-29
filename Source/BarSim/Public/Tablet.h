@@ -54,4 +54,7 @@ public:
 	UPROPERTY()
 	int32 tabletStandArrayNum = 0;
 
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* attachSound;
+
 };

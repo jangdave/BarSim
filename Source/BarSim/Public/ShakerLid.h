@@ -41,5 +41,8 @@ public:
 
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
+
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* attachSound;
 	
 };

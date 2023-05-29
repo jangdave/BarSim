@@ -10,7 +10,21 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerLid.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerLid.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerStrainer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerStrainer.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_Strainer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_Strainer.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DoorSoundCollision/BP_DrawerSoundCollision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DoorSoundCollision/BP_DrawerSoundCollision.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerLid.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerLid.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Strainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Strainer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Tablet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Tablet.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/ShakerLid.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/ShakerLid.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/ShakerStrainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/ShakerStrainer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/Strainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/Strainer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/Tablet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/Tablet.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +293,8 @@
       <workItem from="1685275234637" duration="1717000" />
       <workItem from="1685279363285" duration="691000" />
       <workItem from="1685324763665" duration="2586000" />
-      <workItem from="1685336872762" duration="1100000" />
+      <workItem from="1685336872762" duration="1694000" />
+      <workItem from="1685346867700" duration="1494000" />
     </task>
     <servers />
   </component>
