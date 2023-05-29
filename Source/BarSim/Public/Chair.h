@@ -34,6 +34,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category=ChairSetting)
 	class USceneComponent* sitComp;
+
+	UPROPERTY(EditAnywhere, Category=ChairSetting)
+	class USceneComponent* sitOldComp;
 	
 	UPROPERTY(EditAnywhere, Category=CocktailZone)
 	class UBoxComponent* coctailBoxComp;
@@ -75,6 +78,10 @@ public:
 	// 손님의 위치 순서
 	UPROPERTY()
 	int32 customerIdx;
+
+	// 올드팔의 위치 순서
+	UPROPERTY()
+	int32 oldpalIdx;
 	
 	// 손님 오버랩 함수
 	UFUNCTION()
@@ -116,8 +123,6 @@ public:
 	// 컵 손님 앞으로 이동시키는 함수
 	UFUNCTION()
 	void MoveCup();
-
-	void MoveCupSlow();
 
 	FTimerHandle moveTimer;
 

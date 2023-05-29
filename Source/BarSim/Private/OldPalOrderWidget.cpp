@@ -25,15 +25,18 @@ void UOldPalOrderWidget::NativeConstruct()
 	oldpalScript1.Emplace(FString::Printf(TEXT("진라임... 인건가"))); // 7
 	oldpalScript1.Emplace(FString::Printf(TEXT("다이커리... 인건가"))); // 8
 	oldpalScript1.Emplace(FString::Printf(TEXT("마티니... 인건가"))); // 9
+	oldpalScript1.Emplace(FString::Printf(TEXT("무슨 칵테일인지 알수가 없군"))); // 10
 	//---------------------------------------------------------------------------
-	oldpalScript1.Emplace(FString::Printf(TEXT("조금 덜 성숙한 맛이 나긴 하지만 나쁘지 않군"))); // 10
+	oldpalScript1.Emplace(FString::Printf(TEXT("조금 덜 성숙한 맛이 나긴 하지만 나쁘지 않군"))); // 11
 	//---------------------------------------------------------------------------선택
-	oldpalScript1.Emplace(FString::Printf(TEXT("다음 번에는 비율에 더 신경써서 만들면 더할 나위 없겠군"))); // 11
-	oldpalScript1.Emplace(FString::Printf(TEXT("다음 번에는 양에 더 신경써서 만들면 더할 나위 없겠군"))); // 12
-	oldpalScript1.Emplace(FString::Printf(TEXT("다음 번에는 기법에 더 신경써서 만들면 더할 나위 없겠군"))); // 13
+	oldpalScript1.Emplace(FString::Printf(TEXT("다음 번에는 비율에 더 신경써서 만들면 더할 나위 없겠군"))); // 12
+	oldpalScript1.Emplace(FString::Printf(TEXT("다음 번에는 양에 더 신경써서 만들면 더할 나위 없겠군"))); // 13
+	oldpalScript1.Emplace(FString::Printf(TEXT("다음 번에는 기법에 더 신경써서 만들면 더할 나위 없겠군"))); // 14
+	oldpalScript1.Emplace(FString::Printf(TEXT("기대 이상으로 괜찮았군"))); // 15
+	oldpalScript1.Emplace(FString::Printf(TEXT("어떤 칵테일인지는 모르겠지만 잘마셨네"))); // 16
 	//---------------------------------------------------------------------------
-	oldpalScript1.Emplace(FString::Printf(TEXT("오늘은 한잔만 마시고 가보겠네"))); // 14
-	oldpalScript1.Emplace(FString::Printf(TEXT("또 보세 젊은 바텐더 선생"))); // 15
+	oldpalScript1.Emplace(FString::Printf(TEXT("오늘은 한잔만 마시고 가보겠네"))); // 17
+	oldpalScript1.Emplace(FString::Printf(TEXT("또 보세 젊은 바텐더 선생"))); // 18
 	
 }
 

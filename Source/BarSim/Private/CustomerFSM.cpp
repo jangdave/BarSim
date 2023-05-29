@@ -3,11 +3,9 @@
 
 #include "CustomerFSM.h"
 #include "AIController.h"
-#include "BarPlayer.h"
 #include "CustomerAnimInstance.h"
 #include "CustomerCharacter.h"
 #include "CustomerOrderWidget.h"
-#include "MeshCardRepresentation.h"
 #include "SpawnManager.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -573,7 +571,7 @@ void UCustomerFSM::TickUnHoldCup()
 	{
 		bCheckPlayAnim = true;
 
-		// 컵 잡는 애니메이션 실행
+		// 컵 놓는 애니메이션 실행
 		owner->customerAnim->OnDrinkAnim(TEXT("UnHoldCup"));
 	}
 }

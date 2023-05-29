@@ -38,7 +38,7 @@ void UOldPalAnimInstance::EndLean()
 void UOldPalAnimInstance::EndSitStoll()
 {
 	owner->oldPalFSM->SetState(EOldPalState::SIT);
-
+	
 	owner->oldPalFSM->AttachCustomer();
 }
 
@@ -62,7 +62,47 @@ void UOldPalAnimInstance::OnSitAnim(float sectionTime)
 	owner->bodyComp->GetAnimInstance()->Montage_Play(oldPalSitMontageFactory, 1, EMontagePlayReturnType::MontageLength, sectionTime);
 }
 
+void UOldPalAnimInstance::EndHoldCup()
+{
+	owner->oldPalFSM->SetSitState(EOldPalSitState::DRINK);
+}
+
+void UOldPalAnimInstance::AttachCup()
+{
+	owner->BindOldPalOverlap();
+}
+
 void UOldPalAnimInstance::OnDrinkAnim(float sectionTime)
 {
 	owner->bodyComp->GetAnimInstance()->Montage_Play(oldPalDrinkMontageFactory, 1, EMontagePlayReturnType::MontageLength, sectionTime);
+}
+
+void UOldPalAnimInstance::EndCheer()
+{
+	owner->oldPalFSM->SetDrinkState(EOldPalDrinkState::DRINK);
+}
+
+void UOldPalAnimInstance::EndDrinkLittle()
+{
+	owner->oldPalFSM->SetDrinkState(EOldPalDrinkState::DRINK);
+}
+
+void UOldPalAnimInstance::EndDrinkAll()
+{
+	owner->oldPalFSM->SetDrinkState(EOldPalDrinkState::UNHOLDCUP);
+}
+
+void UOldPalAnimInstance::DetachCup()
+{
+	owner->DetachCup();
+}
+
+void UOldPalAnimInstance::EndUnHoldCup()
+{
+	owner->oldPalFSM->SetSitState(EOldPalSitState::TASTEJUDGE);
+}
+
+void UOldPalAnimInstance::EndLeaveSit()
+{
+	owner->oldPalFSM->SetState(EOldPalState::LEAVE);
 }

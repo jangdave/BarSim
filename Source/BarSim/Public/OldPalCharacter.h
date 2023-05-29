@@ -43,4 +43,14 @@ public:
 
 	UPROPERTY(EditAnywhere, Category=Sound)
 	class USoundBase* enterSound;
+
+	UPROPERTY()
+	class ACupBase* cup;
+	
+	// 캐릭터 컵 오버랩 바인드 함수
+	UFUNCTION()
+	void BindOldPalOverlap();
+
+	UFUNCTION()
+	void DetachCup();
 };
