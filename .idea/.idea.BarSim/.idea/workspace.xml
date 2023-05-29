@@ -10,13 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/FX/NE_LaserTraceLeft_System.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/FX/NE_LaserTraceLeft_System.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/FX/NE_LaserTrace_System.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/FX/NE_LaserTrace_System.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealisticLeft.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealisticLeft.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,7 +278,8 @@
       <workItem from="1685246849259" duration="18034000" />
       <workItem from="1685275234637" duration="1717000" />
       <workItem from="1685279363285" duration="691000" />
-      <workItem from="1685324763665" duration="1918000" />
+      <workItem from="1685324763665" duration="2586000" />
+      <workItem from="1685336872762" duration="1100000" />
     </task>
     <servers />
   </component>
