@@ -511,7 +511,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 	{
 		iceCount += 1;
 		//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
-		cupSize = cupSizeOrigin - iceCount * 2;
+		cupSize = cupSizeOrigin - iceCount * 1.8f;
 		insideContents = FMath::Clamp(contents, 0, cupSize);
 		LiquorScale();
 	}

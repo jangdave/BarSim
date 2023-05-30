@@ -10,8 +10,12 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarSim.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/BarSim.uproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Mat_Sink.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/Mat_Sink.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/cupboard3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/cupboard3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/cupboardTop5_VintageBarTable_009.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/cupboardTop5_VintageBarTable_009.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Materials/M_Metalic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Materials/M_Metalic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/SteelSink/SteelSink.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/SteelSink/SteelSink.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,25 +30,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\USER\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C++ Project.BarSim">
     <configuration name="BarSim" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -283,6 +287,7 @@
       <workItem from="1685336872762" duration="1694000" />
       <workItem from="1685346867700" duration="2452000" />
       <workItem from="1685357298158" duration="1328000" />
+      <workItem from="1685434200699" duration="427000" />
     </task>
     <servers />
   </component>
