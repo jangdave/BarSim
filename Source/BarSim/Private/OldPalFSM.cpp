@@ -102,16 +102,20 @@ void UOldPalFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 void UOldPalFSM::AttachCustomer()
 {
 	owner->GetCapsuleComponent()->SetEnableGravity(false);
+
+	owner->GetMesh()->SetRelativeLocation(FVector(0, 0, -5));
 	
-	owner->AttachToComponent(spawnManager->aChairs[idx]->sitComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	owner->AttachToComponent(spawnManager->aChairs[idx]->sitOldComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 }
 
 // 손님 의자에 detach
 void UOldPalFSM::DetachCustomer()
 {
 	owner->GetCapsuleComponent()->SetEnableGravity(true);
+
+	//owner->GetMesh()->SetRelativeLocation(FVector(0, 0, 5));
 	
-	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitComp, FDetachmentTransformRules::KeepWorldTransform);
+	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitOldComp, FDetachmentTransformRules::KeepWorldTransform);
 }
 
 // 주문 칵테일 정하기
@@ -124,7 +128,8 @@ void UOldPalFSM::SetOrderCoctail()
 	}
 }
 
-// -------------------------------------------------------------------------idle state
+// -------------------------------------------------------------------------idle
+// idle 상태 설정 함수
 void UOldPalFSM::SetState(EOldPalState next)
 {
 	state = next;
@@ -187,7 +192,7 @@ void UOldPalFSM::TickReadyLean()
 				bCheckPlayAnim = true;
 			
 				// 도착하면 기대는 애니메이션 실행
-				owner->oldPalAnim->OnStandAnim(1.34);
+				owner->oldPalAnim->OnStandAnim(2.01);
 			}
 		}
 		else
@@ -236,6 +241,48 @@ void UOldPalFSM::TickChoice()
 {
 	if(gi->checkDayCount == 1)
 	{
+		if(bOldPalTalk != true && curTime > 1)
+		{
+			// 올드팔 대사 지우기
+			owner->oldPal_UI->EndOldPal();
+
+			bOldPalTalk = true;
+		}
+		
+		if(bCheckPlayAnim != true && curTime > 3)
+		{
+			// 올드팔 대사 1
+			owner->oldPal_UI->SetOldPalText(1);
+			owner->oldPal_UI->StartOldPal();
+			
+			bCheckPlayAnim = true;
+		
+			// 말하는 애니메이션 실행
+			owner->oldPalAnim->OnLeanAnim(4.51);
+		}
+
+		if(curTime > 5)
+		{
+			SetState(EOldPalState::READYMOVE);
+		}
+	}
+	else
+	{
+		//
+	}
+}
+
+void UOldPalFSM::TickReadyMove()
+{
+	if(gi->checkDayCount == 1)
+	{
+		// 의자의 저장하고
+		idx = 1;
+		
+		// 앉은 의자 배열에 착석 여부 바꾸기
+		spawnManager->bIsSit[idx] = true;
+
+		// 선택지 띄우기
 		if(player->playerText_UI->choiceCount == 0)
 		{
 			if(bPlayerTalk != true && curTime > 1)
@@ -256,6 +303,7 @@ void UOldPalFSM::TickChoice()
 				}
 			}
 		}
+		// 선택 왼쪽
 		else if(player->playerText_UI->choiceCount == 1)
 		{
 			if(bCount != true)
@@ -273,22 +321,20 @@ void UOldPalFSM::TickChoice()
 				bPlayerTalk = false;
 			}
 			
-			if(curTime > 1 && bPlayerTalk != true)
+			if(curTime > 1 && bCheckPlayAnim != true)
 			{
 				// 플레이어 대사 1
 				player->playerText_UI->SetSwitcher(0);
 				player->playerText_UI->SetPlayerText(1);
 				player->playerText_UI->StartPlayer();
 
-				if(bCheckPlayAnim != true)
-				{
-					bCheckPlayAnim = true;
+				bCheckPlayAnim = true;
 			
-					// 다시 일어서는 애니메이션 실행
-					owner->oldPalAnim->OnLeanAnim(0.01);
-				}		
+				// 다시 일어서는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(0.01);
 			}
 		}
+		// 선택 오른쪽
 		else if(player->playerText_UI->choiceCount == 2)
 		{
 			if(bCount != true)
@@ -306,51 +352,19 @@ void UOldPalFSM::TickChoice()
 				bPlayerTalk = false;
 			}
 
-			if(curTime > 1 && bPlayerTalk != true)
+			if(curTime > 1 && bCheckPlayAnim != true)
 			{
 				// 플레이어 대사 2
 				player->playerText_UI->SetSwitcher(0);
 				player->playerText_UI->SetPlayerText(2);
 				player->playerText_UI->StartPlayer();
 
-				if(bCheckPlayAnim != true)
-				{
-					bCheckPlayAnim = true;
+				bCheckPlayAnim = true;
 			
-					// 다시 일어서는 애니메이션 실행
-					owner->oldPalAnim->OnLeanAnim(0.01);
-				}		
+				// 다시 일어서는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(0.01);
 			}
 		}
-	}
-	else
-	{
-		//
-	}
-}
-
-void UOldPalFSM::TickReadyMove()
-{
-
-	if(gi->checkDayCount == 1)
-	{
-		// 의자의 저장하고
-		idx = 1;
-		
-		// 앉은 의자 배열에 착석 여부 바꾸기
-		spawnManager->bIsSit[idx] = true;
-
-		if(bOldPalTalk != true)
-		{
-			// 올드팔 대사 1
-			owner->oldPal_UI->SetOldPalText(1);
-			owner->oldPal_UI->StartOldPal();
-
-			bOldPalTalk = true;
-		}
-
-		SetState(EOldPalState::MOVE);
-	
 	}
 	else
 	{
@@ -366,19 +380,23 @@ void UOldPalFSM::TickReadyMove()
 
 void UOldPalFSM::TickMove()
 {
-
 	if(gi->checkDayCount == 1)
 	{
 		// 지정 된 의자 뒤로 이동
 		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -100;
 
 		auto result = ai->MoveToLocation(loc);
-
-
-		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
+		
+		if(bPlayerTalk != true && curTime > 1)
 		{
 			// 플레이어 대사 지우기
 			player->playerText_UI->EndPlayer();
+
+			bPlayerTalk = true;
+		}
+		
+		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
+		{
 			
 			// 도착하면 다음 단계로
 			SetState(EOldPalState::READYSIT);
@@ -395,34 +413,26 @@ void UOldPalFSM::TickReadySit()
 	if(gi->checkDayCount == 1)
 	{
 		// 지정 된 의자 뒤로 이동
-		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -20;
-
+		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -10;
 		auto result = ai->MoveToLocation(loc);
 
 		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
 		{
-			
-			if(bOldPalTalk != true)
-			{
-				// 올드팔 대사 지우기
-				owner->oldPal_UI->EndOldPal();
-
-				bOldPalTalk = true;
-			}
-			
 			if(bPlayerTalk != true)
 			{
-				// 플레이어 대사 2
+				// 플레이어 대사 3
 				player->playerText_UI->SetSwitcher(0);
 				player->playerText_UI->SetPlayerText(3);
 				player->playerText_UI->StartPlayer();
+
+				bPlayerTalk = true;
 			}
 			
 			if(bCheckPlayAnim != true)
 			{
 				// 도착하면 앉는 애니메이션 실행
 				bCheckPlayAnim = true;
-			
+
 				owner->oldPalAnim->OnStandAnim(0.01);
 			}
 		}
@@ -478,7 +488,55 @@ void UOldPalFSM::TickSit()
 
 void UOldPalFSM::TickLeave()
 {
-	
+	if(gi->checkDayCount == 1)
+	{
+		// 문 밖의 스폰매니저 주변으로 이동
+		auto loc = spawnManager->GetActorLocation();
+
+		auto result = ai->MoveToLocation(loc);
+
+		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
+		{
+			owner->GetCharacterMovement()->MaxWalkSpeed = 0;
+		}
+
+		if(bPlayerTalk != true && curTime > 3)
+		{
+			// 플레이어 대사 5
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(5);
+			player->playerText_UI->StartPlayer();
+			
+			bPlayerTalk = true;
+		}
+
+		if(bOldPalTalk != true && curTime > 5)
+		{
+			// 플레이어 대사 6
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(6);
+
+			bOldPalTalk = true;
+		}
+
+		if(bCheckPlayAnim != true && curTime > 7)
+		{
+			// 플레이어 대사 7
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(7);
+
+			bCheckPlayAnim = true;
+		}
+
+		if(curTime > 9)
+		{
+			UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
+		}
+	}
+	else
+	{
+		
+	}
 }
 
 // ---------------------------------------------------------------------------sit
@@ -509,7 +567,7 @@ void UOldPalFSM::TickStandby()
 {
 	if(gi->checkDayCount == 1)
 	{
-		if(bPlayerTalk != true && curTime > 1)
+		if(bPlayerTalk != true && curTime > 2)
 		{
 			// 플레이어 대사 지우기
 			player->playerText_UI->EndPlayer();
@@ -517,7 +575,7 @@ void UOldPalFSM::TickStandby()
 			bPlayerTalk = true;
 		}
 
-		if(bOldPalTalk != true && curTime > 2)
+		if(bOldPalTalk != true && curTime > 3)
 		{
 			// 올드팔 대사 2
 			owner->oldPal_UI->SetOldPalText(2);
@@ -535,7 +593,7 @@ void UOldPalFSM::TickStandby()
 		}
 		
 		// 일정 시간 전에 코스터가 있다면 오더로 상태 변경
-		if(curTime < 10 && spawnManager->bIsCoaster[idx] != false)
+		if(curTime > 6 && curTime <= 10 && spawnManager->bIsCoaster[idx] != false)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -613,7 +671,8 @@ void UOldPalFSM::TickOrder()
 				owner->oldPalAnim->OnSitAnim(0.01);
 			}
 		}
-		else if(curTime > 8)
+
+		if(curTime > 8)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -623,7 +682,7 @@ void UOldPalFSM::TickOrder()
 	}
 	else
 	{
-		
+		//
 	}
 }
 
@@ -649,7 +708,7 @@ void UOldPalFSM::TickWait()
 		}
 		
 		// 일정 시간안에 코스터와 칵테일이 준비 되면 상태 이동
-		if(curTime < 10 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
+		if(curTime > 5 && curTime <= 10 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -657,7 +716,7 @@ void UOldPalFSM::TickWait()
 			SetSitState(EOldPalSitState::ORDERJUDGE);
 		}
 		// 그렇지 않다면 불만표시로 상태 이동
-		else
+		else if(curTime > 10)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -667,7 +726,7 @@ void UOldPalFSM::TickWait()
 	}
 	else
 	{
-		
+		//
 	}
 }
 
@@ -693,17 +752,27 @@ void UOldPalFSM::TickWaitLong()
 		}
 		
 		// 코스터와 칵테일이 준비 되면 상태 이동
-		if(spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
+		if(curTime > 2 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
 			
-			SetSitState(EOldPalSitState::ORDERJUDGE);
+			if(bPlayerTalk != true)
+			{
+				// 플레이어 대사 4
+				player->playerText_UI->SetSwitcher(0);
+				player->playerText_UI->SetPlayerText(4);
+				player->playerText_UI->StartPlayer();
+
+				bPlayerTalk = true;
+				
+				SetSitState(EOldPalSitState::ORDERJUDGE);
+			}
 		}
 	}
 	else
 	{
-		
+		//
 	}
 }
 
@@ -711,70 +780,563 @@ void UOldPalFSM::TickOrderJudge()
 {
 	if(gi->checkDayCount == 1)
 	{
-		
+		// 진라임을 주면
+		if(spawnManager->orderCoctailIdx[idx] == 1)
+		{
+			if(bPlayerTalk != true && curTime > 1)
+			{
+				// 플레이어 대사 지우기
+				player->playerText_UI->EndPlayer();
+
+				bPlayerTalk = true;
+			}
+
+			if(bOldPalTalk != true && curTime > 3)
+			{
+				// 올드팔 대사 7
+				owner->oldPal_UI->SetOldPalText(7);
+				owner->oldPal_UI->StartOldPal();
+
+				bOldPalTalk = true;
+
+				if(bCheckPlayAnim != true)
+				{
+					// 토크0 애니메이션 실행
+					bCheckPlayAnim = true;
+			
+					owner->oldPalAnim->OnSitAnim(0.01);
+				}
+			}
+
+			if(curTime > 5)
+			{
+				SetSitState(EOldPalSitState::HOLDCUP);
+
+				spawnManager->aChairs[idx]->HideScore();
+				
+				spawnManager->aChairs[idx]->MoveCup();
+			}
+		}
+		// 다이커리를 주면
+		else if(spawnManager->orderCoctailIdx[idx] == 2)
+		{
+			if(bPlayerTalk != true && curTime > 1)
+			{
+				// 플레이어 대사 지우기
+				player->playerText_UI->EndPlayer();
+
+				bPlayerTalk = true;
+			}
+
+			if(bOldPalTalk != true && curTime > 3)
+			{
+				// 올드팔 대사 8
+				owner->oldPal_UI->SetOldPalText(8);
+				owner->oldPal_UI->StartOldPal();
+
+				bOldPalTalk = true;
+
+				if(bCheckPlayAnim != true)
+				{
+					// 토크0 애니메이션 실행
+					bCheckPlayAnim = true;
+			
+					owner->oldPalAnim->OnSitAnim(0.01);
+				}
+			}
+
+			if(curTime > 5)
+			{
+				SetSitState(EOldPalSitState::HOLDCUP);
+
+				spawnManager->aChairs[idx]->HideScore();
+				
+				spawnManager->aChairs[idx]->MoveCup();
+			}
+		}
+		// 마티니를 주면
+		else if(spawnManager->orderCoctailIdx[idx] == 3)
+		{
+			if(bPlayerTalk != true && curTime > 1)
+			{
+				// 플레이어 대사 지우기
+				player->playerText_UI->EndPlayer();
+
+				bPlayerTalk = true;
+			}
+
+			if(bOldPalTalk != true && curTime > 3)
+			{
+				// 올드팔 대사 9
+				owner->oldPal_UI->SetOldPalText(9);
+				owner->oldPal_UI->StartOldPal();
+
+				bOldPalTalk = true;
+
+				if(bCheckPlayAnim != true)
+				{
+					// 토크0 애니메이션 실행
+					bCheckPlayAnim = true;
+			
+					owner->oldPalAnim->OnSitAnim(0.01);
+				}
+			}
+
+			if(curTime > 5)
+			{
+				SetSitState(EOldPalSitState::HOLDCUP);
+
+				spawnManager->aChairs[idx]->HideScore();
+				
+				spawnManager->aChairs[idx]->MoveCup();
+			}
+		}
+		// 그이외 모든것
+		else if(spawnManager->orderCoctailIdx[idx] == 5)
+		{
+			if(bPlayerTalk != true && curTime > 1)
+			{
+				// 플레이어 대사 지우기
+				player->playerText_UI->EndPlayer();
+
+				bPlayerTalk = true;
+			}
+
+			if(bOldPalTalk != true && curTime > 3)
+			{
+				// 올드팔 대사 10
+				owner->oldPal_UI->SetOldPalText(10);
+				owner->oldPal_UI->StartOldPal();
+
+				bOldPalTalk = true;
+
+				if(bCheckPlayAnim != true)
+				{
+					// 토크0 애니메이션 실행
+					bCheckPlayAnim = true;
+			
+					owner->oldPalAnim->OnSitAnim(0.01);
+				}
+			}
+
+			if(curTime > 5)
+			{
+				SetSitState(EOldPalSitState::HOLDCUP);
+
+				spawnManager->aChairs[idx]->MoveCup();
+			}
+		}
 	}
 	else
 	{
-		
+		//
 	}
 }
 
 void UOldPalFSM::TickHoldCup()
 {
-	
+	if(gi->checkDayCount == 1)
+	{
+		if(bOldPalTalk != true && curTime > 1)
+		{
+			// 올드팔 대사 지우기
+			owner->oldPal_UI->EndOldPal();
+
+			bOldPalTalk = true;
+		}
+
+		if(bCheckPlayAnim != true && curTime > 2)
+		{
+			bCheckPlayAnim = true;
+
+			// 컵 잡는 애니메이션 실행
+			owner->oldPalAnim->OnSitAnim(6.34);
+		}
+	}
+	else
+	{
+		//
+	}
 }
 
 void UOldPalFSM::TickDrink()
 {
-	
+	switch (drinkState)
+	{
+	case EOldPalDrinkState::IDLE:
+		TickIdleCup();
+		break;
+	case EOldPalDrinkState::DRINK:
+		TickDrinkCup();
+		break;
+	case EOldPalDrinkState::UNHOLDCUP:
+		TickUnHoldCup();
+		break;
+	}
 }
 
 void UOldPalFSM::TickTasteJudge()
 {
-	
+	if(gi->checkDayCount == 1)
+	{
+		// 진라임 이였다면
+		if(spawnManager->orderCoctailIdx[idx] == 1)
+		{
+			if(spawnManager->scoreIdx[0] == 1 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 12
+				owner->oldPal_UI->SetOldPalText(12);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크1 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(3.68);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+			else if(spawnManager->scoreIdx[1] == 1 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 13
+				owner->oldPal_UI->SetOldPalText(13);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크1 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(3.68);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+			else if(spawnManager->scoreIdx[1] == 0 && spawnManager->scoreIdx[0] == 0 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 15
+				owner->oldPal_UI->SetOldPalText(15);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크2 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(5.01);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+		}
+		// 다이커리 였다면
+		else if(spawnManager->orderCoctailIdx[idx] == 2)
+		{
+			if(spawnManager->scoreIdx[2] == 1 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 14
+				owner->oldPal_UI->SetOldPalText(14);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크1 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(3.68);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+			else if(spawnManager->scoreIdx[0] == 1 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 12
+				owner->oldPal_UI->SetOldPalText(12);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크1 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(3.68);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+			else if(spawnManager->scoreIdx[1] == 1 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 13
+				owner->oldPal_UI->SetOldPalText(13);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크1 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(3.68);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+			else if(spawnManager->scoreIdx[2] == 0 && spawnManager->scoreIdx[1] == 0 && spawnManager->scoreIdx[0] == 0 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 15
+				owner->oldPal_UI->SetOldPalText(15);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크2 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(5.01);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+		}
+		// 마티니 였다면
+		else if(spawnManager->orderCoctailIdx[idx] == 3)
+		{
+			if(spawnManager->scoreIdx[2] == 1 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 14
+				owner->oldPal_UI->SetOldPalText(14);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크1 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(3.68);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+			else if(spawnManager->scoreIdx[0] == 1 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 12
+				owner->oldPal_UI->SetOldPalText(12);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크1 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(3.68);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+			else if(spawnManager->scoreIdx[1] == 1 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 13
+				owner->oldPal_UI->SetOldPalText(13);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크1 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(3.68);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+			else if(spawnManager->scoreIdx[2] == 0 && spawnManager->scoreIdx[1] == 0 && spawnManager->scoreIdx[0] == 0 && bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 15
+				owner->oldPal_UI->SetOldPalText(15);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크2 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(5.01);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+		}
+		else if(spawnManager->orderCoctailIdx[idx] == 5)
+		{
+			if(bOldPalTalk != true)
+			{
+				bOldPalTalk = true;
+
+				// 올드팔 대사 16
+				owner->oldPal_UI->SetOldPalText(16);
+				owner->oldPal_UI->StartOldPal();
+
+				// 토크2 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(5.01);
+
+				SetSitState(EOldPalSitState::ANGRY);
+			}
+		}
+	}
+	else
+	{
+		//
+	}
 }
 
 void UOldPalFSM::TickAngry()
 {
-	
+	if(gi->checkDayCount == 1)
+	{
+		if(bOldPalTalk != true && curTime > 2)
+		{
+			// 올드팔 대사 지우기
+			bOldPalTalk = true;
+			
+			owner->oldPal_UI->EndOldPal();
+		}
+
+		if(bCheckPlayAnim != true && curTime > 4)
+		{
+			// 올드팔 대사 17
+			owner->oldPal_UI->SetOldPalText(17);
+			owner->oldPal_UI->StartOldPal();
+
+			bCheckPlayAnim = true;
+
+			// 토크0 애니메이션 실행
+			owner->oldPalAnim->OnSitAnim(0.01);
+
+			SetSitState(EOldPalSitState::AWESOME);
+		}
+	}
+	else
+	{
+		//
+	}
 }
 
 void UOldPalFSM::TickAwesome()
 {
-	
+	if(gi->checkDayCount == 1)
+	{
+		if(bOldPalTalk != true && curTime > 2)
+		{
+			// 올드팔 대사 지우기
+			bOldPalTalk = true;
+			
+			owner->oldPal_UI->EndOldPal();
+		}
+		
+		if(bCheckPlayAnim != true && curTime > 4)
+		{
+			// 올드팔 대사 18
+			owner->oldPal_UI->SetOldPalText(18);
+			owner->oldPal_UI->StartOldPal();
+
+			bCheckPlayAnim = true;
+
+			// 토크2 애니메이션 실행
+			owner->oldPalAnim->OnSitAnim(5.01);
+
+			SetSitState(EOldPalSitState::READYLEAVE);
+		}
+	}
+	else
+	{
+		//
+	}
 }
 
 void UOldPalFSM::TickReadyLeave()
 {
-	
+	if(gi->checkDayCount == 1)
+	{
+		if(bOldPalTalk != true && curTime > 2)
+		{
+			// 올드팔 대사 지우기
+			bOldPalTalk = true;
+			
+			owner->oldPal_UI->EndOldPal();
+
+			DetachCustomer();
+
+			if(bCheckPlayAnim != true)
+			{
+				bCheckPlayAnim = true;
+
+				// 자리에서 일어나는 애니메이션 실행
+				owner->oldPalAnim->OnSitAnim(10.58);
+			}
+		}
+	}
+	else
+	{
+		//
+	}
 }
 
+// ---------------------------------------------------------------------------drink
+// drink 상태 설정 함수
 void UOldPalFSM::SetDrinkState(EOldPalDrinkState next)
 {
-	
+	drinkState = next;
+
+	// 상태가 변경 될 때마다 대기시간 초기화
+	curTime = 0;
+
+	// 플레이 되는 애니메이션 플레이 체크 초기화
+	bCheckPlayAnim = false;
+
+	// 시간 초기화
+	bCount = false;
+
+	// 대화 초기화
+	bPlayerTalk = false;
+
+	bOldPalTalk = false;
 }
 
 void UOldPalFSM::TickIdleCup()
 {
+	if(gi->checkDayCount == 1)
+	{
+		if(bCheckPlayAnim != true && curTime > 1)
+		{
+			bCheckPlayAnim = true;
+
+			// 잔을 들고 cheers 애니메이션 실행
+			owner->oldPalAnim->OnDrinkAnim(0.01);
+		}
+	}
+	else
+	{
+		//
+	}
 }
 
 void UOldPalFSM::TickDrinkCup()
 {
+	if(gi->checkDayCount == 1)
+	{
+		if(bCheckPlayAnim != true && curTime > 1 && drinkCount == 0)
+		{
+			bCheckPlayAnim = true;
+
+			drinkCount++;
+
+			// 올드팔 대사 10
+			owner->oldPal_UI->SetOldPalText(11);
+			owner->oldPal_UI->StartOldPal();
+			
+			// 살짝 마시는 애니메이션 실행
+			owner->oldPalAnim->OnDrinkAnim(5.68);
+		}
+		else if(bCheckPlayAnim != true && curTime > 2 && drinkCount == 1)
+		{
+			bCheckPlayAnim = true;
+
+			// 올드팔 대사 지우기
+			owner->oldPal_UI->EndOldPal();
+			
+			// 많이 마시는 애니메이션 실행
+			owner->oldPalAnim->OnDrinkAnim(2.01);
+		}
+	}
+	else
+	{
+		//
+	}
+		
 }
 
 void UOldPalFSM::TickUnHoldCup()
 {
-}
+	if(gi->checkDayCount == 1)
+	{
+		if(bCheckPlayAnim != true && curTime > 1)
+		{
+			bCheckPlayAnim = true;
 
-void UOldPalFSM::VisibleOrder()
-{
-	
-}
-
-// 랜덤 함수
-int32 UOldPalFSM::SetRandRange(int32 idxStart, int32 idxEnd)
-{
-	int32 result = FMath::RandRange(idxStart, idxEnd);
-
-	return result;
+			// 컵 놓는 애니메이션 실행
+			owner->oldPalAnim->OnDrinkAnim(7.67);
+		}
+	}
+	else
+	{
+		//
+	}
 }

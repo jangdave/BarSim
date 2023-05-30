@@ -2,6 +2,8 @@
 
 
 #include "OldPalCharacter.h"
+
+#include "CupBase.h"
 #include "OldPalAnimInstance.h"
 #include "OldPalFSM.h"
 #include "OldPalOrderWidget.h"
@@ -65,5 +67,43 @@ void AOldPalCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AOldPalCharacter::BindOldPalOverlap()
+{
+	TArray<FOverlapResult> hitsInfo;
+	FVector centerLoc = bodyComp->GetSocketLocation(TEXT("hand_rSocket"));
+	FQuat centerRot = bodyComp->GetSocketQuaternion(TEXT("hand_rSocket"));
+	FCollisionObjectQueryParams params;
+	FCollisionShape checkShape = FCollisionShape::MakeSphere(20);
+	params.AddObjectTypesToQuery(ECC_GameTraceChannel9);
+	
+	GetWorld()->OverlapMultiByObjectType(hitsInfo, centerLoc, centerRot, params, checkShape);
+	for(FOverlapResult hitInfo : hitsInfo)
+	{
+		cup = Cast<ACupBase>(hitInfo.GetActor());
+
+		// 컵이 오버랩 되면
+		if(cup != nullptr)
+		{
+			// 컵의 물리를 끄고
+			cup->cupComp->SetSimulatePhysics(false);
+
+			// 컵을 손에 붙인다
+			cup->AttachToComponent(bodyComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, "hand_rSocket");
+		}
+	}
+
+	// 디버그 라인
+	DrawDebugSphere(GetWorld(), centerLoc, 20, 1, FColor::Yellow, false, 1);
+}
+
+void AOldPalCharacter::DetachCup()
+{
+	// 컵을 떨어트리고
+	cup->DetachAllSceneComponents(bodyComp, FDetachmentTransformRules::KeepWorldTransform);
+
+	// 컵의 물리를 킨다
+	cup->cupComp->SetSimulatePhysics(true);
 }
 

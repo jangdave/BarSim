@@ -62,11 +62,35 @@ public:
 	void EndLean();
 
 	UFUNCTION(BlueprintCallable)
+	void EndSitStoll();
+	
+	UFUNCTION(BlueprintCallable)
 	void EndTalk();
 
 	UFUNCTION(BlueprintCallable)
 	void EndUnLean();
 
 	UFUNCTION(BlueprintCallable)
-	void EndSitStoll();
+	void EndHoldCup();
+
+	UFUNCTION(BlueprintCallable)
+	void AttachCup();
+
+	UFUNCTION(BlueprintCallable)
+	void EndCheer();
+
+	UFUNCTION(BlueprintCallable)
+	void EndDrinkLittle();
+	
+	UFUNCTION(BlueprintCallable)
+	void EndDrinkAll();
+
+	UFUNCTION(BlueprintCallable)
+	void DetachCup();
+	
+	UFUNCTION(BlueprintCallable)
+	void EndUnHoldCup();
+
+	UFUNCTION(BlueprintCallable)
+	void EndLeaveSit();
 };
