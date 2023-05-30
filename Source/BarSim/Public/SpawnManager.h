@@ -23,6 +23,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY()
+	class UBarGameInstance* gi;
 	
 	UPROPERTY()
 	TArray<AActor*> chairs;
@@ -113,8 +116,12 @@ public:
 	
 	float amountOfCampari;
 
-	int32 orderScore = 100;
-	
+	int32 orderScore;
+
+	// 비율, 양, 기법
+	UPROPERTY()
+	TArray<int32> scoreIdx = {0, 0, 0};
+
 	void CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx);
 
 	void CheckWhisky(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx);
@@ -125,9 +132,9 @@ public:
 
 	void CheckMartini(int32 customerIdx);
 
-	void CheckOldPal(int32 customerIdx);
-
 	void CheckDaiquiri(int32 customerIdx);
+
+	void CheckOldPal(int32 customerIdx);
 
 	void SomethingElse(int32 customerIdx);
 	

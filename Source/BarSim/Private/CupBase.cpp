@@ -518,39 +518,36 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 			if(iceCount==0)
 			{
 				ice->DisableComponentsSimulatePhysics();
-				//ice->SetActorEnableCollision(false);
 				auto socketLoc1 = cupComp->GetSocketTransform(FName("IceSocket1"));
 				ice->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));	
 				iceCount += 1;
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
-				cupSize = cupSizeOrigin - iceCount * 2;
+				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);
 				LiquorScale();
 			}
 			else if(iceCount==1)
 			{
 				ice->DisableComponentsSimulatePhysics();
-				//ice->SetActorEnableCollision(false);
 				auto socketLoc2 = cupComp->GetSocketTransform(FName("IceSocket2"));
 				ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
 				iceCount += 1;
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
-				cupSize = cupSizeOrigin - iceCount * 2;
+				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);
 				LiquorScale();
 			}
 			else if(iceCount==2)
 			{
 				ice->DisableComponentsSimulatePhysics();
-				//ice->SetActorEnableCollision(false);
 				auto socketLoc3 = cupComp->GetSocketTransform(FName("IceSocket3"));
 				ice->SetActorLocationAndRotation(socketLoc3.GetLocation(), socketLoc3.GetRotation());
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket3"));
 				iceCount += 1;
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
-				cupSize = cupSizeOrigin - iceCount * 2;
+				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);
 				LiquorScale();
 			}
@@ -580,7 +577,6 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 			halfSlicedLime->SetActorEnableCollision(false);
 			isLimeAttached = true;
 		}
-	}
 }
 
 void ACupBase::ExtractIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,

@@ -7,6 +7,8 @@
 #include "CupBase.h"
 #include "CustomerCharacter.h"
 #include "CustomerFSM.h"
+#include "OldPalCharacter.h"
+#include "OldPalFSM.h"
 #include "PlayerCharacter.h"
 #include "SpawnManager.h"
 #include "Components/BoxComponent.h"
@@ -28,6 +30,9 @@ AChair::AChair()
 
 	sitComp = CreateDefaultSubobject<USceneComponent>(TEXT("sitComp"));
 	sitComp->SetupAttachment(meshComp);
+
+	sitOldComp = CreateDefaultSubobject<USceneComponent>(TEXT("sitOldComp"));
+	sitOldComp->SetupAttachment(meshComp);
 	
 	coctailBoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("coctailBoxComp"));
 	coctailBoxComp->SetupAttachment(boxComp);
@@ -70,7 +75,8 @@ void AChair::Tick(float DeltaTime)
 void AChair::OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	auto customer = Cast<ACustomerCharacter>(OtherActor);
-
+	auto oldpal = Cast<AOldPalCharacter>(OtherActor);
+	
 	if(customer != nullptr)
 	{
 		// 손님이 오버랩 되면 손님의 요소 스폰매니저로 보내기
@@ -84,13 +90,23 @@ void AChair::OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 
 		bCheckCustomer = true;
 	}
+	if(oldpal != nullptr)
+	{
+		auto ordertemp = oldpal->oldPalFSM->orderIdx;
+
+		customerIdx = oldpal->oldPalFSM->idx;
+
+		spawnManager->GetCustomerIdx(ordertemp, customerIdx);
+
+		bCheckCustomer = true;
+	}
 }
 
 void AChair::EndCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	auto customer = Cast<ACustomerCharacter>(OtherActor);
-
+	
 	if(customer != nullptr)
 	{
 		bCheckCustomer = false;

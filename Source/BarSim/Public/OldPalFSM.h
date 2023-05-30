@@ -132,9 +132,6 @@ public:
 	UFUNCTION()
 	void SetDrinkState(EOldPalDrinkState next);
 
-	// 주문내역 보이는 함수
-	void VisibleOrder();
-
 	// 손님 의자에 붙이기
 	UFUNCTION()
 	void AttachCustomer();
@@ -142,11 +139,7 @@ public:
 	// 손님 의자에서 떨어트리기
 	UFUNCTION()
 	void DetachCustomer();
-
-	// 랜덤 함수
-	UFUNCTION()
-	int32 SetRandRange(int32 idxStart, int32 idxEnd);
-
+	
 	// 마신 횟수
 	UPROPERTY()
 	int32 drinkCount = 0;
