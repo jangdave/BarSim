@@ -217,6 +217,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		{
 			isGrabbingBottleRight = true;
 			bottle->SetActorTickEnabled(true);
+			bottle->isGrabbingBottle=true;
 		}
 		// 잡은 대상이 Tablet 이라면
 		else if(GrabbedActorRight==tablet&&tablet!=nullptr)
@@ -317,6 +318,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	{
 		isGrabbingBottleLeft = true;
 		bottleL->SetActorTickEnabled(true);
+		bottleL->isGrabbingBottle=true;
 	}
 	// 잡은 대상이 Tablet 이라면
 	else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
@@ -411,7 +413,10 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingBottleRight)
 	{
 		if(bottle!=nullptr)
-		bottle->isDropSoundEnabled=true;
+		{
+			bottle->isGrabbingBottle=false;
+			bottle->isDropSoundEnabled=true;
+		}
 		isGrabbingBottleRight=false;
 	}
 	else if(isGrabbingTabletRight)
@@ -525,6 +530,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	else if(isGrabbingBottleLeft&&bottleL!=nullptr)
 	{
 		bottleL->isDropSoundEnabled=true;
+		bottleL->isGrabbingBottle=false;
 		isGrabbingBottleLeft=false;
 	}
 	else if(isGrabbingTabletLeft&&tabletL!=nullptr)
