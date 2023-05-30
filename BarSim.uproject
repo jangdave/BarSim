@@ -86,6 +86,10 @@
 				"Android",
 				"HoloLens"
 			]
+		},
+		{
+			"Name": "HDRIBackdrop",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [

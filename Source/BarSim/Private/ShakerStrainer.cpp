@@ -7,6 +7,7 @@
 #include "ShakerLid.h"
 #include "Components/SphereComponent.h"
 #include "Components/SplineComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Materials/MaterialExpressionChannelMaskParameterColor.h"
 
 // Sets default values
@@ -76,6 +77,7 @@ void AShakerStrainer::AttachToShaker()
 		shaker=Cast<AShaker>(HitObj[shakerArrayNum].GetActor());
 		if(shaker!=nullptr)
 		{
+			UGameplayStatics::PlaySound2D(GetWorld(), attachSound, 1, 1, 0);
 			UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
 			this->DisableComponentsSimulatePhysics();
 			this->VRGripInterfaceSettings.bSimulateOnDrop=false;

@@ -28,9 +28,6 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Lid")
 	class UStaticMeshComponent* meshComp;
 
-	UPROPERTY(EditAnywhere, Category = "Lid")
-	bool isLidAttachable = false;
-
 	UFUNCTION()
 	void AttachToShakerStrainer();
 
@@ -44,5 +41,8 @@ public:
 
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
+
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* attachSound;
 	
 };

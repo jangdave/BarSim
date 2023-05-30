@@ -8,7 +8,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="" />
+    <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarSim.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/BarSim.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,9 +39,9 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src&quot;
+      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\USER\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
 }</component>
@@ -268,12 +272,17 @@
       <workItem from="1684989056734" duration="1311000" />
       <workItem from="1684991208822" duration="1104000" />
       <workItem from="1685047344340" duration="1901000" />
-      <workItem from="1685124965650" duration="69000" />
-      <workItem from="1685129507289" duration="1000" />
-      <workItem from="1685131139560" duration="936000" />
-      <workItem from="1685262675421" duration="1478000" />
-      <workItem from="1685381860585" duration="5792000" />
-      <workItem from="1685430149816" duration="838000" />
+      <workItem from="1685092017062" duration="5548000" />
+      <workItem from="1685145734427" duration="5529000" />
+      <workItem from="1685175735346" duration="9511000" />
+      <workItem from="1685235193993" duration="2321000" />
+      <workItem from="1685246849259" duration="18034000" />
+      <workItem from="1685275234637" duration="1717000" />
+      <workItem from="1685279363285" duration="691000" />
+      <workItem from="1685324763665" duration="2586000" />
+      <workItem from="1685336872762" duration="1694000" />
+      <workItem from="1685346867700" duration="2452000" />
+      <workItem from="1685357298158" duration="1328000" />
     </task>
     <servers />
   </component>

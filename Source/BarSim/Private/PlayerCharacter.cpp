@@ -16,6 +16,7 @@
 #include "IceCube.h"
 #include "IceCubeVat.h"
 #include "MixingGlass.h"
+#include "NiagaraComponent.h"
 #include "PlayerDialogWidget.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
@@ -42,6 +43,12 @@ APlayerCharacter::APlayerCharacter()
 	widgetInteractionCompLeft->SetupAttachment(LeftMotionController);
 	widgetInteractionCompLeft->SetRelativeLocation(FVector(9.0641, 5.1962, -10.4361));
 	widgetInteractionCompLeft->SetRelativeRotation(FRotator(-52.5329, 21.7898, -2.4338));
+
+	WidgetTraceRight=CreateDefaultSubobject<UNiagaraComponent>(TEXT("WidgetTraceRight"));
+	WidgetTraceRight->SetupAttachment(widgetInteractionComp);
+
+	WidgetTraceLeft=CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraWidgetTraceLeft"));
+	WidgetTraceLeft->SetupAttachment(widgetInteractionCompLeft);
 
 	playerTextWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("playerTextWidget"));
 	playerTextWidget->SetupAttachment(VRReplicatedCamera);
@@ -71,23 +78,21 @@ void APlayerCharacter::BeginPlay()
 	LeftMotionController->bSmoothHandTracking=true;
 	RightMotionController->bSmoothHandTracking=true;
 	
-	widgetInteractionComp->DebugSphereLineThickness=0;
-	widgetInteractionComp->DebugLineThickness=0.3f;
-	widgetInteractionComp->DebugColor=FColor::White;
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;	
 	widgetInteractionComp->InteractionDistance=40.0f;
 
-	widgetInteractionCompLeft->DebugSphereLineThickness=0;
-	widgetInteractionCompLeft->DebugLineThickness=0.3f;
-	widgetInteractionCompLeft->DebugColor=FColor::White;
 	widgetInteractionCompLeft->bEnableHitTesting=true;
 	widgetInteractionCompLeft->bShowDebug=false;	
 	widgetInteractionCompLeft->InteractionDistance=40.0f;
 
+	WidgetTraceLeft->SetVisibility(false);
+	WidgetTraceRight->SetVisibility(false);
+
 	gameMode = Cast<ABarGameMode>(GetWorld()->GetAuthGameMode());
 
 	playerText_UI = Cast<UPlayerDialogWidget>(playerTextWidget->GetUserWidgetObject());
+	
 }
 
 
@@ -95,7 +100,7 @@ void APlayerCharacter::BeginPlay()
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	// Tongs가 nullptr이 아니면서
 	if(huchuTong!=nullptr)
 	{
@@ -123,7 +128,42 @@ void APlayerCharacter::Tick(float DeltaTime)
 			}
 			
 		}
-	}	
+	}
+
+	// Tablet Widget Line Trace
+	FVector startPos = widgetInteractionComp->GetComponentLocation();
+	FVector endPos = startPos + widgetInteractionComp->GetForwardVector() * 40.0f;
+	FHitResult traceHit;
+	bool bOverWidget = widgetInteractionComp->IsOverHitTestVisibleWidget();
+	bool bHit = GetWorld()->LineTraceSingleByChannel(traceHit, startPos, endPos, ECC_Visibility);
+	if(bHit&&bOverWidget)
+	{
+		auto hitDist = traceHit.Distance;
+		auto hitLoc = widgetInteractionComp->Get2DHitLocation();
+		WidgetTraceRight->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
+		WidgetTraceRight->SetVisibility(true);
+	}
+	else
+	{
+		WidgetTraceRight->SetVisibility(false);
+	}
+	// Tablet Widget Line Trace Left
+	FVector startPosL = widgetInteractionCompLeft->GetComponentLocation();
+	FVector endPosL = startPosL + widgetInteractionCompLeft->GetForwardVector() * 40.0f;
+	FHitResult traceHitL;
+	bool bOverWidgetLeft = widgetInteractionCompLeft->IsOverHitTestVisibleWidget();
+	bool bHitL = GetWorld()->LineTraceSingleByChannel(traceHitL, startPosL, endPosL, ECC_Visibility);
+	if(bHitL&&bOverWidgetLeft)
+	{
+		auto hitDist = traceHitL.Distance;
+		WidgetTraceLeft->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
+		WidgetTraceLeft->SetVisibility(true);
+	}
+	else
+	{
+		WidgetTraceLeft->SetVisibility(false);	
+	}
+
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -171,28 +211,26 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
 		isGrabbingTongsRight=true;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed Huchu Right"));
 		}
 		// 잡은 대상이 Bottle 이라면
 		else if(GrabbedActorRight == bottle&&bottle!=nullptr)
 		{
 			isGrabbingBottleRight = true;
 			bottle->SetActorTickEnabled(true);
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed bottle on Right"))
 		}
 		// 잡은 대상이 Tablet 이라면
 		else if(GrabbedActorRight==tablet&&tablet!=nullptr)
 		{
 			isGrabbingTabletRight=true;
-			widgetInteractionComp->bShowDebug=false;
-			widgetInteractionCompLeft->bShowDebug=true;
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed tablet on Right"))
+			tablet->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			tablet->VRGripInterfaceSettings.bSimulateOnDrop=true;
+			//widgetInteractionComp->bShowDebug=false;
+			//widgetInteractionCompLeft->bShowDebug=true;
 		}		
 		// 잡은 대상이 Coaster이라면
 		else if(GrabbedActorRight==coaster&&coaster!=nullptr)
 		{
 			isGrabbingCoasterRight=true;
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed coaster on Right"))			
 		}
 		// 잡은 대상이 Cup이라면
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
@@ -200,19 +238,17 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingCupRight=true;
 			cup->SetActorTickEnabled(true);
 			cup->isCupTickActivated=true;
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Right"))			
 		}
 		// 잡은 대상이 BarSpoon이라면
 		else if(GrabbedActorRight==barSpoon&&barSpoon!=nullptr)
 		{
 			isGrabbingBarSpoonRight=true;
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed barspoon on Right"))			
 		}
 		// 잡은 대상이 Shaker이라면
 		else if(GrabbedActorRight==shaker&&shaker!=nullptr)
 		{
-		isGrabbingShakerRight=true;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed shaker on Right"))			
+			isGrabbingShakerRight=true;
+			shaker->VRGripInterfaceSettings.bDenyGripping=true;
 		}
 		// 잡은 대상이 ShakerLid라면
 		else if(GrabbedActorRight==shakerLid&&shakerLid!=nullptr)
@@ -220,7 +256,6 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingShakerLidRight=true;
 			shakerLid->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			shakerLid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Lid on Right"))			
 		}
 		// 잡은 대상이 ShakerStrainer 이라면
 		else if(GrabbedActorRight==shakerStrainer&&shakerStrainer!=nullptr)
@@ -228,14 +263,13 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingShakerStrainerRight=true;
 			shakerStrainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			shakerStrainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Strainer on Right"))			
 		}
 		// 잡은 대상이 MixingGlass 라면
 		else if(GrabbedActorRight==mixingGlass&&mixingGlass!=nullptr)
 		{
 			isGrabbingMixingGlassRight=true;
+			mixingGlass->VRGripInterfaceSettings.bDenyGripping=true;
 			mixingGlass->VRGripInterfaceSettings.bSimulateOnDrop=true;
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed Mixing Glass  on Right"))			
 		}
 		// 잡은 대상이 Glass Strainer 이라면
 		else if(GrabbedActorRight==strainer&&strainer!=nullptr)
@@ -243,7 +277,6 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingStrainerRight=true;
 			strainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-			//UE_LOG(LogTemp, Warning, TEXT("Grabbed Glass Strainer on Right"))			
 
 		}
 	
@@ -278,28 +311,26 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
 	{
 		isGrabbingTongsLeft=true;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed Huchu Left"));
 	}
 	// 잡은 대상이 Bottle 이라면
 	else if(GrabbedActorLeft == bottleL&&bottleL!=nullptr)
 	{
 		isGrabbingBottleLeft = true;
 		bottleL->SetActorTickEnabled(true);
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed bottle on Left"))
 	}
 	// 잡은 대상이 Tablet 이라면
 	else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
 	{
 		isGrabbingTabletLeft=true;
-		widgetInteractionComp->bShowDebug=true;
-		widgetInteractionCompLeft->bShowDebug=false;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed tablet on Left"))
+		tabletL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		tabletL->VRGripInterfaceSettings.bSimulateOnDrop=true;
+		//widgetInteractionComp->bShowDebug=true;
+		//widgetInteractionCompLeft->bShowDebug=false;
 	}		
 	// 잡은 대상이 Coaster이라면
 	else if(GrabbedActorLeft==coasterL&&coasterL!=nullptr)
 	{
 		isGrabbingCoasterLeft=true;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed coaster on Left"))			
 	}
 	// 잡은 대상이 Cup이라면
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
@@ -307,27 +338,24 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		isGrabbingCupLeft=true;
 		cupL->SetActorTickEnabled(true);
 		cupL->isCupTickActivated=true;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed cup on Left"))			
 	}
 	// 잡은 대상이 BarSpoon이라면
 	else if(GrabbedActorLeft==barSpoonL&&barSpoonL!=nullptr)
 	{
 		isGrabbingBarSpoonLeft=true;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed barspoon on Left"))			
 	}
 	// 잡은 대상이 Shaker이라면
 	else if(GrabbedActorLeft==shakerL&&shakerL!=nullptr)
 	{
 		isGrabbingShakerLeft=true;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed shaker on Left"))			
+		shakerL->VRGripInterfaceSettings.bDenyGripping=true;
 	}
 	// 잡은 대상이 ShakerLid라면
 	else if(GrabbedActorLeft==shakerLidL&&shakerLidL!=nullptr)
 	{
 		isGrabbingShakerLidLeft=true;
-		shakerLidL->isLidAttachable=false;
+		shakerLidL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		shakerLidL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Lid on Left"))			
 	}
 	// 잡은 대상이 ShakerStrainer 이라면
 	else if(GrabbedActorLeft==shakerStrainerL&&shakerStrainerL!=nullptr)
@@ -335,14 +363,13 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		isGrabbingShakerStrainerLeft=true;
 		shakerStrainerL->isStrainerAttachable = false;
 		shakerStrainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed Shaker Strainer on Left"))			
 	}
 	// 잡은 대상이 MixingGlass 라면
 	else if(GrabbedActorLeft==mixingGlassL&&mixingGlassL!=nullptr)
 	{
 		isGrabbingMixingGlassLeft=true;
+		mixingGlassL->VRGripInterfaceSettings.bDenyGripping=true;
 		mixingGlassL->VRGripInterfaceSettings.bSimulateOnDrop=true;
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed Mixing Glass  on Left"))			
 	}
 	// 잡은 대상이 Glass Strainer 이라면
 	else if(GrabbedActorLeft==strainerL&&strainerL!=nullptr)
@@ -350,7 +377,6 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		isGrabbingStrainerLeft=true;
 		strainerL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		strainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		//UE_LOG(LogTemp, Warning, TEXT("Grabbed Glass Strainer on Left"))	
  
 	}
 	
@@ -391,10 +417,13 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingTabletRight)
 	{
 		if(tablet!=nullptr)
-		tablet->isDropSoundEnabled=true;
+		{
+			tablet->isDropSoundEnabled=true;
+			tablet->AttachToTabletStand();
+		}
 		isGrabbingTabletRight=false;
-		widgetInteractionComp->bShowDebug=false;
-		widgetInteractionCompLeft->bShowDebug=false;
+		//widgetInteractionComp->bShowDebug=false;
+		//widgetInteractionCompLeft->bShowDebug=false;
 	}
 	else if(isGrabbingCoasterRight)
 	{
@@ -441,7 +470,10 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingMixingGlassRight)
 	{
 		if(mixingGlass!=nullptr)
-		mixingGlass->isDropSoundEnabled=true;
+		{
+			mixingGlass->isDropSoundEnabled=true;
+			mixingGlass->VRGripInterfaceSettings.bDenyGripping=false;
+		}
 		isGrabbingMixingGlassRight=false;
 	}
 	else if(isGrabbingStrainerRight)
@@ -456,7 +488,10 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingShakerRight)
 	{
 		if(shaker!=nullptr)
-		shaker->isDropSoundEnabled=true;
+		{
+			shaker->isDropSoundEnabled=true;
+			shaker->VRGripInterfaceSettings.bDenyGripping=false;
+		}
 		isGrabbingShakerRight=false;		
 	}
 }
@@ -494,10 +529,11 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	}
 	else if(isGrabbingTabletLeft&&tabletL!=nullptr)
 	{
-		tabletL->isDropSoundEnabled=true;
 		isGrabbingTabletLeft=false;
-		widgetInteractionComp->bShowDebug=false;
-		widgetInteractionCompLeft->bShowDebug=false;
+		tabletL->AttachToTabletStand();
+		tabletL->isDropSoundEnabled=true;
+		//widgetInteractionComp->bShowDebug=false;
+		//widgetInteractionCompLeft->bShowDebug=false;
 	}
 	else if(isGrabbingCoasterLeft&&coasterL!=nullptr)
 	{
@@ -525,6 +561,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	}
 	else if(isGrabbingMixingGlassLeft&&mixingGlassL!=nullptr)
 	{
+		mixingGlassL->VRGripInterfaceSettings.bDenyGripping=false;
 		mixingGlassL->isDropSoundEnabled=true;
 		isGrabbingMixingGlassLeft=false;
 	}
@@ -536,6 +573,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	}
 	else if(isGrabbingShakerLeft&&shakerL!=nullptr)
 	{
+		shakerL->VRGripInterfaceSettings.bDenyGripping=false;
 		shakerL->isDropSoundEnabled=true;
 		isGrabbingShakerLeft=false;		
 	}
@@ -547,6 +585,8 @@ void APlayerCharacter::FireRight()
 	{
 		//UI에 이벤트를 전달하고 싶다.
 		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
+		widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+
 	}
 	// 오른손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsRight)
@@ -725,6 +765,8 @@ void APlayerCharacter::FireLeft()
 	if(widgetInteractionCompLeft)
 	{
 		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));
+		widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+
 	}
 	// 왼손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsLeft)

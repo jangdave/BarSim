@@ -4,6 +4,7 @@
 #include "Strainer.h"
 
 #include "MixingGlass.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AStrainer::AStrainer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -59,6 +60,7 @@ void AStrainer::AttachToMixingGlass()
 		mixingGlass=Cast<AMixingGlass>(HitObj[mixingGlassArrayNum].GetActor());
 		if(mixingGlass!=nullptr)
 		{
+			UGameplayStatics::PlaySound2D(GetWorld(), attachSound, 1, 1, 0);
 			UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
 			this->DisableComponentsSimulatePhysics();
 			this->VRGripInterfaceSettings.bSimulateOnDrop=false;

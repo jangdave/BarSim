@@ -545,7 +545,7 @@ void ACupBase::SetCupEmpty()
 	FCollisionQueryParams params;
 	params.AddIgnoredActor(this);
 	//DrawDebugSphere(GetWorld(), Center, 10, 30, FColor::Red, false, 2.0, 0, 0.1);
-	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(10), params);
+	bool bHit = GetWorld()->OverlapMultiByChannel(HitObj, Center, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(15), params);
 	if (bHit == false)
 	{
 		return;
