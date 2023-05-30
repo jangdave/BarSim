@@ -983,13 +983,16 @@ void APlayerCharacter::FireReleasedRight()
 			isGrabbingWithTongsRight = false;
 			isGrabbingIceWithTongsRight=false;
 			isGrabbingLimeWithTongsRight=false;
-			// 2. 손에서 떼어내기
-			GrabbedObjectWithTongsRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-			// 3. 물리기능 활성화
-			GrabbedObjectWithTongsRight->SetSimulatePhysics(true);
-			// 4. 충돌기능 활성화
-			GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-			GrabbedObjectWithTongsRight = nullptr;
+			if(GrabbedObjectWithTongsRight!=nullptr)
+			{
+				// 2. 손에서 떼어내기
+				GrabbedObjectWithTongsRight->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+				// 3. 물리기능 활성화
+				GrabbedObjectWithTongsRight->SetSimulatePhysics(true);
+				// 4. 충돌기능 활성화
+				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+				GrabbedObjectWithTongsRight = nullptr;
+			}
 		}
 		// Tongs 로 잡고 있는 대상이 없었다면
 		else
@@ -1045,13 +1048,16 @@ void APlayerCharacter::FireReleasedLeft()
 			isGrabbingWithTongsLeft = false;
 			isGrabbingIceWithTongsLeft=false;
 			isGrabbingLimeWithTongsLeft=false;
-			// 2. 손에서 떼어내기
-			GrabbedObjectWithTongsLeft->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-			// 3. 물리기능 활성화
-			GrabbedObjectWithTongsLeft->SetSimulatePhysics(true);
-			// 4. 충돌기능 활성화
-			GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-			GrabbedObjectWithTongsLeft = nullptr;
+			if(GrabbedObjectWithTongsLeft!=nullptr)
+			{
+				// 2. 손에서 떼어내기
+				GrabbedObjectWithTongsLeft->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+				// 3. 물리기능 활성화
+				GrabbedObjectWithTongsLeft->SetSimulatePhysics(true);
+				// 4. 충돌기능 활성화
+				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+				GrabbedObjectWithTongsLeft = nullptr;
+			}
 		}
 		// Tongs 로 잡고 있는 대상이 없었다면
 		else

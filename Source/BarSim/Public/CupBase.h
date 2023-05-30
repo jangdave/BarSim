@@ -188,9 +188,9 @@ public:
 	UPROPERTY()
 	bool isLimeAttached = false;
 
-	UPROPERTY(EditAnywhere, Category=Sounds)
+	UPROPERTY(EditAnywhere, Category="Sounds")
 	class USoundBase* iceDropSound;
 
-	UPROPERTY(EditAnywhere, Category=Sounds)
+	UPROPERTY(EditAnywhere, Category="Sounds")
 	class USoundBase* limeAttachSound;
 };
