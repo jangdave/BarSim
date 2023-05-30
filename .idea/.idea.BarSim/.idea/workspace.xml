@@ -8,20 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/MF_BottleLiquid.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/MF_BottleLiquid.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidDryVermouth_Inst1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidDryVermouth_Inst1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidGin1_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidGin1_Inst.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidLimeJice_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidLimeJice_Inst.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidSugar_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BottleLiquid/BottleMaterial/M_BottleLiquidSugar_Inst.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/wood_002.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/wood_002.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_RyeWhiskey.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_RyeWhiskey.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/MixedDrop.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/MixedDrop.h" afterDir="false" />
-    </list>
+    <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -286,6 +273,7 @@
       <workItem from="1685131139560" duration="936000" />
       <workItem from="1685262675421" duration="1478000" />
       <workItem from="1685381860585" duration="5792000" />
+      <workItem from="1685430149816" duration="838000" />
     </task>
     <servers />
   </component>
