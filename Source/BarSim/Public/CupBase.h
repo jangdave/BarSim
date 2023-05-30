@@ -178,4 +178,13 @@ public:
 
 	UFUNCTION()
 	void PlayerCast();
+
+	UPROPERTY()
+	class ASlicedLime* slicedLime;
+
+	UPROPERTY()
+	class AHalfSlicedLime* halfSlicedLime;
+
+	UPROPERTY()
+	bool isLimeAttached = false;
 };

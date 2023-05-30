@@ -34,4 +34,7 @@ public:
 
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
+
+	UPROPERTY()
+	bool isIceCubeAttachable = false;
 };

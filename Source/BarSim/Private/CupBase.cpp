@@ -5,9 +5,11 @@
 
 #include "CupWidget.h"
 #include "DropBase.h"
+#include "HalfSlicedLime.h"
 #include "IceCube.h"
 #include "MixedDrop.h"
 #include "PlayerCharacter.h"
+#include "SlicedLime.h"
 #include "SteelSink.h"
 #include "Components/BoxComponent.h"
 #include "Components/Overlay.h"
@@ -505,15 +507,79 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	ice = Cast<AIceCube>(OtherActor);
+	ice = Cast<AIceCube>(OtherActor);	
+	slicedLime = Cast<ASlicedLime>(OtherActor);
+	halfSlicedLime = Cast<AHalfSlicedLime>(OtherActor);
 	//igchecker에 얼음이 오버랩되었을 때
 	if(ice)
 	{
-		iceCount += 1;
-		//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
-		cupSize = cupSizeOrigin - iceCount * 2;
-		insideContents = FMath::Clamp(contents, 0, cupSize);
-		LiquorScale();
+		if(ice->isIceCubeAttachable)
+		{
+			if(iceCount==0)
+			{
+				ice->DisableComponentsSimulatePhysics();
+				//ice->SetActorEnableCollision(false);
+				auto socketLoc1 = cupComp->GetSocketTransform(FName("IceSocket1"));
+				ice->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());
+				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));	
+				iceCount += 1;
+				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+				cupSize = cupSizeOrigin - iceCount * 2;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				LiquorScale();
+			}
+			else if(iceCount==1)
+			{
+				ice->DisableComponentsSimulatePhysics();
+				//ice->SetActorEnableCollision(false);
+				auto socketLoc2 = cupComp->GetSocketTransform(FName("IceSocket2"));
+				ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());
+				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
+				iceCount += 1;
+				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+				cupSize = cupSizeOrigin - iceCount * 2;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				LiquorScale();
+			}
+			else if(iceCount==2)
+			{
+				ice->DisableComponentsSimulatePhysics();
+				//ice->SetActorEnableCollision(false);
+				auto socketLoc3 = cupComp->GetSocketTransform(FName("IceSocket3"));
+				ice->SetActorLocationAndRotation(socketLoc3.GetLocation(), socketLoc3.GetRotation());
+				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket3"));
+				iceCount += 1;
+				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+				cupSize = cupSizeOrigin - iceCount * 2;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				LiquorScale();
+			}
+		}
+	}
+	//igchecker에 라임이 오버랩되었을 때
+	else if(slicedLime)
+	{
+		if(slicedLime->isSlicedLimeAttachable&&isLimeAttached==false)
+		{
+			slicedLime->DisableComponentsSimulatePhysics();
+			auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedLimeSocket"));
+			slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
+			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
+			slicedLime->SetActorEnableCollision(false);
+			isLimeAttached = true;
+		}
+	}
+	else if(halfSlicedLime)
+	{
+		if(halfSlicedLime->isHalfSlicedLimeAttachable&&isLimeAttached==false)
+		{
+			halfSlicedLime->DisableComponentsSimulatePhysics();
+			auto halfLimeSocketTrans = cupComp->GetSocketTransform(FName("HalfSlicedLimeSocket"));
+			halfSlicedLime->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
+			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
+			halfSlicedLime->SetActorEnableCollision(false);
+			isLimeAttached = true;
+		}
 	}
 }
 

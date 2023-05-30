@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "SlicedLime.h"
+#include "../../../../../UE_5.1/Engine/Platforms/Hololens/Source/Runtime/Core/Public/Microsoft/AllowMicrosoftPlatformTypesPrivate.h"
 #include "HalfSlicedLime.generated.h"
 
 /**
@@ -20,5 +21,8 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category=IceSettings)
 	class UStaticMeshComponent* limeMesh;
+
+	UPROPERTY()
+	bool isHalfSlicedLimeAttachable = false;
 	
 };
