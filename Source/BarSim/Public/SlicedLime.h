@@ -21,7 +21,8 @@ public:
 	UPROPERTY(EditAnywhere, Category=IceSettings)
 	class UStaticMeshComponent* limeMesh;
 
-
+	UPROPERTY()
+	bool isSlicedLimeAttachable = false;
 	
 protected:
 	// Called when the game starts or when spawned

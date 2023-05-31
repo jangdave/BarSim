@@ -55,4 +55,18 @@ public:
 
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
+
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* pourSound;
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* pourStopSound;
+
+	UPROPERTY()
+	bool pourSoundBoolean = false;
+
+	UPROPERTY()
+	class UAudioComponent* pourSoundAudioComp;
+
+	UPROPERTY()
+	bool isGrabbingBottle=false;
 };

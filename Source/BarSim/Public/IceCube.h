@@ -16,11 +16,9 @@ public:
 	// Sets default values for this actor's properties
 	AIceCube(const FObjectInitializer& ObjectInitializer);
 
-	UPROPERTY(EditAnywhere, Category=IceSettings)
+	UPROPERTY(EditAnywhere, Category="IceSettings")
 	class UStaticMeshComponent* iceCubeMesh;
 
-	UPROPERTY(EditAnywhere, Category=IceSettings)
-	class UBoxComponent* boxComp;
 
 
 	
@@ -34,4 +32,7 @@ public:
 
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
+
+	UPROPERTY()
+	bool isIceCubeAttachable = false;
 };

@@ -10,15 +10,11 @@ AIceCube::AIceCube(const FObjectInitializer& ObjectInitializer):Super(ObjectInit
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
-	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("boxComp"));
-	SetRootComponent(boxComp);
-	boxComp->SetBoxExtent(FVector(5.0f));
-	boxComp->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-
 	
 	iceCubeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("iceCubeMesh"));
-	iceCubeMesh->SetupAttachment(boxComp);
+	SetRootComponent(iceCubeMesh);
+	iceCubeMesh->SetGenerateOverlapEvents(true);
+	iceCubeMesh->SetSimulatePhysics(true);
 
 
 	
@@ -28,13 +24,6 @@ AIceCube::AIceCube(const FObjectInitializer& ObjectInitializer):Super(ObjectInit
 void AIceCube::BeginPlay()
 {
 	Super::BeginPlay();
-
-
-	boxComp->SetSimulatePhysics(true);
-	boxComp->SetGenerateOverlapEvents(true);
-
-	iceCubeMesh->SetGenerateOverlapEvents(false);
-	iceCubeMesh->SetSimulatePhysics(false);
 
 }
 

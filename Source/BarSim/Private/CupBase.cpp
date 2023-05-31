@@ -5,9 +5,11 @@
 
 #include "CupWidget.h"
 #include "DropBase.h"
+#include "HalfSlicedLime.h"
 #include "IceCube.h"
 #include "MixedDrop.h"
 #include "PlayerCharacter.h"
+#include "SlicedLime.h"
 #include "SteelSink.h"
 #include "Components/BoxComponent.h"
 #include "Components/Overlay.h"
@@ -52,6 +54,7 @@ void ACupBase::BeginPlay()
 	Super::BeginPlay();
 
 	cupSize = cupSizeOrigin;
+	iceCount=0;
 	
 	measureComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddLiquor);
 	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
@@ -505,15 +508,83 @@ void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* Other
 void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	ice = Cast<AIceCube>(OtherActor);
+	ice = Cast<AIceCube>(OtherActor);	
+	slicedLime = Cast<ASlicedLime>(OtherActor);
+	halfSlicedLime = Cast<AHalfSlicedLime>(OtherActor);
 	//igchecker에 얼음이 오버랩되었을 때
 	if(ice)
 	{
-		iceCount += 1;
-		//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
-		cupSize = cupSizeOrigin - iceCount * 1.8f;
-		insideContents = FMath::Clamp(contents, 0, cupSize);
-		LiquorScale();
+		if(ice->isIceCubeAttachable)
+		{
+			if(iceCount==0)
+			{
+				auto randPitch = FMath::FRandRange(0.95, 1.05);
+				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
+				ice->DisableComponentsSimulatePhysics();
+				auto socketLoc1 = cupComp->GetSocketTransform(FName("IceSocket1"), RTS_World);
+				ice->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());
+				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));
+				iceCount += 1;
+				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+				cupSize = cupSizeOrigin - iceCount * 1.8;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				LiquorScale();
+			}
+			else if(iceCount==1)
+			{
+				auto randPitch = FMath::FRandRange(0.95, 1.05);
+				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
+				ice->DisableComponentsSimulatePhysics();
+				auto socketLoc2 = cupComp->GetSocketTransform(FName("IceSocket2"), RTS_World);
+				ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());
+				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
+				iceCount += 1;
+				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+				cupSize = cupSizeOrigin - iceCount * 1.8;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				LiquorScale();
+			}
+			else if(iceCount==2)
+			{
+				auto randPitch = FMath::FRandRange(0.95, 1.05);
+				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
+				ice->DisableComponentsSimulatePhysics();
+				auto socketLoc3 = cupComp->GetSocketTransform(FName("IceSocket3"), RTS_World);
+				ice->SetActorLocationAndRotation(socketLoc3.GetLocation(), socketLoc3.GetRotation());
+				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket3"));
+				iceCount += 1;
+				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+				cupSize = cupSizeOrigin - iceCount * 1.8;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				LiquorScale();
+			}
+		}
+	}
+	//igchecker에 라임이 오버랩되었을 때
+	else if(slicedLime)
+	{
+		if(slicedLime->isSlicedLimeAttachable&&isLimeAttached==false)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
+			slicedLime->DisableComponentsSimulatePhysics();
+			auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedLimeSocket"));
+			slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
+			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
+			isLimeAttached = true;
+		}
+	}
+	else if(halfSlicedLime)
+	{
+		if(halfSlicedLime->isHalfSlicedLimeAttachable&&isLimeAttached==false)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
+			halfSlicedLime->DisableComponentsSimulatePhysics();
+			halfSlicedLime->SetActorEnableCollision(false);
+			auto halfLimeSocketTrans = cupComp->GetSocketTransform(FName("HalfSlicedLimeSocket"));
+			halfSlicedLime->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
+			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
+			isLimeAttached = true;
+		}
 	}
 }
 
@@ -526,7 +597,7 @@ void ACupBase::ExtractIce(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 	{
 		iceCount -= 1;
 		//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
-		cupSize = cupSizeOrigin - iceCount * 2;
+		cupSize = cupSizeOrigin - iceCount * 1.8;
 		insideContents = FMath::Clamp(contents, 0, cupSize);
 		LiquorScale();
 

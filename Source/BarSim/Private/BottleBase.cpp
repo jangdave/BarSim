@@ -6,7 +6,9 @@
 #include "DropBase.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "Components/AudioComponent.h"
 #include "Components/SphereComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABottleBase::ABottleBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -64,6 +66,13 @@ void ABottleBase::Tick(float DeltaTime)
 				drop->dropMass = 0.05f * streamWidth * DeltaTime;
 				drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
 				remains = remains - drop->dropMass;
+				if(pourSoundBoolean==false&&isGrabbingBottle==true)
+				{
+					UE_LOG(LogTemp, Warning, TEXT("play sound"))
+					//pourSoundAudioComp = UGameplayStatics::SpawnSound2D(GetWorld(), pourSound, 1, 1, 0, nullptr, false, true);
+					pourSoundAudioComp = UGameplayStatics::SpawnSound2D(GetWorld(), pourSound, 1, 1, 0);
+					pourSoundBoolean=true;
+				}
 				bStreamOn = true;
 			}
 			else
@@ -95,8 +104,16 @@ void ABottleBase::Tick(float DeltaTime)
 			if(waterStream)
 			{
 				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
+				if(pourSoundBoolean==true&&pourSoundAudioComp!=nullptr&&isGrabbingBottle==true)
+				{
+					UE_LOG(LogTemp, Warning, TEXT("stop sound"))
+					pourSoundAudioComp->SetActive(false);
+					UGameplayStatics::PlaySound2D(GetWorld(), pourStopSound, 1, 1, 0);
+					pourSoundBoolean=false;
+				}
 				bStreamOn = false;
 			}
+
 		}
 	}
 	else
