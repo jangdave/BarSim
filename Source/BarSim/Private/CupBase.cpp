@@ -54,6 +54,7 @@ void ACupBase::BeginPlay()
 	Super::BeginPlay();
 
 	cupSize = cupSizeOrigin;
+	iceCount=0;
 	
 	measureComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddLiquor);
 	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
@@ -520,7 +521,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				auto randPitch = FMath::FRandRange(0.95, 1.05);
 				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
 				ice->DisableComponentsSimulatePhysics();
-				auto socketLoc1 = cupComp->GetSocketTransform(FName("IceSocket1"));
+				auto socketLoc1 = cupComp->GetSocketTransform(FName("IceSocket1"), RTS_World);
 				ice->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));
 				iceCount += 1;
@@ -534,7 +535,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				auto randPitch = FMath::FRandRange(0.95, 1.05);
 				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
 				ice->DisableComponentsSimulatePhysics();
-				auto socketLoc2 = cupComp->GetSocketTransform(FName("IceSocket2"));
+				auto socketLoc2 = cupComp->GetSocketTransform(FName("IceSocket2"), RTS_World);
 				ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
 				iceCount += 1;
@@ -548,7 +549,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				auto randPitch = FMath::FRandRange(0.95, 1.05);
 				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
 				ice->DisableComponentsSimulatePhysics();
-				auto socketLoc3 = cupComp->GetSocketTransform(FName("IceSocket3"));
+				auto socketLoc3 = cupComp->GetSocketTransform(FName("IceSocket3"), RTS_World);
 				ice->SetActorLocationAndRotation(socketLoc3.GetLocation(), socketLoc3.GetRotation());
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket3"));
 				iceCount += 1;
@@ -566,7 +567,6 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 		{
 			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
 			slicedLime->DisableComponentsSimulatePhysics();
-			slicedLime->SetActorEnableCollision(false);
 			auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedLimeSocket"));
 			slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
 			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));

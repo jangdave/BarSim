@@ -112,6 +112,8 @@ public:
 	bool isGrabbingIceWithTongsLeft=false;
 	bool isGrabbingLimeWithTongsRight=false;
 	bool isGrabbingLimeWithTongsLeft=false;
+	bool isGrabbingOliveWithTongsRight=false;
+	bool isGrabbingOliveWithTongsLeft=false;
 		
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;
@@ -210,6 +212,12 @@ public:
 	class ASlicedLimeVat* slicedLimeVat;
 	UPROPERTY()
 	class AIceCubeVat* iceCubeVat;
+	UPROPERTY()
+	class AOlivePick* olivePick;
+	UPROPERTY()
+	class AOlivePick* olivePickL;
+	UPROPERTY()
+	class AOliveVat* oliveVat;
 	
 	// Sounds
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
@@ -231,5 +239,10 @@ public:
 	// Ice Cube BP
 	UPROPERTY(EditAnywhere, Category="Factory")
 	TSubclassOf<class AIceCube> iceCubeFac;
+
+	// Olive BP
+	UPROPERTY(EditAnywhere, Category="Factory")
+	TSubclassOf<class AOlivePick> oliveFac;
+
 	
 };

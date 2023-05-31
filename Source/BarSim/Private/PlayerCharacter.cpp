@@ -17,6 +17,8 @@
 #include "IceCubeVat.h"
 #include "MixingGlass.h"
 #include "NiagaraComponent.h"
+#include "OlivePick.h"
+#include "OliveVat.h"
 #include "PlayerDialogWidget.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
@@ -616,6 +618,7 @@ void APlayerCharacter::FireRight()
 			halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(VatHitObj[i].GetActor());
 			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[i].GetActor());
 			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[i].GetActor());
+			oliveVat=Cast<AOliveVat>(VatHitObj[i].GetActor());
 			if(halfSlicedLimeVat)
 			{
 				FActorSpawnParameters param;
@@ -639,6 +642,14 @@ void APlayerCharacter::FireRight()
 				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
 				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("TongGrabSizeSocket"));
 				GetWorld()->SpawnActor<AIceCube>(iceCubeFac, socketLoc, socketRot, param);
+			}
+			else if(oliveVat)
+			{
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("OliveSocket"));
+				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("OliveSocket"));
+				GetWorld()->SpawnActor<AOlivePick>(oliveFac, socketLoc, socketRot, param);
 			}
 		}
 		// 집게에 집는 대상 오브젝트가 오버랩되었는지 판단하는 OverlapMulti
@@ -686,6 +697,7 @@ void APlayerCharacter::FireRight()
 			iceCube=Cast<AIceCube>(GrabbedActorWithTongsRight);
 			slicedLime=Cast<ASlicedLime>(GrabbedActorWithTongsRight);
 			halfSlicedLime=Cast<AHalfSlicedLime>(GrabbedActorWithTongsRight);
+			olivePick=Cast<AOlivePick>(GrabbedActorWithTongsRight);
 			
 			if(GrabbedActorWithTongsRight==iceCube&&iceCube!=nullptr)
 			{
@@ -710,6 +722,14 @@ void APlayerCharacter::FireRight()
 				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
 				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
+			}
+			else if(GrabbedActorWithTongsRight==olivePick&&olivePick!=nullptr)
+			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
+				isGrabbingOliveWithTongsRight=true;
+				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
+				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("OliveSocket"));
 			}
 		}		
 			FLatentActionInfo LatentInfo;
@@ -737,13 +757,16 @@ void APlayerCharacter::FireRight()
 					//grabbingObjectSize = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
 					// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
 					tongCompRef->SetRelativeRotation(FRotator(5, 0, 0));
-					//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				}
 				else if(isGrabbingLimeWithTongsRight)
 				{
 					isTongsTickEnabled = false;
 					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
-					//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				}
+				else if(isGrabbingOliveWithTongsRight)
+				{
+					isTongsTickEnabled = false;
+					tongCompRef->SetRelativeRotation(FRotator(12, 0, 0));
 				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -796,6 +819,7 @@ void APlayerCharacter::FireLeft()
 			halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(VatHitObj[i].GetActor());
 			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[i].GetActor());
 			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[i].GetActor());
+			oliveVat=Cast<AOliveVat>(VatHitObj[i].GetActor());
 			if(halfSlicedLimeVat)
 			{
 				FActorSpawnParameters param;
@@ -819,6 +843,14 @@ void APlayerCharacter::FireLeft()
 				auto socketLoc = huchuTongL->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
 				auto socketRot = huchuTongL->tongRight-> GetSocketRotation(FName("TongGrabSizeSocket"));
 				GetWorld()->SpawnActor<AIceCube>(iceCubeFac, socketLoc, socketRot, param);
+			}
+			else if(oliveVat)
+			{
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTongL->tongRight->GetSocketLocation(FName("OliveSocket"));
+				auto socketRot = huchuTongL->tongRight-> GetSocketRotation(FName("OliveSocket"));
+				GetWorld()->SpawnActor<AOlivePick>(oliveFac, socketLoc, socketRot, param);
 			}
 		}
 		// 중심점
@@ -864,6 +896,7 @@ void APlayerCharacter::FireLeft()
 			iceCubeL=Cast<AIceCube>(GrabbedActorWithTongsLeft);
 			slicedLimeL=Cast<ASlicedLime>(GrabbedActorWithTongsLeft);
 			halfSlicedLimeL=Cast<AHalfSlicedLime>(GrabbedActorWithTongsLeft);
+			olivePickL=Cast<AOlivePick>(GrabbedActorWithTongsLeft);
 			if(GrabbedActorWithTongsLeft==iceCubeL&&iceCubeL!=nullptr)
 			{
 				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
@@ -888,6 +921,14 @@ void APlayerCharacter::FireLeft()
 				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
 			}
+			else if(GrabbedActorWithTongsLeft==olivePickL&&olivePickL!=nullptr)
+			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
+				isGrabbingOliveWithTongsLeft=true;
+				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("OliveSocket"));
+			}
 		}	
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
@@ -908,17 +949,17 @@ void APlayerCharacter::FireLeft()
 				if(isGrabbingIceWithTongsLeft)
 				{
 					isTongsTickEnabledL = false;
-					// Left Impact Point와 Right Impact Point 사이의 간격을 도출한다
-					//grabbingObjectSizeL = FVector::Dist(leftTrace.ImpactPoint, rightTrace.ImpactPoint);
-					// grabbingObjectSize에 따라서 Tongs가 다물어질 정도를 결정한다.
 					tongCompRef->SetRelativeRotation(FRotator(5, 0, 0));
-					//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				}
 				else if(isGrabbingLimeWithTongsLeft)
 				{
 					isTongsTickEnabledL = false;
 					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
-					//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(8, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				}
+				else if(isGrabbingOliveWithTongsLeft)
+				{
+					isTongsTickEnabledL = false;
+					tongCompRef->SetRelativeRotation(FRotator(12, 0, 0));
 				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -978,11 +1019,20 @@ void APlayerCharacter::FireReleasedRight()
 					slicedLime->isSlicedLimeAttachable=true;
 				}
 			}
+			else if(isGrabbingOliveWithTongsRight)
+			{
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-12, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				if(olivePick!=nullptr)
+				{
+					olivePick->isOliveAttachable = true;
+				}
+			}
 			isTongsTickEnabled = true;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsRight = false;
 			isGrabbingIceWithTongsRight=false;
 			isGrabbingLimeWithTongsRight=false;
+			isGrabbingOliveWithTongsRight=false;
 			if(GrabbedObjectWithTongsRight!=nullptr)
 			{
 				// 2. 손에서 떼어내기
@@ -1043,11 +1093,20 @@ void APlayerCharacter::FireReleasedLeft()
 					slicedLimeL->isSlicedLimeAttachable=true;
 				}
 			}
+			else if(isGrabbingOliveWithTongsLeft)
+			{
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-12, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				if(olivePickL!=nullptr)
+				{
+					olivePickL->isOliveAttachable=true;
+				}
+			}
 			isTongsTickEnabledL = true;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsLeft = false;
 			isGrabbingIceWithTongsLeft=false;
 			isGrabbingLimeWithTongsLeft=false;
+			isGrabbingOliveWithTongsLeft=false;
 			if(GrabbedObjectWithTongsLeft!=nullptr)
 			{
 				// 2. 손에서 떼어내기
