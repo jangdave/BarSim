@@ -103,9 +103,7 @@ void UOldPalFSM::AttachCustomer()
 {
 	owner->GetCapsuleComponent()->SetEnableGravity(false);
 
-	owner->GetMesh()->SetRelativeLocation(FVector(0, 0, -5));
-	
-	owner->AttachToComponent(spawnManager->aChairs[idx]->sitOldComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	owner->AttachToComponent(spawnManager->aChairs[idx]->sitComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 }
 
 // 손님 의자에 detach
@@ -113,9 +111,7 @@ void UOldPalFSM::DetachCustomer()
 {
 	owner->GetCapsuleComponent()->SetEnableGravity(true);
 
-	//owner->GetMesh()->SetRelativeLocation(FVector(0, 0, 5));
-	
-	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitOldComp, FDetachmentTransformRules::KeepWorldTransform);
+	owner->DetachAllSceneComponents(spawnManager->aChairs[idx]->sitComp, FDetachmentTransformRules::KeepWorldTransform);
 }
 
 // 주문 칵테일 정하기
@@ -195,9 +191,16 @@ void UOldPalFSM::TickReadyLean()
 				owner->oldPalAnim->OnStandAnim(2.01);
 			}
 		}
+		// 3일
 		else
 		{
-			//
+			if(bCheckPlayAnim != true)
+			{
+				bCheckPlayAnim = true;
+			
+				// 도착하면 기대는 애니메이션 실행
+				owner->oldPalAnim->OnStandAnim(2.01);
+			}
 		}
 	}
 }
@@ -231,9 +234,133 @@ void UOldPalFSM::TickTalk()
 			}
 		}
 	}
+	// 3일
 	else
 	{
-		//
+		if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
+		{
+			// 올드팔 대사 0
+			owner->oldPal_UI->SetOldPalText(0);
+			owner->oldPal_UI->StartOldPal();
+
+			bOldPalTalk = true;
+
+			if(bCheckPlayAnim != true)
+			{
+				bCheckPlayAnim = true;
+			
+				// 말하는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(4.51);
+			}
+		}
+
+		if(curTime > 3 && curTime <= 5)
+		{
+			// 올드팔 대사 1
+			owner->oldPal_UI->SetOldPalText(1);
+		}
+
+		if(bOldPalTalk != false && curTime > 5 && curTime <= 7)
+		{
+			owner->oldPal_UI->EndOldPal();
+
+			bOldPalTalk = false;
+		}
+
+		if(bPlayerTalk != true && curTime > 7 && curTime <= 9)
+		{
+			// 플레이어 대사 0
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(0);
+			player->playerText_UI->StartPlayer();
+
+			bPlayerTalk = true;
+		}
+
+		if(curTime > 9 && curTime <= 11)
+		{
+			// 플레이어 대사 1
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(1);
+		}
+
+		if(bPlayerTalk != false && curTime > 11 && curTime <= 13)
+		{
+			player->playerText_UI->EndPlayer();
+
+			bPlayerTalk = false;
+		}
+
+		if(bOldPalTalk != true && curTime > 13 && curTime <= 15)
+		{
+			// 올드팔 대사 2
+			owner->oldPal_UI->SetOldPalText(2);
+			owner->oldPal_UI->StartOldPal();
+
+			bOldPalTalk = true;
+
+			if(bCheckPlayAnim != false)
+			{
+				bCheckPlayAnim = false;
+			
+				// 말하는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(4.51);
+			}
+		}
+
+		if(curTime > 15 && curTime <= 17)
+		{
+			// 올드팔 대사 3
+			owner->oldPal_UI->SetOldPalText(3);
+		}
+
+		if(bOldPalTalk != false && curTime > 17 && curTime <= 19)
+		{
+			owner->oldPal_UI->EndOldPal();
+
+			bOldPalTalk = false;
+		}
+
+		if(bPlayerTalk != true && curTime > 19 && curTime <= 21)
+		{
+			// 플레이어 대사 2
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(2);
+			player->playerText_UI->StartPlayer();
+
+			bPlayerTalk = true;
+		}
+
+		if(curTime > 21 && curTime <= 23)
+		{
+			// 플레이어 대사 3
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(3);
+		}
+
+		if(bPlayerTalk != false && curTime > 23 && curTime <= 25)
+		{
+			player->playerText_UI->EndPlayer();
+
+			bPlayerTalk = false;
+		}
+
+		if(bOldPalTalk != true && curTime > 25)
+		{
+			// 올드팔 대사 4
+			owner->oldPal_UI->SetOldPalText(4);
+			owner->oldPal_UI->StartOldPal();
+
+			bOldPalTalk = true;
+
+			if(bCheckPlayAnim != false)
+			{
+				bCheckPlayAnim = false;
+			
+				// 말하는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(1.01);
+			}
+		}
 	}
 }
 
@@ -266,9 +393,95 @@ void UOldPalFSM::TickChoice()
 			SetState(EOldPalState::READYMOVE);
 		}
 	}
+	// 3일
 	else
 	{
-		//
+		if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
+		{
+			owner->oldPal_UI->EndOldPal();
+
+			bOldPalTalk = true;
+		}
+
+		if(bPlayerTalk != true && curTime > 3 && curTime <= 5)
+		{
+			// 플레이어 대사 4
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(4);
+			player->playerText_UI->StartPlayer();
+
+			bPlayerTalk = true;
+		}
+
+		if(curTime > 5 && curTime <= 7)
+		{
+			// 플레이어 대사 5
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(5);
+		}
+
+		if(curTime > 7 && curTime <= 9)
+		{
+			// 플레이어 대사 6
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(6);
+		}
+		
+		if(bPlayerTalk != false && curTime > 9 && curTime <= 11)
+		{
+			player->playerText_UI->EndPlayer();
+
+			bPlayerTalk = false;
+		}
+
+		if(bOldPalTalk != true && curTime > 11 && curTime <= 13)
+		{
+			// 올드팔 대사 5
+			owner->oldPal_UI->SetOldPalText(5);
+			owner->oldPal_UI->StartOldPal();
+
+			bOldPalTalk = true;
+
+			if(bCheckPlayAnim != false)
+			{
+				bCheckPlayAnim = false;
+			
+				// 말하는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(4.51);
+			}
+		}
+		
+		if(curTime > 13 && curTime <= 15)
+		{
+			// 올드팔 대사 6
+			owner->oldPal_UI->SetOldPalText(6);
+		}
+
+		if(bOldPalTalk != false && curTime > 15 && curTime <= 17)
+		{
+			owner->oldPal_UI->EndOldPal();
+
+			bOldPalTalk = false;
+		}
+
+		if(bPlayerTalk != true && curTime > 17 && curTime <= 19)
+		{
+			// 플레이어 대사 7
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(7);
+			player->playerText_UI->StartPlayer();
+
+			bPlayerTalk = true;
+		}
+
+		if(bPlayerTalk != false && curTime > 19)
+		{
+			player->playerText_UI->EndPlayer();
+
+			bPlayerTalk = false;
+
+			SetState(EOldPalState::READYMOVE);
+		}
 	}
 }
 
@@ -366,6 +579,7 @@ void UOldPalFSM::TickReadyMove()
 			}
 		}
 	}
+	// 3일
 	else
 	{
 		// 의자의 저장하고
@@ -374,7 +588,81 @@ void UOldPalFSM::TickReadyMove()
 		// 앉은 의자 배열에 착석 여부 바꾸기
 		spawnManager->bIsSit[idx] = true;
 
-		//
+		// 선택지 띄우기
+		if(player->playerText_UI->choiceCount == 0)
+		{
+			if(bPlayerTalk != true && curTime > 2)
+			{
+				// 플레이어 초이스 1번째
+				player->playerText_UI->SetSwitcher(1);
+				player->playerText_UI->SetChoice2();
+				player->playerText_UI->StartPlayer();
+
+				bPlayerTalk = true;
+			}
+		}
+		// 선택 왼쪽
+		else if(player->playerText_UI->choiceCount == 1)
+		{
+			if(bCount != true)
+			{
+				curTime = 0;
+
+				bCount = true;
+			}
+
+			if(bPlayerTalk != false)
+			{
+				// 플레이어 초이스 지우기
+				player->playerText_UI->EndPlayer();
+				
+				bPlayerTalk = false;
+			}
+			
+			if(curTime > 1 && bCheckPlayAnim != true)
+			{
+				// 플레이어 대사 8
+				player->playerText_UI->SetSwitcher(0);
+				player->playerText_UI->SetPlayerText(8);
+				player->playerText_UI->StartPlayer();
+
+				bCheckPlayAnim = true;
+			
+				// 다시 일어서는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(0.01);
+			}
+		}
+		// 선택 오른쪽
+		else if(player->playerText_UI->choiceCount == 2)
+		{
+			if(bCount != true)
+			{
+				curTime = 0;
+
+				bCount = true;
+			}
+
+			if(bPlayerTalk != false)
+			{
+				// 플레이어 초이스 지우기
+				player->playerText_UI->EndPlayer();
+				
+				bPlayerTalk = false;
+			}
+			
+			if(curTime > 1 && bCheckPlayAnim != true)
+			{
+				// 플레이어 대사 9
+				player->playerText_UI->SetSwitcher(0);
+				player->playerText_UI->SetPlayerText(9);
+				player->playerText_UI->StartPlayer();
+
+				bCheckPlayAnim = true;
+			
+				// 다시 일어서는 애니메이션 실행
+				owner->oldPalAnim->OnLeanAnim(0.01);
+			}
+		}
 	}
 }
 
@@ -397,14 +685,31 @@ void UOldPalFSM::TickMove()
 		
 		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
 		{
-			
 			// 도착하면 다음 단계로
 			SetState(EOldPalState::READYSIT);
 		}
 	}
+	// 3일
 	else
 	{
-		//
+		// 지정 된 의자 뒤로 이동
+		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -100;
+
+		auto result = ai->MoveToLocation(loc);
+		
+		if(bPlayerTalk != true && curTime > 1)
+		{
+			// 플레이어 대사 지우기
+			player->playerText_UI->EndPlayer();
+
+			bPlayerTalk = true;
+		}
+		
+		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
+		{
+			// 도착하면 다음 단계로
+			SetState(EOldPalState::READYSIT);
+		}
 	}
 }
 
@@ -437,9 +742,23 @@ void UOldPalFSM::TickReadySit()
 			}
 		}
 	}
+	// 3일
 	else
 	{
-		//
+		// 지정 된 의자 뒤로 이동
+		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -10;
+		auto result = ai->MoveToLocation(loc);
+
+		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
+		{
+			if(bCheckPlayAnim != true)
+			{
+				// 도착하면 앉는 애니메이션 실행
+				bCheckPlayAnim = true;
+
+				owner->oldPalAnim->OnStandAnim(0.01);
+			}
+		}
 	}
 }
 
@@ -533,6 +852,7 @@ void UOldPalFSM::TickLeave()
 			UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
 		}
 	}
+	// 3일
 	else
 	{
 		
@@ -609,9 +929,25 @@ void UOldPalFSM::TickStandby()
 			SetSitState(EOldPalSitState::STANDBYWAITLONG);
 		}
 	}
+	// 3일
 	else
 	{
-		//
+		if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
+		{
+			// 올드팔 대사 7
+			owner->oldPal_UI->SetOldPalText(7);
+			owner->oldPal_UI->StartOldPal();
+
+			bOldPalTalk = true;
+
+			if(bCheckPlayAnim != false)
+			{
+				// 토크2 애니메이션 실행
+				bCheckPlayAnim = true;
+			
+				owner->oldPalAnim->OnSitAnim(5.01);
+			}
+		}
 	}
 }
 
@@ -645,6 +981,7 @@ void UOldPalFSM::TickStandbyWaitLong()
 			SetSitState(EOldPalSitState::ORDER);
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -680,6 +1017,7 @@ void UOldPalFSM::TickOrder()
 			SetSitState(EOldPalSitState::WAIT);
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -724,6 +1062,7 @@ void UOldPalFSM::TickWait()
 			SetSitState(EOldPalSitState::WAITLONG);
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -770,6 +1109,7 @@ void UOldPalFSM::TickWaitLong()
 			}
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -927,6 +1267,7 @@ void UOldPalFSM::TickOrderJudge()
 			}
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -953,6 +1294,7 @@ void UOldPalFSM::TickHoldCup()
 			owner->oldPalAnim->OnSitAnim(6.34);
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -1151,6 +1493,7 @@ void UOldPalFSM::TickTasteJudge()
 			}
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -1183,6 +1526,7 @@ void UOldPalFSM::TickAngry()
 			SetSitState(EOldPalSitState::AWESOME);
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -1215,6 +1559,7 @@ void UOldPalFSM::TickAwesome()
 			SetSitState(EOldPalSitState::READYLEAVE);
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -1243,6 +1588,7 @@ void UOldPalFSM::TickReadyLeave()
 			}
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -1282,6 +1628,7 @@ void UOldPalFSM::TickIdleCup()
 			owner->oldPalAnim->OnDrinkAnim(0.01);
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -1316,6 +1663,7 @@ void UOldPalFSM::TickDrinkCup()
 			owner->oldPalAnim->OnDrinkAnim(2.01);
 		}
 	}
+	// 3일
 	else
 	{
 		//
@@ -1335,6 +1683,7 @@ void UOldPalFSM::TickUnHoldCup()
 			owner->oldPalAnim->OnDrinkAnim(7.67);
 		}
 	}
+	// 3일
 	else
 	{
 		//
