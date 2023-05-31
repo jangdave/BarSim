@@ -82,11 +82,11 @@ void APlayerCharacter::BeginPlay()
 	
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;	
-	widgetInteractionComp->InteractionDistance=40.0f;
+	widgetInteractionComp->InteractionDistance=100.0f;
 
 	widgetInteractionCompLeft->bEnableHitTesting=true;
 	widgetInteractionCompLeft->bShowDebug=false;	
-	widgetInteractionCompLeft->InteractionDistance=40.0f;
+	widgetInteractionCompLeft->InteractionDistance=100.0f;
 
 	WidgetTraceLeft->SetVisibility(false);
 	WidgetTraceRight->SetVisibility(false);
@@ -134,14 +134,13 @@ void APlayerCharacter::Tick(float DeltaTime)
 
 	// Tablet Widget Line Trace
 	FVector startPos = widgetInteractionComp->GetComponentLocation();
-	FVector endPos = startPos + widgetInteractionComp->GetForwardVector() * 40.0f;
+	FVector endPos = startPos + widgetInteractionComp->GetForwardVector() * 100.0f;
 	FHitResult traceHit;
 	bool bOverWidget = widgetInteractionComp->IsOverHitTestVisibleWidget();
 	bool bHit = GetWorld()->LineTraceSingleByChannel(traceHit, startPos, endPos, ECC_Visibility);
 	if(bHit&&bOverWidget)
 	{
 		auto hitDist = traceHit.Distance;
-		auto hitLoc = widgetInteractionComp->Get2DHitLocation();
 		WidgetTraceRight->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
 		WidgetTraceRight->SetVisibility(true);
 	}
@@ -151,7 +150,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 	}
 	// Tablet Widget Line Trace Left
 	FVector startPosL = widgetInteractionCompLeft->GetComponentLocation();
-	FVector endPosL = startPosL + widgetInteractionCompLeft->GetForwardVector() * 40.0f;
+	FVector endPosL = startPosL + widgetInteractionCompLeft->GetForwardVector() * 100.0f;
 	FHitResult traceHitL;
 	bool bOverWidgetLeft = widgetInteractionCompLeft->IsOverHitTestVisibleWidget();
 	bool bHitL = GetWorld()->LineTraceSingleByChannel(traceHitL, startPosL, endPosL, ECC_Visibility);
