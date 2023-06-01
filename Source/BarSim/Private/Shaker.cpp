@@ -8,7 +8,9 @@
 #include "NiagaraFunctionLibrary.h"
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
+#include "Components/AudioComponent.h"
 #include "Components/SphereComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 AShaker::AShaker(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -80,6 +82,12 @@ void AShaker::Tick(float DeltaSeconds)
 
 					contents = contents - mixedDrop->dropMass;
 					mixedDrop->bStirred = bStirred;
+					if(pourSoundBoolean==false&&isGrabbingShaker==true)
+					{
+						UE_LOG(LogTemp, Warning, TEXT("play sound"))
+						pourSoundAudioCompS = UGameplayStatics::SpawnSound2D(GetWorld(), pourSoundS, 1, 1, 0);
+						pourSoundBoolean=true;
+					}
 					bStreamOn = true;
 				}
 			}
@@ -129,6 +137,13 @@ void AShaker::Tick(float DeltaSeconds)
 			if(waterStream)
 			{
 				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
+				if(pourSoundBoolean==true&&pourSoundAudioCompS!=nullptr&&isGrabbingShaker==true)
+				{
+					UE_LOG(LogTemp, Warning, TEXT("stop sound"));
+					pourSoundAudioCompS->SetActive(false);
+					UGameplayStatics::PlaySound2D(GetWorld(), pourStopSoundS, 1, 1, 0);
+					pourSoundBoolean=false;
+				}
 				bStreamOn = false;
 			}
 		}

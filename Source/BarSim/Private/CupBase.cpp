@@ -521,10 +521,18 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				auto randPitch = FMath::FRandRange(0.95, 1.05);
 				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
 				ice->DisableComponentsSimulatePhysics();
-				auto socketLoc1 = cupComp->GetSocketTransform(FName("IceSocket1"), RTS_World);
-				ice->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());
+				if(cupComp->IsSimulatingPhysics()==true)
+				{
+					
+				}
+				else
+				{
+					auto socketLoc1 = cupComp->GetSocketTransform(FName("IceSocket1"), RTS_World);
+					ice->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());
+				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));
 				iceCount += 1;
+				UE_LOG(LogTemp, Warning, TEXT("IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
 				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);
@@ -535,10 +543,18 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				auto randPitch = FMath::FRandRange(0.95, 1.05);
 				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
 				ice->DisableComponentsSimulatePhysics();
-				auto socketLoc2 = cupComp->GetSocketTransform(FName("IceSocket2"), RTS_World);
-				ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());
+				if(cupComp->IsSimulatingPhysics()==true)
+				{
+					
+				}
+				else
+				{
+					auto socketLoc2 = cupComp->GetSocketTransform(FName("IceSocket2"), RTS_World);
+					ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());
+				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
 				iceCount += 1;
+				UE_LOG(LogTemp, Warning, TEXT("IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
 				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);
@@ -549,14 +565,26 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				auto randPitch = FMath::FRandRange(0.95, 1.05);
 				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
 				ice->DisableComponentsSimulatePhysics();
-				auto socketLoc3 = cupComp->GetSocketTransform(FName("IceSocket3"), RTS_World);
-				ice->SetActorLocationAndRotation(socketLoc3.GetLocation(), socketLoc3.GetRotation());
+				if(cupComp->IsSimulatingPhysics()==true)
+				{
+					
+				}
+				else
+				{
+					auto socketLoc3 = cupComp->GetSocketTransform(FName("IceSocket3"), RTS_World);
+					ice->SetActorLocationAndRotation(socketLoc3.GetLocation(), socketLoc3.GetRotation());
+				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket3"));
 				iceCount += 1;
+				UE_LOG(LogTemp, Warning, TEXT("IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
 				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);
 				LiquorScale();
+			}
+			else if(iceCount==3)
+			{
+				
 			}
 		}
 	}
@@ -567,8 +595,16 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 		{
 			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
 			slicedLime->DisableComponentsSimulatePhysics();
-			auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedLimeSocket"));
-			slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
+			slicedLime->SetActorEnableCollision(false);
+			if(cupComp->IsSimulatingPhysics()==true)
+			{
+				
+			}
+			else
+			{
+				auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedLimeSocket"));
+				slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
+			}
 			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
 			isLimeAttached = true;
 		}
@@ -580,8 +616,16 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
 			halfSlicedLime->DisableComponentsSimulatePhysics();
 			halfSlicedLime->SetActorEnableCollision(false);
-			auto halfLimeSocketTrans = cupComp->GetSocketTransform(FName("HalfSlicedLimeSocket"));
-			halfSlicedLime->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
+			if(cupComp->IsSimulatingPhysics()==true)
+			{
+				
+			}
+			else
+			{
+				auto halfLimeSocketTrans = cupComp->GetSocketTransform(FName("HalfSlicedLimeSocket"));
+				halfSlicedLime->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
+			}
+
 			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
 			isLimeAttached = true;
 		}

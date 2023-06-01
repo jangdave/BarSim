@@ -4,6 +4,7 @@
 #include "MartiniCup.h"
 
 #include "HalfSlicedLime.h"
+#include "IceCube.h"
 #include "OlivePick.h"
 #include "SlicedLime.h"
 #include "Kismet/GameplayStatics.h"
@@ -21,8 +22,13 @@ void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* Other
 	slicedLime = Cast<ASlicedLime>(OtherActor);
 	halfSlicedLime = Cast<AHalfSlicedLime>(OtherActor);
 	olive = Cast<AOlivePick>(OtherActor);
+	ice=Cast<AIceCube>(OtherActor);
+	if(ice)
+	{
+		return;
+	}
 	//igchecker에 라임이 오버랩되었을 때
-	if(slicedLime)
+	else if(slicedLime)
 	{
 		if(slicedLime->isSlicedLimeAttachable&&isLimeAttached==false)
 		{
