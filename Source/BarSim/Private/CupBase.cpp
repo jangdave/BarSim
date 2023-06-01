@@ -523,8 +523,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				ice->DisableComponentsSimulatePhysics();
 				if(cupComp->IsSimulatingPhysics()==true)
 				{
-					auto cupLoc1 = cupComp->GetComponentTransform();
-					ice->SetActorLocationAndRotation(cupLoc1.GetLocation(), cupLoc1.GetRotation());
+					
 				}
 				else
 				{

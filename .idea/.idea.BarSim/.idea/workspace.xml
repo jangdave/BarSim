@@ -10,9 +10,12 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_CupBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Coaster.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_IceCube.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_IceCube.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
