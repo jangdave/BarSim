@@ -1049,6 +1049,7 @@ void APlayerCharacter::FireReleasedRight()
 			isGrabbingWithTongsRight = false;
 			isGrabbingIceWithTongsRight=false;
 			isGrabbingLimeWithTongsRight=false;
+			isGrabbingOliveWithTongsRight=false;
 			isTongsTickEnabled = true;
 		}	
 	}
@@ -1123,6 +1124,7 @@ void APlayerCharacter::FireReleasedLeft()
 			isGrabbingWithTongsLeft = false;
 			isGrabbingIceWithTongsLeft=false;
 			isGrabbingLimeWithTongsLeft=false;
+			isGrabbingOliveWithTongsLeft=false;
 			isTongsTickEnabledL = true;
 		}	
 	}
