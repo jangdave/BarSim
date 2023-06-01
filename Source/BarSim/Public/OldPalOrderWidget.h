@@ -35,15 +35,6 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_oldpal2;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UTextBlock* text_oldpal3;
-
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UTextBlock* text_oldpal4;
-
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UTextBlock* text_oldpal5;
-
 	UFUNCTION()
 	void SetOldPalText(int32 idx);
 

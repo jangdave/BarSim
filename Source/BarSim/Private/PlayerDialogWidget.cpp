@@ -78,8 +78,8 @@ void UPlayerDialogWidget::NativeConstruct()
 	playerScript3.Emplace(FString::Printf(TEXT("어떤 생각을 했는지 한번 들어나보자구"))); // 31
 	
 	// 2번째 선택지
-	playerChoice2.Emplace(FString::Printf(TEXT("알겠습니다 만들어 드릴께요"))); // 0
-	playerChoice2.Emplace(FString::Printf(TEXT("자리에 앉으시죠"))); // 1
+	playerChoice2.Emplace(FString::Printf(TEXT("알겠습니다"))); // 0
+	playerChoice2.Emplace(FString::Printf(TEXT("앉으시죠"))); // 1
 
 	// 3번째 선택지
 	playerChoice3.Emplace(FString::Printf(TEXT("...알겠습니다"))); // 0

@@ -182,9 +182,19 @@ void AChair::ViewScore(int32 score)
 {
 	totalScore = score;
 	
-	score_UI->SetVisibility(ESlateVisibility::Visible);
-	
 	score_UI->text_Score->SetText(FText::AsNumber(score));
+
+	score_UI->SetScoreSwitcher(0);
+	
+	score_UI->SetVisibility(ESlateVisibility::Visible);
+}
+
+// 안내문 보이는 함수
+void AChair::ViewInfo()
+{
+	score_UI->SetScoreSwitcher(1);
+	
+	score_UI->SetVisibility(ESlateVisibility::Visible);
 }
 
 // 점수 가리기 함수

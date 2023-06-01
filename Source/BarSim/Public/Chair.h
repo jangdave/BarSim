@@ -108,6 +108,10 @@ public:
 	UFUNCTION()
 	void ViewScore(int32 score);
 
+	// 안내문 보이는 함수
+	UFUNCTION()
+	void ViewInfo();
+	
 	// 점수 가리기 함수
 	UFUNCTION()
 	void HideScore();

@@ -99,7 +99,7 @@ void ASpawnManager::SpawnCustomer()
 void ASpawnManager::SpawnCustom()
 {
 	// 날짜가 지난만큼 더 많이 스폰
-	int32 idx = (gi->checkDayCount - 1) * 0; // 4
+	int32 idx = (gi->checkDayCount - 1) * 4; // 4
 	
 	// 전체 손님 수가 지정한 숫자보다 작을때
 	if(checkCustomerNum >= idx)
@@ -423,8 +423,6 @@ void ASpawnManager::CheckGinLime(int32 customerIdx)
 
 	if(gi->checkDayCount == 1)
 	{
-		aChairs[customerIdx]->ViewScore(orderScore);
-
 		orderCoctailIdx[customerIdx] = 1;
 	}
 	else
@@ -509,8 +507,6 @@ void ASpawnManager::CheckMartini(int32 customerIdx)
 
 	if(gi->checkDayCount == 1)
 	{
-		aChairs[customerIdx]->ViewScore(orderScore);
-
 		orderCoctailIdx[customerIdx] = 3;
 	}
 	else
@@ -595,8 +591,6 @@ void ASpawnManager::CheckDaiquiri(int32 customerIdx)
 
 	if(gi->checkDayCount == 1)
 	{
-		aChairs[customerIdx]->ViewScore(orderScore);
-
 		orderCoctailIdx[customerIdx] = 2;
 	}
 	else
@@ -700,9 +694,16 @@ void ASpawnManager::CheckOldPal(int32 customerIdx)
 	{
 		if(orderCoctailIdx[customerIdx] == 4)
 		{
-			aChairs[customerIdx]->ViewScore(orderScore);
+			if(bSpawnOld == true)
+			{
+				aChairs[customerIdx]->SameOrder();
+			}
+			else
+			{
+				aChairs[customerIdx]->ViewScore(orderScore);
 
-			aChairs[customerIdx]->SameOrder();
+				aChairs[customerIdx]->SameOrder();
+			}
 		}
 		else
 		{
