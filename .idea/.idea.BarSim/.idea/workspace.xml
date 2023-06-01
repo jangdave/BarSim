@@ -7,14 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efccfadb-b29e-4438-b5cc-0c0fe84ae005" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Chair.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BarGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BarGameInstance.h" afterDir="false" />
-    </list>
+    <list default="true" id="efccfadb-b29e-4438-b5cc-0c0fe84ae005" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,6 +119,7 @@
       <workItem from="1685582039239" duration="15755000" />
       <workItem from="1685601790157" duration="3613000" />
       <workItem from="1685605548177" duration="40000" />
+      <workItem from="1685605653847" duration="29000" />
     </task>
     <servers />
   </component>
