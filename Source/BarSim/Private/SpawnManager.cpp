@@ -99,7 +99,7 @@ void ASpawnManager::SpawnCustomer()
 void ASpawnManager::SpawnCustom()
 {
 	// 날짜가 지난만큼 더 많이 스폰
-	int32 idx = (gi->checkDayCount - 1) * 4; // 4
+	int32 idx = (gi->checkDayCount - 1) * 0; // 4
 	
 	// 전체 손님 수가 지정한 숫자보다 작을때
 	if(checkCustomerNum >= idx)

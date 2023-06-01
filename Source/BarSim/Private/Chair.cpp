@@ -79,13 +79,13 @@ void AChair::OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	
 	if(customer != nullptr)
 	{
-		// 손님이 오버랩 되면 손님의 요소 스폰매니저로 보내기
 		// 주문한 칵테일 저장
 		auto orderTemp = customer->customerFSM->orderIdx;
 
 		// 손님의 위치 순서 저장
 		customerIdx = customer->customerFSM->idx;
 
+		// 손님이 오버랩 되면 손님의 요소 스폰매니저로 보내기
 		spawnManager->GetCustomerIdx(orderTemp, customerIdx);
 
 		bCheckCustomer = true;
@@ -135,6 +135,10 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		coaster = tempCoaster;
 		
 		bCheckCoaster = true;
+	}
+	else if(tempCoctail != nullptr && spawnManager->bSpawnOld != false)
+	{
+		bCheckCoctail = true;
 	}
 }
 

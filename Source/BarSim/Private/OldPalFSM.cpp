@@ -954,11 +954,11 @@ void UOldPalFSM::TickStandby()
 			}
 		}
 
-		if(bOldPalTalk != true && curTime > 3 && curTime <= 5)
+		if(bOldPalTalk != false && curTime > 3 && curTime <= 5)
 		{
 			owner->oldPal_UI->EndOldPal();
 
-			bOldPalTalk = true;
+			bOldPalTalk = false;
 		}
 
 		if(curTime > 5)
@@ -1624,7 +1624,7 @@ void UOldPalFSM::TickTasteJudge()
 					spawnManager->aChairs[idx]->ViewInfo();
 				}
 			
-				if(spawnManager->bIsCoaster[idx] != true)
+				if(spawnManager->bIsCoaster[idx] != true && spawnManager->bIsCoctail[idx] != true)
 				{
 					spawnManager->aChairs[idx]->HideScore();
 				
@@ -1632,6 +1632,8 @@ void UOldPalFSM::TickTasteJudge()
 
 					SetSitState(EOldPalSitState::ORDER);
 
+					drinkState = EOldPalDrinkState::IDLE;
+					
 					spawnManager->aChairs[idx]->bSameOrder = false;
 				}
 			}
@@ -1659,14 +1661,16 @@ void UOldPalFSM::TickTasteJudge()
 				spawnManager->aChairs[idx]->ViewInfo();
 			}
 			
-			if(spawnManager->bIsCoaster[idx] != true)
+			if(spawnManager->bIsCoaster[idx] != true && spawnManager->bIsCoctail[idx] != true)
 			{
 				spawnManager->aChairs[idx]->HideScore();
 				
 				spawnManager->aChairs[idx]->bOnceOverlap = false;
 
 				SetSitState(EOldPalSitState::ORDER);
-
+				
+				drinkState = EOldPalDrinkState::IDLE;
+				
 				spawnManager->aChairs[idx]->bUnSameOrder = false;
 			}
 		}
