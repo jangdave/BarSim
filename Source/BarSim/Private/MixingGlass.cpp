@@ -10,6 +10,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "StirWidget.h"
 #include "Strainer.h"
+#include "Components/AudioComponent.h"
 #include "Components/Overlay.h"
 #include "Components/SphereComponent.h"
 #include "Components/TextBlock.h"
@@ -167,56 +168,17 @@ void AMixingGlass::Tick(float DeltaSeconds)
 		if(bStrainerOn)
 		{
 			//기울어진 각도가 90도 이상이라면
-		if(angle > (1.1 - contents / cupSize) * 100 && angle2 <= 90)
-		{
-			//물줄기 없을때에만 한 번 스폰 시키기
-			//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);
-			if(!bStreamOn)
+			if(angle > (1.1 - contents / cupSize) * 100 && angle2 <= 90)
 			{
-				//UE_LOG(LogTemp, Warning, TEXT("streamOn"));
-				waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")));
-				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
-				waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
-				waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
-				//물방울 액터 스폰
-				FActorSpawnParameters param;
-				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-				AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")), param);
-				mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
-
-				//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
-				
-				// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
-				mixedDrop->NameArray.Empty();
-				mixedDrop->NameArray = NameArray;
-				mixedDrop->ContentsArray.Empty();
-				mixedDrop->ContentsArray = ContentsArray;
-
-				for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
+				//물줄기 없을때에만 한 번 스폰 시키기
+				//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);
+				if(!bStreamOn)
 				{
-					float mixedPercent = mixedDrop->dropMass / contents;
-					mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-					mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
-				}
-
-				mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
-
-				contents = contents - mixedDrop->mixedDropMass;
-				mixedDrop->bStirred = bStirred;
-				bStreamOn = true;
-			}
-			else
-			{
-				//이미 물줄기가 스폰된 상태라면 물줄기 두께 변경, 
-				if(waterStream)
-				{
-					//UE_LOG(LogTemp, Warning, TEXT("waterStream On"));
+					//UE_LOG(LogTemp, Warning, TEXT("streamOn"));
+					waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")));
 					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
 					waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
 					waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
-					
-					waterStream->SetRelativeLocation(cupComp->GetSocketLocation(FName("Mouth")));
-					waterStream->SetRelativeRotation(cupComp->GetSocketRotation(FName("Mouth")));
 					//물방울 액터 스폰
 					FActorSpawnParameters param;
 					param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
@@ -224,7 +186,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
 
 					//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
-
+				
 					// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
 					mixedDrop->NameArray.Empty();
 					mixedDrop->NameArray = NameArray;
@@ -239,19 +201,73 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					}
 
 					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
+
 					contents = contents - mixedDrop->mixedDropMass;
 					mixedDrop->bStirred = bStirred;
+
+					if(pourSoundBoolean==false&&isGrabbingMixingGlass==true)
+					{
+						UE_LOG(LogTemp, Warning, TEXT("play sound"))
+						pourSoundAudioCompM = UGameplayStatics::SpawnSound2D(GetWorld(), pourSoundM, 1, 1, 0);
+						pourSoundBoolean=true;
+					}
+					bStreamOn = true;
+				}
+				else
+				{
+					//이미 물줄기가 스폰된 상태라면 물줄기 두께 변경, 
+					if(waterStream)
+					{
+						//UE_LOG(LogTemp, Warning, TEXT("waterStream On"));
+						waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
+						waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+						waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
+					
+						waterStream->SetRelativeLocation(cupComp->GetSocketLocation(FName("Mouth")));
+						waterStream->SetRelativeRotation(cupComp->GetSocketRotation(FName("Mouth")));
+						//물방울 액터 스폰
+						FActorSpawnParameters param;
+						param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+						AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")), param);
+						mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
+
+						//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
+
+						// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
+						mixedDrop->NameArray.Empty();
+						mixedDrop->NameArray = NameArray;
+						mixedDrop->ContentsArray.Empty();
+						mixedDrop->ContentsArray = ContentsArray;
+
+						for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
+						{
+							float mixedPercent = mixedDrop->dropMass / contents;
+							mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
+							mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
+						}
+
+						mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
+						contents = contents - mixedDrop->mixedDropMass;
+						mixedDrop->bStirred = bStirred;
+					}
 				}
 			}
-		}
-		else
-		{
-			if(waterStream)
+			else
 			{
-				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
-				bStreamOn = false;
+				if(waterStream)
+				{
+					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
+					if(pourSoundBoolean==true&&pourSoundAudioCompM!=nullptr&&isGrabbingMixingGlass==true)
+					{
+						UE_LOG(LogTemp, Warning, TEXT("stop sound"));
+						pourSoundAudioCompM->SetActive(false);
+						UGameplayStatics::PlaySound2D(GetWorld(), pourStopSoundM, 1, 1, 0);
+						pourSoundBoolean=false;
+					}
+			
+					bStreamOn = false;
+				}
 			}
-		}
 		}
 	}
 	else

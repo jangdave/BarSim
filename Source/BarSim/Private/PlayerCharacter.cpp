@@ -251,6 +251,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		{
 			isGrabbingShakerRight=true;
 			shaker->VRGripInterfaceSettings.bDenyGripping=true;
+			shaker->isGrabbingShaker=true;
 		}
 		// 잡은 대상이 ShakerLid라면
 		else if(GrabbedActorRight==shakerLid&&shakerLid!=nullptr)
@@ -272,6 +273,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingMixingGlassRight=true;
 			mixingGlass->VRGripInterfaceSettings.bDenyGripping=true;
 			mixingGlass->VRGripInterfaceSettings.bSimulateOnDrop=true;
+			mixingGlass->isGrabbingMixingGlass=true;
 		}
 		// 잡은 대상이 Glass Strainer 이라면
 		else if(GrabbedActorRight==strainer&&strainer!=nullptr)
@@ -352,6 +354,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	{
 		isGrabbingShakerLeft=true;
 		shakerL->VRGripInterfaceSettings.bDenyGripping=true;
+		shakerL->isGrabbingShaker=true;
 	}
 	// 잡은 대상이 ShakerLid라면
 	else if(GrabbedActorLeft==shakerLidL&&shakerLidL!=nullptr)
@@ -373,6 +376,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		isGrabbingMixingGlassLeft=true;
 		mixingGlassL->VRGripInterfaceSettings.bDenyGripping=true;
 		mixingGlassL->VRGripInterfaceSettings.bSimulateOnDrop=true;
+		mixingGlassL->isGrabbingMixingGlass=true;
 	}
 	// 잡은 대상이 Glass Strainer 이라면
 	else if(GrabbedActorLeft==strainerL&&strainerL!=nullptr)
@@ -479,6 +483,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		{
 			mixingGlass->isDropSoundEnabled=true;
 			mixingGlass->VRGripInterfaceSettings.bDenyGripping=false;
+			mixingGlass->isGrabbingMixingGlass=false;
 		}
 		isGrabbingMixingGlassRight=false;
 	}
@@ -497,6 +502,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		{
 			shaker->isDropSoundEnabled=true;
 			shaker->VRGripInterfaceSettings.bDenyGripping=false;
+			shaker->isGrabbingShaker=false;
 		}
 		isGrabbingShakerRight=false;		
 	}
@@ -570,6 +576,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		mixingGlassL->VRGripInterfaceSettings.bDenyGripping=false;
 		mixingGlassL->isDropSoundEnabled=true;
+		mixingGlassL->isGrabbingMixingGlass=false;
 		isGrabbingMixingGlassLeft=false;
 	}
 	else if(isGrabbingStrainerLeft&&strainerL!=nullptr)
@@ -582,6 +589,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		shakerL->VRGripInterfaceSettings.bDenyGripping=false;
 		shakerL->isDropSoundEnabled=true;
+		shakerL->isGrabbingShaker=false;
 		isGrabbingShakerLeft=false;		
 	}
 }
