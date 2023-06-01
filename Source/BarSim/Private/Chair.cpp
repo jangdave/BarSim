@@ -79,13 +79,13 @@ void AChair::OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	
 	if(customer != nullptr)
 	{
-		// 손님이 오버랩 되면 손님의 요소 스폰매니저로 보내기
 		// 주문한 칵테일 저장
 		auto orderTemp = customer->customerFSM->orderIdx;
 
 		// 손님의 위치 순서 저장
 		customerIdx = customer->customerFSM->idx;
 
+		// 손님이 오버랩 되면 손님의 요소 스폰매니저로 보내기
 		spawnManager->GetCustomerIdx(orderTemp, customerIdx);
 
 		bCheckCustomer = true;
@@ -136,6 +136,10 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		
 		bCheckCoaster = true;
 	}
+	else if(tempCoctail != nullptr && spawnManager->bSpawnOld != false)
+	{
+		bCheckCoctail = true;
+	}
 }
 
 void AChair::EndCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
@@ -182,9 +186,19 @@ void AChair::ViewScore(int32 score)
 {
 	totalScore = score;
 	
-	score_UI->SetVisibility(ESlateVisibility::Visible);
-	
 	score_UI->text_Score->SetText(FText::AsNumber(score));
+
+	score_UI->SetScoreSwitcher(0);
+	
+	score_UI->SetVisibility(ESlateVisibility::Visible);
+}
+
+// 안내문 보이는 함수
+void AChair::ViewInfo()
+{
+	score_UI->SetScoreSwitcher(1);
+	
+	score_UI->SetVisibility(ESlateVisibility::Visible);
 }
 
 // 점수 가리기 함수

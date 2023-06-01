@@ -84,7 +84,14 @@ void UOldPalAnimInstance::EndCheer()
 
 void UOldPalAnimInstance::EndDrinkLittle()
 {
-	owner->oldPalFSM->SetDrinkState(EOldPalDrinkState::DRINK);
+	if(owner->oldPalFSM->drinkCount == 1)
+	{
+		owner->oldPalFSM->SetDrinkState(EOldPalDrinkState::DRINK);
+	}
+	else
+	{
+		owner->oldPalFSM->SetDrinkState(EOldPalDrinkState::UNHOLDCUP);
+	}
 }
 
 void UOldPalAnimInstance::EndDrinkAll()
@@ -105,4 +112,6 @@ void UOldPalAnimInstance::EndUnHoldCup()
 void UOldPalAnimInstance::EndLeaveSit()
 {
 	owner->oldPalFSM->SetState(EOldPalState::LEAVE);
+
+	owner->oldPalFSM->DetachCustomer();
 }
