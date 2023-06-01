@@ -17,6 +17,12 @@ class BARSIM_API UCoctailScoreWidget : public UUserWidget
 public:
 	virtual void NativeConstruct() override;
 	
-	UPROPERTY(VisibleAnywhere, meta=(BindWidget))
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UWidgetSwitcher* WidgetSwitcher_scoreBox;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_Score;
+
+	UFUNCTION()
+	void SetScoreSwitcher(int32 idx);
 };

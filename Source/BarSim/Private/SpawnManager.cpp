@@ -6,6 +6,8 @@
 #include "Chair.h"
 #include "CustomerCharacter.h"
 #include "OldPalCharacter.h"
+#include "PlayerCharacter.h"
+#include "PlayerDialogWidget.h"
 #include "Tablet.h"
 #include "TabletWidget.h"
 #include "Components/Button.h"
@@ -97,7 +99,7 @@ void ASpawnManager::SpawnCustomer()
 void ASpawnManager::SpawnCustom()
 {
 	// 날짜가 지난만큼 더 많이 스폰
-	int32 idx = (gi->checkDayCount - 1) * 4;
+	int32 idx = (gi->checkDayCount - 1) * 4; // 4
 	
 	// 전체 손님 수가 지정한 숫자보다 작을때
 	if(checkCustomerNum >= idx)
@@ -146,7 +148,10 @@ void ASpawnManager::SpawnOldPal()
 		}
 		else if(gi->checkDayCount == 2)
 		{
-			UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
+			player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+			
+			FTimerHandle timer;
+			GetWorldTimerManager().SetTimer(timer, this, &ASpawnManager::SecondDay, 0.1, true);
 		}
 		else if(gi->checkDayCount == 3 && bSpawnOld != true)
 		{
@@ -154,6 +159,35 @@ void ASpawnManager::SpawnOldPal()
 
 			bSpawnOld = true;
 		}
+	}
+}
+
+void ASpawnManager::SecondDay()
+{
+	twoTimer += 0.1;
+
+	if(twoTimer > 1 && bCheckTwo != true)
+	{
+		player->playerText_UI->SetSwitcher(0);
+		player->playerText_UI->SetPlayerText(0);
+		player->playerText_UI->StartPlayer();
+
+		bCheckTwo = true;
+	}
+
+	if(twoTimer >= 4 && twoTimer < 7)
+	{
+		player->playerText_UI->SetPlayerText(1);
+	}
+
+	if(twoTimer >= 7 && twoTimer < 10)
+	{
+		player->playerText_UI->SetPlayerText(2);
+	}
+
+	if(twoTimer >= 10)
+	{
+		UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
 	}
 }
 
@@ -389,8 +423,6 @@ void ASpawnManager::CheckGinLime(int32 customerIdx)
 
 	if(gi->checkDayCount == 1)
 	{
-		aChairs[customerIdx]->ViewScore(orderScore);
-
 		orderCoctailIdx[customerIdx] = 1;
 	}
 	else
@@ -475,8 +507,6 @@ void ASpawnManager::CheckMartini(int32 customerIdx)
 
 	if(gi->checkDayCount == 1)
 	{
-		aChairs[customerIdx]->ViewScore(orderScore);
-
 		orderCoctailIdx[customerIdx] = 3;
 	}
 	else
@@ -561,8 +591,6 @@ void ASpawnManager::CheckDaiquiri(int32 customerIdx)
 
 	if(gi->checkDayCount == 1)
 	{
-		aChairs[customerIdx]->ViewScore(orderScore);
-
 		orderCoctailIdx[customerIdx] = 2;
 	}
 	else
@@ -666,9 +694,16 @@ void ASpawnManager::CheckOldPal(int32 customerIdx)
 	{
 		if(orderCoctailIdx[customerIdx] == 4)
 		{
-			aChairs[customerIdx]->ViewScore(orderScore);
+			if(bSpawnOld == true)
+			{
+				aChairs[customerIdx]->SameOrder();
+			}
+			else
+			{
+				aChairs[customerIdx]->ViewScore(orderScore);
 
-			aChairs[customerIdx]->SameOrder();
+				aChairs[customerIdx]->SameOrder();
+			}
 		}
 		else
 		{

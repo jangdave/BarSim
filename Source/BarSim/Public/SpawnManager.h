@@ -53,6 +53,9 @@ public:
 	UPROPERTY()
 	TArray<int32> orderCoctailIdx = {0, 0, 0, 0};
 
+	// 2일차 대사 확인
+	bool bCheckTwo;
+	
 	// 앉아 있는지 확인
 	bool bCheckSit;
 
@@ -77,6 +80,12 @@ public:
 	UPROPERTY()
 	class ATablet* tablet;
 	
+	UPROPERTY()
+	float twoTimer;
+
+	UPROPERTY()
+	class APlayerCharacter* player;
+	
 	void CheckChairSit();
 	
 	void CheckArray();
@@ -92,6 +101,9 @@ public:
 	UFUNCTION()
 	void SpawnOldPal();
 
+	UFUNCTION()
+	void SecondDay();
+	
 	// 점수 체크------------------------------------------------------------------------------------
 public:
 	void GetCup(TArray<FString> cocName, TArray<float> cocLiter, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx);

@@ -2,12 +2,14 @@
 
 
 #include "OldPalCharacter.h"
-
+#include "Coaster.h"
 #include "CupBase.h"
 #include "OldPalAnimInstance.h"
 #include "OldPalFSM.h"
 #include "OldPalOrderWidget.h"
 #include "PlayerCharacter.h"
+#include "SpawnManager.h"
+#include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -105,5 +107,15 @@ void AOldPalCharacter::DetachCup()
 
 	// 컵의 물리를 킨다
 	cup->cupComp->SetSimulatePhysics(true);
+
+	FTimerHandle setloc;
+	GetWorldTimerManager().SetTimer(setloc, FTimerDelegate::CreateLambda([&]()
+	{
+		FVector targetLoc = oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coctailBoxComp->GetComponentLocation();
+
+		cup->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, cup->GetActorLocation().Z));
+
+		oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coaster->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coaster->GetActorLocation().Z));
+	}), 1.0f, false);
 }
 

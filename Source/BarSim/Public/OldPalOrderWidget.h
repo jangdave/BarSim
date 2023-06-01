@@ -18,14 +18,29 @@ public:
 	virtual void NativeConstruct() override;
 
 	UPROPERTY()
+	class UBarGameInstance* gi;
+	
+	UPROPERTY()
 	TArray<FString> oldpalScript1;
 
+	UPROPERTY()
+	TArray<FString> oldpalScript3;
+	
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_oldpal;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_oldpal1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_oldpal2;
 
 	UFUNCTION()
 	void SetOldPalText(int32 idx);
 
+	UFUNCTION()
+	void SetOldPalRecipe();
+	
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartOldPal();
 

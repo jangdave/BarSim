@@ -21,11 +21,27 @@ public:
 	int32 choiceCount;
 
 	UPROPERTY()
+	class UBarGameInstance* gi;
+	
+	UPROPERTY()
 	TArray<FString> playerScript1;
+	
+	UPROPERTY()
+	TArray<FString> playerScript2;
 
 	UPROPERTY()
-	TArray<FString> playerChoice1;
+	TArray<FString> playerScript3;
 	
+	UPROPERTY()
+	TArray<FString> playerChoice1;
+
+	UPROPERTY()
+	TArray<FString> playerChoice2;
+
+	UPROPERTY()
+	TArray<FString> playerChoice3;
+
+	//-----------------------------------------------------------------
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UWidgetSwitcher* WidgetSwitcher_Player;
 	
@@ -54,6 +70,12 @@ public:
 
 	UFUNCTION()
 	void SetChoice1();
+	
+	UFUNCTION()
+	void SetChoice2();
+	
+	UFUNCTION()
+	void SetChoice3();
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartPlayer();
