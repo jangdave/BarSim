@@ -107,11 +107,15 @@ void AOldPalCharacter::DetachCup()
 
 	// 컵의 물리를 킨다
 	cup->cupComp->SetSimulatePhysics(true);
-	
-	FVector targetLoc = oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coctailBoxComp->GetComponentLocation();
 
-	cup->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, cup->GetActorLocation().Z));
+	FTimerHandle setloc;
+	GetWorldTimerManager().SetTimer(setloc, FTimerDelegate::CreateLambda([&]()
+	{
+		FVector targetLoc = oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coctailBoxComp->GetComponentLocation();
 
-	oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coaster->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coaster->GetActorLocation().Z));
+		cup->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, cup->GetActorLocation().Z));
+
+		oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coaster->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, oldPalFSM->spawnManager->aChairs[oldPalFSM->idx]->coaster->GetActorLocation().Z));
+	}), 1.0f, false);
 }
 
