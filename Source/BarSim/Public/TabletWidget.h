@@ -15,6 +15,7 @@ class BARSIM_API UTabletWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
+	
 	virtual void NativeConstruct() override;
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
@@ -48,6 +49,9 @@ public:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_Internet;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_Mail;
 	
 	// 테블릿 레시피 메뉴
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
@@ -106,6 +110,87 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_BackRecipeMenu7;
 
+	// 메일함 관련
+
+	//받은 메일함
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_Inbox;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_Outbox;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_InMail1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_InMail2;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_InMail3;
+
+	//받은메일 1
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_1;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_2;
+
+	//받은메일 2
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_3;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_4;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_5;
+
+	//받은메일 3
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_6;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_7;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_8;
+
+	//보낸 메일함
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_Inbox_1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_Outbox_1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_InMail1_1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_InMail2_1;
+
+	//보낸메일 1
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_9;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_10;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_11;
+
+	//보낸메일 2
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_12;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_13;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_BackInMail1_14;
+	
 	UFUNCTION()
 	void OpenStore();
 
@@ -147,6 +232,27 @@ public:
 
 	UFUNCTION()
 	void CastToPlayerCharacter();
+
+	UFUNCTION()
+	void OpenInbox();
+
+	UFUNCTION()
+	void OpenInMail1();
+
+	UFUNCTION()
+	void OpenInMail2();
+
+	UFUNCTION()
+	void OpenInMail3();
+
+	UFUNCTION()
+	void OpenOutbox();
+
+	UFUNCTION()
+	void OpenOutMail1();
+
+	UFUNCTION()
+	void OpenOutMail2();
 
 	//------------------------------------------------------------------------------------- 키보드
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
