@@ -19,10 +19,18 @@
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_RyeWhiskey.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_RyeWhiskey.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_SugarSyrupBottle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_SugarSyrupBottle.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_WhiteRumBottle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_WhiteRumBottle.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealisticLeft.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealisticLeft.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Door/DoorActorNoKeyhole.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Door/DoorActorNoKeyhole.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealistic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealistic.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealisticLeft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealisticLeft.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BottleBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BottleBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/GraspingHandRealistic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/GraspingHandRealistic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/GraspingHandRealisticLeft.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/GraspingHandRealisticLeft.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +307,7 @@
       <workItem from="1685523114010" duration="370000" />
       <workItem from="1685622711277" duration="1560000" />
       <workItem from="1685659469506" duration="748000" />
-      <workItem from="1685688933991" duration="2686000" />
+      <workItem from="1685688933991" duration="8092000" />
     </task>
     <servers />
   </component>

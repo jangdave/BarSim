@@ -29,6 +29,7 @@
 #include "Tablet.h"
 #include "Components/WidgetComponent.h"
 #include "Components/WidgetInteractionComponent.h"
+#include "Haptics/HapticFeedbackEffect_Curve.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -62,7 +63,7 @@ void APlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	// Enhanced Input 
-	auto PC = Cast<APlayerController>(GetWorld()->GetFirstPlayerController());
+	PC = Cast<APlayerController>(GetWorld()->GetFirstPlayerController());
 	if (PC)
 	{
 		// LocalPlayer
@@ -94,6 +95,8 @@ void APlayerCharacter::BeginPlay()
 	gameMode = Cast<ABarGameMode>(GetWorld()->GetAuthGameMode());
 
 	playerText_UI = Cast<UPlayerDialogWidget>(playerTextWidget->GetUserWidgetObject());
+
+
 	
 }
 
@@ -186,7 +189,14 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void APlayerCharacter::CheckGrabbedObjectRight()
 {
+	// Grabbing Sound
 	UGameplayStatics::PlaySound2D(GetWorld(), grabSound, 1.2, 1, 0);
+	
+	// Haptic Feedback
+	if(PC)
+	{
+		PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Right);			
+	}
 	
 	TArray<AActor*> RightGrippedActors;
 	RightMotionController->GetGrippedActors(RightGrippedActors);
@@ -219,6 +229,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingBottleRight = true;
 			bottle->SetActorTickEnabled(true);
 			bottle->isGrabbingBottle=true;
+			bottle->isGBR=true;
 		}
 		// 잡은 대상이 Tablet 이라면
 		else if(GrabbedActorRight==tablet&&tablet!=nullptr)
@@ -291,6 +302,13 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 {
 	UGameplayStatics::PlaySound2D(GetWorld(), grabSound, 1.2, 1, 0);
 
+		// Haptic Feedback
+		if (PC)
+		{
+			PC->PlayHapticEffect(HF_GrabObjectLeft, EControllerHand::Left);
+		}
+
+
 	TArray<AActor*> LeftGrippedActors;
 	LeftMotionController->GetGrippedActors(LeftGrippedActors);
 	for(int i=0; i<LeftGrippedActors.Num(); ++i)
@@ -322,6 +340,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		isGrabbingBottleLeft = true;
 		bottleL->SetActorTickEnabled(true);
 		bottleL->isGrabbingBottle=true;
+		bottleL->isGBL=true;
 	}
 	// 잡은 대상이 Tablet 이라면
 	else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
@@ -420,6 +439,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		if(bottle!=nullptr)
 		{
 			bottle->isGrabbingBottle=false;
+			bottle->isGBR=false;
 			bottle->isDropSoundEnabled=true;
 		}
 		isGrabbingBottleRight=false;
@@ -537,6 +557,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	else if(isGrabbingBottleLeft&&bottleL!=nullptr)
 	{
 		bottleL->isDropSoundEnabled=true;
+		bottleL->isGBL=false;
 		bottleL->isGrabbingBottle=false;
 		isGrabbingBottleLeft=false;
 	}
@@ -628,6 +649,11 @@ void APlayerCharacter::FireRight()
 			oliveVat=Cast<AOliveVat>(VatHitObj[i].GetActor());
 			if(halfSlicedLimeVat)
 			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Right);			
+				}
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("LimeSocket"));
@@ -636,6 +662,11 @@ void APlayerCharacter::FireRight()
 			}
 			else if(slicedLimeVat)
 			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Right);			
+				}
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("LimeSocket"));
@@ -644,6 +675,11 @@ void APlayerCharacter::FireRight()
 			}
 			else if(iceCubeVat)
 			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Right);			
+				}
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
@@ -652,6 +688,11 @@ void APlayerCharacter::FireRight()
 			}
 			else if(oliveVat)
 			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Right);			
+				}
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("OliveSocket"));
@@ -829,6 +870,11 @@ void APlayerCharacter::FireLeft()
 			oliveVat=Cast<AOliveVat>(VatHitObj[i].GetActor());
 			if(halfSlicedLimeVat)
 			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Left);			
+				}
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				auto socketLoc = huchuTongL->tongRight->GetSocketLocation(FName("LimeSocket"));
@@ -837,6 +883,11 @@ void APlayerCharacter::FireLeft()
 			}
 			else if(slicedLimeVat)
 			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Left);			
+				}
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				auto socketLoc = huchuTongL->tongRight->GetSocketLocation(FName("LimeSocket"));
@@ -845,6 +896,11 @@ void APlayerCharacter::FireLeft()
 			}
 			else if(iceCubeVat)
 			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Left);			
+				}
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				auto socketLoc = huchuTongL->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
@@ -853,6 +909,11 @@ void APlayerCharacter::FireLeft()
 			}
 			else if(oliveVat)
 			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Left);			
+				}
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				auto socketLoc = huchuTongL->tongRight->GetSocketLocation(FName("OliveSocket"));

@@ -146,6 +146,9 @@ public:
 	class UPrimitiveComponent* GrabbedObjectWithTongsLeft;
 	UPROPERTY()
 	class AActor* GrabbedActorWithTongsLeft;
+	// Player Controller
+	UPROPERTY()
+	class APlayerController* PC;
 
 	// References
 	UPROPERTY()
@@ -243,6 +246,15 @@ public:
 	// Olive BP
 	UPROPERTY(EditAnywhere, Category="Factory")
 	TSubclassOf<class AOlivePick> oliveFac;
+
+	// Haptic Feedback
+	UPROPERTY(EditDefaultsOnly, Category="Haptics")
+	class UHapticFeedbackEffect_Curve* HF_GrabObjectRight;
+
+	UPROPERTY(EditDefaultsOnly, Category="Haptics")
+	class UHapticFeedbackEffect_Curve* HF_GrabObjectLeft;
+
+	
 
 	
 };

@@ -70,6 +70,18 @@ public:
 	UPROPERTY()
 	bool isGrabbingBottle=false;
 
+	UPROPERTY()
+	bool isGBR = false;
+	UPROPERTY()
+	bool isGBL =false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UAudioComponent* glassClankAudioComp;
+
+	// Player Controller
+	UPROPERTY()
+	class APlayerController* PC;
+
+	UPROPERTY(EditDefaultsOnly, Category="Haptics")
+	class UHapticFeedbackEffect_Curve* HF_PourLiquid;
 };

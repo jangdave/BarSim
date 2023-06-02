@@ -8,6 +8,7 @@
 #include "NiagaraComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/SphereComponent.h"
+#include "Haptics/HapticFeedbackEffect_Curve.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -31,6 +32,9 @@ ABottleBase::ABottleBase(const FObjectInitializer& ObjectInitializer) : Super(Ob
 void ABottleBase::BeginPlay()
 {
 	Super::BeginPlay();
+
+	PC = Cast<APlayerController>(GetWorld()->GetFirstPlayerController());
+	
 	remains = maxContents;
 	SetActorTickEnabled(false);
 }
@@ -66,6 +70,15 @@ void ABottleBase::Tick(float DeltaTime)
 				drop->dropMass = 0.05f * streamWidth * DeltaTime;
 				drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
 				remains = remains - drop->dropMass;
+				// Haptic Feedback
+				if(PC)
+				{
+					if(isGBR)
+						PC->PlayHapticEffect(HF_PourLiquid, EControllerHand::Right);
+					if(isGBL)
+						PC->PlayHapticEffect(HF_PourLiquid, EControllerHand::Left);
+
+				}
 				if(pourSoundBoolean==false&&isGrabbingBottle==true)
 				{
 					UE_LOG(LogTemp, Warning, TEXT("play sound"))
@@ -104,6 +117,14 @@ void ABottleBase::Tick(float DeltaTime)
 			if(waterStream)
 			{
 				waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
+				if(PC)
+				{
+					if(isGBR)
+						PC->StopHapticEffect(EControllerHand::Right);
+					if(isGBL)
+						PC->StopHapticEffect(EControllerHand::Left);
+
+				}
 				if(pourSoundBoolean==true&&pourSoundAudioComp!=nullptr&&isGrabbingBottle==true)
 				{
 					UE_LOG(LogTemp, Warning, TEXT("stop sound"))

@@ -75,6 +75,14 @@ public:
 	UPROPERTY()
 	class AMartiniCup* martiniCup;
 
+	// Player Controller
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	class APlayerController* PC;
+	
+	// Haptic Feedback
+	UPROPERTY(EditDefaultsOnly, Category="Haptics")
+	class UHapticFeedbackEffect_Curve* HF_ActorOverlap;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTimerHandle widgetDestroyHandle;
 };
