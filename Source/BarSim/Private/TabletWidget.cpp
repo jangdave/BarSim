@@ -47,6 +47,40 @@ void UTabletWidget::NativeConstruct()
 	btn_BackRecipeMenu6->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 	btn_BackRecipeMenu7->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 
+	// 메일함
+	btn_Mail->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+
+	btn_Inbox->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_Outbox->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_InMail1->OnClicked.AddDynamic(this, &UTabletWidget::OpenInMail1);
+	btn_InMail2->OnClicked.AddDynamic(this, &UTabletWidget::OpenInMail2);
+	btn_InMail3->OnClicked.AddDynamic(this, &UTabletWidget::OpenInMail3);
+
+	btn_BackInMail1->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_2->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+
+	btn_BackInMail1_3->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_4->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_5->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+
+	btn_BackInMail1_6->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_7->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_8->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+
+	btn_Inbox_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_Outbox_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_InMail1_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutMail1);
+	btn_InMail2_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutMail2);
+
+	btn_BackInMail1_9->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1_10->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_11->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+
+	btn_BackInMail1_12->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1_13->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_14->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	
 	// 테블릿 키보드 입력
 	btn_BackMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
 	btn_CapsLock->OnClicked.AddDynamic(this, &UTabletWidget::SetCapsLock);
@@ -169,6 +203,41 @@ void UTabletWidget::OpenOldPalVideo()
 void UTabletWidget::CastToPlayerCharacter()
 {
 	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
+}
+
+void UTabletWidget::OpenInbox()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(11);
+}
+
+void UTabletWidget::OpenInMail1()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(12);
+}
+
+void UTabletWidget::OpenInMail2()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(13);
+}
+
+void UTabletWidget::OpenInMail3()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(14);
+}
+
+void UTabletWidget::OpenOutbox()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(15);
+}
+
+void UTabletWidget::OpenOutMail1()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(16);
+}
+
+void UTabletWidget::OpenOutMail2()
+{
+	WidgetSwitcher_Tablet->SetActiveWidgetIndex(17);
 }
 
 void UTabletWidget::SetCapsLock()

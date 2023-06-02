@@ -10,10 +10,21 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_LimeJuiceBottle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_LimeJuiceBottle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/BP_Tablet.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_12_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_10_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_11_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_12_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_2_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_5_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_6_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_7_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_8_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Asset_9_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/HowToCocktailIcon_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/wallpaper.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WB_TabletWidget1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WB_TabletWidget1.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -291,6 +302,7 @@
       <workItem from="1685523114010" duration="370000" />
       <workItem from="1685622711277" duration="1560000" />
       <workItem from="1685709092369" duration="3627000" />
+      <workItem from="1685729104692" duration="5164000" />
     </task>
     <servers />
   </component>
