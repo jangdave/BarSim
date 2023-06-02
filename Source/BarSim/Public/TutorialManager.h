@@ -27,7 +27,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY()
-	TArray<ATutorialLight*> allLights;
+	TArray<ATutorialLight*> allLights = {0, 0, 0, 0, 0};
 
 	UPROPERTY()
 	TArray<ATutorialWall*> allWalls;
