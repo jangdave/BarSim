@@ -4,7 +4,6 @@
 #include "TutorialManager.h"
 #include "EngineUtils.h"
 #include "TutorialLight.h"
-#include "TutorialWidget.h"
 
 // Sets default values
 ATutorialManager::ATutorialManager()
@@ -41,9 +40,25 @@ void ATutorialManager::GetRights()
 	{
 		auto light = *lights;
 
-		if(light != nullptr)
+		if(light != nullptr && light->GetActorNameOrLabel() == "BP_TutorialLight1")
 		{
-			allLights.Add(light);
+			allLights[0] = light;
+		}
+		else if(light != nullptr && light->GetActorNameOrLabel() == "BP_TutorialLight2")
+		{
+			allLights[1] = light;
+		}
+		else if(light != nullptr && light->GetActorNameOrLabel() == "BP_TutorialLight3")
+		{
+			allLights[2] = light;
+		}
+		else if(light != nullptr && light->GetActorNameOrLabel() == "BP_TutorialLight4")
+		{
+			allLights[3] = light;
+		}
+		else if(light != nullptr && light->GetActorNameOrLabel() == "BP_TutorialLight5")
+		{
+			allLights[4] = light;
 		}
 	}
 }

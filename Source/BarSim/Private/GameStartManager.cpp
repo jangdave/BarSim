@@ -46,12 +46,11 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 		if(gi->bCheckGameMode != false)
 		{
-			UGameplayStatics::OpenLevel(GetWorld(), FName("TestBarMap"));
-			
+			UGameplayStatics::OpenLevel(GetWorld(), FName("BarMainMap"));
 		}
 		else
 		{
-			UGameplayStatics::OpenLevel(GetWorld(), FName("TutorialMap"));
+			UGameplayStatics::OpenLevel(GetWorld(), FName("BarTutorialMap"));
 			
 			gi->bCheckGameMode = true;
 		}
