@@ -194,5 +194,8 @@ public:
 	UPROPERTY(EditAnywhere, Category="Sounds")
 	class USoundBase* limeAttachSound;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UAudioComponent* glassClankAudioComp;
+
 
 };

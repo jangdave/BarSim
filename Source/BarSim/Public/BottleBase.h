@@ -69,4 +69,7 @@ public:
 
 	UPROPERTY()
 	bool isGrabbingBottle=false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UAudioComponent* glassClankAudioComp;
 };
