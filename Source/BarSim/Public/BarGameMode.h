@@ -26,4 +26,10 @@ public:
 	
 	UFUNCTION()
 	void SpawnMenu();
+
+	UFUNCTION()
+	void DestroyMenu();
+
+	UPROPERTY()
+	class AMenuWidgetActor* menuWidget;
 };

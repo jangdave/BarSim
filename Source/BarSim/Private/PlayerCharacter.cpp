@@ -1405,6 +1405,17 @@ void APlayerCharacter::FireReleasedLeft()
 
 void APlayerCharacter::ShowMenuWidget()
 {
-	gameMode->SpawnMenu();
-	UE_LOG(LogTemp, Warning, TEXT("Spawn Menu"))
+	if(menuWidgetBool==false)
+	{
+		gameMode->SpawnMenu();
+		UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetAppearSound, 1, 1, 0);
+		menuWidgetBool=true;
+	}
+	else
+	{
+		gameMode->DestroyMenu();
+		UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetDisappearSound, 1, 1, 0);
+		menuWidgetBool=false;
+	}
+
 }

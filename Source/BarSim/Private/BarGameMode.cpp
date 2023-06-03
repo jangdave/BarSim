@@ -32,6 +32,14 @@ void ABarGameMode::SpawnMenu()
 	{
 		FRotator rot = player->GetActorRotation()+FRotator(0, 180, 0);
 		FVector loc = player->GetActorLocation()+(player->GetActorForwardVector()*100);
-		GetWorld()->SpawnActor<AMenuWidgetActor>(menuFactory, loc, rot);
+		menuWidget = GetWorld()->SpawnActor<AMenuWidgetActor>(menuFactory, loc, rot);
+	}
+}
+
+void ABarGameMode::DestroyMenu()
+{
+	if(menuWidget!=nullptr)
+	{
+		menuWidget->Destroy();
 	}
 }

@@ -120,6 +120,8 @@ public:
 	bool isGrabbingOrangeWithTongsLeft = false;
 	bool isVatCastedRight = false;
 	bool isVatCastedLeft = false;
+
+	bool menuWidgetBool = false;
 		
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;
@@ -261,6 +263,13 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* TriggerReleasedSound;
+	
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* MenuWidgetAppearSound;
+
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* MenuWidgetDisappearSound;
+	
 
 	// Lime BP
 	UPROPERTY(EditAnywhere, Category="Factory")
