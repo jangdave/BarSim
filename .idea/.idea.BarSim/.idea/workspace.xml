@@ -10,9 +10,30 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_4x.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/ginlimeNoBG_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/LevelDesign/MainMap/bottle/baileys.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/LevelDesign/MainMap/bottle/baileys.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/LevelDesign/MainMap/bottle/jagermeisterDiffuse.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/LevelDesign/MainMap/bottle/jagermeisterDiffuse.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/LevelDesign/MainMap/cupMat/cupMatAlpha2_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/LevelDesign/MainMap/cupMat/cupMatAlpha2_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_10_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_10_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_11_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_11_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_2_4x.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_3_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_3_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_6_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_6_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_7_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_7_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_8_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_8_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_9_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Artboard_4_copy_9_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Daiquiri_Hovered_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Daiquiri_Hovered_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Daiquiri_Normal_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Daiquiri_Normal_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/GinLime_Hovered_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/GinLime_Hovered_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/GinLime_Normal_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/GinLime_Normal_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Martini_Hovered_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Martini_Hovered_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Martini_Normal_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Martini_Normal_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Negroni_Hovered_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Negroni_Hovered_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Negroni_Normal_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/Negroni_Normal_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/RecipeBG_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/RecipeBG_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/ginlimeNoBG_4x.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/ginlimeNoBG_4x.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/Tablet/Recipe/Main/ginlimetempBG.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WB_TabletWidget1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WB_TabletWidget1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -294,6 +315,7 @@
       <workItem from="1685747020876" duration="2260000" />
       <workItem from="1685759676452" duration="1406000" />
       <workItem from="1685784320710" duration="857000" />
+      <workItem from="1685788118745" duration="2244000" />
     </task>
     <servers />
   </component>
