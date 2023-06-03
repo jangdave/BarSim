@@ -667,15 +667,29 @@ void APlayerCharacter::FireRight()
 		if (bHitVat == false)
 		{
 			return;
-		}		
+		}
+		int32 ClosestVat = 0;
 		for (int i = 0; i < VatHitObj.Num(); ++i)
 		{
-			halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(VatHitObj[i].GetActor());
-			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[i].GetActor());
-			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[i].GetActor());
-			oliveVat=Cast<AOliveVat>(VatHitObj[i].GetActor());
-			halfSlicedOrangeVat = Cast<AHalfSlicedOrangeVat>(VatHitObj[i].GetActor());
-			slicedOrangeVat = Cast<ASlicedOrangeVat>(VatHitObj[i].GetActor());
+			isVatCastedRight = true;
+			float ClosestDist = FVector::Dist(VatHitObj[ClosestVat].GetActor()->GetActorLocation(), CenterTong);
+			float NextDist = FVector::Dist(VatHitObj[i].GetActor()->GetActorLocation(), CenterTong);
+
+			// 만약 이번 대상이 현재 대상보다 가깝다면,
+			if (NextDist < ClosestDist)
+			{
+				// 가장 가까운 대상으로 변경하기
+				ClosestVat = i;
+			}				
+		}
+		if(isVatCastedRight)
+		{
+			halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(VatHitObj[ClosestVat].GetActor());
+			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[ClosestVat].GetActor());
+			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[ClosestVat].GetActor());
+			oliveVat=Cast<AOliveVat>(VatHitObj[ClosestVat].GetActor());
+			halfSlicedOrangeVat = Cast<AHalfSlicedOrangeVat>(VatHitObj[ClosestVat].GetActor());
+			slicedOrangeVat = Cast<ASlicedOrangeVat>(VatHitObj[ClosestVat].GetActor());
 			if(halfSlicedLimeVat)
 			{
 				// Haptic Feedback
@@ -754,6 +768,7 @@ void APlayerCharacter::FireRight()
 				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("LimeSocket"));
 				GetWorld()->SpawnActor<ASlicedOrange>(slicedOrangeFac, socketLoc, socketRot, param);
 			}
+			isVatCastedRight=false;
 		}
 		// 집게에 집는 대상 오브젝트가 오버랩되었는지 판단하는 OverlapMulti
 		// 중심점
@@ -882,7 +897,7 @@ void APlayerCharacter::FireRight()
 				else if(isGrabbingLimeWithTongsRight)
 				{
 					isTongsTickEnabled = false;
-					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
+					tongCompRef->SetRelativeRotation(FRotator(13, 0, 0));
 				}
 				else if(isGrabbingOliveWithTongsRight)
 				{
@@ -892,7 +907,7 @@ void APlayerCharacter::FireRight()
 				else if(isGrabbingOrangeWithTongsRight)
 				{
 					isTongsTickEnabled = false;
-					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
+					tongCompRef->SetRelativeRotation(FRotator(13, 0, 0));
 				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -944,14 +959,28 @@ void APlayerCharacter::FireLeft()
 		{
 			return;
 		}		
+		int32 ClosestVat = 0;
 		for (int i = 0; i < VatHitObj.Num(); ++i)
 		{
-			halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(VatHitObj[i].GetActor());
-			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[i].GetActor());
-			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[i].GetActor());
-			oliveVat=Cast<AOliveVat>(VatHitObj[i].GetActor());
-			halfSlicedOrangeVat=Cast<AHalfSlicedOrangeVat>(VatHitObj[i].GetActor());
-			slicedOrangeVat=Cast<ASlicedOrangeVat>(VatHitObj[i].GetActor());
+			isVatCastedLeft = true;
+			float ClosestDist = FVector::Dist(VatHitObj[ClosestVat].GetActor()->GetActorLocation(), CenterTong);
+			float NextDist = FVector::Dist(VatHitObj[i].GetActor()->GetActorLocation(), CenterTong);
+
+			// 만약 이번 대상이 현재 대상보다 가깝다면,
+			if (NextDist < ClosestDist)
+			{
+				// 가장 가까운 대상으로 변경하기
+				ClosestVat = i;
+			}				
+		}
+		if(isVatCastedLeft)
+		{
+			halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(VatHitObj[ClosestVat].GetActor());
+			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[ClosestVat].GetActor());
+			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[ClosestVat].GetActor());
+			oliveVat=Cast<AOliveVat>(VatHitObj[ClosestVat].GetActor());
+			halfSlicedOrangeVat=Cast<AHalfSlicedOrangeVat>(VatHitObj[ClosestVat].GetActor());
+			slicedOrangeVat=Cast<ASlicedOrangeVat>(VatHitObj[ClosestVat].GetActor());
 			if(halfSlicedLimeVat)
 			{
 				// Haptic Feedback
@@ -1030,6 +1059,7 @@ void APlayerCharacter::FireLeft()
 				auto socketRot = huchuTongL->tongRight-> GetSocketRotation(FName("LimeSocket"));
 				GetWorld()->SpawnActor<AHalfSlicedOrange>(halfSlicedOrangeFac, socketLoc, socketRot, param);
 			}
+			isVatCastedLeft=false;
 		}
 		// 중심점
 		FVector Center = huchuTongL->tongRight->GetSocketLocation(FName("TongAttach"));
@@ -1151,7 +1181,7 @@ void APlayerCharacter::FireLeft()
 				else if(isGrabbingLimeWithTongsLeft)
 				{
 					isTongsTickEnabledL = false;
-					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
+					tongCompRef->SetRelativeRotation(FRotator(13, 0, 0));
 				}
 				else if(isGrabbingOliveWithTongsLeft)
 				{
@@ -1161,7 +1191,7 @@ void APlayerCharacter::FireLeft()
 				else if(isGrabbingOrangeWithTongsLeft)
 				{
 					isTongsTickEnabledL = false;
-					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
+					tongCompRef->SetRelativeRotation(FRotator(13, 0, 0));
 				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
@@ -1216,7 +1246,7 @@ void APlayerCharacter::FireReleasedRight()
 			}
 			else if(isGrabbingLimeWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-14, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(halfSlicedLime!=nullptr)
 				{
 					halfSlicedLime->isHalfSlicedLimeAttachable=true;
@@ -1236,7 +1266,7 @@ void APlayerCharacter::FireReleasedRight()
 			}
 			else if(isGrabbingOrangeWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-14, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(halfSlicedOrange!=nullptr)
 				{
 					halfSlicedOrange->isHalfSlicedOrangeAttachable=true;
@@ -1309,7 +1339,7 @@ void APlayerCharacter::FireReleasedLeft()
 			}
 			else if(isGrabbingLimeWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-14, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(halfSlicedLimeL!=nullptr)
 				{
 					halfSlicedLimeL->isHalfSlicedLimeAttachable=true;
@@ -1329,7 +1359,7 @@ void APlayerCharacter::FireReleasedLeft()
 			}
 			else if(isGrabbingOrangeWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-14, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(halfSlicedOrangeL!=nullptr)
 				{
 					halfSlicedOrangeL->isHalfSlicedOrangeAttachable=true;

@@ -118,6 +118,8 @@ public:
 	bool isGrabbingDrinkCanLeft = false;
 	bool isGrabbingOrangeWithTongsRight = false;
 	bool isGrabbingOrangeWithTongsLeft = false;
+	bool isVatCastedRight = false;
+	bool isVatCastedLeft = false;
 		
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;
