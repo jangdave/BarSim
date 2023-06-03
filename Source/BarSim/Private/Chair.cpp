@@ -90,6 +90,7 @@ void AChair::OnCustomerOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 
 		bCheckCustomer = true;
 	}
+
 	if(oldpal != nullptr)
 	{
 		auto ordertemp = oldpal->oldPalFSM->orderIdx;
@@ -136,8 +137,11 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		
 		bCheckCoaster = true;
 	}
-	else if(tempCoctail != nullptr && spawnManager->bSpawnOld != false)
+
+	if(tempCoctail != nullptr)
 	{
+		coctail = tempCoctail;
+		
 		bCheckCoctail = true;
 	}
 }

@@ -5,6 +5,7 @@
 #include "BarGameInstance.h"
 #include "Chair.h"
 #include "CustomerCharacter.h"
+#include "EngineUtils.h"
 #include "OldPalCharacter.h"
 #include "PlayerCharacter.h"
 #include "PlayerDialogWidget.h"
@@ -47,15 +48,26 @@ void ASpawnManager::Tick(float DeltaTime)
 
 void ASpawnManager::CheckChairSit()
 {
-	// 인스턴스 상에 있는 모든 의자를 배열에 담는다
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AChair::StaticClass(), chairs);
-
-	// bIsSit 이라는 bool 배열에 의자가 비어 있는지 아닌지를 담는다
-	for(int i = 0; i<chairs.Num(); i++)
+	for(TActorIterator<AChair> chairs(GetWorld()); chairs; ++chairs)
 	{
-		auto temp = Cast<AChair>(chairs[i]);
-		bIsSit.Add(temp->bCheck);
-		aChairs.Add(temp);
+		auto chair = *chairs;
+
+		if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair1")
+		{
+			aChairs[0] = chair;
+		}
+		else if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair2")
+		{
+			aChairs[1] = chair;
+		}
+		else if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair3")
+		{
+			aChairs[2] = chair;
+		}
+		else if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair4")
+		{
+			aChairs[3] = chair;
+		}
 	}
 }
 
@@ -67,17 +79,16 @@ void ASpawnManager::CheckArray()
 	bIsCoaster.Empty();
 
 	// 모든 의자들을 확인해서 인자들 다시 채우기
-	for(int i = 0; i<chairs.Num(); i++)
+	for(int i = 0; i<aChairs.Num(); i++)
 	{
-		auto temp = Cast<AChair>(chairs[i]);
-		bIsCoctail.Add(temp->bCheckCoctail);
-		bIsCoaster.Add(temp->bCheckCoaster);
-		bIsPlayer.Add(temp->bCheckPlayer);
+		bIsCoctail.Add(aChairs[i]->bCheckCoctail);
+		bIsCoaster.Add(aChairs[i]->bCheckCoaster);
+		bIsPlayer.Add(aChairs[i]->bCheckPlayer);
 	}
 
-	for(int i = 0; i<bIsSit.Num(); i++)
+	for(int i = 0; i<aChairs.Num(); i++)
 	{
-		if(bIsSit[i] != false)
+		if(aChairs[i]->bCheck != false)
 		{
 			return;
 		}
@@ -91,9 +102,11 @@ void ASpawnManager::CheckArray()
 
 void ASpawnManager::SpawnCustomer()
 {
+	SpawnCustom();
+	
 	// 시간이 지날때마다 손님을 스폰한다
 	FTimerHandle spawnTime;
-	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 5, true);
+	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 30, true);
 }
 
 void ASpawnManager::SpawnCustom()
@@ -109,10 +122,10 @@ void ASpawnManager::SpawnCustom()
 	}
 	else if(checkCustomerNum < idx)
 	{
-		for(int i = 0; i<bIsSit.Num(); i++)
+		for(int i = 0; i<aChairs.Num(); i++)
 		{
 			// 빈자리가 있으면
-			if(bIsSit[i] != true)
+			if(aChairs[i]->bCheck != true)
 			{
 				bCheckSit = true;
 			}
@@ -194,11 +207,21 @@ void ASpawnManager::SecondDay()
 // 점수 체크------------------------------------------------------------------------------------------------------------
 void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool bStirred, bool bStirredLater, bool bShake, TArray<bool> garnishArray,  int32 customerIdx)
 {
+	amountOfWhiskey = 0;
+	amountOfRum = 0;
+	amountOfGin = 0;
+	amountOfVermouth = 0;
+	amountOfLime = 0;
+	amountOfSugar = 0;
+	amountOfCampari = 0;
+	
+	orderScore = 100;
+	
 	for(int i = 0; i<cocName.Num(); i++)
 	{
 		if(cocName[i] == "Whiskey")
 		{
-			amountOfWhisky += cocliter[i];
+			amountOfWhiskey += cocliter[i];
 		}
 		else if(cocName[i] == "Rum")
 		{
@@ -220,19 +243,21 @@ void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool
 		{
 			amountOfCampari += cocliter[i];
 		}
+		else if(cocName[i] == "Sugar")
+		{
+			amountOfSugar += cocliter[i];
+		}
 	}
-
-	orderScore = 100;
 	
 	if(amountOfGin > 0)
 	{
-		CheckGin(cocName, bStirred, bStirredLater, garnishArray,customerIdx);
+		CheckGin(cocName, bStirred, bStirredLater, garnishArray, customerIdx);
 	}
 	else if(amountOfRum > 0)
 	{
 		CheckRum(cocName, bStirred, bStirredLater, bShake, garnishArray, customerIdx);
 	}
-	else if(amountOfWhisky > 0)
+	else if(amountOfWhiskey > 0)
 	{
 		CheckWhisky(cocName, bStirred, bStirredLater, customerIdx);
 	}
@@ -570,46 +595,67 @@ void ASpawnManager::CheckMartini(int32 customerIdx)
 
 void ASpawnManager::CheckDaiquiri(int32 customerIdx)
 {
-	float daiquiri = amountOfLime + amountOfRum;
+	float daiquiri = amountOfLime + amountOfRum + amountOfSugar;
 
 	float rumRatio = amountOfRum/daiquiri;
 
 	float limeRatio = amountOfLime/daiquiri;
+
+	float sugarRatio = amountOfSugar/daiquiri;
 	
-	if(rumRatio > 0.71 && rumRatio < 0.79)
+	if(rumRatio > 0.61 && rumRatio < 0.71)
 	{
 		orderScore -= 0;
 	}
-	else if(rumRatio > 0.67 && rumRatio <= 0.71)
+	else if(rumRatio > 0.56 && rumRatio <= 0.61)
 	{
-		orderScore -= 10;
+		orderScore -= 5;
 	}
-	else if(rumRatio < 0.82 && rumRatio >= 0.79)
+	else if(rumRatio < 0.76 && rumRatio >= 0.71)
 	{
-		orderScore -= 10;
+		orderScore -= 5;
 	}
 	else
 	{
-		orderScore -= 15;
+		orderScore -= 10;
 
 		scoreIdx[0] = 1;
 	}
 
-	if(limeRatio > 0.23 && limeRatio < 0.27)
+	if(sugarRatio > 0.09 && sugarRatio < 0.13)
 	{
 		orderScore -= 0;
 	}
-	else if(limeRatio > 0.22 && limeRatio <= 0.23)
+	else if(sugarRatio > 0.07 && sugarRatio <= 0.09)
 	{
-		orderScore -= 10;
+		orderScore -= 5;
 	}
-	else if(limeRatio < 0.28 && limeRatio >= 0.27)
+	else if(sugarRatio < 0.15 && sugarRatio >= 0.13)
 	{
-		orderScore -= 10;
+		orderScore -= 5;
 	}
 	else
 	{
-		orderScore -= 15;
+		orderScore -= 10;
+
+		scoreIdx[0] = 1;
+	}
+
+	if(limeRatio > 0.18 && limeRatio < 0.26)
+	{
+		orderScore -= 0;
+	}
+	else if(limeRatio > 0.15 && limeRatio <= 0.18)
+	{
+		orderScore -= 5;
+	}
+	else if(limeRatio < 0.29 && limeRatio >= 0.26)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 10;
 
 		scoreIdx[0] = 1;
 	}
@@ -759,9 +805,9 @@ void ASpawnManager::CheckNegroni(int32 customerIdx)
 
 void ASpawnManager::CheckOldPal(int32 customerIdx)
 {
-	float oldPal = amountOfCampari + amountOfVermouth + amountOfWhisky;
+	float oldPal = amountOfCampari + amountOfVermouth + amountOfWhiskey;
 
-	float whiskyRatio = amountOfWhisky/oldPal;
+	float whiskyRatio = amountOfWhiskey/oldPal;
 
 	float vermouthRatio = amountOfVermouth/oldPal;
 

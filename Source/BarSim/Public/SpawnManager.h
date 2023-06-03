@@ -28,14 +28,7 @@ public:
 	class UBarGameInstance* gi;
 	
 	UPROPERTY()
-	TArray<AActor*> chairs;
-
-	UPROPERTY()
-	TArray<AChair*> aChairs;
-
-	// 의자 비어있는지 bool 배열
-	UPROPERTY()
-	TArray<bool> bIsSit;
+	TArray<AChair*> aChairs = {0, 0, 0, 0};
 
 	// 의자마다 칵테일이 있는지 bool 배열
 	UPROPERTY()
@@ -110,7 +103,7 @@ public:
 
 	TArray<FString> GinLime = {"Gin", "Lime"};
 
-	TArray<FString> Daiquiri = {"Rum", "Lime"};
+	TArray<FString> Daiquiri = {"Rum", "Lime", "Sugar"};
 	
 	TArray<FString> Martini = {"Gin", "Vermouth"};
 
@@ -122,13 +115,15 @@ public:
 
 	float amountOfGin;
 
-	float amountOfWhisky;
+	float amountOfWhiskey;
 
 	float amountOfLime;
 	
 	float amountOfVermouth;
 	
 	float amountOfCampari;
+
+	float amountOfSugar;
 
 	int32 orderScore;
 

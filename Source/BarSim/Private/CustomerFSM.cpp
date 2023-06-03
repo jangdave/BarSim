@@ -139,16 +139,16 @@ void UCustomerFSM::TickIdle()
 {
 	if(spawnManager != nullptr)
 	{
-		for(int i = 0; i<spawnManager->bIsSit.Num(); i++)
+		for(int i = 0; i<spawnManager->aChairs.Num(); i++)
 		{
 			// 스폰 매니저에 있는 의자 배열에 착석 여부를 확인하는 배열 체크
-			if(spawnManager->bIsSit[i] == false)
+			if(spawnManager->aChairs[i]->bCheck == false)
 			{
 				// 비어 있는 의자가 있으면 의자의 순서를 저장하고
 				idx = i;
 				
 				// 앉은 의자 배열에 착석 여부 바꾸기
-				spawnManager->bIsSit[idx] = true;
+				spawnManager->aChairs[idx]->bCheck = true;
 
 				// 가게 오픈했다고 바꾸기
 				spawnManager->bCheckSpawn = true;
@@ -165,7 +165,7 @@ void UCustomerFSM::TickIdle()
 void UCustomerFSM::TickMove()
 {
 	// 지정 된 의자 뒤로 이동
-	auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -100;
+	auto loc = spawnManager->aChairs[idx]->GetActorLocation() + spawnManager->aChairs[idx]->GetActorForwardVector() * -100;
 
 	auto result = ai->MoveToLocation(loc);
 
@@ -179,7 +179,7 @@ void UCustomerFSM::TickMove()
 void UCustomerFSM::TickReadySit()
 {
 	// 지정 된 의자 뒤로 이동
-	auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -20;
+	auto loc = spawnManager->aChairs[idx]->GetActorLocation() + spawnManager->aChairs[idx]->GetActorForwardVector() * -20;
 
 	auto result = ai->MoveToLocation(loc);
 
@@ -259,7 +259,7 @@ void UCustomerFSM::TickLeave()
 		spawnManager->aChairs[idx]->bOnceOverlap = false;
 		
 		// 도착하면 의자 배열에 착석 여부 바꾸고 사라짐
-		spawnManager->bIsSit[idx] = false;
+		spawnManager->aChairs[idx]->bCheck = false;
 		
 		owner->Destroy();
 	}
@@ -297,7 +297,7 @@ void UCustomerFSM::TickStandby()
 	}
 	
 	// 일정 시간 전에 코스터가 있다면 오더로 상태 변경
-	if(curTime < 10 && spawnManager->bIsCoaster[idx] != false)
+	if(curTime <= 10 && spawnManager->bIsCoaster[idx] != false)
 	{
 		owner->order_UI->EndCustomer();
 		
@@ -406,17 +406,20 @@ void UCustomerFSM::TickWaitLong()
 void UCustomerFSM::TickOrderJudge()
 {
 	// 주문과 일치하면 holdcup으로 상태 이동
-	if(spawnManager->aChairs[idx]->bSameOrder == true && curTime > 1)
+	if(spawnManager->aChairs[idx]->bSameOrder == true)
 	{
-		SetSitState(ECustomerSitState::HOLDCUP);
+		if(curTime > 1)
+		{
+			SetSitState(ECustomerSitState::HOLDCUP);
 
-		spawnManager->aChairs[idx]->MoveCup();
+			spawnManager->aChairs[idx]->MoveCup();
+		}
 	}
 	// 주문과 일치 하지 않고
-	else if(spawnManager->aChairs[idx]->bUnSameOrder == true && curTime > 1)
+	else if(spawnManager->aChairs[idx]->bUnSameOrder == true)
 	{
 		// 한번 더 기회를 소모하지 않았으면
-		if(bCheckOrder != true)
+		if(bCheckOrder != true && curTime > 1)
 		{
 			if(bCheckCustomer != true)
 			{
@@ -448,7 +451,7 @@ void UCustomerFSM::TickOrderJudge()
 			}
 		}
 		// 한번의 기회를 소모했으면
-		else
+		else if(bCheckOrder != false && curTime > 1)
 		{
 			if(bCheckCustomer != true && curTime > 2 && curTime <= 4)
 			{
@@ -503,7 +506,7 @@ void UCustomerFSM::TickTasteJudge()
 	// 점수 판단
 	auto result = spawnManager->aChairs[idx]->totalScore;
 
-	if(result > 60)
+	if(result >= 40)
 	{
 		SetSitState(ECustomerSitState::AWESOME);
 	}

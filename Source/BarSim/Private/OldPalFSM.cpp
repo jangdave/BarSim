@@ -498,7 +498,7 @@ void UOldPalFSM::TickReadyMove()
 		idx = 1;
 		
 		// 앉은 의자 배열에 착석 여부 바꾸기
-		spawnManager->bIsSit[idx] = true;
+		spawnManager->aChairs[idx]->bCheck = true;
 
 		// 선택지 띄우기
 		if(player->playerText_UI->choiceCount == 0)
@@ -591,7 +591,7 @@ void UOldPalFSM::TickReadyMove()
 		idx = 1;
 		
 		// 앉은 의자 배열에 착석 여부 바꾸기
-		spawnManager->bIsSit[idx] = true;
+		spawnManager->aChairs[idx]->bCheck = true;
 
 		// 선택지 띄우기
 		if(player->playerText_UI->choiceCount == 0)
@@ -676,7 +676,7 @@ void UOldPalFSM::TickMove()
 	if(gi->checkDayCount == 1)
 	{
 		// 지정 된 의자 뒤로 이동
-		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -100;
+		auto loc = spawnManager->aChairs[idx]->GetActorLocation() + spawnManager->aChairs[idx]->GetActorForwardVector() * -100;
 
 		auto result = ai->MoveToLocation(loc);
 		
@@ -698,7 +698,7 @@ void UOldPalFSM::TickMove()
 	else
 	{
 		// 지정 된 의자 뒤로 이동
-		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -100;
+		auto loc = spawnManager->aChairs[idx]->GetActorLocation() + spawnManager->aChairs[idx]->GetActorForwardVector() * -100;
 
 		auto result = ai->MoveToLocation(loc);
 
@@ -725,7 +725,7 @@ void UOldPalFSM::TickReadySit()
 	if(gi->checkDayCount == 1)
 	{
 		// 지정 된 의자 뒤로 이동
-		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -10;
+		auto loc = spawnManager->aChairs[idx]->GetActorLocation() + spawnManager->aChairs[idx]->GetActorForwardVector() * -10;
 		auto result = ai->MoveToLocation(loc);
 
 		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
@@ -753,7 +753,7 @@ void UOldPalFSM::TickReadySit()
 	else
 	{
 		// 지정 된 의자 뒤로 이동
-		auto loc = spawnManager->chairs[idx]->GetActorLocation() + spawnManager->chairs[idx]->GetActorForwardVector() * -10;
+		auto loc = spawnManager->aChairs[idx]->GetActorLocation() + spawnManager->aChairs[idx]->GetActorForwardVector() * -10;
 		auto result = ai->MoveToLocation(loc);
 
 		if(result == EPathFollowingRequestResult::AlreadyAtGoal)
@@ -1129,6 +1129,11 @@ void UOldPalFSM::TickWait()
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
+
+			// 플레이어 대사 4
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(4);
+			player->playerText_UI->StartPlayer();
 			
 			SetSitState(EOldPalSitState::ORDERJUDGE);
 		}
@@ -1207,7 +1212,7 @@ void UOldPalFSM::TickOrderJudge()
 		// 진라임을 주면
 		if(spawnManager->orderCoctailIdx[idx] == 1)
 		{
-			if(bPlayerTalk != true && curTime > 1)
+			if(bPlayerTalk != true && curTime > 2)
 			{
 				// 플레이어 대사 지우기
 				player->playerText_UI->EndPlayer();
@@ -1242,7 +1247,7 @@ void UOldPalFSM::TickOrderJudge()
 		// 다이커리를 주면
 		else if(spawnManager->orderCoctailIdx[idx] == 2)
 		{
-			if(bPlayerTalk != true && curTime > 1)
+			if(bPlayerTalk != true && curTime > 2)
 			{
 				// 플레이어 대사 지우기
 				player->playerText_UI->EndPlayer();
@@ -1277,7 +1282,7 @@ void UOldPalFSM::TickOrderJudge()
 		// 마티니를 주면
 		else if(spawnManager->orderCoctailIdx[idx] == 3)
 		{
-			if(bPlayerTalk != true && curTime > 1)
+			if(bPlayerTalk != true && curTime > 2)
 			{
 				// 플레이어 대사 지우기
 				player->playerText_UI->EndPlayer();
@@ -1312,7 +1317,7 @@ void UOldPalFSM::TickOrderJudge()
 		// 네그로니를 주면
 		else if(spawnManager->orderCoctailIdx[idx] == 4)
 		{
-			if(bPlayerTalk != true && curTime > 1)
+			if(bPlayerTalk != true && curTime > 2)
 			{
 				// 플레이어 대사 지우기
 				player->playerText_UI->EndPlayer();
@@ -1347,7 +1352,7 @@ void UOldPalFSM::TickOrderJudge()
 		// 그이외 모든것
 		else if(spawnManager->orderCoctailIdx[idx] == 6)
 		{
-			if(bPlayerTalk != true && curTime > 1)
+			if(bPlayerTalk != true && curTime > 2)
 			{
 				// 플레이어 대사 지우기
 				player->playerText_UI->EndPlayer();

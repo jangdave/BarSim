@@ -115,10 +115,10 @@ void UCustomerOrderWidget::NativeConstruct()
 	manScriptC.Emplace(FString::Printf(TEXT("바텐더 마티니 한잔"))); // 2
 	manScriptC.Emplace(FString::Printf(TEXT("바텐더 네그로니 한잔"))); // 3
 	// 한번
-	manScriptC.Emplace(FString::Printf(TEXT("진라임 시킨적 없는데?"))); // 4
-	manScriptC.Emplace(FString::Printf(TEXT("다이키리 시킨적 없는데?"))); // 5
-	manScriptC.Emplace(FString::Printf(TEXT("마티니 시킨적 없는데?"))); // 6
-	manScriptC.Emplace(FString::Printf(TEXT("네그로니 시킨적 없는데?"))); // 7
+	manScriptC.Emplace(FString::Printf(TEXT("진라임이 아닌데?"))); // 4
+	manScriptC.Emplace(FString::Printf(TEXT("다이키리 아닌데?"))); // 5
+	manScriptC.Emplace(FString::Printf(TEXT("마티니 아닌데?"))); // 6
+	manScriptC.Emplace(FString::Printf(TEXT("네그로니 아닌데?"))); // 7
 	// 두번
 	manScriptC.Emplace(FString::Printf(TEXT("뭐 이런 바가 있어? 나 참"))); // 8
 	manScriptC.Emplace(FString::Printf(TEXT("이 정도면 못 마실 정도는 아니군"))); // 9

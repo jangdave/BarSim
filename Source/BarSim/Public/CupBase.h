@@ -205,5 +205,6 @@ public:
 	UPROPERTY()
 	TArray<bool> garnishArray;
 
-
+	UPROPERTY()
+	bool bScored;
 };
