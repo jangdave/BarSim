@@ -22,7 +22,6 @@
 #include "SlicedLimeVat.h"
 #include "Strainer.h"
 #include "Tablet.h"
-#include "Components/BoxComponent.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetComponent.h"
 #include "Haptics/HapticFeedbackEffect_Curve.h"
