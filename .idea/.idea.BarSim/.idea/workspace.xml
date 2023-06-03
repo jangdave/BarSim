@@ -10,17 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MartiniCup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MartiniCup.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,7 +290,7 @@
       <workItem from="1685688933991" duration="8092000" />
       <workItem from="1685747020876" duration="2260000" />
       <workItem from="1685758761237" duration="6186000" />
-      <workItem from="1685772448670" duration="8097000" />
+      <workItem from="1685772448670" duration="8925000" />
     </task>
     <servers />
   </component>

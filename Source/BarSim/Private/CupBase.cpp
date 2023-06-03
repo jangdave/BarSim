@@ -55,9 +55,7 @@ void ACupBase::BeginPlay()
 
 	cupSize = cupSizeOrigin;
 	iceCount=0;
-	garnishArray[0]=false;
-	garnishArray[1]=false;
-	garnishArray[2]=false;
+	garnishArray={false, false, false};
 	
 	measureComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddLiquor);
 	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
