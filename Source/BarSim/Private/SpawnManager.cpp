@@ -99,7 +99,7 @@ void ASpawnManager::SpawnCustomer()
 void ASpawnManager::SpawnCustom()
 {
 	// 날짜가 지난만큼 더 많이 스폰
-	int32 idx = (gi->checkDayCount - 1) * 1; // 4
+	int32 idx = (gi->checkDayCount - 1) * 4; // 4
 	
 	// 전체 손님 수가 지정한 숫자보다 작을때
 	if(checkCustomerNum >= idx)
@@ -196,7 +196,7 @@ void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool
 {
 	for(int i = 0; i<cocName.Num(); i++)
 	{
-		if(cocName[i] == "Whisky")
+		if(cocName[i] == "Whiskey")
 		{
 			amountOfWhisky += cocliter[i];
 		}
@@ -274,6 +274,11 @@ void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirr
 			
 			CheckMartini(customerIdx);
 		}
+	}
+	// 네그로니 판정
+	else if(amountOfCampari > 0 && amountOfVermouth > 0 && amountOfLime <= 0)
+	{
+		
 	}
 	// 레시피 범위 밖
 	else
