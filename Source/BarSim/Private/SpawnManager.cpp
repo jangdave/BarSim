@@ -196,7 +196,7 @@ void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool
 {
 	for(int i = 0; i<cocName.Num(); i++)
 	{
-		if(cocName[i] == "Whisky")
+		if(cocName[i] == "Whiskey")
 		{
 			amountOfWhisky += cocliter[i];
 		}
@@ -274,6 +274,11 @@ void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirr
 			
 			CheckMartini(customerIdx);
 		}
+	}
+	// 네그로니 판정
+	else if(amountOfCampari > 0 && amountOfVermouth > 0 && amountOfLime <= 0)
+	{
+		
 	}
 	// 레시피 범위 밖
 	else

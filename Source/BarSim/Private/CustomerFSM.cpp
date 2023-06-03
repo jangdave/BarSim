@@ -95,22 +95,27 @@ void UCustomerFSM::SetOrderCoctail()
 	if(owner != nullptr)
 	{
 		// 랜덤으로 메뉴 선정
-		int32 result = FMath::RandRange(1,9);
+		int32 result = FMath::RandRange(1,8);
 			
 		if(result > 6)
 		{
 			// 진라임
 			orderIdx = 1;
 		}
-		else if(result <= 6 && result > 3)
+		else if(result <= 6 && result > 4)
 		{
 			// 다이키리
 			orderIdx = 2;
 		}
-		else if(result <= 3)
+		else if(result <= 4 && result > 2)
 		{
 			// 마타니
 			orderIdx = 3;
+		}
+		else if(result <= 2)
+		{
+			// 네그로니
+			orderIdx = 4;
 		}
 	}
 }
@@ -194,11 +199,6 @@ void UCustomerFSM::TickSit()
 	// 대기시간 체크를 위한 시간 적립
 	curTime += GetWorld()->GetDeltaSeconds();
 
-	if(curTime > 20)
-	{
-		curTime = 0;
-	}
-	
 	switch (sitState)
 	{
 	case ECustomerSitState::STANDBY:
@@ -278,7 +278,7 @@ void UCustomerFSM::TickStandby()
 	// 오더 위젯에 물음표 띄우기
 	owner->order_UI->SetVisibility(ESlateVisibility::Visible);
 
-	owner->order_UI->SetImage(owner->order_UI->orderImage[0]);
+	//owner->order_UI->SetImage(owner->order_UI->orderImage[0]);
 
 	// 일정 시간 전에 코스터가 있다면 오더로 상태 변경
 	if(curTime < 10 && spawnManager->bIsCoaster[idx] != false)
@@ -582,12 +582,12 @@ void UCustomerFSM::VisibleOrder()
 	if(spawnManager->bIsPlayer[idx] != false)
 	{
 		// 플레이어가 근처에 있으면 주문한 칵테일 보여주기
-		owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
+		//owner->order_UI->SetImage(owner->order_UI->orderImage[orderIdx]);
 	}
 	else
 	{
 		// 플레이어가 근터에 없으면 물음표
-		owner->order_UI->SetImage(owner->order_UI->orderImage[0]);
+		//owner->order_UI->SetImage(owner->order_UI->orderImage[0]);
 	}
 }
 
