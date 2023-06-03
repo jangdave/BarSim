@@ -32,6 +32,9 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_Customer;
 	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_Money;
+	
 	UPROPERTY()
 	TArray<FString> womanScriptA;
 
@@ -55,7 +58,31 @@ public:
 
 	UPROPERTY()
 	TArray<FString> manScriptD;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartCustomer();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void EndCustomer();
+
+	UFUNCTION()
+	void SetSwitcher(int32 idx);
 	
 	UFUNCTION()
-	void SetOrderText();
+	void SetOrderText(int32 voiceCount, int32 orderIdx);
+
+	UFUNCTION()
+	void SetOrderTwiceText(int32 voiceCount, int32 orderIdx);
+
+	UFUNCTION()
+	void SetLeaveText(int32 voiceCount);
+
+	UFUNCTION()
+	void SetGoodText(int32 voiceCount);
+
+	UFUNCTION()
+	void SetBadText(int32 voiceCount);
+
+	UFUNCTION()
+	void SetMoneyText(float money);
 };

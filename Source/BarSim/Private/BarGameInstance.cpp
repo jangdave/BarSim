@@ -30,3 +30,25 @@ void UBarGameInstance::BindFunction()
 	// 체크데이 함수 델리케이트에 연결
 	goToMainMapDele.BindUFunction(this, FName("CheckDay"));
 }
+
+void UBarGameInstance::AddMoney(float money)
+{
+	if(checkDayCount == 1)
+	{
+		TotalMoney[0] += money;
+
+		TotalMoney[3] += money;
+	}
+	else if(checkDayCount == 2)
+	{
+		TotalMoney[1] += money;
+
+		TotalMoney[3] += money;
+	}
+	else if(checkDayCount == 3)
+	{
+		TotalMoney[2] += money;
+
+		TotalMoney[3] += money;
+	}
+}

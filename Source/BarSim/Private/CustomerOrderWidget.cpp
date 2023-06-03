@@ -3,6 +3,8 @@
 
 #include "CustomerOrderWidget.h"
 #include "Components/Image.h"
+#include "Components/TextBlock.h"
+#include "Components/WidgetSwitcher.h"
 
 void UCustomerOrderWidget::NativeConstruct()
 {
@@ -144,7 +146,432 @@ void UCustomerOrderWidget::SetImage(UTexture2D* setTexture)
 	image_Icon->SetBrushFromTexture(setTexture);
 }
 
-void UCustomerOrderWidget::SetOrderText()
+void UCustomerOrderWidget::SetSwitcher(int32 idx)
 {
-	
+	WidgetSwitcher_Customer->SetActiveWidgetIndex(idx);
+}
+
+void UCustomerOrderWidget::SetOrderText(int32 voiceCount, int32 orderIdx)
+{
+	if(voiceCount == 5)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptA[0]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptA[1]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptA[2]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptA[3]));
+		}
+	}
+	else if(voiceCount == 6)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptB[0]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptB[1]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptB[2]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptB[3]));
+		}
+	}
+	else if(voiceCount == 7)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptC[0]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptC[1]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptC[2]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptC[3]));
+		}
+	}
+	else if(voiceCount == 8)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptD[0]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptD[1]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptD[2]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptD[3]));
+		}
+	}
+	else if(voiceCount == 1)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(manScriptA[0]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(manScriptA[1]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(manScriptA[2]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(manScriptA[3]));
+		}
+	}
+	else if(voiceCount == 2)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(manScriptB[0]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(manScriptB[1]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(manScriptB[2]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(manScriptB[3]));
+		}
+	}
+	else if(voiceCount == 3)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(manScriptC[0]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(manScriptC[1]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(manScriptC[2]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(manScriptC[3]));
+		}
+	}
+	else if(voiceCount == 4)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(manScriptD[0]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(manScriptD[1]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(manScriptD[2]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(manScriptD[3]));
+		}
+	}
+}
+
+void UCustomerOrderWidget::SetOrderTwiceText(int32 voiceCount, int32 orderIdx)
+{
+	if(voiceCount == 5)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptA[4]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptA[5]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptA[6]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptA[7]));
+		}
+	}
+	else if(voiceCount == 6)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptB[4]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptB[5]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptB[6]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptB[7]));
+		}
+	}
+	else if(voiceCount == 7)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptC[4]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptC[5]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptC[6]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptC[7]));
+		}
+	}
+	else if(voiceCount == 8)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptD[4]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptD[5]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptD[6]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(womanScriptD[7]));
+		}
+	}
+	else if(voiceCount == 1)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(manScriptA[4]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(manScriptA[5]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(manScriptA[6]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(manScriptA[7]));
+		}
+	}
+	else if(voiceCount == 2)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(manScriptB[4]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(manScriptB[5]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(manScriptB[6]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(manScriptB[7]));
+		}
+	}
+	else if(voiceCount == 3)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(manScriptC[4]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(manScriptC[5]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(manScriptC[6]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(manScriptC[7]));
+		}
+	}
+	else if(voiceCount == 4)
+	{
+		if(orderIdx == 1)
+		{
+			text_Customer->SetText(FText::FromString(manScriptD[4]));
+		}
+		else if(orderIdx == 2)
+		{
+			text_Customer->SetText(FText::FromString(manScriptD[5]));
+		}
+		else if(orderIdx == 3)
+		{
+			text_Customer->SetText(FText::FromString(manScriptD[6]));
+		}
+		else if(orderIdx == 4)
+		{
+			text_Customer->SetText(FText::FromString(manScriptD[7]));
+		}
+	}
+}
+
+void UCustomerOrderWidget::SetLeaveText(int32 voiceCount)
+{
+	if(voiceCount == 5)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptA[8]));
+	}
+	else if(voiceCount == 6)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptB[8]));
+	}
+	else if(voiceCount == 7)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptC[8]));
+	}
+	else if(voiceCount == 8)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptD[8]));
+	}
+	else if(voiceCount == 1)
+	{
+		text_Customer->SetText(FText::FromString(manScriptA[8]));
+	}
+	else if(voiceCount == 2)
+	{
+		text_Customer->SetText(FText::FromString(manScriptB[8]));
+	}
+	else if(voiceCount == 3)
+	{
+		text_Customer->SetText(FText::FromString(manScriptC[8]));
+	}
+	else if(voiceCount == 4)
+	{
+		text_Customer->SetText(FText::FromString(manScriptD[8]));
+	}
+}
+
+void UCustomerOrderWidget::SetGoodText(int32 voiceCount)
+{
+	if(voiceCount == 5)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptA[9]));
+	}
+	else if(voiceCount == 6)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptB[9]));
+	}
+	else if(voiceCount == 7)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptC[9]));
+	}
+	else if(voiceCount == 8)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptD[9]));
+	}
+	else if(voiceCount == 1)
+	{
+		text_Customer->SetText(FText::FromString(manScriptA[9]));
+	}
+	else if(voiceCount == 2)
+	{
+		text_Customer->SetText(FText::FromString(manScriptB[9]));
+	}
+	else if(voiceCount == 3)
+	{
+		text_Customer->SetText(FText::FromString(manScriptC[9]));
+	}
+	else if(voiceCount == 4)
+	{
+		text_Customer->SetText(FText::FromString(manScriptD[9]));
+	}
+}
+
+void UCustomerOrderWidget::SetBadText(int32 voiceCount)
+{
+	if(voiceCount == 5)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptA[10]));
+	}
+	else if(voiceCount == 6)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptB[10]));
+	}
+	else if(voiceCount == 7)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptC[10]));
+	}
+	else if(voiceCount == 8)
+	{
+		text_Customer->SetText(FText::FromString(womanScriptD[10]));
+	}
+	else if(voiceCount == 1)
+	{
+		text_Customer->SetText(FText::FromString(manScriptA[10]));
+	}
+	else if(voiceCount == 2)
+	{
+		text_Customer->SetText(FText::FromString(manScriptB[10]));
+	}
+	else if(voiceCount == 3)
+	{
+		text_Customer->SetText(FText::FromString(manScriptC[10]));
+	}
+	else if(voiceCount == 4)
+	{
+		text_Customer->SetText(FText::FromString(manScriptD[10]));
+	}
+}
+
+void UCustomerOrderWidget::SetMoneyText(float money)
+{
+	text_Money->SetText(FText::AsNumber(money));
 }

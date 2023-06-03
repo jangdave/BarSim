@@ -126,7 +126,7 @@ void AChair::OnCupOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 		bCheckCoctail = true;
 
 		// 컵 정보를 보내준다
-		spawnManager->GetCup(coctail->NameArray, coctail->ContentsArray, coctail->bStirred, coctail->bStirredLater, coctail->bShaked, customerIdx);
+		spawnManager->GetCup(coctail->NameArray, coctail->ContentsArray, coctail->bStirred, coctail->bStirredLater, coctail->bShaked, coctail->garnishArray, customerIdx);
 
 		bOnceOverlap = true;
 	}
@@ -185,9 +185,48 @@ void AChair::EndPlayerOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 void AChair::ViewScore(int32 score)
 {
 	totalScore = score;
-	
-	score_UI->text_Score->SetText(FText::AsNumber(score));
 
+	if(totalScore >= 80)
+	{
+		score_UI->text_Score->SetText(FText::FromString("Excellent"));
+
+		FLinearColor color = {0.5,0,0.5,1};
+		
+		score_UI->text_Score->SetColorAndOpacity(color);
+	}
+	else if(totalScore < 80 && totalScore >= 60)
+	{
+		score_UI->text_Score->SetText(FText::FromString("Very Good"));
+
+		FLinearColor color = {0,0,1,1};
+		
+		score_UI->text_Score->SetColorAndOpacity(color);
+	}
+	else if(totalScore < 60 && totalScore >= 40)
+	{
+		score_UI->text_Score->SetText(FText::FromString("Good"));
+
+		FLinearColor color = {0,1,0,1};
+		
+		score_UI->text_Score->SetColorAndOpacity(color);
+	}
+	else if(totalScore < 40 && totalScore >= 20)
+	{
+		score_UI->text_Score->SetText(FText::FromString("Normal"));
+
+		FLinearColor color = {1,1,0,1};
+		
+		score_UI->text_Score->SetColorAndOpacity(color);
+	}
+	else if(totalScore < 20)
+	{
+		score_UI->text_Score->SetText(FText::FromString("Bad"));
+
+		FLinearColor color = {1,0,0,1};
+		
+		score_UI->text_Score->SetColorAndOpacity(color);
+	}
+	
 	score_UI->SetScoreSwitcher(0);
 	
 	score_UI->SetVisibility(ESlateVisibility::Visible);

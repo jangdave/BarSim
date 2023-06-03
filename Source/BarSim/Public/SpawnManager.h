@@ -32,7 +32,7 @@ public:
 
 	UPROPERTY()
 	TArray<AChair*> aChairs;
-	
+
 	// 의자 비어있는지 bool 배열
 	UPROPERTY()
 	TArray<bool> bIsSit;
@@ -106,7 +106,7 @@ public:
 	
 	// 점수 체크------------------------------------------------------------------------------------
 public:
-	void GetCup(TArray<FString> cocName, TArray<float> cocLiter, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx);
+	void GetCup(TArray<FString> cocName, TArray<float> cocLiter, bool bStirred, bool bStirredLater, bool bShake, TArray<bool> garnishArray, int32 customerIdx);
 
 	TArray<FString> GinLime = {"Gin", "Lime"};
 
@@ -136,17 +136,19 @@ public:
 	UPROPERTY()
 	TArray<int32> scoreIdx = {0, 0, 0};
 
-	void CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx);
+	void CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, TArray<bool> garnishArray, int32 customerIdx);
 
 	void CheckWhisky(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx);
 
-	void CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx);
+	void CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShake, TArray<bool> garnishArray, int32 customerIdx);
 
 	void CheckGinLime(int32 customerIdx);
 
 	void CheckMartini(int32 customerIdx);
 
 	void CheckDaiquiri(int32 customerIdx);
+
+	void CheckNegroni(int32 customerIdx);
 
 	void CheckOldPal(int32 customerIdx);
 

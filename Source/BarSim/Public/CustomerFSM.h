@@ -73,6 +73,7 @@ public:
 	UPROPERTY()
 	class ASpawnManager* spawnManager;
 
+	UPROPERTY()
 	class AAIController* ai;
 	
 	// 의자 순서 저장 인자
@@ -86,6 +87,9 @@ public:
 	// 시간
 	float curTime;
 
+	// 대사
+	bool bCheckCustomer;
+	
 	// 애니메이션 플레이 여부
 	bool bCheckPlayAnim;
 

@@ -192,7 +192,7 @@ void ASpawnManager::SecondDay()
 }
 
 // 점수 체크------------------------------------------------------------------------------------------------------------
-void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx)
+void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool bStirred, bool bStirredLater, bool bShake, TArray<bool> garnishArray,  int32 customerIdx)
 {
 	for(int i = 0; i<cocName.Num(); i++)
 	{
@@ -226,11 +226,11 @@ void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool
 	
 	if(amountOfGin > 0)
 	{
-		CheckGin(cocName, bStirred, bStirredLater, customerIdx);
+		CheckGin(cocName, bStirred, bStirredLater, garnishArray,customerIdx);
 	}
 	else if(amountOfRum > 0)
 	{
-		CheckRum(cocName, bStirred, bStirredLater, bShake, customerIdx);
+		CheckRum(cocName, bStirred, bStirredLater, bShake, garnishArray, customerIdx);
 	}
 	else if(amountOfWhisky > 0)
 	{
@@ -242,13 +242,22 @@ void ASpawnManager::GetCup(TArray<FString> cocName, TArray<float> cocliter, bool
 	}
 }
 
-void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx)
+void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, TArray<bool> garnishArray, int32 customerIdx)
 {
 	// 진라임 판정
 	if(amountOfLime > 0 && amountOfVermouth <= 0 && amountOfCampari <= 0)
 	{
 		if(cocName.Num() == GinLime.Num())
 		{
+			if(garnishArray[0] == true)
+			{
+				orderScore -= 0;
+			}
+			else
+			{
+				orderScore -= 10;
+			}
+			
 			CheckGinLime(customerIdx);
 		}
 	}
@@ -267,9 +276,18 @@ void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirr
 			}
 			else
 			{
-				orderScore -= 30;
+				orderScore -= 25;
 
 				scoreIdx[2] = 1;
+			}
+
+			if(garnishArray[1] == true)
+			{
+				orderScore -= 0;
+			}
+			else
+			{
+				orderScore -= 15;
 			}
 			
 			CheckMartini(customerIdx);
@@ -278,7 +296,19 @@ void ASpawnManager::CheckGin(TArray<FString> cocName, bool bStirred, bool bStirr
 	// 네그로니 판정
 	else if(amountOfCampari > 0 && amountOfVermouth > 0 && amountOfLime <= 0)
 	{
-		
+		if(cocName.Num() == Negroni.Num())
+		{
+			if(garnishArray[2] == true)
+			{
+				orderScore -= 0;
+			}
+			else
+			{
+				orderScore -= 20;
+			}
+			
+			CheckNegroni(customerIdx);
+		}
 	}
 	// 레시피 범위 밖
 	else
@@ -318,7 +348,7 @@ void ASpawnManager::CheckWhisky(TArray<FString> cocName, bool bStirred, bool bSt
 	}
 }
 
-void ASpawnManager::CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShaked, int32 customerIdx)
+void ASpawnManager::CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShaked, TArray<bool> garnishArray,  int32 customerIdx)
 {
 	// 다이커리 판정
 	if(amountOfLime > 0)
@@ -349,6 +379,15 @@ void ASpawnManager::CheckRum(TArray<FString> cocName, bool bStirred, bool bStirr
 				orderScore -= 25;
 
 				scoreIdx[2] = 1;
+			}
+
+			if(garnishArray[0] == true)
+			{
+				orderScore -= 0;
+			}
+			else
+			{
+				orderScore -= 10;
 			}
 			
 			CheckDaiquiri(customerIdx);
@@ -383,7 +422,7 @@ void ASpawnManager::CheckGinLime(int32 customerIdx)
 	}
 	else
 	{
-		orderScore -= 30;
+		orderScore -= 25;
 
 		scoreIdx[0] = 1;
 	}
@@ -402,7 +441,7 @@ void ASpawnManager::CheckGinLime(int32 customerIdx)
 	}
 	else
 	{
-		orderScore -= 30;
+		orderScore -= 25;
 
 		scoreIdx[0] = 1;
 	}
@@ -467,7 +506,7 @@ void ASpawnManager::CheckMartini(int32 customerIdx)
 	}
 	else
 	{
-		orderScore -= 30;
+		orderScore -= 25;
 
 		scoreIdx[0] = 1;
 	}
@@ -486,7 +525,7 @@ void ASpawnManager::CheckMartini(int32 customerIdx)
 	}
 	else
 	{
-		orderScore -= 30;
+		orderScore -= 25;
 
 		scoreIdx[0] = 1;
 	}
@@ -551,7 +590,7 @@ void ASpawnManager::CheckDaiquiri(int32 customerIdx)
 	}
 	else
 	{
-		orderScore -= 20;
+		orderScore -= 15;
 
 		scoreIdx[0] = 1;
 	}
@@ -570,7 +609,7 @@ void ASpawnManager::CheckDaiquiri(int32 customerIdx)
 	}
 	else
 	{
-		orderScore -= 20;
+		orderScore -= 15;
 
 		scoreIdx[0] = 1;
 	}
@@ -601,6 +640,111 @@ void ASpawnManager::CheckDaiquiri(int32 customerIdx)
 	else
 	{
 		if(orderCoctailIdx[customerIdx] == 2)
+		{
+			aChairs[customerIdx]->ViewScore(orderScore);
+
+			aChairs[customerIdx]->SameOrder();
+		}
+		else
+		{
+			aChairs[customerIdx]->UnSameOrder();
+		}
+	}
+}
+
+void ASpawnManager::CheckNegroni(int32 customerIdx)
+{
+	float negroni = amountOfGin + amountOfCampari + amountOfVermouth;
+
+	float ginRatio = amountOfGin/negroni;
+
+	float campariRatio = amountOfCampari/negroni;
+
+	float vermouthRatio = amountOfVermouth/negroni;
+
+	if(ginRatio > 0.31 && ginRatio < 0.35)
+	{
+		orderScore -= 0;
+	}
+	else if(ginRatio > 0.3 && ginRatio <= 0.31)
+	{
+		orderScore -= 5;
+	}
+	else if(ginRatio < 0.36 && ginRatio >= 0.35)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 20;
+
+		scoreIdx[0] = 1;
+	}
+
+	if(vermouthRatio > 0.31 && vermouthRatio < 0.35)
+	{
+		orderScore -= 0;
+	}
+	else if(vermouthRatio > 0.3 && vermouthRatio <= 0.31)
+	{
+		orderScore -= 5;
+	}
+	else if(vermouthRatio < 0.36 && vermouthRatio >= 0.35)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 20;
+
+		scoreIdx[0] = 1;
+	}
+
+	if(campariRatio > 0.31 && campariRatio < 0.35)
+	{
+		orderScore -= 0;
+	}
+	else if(campariRatio > 0.3 && campariRatio <= 0.31)
+	{
+		orderScore -= 5;
+	}
+	else if(campariRatio < 0.36 && campariRatio >= 0.35)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 20;
+
+		scoreIdx[0] = 1;
+	}
+
+	if(negroni > 2.85 && negroni < 3.15)
+	{
+		orderScore -= 0;
+	}
+	else if(negroni > 2.7 && negroni <= 2.85)
+	{
+		orderScore -= 5;
+	}
+	else if(negroni < 3.3 && negroni >= 3.15)
+	{
+		orderScore -= 5;
+	}
+	else
+	{
+		orderScore -= 20;
+
+		scoreIdx[1] = 1;
+	}
+
+	if(gi->checkDayCount == 1)
+	{
+		orderCoctailIdx[customerIdx] = 4;
+	}
+	else
+	{
+		if(orderCoctailIdx[customerIdx] == 4)
 		{
 			aChairs[customerIdx]->ViewScore(orderScore);
 
@@ -697,16 +841,10 @@ void ASpawnManager::CheckOldPal(int32 customerIdx)
 	}
 	else
 	{
-		if(orderCoctailIdx[customerIdx] == 4)
+		if(orderCoctailIdx[customerIdx] == 5)
 		{
 			if(bSpawnOld == true)
 			{
-				aChairs[customerIdx]->SameOrder();
-			}
-			else
-			{
-				aChairs[customerIdx]->ViewScore(orderScore);
-
 				aChairs[customerIdx]->SameOrder();
 			}
 		}
@@ -722,7 +860,7 @@ void ASpawnManager::SomethingElse(int32 customerIdx)
 {
 	if(gi->checkDayCount == 1)
 	{
-		orderCoctailIdx[customerIdx] = 5;
+		orderCoctailIdx[customerIdx] = 6;
 	}
 	else
 	{
