@@ -205,5 +205,7 @@ public:
 	UPROPERTY()
 	TArray<bool> garnishArray;
 
+	UPROPERTY(VisibleAnywhere, Category = "Cup")
+	bool bScored;
 
 };
