@@ -114,6 +114,10 @@ public:
 	bool isGrabbingLimeWithTongsLeft=false;
 	bool isGrabbingOliveWithTongsRight=false;
 	bool isGrabbingOliveWithTongsLeft=false;
+	bool isGrabbingDrinkCanRight = false;
+	bool isGrabbingDrinkCanLeft = false;
+	bool isGrabbingOrangeWithTongsRight = false;
+	bool isGrabbingOrangeWithTongsLeft = false;
 		
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;
@@ -221,6 +225,24 @@ public:
 	class AOlivePick* olivePickL;
 	UPROPERTY()
 	class AOliveVat* oliveVat;
+	UPROPERTY()
+	class ADrinkCan* drinkCan;
+	UPROPERTY()
+	class ADrinkCan* drinkCanL;
+	UPROPERTY()
+	class ASlicedOrange* slicedOrange;
+	UPROPERTY()
+	class ASlicedOrange* slicedOrangeL;
+	UPROPERTY()
+	class AHalfSlicedOrange* halfSlicedOrange;
+	UPROPERTY()
+	class AHalfSlicedOrange* halfSlicedOrangeL;
+	UPROPERTY()
+	class AHalfSlicedOrangeVat* halfSlicedOrangeVat;
+	UPROPERTY()
+	class ASlicedOrangeVat* slicedOrangeVat;
+	
+	
 	
 	// Sounds
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
@@ -231,6 +253,12 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* TongGrabSound;
+
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* TriggerPressedSound;
+
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* TriggerReleasedSound;
 
 	// Lime BP
 	UPROPERTY(EditAnywhere, Category="Factory")
@@ -246,6 +274,13 @@ public:
 	// Olive BP
 	UPROPERTY(EditAnywhere, Category="Factory")
 	TSubclassOf<class AOlivePick> oliveFac;
+
+	// Orange BP
+	UPROPERTY(EditAnywhere, Category="Factory")
+	TSubclassOf<class AHalfSlicedOrange> halfSlicedOrangeFac;
+
+	UPROPERTY(EditAnywhere, Category="Factory")
+	TSubclassOf<class ASlicedOrange> slicedOrangeFac;
 
 	// Haptic Feedback
 	UPROPERTY(EditDefaultsOnly, Category="Haptics")

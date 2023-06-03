@@ -55,6 +55,7 @@ void ACupBase::BeginPlay()
 
 	cupSize = cupSizeOrigin;
 	iceCount=0;
+	garnishArray={false, false, false};
 	
 	measureComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddLiquor);
 	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ACupBase::AddIce);
@@ -582,7 +583,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				insideContents = FMath::Clamp(contents, 0, cupSize);
 				LiquorScale();
 			}
-			else if(iceCount==3)
+			else if(iceCount>=3)
 			{
 				
 			}
@@ -607,6 +608,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 			}
 			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
 			isLimeAttached = true;
+			garnishArray[0]=true;
 		}
 	}
 	else if(halfSlicedLime)
@@ -628,6 +630,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 
 			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
 			isLimeAttached = true;
+			garnishArray[0]=true;
 		}
 	}
 }
