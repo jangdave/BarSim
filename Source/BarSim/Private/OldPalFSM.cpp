@@ -902,7 +902,7 @@ void UOldPalFSM::TickLeave()
 		
 		if(curTime > 11)
 		{
-			UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
+			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 		}
 	}
 }
@@ -1613,7 +1613,7 @@ void UOldPalFSM::TickTasteJudge()
 	{
 		if(spawnManager->aChairs[idx]->bSameOrder == true)
 		{
-			if(spawnManager->orderScore >= 60)
+			if(spawnManager->orderScore >= 50)
 			{
 				if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
 				{

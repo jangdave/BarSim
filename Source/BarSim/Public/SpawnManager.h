@@ -110,11 +110,13 @@ public:
 
 	TArray<FString> GinLime = {"Gin", "Lime"};
 
+	TArray<FString> Daiquiri = {"Rum", "Lime"};
+	
 	TArray<FString> Martini = {"Gin", "Vermouth"};
 
+	TArray<FString> Negroni = {"Gin", "Vermouth", "Campari"};
+	
 	TArray<FString> OldPal = {"Whisky", "Vermouth", "Campari"};
-
-	TArray<FString> Daiquiri = {"Rum", "Lime"};
 	
 	float amountOfRum;
 

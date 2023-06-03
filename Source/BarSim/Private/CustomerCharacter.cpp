@@ -91,10 +91,10 @@ void ACustomerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 void ACustomerCharacter::SetMesh()
 {
-	int32 idx = customerFSM->SetRandRange(1, 10);
+	int32 idx = customerFSM->SetRandRange(1, 8);
 
 	// 5보다 크면 여자
-	if(idx > 5)
+	if(idx > 4)
 	{
 		int32 womanIdx = customerFSM->SetRandRange(0, 2);
 
@@ -107,6 +107,8 @@ void ACustomerCharacter::SetMesh()
 			{
 				GetMesh()->SetRelativeScale3D(FVector(1.1));
 			}
+			
+			voiceCount = idx;
 			
 			customerFSM->spawnManager->checkMeshCount = womanIdx;
 		}
@@ -125,6 +127,8 @@ void ACustomerCharacter::SetMesh()
 		if(manIdx != customerFSM->spawnManager->checkMeshCount)
 		{
 			GetMesh()->SetSkeletalMesh(manMesh[manIdx].Object);
+
+			voiceCount = idx;
 			
 			customerFSM->spawnManager->checkMeshCount = manIdx;
 		}

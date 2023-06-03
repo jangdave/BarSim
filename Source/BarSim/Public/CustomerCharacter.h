@@ -52,6 +52,10 @@ public:
 	// 여성 메쉬
 	TArray<ConstructorHelpers::FObjectFinder<USkeletalMesh>> womenMesh;
 
+	// 남성 여성 구별 변수
+	UPROPERTY()
+	int32 voiceCount;
+	
 	// 캐릭터 컵 오버랩 바인드 함수
 	UFUNCTION()
 	void BindOverlap();
