@@ -621,7 +621,7 @@ void APlayerCharacter::FireRight()
 	{
 		//UI에 이벤트를 전달하고 싶다.
 		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
-		widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+		//widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
 
 	}
 	// 오른손에 Tongs를 쥐고 있다면
@@ -842,7 +842,7 @@ void APlayerCharacter::FireLeft()
 	if(widgetInteractionCompLeft)
 	{
 		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));
-		widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+		//widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
 
 	}
 	// 왼손에 Tongs를 쥐고 있다면
