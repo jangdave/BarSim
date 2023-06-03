@@ -13,6 +13,8 @@
 #include "GripMotionControllerComponent.h"
 #include "HalfSlicedLime.h"
 #include "HalfSlicedLimeVat.h"
+#include "HalfSlicedOrange.h"
+#include "HalfSlicedOrangeVat.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
 #include "IceCubeVat.h"
@@ -26,6 +28,8 @@
 #include "ShakerStrainer.h"
 #include "SlicedLime.h"
 #include "SlicedLimeVat.h"
+#include "SlicedOrange.h"
+#include "SlicedOrangeVat.h"
 #include "Strainer.h"
 #include "Tablet.h"
 #include "Components/WidgetComponent.h"
@@ -639,6 +643,11 @@ void APlayerCharacter::FireRight()
 	{
 		//UI에 이벤트를 전달하고 싶다.
 		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
+		bool isCursorOn = widgetInteractionComp->IsOverHitTestVisibleWidget();
+		if(isCursorOn)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(),TriggerPressedSound, 1, 1, 0);
+		}
 		//widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
 
 	}
@@ -665,6 +674,8 @@ void APlayerCharacter::FireRight()
 			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[i].GetActor());
 			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[i].GetActor());
 			oliveVat=Cast<AOliveVat>(VatHitObj[i].GetActor());
+			halfSlicedOrangeVat = Cast<AHalfSlicedOrangeVat>(VatHitObj[i].GetActor());
+			slicedOrangeVat = Cast<ASlicedOrangeVat>(VatHitObj[i].GetActor());
 			if(halfSlicedLimeVat)
 			{
 				// Haptic Feedback
@@ -717,6 +728,32 @@ void APlayerCharacter::FireRight()
 				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("OliveSocket"));
 				GetWorld()->SpawnActor<AOlivePick>(oliveFac, socketLoc, socketRot, param);
 			}
+			else if(halfSlicedOrangeVat)
+			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Right);			
+				}
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("LimeSocket"));
+				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("LimeSocket"));
+				GetWorld()->SpawnActor<AHalfSlicedOrange>(halfSlicedOrangeFac, socketLoc, socketRot, param);
+			}
+			else if(slicedOrangeVat)
+			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Right);			
+				}
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTong->tongRight->GetSocketLocation(FName("LimeSocket"));
+				auto socketRot = huchuTong->tongRight-> GetSocketRotation(FName("LimeSocket"));
+				GetWorld()->SpawnActor<ASlicedOrange>(slicedOrangeFac, socketLoc, socketRot, param);
+			}
 		}
 		// 집게에 집는 대상 오브젝트가 오버랩되었는지 판단하는 OverlapMulti
 		// 중심점
@@ -764,6 +801,8 @@ void APlayerCharacter::FireRight()
 			slicedLime=Cast<ASlicedLime>(GrabbedActorWithTongsRight);
 			halfSlicedLime=Cast<AHalfSlicedLime>(GrabbedActorWithTongsRight);
 			olivePick=Cast<AOlivePick>(GrabbedActorWithTongsRight);
+			slicedOrange = Cast<ASlicedOrange>(GrabbedActorWithTongsRight);
+			halfSlicedOrange=Cast<AHalfSlicedOrange>(GrabbedActorWithTongsRight);
 			
 			if(GrabbedActorWithTongsRight==iceCube&&iceCube!=nullptr)
 			{
@@ -796,6 +835,22 @@ void APlayerCharacter::FireRight()
 				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
 				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
 				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("OliveSocket"));
+			}
+			else if(GrabbedActorWithTongsRight==slicedOrange&&slicedOrange!=nullptr)
+			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
+				isGrabbingOrangeWithTongsRight=true;
+				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
+				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
+			}
+			else if(GrabbedActorWithTongsRight==halfSlicedOrange&&halfSlicedOrange!=nullptr)
+			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
+				isGrabbingOrangeWithTongsRight=true;
+				GrabbedObjectWithTongsRight->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::NoCollision);				
+				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
 			}
 		}		
 			FLatentActionInfo LatentInfo;
@@ -834,6 +889,11 @@ void APlayerCharacter::FireRight()
 					isTongsTickEnabled = false;
 					tongCompRef->SetRelativeRotation(FRotator(12, 0, 0));
 				}
+				else if(isGrabbingOrangeWithTongsRight)
+				{
+					isTongsTickEnabled = false;
+					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
+				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
 			else
@@ -861,7 +921,11 @@ void APlayerCharacter::FireLeft()
 	{
 		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));
 		//widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
-
+		bool isCursorOn = widgetInteractionComp->IsOverHitTestVisibleWidget();
+		if(isCursorOn)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(),TriggerPressedSound, 1, 1, 0);
+		}
 	}
 	// 왼손에 Tongs를 쥐고 있다면
 	if(isGrabbingTongsLeft)
@@ -886,6 +950,8 @@ void APlayerCharacter::FireLeft()
 			slicedLimeVat=Cast<ASlicedLimeVat>(VatHitObj[i].GetActor());
 			iceCubeVat=Cast<AIceCubeVat>(VatHitObj[i].GetActor());
 			oliveVat=Cast<AOliveVat>(VatHitObj[i].GetActor());
+			halfSlicedOrangeVat=Cast<AHalfSlicedOrangeVat>(VatHitObj[i].GetActor());
+			slicedOrangeVat=Cast<ASlicedOrangeVat>(VatHitObj[i].GetActor());
 			if(halfSlicedLimeVat)
 			{
 				// Haptic Feedback
@@ -938,6 +1004,32 @@ void APlayerCharacter::FireLeft()
 				auto socketRot = huchuTongL->tongRight-> GetSocketRotation(FName("OliveSocket"));
 				GetWorld()->SpawnActor<AOlivePick>(oliveFac, socketLoc, socketRot, param);
 			}
+			else if(slicedOrangeVat)
+			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Left);			
+				}
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTongL->tongRight->GetSocketLocation(FName("LimeSocket"));
+				auto socketRot = huchuTongL->tongRight-> GetSocketRotation(FName("LimeSocket"));
+				GetWorld()->SpawnActor<ASlicedOrange>(slicedOrangeFac, socketLoc, socketRot, param);
+			}
+			else if(halfSlicedOrangeVat)
+			{
+				// Haptic Feedback
+				if(PC)
+				{
+					PC->PlayHapticEffect(HF_GrabObjectRight, EControllerHand::Left);			
+				}
+				FActorSpawnParameters param;
+				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				auto socketLoc = huchuTongL->tongRight->GetSocketLocation(FName("LimeSocket"));
+				auto socketRot = huchuTongL->tongRight-> GetSocketRotation(FName("LimeSocket"));
+				GetWorld()->SpawnActor<AHalfSlicedOrange>(halfSlicedOrangeFac, socketLoc, socketRot, param);
+			}
 		}
 		// 중심점
 		FVector Center = huchuTongL->tongRight->GetSocketLocation(FName("TongAttach"));
@@ -983,6 +1075,8 @@ void APlayerCharacter::FireLeft()
 			slicedLimeL=Cast<ASlicedLime>(GrabbedActorWithTongsLeft);
 			halfSlicedLimeL=Cast<AHalfSlicedLime>(GrabbedActorWithTongsLeft);
 			olivePickL=Cast<AOlivePick>(GrabbedActorWithTongsLeft);
+			slicedOrangeL=Cast<ASlicedOrange>(GrabbedActorWithTongsLeft);
+			halfSlicedOrangeL=Cast<AHalfSlicedOrange>(GrabbedActorWithTongsLeft);
 			if(GrabbedActorWithTongsLeft==iceCubeL&&iceCubeL!=nullptr)
 			{
 				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
@@ -1015,6 +1109,23 @@ void APlayerCharacter::FireLeft()
 				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("OliveSocket"));
 			}
+			else if(GrabbedActorWithTongsLeft==slicedOrangeL&&slicedOrangeL!=nullptr)
+			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
+				isGrabbingOrangeWithTongsLeft=true;
+				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
+			}
+			else if(GrabbedActorWithTongsLeft==halfSlicedOrangeL&&halfSlicedOrangeL!=nullptr)
+			{
+				UGameplayStatics::PlaySound2D(GetWorld(), TongGrabSound, 1, 1, 0);
+				isGrabbingOrangeWithTongsLeft=true;
+				GrabbedObjectWithTongsLeft->SetSimulatePhysics(false);
+				GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				GrabbedObjectWithTongsLeft->AttachToComponent(huchuTongL->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
+			}
+			
 		}	
 			FLatentActionInfo LatentInfo;
 			LatentInfo.CallbackTarget = this;
@@ -1047,6 +1158,11 @@ void APlayerCharacter::FireLeft()
 					isTongsTickEnabledL = false;
 					tongCompRef->SetRelativeRotation(FRotator(12, 0, 0));
 				}
+				else if(isGrabbingOrangeWithTongsLeft)
+				{
+					isTongsTickEnabledL = false;
+					tongCompRef->SetRelativeRotation(FRotator(14, 0, 0));
+				}
 			}
 			// LineTrace가 적중하지 않았다면 -> 허공이라면
 			else
@@ -1074,6 +1190,11 @@ void APlayerCharacter::FireReleasedRight()
 	if (widgetInteractionComp)
 	{
 		widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+		bool isCursorOn = widgetInteractionComp->IsOverHitTestVisibleWidget();
+		if(isCursorOn)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(),TriggerReleasedSound, 1, 1, 0);
+		}
 	}
 	if(isGrabbingTongsRight)
 	{		
@@ -1113,6 +1234,18 @@ void APlayerCharacter::FireReleasedRight()
 					olivePick->isOliveAttachable = true;
 				}
 			}
+			else if(isGrabbingOrangeWithTongsRight)
+			{
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-14, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				if(halfSlicedOrange!=nullptr)
+				{
+					halfSlicedOrange->isHalfSlicedOrangeAttachable=true;
+				}
+				if(slicedOrange!=nullptr)
+				{
+					slicedOrange->isSlicedOrangeAttachable=true;
+				}
+			}
 			isTongsTickEnabled = true;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsRight = false;
@@ -1137,6 +1270,7 @@ void APlayerCharacter::FireReleasedRight()
 			isGrabbingIceWithTongsRight=false;
 			isGrabbingLimeWithTongsRight=false;
 			isGrabbingOliveWithTongsRight=false;
+			isGrabbingOrangeWithTongsRight=false;
 			isTongsTickEnabled = true;
 		}	
 	}
@@ -1151,6 +1285,11 @@ void APlayerCharacter::FireReleasedLeft()
 	if (widgetInteractionCompLeft)
 	{
 		widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+		bool isCursorOn = widgetInteractionComp->IsOverHitTestVisibleWidget();
+		if(isCursorOn)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(),TriggerReleasedSound, 1, 1, 0);
+		}
 	}
 	if(isGrabbingTongsLeft)
 	{		
@@ -1188,6 +1327,18 @@ void APlayerCharacter::FireReleasedLeft()
 					olivePickL->isOliveAttachable=true;
 				}
 			}
+			else if(isGrabbingOrangeWithTongsLeft)
+			{
+				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-14, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				if(halfSlicedOrangeL!=nullptr)
+				{
+					halfSlicedOrangeL->isHalfSlicedOrangeAttachable=true;
+				}
+				if(slicedOrangeL!=nullptr)
+				{
+					slicedOrangeL->isSlicedOrangeAttachable=true;
+				}
+			}
 			isTongsTickEnabledL = true;
 			// 1. 잡지않은 상태로 전환
 			isGrabbingWithTongsLeft = false;
@@ -1212,6 +1363,7 @@ void APlayerCharacter::FireReleasedLeft()
 			isGrabbingIceWithTongsLeft=false;
 			isGrabbingLimeWithTongsLeft=false;
 			isGrabbingOliveWithTongsLeft=false;
+			isGrabbingOrangeWithTongsLeft=false;
 			isTongsTickEnabledL = true;
 		}	
 	}

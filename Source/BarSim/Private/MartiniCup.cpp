@@ -39,6 +39,7 @@ void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
 			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
 			isLimeAttached = true;
+			garnishArray[0]=true;
 		}
 	}
 	else if(halfSlicedLime)
@@ -52,6 +53,7 @@ void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			halfSlicedLime->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
 			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
 			isLimeAttached = true;
+			garnishArray[0]=true;
 		}
 	}
 	//igchecker에 올리브가 오버랩되었을 때
@@ -67,6 +69,7 @@ void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			olive->SetActorLocationAndRotation(oliveSocketTrans.GetLocation(), oliveSocketTrans.GetRotation());
 			olive->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("OliveSocket"));
 			isOliveAttached = true;
+			garnishArray[1]=true;
 		}
 	}
 

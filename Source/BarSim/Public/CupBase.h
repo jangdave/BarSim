@@ -202,5 +202,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UAudioComponent* glassClankAudioComp;
 
+	UPROPERTY()
+	TArray<bool> garnishArray;
+
 
 };
