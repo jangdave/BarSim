@@ -110,7 +110,7 @@ void UTabletWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 		{
 			// 커서를 보이게 하고, 닿은 2D 위치값으로 커서를 위치시킨다.
 			FVector2D hitLoc = player->widgetInteractionComp->Get2DHitLocation();
-			CursorRight->SetVisibility(ESlateVisibility::Visible);
+			CursorRight->SetVisibility(ESlateVisibility::HitTestInvisible);
 			CursorRight->SetRenderTranslation(hitLoc);
 		}
 		else
@@ -123,7 +123,7 @@ void UTabletWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 		{
 			// 커서를 보이게 하고, 닿은 2D 위치값으로 커서를 위치시킨다.
 			FVector2D hitLocLeft = player->widgetInteractionCompLeft->Get2DHitLocation();
-			CursorLeft->SetVisibility(ESlateVisibility::Visible);
+			CursorLeft->SetVisibility(ESlateVisibility::HitTestInvisible);
 			CursorLeft->SetRenderTranslation(hitLocLeft);
 		}
 		else
