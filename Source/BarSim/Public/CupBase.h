@@ -185,8 +185,13 @@ public:
 	UPROPERTY()
 	class AHalfSlicedLime* halfSlicedLime;
 
+	// 가니쉬 판단 변수
 	UPROPERTY()
 	bool isLimeAttached = false;
+	UPROPERTY()
+	bool isOliveAttached = false;
+	UPROPERTY()
+	bool isOrangeAttached = false;
 
 	UPROPERTY(EditAnywhere, Category="Sounds")
 	class USoundBase* iceDropSound;

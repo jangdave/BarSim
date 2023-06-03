@@ -7,6 +7,7 @@
 #include "BottleBase.h"
 #include "Coaster.h"
 #include "CupBase.h"
+#include "DrinkCan.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
 #include "MixingGlass.h"
@@ -62,6 +63,7 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 	shaker=Cast<AShaker>(OtherActor);
 	mixingGlass=Cast<AMixingGlass>(OtherActor);
 	iceCube=Cast<AIceCube>(OtherActor);
+	drinkCan=Cast<ADrinkCan>(OtherActor);
 
 	auto randPitch = FMath::FRandRange(0.9, 1.1);
 
@@ -171,6 +173,15 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 			auto iceCubeLoc = iceCube->GetActorLocation();
 			UGameplayStatics::PlaySoundAtLocation(GetWorld(), iceCubeDropSound, iceCubeLoc, soundVolume, randPitch, 0);
 			iceCube->isDropSoundEnabled=false;
+		}
+	}
+	else if(drinkCan)
+	{
+		if(drinkCan->isDropSoundEnabled==true)
+		{
+			auto canLoc = drinkCan->GetActorLocation();
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), canDropSound, canLoc, soundVolume, randPitch, 0);
+			drinkCan->isDropSoundEnabled=false;
 		}
 	}
 }

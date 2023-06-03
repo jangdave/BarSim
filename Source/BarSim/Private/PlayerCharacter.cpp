@@ -7,6 +7,7 @@
 #include "BottleBase.h"
 #include "Coaster.h"
 #include "CupBase.h"
+#include "DrinkCan.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GripMotionControllerComponent.h"
@@ -217,6 +218,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 	shakerLid=Cast<AShakerLid>(GrabbedActorRight);
 	shaker=Cast<AShaker>(GrabbedActorRight);
 	mixingGlass=Cast<AMixingGlass>(GrabbedActorRight);
+	drinkCan = Cast<ADrinkCan>(GrabbedActorRight);
 	
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
@@ -292,7 +294,11 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 			isGrabbingStrainerRight=true;
 			strainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-
+		}
+		// 잡은 대상이 DrinkCan 이라면
+		else if(GrabbedActorRight==drinkCan&&drinkCan!=nullptr)
+		{
+			isGrabbingDrinkCanRight = true;
 		}
 	
 	
@@ -328,6 +334,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	shakerLidL=Cast<AShakerLid>(GrabbedActorLeft);
 	shakerL=Cast<AShaker>(GrabbedActorLeft);
 	mixingGlassL=Cast<AMixingGlass>(GrabbedActorLeft);
+	drinkCanL = Cast<ADrinkCan>(GrabbedActorLeft);
 	
 	// 잡은 대상이 Tongs라면
 	if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
@@ -403,9 +410,12 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		isGrabbingStrainerLeft=true;
 		strainerL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		strainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
- 
+ 	}
+	// 잡은 대상이 DrinkCan 이라면
+	else if(GrabbedActorLeft==drinkCanL&&drinkCanL!=nullptr)
+	{
+		isGrabbingDrinkCanLeft = true;
 	}
-	
 }
 
 void APlayerCharacter::CheckDroppedObjectRight()
@@ -526,6 +536,10 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		}
 		isGrabbingShakerRight=false;		
 	}
+	else if(isGrabbingDrinkCanRight&&drinkCan!=nullptr)
+	{
+		drinkCan->isDropSoundEnabled=true;
+	}
 }
 
 void APlayerCharacter::CheckDroppedObjectLeft()
@@ -613,6 +627,10 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		shakerL->isGrabbingShaker=false;
 		isGrabbingShakerLeft=false;		
 	}
+	else if(isGrabbingDrinkCanLeft&&drinkCanL!=nullptr)
+	{
+		drinkCanL->isDropSoundEnabled=true;
+	}
 }
 
 void APlayerCharacter::FireRight()
@@ -621,7 +639,7 @@ void APlayerCharacter::FireRight()
 	{
 		//UI에 이벤트를 전달하고 싶다.
 		widgetInteractionComp->PressPointerKey(FKey(FName("LeftMouseButton")));
-		widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+		//widgetInteractionComp->ReleasePointerKey(FKey(FName("LeftMouseButton")));
 
 	}
 	// 오른손에 Tongs를 쥐고 있다면
@@ -842,7 +860,7 @@ void APlayerCharacter::FireLeft()
 	if(widgetInteractionCompLeft)
 	{
 		widgetInteractionCompLeft->PressPointerKey(FKey(FName("LeftMouseButton")));
-		widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+		//widgetInteractionCompLeft->ReleasePointerKey(FKey(FName("LeftMouseButton")));
 
 	}
 	// 왼손에 Tongs를 쥐고 있다면

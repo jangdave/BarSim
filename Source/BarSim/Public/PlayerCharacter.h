@@ -114,6 +114,8 @@ public:
 	bool isGrabbingLimeWithTongsLeft=false;
 	bool isGrabbingOliveWithTongsRight=false;
 	bool isGrabbingOliveWithTongsLeft=false;
+	bool isGrabbingDrinkCanRight = false;
+	bool isGrabbingDrinkCanLeft = false;
 		
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Input)
 	double fingerPressedActionValue;
@@ -221,6 +223,10 @@ public:
 	class AOlivePick* olivePickL;
 	UPROPERTY()
 	class AOliveVat* oliveVat;
+	UPROPERTY()
+	class ADrinkCan* drinkCan;
+	UPROPERTY()
+	class ADrinkCan* drinkCanL;
 	
 	// Sounds
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")

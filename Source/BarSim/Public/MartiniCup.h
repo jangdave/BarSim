@@ -22,6 +22,4 @@ public:
 	UPROPERTY()
 	class AOlivePick* olive;
 
-	UPROPERTY()
-	bool isOliveAttached = false;
 };

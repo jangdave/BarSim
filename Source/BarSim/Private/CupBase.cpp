@@ -582,7 +582,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				insideContents = FMath::Clamp(contents, 0, cupSize);
 				LiquorScale();
 			}
-			else if(iceCount==3)
+			else if(iceCount>=3)
 			{
 				
 			}
