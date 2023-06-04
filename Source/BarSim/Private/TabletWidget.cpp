@@ -82,7 +82,7 @@ void UTabletWidget::NativeConstruct()
 	btn_BackInMail1_14->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
 	
 	// 테블릿 키보드 입력
-	btn_BackMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
+	//btn_BackMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
 	btn_CapsLock->OnClicked.AddDynamic(this, &UTabletWidget::SetCapsLock);
 	btn_Enter->OnClicked.AddDynamic(this, &UTabletWidget::SetEnter);
 

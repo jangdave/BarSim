@@ -82,8 +82,8 @@ public:
 	class UButton* btn_OpenOldPalVideo;
 	
 	// 테블릿 인터넷 창
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UButton* btn_BackMenu1;
+	 // UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	 // class UButton* btn_BackMenu1;
 	
 	// 테블릿 칵테일 레시피 & 영상
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
