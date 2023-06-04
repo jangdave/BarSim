@@ -77,6 +77,7 @@ void AShakerStrainer::AttachToShaker()
 		shaker=Cast<AShaker>(HitObj[shakerArrayNum].GetActor());
 		if(shaker!=nullptr)
 		{
+			shaker->strainer = this;
 			UGameplayStatics::PlaySound2D(GetWorld(), attachSound, 1, 1, 0);
 			UE_LOG(LogTemp, Warning, TEXT("Attach Activated"))
 			this->DisableComponentsSimulatePhysics();

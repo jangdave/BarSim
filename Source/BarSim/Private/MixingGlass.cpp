@@ -177,7 +177,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 		if(bStrainerOn)
 		{
 			//기울어진 각도가 90도 이상이라면
-			if(angle > (1.1 - contents / cupSize) * 100 && angle2 <= 90)
+			if(angle > (1.1 - insideContents / cupSizeOrigin) * 100 && angle2 <= 90)
 			{
 				//물줄기 없을때에만 한 번 스폰 시키기
 				//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);
@@ -212,6 +212,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
 
 					contents = contents - mixedDrop->mixedDropMass;
+					LiquorScale();
 					mixedDrop->bStirred = bStirred;
 
 					if(pourSoundBoolean==false&&isGrabbingMixingGlass==true)
@@ -257,6 +258,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 
 						mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
 						contents = contents - mixedDrop->mixedDropMass;
+						LiquorScale();
 						mixedDrop->bStirred = bStirred;
 					}
 				}
