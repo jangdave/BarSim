@@ -2,6 +2,7 @@
 
 #include "PlayerCharacter.h"
 
+#include "BarGameInstance.h"
 #include "BarGameMode.h"
 #include "BarSpoon.h"
 #include "BottleBase.h"
@@ -101,7 +102,7 @@ void APlayerCharacter::BeginPlay()
 
 	playerText_UI = Cast<UPlayerDialogWidget>(playerTextWidget->GetUserWidgetObject());
 
-
+	BarGameInstance = Cast<UBarGameInstance>(GetWorld()->GetGameInstance());
 	
 }
 
@@ -870,10 +871,6 @@ void APlayerCharacter::FireRight()
 				GrabbedObjectWithTongsRight->AttachToComponent(huchuTong->tongRight,FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LimeSocket"));
 			}
 		}		
-			FLatentActionInfo LatentInfo;
-			LatentInfo.CallbackTarget = this;
-			LatentInfo.Linkage = 0;
-			LatentInfo.UUID = 0; 
 			auto tongCompRef = huchuTong->tongRight;
 			auto tongLoc =  huchuTong->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
 			auto tongRightVector = huchuTong->GetActorForwardVector();
@@ -1159,8 +1156,7 @@ void APlayerCharacter::FireLeft()
 			}
 			
 		}	
-			FLatentActionInfo LatentInfo;
-			LatentInfo.CallbackTarget = this;
+
 			auto tongCompRef = huchuTongL->tongRight;
 			auto tongLoc =  huchuTongL->tongRight->GetSocketLocation(FName("TongGrabSizeSocket"));
 			auto tongRightVector = huchuTongL->GetActorForwardVector();
@@ -1234,9 +1230,7 @@ void APlayerCharacter::FireReleasedRight()
 		if (isGrabbingWithTongsRight)
 		{
 			FLatentActionInfo LatentInfo;
-			LatentInfo.CallbackTarget = this;
-			LatentInfo.Linkage = 0;
-			LatentInfo.UUID = 0; 
+			LatentInfo.CallbackTarget = this;	
 			auto tongCompRef = huchuTong->tongRight;
 			if(isGrabbingIceWithTongsRight)
 			{
