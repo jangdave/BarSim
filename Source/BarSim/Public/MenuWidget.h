@@ -19,6 +19,9 @@ public:
 
 	UPROPERTY()
 	class AMenuWidgetActor* menuActor;
+
+	UPROPERTY()
+	class UBarGameInstance* gi;
 	
 	// 위젯스위처
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
@@ -26,27 +29,32 @@ public:
 
 	// 메뉴 버튼
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UButton* btn_GameStart;
-
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UButton* btn_Option;
+	class UButton* btn_StoryMode;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_QuitGame;
 
 	// 모드 선택
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UButton* btn_StoryMode;
+	class UButton* btn_TutorialYes;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UButton* btn_Tutorial;
+	class UButton* btn_TutorialNo;
 
+	// 메뉴 스폰
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_ResumeGame;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_ResetGame;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_QuitGame1;
+
+	// 0일차 메뉴 함수
 	UFUNCTION()
 	void GameStart();
 
-	UFUNCTION()
-	void SetOption();
-	
 	UFUNCTION()
 	void QuitGame();
 
@@ -54,5 +62,12 @@ public:
 	void StoryMode();
 
 	UFUNCTION()
-	void Tutorial();
+	void TutorialMode();
+
+	// 이후 메뉴 함수
+	UFUNCTION()
+	void ResumeGame();
+
+	UFUNCTION()
+	void ResetGame();
 };

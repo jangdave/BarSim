@@ -359,6 +359,8 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 	{
 		if(cup->iceCount == 3 && cup->contents >= 2 && cup->garnishArray[0] == true)
 		{
+			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+			
 			FTimerHandle timer;
 			GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
 			{
@@ -369,6 +371,8 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 		}
 		else if(cup->bStirred != false && cup->contents >= 2)
 		{
+			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+			
 			FTimerHandle timer;
 			GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
 			{
@@ -379,6 +383,8 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 		}
 		else if(cup->bShaked != false && cup->contents >= 2)
 		{
+			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+			
 			FTimerHandle timer;
 			GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
 			{
@@ -391,6 +397,8 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 
 	if(tablet != nullptr)
 	{
+		UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+		
 		FTimerHandle timer;
 		GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
 		{

@@ -2,10 +2,11 @@
 
 
 #include "MenuWidgetActor.h"
-
 #include "BarGameInstance.h"
+#include "MenuWidget.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Components/WidgetSwitcher.h"
 
 // Sets default values
 AMenuWidgetActor::AMenuWidgetActor()
@@ -25,6 +26,11 @@ void AMenuWidgetActor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	gi = Cast<UBarGameInstance>(GetGameInstance());
+
+	menu_UI = Cast<UMenuWidget>(menuWidget->GetUserWidgetObject());
+	
+	SetMenu();
 }
 
 // Called every frame
@@ -37,5 +43,22 @@ void AMenuWidgetActor::Tick(float DeltaTime)
 void AMenuWidgetActor::Destroy()
 {
 	this->K2_DestroyActor();
+}
+
+void AMenuWidgetActor::SetMenu()
+{
+	if(gi != nullptr)
+	{
+		if(gi->bCheckMenu != true)
+		{
+			menu_UI->WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
+
+			gi->bCheckMenu = true;
+		}
+		else
+		{
+			menu_UI->WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
+		}
+	}
 }
 
