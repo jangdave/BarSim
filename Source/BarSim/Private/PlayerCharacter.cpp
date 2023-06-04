@@ -2,6 +2,7 @@
 
 #include "PlayerCharacter.h"
 
+#include "BarGameInstance.h"
 #include "BarGameMode.h"
 #include "BarSpoon.h"
 #include "BottleBase.h"
@@ -101,7 +102,7 @@ void APlayerCharacter::BeginPlay()
 
 	playerText_UI = Cast<UPlayerDialogWidget>(playerTextWidget->GetUserWidgetObject());
 
-
+	BarGameInstance = Cast<UBarGameInstance>(GetGameInstance());
 	
 }
 
