@@ -356,157 +356,160 @@ void ACupBase::Tick(float DeltaTime)
 void ACupBase::AddLiquor(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	mixedDropOverlapped = Cast<AMixedDrop>(OtherActor);
-	// 섞인 방울이 컵에 담기면
-	if(mixedDropOverlapped)
+	if(contents < cupSize)
 	{
-		overlappedNum ++;
-		//방울에 NameArray가 있다면
-		if(!mixedDropOverlapped->NameArray.IsEmpty())
-		{
-			for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
-			{
-				//컵의 NameArray에 같은 이름을 가진 원소가 있다면
-				if(NameArray.Find(mixedDropOverlapped->NameArray[i]) != INDEX_NONE)
-				{
-					//해당 원소의 순서의 ContentsArray이 가진 기존 배열값에 새 방울이 가진 ContentsArray 값을 더해줌
-					ContentsArray[NameArray.Find(mixedDropOverlapped->NameArray[i])] = ContentsArray[NameArray.Find(mixedDropOverlapped->NameArray[i])] + mixedDropOverlapped->ContentsArray[i];
-				}
-				//컵의 NameArray에 같은 이름이 없다면
-				else
-				{
-					//새로 추가
-					NameArray.Emplace(mixedDropOverlapped->NameArray[i]);
-					ContentsArray.Add(mixedDropOverlapped->ContentsArray[i]);
-				}
-			}
-
-			if(mixedDropOverlapped->NameArray.Num() >= 2)
-			{
-				// 이미 위젯 네임어레이에 믹스쳐라는 원소가 있다면 그대로 해당 순서의 위젯 컨텐츠 어레이에 더해줌
-				if(widgetNameArray.Find(FString("Mixture")) != INDEX_NONE)
-				{
-					float mixtureMass = 0;
-					for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
-					{
-						mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
-					}
-					widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] = widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] + mixtureMass; 
-				}
-				// 위젯 네임 어레이에 믹스쳐라는 원소가 없다면 새로 믹스쳐라는 이름의 원소를 위젯 네임어레이에 추가하고 믹스드드랍의 부피를 더해줌
-				else
-				{
-					widgetNameArray.Emplace(FString("Mixture"));
-					float mixtureMass = 0;
-					for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
-					{
-						mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
-					}
-					widgetContentsArray.Add(mixtureMass);
-				}
-			}
-			//mixedDrop에 한가지만 들어있을 경우 ( 섞이지 않고 하나의 술만 들어있을 경우)
-			else if(mixedDropOverlapped->NameArray.Num() == 1)
-			{
-				// 이미 위젯에 그 술이 들어가 있을 경우
-				if(widgetNameArray.Find(mixedDropOverlapped->NameArray[0]) != INDEX_NONE)
-				{
-					widgetContentsArray[widgetNameArray.Find(mixedDropOverlapped->NameArray[0])] += mixedDropOverlapped->ContentsArray[0];
-				}
-				// 위젯에 그 술이 떠있지 않을 경우
-				else
-				{
-					widgetNameArray.Emplace(mixedDropOverlapped->NameArray[0]);
-					widgetContentsArray.Add(mixedDropOverlapped->ContentsArray[0]);
-				}
-			}
-				
-
-			//위젯 나타내기
-			SetActorTickEnabled(true);
-			bWidgetOn = true;
-			widgetTime = 0;
-			bWidgetAnimOn = false;
-			
-			MixArray.Add(mixedDropOverlapped->bStirred);
-			ShakeArray.Add(mixedDropOverlapped->bShaked);
-			contents = contents + mixedDropOverlapped->mixedDropMass;
-			insideContents = FMath::Clamp(contents, 0, cupSize);
-			liquorComp->SetVisibility(true);
-			LiquorScale();
-			mixedDropOverlapped->DropDestroyDelay();
-		}
-	}
-	else
-	{
-		drop = Cast<ADropBase>(OtherActor);
-		if(drop)
+		mixedDropOverlapped = Cast<AMixedDrop>(OtherActor);
+		// 섞인 방울이 컵에 담기면
+		if(mixedDropOverlapped)
 		{
 			overlappedNum ++;
-			//들어온 방울 액터가 가진 이름을 NameArrary에, 유량을 ContentsArray에 저장한다.
-			if(!NameArray.IsEmpty())
+			//방울에 NameArray가 있다면
+			if(!mixedDropOverlapped->NameArray.IsEmpty())
 			{
-				//NameArray에 이미 저장된 이름이라면
-				if(NameArray.Find(drop->name) != INDEX_NONE)
+				for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
 				{
-					//해당 배열 순서의 ContentsArray에 기존값에 새로 오버랩된 방울 액터의 dropMass 값을 더해서 넣어주고
-					ContentsArray[NameArray.Find(drop->name)] = ContentsArray[NameArray.Find(drop->name)] + drop->dropMass;
-				}
-				//NameArray에 저장되어 있지 않은 이름이라면 
-				else
-				{
-					//새로운 NameArray와 ContentsArray에 넣는다.
-					NameArray.Emplace(drop->name);
-					ContentsArray.Add(drop->dropMass);
-				}
-			}
-			else
-				//배열이 비어있을 경우 값 하나 일단 넣기
-				{
-				NameArray.Emplace(drop->name);
-				ContentsArray.Add(drop->dropMass);
+					//컵의 NameArray에 같은 이름을 가진 원소가 있다면
+					if(NameArray.Find(mixedDropOverlapped->NameArray[i]) != INDEX_NONE)
+					{
+						//해당 원소의 순서의 ContentsArray이 가진 기존 배열값에 새 방울이 가진 ContentsArray 값을 더해줌
+						ContentsArray[NameArray.Find(mixedDropOverlapped->NameArray[i])] = ContentsArray[NameArray.Find(mixedDropOverlapped->NameArray[i])] + mixedDropOverlapped->ContentsArray[i];
+					}
+					//컵의 NameArray에 같은 이름이 없다면
+					else
+					{
+						//새로 추가
+						NameArray.Emplace(mixedDropOverlapped->NameArray[i]);
+						ContentsArray.Add(mixedDropOverlapped->ContentsArray[i]);
+					}
 				}
 
-			// 실시간으로 담기는 용량 위젯 표시용
-			// 이미 위젯 네임어레이가 비어있지 않다면
-			if(!widgetNameArray.IsEmpty())
-			{
-				// 위젯 네임 어레이에 새로 들어온 방울의 이름이 있다면 그대로 값에 더해줌
-				if(widgetNameArray.Find(drop->name) != INDEX_NONE)
+				if(mixedDropOverlapped->NameArray.Num() >= 2)
 				{
-					widgetContentsArray[widgetNameArray.Find(drop->name)] = widgetContentsArray[widgetNameArray.Find(drop->name)] + drop->dropMass; 
+					// 이미 위젯 네임어레이에 믹스쳐라는 원소가 있다면 그대로 해당 순서의 위젯 컨텐츠 어레이에 더해줌
+					if(widgetNameArray.Find(FString("Mixture")) != INDEX_NONE)
+					{
+						float mixtureMass = 0;
+						for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
+						{
+							mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
+						}
+						widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] = widgetContentsArray[widgetNameArray.Find(FString("Mixture"))] + mixtureMass; 
+					}
+					// 위젯 네임 어레이에 믹스쳐라는 원소가 없다면 새로 믹스쳐라는 이름의 원소를 위젯 네임어레이에 추가하고 믹스드드랍의 부피를 더해줌
+					else
+					{
+						widgetNameArray.Emplace(FString("Mixture"));
+						float mixtureMass = 0;
+						for(int i = 0; i < mixedDropOverlapped->NameArray.Num(); i++)
+						{
+							mixtureMass = mixtureMass + mixedDropOverlapped->ContentsArray[i];
+						}
+						widgetContentsArray.Add(mixtureMass);
+					}
 				}
-				// 위젯 네임 어레이에 새로 들어온 방울의 이름이 없다면 새로 추가해 줌
+				//mixedDrop에 한가지만 들어있을 경우 ( 섞이지 않고 하나의 술만 들어있을 경우)
+				else if(mixedDropOverlapped->NameArray.Num() == 1)
+				{
+					// 이미 위젯에 그 술이 들어가 있을 경우
+					if(widgetNameArray.Find(mixedDropOverlapped->NameArray[0]) != INDEX_NONE)
+					{
+						widgetContentsArray[widgetNameArray.Find(mixedDropOverlapped->NameArray[0])] += mixedDropOverlapped->ContentsArray[0];
+					}
+					// 위젯에 그 술이 떠있지 않을 경우
+					else
+					{
+						widgetNameArray.Emplace(mixedDropOverlapped->NameArray[0]);
+						widgetContentsArray.Add(mixedDropOverlapped->ContentsArray[0]);
+					}
+				}
+				
+
+				//위젯 나타내기
+				SetActorTickEnabled(true);
+				bWidgetOn = true;
+				widgetTime = 0;
+				bWidgetAnimOn = false;
+			
+				MixArray.Add(mixedDropOverlapped->bStirred);
+				ShakeArray.Add(mixedDropOverlapped->bShaked);
+				contents = contents + mixedDropOverlapped->mixedDropMass;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				liquorComp->SetVisibility(true);
+				LiquorScale();
+				mixedDropOverlapped->DropDestroyDelay();
+			}
+		}
+
+		else
+		{
+			drop = Cast<ADropBase>(OtherActor);
+			if(drop)
+			{
+				overlappedNum ++;
+				//들어온 방울 액터가 가진 이름을 NameArrary에, 유량을 ContentsArray에 저장한다.
+				if(!NameArray.IsEmpty())
+				{
+					//NameArray에 이미 저장된 이름이라면
+					if(NameArray.Find(drop->name) != INDEX_NONE)
+					{
+						//해당 배열 순서의 ContentsArray에 기존값에 새로 오버랩된 방울 액터의 dropMass 값을 더해서 넣어주고
+						ContentsArray[NameArray.Find(drop->name)] = ContentsArray[NameArray.Find(drop->name)] + drop->dropMass;
+					}
+					//NameArray에 저장되어 있지 않은 이름이라면 
+					else
+					{
+						//새로운 NameArray와 ContentsArray에 넣는다.
+						NameArray.Emplace(drop->name);
+						ContentsArray.Add(drop->dropMass);
+					}
+				}
+				else
+					//배열이 비어있을 경우 값 하나 일단 넣기
+					{
+					NameArray.Emplace(drop->name);
+					ContentsArray.Add(drop->dropMass);
+					}
+
+				// 실시간으로 담기는 용량 위젯 표시용
+				// 이미 위젯 네임어레이가 비어있지 않다면
+				if(!widgetNameArray.IsEmpty())
+				{
+					// 위젯 네임 어레이에 새로 들어온 방울의 이름이 있다면 그대로 값에 더해줌
+					if(widgetNameArray.Find(drop->name) != INDEX_NONE)
+					{
+						widgetContentsArray[widgetNameArray.Find(drop->name)] = widgetContentsArray[widgetNameArray.Find(drop->name)] + drop->dropMass; 
+					}
+					// 위젯 네임 어레이에 새로 들어온 방울의 이름이 없다면 새로 추가해 줌
+					else
+					{
+						widgetNameArray.Emplace(drop->name);
+						widgetContentsArray.Add(drop->dropMass);
+					}
+				}
+				// 위젯 네임 어레이가 없다면 위젯 네임 어레이와 위젯 컨텐츠 어레이에 하나씩 새로 넣어줌
 				else
 				{
 					widgetNameArray.Emplace(drop->name);
 					widgetContentsArray.Add(drop->dropMass);
 				}
-			}
-			// 위젯 네임 어레이가 없다면 위젯 네임 어레이와 위젯 컨텐츠 어레이에 하나씩 새로 넣어줌
-			else
-			{
-				widgetNameArray.Emplace(drop->name);
-				widgetContentsArray.Add(drop->dropMass);
-			}
 
-			//위젯 나타내기
-			SetActorTickEnabled(true);
-			bWidgetOn = true;
-			widgetTime = 0;
-			bWidgetAnimOn = false;
+				//위젯 나타내기
+				SetActorTickEnabled(true);
+				bWidgetOn = true;
+				widgetTime = 0;
+				bWidgetAnimOn = false;
 			
-			contents = contents + drop->dropMass;
-			insideContents = FMath::Clamp(contents, 0, cupSize);
-			liquorComp->SetVisibility(true);
-			LiquorScale();
-			MixArray.Add(false);
-			ShakeArray.Add(false);
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("drop overlapped"));
-			drop->DropDestroyDelay();
+				contents = contents + drop->dropMass;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				liquorComp->SetVisibility(true);
+				LiquorScale();
+				MixArray.Add(false);
+				ShakeArray.Add(false);
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("drop overlapped"));
+				drop->DropDestroyDelay();
+			}
 		}
 	}
-	
 }
 
 void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,

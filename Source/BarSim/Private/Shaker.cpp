@@ -40,7 +40,7 @@ void AShaker::Tick(float DeltaSeconds)
 	if(contents > 0)
 	{
 		//기울어진 각도가 90도 이상이라면
-		if(angle > (1.1 - contents / cupSize) * 100)
+		if(angle > (1.1 - insideContents / cupSizeOrigin) * 100)
 		{
 			//물줄기 없을때에만 한 번 스폰 시키기
 			//UE_LOG(LogTemp, Warning, TEXT("%f"), streamWidth);
@@ -51,7 +51,7 @@ void AShaker::Tick(float DeltaSeconds)
 				{
 					waterStream = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), streamFX, strainer->streamPoint, GetActorRotation());
 					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
-					waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+					waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 1.0f);
 					waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 					//물방울 액터 스폰
 					AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, strainer->streamPoint, GetActorRotation());
@@ -68,13 +68,16 @@ void AShaker::Tick(float DeltaSeconds)
 					{
 						float mixedPercent = mixedDrop->dropMass / contents;
 						mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-						//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
+						mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
 					}
 
 					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
 
-					contents = contents - mixedDrop->dropMass;
+					contents = contents - mixedDrop->mixedDropMass;
 					mixedDrop->bStirred = bStirred;
+					mixedDrop->bShaked = bShaked;
+					LiquorScale();
+					
 					if(pourSoundBoolean==false&&isGrabbingShaker==true)
 					{
 						UE_LOG(LogTemp, Warning, TEXT("play sound"))
@@ -92,7 +95,7 @@ void AShaker::Tick(float DeltaSeconds)
 					if(strainer && bStrainerOn && !bLidOn)
 					{
 						waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 500);
-						waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 0.6);
+						waterStream->SetNiagaraVariableFloat(FString("streamWidth"), 1.0f);
 						waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 						
 						waterStream->SetRelativeLocation(strainer->streamPoint);
@@ -116,11 +119,13 @@ void AShaker::Tick(float DeltaSeconds)
 						{
 							float mixedPercent = mixedDrop->dropMass / contents;
 							mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
+							mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
 							//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
 						}
 						mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
 						mixedDrop->bShaked = bShaked;
-						contents = contents - mixedDrop->dropMass;
+						contents = contents - mixedDrop->mixedDropMass;
+						LiquorScale();
 					}
 				}
 			}
