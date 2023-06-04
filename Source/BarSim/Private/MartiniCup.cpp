@@ -23,35 +23,35 @@ void AMartiniCup::LiquorScale()
 void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	slicedLimeM = Cast<ASlicedLime>(OtherActor);
-	halfSlicedLimeM = Cast<AHalfSlicedLime>(OtherActor);
+	slicedLime = Cast<ASlicedLime>(OtherActor);
+	halfSlicedLime = Cast<AHalfSlicedLime>(OtherActor);
 	olive = Cast<AOlivePick>(OtherActor);
-	iceCubeM=Cast<AIceCube>(OtherActor);	
+	ice=Cast<AIceCube>(OtherActor);	
 	//igchecker에 라임이 오버랩되었을 때
-	if(slicedLimeM)
+	if(slicedLime)
 	{
-		if(slicedLimeM->isSlicedLimeAttachable&&isLimeAttached==false)
+		if(slicedLime->isSlicedLimeAttachable&&isLimeAttached==false)
 		{
 			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
-			slicedLimeM->DisableComponentsSimulatePhysics();
-			slicedLimeM->SetActorEnableCollision(false);
+			slicedLime->DisableComponentsSimulatePhysics();
+			slicedLime->SetActorEnableCollision(false);
 			auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedLimeSocket"));
-			slicedLimeM->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
-			slicedLimeM->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
+			slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
+			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
 			isLimeAttached = true;
 			garnishArray[0]=true;
 		}
 	}
-	else if(halfSlicedLimeM)
+	else if(halfSlicedLime)
 	{
-		if(halfSlicedLimeM->isHalfSlicedLimeAttachable&&isLimeAttached==false)
+		if(halfSlicedLime->isHalfSlicedLimeAttachable&&isLimeAttached==false)
 		{
 			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
-			halfSlicedLimeM->DisableComponentsSimulatePhysics();
-			halfSlicedLimeM->SetActorEnableCollision(false);
+			halfSlicedLime->DisableComponentsSimulatePhysics();
+			halfSlicedLime->SetActorEnableCollision(false);
 			auto halfLimeSocketTrans = cupComp->GetSocketTransform(FName("HalfSlicedLimeSocket"));
-			halfSlicedLimeM->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
-			halfSlicedLimeM->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
+			halfSlicedLime->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
+			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
 			isLimeAttached = true;
 			garnishArray[0]=true;
 		}
@@ -72,7 +72,7 @@ void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			garnishArray[1]=true;
 		}
 	}
-	else if(iceCubeM)
+	else if(ice)
 	{
 		return;
 	}

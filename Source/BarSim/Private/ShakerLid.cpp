@@ -71,9 +71,20 @@ void AShakerLid::AttachToShakerStrainer()
 			meshComp->SetCollisionProfileName(FName("Overlapped"));
 			shakerStrainer->DisableComponentsSimulatePhysics();
 			shakerStrainer->bLidOn=true;
+			shakerStrainer->SetLidOn();
 			isShakerStrainerCasted=false;
 			HitObj.Reset();
 		}
 	}
+}
+
+void AShakerLid::SetLidOff()
+{
+	if(shakerStrainer)
+	{
+		shakerStrainer->bLidOn=false;
+		shakerStrainer->SetLidOff();
+	}
+	
 }
 

@@ -89,10 +89,31 @@ void AShakerStrainer::AttachToShaker()
 			meshComp->SetCollisionProfileName(FName("Overlapped"));
 			//shaker->DisableComponentsSimulatePhysics();
 			shaker->bStrainerOn=true;
+			shaker->bLidOn=bLidOn;
 			isStrainerCasted=false;
 			this->VRGripInterfaceSettings.bDenyGripping=true;
 			HitObj.Reset();
 		}
+	}
+}
+
+void AShakerStrainer::SetLidOn()
+{
+	if(shaker)
+	{
+		shaker->bLidOn=true;
+		UE_LOG(LogTemp, Warning, TEXT("Set Lid On"))
+
+	}
+}
+
+void AShakerStrainer::SetLidOff()
+{
+	if(shaker)
+	{
+		shaker->bLidOn=false;
+		UE_LOG(LogTemp, Warning, TEXT("Set Lid Off"))
+
 	}
 }
 

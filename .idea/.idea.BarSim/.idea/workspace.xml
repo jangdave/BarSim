@@ -10,14 +10,18 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/RockGlass_Cup2_RockGlass_Cup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/RockGlass_Cup2_RockGlass_Cup.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_RockGlass.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_RockGlass.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealisticLeft.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealisticLeft.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Haptic/HF_ActorOverlap.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Haptic/HF_ActorOverlap.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CupBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MartiniCup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MartiniCup.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/RockGlass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/RockGlass.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Shaker.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Shaker.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerLid.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerLid.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/MartiniCup.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/MartiniCup.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/RockGlass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/RockGlass.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/ShakerLid.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/ShakerLid.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/ShakerStrainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/ShakerStrainer.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,6 +306,7 @@
       <workItem from="1685831367099" duration="3025000" />
       <workItem from="1685842568171" duration="7296000" />
       <workItem from="1685854858766" duration="2752000" />
+      <workItem from="1685868646102" duration="4127000" />
     </task>
     <servers />
   </component>
