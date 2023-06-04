@@ -38,6 +38,14 @@ public:
 	UPROPERTY()
 	class ATutorialManager* tutorialManager;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class USoundBase* checkSound;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class USoundBase* nextSound;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class USoundBase* levelSound;
 	UFUNCTION()
 	void StartWelcome();
 	

@@ -24,7 +24,19 @@ public:
 	class ASpawnManager* spawnmg;
 
 	UPROPERTY()
+	class UBarGameInstance* gi;
+	
+	UPROPERTY()
 	class APlayerCharacter* player;
+
+	UPROPERTY()
+	bool bCheckTutorialOpen;
+
+	UPROPERTY()
+	bool bCheckTutorialClose;
+
+	UPROPERTY()
+	bool bCheckTutorialInternet;
 	
 	// 테블렛 상단바
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))

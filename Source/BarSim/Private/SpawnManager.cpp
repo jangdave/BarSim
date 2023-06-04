@@ -81,14 +81,17 @@ void ASpawnManager::CheckArray()
 	// 모든 의자들을 확인해서 인자들 다시 채우기
 	for(int i = 0; i<aChairs.Num(); i++)
 	{
-		bIsCoctail.Add(aChairs[i]->bCheckCoctail);
-		bIsCoaster.Add(aChairs[i]->bCheckCoaster);
-		bIsPlayer.Add(aChairs[i]->bCheckPlayer);
+		if(aChairs[i] != nullptr)
+		{
+			bIsCoctail.Add(aChairs[i]->bCheckCoctail);
+			bIsCoaster.Add(aChairs[i]->bCheckCoaster);
+			bIsPlayer.Add(aChairs[i]->bCheckPlayer);
+		}
 	}
 
 	for(int i = 0; i<aChairs.Num(); i++)
 	{
-		if(aChairs[i]->bCheck != false)
+		if(aChairs[i] != nullptr && aChairs[i]->bCheck != false)
 		{
 			return;
 		}
