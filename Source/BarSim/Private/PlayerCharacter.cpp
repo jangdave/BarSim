@@ -102,7 +102,7 @@ void APlayerCharacter::BeginPlay()
 
 	playerText_UI = Cast<UPlayerDialogWidget>(playerTextWidget->GetUserWidgetObject());
 
-	BarGameInstance = Cast<UBarGameInstance>(GetGameInstance());
+	BarGameInstance = Cast<UBarGameInstance>(GetWorld()->GetGameInstance());
 	
 }
 
