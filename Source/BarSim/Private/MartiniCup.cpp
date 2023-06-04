@@ -13,8 +13,6 @@ void AMartiniCup::BeginPlay()
 {
 	Super::BeginPlay();
 
-	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &AMartiniCup::AddIce);
-
 }
 
 void AMartiniCup::LiquorScale()
