@@ -60,14 +60,14 @@ public:
 	UFUNCTION()
 	void SetFirst2Check();
 
-	UFUNCTION()
-	void SetFirst2UnCheck();
+	//UFUNCTION()
+	//void SetFirst2UnCheck();
 
 	UFUNCTION()
 	void SetFirst3Check();
 
-	UFUNCTION()
-	void SetFirst3UnCheck();
+	//UFUNCTION()
+	//void SetFirst3UnCheck();
 	
 	//-----------------------------------------------------------------second
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
@@ -135,7 +135,5 @@ public:
 
 	UFUNCTION()
 	void SetFourth3Check();
-
-
-
+	
 };
