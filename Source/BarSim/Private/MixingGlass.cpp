@@ -8,6 +8,7 @@
 #include "MixedDrop.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "PlayerCharacter.h"
 #include "StirWidget.h"
 #include "Strainer.h"
 #include "Components/AudioComponent.h"
@@ -108,6 +109,14 @@ void AMixingGlass::Tick(float DeltaSeconds)
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("stir started"));
 		widgetComp2->SetVisibility(true);
 		stirWidget = Cast<UStirWidget>(widgetComp2->GetUserWidgetObject());
+
+		if(player)
+		{
+			//UE_LOG(LogTemp, Warning, TEXT("widget rotate"));
+			FVector playerDir = player->VRReplicatedCamera->GetComponentLocation() - GetActorLocation();
+			FRotator playerDirRot = playerDir.Rotation();
+			widgetComp2->SetWorldRotation(playerDirRot);
+		}
 
 		if(stirWidget)
 		{
