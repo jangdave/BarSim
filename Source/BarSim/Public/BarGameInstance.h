@@ -37,4 +37,11 @@ public:
 	// 게임모드 체크 불
 	UPROPERTY()
 	bool bCheckGameMode; // false
+
+	// 첫째날 / 둘째날 / 셋째날 / 모든날
+	UPROPERTY()
+	TArray<float> TotalMoney = {0, 0, 0, 0};
+
+	UFUNCTION()
+	void AddMoney(float money);	
 };

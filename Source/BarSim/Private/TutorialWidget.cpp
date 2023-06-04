@@ -62,20 +62,20 @@ void UTutorialWidget::SetFirst2Check()
 	checkFirst2->SetCheckedState(ECheckBoxState::Checked);
 }
 
-void UTutorialWidget::SetFirst2UnCheck()
-{
-	checkFirst2->SetCheckedState(ECheckBoxState::Unchecked);
-}
+//void UTutorialWidget::SetFirst2UnCheck()
+//{
+//	checkFirst2->SetCheckedState(ECheckBoxState::Unchecked);
+//}
 
 void UTutorialWidget::SetFirst3Check()
 {
 	checkFirst3->SetCheckedState(ECheckBoxState::Checked);
 }
 
-void UTutorialWidget::SetFirst3UnCheck()
-{
-	checkFirst3->SetCheckedState(ECheckBoxState::Unchecked);
-}
+//void UTutorialWidget::SetFirst3UnCheck()
+//{
+//	checkFirst3->SetCheckedState(ECheckBoxState::Unchecked);
+//}
 
 void UTutorialWidget::SetSecond1Check()
 {

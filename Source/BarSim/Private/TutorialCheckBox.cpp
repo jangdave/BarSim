@@ -5,6 +5,7 @@
 #include "CupBase.h"
 #include "MixingGlass.h"
 #include "PlayerCharacter.h"
+#include "Shaker.h"
 #include "TutorialManager.h"
 #include "TutorialWidget.h"
 #include "Components/BoxComponent.h"
@@ -102,10 +103,14 @@ void ATutorialCheckBox::FirstStage()
 			}
 
 			// 가니쉬 체크
+			if(cup->garnishArray[0] == true && tutorial_UI->checkFirst3->GetCheckedState() != ECheckBoxState::Checked)
+			{
+				tutorial_UI->SetFirst3Check();
+			}
 		}
 	}
 
-	if(tutorial_UI->checkFirst1->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFirst2->GetCheckedState() == ECheckBoxState::Checked)
+	if(tutorial_UI->checkFirst1->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFirst2->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFirst3->GetCheckedState() == ECheckBoxState::Checked)
 	{
 		tutorial_UI->SetCheckCup();
 	}
@@ -206,25 +211,52 @@ void ATutorialCheckBox::ThirdStage()
 	for(FOverlapResult hitInfo: hitsInfo)
 	{
 		auto player = Cast<APlayerCharacter>(hitInfo.GetActor());
-
-		if(player != nullptr)
-		{
-			tutorialManager->ClearThirdStage();
-		}
 		
 		if(player != nullptr && bCheckPlayerOnce != true)
 		{
 			bCheckPlayerOnce = true;
 
 			// 위젯 플레이
+			tutorial_UI->SetThird();
 		}
 		
-		auto cup = Cast<ACupBase>(hitInfo.GetActor());
-
-		if(cup != nullptr)
+		if(hitInfo.GetActor()->GetActorNameOrLabel() == "BP_ShakerCup")
 		{
-			
+			auto shaker = Cast<AShaker>(hitInfo.GetActor());
+
+			if(shaker != nullptr)
+			{
+				// 술의 양 체크
+				if(shaker->contents >= 2 && tutorial_UI->checkThird1->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetThird1Check();
+				}
+
+				// 쉐이킹 체크
+				if(shaker->bShaked != false && tutorial_UI->checkThird2->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetThird2Check();
+				}
+			}
 		}
+		else
+		{
+			auto cup = Cast<ACupBase>(hitInfo.GetActor());
+
+			if(cup != nullptr)
+			{
+				// 술의 양 체크
+				if(cup->contents >= 2 && tutorial_UI->checkThird3->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetThird3Check();
+				}
+			}
+		}
+	}
+	
+	if(tutorial_UI->checkThird1->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkThird2->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkThird3->GetCheckedState() == ECheckBoxState::Checked)
+	{
+		tutorial_UI->SetCheckCup();
 	}
 
 	// 디버그 라인
@@ -278,13 +310,23 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 
 	if(cup != nullptr)
 	{
-		if(cup->iceCount == 3 && cup->contents >= 2)
+		if(cup->iceCount == 3 && cup->contents >= 2 && cup->garnishArray[0] == true)
 		{
 			tutorialManager->ClearFirstStage();
+
+			bCheckPlayerOnce = false;
 		}
 		else if(cup->bStirred != false && cup->contents >= 2)
 		{
 			tutorialManager->ClearSecondStage();
+
+			bCheckPlayerOnce = false;
+		}
+		else if(cup->bShaked != false && cup->contents >= 2)
+		{
+			tutorialManager->ClearThirdStage();
+
+			bCheckPlayerOnce = false;
 		}
 	}
 }

@@ -2,11 +2,14 @@
 
 
 #include "CustomerCharacter.h"
+
+#include "Coaster.h"
 #include "CupBase.h"
 #include "CustomerAnimInstance.h"
 #include "CustomerFSM.h"
 #include "CustomerOrderWidget.h"
 #include "SpawnManager.h"
+#include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
 
 // Sets default values
@@ -176,4 +179,14 @@ void ACustomerCharacter::DetachCup()
 
 	// 컵의 물리를 킨다
 	cup->cupComp->SetSimulatePhysics(true);
+
+	FTimerHandle setloc;
+	GetWorldTimerManager().SetTimer(setloc, FTimerDelegate::CreateLambda([&]()
+	{
+		FVector targetLoc = customerFSM->spawnManager->aChairs[customerFSM->idx]->coctailBoxComp->GetComponentLocation();
+
+		cup->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, cup->GetActorLocation().Z));
+
+		customerFSM->spawnManager->aChairs[customerFSM->idx]->coaster->SetActorLocation(FVector(targetLoc.X, targetLoc.Y, customerFSM->spawnManager->aChairs[customerFSM->idx]->coaster->GetActorLocation().Z));
+	}), 1.0f, false);
 }

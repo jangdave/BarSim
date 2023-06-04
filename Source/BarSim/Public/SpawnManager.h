@@ -28,14 +28,7 @@ public:
 	class UBarGameInstance* gi;
 	
 	UPROPERTY()
-	TArray<AActor*> chairs;
-
-	UPROPERTY()
-	TArray<AChair*> aChairs;
-	
-	// 의자 비어있는지 bool 배열
-	UPROPERTY()
-	TArray<bool> bIsSit;
+	TArray<AChair*> aChairs = {0, 0, 0, 0};
 
 	// 의자마다 칵테일이 있는지 bool 배열
 	UPROPERTY()
@@ -106,11 +99,11 @@ public:
 	
 	// 점수 체크------------------------------------------------------------------------------------
 public:
-	void GetCup(TArray<FString> cocName, TArray<float> cocLiter, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx);
+	void GetCup(TArray<FString> cocName, TArray<float> cocLiter, bool bStirred, bool bStirredLater, bool bShake, TArray<bool> garnishArray, int32 customerIdx);
 
 	TArray<FString> GinLime = {"Gin", "Lime"};
 
-	TArray<FString> Daiquiri = {"Rum", "Lime"};
+	TArray<FString> Daiquiri = {"Rum", "Lime", "Sugar"};
 	
 	TArray<FString> Martini = {"Gin", "Vermouth"};
 
@@ -122,7 +115,7 @@ public:
 
 	float amountOfGin;
 
-	float amountOfWhisky;
+	float amountOfWhiskey;
 
 	float amountOfLime;
 	
@@ -130,23 +123,27 @@ public:
 	
 	float amountOfCampari;
 
+	float amountOfSugar;
+
 	int32 orderScore;
 
 	// 비율, 양, 기법
 	UPROPERTY()
 	TArray<int32> scoreIdx = {0, 0, 0};
 
-	void CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx);
+	void CheckGin(TArray<FString> cocName, bool bStirred, bool bStirredLater, TArray<bool> garnishArray, int32 customerIdx);
 
 	void CheckWhisky(TArray<FString> cocName, bool bStirred, bool bStirredLater, int32 customerIdx);
 
-	void CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShake, int32 customerIdx);
+	void CheckRum(TArray<FString> cocName, bool bStirred, bool bStirredLater, bool bShake, TArray<bool> garnishArray, int32 customerIdx);
 
 	void CheckGinLime(int32 customerIdx);
 
 	void CheckMartini(int32 customerIdx);
 
 	void CheckDaiquiri(int32 customerIdx);
+
+	void CheckNegroni(int32 customerIdx);
 
 	void CheckOldPal(int32 customerIdx);
 
