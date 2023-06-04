@@ -127,8 +127,10 @@ void ATutorialManager::ClearSecondStage()
 	allLights[2]->TurnOnLight();
 	allWalls[1]->OpenCollision();
 
+	// 3단계 시작하기
 	allCheckBoxes[1]->Destroy();
 	allCheckBoxes[2]->ThirdStageStart();
+	allCheckBoxes[2]->StartWelcome();
 
 	UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[2]->levelSound);
 }

@@ -203,7 +203,7 @@ void ASpawnManager::SecondDay()
 
 	if(twoTimer >= 10)
 	{
-		UGameplayStatics::OpenLevel(GetWorld(), "StartMap");
+		UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 	}
 }
 

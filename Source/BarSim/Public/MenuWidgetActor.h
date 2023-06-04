@@ -28,7 +28,16 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 	class UWidgetComponent* menuWidget;
+	
+	UPROPERTY()
+	class UBarGameInstance* gi;
 
+	UPROPERTY()
+	class UMenuWidget* menu_UI;
+	
 	UFUNCTION()
 	void Destroy();
+
+	UFUNCTION()
+	void SetMenu();
 };
