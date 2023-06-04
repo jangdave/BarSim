@@ -533,7 +533,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));
 				iceCount += 1;
-				UE_LOG(LogTemp, Warning, TEXT("IceCount : %d"), iceCount);
+				UE_LOG(LogTemp, Warning, TEXT("Cupbase : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
 				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);
@@ -555,7 +555,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
 				iceCount += 1;
-				UE_LOG(LogTemp, Warning, TEXT("IceCount : %d"), iceCount);
+				UE_LOG(LogTemp, Warning, TEXT("Cupbase : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
 				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);
@@ -577,7 +577,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket3"));
 				iceCount += 1;
-				UE_LOG(LogTemp, Warning, TEXT("IceCount : %d"), iceCount);
+				UE_LOG(LogTemp, Warning, TEXT("Cupbase : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
 				cupSize = cupSizeOrigin - iceCount * 1.8;
 				insideContents = FMath::Clamp(contents, 0, cupSize);

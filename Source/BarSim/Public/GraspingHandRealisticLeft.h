@@ -75,6 +75,16 @@ public:
 	class AIceCubeVat* iceCubeVat;
 	UPROPERTY()
 	class AMartiniCup* martiniCup;
+	UPROPERTY()
+	class ARockGlass* rockGlass;
+	UPROPERTY()
+	class AHalfSlicedOrangeVat* halfSlicedOrangeVat;
+	UPROPERTY()
+	class AHalfSlicedOrange* halfSlicedOrange;
+	UPROPERTY()
+	class ASlicedOrangeVat* SlicedOrangeVat;
+	UPROPERTY()
+	class ASlicedOrange* SlicedOrange;
 
 	// Player Controller
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

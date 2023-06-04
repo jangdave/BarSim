@@ -4,69 +4,110 @@
 #include "RockGlass.h"
 
 #include "HalfSlicedLime.h"
+#include "HalfSlicedOrange.h"
 #include "IceCube.h"
 #include "OlivePick.h"
 #include "SlicedLime.h"
+#include "SlicedOrange.h"
 #include "Kismet/GameplayStatics.h"
 
-void ARockGlass::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ARockGlass::BeginPlay()
 {
-	Super::AddIce(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
+	Super::BeginPlay();
 
-	slicedLime = Cast<ASlicedLime>(OtherActor);
-	halfSlicedLime = Cast<AHalfSlicedLime>(OtherActor);
-	olive = Cast<AOlivePick>(OtherActor);
-	ice=Cast<AIceCube>(OtherActor);
-	if(ice)
-	{
-		return;
-	}
-	//igchecker에 라임이 오버랩되었을 때
-	else if(slicedLime)
-	{
-		if(slicedLime->isSlicedLimeAttachable&&isLimeAttached==false)
-		{
-			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
-			slicedLime->DisableComponentsSimulatePhysics();
-			slicedLime->SetActorEnableCollision(false);
-			auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedLimeSocket"));
-			slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
-			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
-			isLimeAttached = true;
-			garnishArray[0]=true;
-		}
-	}
-	else if(halfSlicedLime)
-	{
-		if(halfSlicedLime->isHalfSlicedLimeAttachable&&isLimeAttached==false)
-		{
-			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
-			halfSlicedLime->DisableComponentsSimulatePhysics();
-			halfSlicedLime->SetActorEnableCollision(false);
-			auto halfLimeSocketTrans = cupComp->GetSocketTransform(FName("HalfSlicedLimeSocket"));
-			halfSlicedLime->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
-			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
-			isLimeAttached = true;
-			garnishArray[0]=true;
-		}
-	}
-	//igchecker에 올리브가 오버랩되었을 때
-	else if(olive)
-	{
-		//if(olive->isOliveAttachable&&isOliveAttached==false)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Olive Attached"))
-			UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
-			olive->DisableComponentsSimulatePhysics();
-			olive->SetActorEnableCollision(false);
-			auto oliveSocketTrans = cupComp->GetSocketTransform(FName("OliveSocket"));
-			olive->SetActorLocationAndRotation(oliveSocketTrans.GetLocation(), oliveSocketTrans.GetRotation());
-			olive->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("OliveSocket"));
-			isOliveAttached = true;
-			garnishArray[1]=true;
-		}
-	}
+	igCheckerComp->OnComponentBeginOverlap.AddDynamic(this, &ARockGlass::AddIce);
+}
 
+void ARockGlass::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+                        int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	iceCubeR=Cast<AIceCube>(OtherActor);
+	halfSlicedOrangeR=Cast<AHalfSlicedOrange>(OtherActor);
+	slicedOrangeR=Cast<ASlicedOrange>(OtherActor);
+	
+	//igchecker에 얼음이 오버랩되었을 때
+	if(iceCubeR)
+	{
+		if(iceCubeR->isIceCubeAttachable)
+		{
+			if(iceCount==0)
+			{
+				auto randPitch = FMath::FRandRange(0.95, 1.05);
+				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
+				iceCubeR->DisableComponentsSimulatePhysics();	
+				if(cupComp->IsSimulatingPhysics()==true)
+				{
+					
+				}
+				else
+				{
+					auto socketLoc1 = cupComp->GetSocketTransform(FName("IceSocket1"), RTS_World);
+					iceCubeR->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());
+				}
+				iceCubeR->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));
+				iceCount += 1;
+				UE_LOG(LogTemp, Warning, TEXT("RockGlass : IceCount : %d"), iceCount);
+				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+				cupSize = cupSizeOrigin - iceCount * 1.8;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				LiquorScale();
+			}
+			else if(iceCount==1)
+			{
+				auto randPitch = FMath::FRandRange(0.95, 1.05);
+				UGameplayStatics::PlaySound2D(GetWorld(), iceDropSound, 1, randPitch, 0);
+				iceCubeR->DisableComponentsSimulatePhysics();
+				if(cupComp->IsSimulatingPhysics()==true)
+				{
+					
+				}
+				else
+				{
+					auto socketLoc2 = cupComp->GetSocketTransform(FName("IceSocket2"), RTS_World);
+					iceCubeR->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());
+				}	
+				iceCubeR->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
+				iceCount += 1;
+				UE_LOG(LogTemp, Warning, TEXT("RockGlass : IceCount : %d"), iceCount);
+				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
+				cupSize = cupSizeOrigin - iceCount * 1.8;
+				insideContents = FMath::Clamp(contents, 0, cupSize);
+				LiquorScale();
+			}
+			else if(iceCount>=2)
+			{
+				
+			}
+		}
+	}
+		//igchecker에 오렌지가 오버랩되었을 때
+		else if(slicedOrangeR)
+		{
+			if(slicedOrangeR->isSlicedOrangeAttachable&&isOrangeAttached==false)
+			{
+				UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
+				slicedOrangeR->DisableComponentsSimulatePhysics();
+				slicedOrangeR->SetActorEnableCollision(false);	
+				auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedOrangeSocket"));
+				slicedOrangeR->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
+				slicedOrangeR->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedOrangeSocket"));
+				isOrangeAttached = true;
+				garnishArray[2]=true;
+			}
+		}
+		else if(halfSlicedOrangeR)
+		{
+			if(halfSlicedOrangeR->isHalfSlicedOrangeAttachable&&isOrangeAttached==false)
+			{
+				UGameplayStatics::PlaySound2D(GetWorld(), limeAttachSound, 1, 1, 0);
+				halfSlicedOrangeR->DisableComponentsSimulatePhysics();
+				halfSlicedOrangeR->SetActorEnableCollision(false);
+				auto halfLimeSocketTrans = cupComp->GetSocketTransform(FName("HalfSlicedOrangeSocket"));
+				halfSlicedOrangeR->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());				
+				halfSlicedOrangeR->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedOrangeSocket"));
+				isOrangeAttached = true;
+				garnishArray[2]=true;
+			}
+		}
 	
 }

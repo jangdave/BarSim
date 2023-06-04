@@ -10,16 +10,21 @@
 #include "CupBase.h"
 #include "HalfSlicedLime.h"
 #include "HalfSlicedLimeVat.h"
+#include "HalfSlicedOrange.h"
+#include "HalfSlicedOrangeVat.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
 #include "IceCubeVat.h"
 #include "MartiniCup.h"
 #include "MixingGlass.h"
+#include "RockGlass.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
 #include "SlicedLime.h"
 #include "SlicedLimeVat.h"
+#include "SlicedOrange.h"
+#include "SlicedOrangeVat.h"
 #include "Strainer.h"
 #include "Tablet.h"
 #include "Components/TextBlock.h"
@@ -96,6 +101,11 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	halfSlicedLimeVat=Cast<AHalfSlicedLimeVat>(OtherActor);
 	iceCubeVat=Cast<AIceCubeVat>(OtherActor);
 	martiniCup=Cast<AMartiniCup>(OtherActor);
+	rockGlass=Cast<ARockGlass>(OtherActor);
+	SlicedOrange=Cast<ASlicedOrange>(OtherActor);
+	halfSlicedOrange=Cast<AHalfSlicedOrange>(OtherActor);
+	SlicedOrangeVat=Cast<ASlicedOrangeVat>(OtherActor);
+	halfSlicedOrangeVat=Cast<AHalfSlicedOrangeVat>(OtherActor);
 
 	if(huchuTong)
 	{			
@@ -350,6 +360,78 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->PlayAnimation(actorInfoWidget->Disappearing);
 		}), 1, false); }
+	else if(halfSlicedOrangeVat)
+	{	
+		if(PC)
+		{
+			PC->PlayHapticEffect(HF_ActorOverlap, EControllerHand::Right);			
+		}
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		if(actorInfoWidget->IsAnimationPlaying(actorInfoWidget->Disappearing))
+		{
+			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
+		}
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지 컨테이너"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidget->PlayAnimation(actorInfoWidget->Disappearing);
+		}), 1, false); }
+	else if(SlicedOrangeVat)
+	{	
+		if(PC)
+		{
+			PC->PlayHapticEffect(HF_ActorOverlap, EControllerHand::Right);			
+		}
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		if(actorInfoWidget->IsAnimationPlaying(actorInfoWidget->Disappearing))
+		{
+			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
+		}
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지 컨테이너"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidget->PlayAnimation(actorInfoWidget->Disappearing);
+		}), 1, false); }
+	else if(SlicedOrange)
+	{	
+		if(PC)
+		{
+			PC->PlayHapticEffect(HF_ActorOverlap, EControllerHand::Right);			
+		}
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		if(actorInfoWidget->IsAnimationPlaying(actorInfoWidget->Disappearing))
+		{
+			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
+		}
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidget->PlayAnimation(actorInfoWidget->Disappearing);
+		}), 1, false); }
+	else if(halfSlicedOrange)
+	{	
+		if(PC)
+		{
+			PC->PlayHapticEffect(HF_ActorOverlap, EControllerHand::Right);			
+		}
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		if(actorInfoWidget->IsAnimationPlaying(actorInfoWidget->Disappearing))
+		{
+			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
+		}
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidget->PlayAnimation(actorInfoWidget->Disappearing);
+		}), 1, false); }
 	else if(iceCubeVat)
 	{	
 		if(PC)
@@ -380,6 +462,24 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
 		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("마티니 컵"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidget->PlayAnimation(actorInfoWidget->Disappearing);
+		}), 1, false); }
+	else if(rockGlass)
+	{	
+		if(PC)
+		{
+			PC->PlayHapticEffect(HF_ActorOverlap, EControllerHand::Right);			
+		}
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		if(actorInfoWidget->IsAnimationPlaying(actorInfoWidget->Disappearing))
+		{
+			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
+		}
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("온더록 글래스"))));
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
