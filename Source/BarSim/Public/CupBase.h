@@ -185,6 +185,15 @@ public:
 	UPROPERTY()
 	class AHalfSlicedLime* halfSlicedLime;
 
+	UPROPERTY()
+	class AOlivePick* olive;
+
+	UPROPERTY()
+	class AHalfSlicedOrange* HalfSlicedOrange;
+
+	UPROPERTY()
+	class ASlicedOrange* SlicedOrange;
+
 	// 가니쉬 판단 변수
 	UPROPERTY()
 	bool isLimeAttached = false;

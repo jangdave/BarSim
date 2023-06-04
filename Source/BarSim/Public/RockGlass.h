@@ -20,23 +20,5 @@ protected:
 	
 public:
 	virtual void AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
-
-	UPROPERTY()
-	class AOlivePick* olive;
-
-	UPROPERTY()
-	class AHalfSlicedOrange* HalfSlicedOrange;
-
-	UPROPERTY()
-	class ASlicedOrange* SlicedOrange;
-
-	UPROPERTY()
-	class AIceCube* iceCubeR;
-
-	UPROPERTY()
-	class ASlicedOrange* slicedOrangeR;
-
-	UPROPERTY()
-	class AHalfSlicedOrange* halfSlicedOrangeR;
 	
 };

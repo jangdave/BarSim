@@ -30,19 +30,12 @@ void AShaker::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	
+	//UE_LOG(LogTemp, Warning, TEXT("Bool value is: %d"), bLidOn? 1 : 0);
+	
 	float dot = FVector::DotProduct(GetActorUpVector(), upVector);
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
 	//float streamWidth = FMath::Clamp(angle * 0.3f - 17.0f, 0, 10);
 	float streamWidth = 10.0f;
-
-	if(strainer)
-	{
-		bLidOn = strainer->bLidOn;
-	}
-	else
-	{
-		bLidOn = false;
-	}
 	
 	if(contents > 0)
 	{

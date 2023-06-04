@@ -23,15 +23,6 @@ public:
 	virtual void LiquorScale() override;
 
 	virtual void AddIce(UPrimitiveComponent* OverlappedComponentM, AActor* OtherActorM, UPrimitiveComponent* OtherCompM, int32 OtherBodyIndexM, bool bFromSweepM, const FHitResult& SweepResultM) override;
-
-	UPROPERTY()
-	class AOlivePick* olive;
-
-	UPROPERTY()
-	class AIceCube* iceCubeM;
-	UPROPERTY()
-	class ASlicedLime* slicedLimeM;
-	UPROPERTY()
-	class AHalfSlicedLime* halfSlicedLimeM;
+	
 
 };

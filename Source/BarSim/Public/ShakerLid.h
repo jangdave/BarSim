@@ -44,5 +44,8 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="Sounds")
 	class USoundBase* attachSound;
+
+	UFUNCTION()
+	void SetLidOff();
 	
 };

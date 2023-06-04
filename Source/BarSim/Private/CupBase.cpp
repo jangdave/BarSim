@@ -6,10 +6,13 @@
 #include "CupWidget.h"
 #include "DropBase.h"
 #include "HalfSlicedLime.h"
+#include "HalfSlicedOrange.h"
 #include "IceCube.h"
 #include "MixedDrop.h"
+#include "OlivePick.h"
 #include "PlayerCharacter.h"
 #include "SlicedLime.h"
+#include "SlicedOrange.h"
 #include "SteelSink.h"
 #include "Components/BoxComponent.h"
 #include "Components/Overlay.h"
@@ -512,6 +515,9 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 	ice = Cast<AIceCube>(OtherActor);	
 	slicedLime = Cast<ASlicedLime>(OtherActor);
 	halfSlicedLime = Cast<AHalfSlicedLime>(OtherActor);
+	//SlicedOrange=Cast<ASlicedOrange>(OtherActor);
+	//HalfSlicedOrange=Cast<AHalfSlicedOrange>(OtherActor);
+	//olive=Cast<AOlivePick>(OtherActor);
 	//igchecker에 얼음이 오버랩되었을 때
 	if(ice)
 	{
@@ -691,6 +697,20 @@ void ACupBase::SetCupEmpty()
 				liquorComp->SetVisibility(false);
 				bStirred=false;
 				contents=0;
+				// CupComp에 Attach 되어있는 컴포넌트 배열
+				auto attachedGarnishes = cupComp->GetAttachChildren();
+				for(int i = 0; i<attachedGarnishes.Num(); ++i)
+				{
+					// 배열에서 액터를 구한 뒤
+					auto attachedActors = attachedGarnishes[i]->GetAttachmentRootActor();
+					// 해당 액터가 가니쉬 혹은 얼음이라면,
+					if(attachedActors==ice||attachedActors==slicedLime||attachedActors==halfSlicedLime||attachedActors==olive||attachedActors==SlicedOrange||attachedActors==HalfSlicedOrange)
+					{
+					// 해당 액터들을 파괴한다.
+						attachedActors->Destroy();
+					}
+
+				}
 				isSteelSinkCasted=false;
 		}
 	}

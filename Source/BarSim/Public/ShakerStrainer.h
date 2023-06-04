@@ -39,7 +39,10 @@ public:
 
 	UFUNCTION()
 	void AttachToShaker();
-	
+	UFUNCTION()
+	void SetLidOn();
+	UFUNCTION()
+	void SetLidOff();
 	UPROPERTY()
 	class AShakerLid* lid;
 

@@ -274,6 +274,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==shakerLid&&shakerLid!=nullptr)
 		{
 			isGrabbingShakerLidRight=true;
+			shakerLid->SetLidOff();
 			shakerLid->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			shakerLid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		}
@@ -390,6 +391,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==shakerLidL&&shakerLidL!=nullptr)
 	{
 		isGrabbingShakerLidLeft=true;
+		shakerLidL->SetLidOff();
 		shakerLidL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		shakerLidL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	}
