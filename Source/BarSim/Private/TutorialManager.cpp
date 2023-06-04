@@ -4,6 +4,7 @@
 #include "TutorialManager.h"
 #include "EngineUtils.h"
 #include "TutorialLight.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ATutorialManager::ATutorialManager()
@@ -101,6 +102,8 @@ void ATutorialManager::StartTutorial()
 		// 1단계 시작하기
 		allCheckBoxes[0]->FirstStageStart();
 		allCheckBoxes[0]->StartWelcome();
+
+		UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[0]->levelSound);
 	}), 1.0f, false);
 }
 
@@ -114,6 +117,8 @@ void ATutorialManager::ClearFirstStage()
 	allCheckBoxes[0]->Destroy();
 	allCheckBoxes[1]->SecondStageStart();
 	allCheckBoxes[1]->StartWelcome();
+
+	UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[1]->levelSound);
 }
 
 void ATutorialManager::ClearSecondStage()
@@ -124,6 +129,8 @@ void ATutorialManager::ClearSecondStage()
 
 	allCheckBoxes[1]->Destroy();
 	allCheckBoxes[2]->ThirdStageStart();
+
+	UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[2]->levelSound);
 }
 
 void ATutorialManager::ClearThirdStage()
@@ -136,6 +143,8 @@ void ATutorialManager::ClearThirdStage()
 	allCheckBoxes[2]->Destroy();
 	allCheckBoxes[3]->FourthStageStart();
 	allCheckBoxes[3]->StartWelcome();
+
+	UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[3]->levelSound);
 }
 
 void ATutorialManager::ClearFourthStage()

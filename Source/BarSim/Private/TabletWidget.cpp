@@ -3,6 +3,7 @@
 
 #include "TabletWidget.h"
 
+#include "BarGameInstance.h"
 #include "PlayerCharacter.h"
 #include "SpawnManager.h"
 #include "Components/Button.h"
@@ -19,12 +20,18 @@ void UTabletWidget::NativeConstruct()
 	
 	spawnmg = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
 
+	gi = Cast<UBarGameInstance>(GetGameInstance());
+	
 	// 테블렛 메뉴
 	btn_OpenStore->OnClicked.AddDynamic(this, &UTabletWidget::OpenStore);
 	btn_CloseStore->OnClicked.AddDynamic(this, &UTabletWidget::CloseStore);
 	btn_Recipe->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
 	btn_Internet->OnClicked.AddDynamic(this, &UTabletWidget::OpenInternet);
-	btn_CloseStore->SetIsEnabled(false);
+
+	if(gi->checkDayCount != 0)
+	{
+		btn_CloseStore->SetIsEnabled(false);
+	}
 	
 	// 테블릿 레시피 메뉴
 	btn_BackMenu->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
@@ -135,19 +142,35 @@ void UTabletWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 
 void UTabletWidget::OpenStore()
 {
-	spawnmg->SpawnCustomer();
+	if(gi->checkDayCount == 0)
+	{
+		bCheckTutorialOpen = true;
+	}
+	else
+	{
+		spawnmg->SpawnCustomer();
 
-	btn_OpenStore->SetIsEnabled(false);
+		btn_OpenStore->SetIsEnabled(false);
+	}
 }
 
 void UTabletWidget::CloseStore()
 {
-	spawnmg->SpawnOldPal();
+	if(gi->checkDayCount == 0)
+	{
+		bCheckTutorialClose = true;
+	}
+	else
+	{
+		spawnmg->SpawnOldPal();
+	}
 }
 
 void UTabletWidget::OpenInternet()
 {
 	WidgetSwitcher_Tablet->SetActiveWidgetIndex(10);
+
+	bCheckTutorialInternet = true;
 }
 
 void UTabletWidget::OpenMenuPage()
