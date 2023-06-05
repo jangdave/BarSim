@@ -2,7 +2,6 @@
 
 
 #include "TabletWidget.h"
-
 #include "BarGameInstance.h"
 #include "PlayerCharacter.h"
 #include "SpawnManager.h"
@@ -12,7 +11,6 @@
 #include "Components/WidgetInteractionComponent.h"
 #include "Components/WidgetSwitcher.h"
 #include "Kismet/GameplayStatics.h"
-#include "Misc/GeneratedTypeName.h"
 
 void UTabletWidget::NativeConstruct()
 {
@@ -89,7 +87,6 @@ void UTabletWidget::NativeConstruct()
 	btn_BackInMail1_14->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
 	
 	// 테블릿 키보드 입력
-	//btn_BackMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
 	btn_CapsLock->OnClicked.AddDynamic(this, &UTabletWidget::SetCapsLock);
 	btn_Enter->OnClicked.AddDynamic(this, &UTabletWidget::SetEnter);
 
@@ -230,7 +227,10 @@ void UTabletWidget::CastToPlayerCharacter()
 
 void UTabletWidget::OpenInbox()
 {
-	WidgetSwitcher_Tablet->SetActiveWidgetIndex(11);
+	if(gi->checkDayCount != 0)
+	{
+		WidgetSwitcher_Tablet->SetActiveWidgetIndex(11);
+	}
 }
 
 void UTabletWidget::OpenInMail1()

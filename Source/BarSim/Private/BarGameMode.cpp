@@ -5,6 +5,7 @@
 #include "MenuWidgetActor.h"
 #include "PlayerCharacter.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
 ABarGameMode::ABarGameMode()
 {
@@ -30,8 +31,13 @@ void ABarGameMode::SpawnMenu()
 	
 	if(player != nullptr)
 	{
-		FRotator rot = player->GetActorRotation()+FRotator(0, 180, 0);
-		FVector loc = player->GetActorLocation()+(player->GetActorForwardVector()*100);
+		FVector rot1 = player->VRReplicatedCamera->GetComponentLocation();
+		FVector rot2 = player->VRReplicatedCamera->GetComponentLocation() + player->VRReplicatedCamera->GetForwardVector() * 80;
+		FRotator rotend = UKismetMathLibrary::FindLookAtRotation(rot1, rot2);
+		FRotator rot = {0, rotend.Yaw - 180, 0};
+		FVector loc1 = player->VRReplicatedCamera->GetComponentLocation() + player->VRReplicatedCamera->GetForwardVector() * 80;
+		FVector loc2 = player->GetActorLocation() + player->GetActorUpVector() * 30;
+		FVector loc = {loc1.X, loc1.Y, loc2.Z};
 		menuWidget = GetWorld()->SpawnActor<AMenuWidgetActor>(menuFactory, loc, rot);
 	}
 }

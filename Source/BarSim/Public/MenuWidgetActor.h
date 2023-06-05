@@ -34,6 +34,9 @@ public:
 
 	UPROPERTY()
 	class UMenuWidget* menu_UI;
+
+	UPROPERTY()
+	class APlayerCharacter* player;
 	
 	UFUNCTION()
 	void Destroy();
