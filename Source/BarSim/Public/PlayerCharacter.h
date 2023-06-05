@@ -278,9 +278,6 @@ public:
 	
 	// Sounds
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
-	class USoundBase* sinkSound;
-
-	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* grabSound;
 
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")

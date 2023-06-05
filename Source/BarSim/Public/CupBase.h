@@ -194,6 +194,9 @@ public:
 	UPROPERTY()
 	class ASlicedOrange* SlicedOrange;
 
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* sinkSound;
+
 	// 가니쉬 판단 변수
 	UPROPERTY()
 	bool isLimeAttached = false;
@@ -216,5 +219,22 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "Cup")
 	bool bScored;
+
+	UPROPERTY()
+	class AIceCube* iceRef1;
+	UPROPERTY()
+	class AIceCube* iceRef2;
+	UPROPERTY()
+	class AIceCube* iceRef3;
+	UPROPERTY()
+	class ASlicedLime* slicedLimeRef;
+	UPROPERTY()
+	class AHalfSlicedLime* halfSlicedLimeRef;
+	UPROPERTY()
+	class ASlicedOrange* slicedOrangeRef;
+	UPROPERTY()
+	class AHalfSlicedOrange* halfSlicedOrangeRef;
+	UPROPERTY()
+	class AOlivePick* oliveRef;
 
 };

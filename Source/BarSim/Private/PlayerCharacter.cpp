@@ -1039,13 +1039,7 @@ void APlayerCharacter::FireRight()
 	}	
 	if(isGrabbingCupRight&&cup!=nullptr)
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
-		if(cup->contents>0)
-		{
-			double randPitch = FMath::FRandRange(1, 1.5);
-			UGameplayStatics::PlaySound2D(GetWorld(), sinkSound, 1, randPitch, 0);
-			cup->SetCupEmpty();
-		}
+		cup->SetCupEmpty();
 	}
 }
 
@@ -1322,13 +1316,7 @@ void APlayerCharacter::FireLeft()
 	}
 	if(isGrabbingCupLeft&&cupL!=nullptr)
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("set cup empty"))
-		if(cupL->contents>0)
-		{
-			double randPitch = FMath::FRandRange(1, 1.5);
-			UGameplayStatics::PlaySound2D(GetWorld(), sinkSound, 1, randPitch, 0);
-			cupL->SetCupEmpty();
-		}
+		cupL->SetCupEmpty();
 	}
 }
 

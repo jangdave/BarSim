@@ -36,6 +36,7 @@ void ARockGlass::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 				auto socketLoc1 = this->cupComp->GetSocketTransform(FName("IceSocket1"), RTS_World);
 				ice->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());				
 				ice->AttachToComponent(this->cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));
+				iceRef1=ice;
 				iceCount += 1;
 				UE_LOG(LogTemp, Warning, TEXT("RockGlass : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
@@ -51,6 +52,7 @@ void ARockGlass::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 				auto socketLoc2 = this->cupComp->GetSocketTransform(FName("IceSocket2"), RTS_World);
 				ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());					
 				ice->AttachToComponent(this->cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
+				iceRef2=ice;
 				iceCount += 1;
 				UE_LOG(LogTemp, Warning, TEXT("RockGlass : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
@@ -75,6 +77,7 @@ void ARockGlass::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 				auto limeSocketTrans = this->cupComp->GetSocketTransform(FName("SlicedOrangeSocket"));
 				SlicedOrange->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
 				SlicedOrange->AttachToComponent(this->cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedOrangeSocket"));
+				slicedOrangeRef=SlicedOrange;
 				isOrangeAttached = true;
 				garnishArray[2]=true;
 			}
@@ -89,6 +92,7 @@ void ARockGlass::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 				auto halfLimeSocketTrans = this->cupComp->GetSocketTransform(FName("HalfSlicedOrangeSocket"));
 				HalfSlicedOrange->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());				
 				HalfSlicedOrange->AttachToComponent(this->cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedOrangeSocket"));
+				halfSlicedOrangeRef=HalfSlicedOrange;
 				isOrangeAttached = true;
 				garnishArray[2]=true;
 			}

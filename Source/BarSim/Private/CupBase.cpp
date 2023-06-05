@@ -541,6 +541,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 					ice->SetActorLocationAndRotation(socketLoc1.GetLocation(), socketLoc1.GetRotation());
 				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket1"));
+				iceRef1=ice;
 				iceCount += 1;
 				UE_LOG(LogTemp, Warning, TEXT("Cupbase : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
@@ -563,6 +564,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 					ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());
 				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
+				iceRef2=ice;
 				iceCount += 1;
 				UE_LOG(LogTemp, Warning, TEXT("Cupbase : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
@@ -585,6 +587,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 					ice->SetActorLocationAndRotation(socketLoc3.GetLocation(), socketLoc3.GetRotation());
 				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket3"));
+				iceRef3=ice;
 				iceCount += 1;
 				UE_LOG(LogTemp, Warning, TEXT("Cupbase : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
@@ -616,6 +619,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
 			}
 			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
+			slicedLimeRef=slicedLime;
 			isLimeAttached = true;
 			garnishArray[0]=true;
 		}
@@ -638,6 +642,7 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 			}
 
 			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
+			halfSlicedLimeRef=halfSlicedLime;
 			isLimeAttached = true;
 			garnishArray[0]=true;
 		}
@@ -694,26 +699,32 @@ void ACupBase::SetCupEmpty()
 		steelSink=Cast<ASteelSink>(HitObj[sinkArrayNum].GetActor());
 		if(steelSink!=nullptr)
 		{
+				double randPitch = FMath::FRandRange(1, 1.5);
+				UGameplayStatics::PlaySound2D(GetWorld(), sinkSound, 1, randPitch, 0);
 				UE_LOG(LogTemp, Warning, TEXT("Set Cup Empty"));
 				NameArray.Empty();
 				ContentsArray.Empty();
 				liquorComp->SetVisibility(false);
 				bStirred=false;
 				contents=0;
-				// CupComp에 Attach 되어있는 컴포넌트 배열
-				auto attachedGarnishes = cupComp->GetAttachChildren();
-				for(int i = 0; i<attachedGarnishes.Num(); ++i)
-				{
-					// 배열에서 액터를 구한 뒤
-					auto attachedActors = attachedGarnishes[i]->GetAttachmentRootActor();
-					// 해당 액터가 가니쉬 혹은 얼음이라면,
-					if(attachedActors==ice||attachedActors==slicedLime||attachedActors==halfSlicedLime||attachedActors==olive||attachedActors==SlicedOrange||attachedActors==HalfSlicedOrange)
-					{
-					// 해당 액터들을 파괴한다.
-						attachedActors->Destroy();
-					}
+			
+				if(iceRef1)
+					iceRef1->Destroy();
+				if(iceRef2)
+					iceRef2->Destroy();
+				if(iceRef3)
+					iceRef3->Destroy();
+				if(halfSlicedLimeRef)
+					halfSlicedLimeRef->Destroy();
+				if(slicedLimeRef)
+					slicedLimeRef->Destroy();
+				if(halfSlicedOrangeRef)
+					halfSlicedOrangeRef->Destroy();
+				if(slicedOrangeRef)
+					slicedOrangeRef->Destroy();
+				if(oliveRef)
+					oliveRef->Destroy();
 
-				}
 				isSteelSinkCasted=false;
 		}
 	}
