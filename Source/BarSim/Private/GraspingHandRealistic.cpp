@@ -461,7 +461,7 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("마티니 컵"))));
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("마티니 글래스"))));
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void

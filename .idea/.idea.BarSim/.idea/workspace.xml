@@ -10,6 +10,28 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/realistic_hand_r_ue4_Physics.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Meshes/PlayerHandsMesh/HTAB/meshes/realistic_hand/realistic_hand_r_ue4_Physics.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Door/DoorActorNoKeyhole.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Grippables/Misc/Examples/Door/DoorActorNoKeyhole.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/DropSoundCollision.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/DropSoundCollision.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealistic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealistic.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealisticLeft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealisticLeft.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/DropSoundCollision.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/DropSoundCollision.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/HalfSlicedLime.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/HalfSlicedLime.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/HalfSlicedLimeVat.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/HalfSlicedLimeVat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/HalfSlicedOrangeVat.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/HalfSlicedOrangeVat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/IceCubeVat.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/IceCubeVat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/OliveVat.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/OliveVat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/SlicedLimeVat.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/SlicedLimeVat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/SlicedOrangeVat.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/SlicedOrangeVat.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

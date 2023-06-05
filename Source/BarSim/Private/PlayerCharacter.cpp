@@ -224,6 +224,12 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 	shaker=Cast<AShaker>(GrabbedActorRight);
 	mixingGlass=Cast<AMixingGlass>(GrabbedActorRight);
 	drinkCan = Cast<ADrinkCan>(GrabbedActorRight);
+	slicedLimeVat = Cast<ASlicedLimeVat>(GrabbedActorRight);
+	halfSlicedLimeVat = Cast<AHalfSlicedLimeVat>(GrabbedActorRight);
+	slicedOrangeVat = Cast<ASlicedOrangeVat>(GrabbedActorRight);
+	halfSlicedOrangeVat = Cast<AHalfSlicedOrangeVat>(GrabbedActorRight);
+	oliveVat = Cast<AOliveVat>(GrabbedActorRight);
+	iceCubeVat = Cast<AIceCubeVat>(GrabbedActorRight);
 	
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
@@ -306,6 +312,36 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		{
 			isGrabbingDrinkCanRight = true;
 		}
+		// 잡은 대상이 halfSlicedLimeVat 이라면
+		else if(GrabbedActorRight==halfSlicedLimeVat&&halfSlicedLimeVat!=nullptr)
+		{
+			isGrabbingHalfSlicedLimeVatRight = true;
+		}
+		// 잡은 대상이 slicedLimeVat 이라면
+		else if(GrabbedActorRight==slicedLimeVat&&slicedLimeVat!=nullptr)
+		{
+			isGrabbingSlicedLimeVatRight = true;
+		}
+	// 잡은 대상이 halfSlicedOrangeVat 이라면
+	else if(GrabbedActorRight==halfSlicedOrangeVat&&halfSlicedOrangeVat!=nullptr)
+	{
+		isGrabbingHalfSlicedOrangeVatRight = true;
+	}
+	// 잡은 대상이 slicedOrangeVat 이라면
+	else if(GrabbedActorRight==slicedOrangeVat&&slicedOrangeVat!=nullptr)
+	{
+		isGrabbingSlicedOrangeVatRight = true;
+	}
+	// 잡은 대상이 oliveVat 이라면
+	else if(GrabbedActorRight==oliveVat&&oliveVat!=nullptr)
+	{
+		isGrabbingOliveVatRight = true;
+	}
+	// 잡은 대상이 iceCubeVat 이라면
+	else if(GrabbedActorRight==iceCubeVat&&iceCubeVat!=nullptr)
+	{
+		isGrabbingIceCubeVatRight = true;
+	}
 	
 	
 }
@@ -341,6 +377,12 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	shakerL=Cast<AShaker>(GrabbedActorLeft);
 	mixingGlassL=Cast<AMixingGlass>(GrabbedActorLeft);
 	drinkCanL = Cast<ADrinkCan>(GrabbedActorLeft);
+	slicedLimeVatL = Cast<ASlicedLimeVat>(GrabbedActorLeft);
+	halfSlicedLimeVatL = Cast<AHalfSlicedLimeVat>(GrabbedActorLeft);
+	slicedOrangeVatL = Cast<ASlicedOrangeVat>(GrabbedActorLeft);
+	halfSlicedOrangeVatL = Cast<AHalfSlicedOrangeVat>(GrabbedActorLeft);
+	oliveVatL = Cast<AOliveVat>(GrabbedActorLeft);
+	iceCubeVatL = Cast<AIceCubeVat>(GrabbedActorLeft);
 	
 	// 잡은 대상이 Tongs라면
 	if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
@@ -422,6 +464,36 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==drinkCanL&&drinkCanL!=nullptr)
 	{
 		isGrabbingDrinkCanLeft = true;
+	}
+	// 잡은 대상이 halfSlicedLimeVat 이라면
+	else if(GrabbedActorLeft==halfSlicedLimeVatL&&halfSlicedLimeVatL!=nullptr)
+	{
+		isGrabbingHalfSlicedLimeVatLeft = true;
+	}
+	// 잡은 대상이 slicedLimeVat 이라면
+	else if(GrabbedActorLeft==slicedLimeVatL&&slicedLimeVatL!=nullptr)
+	{
+		isGrabbingSlicedLimeVatLeft = true;
+	}
+	// 잡은 대상이 halfSlicedOrangeVat 이라면
+	else if(GrabbedActorLeft==halfSlicedOrangeVatL&&halfSlicedOrangeVatL!=nullptr)
+	{
+		isGrabbingHalfSlicedOrangeVatLeft = true;
+	}
+	// 잡은 대상이 slicedOrangeVat 이라면
+	else if(GrabbedActorLeft==slicedOrangeVatL&&slicedOrangeVatL!=nullptr)
+	{
+		isGrabbingSlicedOrangeVatLeft = true;
+	}
+	// 잡은 대상이 oliveVat 이라면
+	else if(GrabbedActorLeft==oliveVatL&&oliveVatL!=nullptr)
+	{
+		isGrabbingOliveVatLeft = true;
+	}
+	// 잡은 대상이 iceCubeVat 이라면
+	else if(GrabbedActorLeft==iceCubeVatL&&iceCubeVatL!=nullptr)
+	{
+		isGrabbingIceCubeVatLeft = true;
 	}
 }
 
@@ -547,6 +619,30 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	{
 		drinkCan->isDropSoundEnabled=true;
 	}
+	else if(isGrabbingHalfSlicedLimeVatRight&&halfSlicedLimeVat!=nullptr)
+	{
+		halfSlicedLimeVat->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingSlicedLimeVatRight&&slicedLimeVat!=nullptr)
+	{
+		slicedLimeVat->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingHalfSlicedOrangeVatRight&&halfSlicedOrangeVat!=nullptr)
+	{
+		halfSlicedOrangeVat->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingSlicedOrangeVatRight&&slicedOrangeVat!=nullptr)
+	{
+		slicedOrangeVat->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingOliveVatRight&&oliveVat!=nullptr)
+	{
+		oliveVat->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingIceCubeVatRight&&iceCubeVat!=nullptr)
+	{
+		iceCubeVat->isDropSoundEnabled=true;
+	}
 }
 
 void APlayerCharacter::CheckDroppedObjectLeft()
@@ -637,6 +733,30 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	else if(isGrabbingDrinkCanLeft&&drinkCanL!=nullptr)
 	{
 		drinkCanL->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingHalfSlicedLimeVatLeft&&halfSlicedLimeVatL!=nullptr)
+	{
+		halfSlicedLimeVatL->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingSlicedLimeVatLeft&&slicedLimeVatL!=nullptr)
+	{
+		slicedLimeVatL->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingHalfSlicedOrangeVatLeft&&halfSlicedOrangeVatL!=nullptr)
+	{
+		halfSlicedOrangeVatL->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingSlicedOrangeVatLeft&&slicedOrangeVatL!=nullptr)
+	{
+		slicedOrangeVatL->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingOliveVatLeft&&oliveVatL!=nullptr)
+	{
+		oliveVatL->isDropSoundEnabled=true;
+	}
+	else if(isGrabbingIceCubeVatLeft&&iceCubeVatL!=nullptr)
+	{
+		iceCubeVatL->isDropSoundEnabled=true;
 	}
 }
 
@@ -1401,17 +1521,20 @@ void APlayerCharacter::FireReleasedLeft()
 
 void APlayerCharacter::ShowMenuWidget()
 {
-	if(menuWidgetBool==false&&BarGameInstance->bCheckSpawnMenu==true)
+	if(BarGameInstance->bCheckMenu!=false)
 	{
-		gameMode->SpawnMenu();
-		UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetAppearSound, 1, 1, 0);
-		menuWidgetBool=true;
-	}
-	else
-	{
-		gameMode->DestroyMenu();
-		UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetDisappearSound, 1, 1, 0);
-		menuWidgetBool=false;
+		if(menuWidgetBool==false)
+		{
+			gameMode->SpawnMenu();
+			UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetAppearSound, 1, 1, 0);
+			menuWidgetBool=true;
+		}
+		else
+		{
+			gameMode->DestroyMenu();
+			UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetDisappearSound, 1, 1, 0);
+			menuWidgetBool=false;
+		}
 	}
 
 }

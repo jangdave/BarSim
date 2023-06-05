@@ -8,12 +8,18 @@
 #include "Coaster.h"
 #include "CupBase.h"
 #include "DrinkCan.h"
+#include "HalfSlicedLimeVat.h"
+#include "HalfSlicedOrangeVat.h"
 #include "HuchuTong.h"
 #include "IceCube.h"
+#include "IceCubeVat.h"
 #include "MixingGlass.h"
+#include "OliveVat.h"
 #include "Shaker.h"
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
+#include "SlicedLimeVat.h"
+#include "SlicedOrangeVat.h"
 #include "Strainer.h"
 #include "Tablet.h"
 #include "Components/BoxComponent.h"
@@ -64,6 +70,12 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 	mixingGlass=Cast<AMixingGlass>(OtherActor);
 	iceCube=Cast<AIceCube>(OtherActor);
 	drinkCan=Cast<ADrinkCan>(OtherActor);
+	SlicedLimeVat = Cast<ASlicedLimeVat>(OtherActor);
+	HalfSlicedLimeVat = Cast<AHalfSlicedLimeVat>(OtherActor);
+	SlicedOrangeVat = Cast<ASlicedOrangeVat>(OtherActor);
+	HalfSlicedOrangeVat = Cast<AHalfSlicedOrangeVat>(OtherActor);
+	OliveVat = Cast<AOliveVat>(OtherActor);
+	IceCubeVat = Cast<AIceCubeVat>(OtherActor);
 
 	auto randPitch = FMath::FRandRange(0.9, 1.1);
 
@@ -182,6 +194,60 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 			auto canLoc = drinkCan->GetActorLocation();
 			UGameplayStatics::PlaySoundAtLocation(GetWorld(), canDropSound, canLoc, soundVolume, randPitch, 0);
 			drinkCan->isDropSoundEnabled=false;
+		}
+	}
+	else if(IceCubeVat)
+	{
+		if(IceCubeVat->isDropSoundEnabled==true)
+		{
+			auto canLoc = IceCubeVat->GetActorLocation();
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), vatDropSound, canLoc, soundVolume, randPitch, 0);
+			IceCubeVat->isDropSoundEnabled=false;
+		}
+	}
+	else if(SlicedLimeVat)
+	{
+		if(SlicedLimeVat->isDropSoundEnabled==true)
+		{
+			auto canLoc = SlicedLimeVat->GetActorLocation();
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), vatDropSound, canLoc, soundVolume, randPitch, 0);
+			SlicedLimeVat->isDropSoundEnabled=false;
+		}
+	}
+	else if(HalfSlicedLimeVat)
+	{
+		if(HalfSlicedLimeVat->isDropSoundEnabled==true)
+		{
+			auto canLoc = HalfSlicedLimeVat->GetActorLocation();
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), vatDropSound, canLoc, soundVolume, randPitch, 0);
+			HalfSlicedLimeVat->isDropSoundEnabled=false;
+		}
+	}
+	else if(SlicedOrangeVat)
+	{
+		if(SlicedOrangeVat->isDropSoundEnabled==true)
+		{
+			auto canLoc = SlicedOrangeVat->GetActorLocation();
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), vatDropSound, canLoc, soundVolume, randPitch, 0);
+			SlicedOrangeVat->isDropSoundEnabled=false;
+		}
+	}
+	else if(HalfSlicedOrangeVat)
+	{
+		if(HalfSlicedOrangeVat->isDropSoundEnabled==true)
+		{
+			auto canLoc = HalfSlicedOrangeVat->GetActorLocation();
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), vatDropSound, canLoc, soundVolume, randPitch, 0);
+			HalfSlicedOrangeVat->isDropSoundEnabled=false;
+		}
+	}
+	else if(OliveVat)
+	{
+		if(OliveVat->isDropSoundEnabled==true)
+		{
+			auto canLoc = OliveVat->GetActorLocation();
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), vatDropSound, canLoc, soundVolume, randPitch, 0);
+			OliveVat->isDropSoundEnabled=false;
 		}
 	}
 }

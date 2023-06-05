@@ -59,6 +59,18 @@ public:
 	class AHalfSlicedLime* halfSlicedLime;
 	UPROPERTY()
 	class ADrinkCan* drinkCan;
+	UPROPERTY()
+	class ASlicedLimeVat* SlicedLimeVat;
+	UPROPERTY()
+	class AHalfSlicedLimeVat* HalfSlicedLimeVat;
+	UPROPERTY()
+	class ASlicedOrangeVat* SlicedOrangeVat;
+	UPROPERTY()
+	class AHalfSlicedOrangeVat* HalfSlicedOrangeVat;
+	UPROPERTY()
+	class AOliveVat* OliveVat;
+	UPROPERTY()
+	class AIceCubeVat* IceCubeVat;
 
 	// Sounds
 	UPROPERTY(EditAnywhere, Category="Sounds")
@@ -87,6 +99,8 @@ public:
 	class USoundBase* mixingGlassDropSound;
 	UPROPERTY(EditAnywhere, Category="Sounds")
 	class USoundBase* canDropSound;;
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* vatDropSound;;
 
 	UPROPERTY(EditAnywhere, Category="Sounds")
 	float soundVolume = 0.7;
