@@ -50,9 +50,9 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		}
 		else
 		{
-			UGameplayStatics::OpenLevel(GetWorld(), FName("BarTutorialMap"));
-			
 			gi->bCheckGameMode = true;
+			
+			UGameplayStatics::OpenLevel(GetWorld(), FName("BarTutorialMap"));
 		}
 	}
 }

@@ -27,6 +27,9 @@ ATutorialCheckBox::ATutorialCheckBox()
 	playerStandComp = CreateDefaultSubobject<USceneComponent>(TEXT("playerStandComp"));
 	playerStandComp->SetupAttachment(checkBoxComp);
 
+	tutorialBox = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("tutorialBox"));
+	tutorialBox->SetupAttachment(playerStandComp);
+	
 	tutorialWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("tutorialWidget"));
 	tutorialWidget->SetupAttachment(checkBoxComp);
 }
@@ -53,6 +56,8 @@ void ATutorialCheckBox::Tick(float DeltaTime)
 void ATutorialCheckBox::StartWelcome()
 {
 	tutorial_UI->SetWelcome();
+
+	tutorialBox->SetVisibility(true);
 }
 
 void ATutorialCheckBox::FirstStageStart()
@@ -124,9 +129,6 @@ void ATutorialCheckBox::FirstStage()
 	{
 		tutorial_UI->SetCheckCup();
 	}
-
-	// 디버그 라인
-	DrawDebugBox(GetWorld(), centerLoc, FVector(140), FColor::Red, false, 0.1);
 }
 
 void ATutorialCheckBox::SecondStageStart()
@@ -202,9 +204,6 @@ void ATutorialCheckBox::SecondStage()
 	{
 		tutorial_UI->SetCheckCup();
 	}
-	
-	// 디버그 라인
-	DrawDebugBox(GetWorld(), centerLoc, FVector(140), FColor::Red, false, 0.1);
 }
 
 void ATutorialCheckBox::ThirdStageStart()
@@ -280,9 +279,6 @@ void ATutorialCheckBox::ThirdStage()
 	{
 		tutorial_UI->SetCheckCup();
 	}
-
-	// 디버그 라인
-	DrawDebugBox(GetWorld(), centerLoc, FVector(140), FColor::Red, false, 0.1);
 }
 
 void ATutorialCheckBox::FourthStageStart()
@@ -300,6 +296,7 @@ void ATutorialCheckBox::FourthStage()
 	FCollisionShape checkShape = FCollisionShape::MakeBox(FVector(140));
 	params.AddObjectTypesToQuery(ECC_GameTraceChannel9);
 	params.AddObjectTypesToQuery(ECC_Pawn);
+	params.AddObjectTypesToQuery(ECC_WorldDynamic);
 
 	GetWorld()->OverlapMultiByObjectType(hitsInfo, centerLoc, centerRot, params, checkShape);
 	for(FOverlapResult hitInfo: hitsInfo)
@@ -325,7 +322,7 @@ void ATutorialCheckBox::FourthStage()
 				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
 			}
 
-			if(tablet->tablet_UI->bCheckTutorialOpen != false  && tutorial_UI->checkFourth2->GetCheckedState() != ECheckBoxState::Checked)
+			if(tablet->tablet_UI->bCheckTutorialInternet != false  && tutorial_UI->checkFourth2->GetCheckedState() != ECheckBoxState::Checked)
 			{
 				tutorial_UI->SetFourth2Check();
 
@@ -345,9 +342,6 @@ void ATutorialCheckBox::FourthStage()
 	{
 		tutorial_UI->SetCheckTablet();
 	}
-	
-	// 디버그 라인
-	DrawDebugBox(GetWorld(), centerLoc, FVector(140), FColor::Red, false, 0.1);
 }
 
 void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -367,6 +361,8 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 				tutorialManager->ClearFirstStage();
 
 				bCheckPlayerOnce = false;
+
+				tutorialBox->SetVisibility(false);
 			}), 1.0f, false);
 		}
 		else if(cup->bStirred != false && cup->contents >= 2)
@@ -379,6 +375,8 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 				tutorialManager->ClearSecondStage();
 
 				bCheckPlayerOnce = false;
+
+				tutorialBox->SetVisibility(false);
 			}), 1.0f, false);
 		}
 		else if(cup->bShaked != false && cup->contents >= 2)
@@ -391,19 +389,26 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 				tutorialManager->ClearThirdStage();
 
 				bCheckPlayerOnce = false;
+
+				tutorialBox->SetVisibility(false);
 			}), 1.0f, false);
 		}
 	}
 
 	if(tablet != nullptr)
 	{
-		UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
-		
-		FTimerHandle timer;
-		GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
+		if(tablet->tablet_UI->bCheckTutorialClose != false && tablet->tablet_UI->bCheckTutorialInternet != false && tablet->tablet_UI->bCheckTutorialOpen != false)
 		{
-			tutorialManager->ClearFourthStage();
-		}), 1.0f, false);
+			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+			
+			FTimerHandle timer;
+			GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
+			{
+				tutorialManager->ClearFourthStage();
+
+				tutorialBox->SetVisibility(false);
+			}), 1.0f, false);
+		}
 	}
 }
 

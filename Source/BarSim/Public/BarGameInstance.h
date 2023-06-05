@@ -41,9 +41,6 @@ public:
 	UPROPERTY()
 	bool bCheckMenu;
 
-	UPROPERTY()
-	bool bCheckSpawnMenu;
-	
 	// 첫째날 / 둘째날 / 셋째날 / 모든날
 	UPROPERTY()
 	TArray<float> TotalMoney = {0, 0, 0, 0};

@@ -1401,17 +1401,19 @@ void APlayerCharacter::FireReleasedLeft()
 
 void APlayerCharacter::ShowMenuWidget()
 {
-	if(menuWidgetBool==false&&BarGameInstance->bCheckSpawnMenu==true)
+	if(BarGameInstance->bCheckMenu != false)
 	{
-		gameMode->SpawnMenu();
-		UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetAppearSound, 1, 1, 0);
-		menuWidgetBool=true;
+		if(menuWidgetBool==false)
+		{
+			gameMode->SpawnMenu();
+			UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetAppearSound, 1, 1, 0);
+			menuWidgetBool=true;
+		}
+		else
+		{
+			gameMode->DestroyMenu();
+			UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetDisappearSound, 1, 1, 0);
+			menuWidgetBool=false;
+		}
 	}
-	else
-	{
-		gameMode->DestroyMenu();
-		UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetDisappearSound, 1, 1, 0);
-		menuWidgetBool=false;
-	}
-
 }
