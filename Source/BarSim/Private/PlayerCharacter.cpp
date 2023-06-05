@@ -93,7 +93,7 @@ void APlayerCharacter::BeginPlay()
 
 	widgetInteractionCompLeft->bEnableHitTesting=true;
 	widgetInteractionCompLeft->bShowDebug=false;	
-	widgetInteractionCompLeft->InteractionDistance=100.0f;
+	widgetInteractionCompLeft->InteractionDistance=300.0f;
 
 	WidgetTraceLeft->SetVisibility(false);
 	WidgetTraceRight->SetVisibility(false);
@@ -143,7 +143,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 
 	// Tablet Widget Line Trace
 	FVector startPos = widgetInteractionComp->GetComponentLocation();
-	FVector endPos = startPos + widgetInteractionComp->GetForwardVector() * 100.0f;
+	FVector endPos = startPos + widgetInteractionComp->GetForwardVector() * 300.0f;
 	FHitResult traceHit;
 	bool bOverWidget = widgetInteractionComp->IsOverHitTestVisibleWidget();
 	bool bHit = GetWorld()->LineTraceSingleByChannel(traceHit, startPos, endPos, ECC_Visibility);
@@ -159,7 +159,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 	}
 	// Tablet Widget Line Trace Left
 	FVector startPosL = widgetInteractionCompLeft->GetComponentLocation();
-	FVector endPosL = startPosL + widgetInteractionCompLeft->GetForwardVector() * 100.0f;
+	FVector endPosL = startPosL + widgetInteractionCompLeft->GetForwardVector() * 300.0f;
 	FHitResult traceHitL;
 	bool bOverWidgetLeft = widgetInteractionCompLeft->IsOverHitTestVisibleWidget();
 	bool bHitL = GetWorld()->LineTraceSingleByChannel(traceHitL, startPosL, endPosL, ECC_Visibility);
