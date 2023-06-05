@@ -6,10 +6,15 @@
 #include "MixedDrop.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "PlayerCharacter.h"
 #include "ShakerLid.h"
 #include "ShakerStrainer.h"
+#include "ShakeWidget.h"
 #include "Components/AudioComponent.h"
+#include "Components/Overlay.h"
 #include "Components/SphereComponent.h"
+#include "Components/TextBlock.h"
+#include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 AShaker::AShaker(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -18,19 +23,130 @@ AShaker::AShaker(const FObjectInitializer& ObjectInitializer) : Super(ObjectInit
 	sphereComp->SetupAttachment(cupComp);
 	sphereComp->SetSphereRadius(4.8f);
 	sphereComp->SetRelativeLocation(FVector(0,0, 16.3f));
+
+	widgetComp2 = CreateDefaultSubobject<UWidgetComponent>(TEXT("ShakeWidget"));
+	widgetComp2->SetupAttachment(cupComp);
+	widgetComp2->SetCollisionProfileName(TEXT("NoCollision"));
 }
 
 void AShaker::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	shakeWidget = Cast<UShakeWidget>(widgetComp2->GetUserWidgetObject());
 }
 
 void AShaker::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	//Shake();
+
+	//흔들림 감지
+	if(bLidOn)
+	{
+		newPos = GetActorLocation();
+		newVelocity = (newPos - startPos) / DeltaSeconds;
+		newAcc = (newVelocity - startVelocity) / DeltaSeconds;
+
+		acc = newAcc.Length();
+
+		UE_LOG(LogTemp, Warning, TEXT("%f"), acc);
+		if(acc > shakeAcc)
+		{
+			bShaking = true;
+		}
+		else
+		{
+			bShaking = false;
+		}
+
+		if(bShaking)
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Red, TEXT("Shaking"));
+			//UE_LOG(LogTemp, Warning, TEXT("%f"), shakingTime);
+			timePassed = 0;
+			widgetTime2 = 0;
+			bShakeWidgetOn = true;
+			bShakeWidgetAnimOn = false;
+			shakingTime = shakingTime + GetWorld()->GetDeltaSeconds();
+		}
+
+		if(shakingTime >= 10.0f)
+		{
+			for(int i = 0; i < ShakeArray.Num(); i++)
+			{
+				ShakeArray[i] = true;
+			}
+		}
+
+		startPos = newPos;
+		startVelocity = newVelocity;
+	}
+
 	
-	//UE_LOG(LogTemp, Warning, TEXT("Bool value is: %d"), bLidOn? 1 : 0);
+	if(timePassed >= 5.0f)
+	{
+		shakingTime = 0;
+		bShakeWidgetOn = false;
+	}
+	
+	//쉐이크 위젯 관련
+	if(bShakeWidgetOn)
+	{
+		widgetComp2->SetVisibility(true);
+		
+		//플레이어 바라보게 고정
+		if(player)
+		{
+			FVector playerDir = player->VRReplicatedCamera->GetComponentLocation() - GetActorLocation();
+			FRotator playerDirRot = playerDir.Rotation();
+			widgetComp2->SetWorldRotation(playerDirRot);
+		}
+
+		if(shakeWidget)
+		{
+			widgetTime2 = widgetTime2 + DeltaSeconds;
+			shakeWidget->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+
+			shakeWidget->Overlay->SetVisibility(ESlateVisibility::Visible);
+			shakeWidget->Contents->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero((100 * shakingTime) / 100)) + " Sec"));
+
+			if(!bShakeWidgetAnimOn)
+			{
+				shakeWidget->StopAnimation(shakeWidget->Disappearing);
+				shakeWidget->PlayAnimation(shakeWidget->Appearing);
+			}
+
+			//2초 이상 지났으면 사라지는 애니메이션 재생
+			if(widgetTime2 >= 2.0f)
+			{
+				if(!bShakeWidgetAnimOn)
+				{
+					shakeWidget->PlayAnimation(shakeWidget->Disappearing);
+					bShakeWidgetAnimOn = true;
+				}
+				else
+				{
+					if(widgetTime2 >= 3.2f)
+					{
+						shakeWidget->SetVisibility(ESlateVisibility::Hidden);
+						bShakeWidgetOn = false;
+						bShakeWidgetAnimOn = false;
+						widgetTime2 = 0;
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		widgetComp2->SetVisibility(false);
+	}
+
+
+
+
+
 	
 	float dot = FVector::DotProduct(GetActorUpVector(), upVector);
 	float angle = FMath::RadiansToDegrees(FMath::Acos(dot));
@@ -154,37 +270,7 @@ void AShaker::Tick(float DeltaSeconds)
 			bStreamOn = false;
 		}
 	}
-
-	//흔들림 감지
-	newPos = GetActorLocation();
-	newVelocity = (newPos - startPos) / DeltaSeconds;
-	newAcc = (newVelocity - startVelocity) / DeltaSeconds;
-
-	acc = newAcc.Length();
-	if(acc > shakeAcc)
-	{
-		bShaking = true;
-	}
-	else
-	{
-		bShaking = false;
-	}
-
-	if(bShaking)
-	{
-		shakingTime = shakingTime + DeltaSeconds;
-	}
-
-	if(shakingTime >= 10.0f)
-	{
-		for(int i = 0; i < ShakeArray.Num(); i++)
-		{
-			ShakeArray[i] = true;
-		}
-	}
-
-	startPos = newPos;
-	startVelocity = newVelocity;
+	
 }
 
 void AShaker::LiquorScale()
@@ -201,4 +287,10 @@ void AShaker::CupStop()
 		this->SetActorRelativeRotation(FRotator(0, cupRotYaw, 0));
 	}
 }
+
+void AShaker::Shake()
+{
+	
+}
+
 

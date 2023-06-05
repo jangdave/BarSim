@@ -10,6 +10,15 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerCup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/BP_ShakerCup.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_ShakeRate.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_ShakeRate.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/UI/WBP_MenuWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/WBP_MenuWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MixingGlass.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/Shaker.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/Shaker.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/CupBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/Shaker.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/Shaker.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,6 +308,7 @@
       <workItem from="1685880310859" duration="9969000" />
       <workItem from="1685893227752" duration="22000" />
       <workItem from="1685893489302" duration="2092000" />
+      <workItem from="1685901332784" duration="10002000" />
     </task>
     <servers />
   </component>

@@ -25,6 +25,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Shaker")
 	class USphereComponent* sphereComp;
 
+	UPROPERTY(EditAnywhere, Category = "Shaker")
+	class UWidgetComponent* widgetComp2;
+
 	UPROPERTY(VisibleAnywhere, Category = "Shaker")
 	FVector upVector = FVector(0,0,1);
 
@@ -77,6 +80,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Shaker")
 	bool bLidOn;
+
+	UFUNCTION()
+	void Shake();
 	
 	virtual void CupStop() override;
 
@@ -96,5 +102,19 @@ public:
 
 	UPROPERTY()
 	bool isGrabbingShaker=false;
+
+	//쉐이크 위젯 관련
+
+	UPROPERTY(VisibleAnywhere, Category = "Shaker")
+	bool bShakeWidgetOn;
+
+	UPROPERTY()
+	class UShakeWidget* shakeWidget;
+
+	UPROPERTY()
+	float widgetTime2;
+
+	UPROPERTY(VisibleAnywhere, Category = "Shaker")
+	bool bShakeWidgetAnimOn;
 };
 
