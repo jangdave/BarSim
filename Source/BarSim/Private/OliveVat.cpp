@@ -4,10 +4,10 @@
 #include "OliveVat.h"
 
 // Sets default values
-AOliveVat::AOliveVat()
+AOliveVat::AOliveVat(const FObjectInitializer& ObjectInitializer):Super(ObjectInitializer)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	oliveVatComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("oliveVatComp"));
 	SetRootComponent(oliveVatComp);

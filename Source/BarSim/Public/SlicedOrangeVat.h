@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "SlicedOrangeVat.generated.h"
 
 UCLASS()
-class BARSIM_API ASlicedOrangeVat : public AActor
+class BARSIM_API ASlicedOrangeVat : public AGrippableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ASlicedOrangeVat();
+	ASlicedOrangeVat(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, Category = "LimeVat")
 	class UStaticMeshComponent* meshComp;
