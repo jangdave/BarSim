@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "OliveVat.generated.h"
 
 UCLASS()
-class BARSIM_API AOliveVat : public AActor
+class BARSIM_API AOliveVat : public AGrippableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AOliveVat();
+	AOliveVat(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, Category = "Olive")
 	class UStaticMeshComponent* oliveVatComp;

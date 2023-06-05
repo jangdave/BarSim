@@ -1401,7 +1401,7 @@ void APlayerCharacter::FireReleasedLeft()
 
 void APlayerCharacter::ShowMenuWidget()
 {
-	if(menuWidgetBool==false)
+	if(menuWidgetBool==false&&BarGameInstance->bCheckSpawnMenu==true)
 	{
 		gameMode->SpawnMenu();
 		UGameplayStatics::PlaySound2D(GetWorld(), MenuWidgetAppearSound, 1, 1, 0);

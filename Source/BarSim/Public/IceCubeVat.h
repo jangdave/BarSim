@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Grippables/GrippableActor.h"
 #include "IceCubeVat.generated.h"
 
 UCLASS()
-class BARSIM_API AIceCubeVat : public AActor
+class BARSIM_API AIceCubeVat : public AGrippableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AIceCubeVat();
+	AIceCubeVat(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, Category = "IceVat")
 	class UStaticMeshComponent* meshComp;
