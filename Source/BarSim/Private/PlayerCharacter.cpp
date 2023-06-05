@@ -89,7 +89,7 @@ void APlayerCharacter::BeginPlay()
 	
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;	
-	widgetInteractionComp->InteractionDistance=100.0f;
+	widgetInteractionComp->InteractionDistance=300.0f;
 
 	widgetInteractionCompLeft->bEnableHitTesting=true;
 	widgetInteractionCompLeft->bShowDebug=false;	

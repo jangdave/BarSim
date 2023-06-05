@@ -202,6 +202,15 @@ void ADropSoundCollision::OnOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		{
 			auto canLoc = IceCubeVat->GetActorLocation();
 			UGameplayStatics::PlaySoundAtLocation(GetWorld(), vatDropSound, canLoc, soundVolume, randPitch, 0);
+			FTimerHandle physicsHandle;
+			GetWorldTimerManager().SetTimer(physicsHandle, FTimerDelegate::CreateLambda([this]()->void
+			{
+				if(IceCubeVat)
+				{
+					IceCubeVat->DisableComponentsSimulatePhysics();
+					IceCubeVat->meshComp->SetSimulatePhysics(false);
+				}
+			}), 2.0f, false);
 			IceCubeVat->isDropSoundEnabled=false;
 		}
 	}
