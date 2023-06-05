@@ -114,7 +114,7 @@ public:
 
 	//스터해야하는 횟수, 에디터 수정 가능
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cup")
-	float stirNeeded = 3;
+	float stirNeeded = 10;
 	
 	UPROPERTY(VisibleAnywhere, Category ="Cup")
 	float allInside;

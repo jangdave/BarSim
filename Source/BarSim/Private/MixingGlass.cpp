@@ -49,6 +49,7 @@ void AMixingGlass::BeginPlay()
 
 	stirChecker1->OnComponentBeginOverlap.AddDynamic(this, &AMixingGlass::Stir);
 	stirChecker2->OnComponentBeginOverlap.AddDynamic(this, &AMixingGlass::Stir);
+	stirWidget = Cast<UStirWidget>(widgetComp2->GetUserWidgetObject());
 }
 
 void AMixingGlass::CupStop()
@@ -108,8 +109,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 	{
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("stir started"));
 		widgetComp2->SetVisibility(true);
-		stirWidget = Cast<UStirWidget>(widgetComp2->GetUserWidgetObject());
-
+		
 		if(player)
 		{
 			//UE_LOG(LogTemp, Warning, TEXT("widget rotate"));

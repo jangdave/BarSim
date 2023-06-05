@@ -157,6 +157,9 @@ public:
 	// Player Controller
 	UPROPERTY()
 	class APlayerController* PC;
+	// Game Instance
+	UPROPERTY()
+	class UBarGameInstance* BarGameInstance;
 
 	// References
 	UPROPERTY()
