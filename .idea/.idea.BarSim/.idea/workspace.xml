@@ -7,36 +7,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73d1fb6e-a760-432f-9daa-5962da57e311" name="Changes" comment="">
+    <list default="true" id="ac54cec0-15f2-42cf-bc86-9aa4107fb7fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_FinalWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_FinalWidget.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_CustomerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_CustomerCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/BP_MainLogo_Dissolve.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/BP_MainLogo_Dissolve.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_MainLogo.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WBP_MainLogo.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WB_TabletWidget1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/WB_TabletWidget1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/cutomer/Walk_UE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/cutomer/Walk_UE.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/Animation/oldpal/Walking_UE1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/Animation/oldpal/Walking_UE1.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BP_OldPalCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_OldPalCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_TutorialCheckBox.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_TutorialCheckBox.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BarMainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarMainMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BarStartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarStartMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap_FInal6.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap_FInal6.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarGameInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerFSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalAnimInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ScoreWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ScoreWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TabletWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BarGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BarGameInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/TabletWidget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/GameStartManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/GameStartManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TutorialManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TutorialManager.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="2QobC04gmhG3Y6y2mRM7yuErrLm" />
+  <component name="ProjectId" id="2QpWJ9DlEYm7wrMxzuCwi4SKAvu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -121,12 +112,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="73d1fb6e-a760-432f-9daa-5962da57e311" name="Changes" comment="" />
-      <created>1686022751257</created>
+      <changelist id="ac54cec0-15f2-42cf-bc86-9aa4107fb7fd" name="Changes" comment="" />
+      <created>1686050929651</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686022751257</updated>
-      <workItem from="1686022752402" duration="7524000" />
+      <updated>1686050929651</updated>
+      <workItem from="1686050930742" duration="2261000" />
     </task>
     <servers />
   </component>
