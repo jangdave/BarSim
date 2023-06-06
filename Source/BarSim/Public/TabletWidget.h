@@ -30,13 +30,19 @@ public:
 	class APlayerCharacter* player;
 
 	UPROPERTY()
+	bool bCheckTutorialRecipe;
+
+	UPROPERTY()
+	bool bCheckTutorialMail;
+
+	UPROPERTY()
+	bool bCheckTutorialInternet;
+	
+	UPROPERTY()
 	bool bCheckTutorialOpen;
 
 	UPROPERTY()
 	bool bCheckTutorialClose;
-
-	UPROPERTY()
-	bool bCheckTutorialInternet;
 	
 	// 테블렛 상단바
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))

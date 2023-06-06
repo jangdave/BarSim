@@ -496,6 +496,8 @@ void ASpawnManager::CheckGinLime(int32 customerIdx)
 	if(gi->checkDayCount == 1)
 	{
 		orderCoctailIdx[customerIdx] = 1;
+
+		aChairs[customerIdx]->totalScore = orderScore;
 	}
 	else
 	{
@@ -580,6 +582,8 @@ void ASpawnManager::CheckMartini(int32 customerIdx)
 	if(gi->checkDayCount == 1)
 	{
 		orderCoctailIdx[customerIdx] = 3;
+
+		aChairs[customerIdx]->totalScore = orderScore;
 	}
 	else
 	{
@@ -685,6 +689,8 @@ void ASpawnManager::CheckDaiquiri(int32 customerIdx)
 	if(gi->checkDayCount == 1)
 	{
 		orderCoctailIdx[customerIdx] = 2;
+		
+		aChairs[customerIdx]->totalScore = orderScore;
 	}
 	else
 	{
@@ -790,6 +796,8 @@ void ASpawnManager::CheckNegroni(int32 customerIdx)
 	if(gi->checkDayCount == 1)
 	{
 		orderCoctailIdx[customerIdx] = 4;
+
+		aChairs[customerIdx]->totalScore = orderScore;
 	}
 	else
 	{
@@ -895,6 +903,8 @@ void ASpawnManager::CheckOldPal(int32 customerIdx)
 			if(bSpawnOld == true)
 			{
 				aChairs[customerIdx]->SameOrder();
+
+				aChairs[customerIdx]->totalScore = orderScore;
 			}
 		}
 		else

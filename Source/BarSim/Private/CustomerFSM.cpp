@@ -591,6 +591,8 @@ void UCustomerFSM::TickReadyLeave()
 		owner->order_UI->SetSwitcher(2);
 		owner->order_UI->SetMoneyText(money);
 		owner->order_UI->StartCustomer();
+
+		UGameplayStatics::PlaySound2D(GetWorld(), owner->cashSound);
 	}
 
 	if(bCheckPlayAnim != true && curTime > 3)

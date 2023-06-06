@@ -62,50 +62,25 @@ void UTutorialWidget::SetFirst2Check()
 	checkFirst2->SetCheckedState(ECheckBoxState::Checked);
 }
 
-//void UTutorialWidget::SetFirst2UnCheck()
-//{
-//	checkFirst2->SetCheckedState(ECheckBoxState::Unchecked);
-//}
-
 void UTutorialWidget::SetFirst3Check()
 {
 	checkFirst3->SetCheckedState(ECheckBoxState::Checked);
 }
-
-//void UTutorialWidget::SetFirst3UnCheck()
-//{
-//	checkFirst3->SetCheckedState(ECheckBoxState::Unchecked);
-//}
 
 void UTutorialWidget::SetSecond1Check()
 {
 	checkSecond1->SetCheckedState(ECheckBoxState::Checked);
 }
 
-/*void UTutorialWidget::SetSecond1UnCheck()
-{
-	checkSecond1->SetCheckedState(ECheckBoxState::Unchecked);
-}*/
-
 void UTutorialWidget::SetSecond2Check()
 {
 	checkSecond2->SetCheckedState(ECheckBoxState::Checked);
 }
 
-/*void UTutorialWidget::SetSecond2UnCheck()
-{
-	checkSecond2->SetCheckedState(ECheckBoxState::Unchecked);
-}*/
-
 void UTutorialWidget::SetSecond3Check()
 {
 	checkSecond3->SetCheckedState(ECheckBoxState::Checked);
 }
-
-/*void UTutorialWidget::SetSecond3UnCheck()
-{
-	checkSecond3->SetCheckedState(ECheckBoxState::Unchecked);
-}*/
 
 void UTutorialWidget::SetThird1Check()
 {
@@ -135,4 +110,14 @@ void UTutorialWidget::SetFourth2Check()
 void UTutorialWidget::SetFourth3Check()
 {
 	checkFourth3->SetCheckedState(ECheckBoxState::Checked);
+}
+
+void UTutorialWidget::SetFourth4Check()
+{
+	checkFourth4->SetCheckedState(ECheckBoxState::Checked);
+}
+
+void UTutorialWidget::SetFourth5Check()
+{
+	checkFourth5->SetCheckedState(ECheckBoxState::Checked);
 }

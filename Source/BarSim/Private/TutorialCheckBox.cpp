@@ -315,30 +315,44 @@ void ATutorialCheckBox::FourthStage()
 
 		if(tablet != nullptr)
 		{
-			if(tablet->tablet_UI->bCheckTutorialOpen != false  && tutorial_UI->checkFourth1->GetCheckedState() != ECheckBoxState::Checked)
+			if(tablet->tablet_UI->bCheckTutorialRecipe != false  && tutorial_UI->checkFourth1->GetCheckedState() != ECheckBoxState::Checked)
 			{
 				tutorial_UI->SetFourth1Check();
 
 				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
 			}
 
-			if(tablet->tablet_UI->bCheckTutorialInternet != false  && tutorial_UI->checkFourth2->GetCheckedState() != ECheckBoxState::Checked)
+			if(tablet->tablet_UI->bCheckTutorialMail != false  && tutorial_UI->checkFourth2->GetCheckedState() != ECheckBoxState::Checked)
 			{
 				tutorial_UI->SetFourth2Check();
 
 				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
 			}
 			
-			if(tablet->tablet_UI->bCheckTutorialClose != false  && tutorial_UI->checkFourth3->GetCheckedState() != ECheckBoxState::Checked)
+			if(tablet->tablet_UI->bCheckTutorialInternet != false  && tutorial_UI->checkFourth3->GetCheckedState() != ECheckBoxState::Checked)
 			{
 				tutorial_UI->SetFourth3Check();
+
+				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
+			}
+
+			if(tablet->tablet_UI->bCheckTutorialOpen != false  && tutorial_UI->checkFourth4->GetCheckedState() != ECheckBoxState::Checked)
+			{
+				tutorial_UI->SetFourth4Check();
+
+				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
+			}
+
+			if(tablet->tablet_UI->bCheckTutorialClose != false  && tutorial_UI->checkFourth5->GetCheckedState() != ECheckBoxState::Checked)
+			{
+				tutorial_UI->SetFourth5Check();
 
 				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
 			}
 		}
 	}
 
-	if(tutorial_UI->checkFourth1->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth2->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth3->GetCheckedState() == ECheckBoxState::Checked)
+	if(tutorial_UI->checkFourth1->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth2->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth3->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth4->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth5->GetCheckedState() == ECheckBoxState::Checked)
 	{
 		tutorial_UI->SetCheckTablet();
 	}
@@ -397,7 +411,7 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 
 	if(tablet != nullptr)
 	{
-		if(tablet->tablet_UI->bCheckTutorialClose != false && tablet->tablet_UI->bCheckTutorialInternet != false && tablet->tablet_UI->bCheckTutorialOpen != false)
+		if(tablet->tablet_UI->bCheckTutorialRecipe != false && tablet->tablet_UI->bCheckTutorialMail != false && tablet->tablet_UI->bCheckTutorialClose != false && tablet->tablet_UI->bCheckTutorialInternet != false && tablet->tablet_UI->bCheckTutorialOpen != false)
 		{
 			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
 			
