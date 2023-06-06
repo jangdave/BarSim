@@ -44,10 +44,10 @@ public:
 	UPROPERTY(EditAnywhere, Category=PlayerZone)
 	class UBoxComponent* playerBoxComp;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	class USoundBase* hereSound;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	class USoundBase* drinkSound;
 	
 	UPROPERTY()

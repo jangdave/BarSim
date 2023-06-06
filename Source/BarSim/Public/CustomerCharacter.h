@@ -43,7 +43,7 @@ public:
 	UPROPERTY()
 	class ACupBase* cup;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	class USoundBase* cashSound;
 	
 	// 스폰시 메쉬 설정 함수
