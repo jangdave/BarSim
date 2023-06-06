@@ -24,5 +24,8 @@ public:
 
 	UPROPERTY()
 	bool isHalfSlicedLimeAttachable = false;
+
+	UPROPERTY()
+	bool isDropSoundEnabled = false;
 	
 };

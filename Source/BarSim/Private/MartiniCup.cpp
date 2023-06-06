@@ -38,6 +38,7 @@ void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			auto limeSocketTrans = cupComp->GetSocketTransform(FName("SlicedLimeSocket"));
 			slicedLime->SetActorLocationAndRotation(limeSocketTrans.GetLocation(), limeSocketTrans.GetRotation());
 			slicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("SlicedLimeSocket"));
+			slicedLimeRef=slicedLime;
 			isLimeAttached = true;
 			garnishArray[0]=true;
 		}
@@ -52,6 +53,7 @@ void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			auto halfLimeSocketTrans = cupComp->GetSocketTransform(FName("HalfSlicedLimeSocket"));
 			halfSlicedLime->SetActorLocationAndRotation(halfLimeSocketTrans.GetLocation(), halfLimeSocketTrans.GetRotation());
 			halfSlicedLime->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("HalfSlicedLimeSocket"));
+			halfSlicedLimeRef=halfSlicedLime;
 			isLimeAttached = true;
 			garnishArray[0]=true;
 		}
@@ -68,6 +70,7 @@ void AMartiniCup::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			auto oliveSocketTrans = cupComp->GetSocketTransform(FName("OliveSocket"));
 			olive->SetActorLocationAndRotation(oliveSocketTrans.GetLocation(), oliveSocketTrans.GetRotation());
 			olive->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("OliveSocket"));
+			oliveRef=olive;
 			isOliveAttached = true;
 			garnishArray[1]=true;
 		}

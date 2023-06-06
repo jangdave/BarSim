@@ -118,8 +118,23 @@ public:
 	bool isGrabbingDrinkCanLeft = false;
 	bool isGrabbingOrangeWithTongsRight = false;
 	bool isGrabbingOrangeWithTongsLeft = false;
+	bool isGrabbingSlicedLimeVatRight = false;
+	bool isGrabbingSlicedLimeVatLeft = false;
+	bool isGrabbingHalfSlicedLimeVatRight = false;
+	bool isGrabbingHalfSlicedLimeVatLeft = false;
+	bool isGrabbingSlicedOrangeVatRight = false;
+	bool isGrabbingSlicedOrangeVatLeft = false;
+	bool isGrabbingHalfSlicedOrangeVatRight =false;
+	bool isGrabbingHalfSlicedOrangeVatLeft =false;
+	bool isGrabbingOliveVatRight = false;
+	bool isGrabbingOliveVatLeft = false;
+	bool isGrabbingIceCubeVatRight =false;
+	bool isGrabbingIceCubeVatLeft =false;
+	
+	
 	bool isVatCastedRight = false;
 	bool isVatCastedLeft = false;
+	
 
 	bool menuWidgetBool = false;
 		
@@ -248,13 +263,20 @@ public:
 	class AHalfSlicedOrangeVat* halfSlicedOrangeVat;
 	UPROPERTY()
 	class ASlicedOrangeVat* slicedOrangeVat;
-	
-	
+	UPROPERTY()
+	class AHalfSlicedLimeVat* halfSlicedLimeVatL;
+	UPROPERTY()
+	class ASlicedLimeVat* slicedLimeVatL;
+	UPROPERTY()
+	class AIceCubeVat* iceCubeVatL;
+	UPROPERTY()
+	class AHalfSlicedOrangeVat* halfSlicedOrangeVatL;
+	UPROPERTY()
+	class ASlicedOrangeVat* slicedOrangeVatL;
+	UPROPERTY()
+	class AOliveVat* oliveVatL;
 	
 	// Sounds
-	UPROPERTY(EditAnywhere, Category="PlayerSounds")
-	class USoundBase* sinkSound;
-
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* grabSound;
 
