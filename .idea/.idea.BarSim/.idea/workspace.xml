@@ -8,7 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="" />
+    <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DoorSoundCollision/BP_BarDoorSoundCollision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DoorSoundCollision/BP_BarDoorSoundCollision.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/DropSoundCollision.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/DropSoundCollision.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -301,6 +307,7 @@
       <workItem from="1685932776158" duration="1755000" />
       <workItem from="1685954627800" duration="3453000" />
       <workItem from="1685968754114" duration="2653000" />
+      <workItem from="1686018102354" duration="1176000" />
     </task>
     <servers />
   </component>
