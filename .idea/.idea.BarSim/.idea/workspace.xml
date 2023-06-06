@@ -10,10 +10,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/BP_MainLogo_Dissolve.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/BP_MainLogo_Dissolve.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DoorSoundCollision/BP_BarDoorSoundCollision.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DoorSoundCollision/BP_BarDoorSoundCollision.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BarMap_FInal4.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/DropSoundCollision.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/DropSoundCollision.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/UI/TutoBox_M.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/TutoBox_M.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/UI/WBP_TutorialWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/WBP_TutorialWidget.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,25 +28,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\USER\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C++ Project.BarSim">
     <configuration name="BarSim" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -308,6 +308,7 @@
       <workItem from="1685954627800" duration="3453000" />
       <workItem from="1685968754114" duration="2653000" />
       <workItem from="1686018102354" duration="1176000" />
+      <workItem from="1686051931919" duration="604000" />
     </task>
     <servers />
   </component>
