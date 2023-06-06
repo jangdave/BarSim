@@ -43,6 +43,14 @@ void UScoreWidget::QuitCall()
 
 void UScoreWidget::GoMainMenu()
 {
+	gi->checkDayCount = 0;
+
+	gi->bCheckGameMode = false;
+
+	gi->bCheckMenu = false;
+
+	gi->TotalMoney = {0, 0, 0, 0};
+	
 	//메인메뉴로 이동
 	UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 }

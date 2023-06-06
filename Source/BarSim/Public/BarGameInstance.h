@@ -23,6 +23,9 @@ public:
 
 	UPROPERTY()
 	class AGameStartManager* startManager;
+
+	UPROPERTY()
+	class ATablet* tablet;
 	
 	UFUNCTION()
 	void CheckDay();

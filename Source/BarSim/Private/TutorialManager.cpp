@@ -2,6 +2,8 @@
 
 
 #include "TutorialManager.h"
+
+#include "BarGameInstance.h"
 #include "EngineUtils.h"
 #include "TutorialLight.h"
 #include "Kismet/GameplayStatics.h"
@@ -105,6 +107,10 @@ void ATutorialManager::StartTutorial()
 
 		UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[0]->levelSound);
 	}), 1.0f, false);
+
+	auto gi = Cast<UBarGameInstance>(GetGameInstance());
+
+	gi->bCheckGameMode = true;
 }
 
 void ATutorialManager::ClearFirstStage()
