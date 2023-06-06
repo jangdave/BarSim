@@ -10,11 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Level/KHJTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealistic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealistic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealisticLeft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/GraspingHandRealisticLeft.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/GraspingHandRealistic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/GraspingHandRealistic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/GraspingHandRealisticLeft.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/GraspingHandRealisticLeft.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,6 +307,7 @@
       <workItem from="1686018102354" duration="1176000" />
       <workItem from="1686024367880" duration="1799000" />
       <workItem from="1686039495536" duration="4286000" />
+      <workItem from="1686055300070" duration="1291000" />
     </task>
     <servers />
   </component>
