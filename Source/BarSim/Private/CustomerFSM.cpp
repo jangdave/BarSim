@@ -4,9 +4,14 @@
 #include "CustomerFSM.h"
 #include "AIController.h"
 #include "BarGameInstance.h"
+#include "CupBase.h"
 #include "CustomerAnimInstance.h"
 #include "CustomerCharacter.h"
 #include "CustomerOrderWidget.h"
+#include "HalfSlicedLime.h"
+#include "HalfSlicedOrange.h"
+#include "OlivePick.h"
+#include "SlicedOrange.h"
 #include "SpawnManager.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -665,6 +670,34 @@ void UCustomerFSM::TickDrinkCup()
 	}
 	else
 	{
+		if(owner->cup != nullptr)
+		{
+			owner->cup->contents = 0;
+
+			owner->cup->liquorComp->SetVisibility(false);
+
+			if(owner->cup->halfSlicedLimeRef)
+			{
+				owner->cup->halfSlicedLimeRef->Destroy();
+			}
+			if(owner->cup->slicedLimeRef)
+			{
+				owner->cup->slicedLimeRef->Destroy();
+			}
+			if(owner->cup->halfSlicedOrangeRef)
+			{
+				owner->cup->halfSlicedOrangeRef->Destroy();
+			}
+			if(owner->cup->slicedOrangeRef)
+			{
+				owner->cup->slicedOrangeRef->Destroy();
+			}
+			if(owner->cup->oliveRef)
+			{
+				owner->cup->oliveRef->Destroy();
+			}
+		}
+		
 		SetDrinkState(ECustomerDrinkState::UNHOLDCUP);
 	}
 }
