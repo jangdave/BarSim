@@ -2,7 +2,12 @@
 
 
 #include "OldPalAnimInstance.h"
+#include "CupBase.h"
+#include "HalfSlicedLime.h"
+#include "HalfSlicedOrange.h"
 #include "OldPalCharacter.h"
+#include "OlivePick.h"
+#include "SlicedOrange.h"
 
 void UOldPalAnimInstance::NativeBeginPlay()
 {
@@ -96,6 +101,34 @@ void UOldPalAnimInstance::EndDrinkLittle()
 
 void UOldPalAnimInstance::EndDrinkAll()
 {
+	if(owner->cup != nullptr)
+	{
+		owner->cup->contents = 0;
+
+		owner->cup->liquorComp->SetVisibility(false);
+
+		if(owner->cup->halfSlicedLimeRef)
+		{
+			owner->cup->halfSlicedLimeRef->Destroy();
+		}
+		if(owner->cup->slicedLimeRef)
+		{
+			owner->cup->slicedLimeRef->Destroy();
+		}
+		if(owner->cup->halfSlicedOrangeRef)
+		{
+			owner->cup->halfSlicedOrangeRef->Destroy();
+		}
+		if(owner->cup->slicedOrangeRef)
+		{
+			owner->cup->slicedOrangeRef->Destroy();
+		}
+		if(owner->cup->oliveRef)
+		{
+			owner->cup->oliveRef->Destroy();
+		}
+	}
+	
 	owner->oldPalFSM->SetDrinkState(EOldPalDrinkState::UNHOLDCUP);
 }
 

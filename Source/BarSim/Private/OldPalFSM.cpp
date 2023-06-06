@@ -13,6 +13,7 @@
 #include "StandPoint.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/TextBlock.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -509,6 +510,7 @@ void UOldPalFSM::TickReadyMove()
 				player->playerText_UI->SetSwitcher(1);
 				player->playerText_UI->SetChoice1();
 				player->playerText_UI->StartPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("UI"));
 
 				bPlayerTalk = true;
 
@@ -535,6 +537,7 @@ void UOldPalFSM::TickReadyMove()
 			{
 				// 플레이어 초이스 지우기
 				player->playerText_UI->EndPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("NoCollision"));
 				
 				bPlayerTalk = false;
 			}
@@ -566,6 +569,7 @@ void UOldPalFSM::TickReadyMove()
 			{
 				// 플레이어 초이스 지우기
 				player->playerText_UI->EndPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("NoCollision"));
 
 				bPlayerTalk = false;
 			}
@@ -598,10 +602,11 @@ void UOldPalFSM::TickReadyMove()
 		{
 			if(bPlayerTalk != true && curTime > 2)
 			{
-				// 플레이어 초이스 1번째
+				// 플레이어 초이스 2번째
 				player->playerText_UI->SetSwitcher(1);
 				player->playerText_UI->SetChoice2();
 				player->playerText_UI->StartPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("UI"));
 
 				bPlayerTalk = true;
 			}
@@ -620,6 +625,7 @@ void UOldPalFSM::TickReadyMove()
 			{
 				// 플레이어 초이스 지우기
 				player->playerText_UI->EndPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("NoCollision"));
 				
 				bPlayerTalk = false;
 			}
@@ -651,6 +657,7 @@ void UOldPalFSM::TickReadyMove()
 			{
 				// 플레이어 초이스 지우기
 				player->playerText_UI->EndPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("NoCollision"));
 				
 				bPlayerTalk = false;
 			}
@@ -2335,10 +2342,11 @@ void UOldPalFSM::TickAwesome()
 		{
 			if(bPlayerTalk != true && curTime > 1)
 			{
-				// 플레이어 초이스 1번째
+				// 플레이어 초이스 3번째
 				player->playerText_UI->SetSwitcher(1);
 				player->playerText_UI->SetChoice3();
 				player->playerText_UI->StartPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("UI"));
 
 				bPlayerTalk = true;
 			}
@@ -2357,6 +2365,7 @@ void UOldPalFSM::TickAwesome()
 			{
 				// 플레이어 초이스 지우기
 				player->playerText_UI->EndPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("NoCollision"));
 				
 				bPlayerTalk = false;
 			}
@@ -2387,6 +2396,7 @@ void UOldPalFSM::TickAwesome()
 			{
 				// 플레이어 초이스 지우기
 				player->playerText_UI->EndPlayer();
+				player->playerTextWidget->SetCollisionProfileName(TEXT("NoCollision"));
 				
 				bPlayerTalk = false;
 			}

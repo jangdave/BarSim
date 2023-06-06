@@ -3,6 +3,9 @@
 
 #include "BarGameInstance.h"
 #include "GameStartManager.h"
+#include "Tablet.h"
+#include "TabletWidget.h"
+#include "Components/TextBlock.h"
 #include "Kismet/GameplayStatics.h"
 
 void UBarGameInstance::Init()
@@ -12,6 +15,8 @@ void UBarGameInstance::Init()
 	// 스타트 매니저 캐스트
 	startManager = Cast<AGameStartManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameStartManager::StaticClass()));
 
+	tablet = Cast<ATablet>(UGameplayStatics::GetActorOfClass(GetWorld(), ATablet::StaticClass()));
+	
 	//델리게이트 연결 함수 실행
 	BindFunction();
 }
@@ -38,17 +43,29 @@ void UBarGameInstance::AddMoney(float money)
 		TotalMoney[0] += money;
 
 		TotalMoney[3] += money;
+
+		tablet->tablet_UI->todayMoney->SetText(FText::AsNumber(TotalMoney[0]));
+
+		tablet->tablet_UI->totalMoney->SetText(FText::AsNumber(TotalMoney[3]));
 	}
 	else if(checkDayCount == 2)
 	{
 		TotalMoney[1] += money;
 
 		TotalMoney[3] += money;
+
+		tablet->tablet_UI->todayMoney->SetText(FText::AsNumber(TotalMoney[1]));
+
+		tablet->tablet_UI->totalMoney->SetText(FText::AsNumber(TotalMoney[3]));
 	}
 	else if(checkDayCount == 3)
 	{
 		TotalMoney[2] += money;
 
 		TotalMoney[3] += money;
+
+		tablet->tablet_UI->todayMoney->SetText(FText::AsNumber(TotalMoney[2]));
+
+		tablet->tablet_UI->totalMoney->SetText(FText::AsNumber(TotalMoney[3]));
 	}
 }

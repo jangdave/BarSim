@@ -98,7 +98,9 @@ void UTabletWidget::NativeConstruct()
 	FTimerHandle castHandle;
 	GetWorld()->GetTimerManager().SetTimer(castHandle, this, &UTabletWidget::CastToPlayerCharacter, 2.0f, false);
 
-
+	// 초기값 설정
+	totalMoney->SetText(FText::AsNumber(0.0));
+	todayMoney->SetText(FText::AsNumber(0.0));
 }
 
 void UTabletWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
