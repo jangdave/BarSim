@@ -10,7 +10,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fbc1dcf7-853a-43ba-a204-4dca17135ea5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_Chair.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/Blueprints/DropSoundCollision/BP_DropSoundCollision3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +310,7 @@
       <workItem from="1686018102354" duration="1176000" />
       <workItem from="1686024367880" duration="1799000" />
       <workItem from="1686039495536" duration="4286000" />
-      <workItem from="1686055300070" duration="1291000" />
+      <workItem from="1686055300070" duration="3073000" />
     </task>
     <servers />
   </component>
