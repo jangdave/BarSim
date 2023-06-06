@@ -14,8 +14,6 @@ void UBarGameInstance::Init()
 
 	// 스타트 매니저 캐스트
 	startManager = Cast<AGameStartManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameStartManager::StaticClass()));
-
-	tablet = Cast<ATablet>(UGameplayStatics::GetActorOfClass(GetWorld(), ATablet::StaticClass()));
 	
 	//델리게이트 연결 함수 실행
 	BindFunction();
@@ -38,6 +36,8 @@ void UBarGameInstance::BindFunction()
 
 void UBarGameInstance::AddMoney(float money)
 {
+	auto tablet = Cast<ATablet>(UGameplayStatics::GetActorOfClass(GetWorld(), ATablet::StaticClass()));
+	
 	if(checkDayCount == 1)
 	{
 		TotalMoney[0] += money;
