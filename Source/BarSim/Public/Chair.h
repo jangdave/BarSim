@@ -45,6 +45,12 @@ public:
 	class UBoxComponent* playerBoxComp;
 
 	UPROPERTY()
+	class USoundBase* hereSound;
+
+	UPROPERTY()
+	class USoundBase* drinkSound;
+	
+	UPROPERTY()
 	class UCoctailScoreWidget* score_UI;
 
 	UPROPERTY()

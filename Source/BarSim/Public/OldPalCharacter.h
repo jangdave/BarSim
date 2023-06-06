@@ -44,6 +44,9 @@ public:
 	UPROPERTY(EditAnywhere, Category=Sound)
 	class USoundBase* enterSound;
 
+	UPROPERTY(EditAnywhere, Category=Sound)
+	class USoundBase* cashSound;
+	
 	UPROPERTY()
 	class ACupBase* cup;
 	

@@ -190,6 +190,17 @@ void AChair::ViewScore(int32 score)
 {
 	totalScore = score;
 
+	auto idx = FMath::RandRange(0, 1);
+
+	if(idx == 0)
+	{
+		UGameplayStatics::PlaySound2D(GetWorld(), hereSound);
+	}
+	else
+	{
+		UGameplayStatics::PlaySound2D(GetWorld(), drinkSound);
+	}
+
 	if(totalScore >= 80)
 	{
 		score_UI->text_Score->SetText(FText::FromString("Excellent"));

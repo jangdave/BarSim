@@ -60,14 +60,8 @@ public:
 	UFUNCTION()
 	void SetFirst2Check();
 
-	//UFUNCTION()
-	//void SetFirst2UnCheck();
-
 	UFUNCTION()
 	void SetFirst3Check();
-
-	//UFUNCTION()
-	//void SetFirst3UnCheck();
 	
 	//-----------------------------------------------------------------second
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
@@ -82,21 +76,12 @@ public:
 	UFUNCTION()
 	void SetSecond1Check();
 	
-	//UFUNCTION()
-	//void SetSecond1UnCheck();
-
 	UFUNCTION()
 	void SetSecond2Check();
 	
-	//UFUNCTION()
-	//void SetSecond2UnCheck();
-
 	UFUNCTION()
 	void SetSecond3Check();
 
-	//UFUNCTION()
-	//void SetSecond3UnCheck();
-	
 	//-----------------------------------------------------------------third
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UCheckBox* checkThird1;
@@ -127,6 +112,12 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UCheckBox* checkFourth3;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UCheckBox* checkFourth4;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UCheckBox* checkFourth5;
+	
 	UFUNCTION()
 	void SetFourth1Check();
 
@@ -135,5 +126,11 @@ public:
 
 	UFUNCTION()
 	void SetFourth3Check();
+
+	UFUNCTION()
+	void SetFourth4Check();
+
+	UFUNCTION()
+	void SetFourth5Check();
 	
 };

@@ -42,6 +42,9 @@ public:
 
 	UPROPERTY()
 	class ACupBase* cup;
+
+	UPROPERTY()
+	class USoundBase* cashSound;
 	
 	// 스폰시 메쉬 설정 함수
 	void SetMesh();
