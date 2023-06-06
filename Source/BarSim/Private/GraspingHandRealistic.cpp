@@ -8,6 +8,7 @@
 #include "BottleBase.h"
 #include "Coaster.h"
 #include "CupBase.h"
+#include "DrinkCan.h"
 #include "HalfSlicedLime.h"
 #include "HalfSlicedLimeVat.h"
 #include "HalfSlicedOrange.h"
@@ -106,6 +107,7 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	halfSlicedOrange=Cast<AHalfSlicedOrange>(OtherActor);
 	SlicedOrangeVat=Cast<ASlicedOrangeVat>(OtherActor);
 	halfSlicedOrangeVat=Cast<AHalfSlicedOrangeVat>(OtherActor);
+	DrinkCan=Cast<ADrinkCan>(OtherActor);
 
 	if(huchuTong)
 	{			
@@ -498,6 +500,24 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
 		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("하이볼 글래스"))));
+		actorInfoWidgetComp->SetVisibility(true);
+		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
+		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
+		{
+			actorInfoWidget->PlayAnimation(actorInfoWidget->Disappearing);
+		}), 1, false); }
+	else if(DrinkCan)
+	{	
+		if(PC)
+		{
+			PC->PlayHapticEffect(HF_ActorOverlap, EControllerHand::Right);			
+		}
+		GetWorldTimerManager().ClearTimer(widgetDestroyHandle);
+		if(actorInfoWidget->IsAnimationPlaying(actorInfoWidget->Disappearing))
+		{
+			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
+		}
+		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("캔 음료"))));
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void

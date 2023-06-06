@@ -33,6 +33,7 @@
 #include "SlicedOrangeVat.h"
 #include "Strainer.h"
 #include "Tablet.h"
+#include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/WidgetInteractionComponent.h"
 #include "Haptics/HapticFeedbackEffect_Curve.h"
@@ -257,6 +258,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==coaster&&coaster!=nullptr)
 		{
 			isGrabbingCoasterRight=true;
+			coaster->boxComp->SetCollisionProfileName(FName("CoasterAfterGrab"));
 		}
 		// 잡은 대상이 Cup이라면
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
@@ -410,6 +412,8 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==coasterL&&coasterL!=nullptr)
 	{
 		isGrabbingCoasterLeft=true;
+		coasterL->boxComp->SetCollisionProfileName(FName("CoasterAfterGrab"));
+
 	}
 	// 잡은 대상이 Cup이라면
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
@@ -547,7 +551,10 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingCoasterRight)
 	{
 		if(coaster!=nullptr)
-		coaster->isDropSoundEnabled=true;
+		{
+			coaster->isDropSoundEnabled=true;
+			coaster->boxComp->SetCollisionProfileName(FName("CoasterBeforeGrab"));
+		}
 		isGrabbingCoasterRight=false;
 	}
 	else if(isGrabbingCupRight)
@@ -689,6 +696,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	else if(isGrabbingCoasterLeft&&coasterL!=nullptr)
 	{
 		coasterL->isDropSoundEnabled=true;
+		coasterL->boxComp->SetCollisionProfileName(FName("CoasterBeforeGrab"));
 		isGrabbingCoasterLeft=false;
 	}
 	else if(isGrabbingCupLeft&&cupL!=nullptr)
