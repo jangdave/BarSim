@@ -4,9 +4,12 @@
 #include "MenuWidgetActor.h"
 #include "BarGameInstance.h"
 #include "MenuWidget.h"
+#include "PlayerCharacter.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/WidgetSwitcher.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 AMenuWidgetActor::AMenuWidgetActor()
@@ -29,7 +32,7 @@ void AMenuWidgetActor::BeginPlay()
 	gi = Cast<UBarGameInstance>(GetGameInstance());
 
 	menu_UI = Cast<UMenuWidget>(menuWidget->GetUserWidgetObject());
-	
+
 	SetMenu();
 }
 
@@ -37,7 +40,7 @@ void AMenuWidgetActor::BeginPlay()
 void AMenuWidgetActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+
 }
 
 void AMenuWidgetActor::Destroy()
@@ -52,8 +55,6 @@ void AMenuWidgetActor::SetMenu()
 		if(gi->bCheckMenu != true)
 		{
 			menu_UI->WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
-
-			gi->bCheckMenu = true;
 		}
 		else
 		{

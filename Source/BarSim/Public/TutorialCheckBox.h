@@ -32,6 +32,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	class UWidgetComponent* tutorialWidget;
 
+	UPROPERTY(EditDefaultsOnly)
+	class UStaticMeshComponent* tutorialBox;
+	
 	UPROPERTY(EditAnywhere)
 	class UTutorialWidget* tutorial_UI;
 	

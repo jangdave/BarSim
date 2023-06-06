@@ -39,11 +39,11 @@ public:
 	bool bCheckTutorialInternet;
 	
 	// 테블렛 상단바
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UProgressBar* PB_Reputation;
-	
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UTextBlock* text_Time;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* totalMoney;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* todayMoney;
 
 	// 위젯스위처
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
