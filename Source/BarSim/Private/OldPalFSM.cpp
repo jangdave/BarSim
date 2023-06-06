@@ -2427,6 +2427,12 @@ void UOldPalFSM::TickReadyLeave()
 			
 			owner->oldPal_UI->EndOldPal();
 
+			float money = 5 + spawnManager->aChairs[idx]->totalScore/10;
+		
+			spawnManager->gi->AddMoney(money);
+
+			UGameplayStatics::PlaySound2D(GetWorld(), owner->cashSound);
+
 			if(bCheckPlayAnim != true)
 			{
 				bCheckPlayAnim = true;
@@ -2664,6 +2670,11 @@ void UOldPalFSM::TickReadyLeave()
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
 
+			float money = 5 + spawnManager->aChairs[idx]->totalScore/10;
+		
+			spawnManager->gi->AddMoney(money);
+
+			UGameplayStatics::PlaySound2D(GetWorld(), owner->cashSound);
 		}
 		
 		if(bCheckPlayAnim != true && curTime > 53)

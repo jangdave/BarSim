@@ -125,42 +125,85 @@ void UMenuWidget::ChoiceCheck()
 
 void UMenuWidget::CheckYes()
 {
+	auto currentMap = UGameplayStatics::GetCurrentLevelName(GetWorld());
+	
 	// 체크포인트로 보내기
-	if(gi->checkDayCount == 0 || gi->checkDayCount == 1)
+	if(gi->checkDayCount == 0 && currentMap != "")
 	{
-		gi->checkDayCount = 0;
 
-		gi->bCheckGameMode = false;
+		if(currentMap == "BarStartMap")
+		{
+			gi->bCheckGameMode = false;
 
-		gi->bCheckMenu = false;
+			gi->bCheckMenu = false;
 
-		gi->TotalMoney = {0, 0, 0, 0};
-		
-		UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+		}
+		else if(currentMap == "BarTutorialMap")
+		{
+			gi->bCheckGameMode = false;
+
+			gi->bCheckMenu = true;
+
+			UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+		}
 	}
-	else if(gi->checkDayCount == 2)
+	else if(gi->checkDayCount == 1 && currentMap != "")
 	{
-		gi->checkDayCount = 1;
-
-		gi->TotalMoney = {0, 0, 0, 0};
-		
-		UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+		if(currentMap == "BarStartMap")
+		{
+			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+		}
+		else if(currentMap == "BarMainMap")
+		{
+			gi->TotalMoney = {0, 0, 0, 0};
+			
+			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+		}
 	}
-	else
+	else if(gi->checkDayCount == 2 && currentMap != "")
 	{
-		gi->checkDayCount = 2;
-		
-		auto twoday = gi->TotalMoney[1];
+		if(currentMap == "BarStartMap")
+		{
+			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+		}
+		else if(currentMap == "BarMainMap")
+		{
+			auto oneday = gi->TotalMoney[0];
 
-		auto threeday = gi->TotalMoney[2];
+			auto twoday = gi->TotalMoney[1];
+			
+			auto total = gi->TotalMoney[3];
 
-		auto total = gi->TotalMoney[3];
+			auto settotal = total - twoday;
+			
+			gi->TotalMoney = {oneday, 0, 0, settotal};
+			
+			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+		}
+	}
+	else if(gi->checkDayCount == 3 && currentMap != "")
+	{
+		if(currentMap == "BarStartMap")
+		{
+			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+		}
+		else if(currentMap == "BarMainMap")
+		{
+			auto oneday = gi->TotalMoney[0];
 
-		auto settotal = total - threeday;
-		
-		gi->TotalMoney = {0, twoday, 0, settotal};
-		
-		UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			auto twoday = gi->TotalMoney[1];
+			
+			auto threeday = gi->TotalMoney[2];
+			
+			auto total = gi->TotalMoney[3];
+
+			auto settotal = total - threeday;
+			
+			gi->TotalMoney = {oneday, twoday, 0, settotal};
+			
+			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+		}
 	}
 }
 
