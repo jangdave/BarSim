@@ -84,6 +84,8 @@ public:
 	class ASlicedOrangeVat* SlicedOrangeVat;
 	UPROPERTY()
 	class ASlicedOrange* SlicedOrange;
+	UPROPERTY()
+	class ADrinkCan* DrinkCan;
 
 	// Player Controller
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
