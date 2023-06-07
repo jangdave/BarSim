@@ -7,16 +7,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa3e7293-901a-4b11-b874-f5316f964720" name="Changes" comment="">
+    <list default="true" id="3f6f3753-7dbc-41a1-9c08-f1b87677fa44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BarMainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarMainMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BarMainMap6.umap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BarMainMapStaticTetst.umap" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="2QpsUGSZKtgV0M1TPsjkXDbN4Vq" />
+  <component name="ProjectId" id="2Qrrz7487wy33UbWXcWvVqZIT1g" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -31,13 +33,6 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
-    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -101,21 +96,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="aa3e7293-901a-4b11-b874-f5316f964720" name="Changes" comment="" />
-      <created>1686061871546</created>
+      <changelist id="3f6f3753-7dbc-41a1-9c08-f1b87677fa44" name="Changes" comment="" />
+      <created>1686122801920</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686061871546</updated>
-      <workItem from="1686061872767" duration="324000" />
-      <workItem from="1686064353031" duration="713000" />
-      <workItem from="1686065360275" duration="593000" />
-      <workItem from="1686066383244" duration="232000" />
-      <workItem from="1686066731050" duration="368000" />
-      <workItem from="1686069698641" duration="883000" />
-      <workItem from="1686094747562" duration="679000" />
-      <workItem from="1686099559511" duration="1653000" />
-      <workItem from="1686110686304" duration="8000" />
-      <workItem from="1686110717043" duration="4009000" />
+      <updated>1686122801920</updated>
+      <workItem from="1686122803132" duration="1125000" />
     </task>
     <servers />
   </component>
