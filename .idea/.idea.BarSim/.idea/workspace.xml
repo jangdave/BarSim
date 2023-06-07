@@ -9,6 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aa3e7293-901a-4b11-b874-f5316f964720" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KHJContents/HandAnimBP/GraspingHandRealistic.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
