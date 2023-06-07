@@ -104,4 +104,5 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="Sounds")
 	float soundVolume = 0.7;
+
 };
