@@ -104,6 +104,12 @@ void APlayerCharacter::BeginPlay()
 	playerText_UI = Cast<UPlayerDialogWidget>(playerTextWidget->GetUserWidgetObject());
 
 	BarGameInstance = Cast<UBarGameInstance>(GetWorld()->GetGameInstance());
+
+	FTimerHandle timer;
+	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
+	{
+		PlayerStartText();
+	}), 1.0f, false);
 	
 }
 
@@ -1627,4 +1633,56 @@ void APlayerCharacter::ShowMenuWidget()
 		}
 	}
 
+}
+
+void APlayerCharacter::PlayerTutoText()
+{
+	// 플레이어 대사 1
+	playerText_UI->SetSwitcher(0);
+	playerText_UI->StartPlayerText(1);
+	playerText_UI->StartPlayer();
+
+	FTimerHandle timer;
+	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
+	{
+		playerText_UI->EndPlayer();
+	}), 3.0f, false);
+}
+
+void APlayerCharacter::PlayerStartText()
+{
+	if(BarGameInstance->checkDayCount == 1 && UGameplayStatics::GetCurrentLevelName(GetWorld()) == "BarStartMap")
+	{
+		// 플레이어 대사 2
+		playerText_UI->SetSwitcher(0);
+		playerText_UI->StartPlayerText(2);
+		playerText_UI->StartPlayer();
+	}
+	else if(BarGameInstance->checkDayCount == 2 && UGameplayStatics::GetCurrentLevelName(GetWorld()) == "BarStartMap")
+	{
+		// 플레이어 대사 3
+		playerText_UI->SetSwitcher(0);
+		playerText_UI->StartPlayerText(3);
+		playerText_UI->StartPlayer();
+	}
+
+	FTimerHandle timer;
+	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
+	{
+		playerText_UI->EndPlayer();
+	}), 3.0f, false);
+}
+
+void APlayerCharacter::PlayerMenuText()
+{
+	// 플레이어 대사 0
+	playerText_UI->SetSwitcher(0);
+	playerText_UI->StartPlayerText(0);
+	playerText_UI->StartPlayer();
+
+	FTimerHandle timer;
+	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
+	{
+		playerText_UI->EndPlayer();
+	}), 3.0f, false);
 }

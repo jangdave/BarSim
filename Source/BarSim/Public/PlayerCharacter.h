@@ -329,5 +329,15 @@ public:
 	// Camera Fade
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartCameraFade();
+
 	
+	// 대사
+	UFUNCTION(BlueprintCallable)
+	void PlayerTutoText();
+	
+	UFUNCTION()
+	void PlayerStartText();
+
+	UFUNCTION()
+	void PlayerMenuText();
 };
