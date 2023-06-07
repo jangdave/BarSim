@@ -340,4 +340,7 @@ public:
 
 	UFUNCTION()
 	void PlayerMenuText();
+
+	UPROPERTY()
+	bool isDropped = false;
 };
