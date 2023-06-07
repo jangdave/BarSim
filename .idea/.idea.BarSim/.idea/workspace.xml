@@ -9,9 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aa3e7293-901a-4b11-b874-f5316f964720" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/DropSoundCollision.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/DropSoundCollision.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +115,7 @@
       <workItem from="1686094747562" duration="679000" />
       <workItem from="1686099559511" duration="1653000" />
       <workItem from="1686110686304" duration="8000" />
-      <workItem from="1686110717043" duration="935000" />
+      <workItem from="1686110717043" duration="4009000" />
     </task>
     <servers />
   </component>
