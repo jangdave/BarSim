@@ -50,7 +50,7 @@ void AShaker::Tick(float DeltaSeconds)
 
 		acc = newAcc.Length();
 
-		UE_LOG(LogTemp, Warning, TEXT("%f"), acc);
+		//UE_LOG(LogTemp, Warning, TEXT("%f"), acc);
 		if(acc > shakeAcc)
 		{
 			bShaking = true;
@@ -60,6 +60,7 @@ void AShaker::Tick(float DeltaSeconds)
 			bShaking = false;
 		}
 
+
 		if(bShaking)
 		{
 			//GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Red, TEXT("Shaking"));
@@ -68,10 +69,10 @@ void AShaker::Tick(float DeltaSeconds)
 			widgetTime2 = 0;
 			bShakeWidgetOn = true;
 			bShakeWidgetAnimOn = false;
-			shakingTime = shakingTime + GetWorld()->GetDeltaSeconds();
+			shakingTime = shakingTime + DeltaSeconds * 2;
 		}
 
-		if(shakingTime >= 10.0f)
+		if(shakingTime >= 8.0f)
 		{
 			for(int i = 0; i < ShakeArray.Num(); i++)
 			{
@@ -109,7 +110,7 @@ void AShaker::Tick(float DeltaSeconds)
 			shakeWidget->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 
 			shakeWidget->Overlay->SetVisibility(ESlateVisibility::Visible);
-			shakeWidget->Contents->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero((100 * shakingTime) / 100)) + " Sec"));
+			shakeWidget->Contents->SetText(FText::FromString(FString::SanitizeFloat(FMath::RoundHalfToZero(100 * shakingTime) / 100) + " Sec"));
 
 			if(!bShakeWidgetAnimOn)
 			{

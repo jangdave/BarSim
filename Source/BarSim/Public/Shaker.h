@@ -116,5 +116,6 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "Shaker")
 	bool bShakeWidgetAnimOn;
+	
 };
 

@@ -55,10 +55,10 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_Right;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_Left;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_Right;
 
 	//------------------------------------------------------------------1페이지

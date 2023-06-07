@@ -109,7 +109,7 @@ void ASpawnManager::SpawnCustomer()
 	
 	// 시간이 지날때마다 손님을 스폰한다
 	FTimerHandle spawnTime;
-	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 60, true);
+	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 10, true);
 }
 
 void ASpawnManager::SpawnCustom()
