@@ -20,16 +20,16 @@ void UPlayerDialogWidget::NativeConstruct()
 	btn_Right->OnClicked.AddDynamic(this, &UPlayerDialogWidget::RightAnswer);
 
 	// 첫째날 대사
-	playerScript1.Emplace(FString::Printf(TEXT("손님 오늘은 내부 사정으로 영업하지 않습니다"))); // 0
+	playerScript1.Emplace(FString::Printf(TEXT("손님, 오늘은 내부 사정으로 영업하지 않습니다"))); // 0
 	//---------------------------------------------------------------------------선택
 	// 선택지 1
 	playerScript1.Emplace(FString::Printf(TEXT("...알겠습니다"))); // 1
 	// 선택지 2
 	playerScript1.Emplace(FString::Printf(TEXT("일단 앉으시죠"))); // 2
 	// 앉고 나서
-	playerScript1.Emplace(FString::Printf(TEXT("(이상한 손님이군 적당히 아무 칵테일이나 만들어 주자)"))); // 3
+	playerScript1.Emplace(FString::Printf(TEXT("(이상한 손님이군... 적당히 아무 칵테일이나 만들어 주자)"))); // 3
 	// 칵테일 나옴
-	playerScript1.Emplace(FString::Printf(TEXT("여기 칵테일 나왔습니다"))); // 4
+	playerScript1.Emplace(FString::Printf(TEXT("여기 주문하신 칵테일 나왔습니다"))); // 4
 	playerScript1.Emplace(FString::Printf(TEXT("별난 손님이였군...."))); // 5
 	playerScript1.Emplace(FString::Printf(TEXT("(오랜만에 만든거 치곤 나쁘지 않았나 보다)"))); // 6
 	playerScript1.Emplace(FString::Printf(TEXT("오늘은 이만 집으로 돌아가자"))); // 7
@@ -39,8 +39,8 @@ void UPlayerDialogWidget::NativeConstruct()
 	playerChoice1.Emplace(FString::Printf(TEXT("일단 앉으시죠"))); // 1
 
 	// 둘째날 대사
-	playerScript2.Emplace(FString::Printf(TEXT("오늘도 어찌저찌 마무리 했군"))); // 0
-	playerScript2.Emplace(FString::Printf(TEXT("어제의 별난 손님은 안오겠지"))); // 1
+	playerScript2.Emplace(FString::Printf(TEXT("오늘도 어찌저찌 하루를 마무리 했군"))); // 0
+	playerScript2.Emplace(FString::Printf(TEXT("설마 어제의 별난 손님은 오지 않겠지..."))); // 1
 	playerScript2.Emplace(FString::Printf(TEXT("문 닫고 집으로 가자"))); // 2
 
 	// 셋째날 대사
@@ -52,26 +52,26 @@ void UPlayerDialogWidget::NativeConstruct()
 	playerScript3.Emplace(FString::Printf(TEXT("다음 영업일에 오시면 연습해두겠습니다"))); // 5
 	playerScript3.Emplace(FString::Printf(TEXT("오늘은 그럼 이만..."))); // 6
 	playerScript3.Emplace(FString::Printf(TEXT("이런, 레시피도 외우고 계세요?"))); // 7
-	playerScript3.Emplace(FString::Printf(TEXT("알겠습니다 만들어 드릴께요"))); // 8
+	playerScript3.Emplace(FString::Printf(TEXT("알겠습니다, 만들어 드리죠"))); // 8
 	playerScript3.Emplace(FString::Printf(TEXT("자리에 앉으시죠"))); // 9
 	playerScript3.Emplace(FString::Printf(TEXT("(정말 까다로운 손님이군...)"))); // 10
 	playerScript3.Emplace(FString::Printf(TEXT("아...역시 아버지의 단골이셨군요"))); // 11
 	playerScript3.Emplace(FString::Printf(TEXT("제 이름을 말씀드렸던가요...?"))); // 12
 	playerScript3.Emplace(FString::Printf(TEXT("아! 저한테 메일을 보내셨던 그...아버지의 친구분?"))); // 13
 	playerScript3.Emplace(FString::Printf(TEXT("아닙니다. 뭐...오랜 친구분이시면 그럴수 있죠"))); // 14
-	playerScript3.Emplace(FString::Printf(TEXT("사실 서로 연락이 안된지 오래됐고, 서로 관심이 없었습니다"))); // 15
+	playerScript3.Emplace(FString::Printf(TEXT("사실 서로 연락이 안된지 오래됐고, 서로 관심도 없었습니다"))); // 15
 	playerScript3.Emplace(FString::Printf(TEXT("일이 없어 가게도 잠시만 운영하고 정리할 생각이라..."))); // 16
 	playerScript3.Emplace(FString::Printf(TEXT("손님, 아니 리차드 아저씨께는 죄송하게 됐네요"))); // 17
 	playerScript3.Emplace(FString::Printf(TEXT("내기요...? 어떤?"))); // 18
 	playerScript3.Emplace(FString::Printf(TEXT("그게 무슨...?"))); // 19
 	playerScript3.Emplace(FString::Printf(TEXT("아저씨가 어떤 칵테일을 만들어 달라고 할 줄 알고요?"))); // 20
-	playerScript3.Emplace(FString::Printf(TEXT("터무니 없어요 말이 안된다구요"))); // 21
+	playerScript3.Emplace(FString::Printf(TEXT("터무니 없어요... 말도 안된다구요"))); // 21
 	playerScript3.Emplace(FString::Printf(TEXT("(말이 안되는 요구이지만 지금은 마땅한 일도 없고...)"))); // 22
 	playerScript3.Emplace(FString::Printf(TEXT("...알겠습니다"))); // 23
 	playerScript3.Emplace(FString::Printf(TEXT("어쩔 수 없죠"))); // 24
 	playerScript3.Emplace(FString::Printf(TEXT("...아버지가 저를 생각하면서요? 말도 안돼요"))); // 25
-	playerScript3.Emplace(FString::Printf(TEXT("그렇게 연락도 없던 빌어먹을 아버지였는데요?"))); // 26
-	playerScript3.Emplace(FString::Printf(TEXT("이제와서 그런다고 뭐가 달라지죠?"))); // 27
+	playerScript3.Emplace(FString::Printf(TEXT("그렇게 연락 한 통 없던, 빌어먹을 아버지였는데요?"))); // 26
+	playerScript3.Emplace(FString::Printf(TEXT("이제와서 그런다고 도대체 뭐가 달라지죠?"))); // 27
 	playerScript3.Emplace(FString::Printf(TEXT("젓지말고, 흔들어서 라... 익숙한 문장인데"))); // 28
 	playerScript3.Emplace(FString::Printf(TEXT("일단 오늘은 여기까지 하자"))); // 29
 	playerScript3.Emplace(FString::Printf(TEXT("빌어먹을 아버지..."))); // 30
