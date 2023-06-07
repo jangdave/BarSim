@@ -741,3 +741,16 @@ void ACupBase::PlayerCast()
 	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 }
 
+void ACupBase::SetSimulateAndTickDisable()
+{
+	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	{
+		this->DisableComponentsSimulatePhysics();
+		cupComp->SetSimulatePhysics(false);
+		this->SetActorTickEnabled(false);
+		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+		
+	}), 10.0f, false);
+	
+}
+

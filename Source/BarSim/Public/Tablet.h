@@ -56,5 +56,11 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="Sounds")
 	class USoundBase* attachSound;
+	
+	UFUNCTION()
+	void SetSimulateAndTickDisable();
+
+	UPROPERTY()
+	FTimerHandle simHandle;
 
 };

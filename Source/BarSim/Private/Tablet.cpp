@@ -83,3 +83,14 @@ void ATablet::AttachToTabletStand()
 	}
 }
 
+void ATablet::SetSimulateAndTickDisable()
+{
+	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	{
+		this->DisableComponentsSimulatePhysics();
+		this->SetActorTickEnabled(false);
+		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+		
+	}), 10.0f, false);
+	
+}

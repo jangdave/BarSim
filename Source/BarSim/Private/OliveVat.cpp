@@ -27,3 +27,15 @@ void AOliveVat::Tick(float DeltaTime)
 
 }
 
+void AOliveVat::SetSimulateAndTickDisable()
+{
+	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	{
+		this->DisableComponentsSimulatePhysics();
+		oliveVatComp->SetSimulatePhysics(false);
+		this->SetActorTickEnabled(false);
+		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+		
+	}), 10.0f, false);
+	
+}

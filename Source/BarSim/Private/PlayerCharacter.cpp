@@ -235,12 +235,14 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		// 잡은 대상이 Tongs라면
 		if(GrabbedActorRight==huchuTong&&huchuTong!=nullptr)
 		{
-		isGrabbingTongsRight=true;
+			isGrabbingTongsRight=true;
+			GetWorld()->GetTimerManager().ClearTimer(huchuTong->simHandle);
 		}
 		// 잡은 대상이 Bottle 이라면
 		else if(GrabbedActorRight == bottle&&bottle!=nullptr)
 		{
 			isGrabbingBottleRight = true;
+			GetWorld()->GetTimerManager().ClearTimer(bottle->simHandle);
 			bottle->SetActorTickEnabled(true);
 			bottle->isGrabbingBottle=true;
 			bottle->isGBR=true;
@@ -249,6 +251,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==tablet&&tablet!=nullptr)
 		{
 			isGrabbingTabletRight=true;
+			GetWorld()->GetTimerManager().ClearTimer(tablet->simHandle);
 			tablet->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 			tablet->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			//widgetInteractionComp->bShowDebug=false;
@@ -258,12 +261,14 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==coaster&&coaster!=nullptr)
 		{
 			isGrabbingCoasterRight=true;
+			GetWorld()->GetTimerManager().ClearTimer(coaster->simHandle);
 			coaster->boxComp->SetCollisionProfileName(FName("CoasterAfterGrab"));
 		}
 		// 잡은 대상이 Cup이라면
 		else if(GrabbedActorRight==cup&&cup!=nullptr)
 		{
 			isGrabbingCupRight=true;
+			GetWorld()->GetTimerManager().ClearTimer(cup->simHandle);
 			cup->SetActorTickEnabled(true);
 			cup->isCupTickActivated=true;
 		}
@@ -284,6 +289,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==shakerLid&&shakerLid!=nullptr)
 		{
 			isGrabbingShakerLidRight=true;
+			GetWorld()->GetTimerManager().ClearTimer(shakerLid->simHandle);
 			shakerLid->SetLidOff();
 			shakerLid->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			shakerLid->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
@@ -292,6 +298,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==shakerStrainer&&shakerStrainer!=nullptr)
 		{
 			isGrabbingShakerStrainerRight=true;
+			GetWorld()->GetTimerManager().ClearTimer(shakerStrainer->simHandle);
 			shakerStrainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			shakerStrainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		}
@@ -308,6 +315,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==strainer&&strainer!=nullptr)
 		{
 			isGrabbingStrainerRight=true;
+			GetWorld()->GetTimerManager().ClearTimer(strainer->simHandle);
 			strainer->VRGripInterfaceSettings.bSimulateOnDrop=true;
 			strainer->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		}
@@ -320,31 +328,42 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==halfSlicedLimeVat&&halfSlicedLimeVat!=nullptr)
 		{
 			isGrabbingHalfSlicedLimeVatRight = true;
+			GetWorld()->GetTimerManager().ClearTimer(halfSlicedLimeVat->simHandle);
 		}
 		// 잡은 대상이 slicedLimeVat 이라면
 		else if(GrabbedActorRight==slicedLimeVat&&slicedLimeVat!=nullptr)
 		{
 			isGrabbingSlicedLimeVatRight = true;
+			GetWorld()->GetTimerManager().ClearTimer(slicedLimeVat->simHandle);
+
 		}
 	// 잡은 대상이 halfSlicedOrangeVat 이라면
 	else if(GrabbedActorRight==halfSlicedOrangeVat&&halfSlicedOrangeVat!=nullptr)
 	{
 		isGrabbingHalfSlicedOrangeVatRight = true;
+		GetWorld()->GetTimerManager().ClearTimer(halfSlicedOrangeVat->simHandle);
+
 	}
 	// 잡은 대상이 slicedOrangeVat 이라면
 	else if(GrabbedActorRight==slicedOrangeVat&&slicedOrangeVat!=nullptr)
 	{
 		isGrabbingSlicedOrangeVatRight = true;
+		GetWorld()->GetTimerManager().ClearTimer(slicedOrangeVat->simHandle);
+
 	}
 	// 잡은 대상이 oliveVat 이라면
 	else if(GrabbedActorRight==oliveVat&&oliveVat!=nullptr)
 	{
 		isGrabbingOliveVatRight = true;
+		GetWorld()->GetTimerManager().ClearTimer(oliveVat->simHandle);
+
 	}
 	// 잡은 대상이 iceCubeVat 이라면
 	else if(GrabbedActorRight==iceCubeVat&&iceCubeVat!=nullptr)
 	{
 		isGrabbingIceCubeVatRight = true;
+		GetWorld()->GetTimerManager().ClearTimer(iceCubeVat->simHandle);
+
 	}
 	
 	
@@ -392,11 +411,14 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	if(GrabbedActorLeft==huchuTongL&&huchuTongL!=nullptr)
 	{
 		isGrabbingTongsLeft=true;
+		GetWorld()->GetTimerManager().ClearTimer(huchuTongL->simHandle);
+
 	}
 	// 잡은 대상이 Bottle 이라면
 	else if(GrabbedActorLeft == bottleL&&bottleL!=nullptr)
 	{
 		isGrabbingBottleLeft = true;
+		GetWorld()->GetTimerManager().ClearTimer(bottleL->simHandle);
 		bottleL->SetActorTickEnabled(true);
 		bottleL->isGrabbingBottle=true;
 		bottleL->isGBL=true;
@@ -405,6 +427,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==tabletL&&tabletL!=nullptr)
 	{
 		isGrabbingTabletLeft=true;
+		GetWorld()->GetTimerManager().ClearTimer(tabletL->simHandle);
 		tabletL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		tabletL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		//widgetInteractionComp->bShowDebug=true;
@@ -414,6 +437,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==coasterL&&coasterL!=nullptr)
 	{
 		isGrabbingCoasterLeft=true;
+		GetWorld()->GetTimerManager().ClearTimer(coasterL->simHandle);
 		coasterL->boxComp->SetCollisionProfileName(FName("CoasterAfterGrab"));
 
 	}
@@ -421,6 +445,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==cupL&&cupL!=nullptr)
 	{
 		isGrabbingCupLeft=true;
+		GetWorld()->GetTimerManager().ClearTimer(cupL->simHandle);
 		cupL->SetActorTickEnabled(true);
 		cupL->isCupTickActivated=true;
 	}
@@ -441,6 +466,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==shakerLidL&&shakerLidL!=nullptr)
 	{
 		isGrabbingShakerLidLeft=true;
+		GetWorld()->GetTimerManager().ClearTimer(shakerLidL->simHandle);
 		shakerLidL->SetLidOff();
 		shakerLidL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		shakerLidL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
@@ -449,6 +475,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==shakerStrainerL&&shakerStrainerL!=nullptr)
 	{
 		isGrabbingShakerStrainerLeft=true;
+		GetWorld()->GetTimerManager().ClearTimer(shakerStrainerL->simHandle);
 		shakerStrainerL->isStrainerAttachable = false;
 		shakerStrainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	}
@@ -465,6 +492,7 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==strainerL&&strainerL!=nullptr)
 	{
 		isGrabbingStrainerLeft=true;
+		GetWorld()->GetTimerManager().ClearTimer(strainerL->simHandle);
 		strainerL->VRGripInterfaceSettings.bSimulateOnDrop=true;
 		strainerL->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
  	}
@@ -477,31 +505,43 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==halfSlicedLimeVatL&&halfSlicedLimeVatL!=nullptr)
 	{
 		isGrabbingHalfSlicedLimeVatLeft = true;
+		GetWorld()->GetTimerManager().ClearTimer(halfSlicedLimeVatL->simHandle);
+
 	}
 	// 잡은 대상이 slicedLimeVat 이라면
 	else if(GrabbedActorLeft==slicedLimeVatL&&slicedLimeVatL!=nullptr)
 	{
 		isGrabbingSlicedLimeVatLeft = true;
+		GetWorld()->GetTimerManager().ClearTimer(slicedLimeVatL->simHandle);
+
 	}
 	// 잡은 대상이 halfSlicedOrangeVat 이라면
 	else if(GrabbedActorLeft==halfSlicedOrangeVatL&&halfSlicedOrangeVatL!=nullptr)
 	{
 		isGrabbingHalfSlicedOrangeVatLeft = true;
+		GetWorld()->GetTimerManager().ClearTimer(halfSlicedOrangeVatL->simHandle);
+
 	}
 	// 잡은 대상이 slicedOrangeVat 이라면
 	else if(GrabbedActorLeft==slicedOrangeVatL&&slicedOrangeVatL!=nullptr)
 	{
 		isGrabbingSlicedOrangeVatLeft = true;
+		GetWorld()->GetTimerManager().ClearTimer(slicedOrangeVatL->simHandle);
+
 	}
 	// 잡은 대상이 oliveVat 이라면
 	else if(GrabbedActorLeft==oliveVatL&&oliveVatL!=nullptr)
 	{
 		isGrabbingOliveVatLeft = true;
+		GetWorld()->GetTimerManager().ClearTimer(oliveVatL->simHandle);
+
 	}
 	// 잡은 대상이 iceCubeVat 이라면
 	else if(GrabbedActorLeft==iceCubeVatL&&iceCubeVatL!=nullptr)
 	{
 		isGrabbingIceCubeVatLeft = true;
+		GetWorld()->GetTimerManager().ClearTimer(iceCubeVatL->simHandle);
+
 	}
 }
 
@@ -529,6 +569,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 			GrabbedObjectWithTongsRight->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 			GrabbedObjectWithTongsRight = nullptr;
 		}
+		huchuTong->SetSimulateAndTickDisable();
 		isGrabbingTongsRight=false;
 	}
 	else if(isGrabbingBottleRight)
@@ -538,6 +579,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 			bottle->isGrabbingBottle=false;
 			bottle->isGBR=false;
 			bottle->isDropSoundEnabled=true;
+			bottle->SetSimulateAndTickDisable();
 		}
 		isGrabbingBottleRight=false;
 	}
@@ -547,6 +589,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		{
 			tablet->isDropSoundEnabled=true;
 			tablet->AttachToTabletStand();
+			tablet->SetSimulateAndTickDisable();
+
 		}
 		isGrabbingTabletRight=false;
 		//widgetInteractionComp->bShowDebug=false;
@@ -558,6 +602,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		{
 			coaster->isDropSoundEnabled=true;
 			coaster->boxComp->SetCollisionProfileName(FName("CoasterBeforeGrab"));
+			coaster->SetSimulateAndTickDisable();
+
 		}
 		isGrabbingCoasterRight=false;
 	}
@@ -567,6 +613,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		{
 			cup->isDropSoundEnabled=true;
 			cup->isCupTickActivated=false;
+			cup->SetSimulateAndTickDisable();
 		}
 		isGrabbingCupRight=false;
 	}
@@ -584,6 +631,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		{
 			shakerLid->isDropSoundEnabled=true;
 			shakerLid->AttachToShakerStrainer();
+			shakerLid->SetSimulateAndTickDisable();
+
 		}
 		isGrabbingShakerLidRight=false;	
 	}
@@ -593,6 +642,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		{
 			shakerStrainer->isDropSoundEnabled=true;
 			shakerStrainer->AttachToShaker();
+			shakerStrainer->SetSimulateAndTickDisable();
+
 		}
 		isGrabbingShakerStrainerRight=false;
 	
@@ -613,6 +664,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		{
 			strainer->isDropSoundEnabled=true;
 			strainer->AttachToMixingGlass();
+			strainer->SetSimulateAndTickDisable();
+
 		}
 		isGrabbingStrainerRight=false;	
 	}
@@ -633,26 +686,38 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	else if(isGrabbingHalfSlicedLimeVatRight&&halfSlicedLimeVat!=nullptr)
 	{
 		halfSlicedLimeVat->isDropSoundEnabled=true;
+		halfSlicedLimeVat->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingSlicedLimeVatRight&&slicedLimeVat!=nullptr)
 	{
 		slicedLimeVat->isDropSoundEnabled=true;
+		slicedLimeVat->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingHalfSlicedOrangeVatRight&&halfSlicedOrangeVat!=nullptr)
 	{
 		halfSlicedOrangeVat->isDropSoundEnabled=true;
+		halfSlicedOrangeVat->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingSlicedOrangeVatRight&&slicedOrangeVat!=nullptr)
 	{
 		slicedOrangeVat->isDropSoundEnabled=true;
+		slicedOrangeVat->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingOliveVatRight&&oliveVat!=nullptr)
 	{
 		oliveVat->isDropSoundEnabled=true;
+		oliveVat->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingIceCubeVatRight&&iceCubeVat!=nullptr)
 	{
 		iceCubeVat->isDropSoundEnabled=true;
+		iceCubeVat->SetSimulateAndTickDisable();
+
 	}
 }
 
@@ -680,6 +745,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 			GrabbedObjectWithTongsLeft->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 			GrabbedObjectWithTongsLeft = nullptr;
 		}
+		huchuTongL->SetSimulateAndTickDisable();
 		isGrabbingTongsLeft=false;
 	}
 	else if(isGrabbingBottleLeft&&bottleL!=nullptr)
@@ -687,6 +753,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		bottleL->isDropSoundEnabled=true;
 		bottleL->isGBL=false;
 		bottleL->isGrabbingBottle=false;
+		bottleL->SetSimulateAndTickDisable();
 		isGrabbingBottleLeft=false;
 	}
 	else if(isGrabbingTabletLeft&&tabletL!=nullptr)
@@ -694,6 +761,8 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		isGrabbingTabletLeft=false;
 		tabletL->AttachToTabletStand();
 		tabletL->isDropSoundEnabled=true;
+		tabletL->SetSimulateAndTickDisable();
+
 		//widgetInteractionComp->bShowDebug=false;
 		//widgetInteractionCompLeft->bShowDebug=false;
 	}
@@ -701,24 +770,31 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		coasterL->isDropSoundEnabled=true;
 		coasterL->boxComp->SetCollisionProfileName(FName("CoasterBeforeGrab"));
+		coasterL->SetSimulateAndTickDisable();
+
 		isGrabbingCoasterLeft=false;
 	}
 	else if(isGrabbingCupLeft&&cupL!=nullptr)
 	{
 		cupL->isDropSoundEnabled=true;
 		cupL->isCupTickActivated=false;
+		cupL->SetSimulateAndTickDisable();
 		isGrabbingCupLeft=false;
 	}
 	else if(isGrabbingShakerLidLeft&&shakerLidL!=nullptr)
 	{			
 		shakerLidL->isDropSoundEnabled=true;
 		shakerLidL->AttachToShakerStrainer();
+		shakerLidL->SetSimulateAndTickDisable();
+
 		isGrabbingShakerLidLeft=false;	
 	}
 	else if(isGrabbingShakerStrainerLeft&&shakerStrainerL!=nullptr)
 	{	
 		shakerStrainerL->isDropSoundEnabled=true;
 		shakerStrainerL->AttachToShaker();
+		shakerStrainerL->SetSimulateAndTickDisable();
+
 		isGrabbingShakerStrainerLeft=false;
 	
 	}
@@ -733,6 +809,8 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	{
 		strainerL->isDropSoundEnabled=true;
 		strainerL->AttachToMixingGlass();
+		strainerL->SetSimulateAndTickDisable();
+
 		isGrabbingStrainerLeft=false;	
 	}
 	else if(isGrabbingShakerLeft&&shakerL!=nullptr)
@@ -749,26 +827,38 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	else if(isGrabbingHalfSlicedLimeVatLeft&&halfSlicedLimeVatL!=nullptr)
 	{
 		halfSlicedLimeVatL->isDropSoundEnabled=true;
+		halfSlicedLimeVatL->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingSlicedLimeVatLeft&&slicedLimeVatL!=nullptr)
 	{
 		slicedLimeVatL->isDropSoundEnabled=true;
+		slicedLimeVatL->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingHalfSlicedOrangeVatLeft&&halfSlicedOrangeVatL!=nullptr)
 	{
 		halfSlicedOrangeVatL->isDropSoundEnabled=true;
+		halfSlicedOrangeVatL->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingSlicedOrangeVatLeft&&slicedOrangeVatL!=nullptr)
 	{
 		slicedOrangeVatL->isDropSoundEnabled=true;
+		slicedOrangeVatL->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingOliveVatLeft&&oliveVatL!=nullptr)
 	{
 		oliveVatL->isDropSoundEnabled=true;
+		oliveVatL->SetSimulateAndTickDisable();
+
 	}
 	else if(isGrabbingIceCubeVatLeft&&iceCubeVatL!=nullptr)
 	{
 		iceCubeVatL->isDropSoundEnabled=true;
+		iceCubeVatL->SetSimulateAndTickDisable();
+
 	}
 }
 

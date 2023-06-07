@@ -84,4 +84,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category="Haptics")
 	class UHapticFeedbackEffect_Curve* HF_PourLiquid;
+
+	UFUNCTION()
+	void SetSimulateAndTickDisable();
+
+	UPROPERTY()
+	FTimerHandle simHandle;
 };
