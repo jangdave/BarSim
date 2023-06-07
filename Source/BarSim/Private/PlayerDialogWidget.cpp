@@ -27,7 +27,7 @@ void UPlayerDialogWidget::NativeConstruct()
 	// 선택지 2
 	playerScript1.Emplace(FString::Printf(TEXT("일단 앉으시죠"))); // 2
 	// 앉고 나서
-	playerScript1.Emplace(FString::Printf(TEXT("(이상한 손님이군... 적당히 아무 칵테일이나 만들어 주자)"))); // 3
+	playerScript1.Emplace(FString::Printf(TEXT("(이상한 손님이군... 어쨋든 손님이 왔으니 코스터를 제공해주자)"))); // 3
 	// 칵테일 나옴
 	playerScript1.Emplace(FString::Printf(TEXT("여기 주문하신 칵테일 나왔습니다"))); // 4
 	playerScript1.Emplace(FString::Printf(TEXT("별난 손님이였군...."))); // 5
@@ -84,6 +84,12 @@ void UPlayerDialogWidget::NativeConstruct()
 	// 3번째 선택지
 	playerChoice3.Emplace(FString::Printf(TEXT("...알겠습니다"))); // 0
 	playerChoice3.Emplace(FString::Printf(TEXT("어쩔 수 없죠"))); // 1
+
+	// 시작 대사
+	playerStartScript.Emplace(FString::Printf(TEXT("여기가 올드팔...이군"))); // 0
+	playerStartScript.Emplace(FString::Printf(TEXT("여기가 올드팔...이군"))); // 1
+	playerStartScript.Emplace(FString::Printf(TEXT("어제 온 손님은 오늘 안오겠지. 문을 열고 내려가자"))); // 2
+	playerStartScript.Emplace(FString::Printf(TEXT("3일째가 되니 슬슬 익숙해지는군. 문을 열고 내려가자"))); // 3
 }
 
 void UPlayerDialogWidget::SetSwitcher(int32 idx)
@@ -133,4 +139,9 @@ void UPlayerDialogWidget::LeftAnswer()
 void UPlayerDialogWidget::RightAnswer()
 {
 	choiceCount = 2;
+}
+
+void UPlayerDialogWidget::StartPlayerText(int32 idx)
+{
+	text_Player->SetText(FText::FromString(playerStartScript[idx]));
 }
