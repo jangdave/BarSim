@@ -10,7 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aa3e7293-901a-4b11-b874-f5316f964720" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/ShakerStrainer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BarGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BarGameInstance.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,6 +229,7 @@
       <workItem from="1686133788596" duration="3958000" />
       <workItem from="1686143853469" duration="248000" />
       <workItem from="1686144587150" duration="1224000" />
+      <workItem from="1686147529108" duration="658000" />
     </task>
     <servers />
   </component>

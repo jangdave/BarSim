@@ -32,11 +32,11 @@ public:
 
 	// 날짜
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int32 checkDayCount; // 0
+	int32 checkDayCount = 2; // 0
 
 	// 게임모드 체크 불
 	UPROPERTY()
-	bool bCheckGameMode; // false
+	bool bCheckGameMode = true; // false
 
 	UPROPERTY()
 	bool bCheckMenu;
