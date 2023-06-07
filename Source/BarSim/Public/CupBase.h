@@ -237,4 +237,9 @@ public:
 	UPROPERTY()
 	class AOlivePick* oliveRef;
 
+	UFUNCTION()
+	void SetSimulateAndTickDisable();
+	UPROPERTY()
+	FTimerHandle simHandle;
+
 };

@@ -47,5 +47,11 @@ public:
 
 	UFUNCTION()
 	void SetLidOff();
+
+	UFUNCTION()
+	void SetSimulateAndTickDisable();
+
+	UPROPERTY()
+	FTimerHandle simHandle;
 	
 };

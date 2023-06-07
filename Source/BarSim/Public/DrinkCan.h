@@ -17,4 +17,5 @@ class BARSIM_API ADrinkCan : public AGrippableActor
 public:
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
+	
 };

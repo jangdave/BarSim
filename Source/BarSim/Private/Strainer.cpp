@@ -76,3 +76,15 @@ void AStrainer::AttachToMixingGlass()
 	}
 }
 
+void AStrainer::SetSimulateAndTickDisable()
+{
+	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	{
+		this->DisableComponentsSimulatePhysics();
+		meshComp->SetSimulatePhysics(false);
+		this->SetActorTickEnabled(false);
+		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+		
+	}), 10.0f, false);
+	
+}

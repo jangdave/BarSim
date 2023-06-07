@@ -32,4 +32,10 @@ public:
 
 	UPROPERTY()
 	bool isDropSoundEnabled = false;
+
+	UFUNCTION()
+	void SetSimulateAndTickDisable();
+
+	UPROPERTY()
+	FTimerHandle simHandle;
 };
