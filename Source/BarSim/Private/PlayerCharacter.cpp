@@ -725,6 +725,8 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		iceCubeVat->SetSimulateAndTickDisable();
 
 	}
+
+	isGrabReleased=true;
 }
 
 void APlayerCharacter::CheckDroppedObjectLeft()
@@ -866,6 +868,9 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		iceCubeVatL->SetSimulateAndTickDisable();
 
 	}
+	
+	isGrabReleased=true;
+
 }
 
 void APlayerCharacter::FireRight()
