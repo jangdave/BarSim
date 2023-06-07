@@ -109,13 +109,13 @@ void ASpawnManager::SpawnCustomer()
 	
 	// 시간이 지날때마다 손님을 스폰한다
 	FTimerHandle spawnTime;
-	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 30, true);
+	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 60, true);
 }
 
 void ASpawnManager::SpawnCustom()
 {
 	// 날짜가 지난만큼 더 많이 스폰
-	int32 idx = (gi->checkDayCount - 1) * 4; // 4
+	int32 idx = (gi->checkDayCount - 1) * 3; // 3
 	
 	// 전체 손님 수가 지정한 숫자보다 작을때
 	if(checkCustomerNum >= idx)

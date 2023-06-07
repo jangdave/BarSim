@@ -10,6 +10,7 @@
 #include "CustomerOrderWidget.h"
 #include "SpawnManager.h"
 #include "Components/BoxComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/WidgetComponent.h"
 
 // Sets default values
@@ -61,7 +62,7 @@ ACustomerCharacter::ACustomerCharacter()
 	customerFSM = CreateDefaultSubobject<UCustomerFSM>(TEXT("costomerFSM"));
 
 	orderWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("orderWidget"));
-	orderWidget->SetupAttachment(GetMesh());
+	orderWidget->SetupAttachment(GetCapsuleComponent());
 		
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
@@ -108,7 +109,7 @@ void ACustomerCharacter::SetMesh()
 
 			if(womanIdx == 0 || womanIdx == 1)
 			{
-				GetMesh()->SetRelativeScale3D(FVector(1.1));
+				GetMesh()->SetRelativeScale3D(FVector(1, 1, 1.1));
 			}
 			
 			voiceCount = idx;
@@ -131,6 +132,8 @@ void ACustomerCharacter::SetMesh()
 		{
 			GetMesh()->SetSkeletalMesh(manMesh[manIdx].Object);
 
+			GetMesh()->SetRelativeScale3D(FVector(1, 1, 1.03));
+			
 			voiceCount = idx;
 			
 			customerFSM->spawnManager->checkMeshCount = manIdx;

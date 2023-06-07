@@ -41,6 +41,9 @@ public:
 	UPROPERTY()
 	TArray<FString> playerChoice3;
 
+	UPROPERTY()
+	TArray<FString> playerStartScript;
+
 	//-----------------------------------------------------------------
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UWidgetSwitcher* WidgetSwitcher_Player;
@@ -88,4 +91,7 @@ public:
 
 	UFUNCTION()
 	void RightAnswer();
+
+	UFUNCTION()
+	void StartPlayerText(int32 idx);
 };

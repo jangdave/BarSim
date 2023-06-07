@@ -255,6 +255,7 @@ void UCustomerFSM::TickLeave()
 	
 	if(result == EPathFollowingRequestResult::AlreadyAtGoal && spawnManager->bIsCoaster[idx] != true && spawnManager->bIsCoctail[idx] != true)
 	{
+		// 컵을 치우라는 알림 지우기
 		spawnManager->aChairs[idx]->HideScore();
 		
 		spawnManager->aChairs[idx]->bSameOrder = false;
@@ -413,7 +414,7 @@ void UCustomerFSM::TickOrderJudge()
 	// 주문과 일치하면 holdcup으로 상태 이동
 	if(spawnManager->aChairs[idx]->bSameOrder == true)
 	{
-		if(curTime > 1)
+		if(curTime > 2)
 		{
 			SetSitState(ECustomerSitState::HOLDCUP);
 
@@ -536,12 +537,6 @@ void UCustomerFSM::TickAngry()
 
 			// 화내는 애니메이션 실행
 			owner->customerAnim->OnSitAnim(TEXT("Angry"));
-			
-			FTimerHandle setloc;
-			GetWorld()->GetTimerManager().SetTimer(setloc, FTimerDelegate::CreateLambda([&]()
-			{
-				owner->order_UI->EndCustomer();
-			}), 2.0f, false);
 		}
 	}
 	// 주문한 음료가 제대로 안나왔을 경우
@@ -569,45 +564,63 @@ void UCustomerFSM::TickAwesome()
 
 		// 좋아하는 애니메이션 실행
 		owner->customerAnim->OnSitAnim(TEXT("Good"));
-		
-		FTimerHandle setloc;
-		GetWorld()->GetTimerManager().SetTimer(setloc, FTimerDelegate::CreateLambda([&]()
-		{
-			owner->order_UI->EndCustomer();
-		}), 2.0f, false);
 	}
 }
 
 void UCustomerFSM::TickReadyLeave()
 {
-	if(bCheckCustomer != true && curTime > 1 && curTime <= 3)
+	if(spawnManager->aChairs[idx]->bSameOrder == true)
 	{
-		bCheckCustomer = true;
+		if(bCheckCustomer != true && curTime > 1 && curTime <= 3)
+		{
+			bCheckCustomer = true;
 
-		float money = 5 + spawnManager->aChairs[idx]->totalScore/10;
-		
-		spawnManager->gi->AddMoney(money);
-		
-		owner->order_UI->SetSwitcher(2);
-		owner->order_UI->SetMoneyText(money);
-		owner->order_UI->StartCustomer();
+			owner->order_UI->EndCustomer();
+		}
+		if(bCheckCustomer != false && curTime > 3 && curTime <= 5)
+		{
+			bCheckCustomer = false;
 
-		UGameplayStatics::PlaySound2D(GetWorld(), owner->cashSound);
+			float money = 5 + spawnManager->aChairs[idx]->totalScore/10;
+				
+			spawnManager->gi->AddMoney(money);
+				
+			owner->order_UI->SetMoneyText(money);
+			owner->order_UI->SetSwitcher(2);
+			owner->order_UI->StartCustomer();
+
+			UGameplayStatics::PlaySound2D(GetWorld(), owner->cashSound);
+		}
+
+		if(bCheckPlayAnim != true && curTime > 5)
+		{
+			owner->order_UI->EndCustomer();
+			
+			DetachCustomer();
+
+			// 컵을 치우라는 알림 띄우기
+			spawnManager->aChairs[idx]->ViewInfo();
+			
+			bCheckPlayAnim = true;
+
+			// 자리에서 일어나는 애니메이션 실행
+			owner->customerAnim->OnSitAnim(TEXT("LeaveSit"));
+		}
 	}
-
-	if(bCheckPlayAnim != true && curTime > 3)
+	else if(spawnManager->aChairs[idx]->bUnSameOrder == true)
 	{
-		owner->order_UI->EndCustomer();
-		
-		DetachCustomer();
+		if(bCheckPlayAnim != true)
+		{
+			DetachCustomer();
 
-		// 컵을 치우라는 알림 띄우기
-		spawnManager->aChairs[idx]->ViewInfo();
-		
-		bCheckPlayAnim = true;
+			// 컵을 치우라는 알림 띄우기
+			spawnManager->aChairs[idx]->ViewInfo();
+			
+			bCheckPlayAnim = true;
 
-		// 자리에서 일어나는 애니메이션 실행
-		owner->customerAnim->OnSitAnim(TEXT("LeaveSit"));
+			// 자리에서 일어나는 애니메이션 실행
+			owner->customerAnim->OnSitAnim(TEXT("LeaveSit"));
+		}
 	}
 }
 

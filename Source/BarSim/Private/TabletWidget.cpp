@@ -30,7 +30,14 @@ void UTabletWidget::NativeConstruct()
 	{
 		btn_CloseStore->SetIsEnabled(false);
 	}
-		
+
+	if(gi->checkDayCount == 1)
+	{
+		btn_OpenStore->SetIsEnabled(false);
+
+		spawnmg->bCheckSpawn = true;
+	}
+	
 	// 테블릿 레시피 메뉴
 	btn_BackMenu->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
 	btn_OpenGinLime->OnClicked.AddDynamic(this, &UTabletWidget::OpenGinLime);
@@ -101,13 +108,6 @@ void UTabletWidget::NativeConstruct()
 	// 초기값 설정
 	totalMoney->SetText(FText::AsNumber(0.0));
 	todayMoney->SetText(FText::AsNumber(0.0));
-
-	if(gi->checkDayCount == 1)
-	{
-		btn_OpenStore->SetIsEnabled(false);
-
-		spawnmg->bCheckSpawn = true;
-	}
 }
 
 void UTabletWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)

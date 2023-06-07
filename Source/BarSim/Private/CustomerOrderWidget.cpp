@@ -573,5 +573,5 @@ void UCustomerOrderWidget::SetBadText(int32 voiceCount)
 
 void UCustomerOrderWidget::SetMoneyText(float money)
 {
-	text_Money->SetText(FText::AsNumber(money));
+	text_CustomerMoney->SetText(FText::AsNumber(money));
 }

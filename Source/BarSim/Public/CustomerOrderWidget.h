@@ -33,7 +33,7 @@ public:
 	class UTextBlock* text_Customer;
 	
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
-	class UTextBlock* text_Money;
+	class UTextBlock* text_CustomerMoney;
 	
 	UPROPERTY()
 	TArray<FString> womanScriptA;
