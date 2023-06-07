@@ -276,8 +276,9 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==shaker&&shaker!=nullptr)
 		{
 			isGrabbingShakerRight=true;
-			shaker->VRGripInterfaceSettings.bDenyGripping=true;
+			shaker->SetActorTickEnabled(true);
 			shaker->isGrabbingShaker=true;
+			shaker->VRGripInterfaceSettings.bDenyGripping=true;
 		}
 		// 잡은 대상이 ShakerLid라면
 		else if(GrabbedActorRight==shakerLid&&shakerLid!=nullptr)
@@ -298,9 +299,10 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==mixingGlass&&mixingGlass!=nullptr)
 		{
 			isGrabbingMixingGlassRight=true;
+			mixingGlass->SetActorTickEnabled(true);
+			mixingGlass->isGrabbingMixingGlass=true;
 			mixingGlass->VRGripInterfaceSettings.bDenyGripping=true;
 			mixingGlass->VRGripInterfaceSettings.bSimulateOnDrop=true;
-			mixingGlass->isGrabbingMixingGlass=true;
 		}
 		// 잡은 대상이 Glass Strainer 이라면
 		else if(GrabbedActorRight==strainer&&strainer!=nullptr)
@@ -431,8 +433,9 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==shakerL&&shakerL!=nullptr)
 	{
 		isGrabbingShakerLeft=true;
-		shakerL->VRGripInterfaceSettings.bDenyGripping=true;
+		shakerL->SetActorTickEnabled(true);
 		shakerL->isGrabbingShaker=true;
+		shakerL->VRGripInterfaceSettings.bDenyGripping=true;
 	}
 	// 잡은 대상이 ShakerLid라면
 	else if(GrabbedActorLeft==shakerLidL&&shakerLidL!=nullptr)
@@ -453,9 +456,10 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==mixingGlassL&&mixingGlassL!=nullptr)
 	{
 		isGrabbingMixingGlassLeft=true;
+		mixingGlassL->SetActorTickEnabled(true);
+		mixingGlassL->isGrabbingMixingGlass=true;
 		mixingGlassL->VRGripInterfaceSettings.bDenyGripping=true;
 		mixingGlassL->VRGripInterfaceSettings.bSimulateOnDrop=true;
-		mixingGlassL->isGrabbingMixingGlass=true;
 	}
 	// 잡은 대상이 Glass Strainer 이라면
 	else if(GrabbedActorLeft==strainerL&&strainerL!=nullptr)

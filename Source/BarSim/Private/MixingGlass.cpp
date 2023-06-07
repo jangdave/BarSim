@@ -215,7 +215,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					LiquorScale();
 					mixedDrop->bStirred = bStirred;
 
-					if(pourSoundBoolean==false&&isGrabbingMixingGlass==true)
+					if(pourSoundBoolean==false)
 					{
 						UE_LOG(LogTemp, Warning, TEXT("play sound"))
 						pourSoundAudioCompM = UGameplayStatics::SpawnSound2D(GetWorld(), pourSoundM, 1, 1, 0);
@@ -268,7 +268,7 @@ void AMixingGlass::Tick(float DeltaSeconds)
 				if(waterStream)
 				{
 					waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
-					if(pourSoundBoolean==true&&pourSoundAudioCompM!=nullptr&&isGrabbingMixingGlass==true)
+					if(pourSoundBoolean==true&&pourSoundAudioCompM!=nullptr)
 					{
 						UE_LOG(LogTemp, Warning, TEXT("stop sound"));
 						pourSoundAudioCompM->SetActive(false);
@@ -286,6 +286,13 @@ void AMixingGlass::Tick(float DeltaSeconds)
 		if(waterStream)
 		{
 			waterStream->SetNiagaraVariableFloat(FString("spawnRate"), 0);
+			if(pourSoundBoolean==true&&pourSoundAudioCompM!=nullptr)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("stop sound"));
+				pourSoundAudioCompM->SetActive(false);
+				UGameplayStatics::PlaySound2D(GetWorld(), pourStopSoundM, 1, 1, 0);
+				pourSoundBoolean=false;
+			}
 			bStreamOn = false;
 		}
 	}
