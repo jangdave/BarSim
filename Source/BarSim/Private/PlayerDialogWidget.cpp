@@ -86,7 +86,7 @@ void UPlayerDialogWidget::NativeConstruct()
 	playerChoice3.Emplace(FString::Printf(TEXT("어쩔 수 없죠"))); // 1
 
 	// 시작 대사
-	playerStartScript.Emplace(FString::Printf(TEXT("여기가 올드팔...이군"))); // 0
+	playerStartScript.Emplace(FString::Printf(TEXT("문을 열고 바 올드 팔로 이동하세요"))); // 0
 	playerStartScript.Emplace(FString::Printf(TEXT("여기가 올드팔...이군"))); // 1
 	playerStartScript.Emplace(FString::Printf(TEXT("어제 온 손님은 오늘 안오겠지. 문을 열고 내려가자"))); // 2
 	playerStartScript.Emplace(FString::Printf(TEXT("3일째가 되니 슬슬 익숙해지는군. 문을 열고 내려가자"))); // 3

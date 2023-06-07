@@ -67,6 +67,13 @@ void UMenuWidget::StoryMode()
 		
 		parent->Destroy();
 	}
+
+	auto player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+
+	if(player != nullptr)
+	{
+		player->PlayerMenuText();
+	}
 }
 
 void UMenuWidget::TutorialMode()
@@ -83,6 +90,13 @@ void UMenuWidget::TutorialMode()
 		gi->bCheckMenu = true;
 		
 		parent->Destroy();
+	}
+
+	auto player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+
+	if(player != nullptr)
+	{
+		player->PlayerMenuText();
 	}
 }
 
