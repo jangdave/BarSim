@@ -124,7 +124,7 @@ void AShakerStrainer::SetSimulateAndTickDisable()
 	{
 		this->DisableComponentsSimulatePhysics();
 		meshComp->SetSimulatePhysics(false);
-		this->SetActorTickEnabled(false);
+		//this->SetActorTickEnabled(false);
 		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
 		
 	}), 10.0f, false);
