@@ -326,6 +326,8 @@ public:
 	class UHapticFeedbackEffect_Curve* HF_GrabObjectLeft;
 
 	
-
+	// Camera Fade
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartCameraFade();
 	
 };
