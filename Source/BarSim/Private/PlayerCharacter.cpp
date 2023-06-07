@@ -372,7 +372,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 
 	}
 	
-	
+	isDropped=false;
 }
 
 void APlayerCharacter::CheckGrabbedObjectLeft()
@@ -549,6 +549,8 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 		GetWorld()->GetTimerManager().ClearTimer(iceCubeVatL->simHandle);
 
 	}
+
+	isDropped=false;
 }
 
 void APlayerCharacter::CheckDroppedObjectRight()
@@ -726,7 +728,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 
 	}
 
-	isGrabReleased=true;
+	isDropped=true;
 }
 
 void APlayerCharacter::CheckDroppedObjectLeft()
@@ -869,7 +871,7 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 
 	}
 	
-	isGrabReleased=true;
+	isDropped=true;
 
 }
 

@@ -342,5 +342,5 @@ public:
 	void PlayerMenuText();
 
 	UPROPERTY()
-	bool isGrabReleased = false;
+	bool isDropped = false;
 };
