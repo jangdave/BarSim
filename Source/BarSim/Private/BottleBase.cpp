@@ -149,11 +149,16 @@ void ABottleBase::Tick(float DeltaTime)
 
 void ABottleBase::SetSimulateAndTickDisable()
 {
-	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	GetWorldTimerManager().SetTimer(simHandle, this, &ABottleBase::SimulateAndTickDisable,10.0f, false);
+}
+
+void ABottleBase::SimulateAndTickDisable()
+{
+	if(meshComp)
 	{
 		this->DisableComponentsSimulatePhysics();
 		meshComp->SetSimulatePhysics(false);
 		this->SetActorTickEnabled(false);
-		
-	}), 10.0f, false);
+		//UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+	}
 }

@@ -54,11 +54,11 @@ void ASpawnManager::CheckChairSit()
 
 		if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair1")
 		{
-			aChairs[0] = chair;
+			aChairs[1] = chair;
 		}
 		else if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair2")
 		{
-			aChairs[1] = chair;
+			aChairs[0] = chair;
 		}
 		else if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair3")
 		{
@@ -109,7 +109,7 @@ void ASpawnManager::SpawnCustomer()
 	
 	// 시간이 지날때마다 손님을 스폰한다
 	FTimerHandle spawnTime;
-	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 10, true);
+	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 50, true);
 }
 
 void ASpawnManager::SpawnCustom()

@@ -44,13 +44,13 @@ void AHuchuTong::Tick(float DeltaTime)
 
 void AHuchuTong::SetSimulateAndTickDisable()
 {
-	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
-	{
+	GetWorldTimerManager().SetTimer(simHandle,this, &AHuchuTong::SimulateAndTickDisable, 10.0f, false);	
+}
+
+void AHuchuTong::SimulateAndTickDisable()
+{
 		this->DisableComponentsSimulatePhysics();
 		this->SetActorTickEnabled(false);
-		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
-		
-	}), 10.0f, false);
-	
+		//UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
 }
 

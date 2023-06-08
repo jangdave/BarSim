@@ -75,6 +75,9 @@ public:
 
 	UPROPERTY()
 	class AAIController* ai;
+
+	UPROPERTY()
+	class APlayerCharacter* player;
 	
 	// 의자 순서 저장 인자
 	UPROPERTY()

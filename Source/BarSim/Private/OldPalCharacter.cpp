@@ -95,9 +95,6 @@ void AOldPalCharacter::BindOldPalOverlap()
 			cup->AttachToComponent(bodyComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, "hand_rSocket");
 		}
 	}
-
-	// 디버그 라인
-	DrawDebugSphere(GetWorld(), centerLoc, 20, 1, FColor::Yellow, false, 1);
 }
 
 void AOldPalCharacter::DetachCup()

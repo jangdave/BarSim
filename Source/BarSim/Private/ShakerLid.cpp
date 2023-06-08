@@ -90,13 +90,16 @@ void AShakerLid::SetLidOff()
 
 void AShakerLid::SetSimulateAndTickDisable()
 {
-	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	GetWorldTimerManager().SetTimer(simHandle,this, &AShakerLid::SimulateAndTickDisable, 10.0f, false);	
+}
+
+void AShakerLid::SimulateAndTickDisable()
+{
+	if(meshComp)
 	{
 		this->DisableComponentsSimulatePhysics();
 		meshComp->SetSimulatePhysics(false);
 		this->SetActorTickEnabled(false);
-		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
-		
-	}), 10.0f, false);
-	
+		//UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+	}
 }
