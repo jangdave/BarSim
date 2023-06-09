@@ -11,6 +11,7 @@
 #include "HalfSlicedLime.h"
 #include "HalfSlicedOrange.h"
 #include "OlivePick.h"
+#include "PlayerCharacter.h"
 #include "SlicedOrange.h"
 #include "SpawnManager.h"
 #include "Components/CapsuleComponent.h"
@@ -39,6 +40,8 @@ void UCustomerFSM::BeginPlay()
 
 	spawnManager = Cast<ASpawnManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ASpawnManager::StaticClass()));
 
+	player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+	
 	// 기본 상태 설정
 	state = ECustomerState::IDLE;
 
@@ -249,7 +252,7 @@ void UCustomerFSM::TickSit()
 void UCustomerFSM::TickLeave()
 {
 	// 문 밖의 스폰매니저 주변으로 이동
-	auto loc = spawnManager->GetActorLocation();
+	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 500;
 
 	auto result = ai->MoveToLocation(loc);
 	
@@ -414,7 +417,7 @@ void UCustomerFSM::TickOrderJudge()
 	// 주문과 일치하면 holdcup으로 상태 이동
 	if(spawnManager->aChairs[idx]->bSameOrder == true)
 	{
-		if(curTime > 2)
+		if(curTime > 2 && player->isDropped == true)
 		{
 			SetSitState(ECustomerSitState::HOLDCUP);
 

@@ -106,11 +106,7 @@ void APlayerCharacter::BeginPlay()
 	BarGameInstance = Cast<UBarGameInstance>(GetWorld()->GetGameInstance());
 
 	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
-	{
-		PlayerStartText();
-	}), 1.0f, false);
-	
+	GetWorldTimerManager().SetTimer(timer, this, &APlayerCharacter::PlayerStartText, 3.0f, false);
 }
 
 
@@ -1649,11 +1645,10 @@ void APlayerCharacter::PlayerTutoText()
 	playerText_UI->StartPlayerText(1);
 	playerText_UI->StartPlayer();
 
+	playerText_UI->EndPlayer();
+
 	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
-	{
-		playerText_UI->EndPlayer();
-	}), 3.0f, false);
+	GetWorldTimerManager().SetTimer(timer, this, &APlayerCharacter::EndText, 5.0f, false);
 }
 
 void APlayerCharacter::PlayerStartText()
@@ -1674,10 +1669,7 @@ void APlayerCharacter::PlayerStartText()
 	}
 
 	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
-	{
-		playerText_UI->EndPlayer();
-	}), 3.0f, false);
+	GetWorldTimerManager().SetTimer(timer, this, &APlayerCharacter::EndText, 3.0f, false);
 }
 
 void APlayerCharacter::PlayerMenuText()
@@ -1688,8 +1680,10 @@ void APlayerCharacter::PlayerMenuText()
 	playerText_UI->StartPlayer();
 
 	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
-	{
-		playerText_UI->EndPlayer();
-	}), 3.0f, false);
+	GetWorldTimerManager().SetTimer(timer, this, &APlayerCharacter::EndText, 3.0f, false);
+}
+
+void APlayerCharacter::EndText()
+{
+	playerText_UI->EndPlayer();
 }

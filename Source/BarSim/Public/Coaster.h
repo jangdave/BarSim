@@ -38,4 +38,7 @@ public:
 
 	UPROPERTY()
 	FTimerHandle simHandle;
+
+	UFUNCTION()
+	void SimulateAndTickDisable();
 };

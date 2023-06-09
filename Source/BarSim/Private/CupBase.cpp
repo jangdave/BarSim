@@ -743,14 +743,18 @@ void ACupBase::PlayerCast()
 
 void ACupBase::SetSimulateAndTickDisable()
 {
-	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	GetWorldTimerManager().SetTimer(simHandle, this, &ACupBase::SimulateAndTickDisable, 10.0f, false);
+	
+}
+
+void ACupBase::SimulateAndTickDisable()
+{
+	if(cupComp)
 	{
 		this->DisableComponentsSimulatePhysics();
 		cupComp->SetSimulatePhysics(false);
 		this->SetActorTickEnabled(false);
-		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
-		
-	}), 10.0f, false);
-	
+		//UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+	}
 }
 

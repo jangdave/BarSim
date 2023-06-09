@@ -179,7 +179,7 @@ void UOldPalFSM::TickReadyLean()
 	{
 		if(gi->checkDayCount == 1)
 		{
-			if(bPlayerTalk != true)
+			if(bPlayerTalk != true && curTime > 1)
 			{
 				// 플레이어 대사 0
 				player->playerText_UI->SetSwitcher(0);
@@ -215,7 +215,7 @@ void UOldPalFSM::TickTalk()
 {
 	if(gi->checkDayCount == 1)
 	{
-		if(bPlayerTalk != true && curTime > 1)
+		if(bPlayerTalk != true && curTime > 3)
 		{
 			// 플레이어 대사 지우기
 			player->playerText_UI->EndPlayer();
@@ -374,7 +374,7 @@ void UOldPalFSM::TickChoice()
 {
 	if(gi->checkDayCount == 1)
 	{
-		if(bOldPalTalk != true && curTime > 1)
+		if(bOldPalTalk != true && curTime > 2)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -496,7 +496,7 @@ void UOldPalFSM::TickReadyMove()
 	if(gi->checkDayCount == 1)
 	{
 		// 의자의 저장하고
-		idx = 1;
+		idx = 0;
 		
 		// 앉은 의자 배열에 착석 여부 바꾸기
 		spawnManager->aChairs[idx]->bCheck = true;
@@ -592,7 +592,7 @@ void UOldPalFSM::TickReadyMove()
 	else
 	{
 		// 의자의 저장하고
-		idx = 1;
+		idx = 0;
 		
 		// 앉은 의자 배열에 착석 여부 바꾸기
 		spawnManager->aChairs[idx]->bCheck = true;
@@ -1132,7 +1132,7 @@ void UOldPalFSM::TickWait()
 		}
 		
 		// 일정 시간안에 코스터와 칵테일이 준비 되면 상태 이동
-		if(curTime > 5 && curTime <= 10 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
+		if(curTime > 5 && curTime <= 10 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false && player->isDropped == true)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -1156,7 +1156,7 @@ void UOldPalFSM::TickWait()
 	// 3일
 	else
 	{
-		if(curTime > 1 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
+		if(curTime > 1 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false && player->isDropped == true)
 		{
 			owner->oldPal_UI->EndOldPal();
 			
@@ -1187,7 +1187,7 @@ void UOldPalFSM::TickWaitLong()
 		}
 		
 		// 코스터와 칵테일이 준비 되면 상태 이동
-		if(curTime > 2 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
+		if(curTime > 2 && spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false && player->isDropped == true)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();

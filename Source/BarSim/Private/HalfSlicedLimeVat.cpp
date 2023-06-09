@@ -30,11 +30,16 @@ void AHalfSlicedLimeVat::Tick(float DeltaTime)
 
 void AHalfSlicedLimeVat::SetSimulateAndTickDisable()
 {
-	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	GetWorldTimerManager().SetTimer(simHandle,this, &AHalfSlicedLimeVat::SimulateAndTickDisable, 10.0f, false);	
+}
+
+void AHalfSlicedLimeVat::SimulateAndTickDisable()
+{
+	if(meshComp)
 	{
 		this->DisableComponentsSimulatePhysics();
 		meshComp->SetSimulatePhysics(false);
 		this->SetActorTickEnabled(false);
-		
-	}), 10.0f, false);
+		//UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+	}
 }

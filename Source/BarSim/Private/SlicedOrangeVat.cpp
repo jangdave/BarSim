@@ -29,13 +29,16 @@ void ASlicedOrangeVat::Tick(float DeltaTime)
 
 void ASlicedOrangeVat::SetSimulateAndTickDisable()
 {
-	GetWorldTimerManager().SetTimer(simHandle, FTimerDelegate::CreateLambda([this]()->void
+	GetWorldTimerManager().SetTimer(simHandle,this, &ASlicedOrangeVat::SimulateAndTickDisable, 10.0f, false);	
+}
+
+void ASlicedOrangeVat::SimulateAndTickDisable()
+{
+	if(meshComp)
 	{
 		this->DisableComponentsSimulatePhysics();
 		meshComp->SetSimulatePhysics(false);
 		this->SetActorTickEnabled(false);
-		UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
-		
-	}), 10.0f, false);
-	
+		//UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
+	}
 }

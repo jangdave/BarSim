@@ -343,4 +343,7 @@ public:
 
 	UPROPERTY()
 	bool isDropped = false;
+
+	UFUNCTION()
+	void EndText();
 };
