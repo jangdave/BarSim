@@ -154,27 +154,24 @@ void ASpawnManager::GetCustomerIdx(int32 orderIdx, int32 idx)
 
 void ASpawnManager::SpawnOldPal()
 {
-	if(gi != nullptr)
+	if(gi->checkDayCount == 1 && bSpawnOld != true)
 	{
-		if(gi->checkDayCount == 1 && bSpawnOld != true)
-		{
-			GetWorld()->SpawnActor<AOldPalCharacter>(oldPalFactory, GetActorLocation(), GetActorRotation());
+		GetWorld()->SpawnActor<AOldPalCharacter>(oldPalFactory, GetActorLocation(), GetActorRotation());
 
-			bSpawnOld = true;
-		}
-		else if(gi->checkDayCount == 2)
-		{
-			player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
-			
-			FTimerHandle timer;
-			GetWorldTimerManager().SetTimer(timer, this, &ASpawnManager::SecondDay, 0.1, true);
-		}
-		else if(gi->checkDayCount == 3 && bSpawnOld != true)
-		{
-			GetWorld()->SpawnActor<AOldPalCharacter>(oldPalFactory, GetActorLocation(), GetActorRotation());
+		bSpawnOld = true;
+	}
+	else if(gi->checkDayCount == 2)
+	{
+		player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+		
+		FTimerHandle timer;
+		GetWorldTimerManager().SetTimer(timer, this, &ASpawnManager::SecondDay, 0.1, true);
+	}
+	else if(gi->checkDayCount == 3 && bSpawnOld != true)
+	{
+		GetWorld()->SpawnActor<AOldPalCharacter>(oldPalFactory, GetActorLocation(), GetActorRotation());
 
-			bSpawnOld = true;
-		}
+		bSpawnOld = true;
 	}
 }
 
