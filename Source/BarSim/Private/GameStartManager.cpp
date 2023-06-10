@@ -4,6 +4,7 @@
 #include "GameStartManager.h"
 #include "BarGameInstance.h"
 #include "PlayerCharacter.h"
+#include "XRLoadingScreenFunctionLibrary.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -40,6 +41,10 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 	if(player != nullptr)
 	{
+
+		UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+		UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+		
 		auto gi = Cast<UBarGameInstance>(GetGameInstance());
 		
 		gi->goToMainMapDele.Execute();

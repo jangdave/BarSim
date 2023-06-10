@@ -5,6 +5,7 @@
 #include "BarGameInstance.h"
 #include "MenuWidgetActor.h"
 #include "PlayerCharacter.h"
+#include "XRLoadingScreenFunctionLibrary.h"
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
 #include "Kismet/GameplayStatics.h"
@@ -151,6 +152,9 @@ void UMenuWidget::CheckYes()
 
 			gi->bCheckMenu = false;
 
+			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
 			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 		}
 		else if(currentMap == "BarTutorialMap")
@@ -159,6 +163,9 @@ void UMenuWidget::CheckYes()
 
 			gi->bCheckMenu = true;
 
+			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
 			UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
 		}
 	}
@@ -166,12 +173,16 @@ void UMenuWidget::CheckYes()
 	{
 		if(currentMap == "BarStartMap")
 		{
+			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 		}
 		else if(currentMap == "BarMainMap")
 		{
 			gi->TotalMoney = {0, 0, 0, 0};
-			
+
+			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
 		}
 	}
@@ -179,6 +190,8 @@ void UMenuWidget::CheckYes()
 	{
 		if(currentMap == "BarStartMap")
 		{
+			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 		}
 		else if(currentMap == "BarMainMap")
@@ -193,6 +206,8 @@ void UMenuWidget::CheckYes()
 			
 			gi->TotalMoney = {oneday, 0, 0, settotal};
 			
+			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
 		}
 	}
@@ -200,6 +215,8 @@ void UMenuWidget::CheckYes()
 	{
 		if(currentMap == "BarStartMap")
 		{
+			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 		}
 		else if(currentMap == "BarMainMap")
@@ -215,7 +232,9 @@ void UMenuWidget::CheckYes()
 			auto settotal = total - threeday;
 			
 			gi->TotalMoney = {oneday, twoday, 0, settotal};
-			
+
+			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
 		}
 	}
@@ -240,7 +259,9 @@ void UMenuWidget::ResetYes()
 	gi->bCheckMenu = false;
 
 	gi->TotalMoney = {0, 0, 0, 0};
-	
+
+	UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+	UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 	UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 }
 
