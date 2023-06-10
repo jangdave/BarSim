@@ -14,15 +14,15 @@ void UCustomerOrderWidget::NativeConstruct()
 
 	// 여성 A
 	// 주문
-	womanScriptA.Emplace(FString::Printf(TEXT("진라임되죠? 한 잔 주세요"))); // 0
-	womanScriptA.Emplace(FString::Printf(TEXT("다이키리되죠? 한 잔 주세요"))); // 1
-	womanScriptA.Emplace(FString::Printf(TEXT("마티니되죠? 한 잔 주세요"))); // 2
-	womanScriptA.Emplace(FString::Printf(TEXT("네그로니되죠? 한 잔 주세요"))); // 3
+	womanScriptA.Emplace(FString::Printf(TEXT("진라임 되죠? 한 잔 주세요"))); // 0
+	womanScriptA.Emplace(FString::Printf(TEXT("다이키리 되죠? 한 잔 주세요"))); // 1
+	womanScriptA.Emplace(FString::Printf(TEXT("마티니 되죠? 한 잔 주세요"))); // 2
+	womanScriptA.Emplace(FString::Printf(TEXT("네그로니 되죠? 한 잔 주세요"))); // 3
 	// 한번
-	womanScriptA.Emplace(FString::Printf(TEXT("이거 말고 진라임 주문했어요"))); // 4
-	womanScriptA.Emplace(FString::Printf(TEXT("이거 말고 다이키리 주문했어요"))); // 5
-	womanScriptA.Emplace(FString::Printf(TEXT("이거 말고 마티니 주문했어요"))); // 6
-	womanScriptA.Emplace(FString::Printf(TEXT("이거 말고 네그로니 주문했어요"))); // 7
+	womanScriptA.Emplace(FString::Printf(TEXT("이거 말고... 저는 진라임을 주문했어요"))); // 4
+	womanScriptA.Emplace(FString::Printf(TEXT("이거 말고... 저는 다이키리를 주문했어요"))); // 5
+	womanScriptA.Emplace(FString::Printf(TEXT("이거 말고... 저는 마티니를 주문했어요"))); // 6
+	womanScriptA.Emplace(FString::Printf(TEXT("이거 말고... 저는 네그로니를 주문했어요"))); // 7
 	// 두번
 	womanScriptA.Emplace(FString::Printf(TEXT("주문한 메뉴도 제대로 못 만드시네요?"))); // 8
 	womanScriptA.Emplace(FString::Printf(TEXT("맛있어요~ 딱이네요!"))); // 9
@@ -58,7 +58,7 @@ void UCustomerOrderWidget::NativeConstruct()
 	// 두번
 	womanScriptC.Emplace(FString::Printf(TEXT("다신 오나봐라"))); // 8
 	womanScriptC.Emplace(FString::Printf(TEXT("이 정도면 마실만 하네"))); // 9
-	womanScriptC.Emplace(FString::Printf(TEXT("웩 이게 무슨 맛이야"))); // 10
+	womanScriptC.Emplace(FString::Printf(TEXT("이게 도대체 무슨 맛이야..."))); // 10
 
 	// 여성 D
 	// 주문
@@ -88,7 +88,7 @@ void UCustomerOrderWidget::NativeConstruct()
 	manScriptA.Emplace(FString::Printf(TEXT("주문한 마티니가 아닌거 같은데요?"))); // 6
 	manScriptA.Emplace(FString::Printf(TEXT("주문한 네그로니가 아닌거 같은데요?"))); // 7
 	// 두번
-	manScriptA.Emplace(FString::Printf(TEXT("주문한 메뉴를 안주다니 못참겠네요"))); // 8
+	manScriptA.Emplace(FString::Printf(TEXT("주문한 메뉴를 안주다니 못 참겠네요"))); // 8
 	manScriptA.Emplace(FString::Printf(TEXT("맛있네요 잘 마셨습니다"))); // 9
 	manScriptA.Emplace(FString::Printf(TEXT("음...제가 알던 맛이 아니네요"))); // 10
 	

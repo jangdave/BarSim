@@ -27,7 +27,7 @@ void UPlayerDialogWidget::NativeConstruct()
 	// 선택지 2
 	playerScript1.Emplace(FString::Printf(TEXT("일단 앉으시죠"))); // 2
 	// 앉고 나서
-	playerScript1.Emplace(FString::Printf(TEXT("(이상한 손님이군... 어쨋든 손님이 왔으니 코스터를 제공해주자)"))); // 3
+	playerScript1.Emplace(FString::Printf(TEXT("(이상한 손님이군... 어쨌든 손님이 왔으니 코스터를 제공해주자)"))); // 3
 	// 칵테일 나옴
 	playerScript1.Emplace(FString::Printf(TEXT("여기 주문하신 칵테일 나왔습니다"))); // 4
 	playerScript1.Emplace(FString::Printf(TEXT("별난 손님이였군...."))); // 5
@@ -72,7 +72,7 @@ void UPlayerDialogWidget::NativeConstruct()
 	playerScript3.Emplace(FString::Printf(TEXT("...아버지가 저를 생각하면서요? 말도 안돼요"))); // 25
 	playerScript3.Emplace(FString::Printf(TEXT("그렇게 연락 한 통 없던, 빌어먹을 아버지였는데요?"))); // 26
 	playerScript3.Emplace(FString::Printf(TEXT("이제와서 그런다고 도대체 뭐가 달라지죠?"))); // 27
-	playerScript3.Emplace(FString::Printf(TEXT("젓지말고, 흔들어서 라... 익숙한 문장인데"))); // 28
+	playerScript3.Emplace(FString::Printf(TEXT("젓지 말고, 흔들어서 라... 익숙한 문장인데"))); // 28
 	playerScript3.Emplace(FString::Printf(TEXT("일단 오늘은 여기까지 하자"))); // 29
 	playerScript3.Emplace(FString::Printf(TEXT("빌어먹을 아버지..."))); // 30
 	playerScript3.Emplace(FString::Printf(TEXT("어떤 생각을 했는지 한번 들어나보자구"))); // 31
