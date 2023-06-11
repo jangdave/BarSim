@@ -24,7 +24,7 @@ void UOldPalOrderWidget::NativeConstruct()
 	oldpalScript1.Emplace(FString::Printf(TEXT("그래도 역시 뭘 마실 땐, 여기 올드팔이 제일 편해"))); // 3
 	oldpalScript1.Emplace(FString::Printf(TEXT("새삼 이곳도 정말 오래된 친구 같아졌군 그래... 허허"))); // 4
 	// 웨이팅
-	oldpalScript1.Emplace(FString::Printf(TEXT("코스터가 없구만..."))); // 5
+	oldpalScript1.Emplace(FString::Printf(TEXT("코스터가 없군."))); // 5
 	oldpalScript1.Emplace(FString::Printf(TEXT("생각보다 오래 걸리는군."))); // 6
 	//---------------------------------------------------------------------------선택
 	oldpalScript1.Emplace(FString::Printf(TEXT("진라임인가..."))); // 7
@@ -41,7 +41,7 @@ void UOldPalOrderWidget::NativeConstruct()
 	oldpalScript1.Emplace(FString::Printf(TEXT("기대 이상으로 훌륭하군"))); // 16
 	oldpalScript1.Emplace(FString::Printf(TEXT("어떤 칵테일인지는 모르겠지만, 잘 마셨네"))); // 17
 	//---------------------------------------------------------------------------
-	oldpalScript1.Emplace(FString::Printf(TEXT("오늘은 한 잔만 마시고 가보겠네"))); // 18
+	oldpalScript1.Emplace(FString::Printf(TEXT("오늘은 한 잔 마셨으니 이만 돌아가보겠네"))); // 18
 	oldpalScript1.Emplace(FString::Printf(TEXT("또 보세, 젊은 바텐더 선생"))); // 19
 
 	// 셋째날 대화
