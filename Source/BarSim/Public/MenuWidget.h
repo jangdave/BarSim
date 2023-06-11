@@ -116,4 +116,7 @@ public:
 	UFUNCTION()
 	void ResetNo();
 
+	UPROPERTY(EditAnywhere, Category="Texture")
+	class UTexture* LoadingTexture;
+
 };
