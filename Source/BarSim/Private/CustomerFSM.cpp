@@ -252,7 +252,7 @@ void UCustomerFSM::TickSit()
 void UCustomerFSM::TickLeave()
 {
 	// 문 밖의 스폰매니저 주변으로 이동
-	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 500;
+	auto loc = spawnManager->GetActorLocation() + spawnManager->GetActorRightVector() * 600;
 
 	auto result = ai->MoveToLocation(loc);
 	

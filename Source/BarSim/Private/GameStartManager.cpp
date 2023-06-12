@@ -23,6 +23,8 @@ void AGameStartManager::BeginPlay()
 {
 	Super::BeginPlay();
 
+	gi = Cast<UBarGameInstance>(GetGameInstance());
+		
 	boxComp->OnComponentBeginOverlap.AddDynamic(this, &AGameStartManager::OnOverlap);
 
 }
@@ -43,8 +45,6 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 	{
 		UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
 		UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
-		
-		auto gi = Cast<UBarGameInstance>(GetGameInstance());
 		
 		gi->goToMainMapDele.Execute();
 
