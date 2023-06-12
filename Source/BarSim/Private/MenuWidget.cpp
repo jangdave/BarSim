@@ -20,12 +20,13 @@ void UMenuWidget::NativeConstruct()
 	gi = Cast<UBarGameInstance>(GetGameInstance());
 
 	// 0일차 메뉴 버튼 바인드
-	btn_StoryMode->OnClicked.AddDynamic(this, &UMenuWidget::GameStart);
+	btn_StoryMode->OnClicked.AddDynamic(this, &UMenuWidget::StoryStart);
+	btn_ArcadeMode->OnClicked.AddDynamic(this, &UMenuWidget::ArcadeStart);
 	btn_QuitGame->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceQuit);
 
 	// 튜토리얼 선택
 	btn_TutorialYes->OnClicked.AddDynamic(this, &UMenuWidget::TutorialMode);
-	btn_TutorialNo->OnClicked.AddDynamic(this, &UMenuWidget::StoryMode);
+	btn_TutorialNo->OnClicked.AddDynamic(this, &UMenuWidget::NoTutorialMode);
 
 	// 이후 메뉴 버튼 바인드
 	btn_ResumeGame->OnClicked.AddDynamic(this, &UMenuWidget::ResumeGame);
@@ -43,9 +44,19 @@ void UMenuWidget::NativeConstruct()
 	btn_QuitNo->OnClicked.AddDynamic(this, &UMenuWidget::QuitGameNo);
 }
 
-void UMenuWidget::GameStart()
+void UMenuWidget::StoryStart()
 {
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(1);
+}
+
+void UMenuWidget::ArcadeStart()
+{
+	WidgetSwitcher_Menu->SetActiveWidgetIndex(1);
+	
+	if(gi != nullptr)
+	{
+		gi->bCheckArcadeMode = true;
+	}
 }
 
 void UMenuWidget::ChoiceQuit()
@@ -53,7 +64,7 @@ void UMenuWidget::ChoiceQuit()
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(5);
 }
 
-void UMenuWidget::StoryMode()
+void UMenuWidget::NoTutorialMode()
 {
 	if(gi != nullptr)
 	{
@@ -141,101 +152,151 @@ void UMenuWidget::ChoiceCheck()
 void UMenuWidget::CheckYes()
 {
 	auto currentMap = UGameplayStatics::GetCurrentLevelName(GetWorld());
-	
-	// 체크포인트로 보내기
-	if(gi->checkDayCount == 0 && currentMap != "")
+
+	if(gi->bCheckArcadeMode != true)
 	{
-
-		if(currentMap == "BarStartMap")
+		// 체크포인트로 보내기
+		if(gi->checkDayCount == 0 && currentMap != "")
 		{
-			gi->bCheckGameMode = false;
+			if(currentMap == "BarStartMap")
+			{
+				gi->bCheckGameMode = false;
 
-			gi->bCheckMenu = false;
+				gi->bCheckMenu = false;
 
-			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
-			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 
-			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarTutorialMap")
+			{
+				gi->bCheckGameMode = false;
+
+				gi->bCheckMenu = true;
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+			}
 		}
-		else if(currentMap == "BarTutorialMap")
+		else if(gi->checkDayCount == 1 && currentMap != "")
 		{
-			gi->bCheckGameMode = false;
+			if(currentMap == "BarStartMap")
+			{
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				gi->TotalMoney = {0, 0, 0, 0};
 
-			gi->bCheckMenu = true;
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
+		}
+		else if(gi->checkDayCount == 2 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				auto oneday = gi->TotalMoney[0];
 
-			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
-			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				auto twoday = gi->TotalMoney[1];
+				
+				auto total = gi->TotalMoney[3];
 
-			UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+				auto settotal = total - twoday;
+				
+				gi->TotalMoney = {oneday, 0, 0, settotal};
+				
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
+		}
+		else if(gi->checkDayCount == 3 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				auto oneday = gi->TotalMoney[0];
+
+				auto twoday = gi->TotalMoney[1];
+				
+				auto threeday = gi->TotalMoney[2];
+				
+				auto total = gi->TotalMoney[3];
+
+				auto settotal = total - threeday;
+				
+				gi->TotalMoney = {oneday, twoday, 0, settotal};
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
 		}
 	}
-	else if(gi->checkDayCount == 1 && currentMap != "")
+	else
 	{
-		if(currentMap == "BarStartMap")
+		// 체크포인트로 보내기
+		if(gi->checkDayCount == 0 && currentMap != "")
 		{
-			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
-			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
-			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			if(currentMap == "BarStartMap")
+			{
+				gi->bCheckGameMode = false;
+
+				gi->bCheckArcadeMode = false;
+				
+				gi->bCheckMenu = false;
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarTutorialMap")
+			{
+				gi->bCheckGameMode = false;
+
+				gi->bCheckMenu = true;
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+			}
 		}
-		else if(currentMap == "BarMainMap")
+		else if(gi->checkDayCount == 3 && currentMap != "")
 		{
-			gi->TotalMoney = {0, 0, 0, 0};
+			if(currentMap == "BarStartMap")
+			{
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				gi->TotalMoney = {0, 0, 0, 0};
 
-			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
-			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
-			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
-		}
-	}
-	else if(gi->checkDayCount == 2 && currentMap != "")
-	{
-		if(currentMap == "BarStartMap")
-		{
-			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
-			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
-			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
-		}
-		else if(currentMap == "BarMainMap")
-		{
-			auto oneday = gi->TotalMoney[0];
-
-			auto twoday = gi->TotalMoney[1];
-			
-			auto total = gi->TotalMoney[3];
-
-			auto settotal = total - twoday;
-			
-			gi->TotalMoney = {oneday, 0, 0, settotal};
-			
-			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
-			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
-			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
-		}
-	}
-	else if(gi->checkDayCount == 3 && currentMap != "")
-	{
-		if(currentMap == "BarStartMap")
-		{
-			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
-			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
-			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
-		}
-		else if(currentMap == "BarMainMap")
-		{
-			auto oneday = gi->TotalMoney[0];
-
-			auto twoday = gi->TotalMoney[1];
-			
-			auto threeday = gi->TotalMoney[2];
-			
-			auto total = gi->TotalMoney[3];
-
-			auto settotal = total - threeday;
-			
-			gi->TotalMoney = {oneday, twoday, 0, settotal};
-
-			UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
-			UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
-			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
 		}
 	}
 }
@@ -256,6 +317,8 @@ void UMenuWidget::ResetYes()
 
 	gi->bCheckGameMode = false;
 
+	gi->bCheckArcadeMode = false;
+	
 	gi->bCheckMenu = false;
 
 	gi->TotalMoney = {0, 0, 0, 0};
