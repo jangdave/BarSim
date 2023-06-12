@@ -85,8 +85,6 @@ void APlayerCharacter::BeginPlay()
 
 	GetCharacterMovement()->bRequestedMoveUseAcceleration=false;
 	GetCharacterMovement()->bNetworkSkipProxyPredictionOnNetUpdate=true;
-	//LeftMotionController->bSmoothHandTracking=true;
-	//RightMotionController->bSmoothHandTracking=true;
 	
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;	
