@@ -143,6 +143,23 @@ public:
 	// 마신 횟수
 	UPROPERTY()
 	int32 drinkCount = 0;
+
+
+	// 음성 관련
+	UPROPERTY(EditAnywhere, Category = "Voice")
+	TArray<int32> OldPalVoiceTIme;
+	
+	UFUNCTION()
+	void PlayOldPalVoice1(int32 index);
+
+	UFUNCTION()
+	void PlayOldPalVoice3(int32 index);
+
+	UFUNCTION()
+	void PlayPlayerVoice1(int32 index);
+	
+	UFUNCTION()
+	void PlayPlayerVoice3(int32 index);
 	
 private:
 	// 기본 상태 함수

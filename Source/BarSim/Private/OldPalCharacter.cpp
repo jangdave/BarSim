@@ -9,6 +9,7 @@
 #include "OldPalOrderWidget.h"
 #include "PlayerCharacter.h"
 #include "SpawnManager.h"
+#include "Components/AudioComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/WidgetComponent.h"
@@ -36,6 +37,18 @@ AOldPalCharacter::AOldPalCharacter()
 	oldPalWidget->SetupAttachment(GetCapsuleComponent());
 	
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
+
+	oldPalVoice1st = CreateDefaultSubobject<UAudioComponent>(TEXT("OldPalVoice1st"));
+	oldPalVoice1st->SetupAttachment(RootComponent);
+
+	oldPalVoice3rd = CreateDefaultSubobject<UAudioComponent>(TEXT("OldPalVoice3rd"));
+	oldPalVoice3rd->SetupAttachment(RootComponent);
+
+	playerVoice1st = CreateDefaultSubobject<UAudioComponent>(TEXT("PlayerVoice1st"));
+	playerVoice1st->SetupAttachment(RootComponent);
+
+	playerVoice3rd = CreateDefaultSubobject<UAudioComponent>(TEXT("PlayerVoice3rd"));
+	playerVoice3rd->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned

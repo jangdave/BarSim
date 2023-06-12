@@ -28,7 +28,7 @@ void UOldPalOrderWidget::NativeConstruct()
 	oldpalScript1.Emplace(FString::Printf(TEXT("생각보다 오래 걸리는군."))); // 6
 	//---------------------------------------------------------------------------선택
 	oldpalScript1.Emplace(FString::Printf(TEXT("진라임인가..."))); // 7
-	oldpalScript1.Emplace(FString::Printf(TEXT("다이커리인가..."))); // 8
+	oldpalScript1.Emplace(FString::Printf(TEXT("다이키리인가..."))); // 8
 	oldpalScript1.Emplace(FString::Printf(TEXT("마티니인가..."))); // 9
 	oldpalScript1.Emplace(FString::Printf(TEXT("네그로니인가..."))); // 10
 	oldpalScript1.Emplace(FString::Printf(TEXT("도무지 무슨 칵테일인지 알 수가 없군..."))); // 11

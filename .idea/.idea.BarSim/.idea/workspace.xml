@@ -10,11 +10,25 @@
   <component name="ChangeListManager">
     <list default="true" id="8bbd6c2f-684f-4fba-bae1-bd40006710dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BP_OldPalCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BP_OldPalCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalOrderWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalOrderWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerDialogWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerDialogWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/OldPalCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/OldPalCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/OldPalFSM.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/OldPalFSM.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -228,6 +242,7 @@
       <workItem from="1686402344841" duration="8600000" />
       <workItem from="1686558029908" duration="438000" />
       <workItem from="1686560884935" duration="1994000" />
+      <workItem from="1686563851250" duration="15429000" />
     </task>
     <servers />
   </component>

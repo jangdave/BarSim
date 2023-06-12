@@ -56,4 +56,17 @@ public:
 
 	UFUNCTION()
 	void DetachCup();
+
+	// 음성 관련
+	UPROPERTY(EditAnywhere, Category = "Voice")
+	class UAudioComponent* oldPalVoice1st;
+
+	UPROPERTY(EditAnywhere, Category = "Voice")
+	class UAudioComponent* oldPalVoice3rd;
+
+	UPROPERTY(EditAnywhere, Category = "Voice")
+	class UAudioComponent* playerVoice1st;
+
+	UPROPERTY(EditAnywhere, Category = "Voice")
+	class UAudioComponent* playerVoice3rd;
 };

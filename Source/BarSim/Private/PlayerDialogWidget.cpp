@@ -41,12 +41,12 @@ void UPlayerDialogWidget::NativeConstruct()
 	// 둘째날 대사
 	playerScript2.Emplace(FString::Printf(TEXT("오늘도 어찌저찌 하루를 마무리 했군"))); // 0
 	playerScript2.Emplace(FString::Printf(TEXT("설마 어제의 별난 손님은 오지 않겠지..."))); // 1
-	playerScript2.Emplace(FString::Printf(TEXT("문 닫고 집으로 가자"))); // 2
+	playerScript2.Emplace(FString::Printf(TEXT("마감하고 돌아가자"))); // 2
 
 	// 셋째날 대사
 	playerScript3.Emplace(FString::Printf(TEXT("손님...또 영업시간이 끝나고 오셨군요"))); // 0
 	playerScript3.Emplace(FString::Printf(TEXT("제 시간에 와주시면 안될까요?"))); // 1
-	playerScript3.Emplace(FString::Printf(TEXT("알겠습니다. 오늘까지만 받아드릴께요"))); // 2
+	playerScript3.Emplace(FString::Printf(TEXT("알겠습니다. 오늘까지만 받아드릴게요"))); // 2
 	playerScript3.Emplace(FString::Printf(TEXT("그럼 주문은 어떤걸로 드릴까요"))); // 3
 	playerScript3.Emplace(FString::Printf(TEXT("음...올드팔은 만들어 본 적이 없네요"))); // 4
 	playerScript3.Emplace(FString::Printf(TEXT("다음 영업일에 오시면 연습해두겠습니다"))); // 5
@@ -60,7 +60,7 @@ void UPlayerDialogWidget::NativeConstruct()
 	playerScript3.Emplace(FString::Printf(TEXT("아! 저한테 메일을 보내셨던 그...아버지의 친구분?"))); // 13
 	playerScript3.Emplace(FString::Printf(TEXT("아닙니다. 뭐...오랜 친구분이시면 그럴수 있죠"))); // 14
 	playerScript3.Emplace(FString::Printf(TEXT("사실 서로 연락이 안된지 오래됐고, 서로 관심도 없었습니다"))); // 15
-	playerScript3.Emplace(FString::Printf(TEXT("일이 없어 가게도 잠시만 운영하고 정리할 생각이라..."))); // 16
+	playerScript3.Emplace(FString::Printf(TEXT("가게도 잠시만 운영하고 정리할 생각이라..."))); // 16
 	playerScript3.Emplace(FString::Printf(TEXT("손님, 아니 리차드 아저씨께는 죄송하게 됐네요"))); // 17
 	playerScript3.Emplace(FString::Printf(TEXT("내기요...? 어떤?"))); // 18
 	playerScript3.Emplace(FString::Printf(TEXT("그게 무슨...?"))); // 19
@@ -75,7 +75,7 @@ void UPlayerDialogWidget::NativeConstruct()
 	playerScript3.Emplace(FString::Printf(TEXT("젓지 말고, 흔들어서 라... 익숙한 문장인데"))); // 28
 	playerScript3.Emplace(FString::Printf(TEXT("일단 오늘은 여기까지 하자"))); // 29
 	playerScript3.Emplace(FString::Printf(TEXT("빌어먹을 아버지..."))); // 30
-	playerScript3.Emplace(FString::Printf(TEXT("어떤 생각을 했는지 한번 들어나보자구"))); // 31
+	playerScript3.Emplace(FString::Printf(TEXT("어떤 생각을 했는지 한 번 들어나보자고"))); // 31
 	
 	// 2번째 선택지
 	playerChoice2.Emplace(FString::Printf(TEXT("알겠습니다"))); // 0
