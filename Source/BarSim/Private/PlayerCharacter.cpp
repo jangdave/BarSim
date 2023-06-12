@@ -281,9 +281,11 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==shaker&&shaker!=nullptr)
 		{
 			isGrabbingShakerRight=true;
-			shaker->SetActorTickEnabled(true);
+			shaker->isGSR=true;
+			shaker->SetActorTickEnabled(true);			
 			shaker->isGrabbingShaker=true;
 			shaker->VRGripInterfaceSettings.bDenyGripping=true;
+			
 		}
 		// 잡은 대상이 ShakerLid라면
 		else if(GrabbedActorRight==shakerLid&&shakerLid!=nullptr)
@@ -458,9 +460,11 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==shakerL&&shakerL!=nullptr)
 	{
 		isGrabbingShakerLeft=true;
+		shakerL->isGSL=true;
 		shakerL->SetActorTickEnabled(true);
 		shakerL->isGrabbingShaker=true;
 		shakerL->VRGripInterfaceSettings.bDenyGripping=true;
+		
 	}
 	// 잡은 대상이 ShakerLid라면
 	else if(GrabbedActorLeft==shakerLidL&&shakerLidL!=nullptr)
@@ -675,9 +679,11 @@ void APlayerCharacter::CheckDroppedObjectRight()
 	{
 		if(shaker!=nullptr)
 		{
-			shaker->isDropSoundEnabled=true;
+			shaker->isGSR=false;
+			shaker->isDropSoundEnabled=true;			
 			shaker->VRGripInterfaceSettings.bDenyGripping=false;
 			shaker->isGrabbingShaker=false;
+		
 		}
 		isGrabbingShakerRight=false;		
 	}
@@ -819,9 +825,10 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 	}
 	else if(isGrabbingShakerLeft&&shakerL!=nullptr)
 	{
+		shakerL->isGSL=false;
 		shakerL->VRGripInterfaceSettings.bDenyGripping=false;
 		shakerL->isDropSoundEnabled=true;
-		shakerL->isGrabbingShaker=false;
+		shakerL->isGrabbingShaker=false;		
 		isGrabbingShakerLeft=false;		
 	}
 	else if(isGrabbingDrinkCanLeft&&drinkCanL!=nullptr)

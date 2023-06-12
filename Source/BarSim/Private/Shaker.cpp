@@ -15,6 +15,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetComponent.h"
+#include "Haptics/HapticFeedbackEffect_Curve.h"
 #include "Kismet/GameplayStatics.h"
 
 AShaker::AShaker(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -33,6 +34,7 @@ void AShaker::BeginPlay()
 {
 	Super::BeginPlay();
 	shakeWidget = Cast<UShakeWidget>(widgetComp2->GetUserWidgetObject());
+	PC = Cast<APlayerController>(GetWorld()->GetFirstPlayerController());
 }
 
 void AShaker::Tick(float DeltaSeconds)
@@ -70,6 +72,42 @@ void AShaker::Tick(float DeltaSeconds)
 			bShakeWidgetOn = true;
 			bShakeWidgetAnimOn = false;
 			shakingTime = shakingTime + DeltaSeconds * 2;
+			// Haptic Feedback
+			if(PC)
+			{
+				if(isGSR)
+					PC->PlayHapticEffect(HF_Shaking, EControllerHand::Right);
+				if(isGSL)
+					PC->PlayHapticEffect(HF_Shaking, EControllerHand::Left);
+			}
+			if(shakeSoundBoolean==false)
+			{
+				shakingSoundAudioComp = UGameplayStatics::SpawnSound2D(GetWorld(), shakeSound, 1, 1, 0);
+				shakeSoundBoolean=true;
+			}
+			if(shakeSoundBoolean2==true&&shakingSoundAudioComp!=nullptr)
+			{
+				shakingSoundAudioComp->SetPaused(false);
+				shakeSoundBoolean2=false;
+			}
+		}
+		else
+		{
+			if(PC)
+			{
+				if(isGSR)
+					PC->StopHapticEffect(EControllerHand::Right);
+				if(isGSL)
+					PC->StopHapticEffect(EControllerHand::Left);
+
+			}
+			if(shakeSoundBoolean==true&&shakingSoundAudioComp!=nullptr&&shakeSoundBoolean2==false)
+			{
+				shakingSoundAudioComp->SetPaused(true);
+				//UGameplayStatics::PlaySound2D(GetWorld(), shakeStopSound, 1, 1, 0);
+				//shakeSoundBoolean=false;
+				shakeSoundBoolean2=true;
+			}
 		}
 
 		if(shakingTime >= 8.0f)
