@@ -34,6 +34,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 checkDayCount; // 0
 
+	// 아케이드 스토리 모드 체크
+	UPROPERTY()
+	bool bCheckArcadeMode; // false
+	
 	// 게임모드 체크 불
 	UPROPERTY()
 	bool bCheckGameMode; // false

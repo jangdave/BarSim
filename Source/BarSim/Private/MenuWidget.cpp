@@ -19,32 +19,46 @@ void UMenuWidget::NativeConstruct()
 	gi = Cast<UBarGameInstance>(GetGameInstance());
 
 	// 0일차 메뉴 버튼 바인드
-	btn_StoryMode->OnClicked.AddDynamic(this, &UMenuWidget::GameStart);
+	btn_StoryMode->OnClicked.AddDynamic(this, &UMenuWidget::StoryStart);
+	btn_ArcadeMode->OnClicked.AddDynamic(this, &UMenuWidget::ArcadeStart);
 	btn_QuitGame->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceQuit);
 
 	// 튜토리얼 선택
 	btn_TutorialYes->OnClicked.AddDynamic(this, &UMenuWidget::TutorialMode);
-	btn_TutorialNo->OnClicked.AddDynamic(this, &UMenuWidget::StoryMode);
+	btn_TutorialNo->OnClicked.AddDynamic(this, &UMenuWidget::NoTutorialMode);
 
 	// 이후 메뉴 버튼 바인드
 	btn_ResumeGame->OnClicked.AddDynamic(this, &UMenuWidget::ResumeGame);
+	
 	// 체크포인트 바인드
 	btn_CheckPoint->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceCheck);
 	btn_CheckPointYes->OnClicked.AddDynamic(this, &UMenuWidget::CheckYes);
 	btn_CheckPointNo->OnClicked.AddDynamic(this, &UMenuWidget::CheckNo);
+	
 	// 메인메뉴 바인드
 	btn_ResetGame->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceReset);
 	btn_MainYes->OnClicked.AddDynamic(this, &UMenuWidget::ResetYes);
 	btn_MainNo->OnClicked.AddDynamic(this, &UMenuWidget::ResetNo);
+	
 	// 게임종료 바인드
 	btn_QuitGame1->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceQuit);
 	btn_QuitYes->OnClicked.AddDynamic(this, &UMenuWidget::QuitGameYes);
 	btn_QuitNo->OnClicked.AddDynamic(this, &UMenuWidget::QuitGameNo);
 }
 
-void UMenuWidget::GameStart()
+void UMenuWidget::StoryStart()
 {
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(1);
+}
+
+void UMenuWidget::ArcadeStart()
+{
+	WidgetSwitcher_Menu->SetActiveWidgetIndex(1);
+	
+	if(gi != nullptr)
+	{
+		gi->bCheckArcadeMode = true;
+	}
 }
 
 void UMenuWidget::ChoiceQuit()
@@ -52,7 +66,7 @@ void UMenuWidget::ChoiceQuit()
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(5);
 }
 
-void UMenuWidget::StoryMode()
+void UMenuWidget::NoTutorialMode()
 {
 	if(gi != nullptr)
 	{
@@ -140,82 +154,115 @@ void UMenuWidget::ChoiceCheck()
 void UMenuWidget::CheckYes()
 {
 	auto currentMap = UGameplayStatics::GetCurrentLevelName(GetWorld());
-	
-	// 체크포인트로 보내기
-	if(gi->checkDayCount == 0 && currentMap != "")
+
+	if(gi->bCheckArcadeMode != true)
 	{
-
-		if(currentMap == "BarStartMap")
+		// 체크포인트로 보내기
+		if(gi->checkDayCount == 0 && currentMap != "")
 		{
-			gi->bCheckGameMode = false;
+			if(currentMap == "BarStartMap")
+			{
+				gi->bCheckGameMode = false;
 
-			gi->bCheckMenu = false;
+				gi->bCheckMenu = false;
 
-			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarTutorialMap")
+			{
+				gi->bCheckGameMode = false;
+
+				gi->bCheckMenu = true;
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+			}
 		}
-		else if(currentMap == "BarTutorialMap")
+		else if(gi->checkDayCount == 1 && currentMap != "")
 		{
-			gi->bCheckGameMode = false;
+			if(currentMap == "BarStartMap")
+			{
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				gi->TotalMoney = {0, 0, 0, 0};
+				
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
+		}
+		else if(gi->checkDayCount == 2 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				auto oneday = gi->TotalMoney[0];
 
-			gi->bCheckMenu = true;
+				auto twoday = gi->TotalMoney[1];
+				
+				auto total = gi->TotalMoney[3];
 
-			UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+				auto settotal = total - twoday;
+				
+				gi->TotalMoney = {oneday, 0, 0, settotal};
+				
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
+		}
+		else if(gi->checkDayCount == 3 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				auto oneday = gi->TotalMoney[0];
+
+				auto twoday = gi->TotalMoney[1];
+				
+				auto threeday = gi->TotalMoney[2];
+				
+				auto total = gi->TotalMoney[3];
+
+				auto settotal = total - threeday;
+				
+				gi->TotalMoney = {oneday, twoday, 0, settotal};
+				
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
 		}
 	}
-	else if(gi->checkDayCount == 1 && currentMap != "")
+	else
 	{
-		if(currentMap == "BarStartMap")
+		// 체크포인트로 보내기
+		if(gi->checkDayCount == 0 && currentMap != "")
 		{
-			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			if(currentMap == "BarStartMap")
+			{
+				gi->bCheckGameMode = false;
+
+				gi->bCheckMenu = false;
+
+				gi->bCheckArcadeMode = false;
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarTutorialMap")
+			{
+				gi->bCheckGameMode = false;
+
+				gi->bCheckMenu = true;
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+			}
 		}
-		else if(currentMap == "BarMainMap")
+		else if(gi->checkDayCount == 3 && currentMap != "")
 		{
 			gi->TotalMoney = {0, 0, 0, 0};
-			
-			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
-		}
-	}
-	else if(gi->checkDayCount == 2 && currentMap != "")
-	{
-		if(currentMap == "BarStartMap")
-		{
-			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
-		}
-		else if(currentMap == "BarMainMap")
-		{
-			auto oneday = gi->TotalMoney[0];
-
-			auto twoday = gi->TotalMoney[1];
-			
-			auto total = gi->TotalMoney[3];
-
-			auto settotal = total - twoday;
-			
-			gi->TotalMoney = {oneday, 0, 0, settotal};
-			
-			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
-		}
-	}
-	else if(gi->checkDayCount == 3 && currentMap != "")
-	{
-		if(currentMap == "BarStartMap")
-		{
-			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
-		}
-		else if(currentMap == "BarMainMap")
-		{
-			auto oneday = gi->TotalMoney[0];
-
-			auto twoday = gi->TotalMoney[1];
-			
-			auto threeday = gi->TotalMoney[2];
-			
-			auto total = gi->TotalMoney[3];
-
-			auto settotal = total - threeday;
-			
-			gi->TotalMoney = {oneday, twoday, 0, settotal};
-			
+				
 			UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
 		}
 	}
@@ -238,6 +285,8 @@ void UMenuWidget::ResetYes()
 	gi->bCheckGameMode = false;
 
 	gi->bCheckMenu = false;
+
+	gi->bCheckArcadeMode = false;
 
 	gi->TotalMoney = {0, 0, 0, 0};
 	

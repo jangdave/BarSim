@@ -7,41 +7,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="824847af-aa40-4d56-ba3d-e2af7c25f2f8" name="Changes" comment="">
+    <list default="true" id="c327602f-0869-4cbd-9565-5791c8a474cd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BarMainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarMainMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BarStartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarStartMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/UI/WBP_MenuWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/WBP_MenuWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BarGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BarGameInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/GameStartManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/GameStartManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MenuWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MenuWidget.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/BarGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/BarGameInstance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/GameStartManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/GameStartManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/MenuWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/MenuWidget.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/SpawnManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/SpawnManager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="2QzsuHbGh5Go3SlI0Yz5IFn00S7" />
+  <component name="ProjectId" id="2R0TMTQ8LRm8pLA4pItsIbtzalA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\SBAuser\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\SBAuser\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\slapt\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\slapt\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\slapt\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BarSim" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -103,12 +112,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="824847af-aa40-4d56-ba3d-e2af7c25f2f8" name="Changes" comment="" />
-      <created>1686367966104</created>
+      <changelist id="c327602f-0869-4cbd-9565-5791c8a474cd" name="Changes" comment="" />
+      <created>1686385951575</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686367966104</updated>
-      <workItem from="1686367967303" duration="2631000" />
+      <updated>1686385951575</updated>
+      <workItem from="1686385952850" duration="624000" />
+      <workItem from="1686453555086" duration="2564000" />
+      <workItem from="1686553439397" duration="4591000" />
     </task>
     <servers />
   </component>
