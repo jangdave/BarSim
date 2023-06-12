@@ -32,6 +32,9 @@ public:
 	class UButton* btn_StoryMode;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_ArcadeMode;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_QuitGame;
 
 	// 모드 선택
@@ -77,13 +80,16 @@ public:
 	
 	// 0일차 메뉴 함수
 	UFUNCTION()
-	void GameStart();
+	void StoryStart();
 
+	UFUNCTION()
+	void ArcadeStart();
+	
 	UFUNCTION()
 	void ChoiceQuit();
 	
 	UFUNCTION()
-	void StoryMode();
+	void NoTutorialMode();
 
 	UFUNCTION()
 	void TutorialMode();

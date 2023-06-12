@@ -64,10 +64,6 @@ void ASpawnManager::CheckChairSit()
 		{
 			aChairs[2] = chair;
 		}
-		else if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair4")
-		{
-			aChairs[3] = chair;
-		}
 	}
 }
 
@@ -114,35 +110,72 @@ void ASpawnManager::SpawnCustomer()
 
 void ASpawnManager::SpawnCustom()
 {
-	// 날짜가 지난만큼 더 많이 스폰
-	int32 idx = (gi->checkDayCount - 1) * 3; // 3
-	
-	// 전체 손님 수가 지정한 숫자보다 작을때
-	if(checkCustomerNum >= idx)
+	if(gi->bCheckArcadeMode != true)
 	{
-		// 가게 오픈했는지 체크
-		bCheckSpawn = true;
-	}
-	else if(checkCustomerNum < idx)
-	{
-		for(int i = 0; i<aChairs.Num(); i++)
+		// 날짜가 지난만큼 더 많이 스폰
+		int32 idx = (gi->checkDayCount - 1) * 2; // 스토리 모드 손님 2배수
+		
+		// 전체 손님 수가 지정한 숫자보다 작을때
+		if(checkCustomerNum >= idx)
 		{
-			// 빈자리가 있으면
-			if(aChairs[i]->bCheck != true)
+			// 가게 오픈했는지 체크
+			bCheckSpawn = true;
+		}
+		else if(checkCustomerNum < idx)
+		{
+			for(int i = 0; i<aChairs.Num(); i++)
 			{
-				bCheckSit = true;
+				// 빈자리가 있으면
+				if(aChairs[i]->bCheck != true)
+				{
+					bCheckSit = true;
+				}
+			}
+			// 손님을 스폰하고
+			if(bCheckSit != false)
+			{
+				GetWorld()->SpawnActor<ACustomerCharacter>(customerFactory, GetActorLocation(), GetActorRotation());
+
+				// 한명씩 카운트하기
+				checkCustomerNum++;
+
+				// 빈자리 채움
+				bCheckSit = false;
 			}
 		}
-		// 손님을 스폰하고
-		if(bCheckSit != false)
+	}
+	else
+	{
+		// 날짜가 지난만큼 더 많이 스폰
+		int32 idx = (gi->checkDayCount - 1) * 3; // 아케이드 모드 손님 6명
+		
+		// 전체 손님 수가 지정한 숫자보다 작을때
+		if(checkCustomerNum >= idx)
 		{
-			GetWorld()->SpawnActor<ACustomerCharacter>(customerFactory, GetActorLocation(), GetActorRotation());
+			// 가게 오픈했는지 체크
+			bCheckSpawn = true;
+		}
+		else if(checkCustomerNum < idx)
+		{
+			for(int i = 0; i<aChairs.Num(); i++)
+			{
+				// 빈자리가 있으면
+				if(aChairs[i]->bCheck != true)
+				{
+					bCheckSit = true;
+				}
+			}
+			// 손님을 스폰하고
+			if(bCheckSit != false)
+			{
+				GetWorld()->SpawnActor<ACustomerCharacter>(customerFactory, GetActorLocation(), GetActorRotation());
 
-			// 한명씩 카운트하기
-			checkCustomerNum++;
+				// 한명씩 카운트하기
+				checkCustomerNum++;
 
-			// 빈자리 채움
-			bCheckSit = false;
+				// 빈자리 채움
+				bCheckSit = false;
+			}
 		}
 	}
 }
@@ -154,7 +187,7 @@ void ASpawnManager::GetCustomerIdx(int32 orderIdx, int32 idx)
 
 void ASpawnManager::SpawnOldPal()
 {
-	if(gi != nullptr)
+	if(gi->bCheckArcadeMode != true)
 	{
 		if(gi->checkDayCount == 1 && bSpawnOld != true)
 		{
@@ -175,6 +208,10 @@ void ASpawnManager::SpawnOldPal()
 
 			bSpawnOld = true;
 		}
+	}
+	else
+	{
+		UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 	}
 }
 

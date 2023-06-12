@@ -28,7 +28,7 @@ public:
 	class UBarGameInstance* gi;
 	
 	UPROPERTY()
-	TArray<AChair*> aChairs = {0, 0, 0, 0};
+	TArray<AChair*> aChairs = {0, 0, 0};
 
 	// 의자마다 칵테일이 있는지 bool 배열
 	UPROPERTY()
@@ -44,7 +44,7 @@ public:
 
 	// 자리마다 오더 칵테일 저장 배열
 	UPROPERTY()
-	TArray<int32> orderCoctailIdx = {0, 0, 0, 0};
+	TArray<int32> orderCoctailIdx = {0, 0, 0};
 
 	// 2일차 대사 확인
 	bool bCheckTwo;
