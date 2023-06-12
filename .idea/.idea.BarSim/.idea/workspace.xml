@@ -10,7 +10,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8bbd6c2f-684f-4fba-bae1-bd40006710dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalOrderWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalOrderWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/tempBottle_Cylinder_001.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Asset/Meshes/tempBottle_Cylinder_001.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_BottleCampari.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Bottles/BP_BottleCampari.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/BottleBase.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,25 +27,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C++ Project.BarSim">
     <configuration name="BarSim" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -227,6 +229,7 @@
       <workItem from="1686198841693" duration="529000" />
       <workItem from="1686199442973" duration="715000" />
       <workItem from="1686402344841" duration="8600000" />
+      <workItem from="1686558029908" duration="438000" />
     </task>
     <servers />
   </component>

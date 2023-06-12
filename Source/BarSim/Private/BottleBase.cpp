@@ -67,9 +67,12 @@ void ABottleBase::Tick(float DeltaTime)
 				FActorSpawnParameters param;
 				param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 				ADropBase* drop = GetWorld()->SpawnActor<class ADropBase>(streamDrop, pourer->GetSocketLocation(FName("Pourer")), pourer->GetSocketRotation(FName("Pourer")), param);
-				drop->dropMass = 0.05f * streamWidth * DeltaTime;
-				drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
-				remains = remains - drop->dropMass;
+				if(drop)
+				{
+					drop->dropMass = 0.05f * streamWidth * DeltaTime;
+					drop->sphereComp->AddForce(drop->sphereComp->GetUpVector() * 9.135);
+					remains = remains - drop->dropMass;
+				}
 				// Haptic Feedback
 				if(PC)
 				{
