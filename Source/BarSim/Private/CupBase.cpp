@@ -704,6 +704,14 @@ void ACupBase::SetCupEmpty()
 				UE_LOG(LogTemp, Warning, TEXT("Set Cup Empty"));
 				NameArray.Empty();
 				ContentsArray.Empty();
+				ginInside=0;
+				limeInside=0;
+				rumInside=0;
+				sugarInside=0;
+				vermouthInside=0;
+				campariInside=0;
+				allInside=0;
+				whiskeyInside=0;
 				liquorComp->SetVisibility(false);
 				bStirred=false;
 				contents=0;
