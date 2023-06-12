@@ -55,14 +55,6 @@ void ATutorialManager::GetRights()
 		{
 			allLights[2] = light;
 		}
-		else if(light != nullptr && light->GetActorNameOrLabel() == "BP_TutorialLight4")
-		{
-			allLights[3] = light;
-		}
-		else if(light != nullptr && light->GetActorNameOrLabel() == "BP_TutorialLight5")
-		{
-			allLights[4] = light;
-		}
 	}
 }
 
@@ -72,9 +64,13 @@ void ATutorialManager::GetWalls()
 	{
 		auto wall = *walls;
 
-		if(wall != nullptr)
+		if(wall != nullptr && wall->GetActorNameOrLabel() == "BP_TutorialWall1")
 		{
-			allWalls.Add(wall);
+			allWalls[0] = wall;
+		}
+		else if(wall != nullptr && wall->GetActorNameOrLabel() == "BP_TutorialWall2")
+		{
+			allWalls[1] = wall;
 		}
 	}
 }
@@ -85,9 +81,13 @@ void ATutorialManager::GetManagers()
 	{
 		auto checkBox = *checkBoxes;
 
-		if(checkBox != nullptr)
+		if(checkBox != nullptr && checkBox->GetActorNameOrLabel() == "BP_TutorialCheckBox1")
 		{
-			allCheckBoxes.Add(checkBox);
+			allCheckBoxes[0] = checkBox;
+		}
+		else if(checkBox != nullptr && checkBox->GetActorNameOrLabel() == "BP_TutorialCheckBox2")
+		{
+			allCheckBoxes[1] = checkBox;
 		}
 	}
 }
@@ -95,7 +95,7 @@ void ATutorialManager::GetManagers()
 void ATutorialManager::StartTutorial()
 {
 	// 불키기
-	allLights[4]->TurnOnLight();
+	allLights[2]->TurnOnLight();
 	allLights[0]->TurnOnLight();
 	
 	FTimerHandle timer;
@@ -106,7 +106,7 @@ void ATutorialManager::StartTutorial()
 		allCheckBoxes[0]->StartWelcome();
 
 		UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[0]->levelSound);
-	}), 1.0f, false);
+	}), 3.0f, false);
 
 	auto gi = Cast<UBarGameInstance>(GetGameInstance());
 
@@ -121,7 +121,7 @@ void ATutorialManager::ClearFirstStage()
 
 	// 2단계 시작하기
 	allCheckBoxes[0]->Destroy();
-	allCheckBoxes[1]->SecondStageStart();
+	allCheckBoxes[1]->FourthStageStart();
 	allCheckBoxes[1]->StartWelcome();
 
 	UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[1]->levelSound);
@@ -129,38 +129,9 @@ void ATutorialManager::ClearFirstStage()
 
 void ATutorialManager::ClearSecondStage()
 {
-	// 불키고 막힌곳 열기
-	allLights[2]->TurnOnLight();
+	// 막힌곳 열기
 	allWalls[1]->OpenCollision();
 
-	// 3단계 시작하기
-	allCheckBoxes[1]->Destroy();
-	allCheckBoxes[2]->ThirdStageStart();
-	allCheckBoxes[2]->StartWelcome();
-
-	UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[2]->levelSound);
-}
-
-void ATutorialManager::ClearThirdStage()
-{
-	// 불키고 막힌곳 열기
-	allLights[3]->TurnOnLight();
-	allWalls[2]->OpenCollision();
-
-	// 4단계 시작하기
-	allCheckBoxes[2]->Destroy();
-	allCheckBoxes[3]->FourthStageStart();
-	allCheckBoxes[3]->StartWelcome();
-
-	UGameplayStatics::PlaySound2D(GetWorld(), allCheckBoxes[3]->levelSound);
-}
-
-void ATutorialManager::ClearFourthStage()
-{
-	// 막힌곳 열기
-	allWalls[3]->OpenCollision();
-
 	// 마무리
-	allCheckBoxes[3]->Destroy();
+	allCheckBoxes[1]->Destroy();
 }
-

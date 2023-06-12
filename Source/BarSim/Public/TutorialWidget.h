@@ -40,6 +40,9 @@ public:
 
 	UFUNCTION()
 	void SetCheckTablet();
+
+	UFUNCTION()
+	void SetCheckNext();
 	
 	//-----------------------------------------------------------------first
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
@@ -54,9 +57,6 @@ public:
 	UFUNCTION()
 	void SetFirst1Check();
 
-	UFUNCTION()
-	void SetFirst1UnCheck();
-	
 	UFUNCTION()
 	void SetFirst2Check();
 

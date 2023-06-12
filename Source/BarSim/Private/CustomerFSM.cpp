@@ -312,8 +312,9 @@ void UCustomerFSM::TickStandby()
 		
 		SetSitState(ECustomerSitState::ORDER);
 	}
+	
 	// 일정 시간 이후에 코스터가 없다면 웨이트롱으로 상태 변경
-	else if(curTime > 10)
+	if(curTime > 10 && spawnManager->bIsCoaster[idx] != true)
 	{
 		SetSitState(ECustomerSitState::STANDBYWAITLONG);
 	}
@@ -322,7 +323,7 @@ void UCustomerFSM::TickStandby()
 void UCustomerFSM::TickStandbyWaitLong()
 {
 	// 오랜 기다림 불만을 표출하는 애니메이션 실행
-	if(bCheckPlayAnim != true && curTime > 5)
+	if(bCheckPlayAnim != true && curTime > 2)
 	{
 		bCheckPlayAnim = true;
 		
@@ -338,8 +339,9 @@ void UCustomerFSM::TickStandbyWaitLong()
 			owner->customerAnim->OnSitAnim(TEXT("WaitLong2"));
 		}
 	}
+	
 	// 코스터가 있으면
-	else if(spawnManager->bIsCoaster[idx] != false)
+	if(spawnManager->bIsCoaster[idx] != false)
 	{
 		owner->order_UI->EndCustomer();
 		
@@ -376,7 +378,7 @@ void UCustomerFSM::TickWait()
 		SetSitState(ECustomerSitState::ORDERJUDGE);
 	}
 	// 그렇지 않다면 불만표시로 상태 이동
-	else
+	else if(curTime >= 10)
 	{
 		SetSitState(ECustomerSitState::WAITLONG);
 	}
@@ -387,7 +389,7 @@ void UCustomerFSM::TickWaitLong()
 	VisibleOrder();
 
 	// 오랜 기다림 불만을 표출하는 애니메이션 실행
-	if(bCheckPlayAnim != true && curTime > 5)
+	if(bCheckPlayAnim != true && curTime > 2)
 	{
 		bCheckPlayAnim = true;
 		
@@ -403,8 +405,9 @@ void UCustomerFSM::TickWaitLong()
 			owner->customerAnim->OnSitAnim(TEXT("WaitLong2"));
 		}
 	}
+	
 	// 코스터와 칵테일이 준비 되면 상태 이동
-	else if(spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
+	if(spawnManager->bIsCoaster[idx] != false && spawnManager->bIsCoctail[idx] != false)
 	{
 		owner->order_UI->EndCustomer();
 
