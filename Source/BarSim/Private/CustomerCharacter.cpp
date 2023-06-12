@@ -2,7 +2,6 @@
 
 
 #include "CustomerCharacter.h"
-
 #include "Coaster.h"
 #include "CupBase.h"
 #include "CustomerAnimInstance.h"
