@@ -153,7 +153,7 @@ public:
 	void PlayOldPalVoice1(int32 index);
 
 	UFUNCTION()
-	void PlayOldPalVoice3(int32 index);
+	void PlayOldPalVoice3(int32 index1, int32 index2);
 
 	UFUNCTION()
 	void PlayPlayerVoice1(int32 index);

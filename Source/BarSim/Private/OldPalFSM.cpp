@@ -166,14 +166,23 @@ void UOldPalFSM::PlayOldPalVoice1(int32 index)
 	}
 }
 
-void UOldPalFSM::PlayOldPalVoice3(int32 index)
+void UOldPalFSM::PlayOldPalVoice3(int32 index1, int32 index2)
 {
-	UAudioComponent* oldPalVoice1 = Cast<UAudioComponent>(GetOwner()->GetDefaultSubobjectByName(TEXT("OldPalVoice1st")));
+	UAudioComponent* oldPalVoice3 = Cast<UAudioComponent>(GetOwner()->GetDefaultSubobjectByName(TEXT("OldPalVoice3rd")));
 
-	if(oldPalVoice1)
+	if(oldPalVoice3)
 	{
-		oldPalVoice1->SetIntParameter("OldPalVoice3", index);
-		oldPalVoice1->Play();
+		oldPalVoice3->SetIntParameter("Switch", index1);
+		if(index1 == 0)
+		{
+			oldPalVoice3->SetIntParameter("OldPalVoice3", index2);
+			oldPalVoice3->Play();
+		}
+		else
+		{
+			oldPalVoice3->SetIntParameter("OldPalVoice4", index2-30);
+			oldPalVoice3->Play();
+		}
 	}
 }
 
@@ -295,6 +304,7 @@ void UOldPalFSM::TickTalk()
 			// 올드팔 대사 0
 			owner->oldPal_UI->SetOldPalText(0);
 			owner->oldPal_UI->StartOldPal();
+			
 
 			bOldPalTalk = true;
 
@@ -311,6 +321,7 @@ void UOldPalFSM::TickTalk()
 		{
 			// 올드팔 대사 1
 			owner->oldPal_UI->SetOldPalText(1);
+			
 		}
 
 		if(bOldPalTalk != false && curTime > 5 && curTime <= 7)
@@ -349,6 +360,8 @@ void UOldPalFSM::TickTalk()
 			// 올드팔 대사 2
 			owner->oldPal_UI->SetOldPalText(2);
 			owner->oldPal_UI->StartOldPal();
+
+			PlayOldPalVoice3(0,2);
 
 			bOldPalTalk = true;
 
