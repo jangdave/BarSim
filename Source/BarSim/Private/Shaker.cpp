@@ -33,8 +33,10 @@ AShaker::AShaker(const FObjectInitializer& ObjectInitializer) : Super(ObjectInit
 void AShaker::BeginPlay()
 {
 	Super::BeginPlay();
-	shakeWidget = Cast<UShakeWidget>(widgetComp2->GetUserWidgetObject());
+
 	PC = Cast<APlayerController>(GetWorld()->GetFirstPlayerController());
+
+	shakeWidget = Cast<UShakeWidget>(widgetComp2->GetUserWidgetObject());
 }
 
 void AShaker::Tick(float DeltaSeconds)
