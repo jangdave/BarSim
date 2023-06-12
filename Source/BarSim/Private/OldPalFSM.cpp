@@ -299,11 +299,13 @@ void UOldPalFSM::TickTalk()
 	// 3일
 	else
 	{
-		if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
+		if(bOldPalTalk != true && curTime > 1 && curTime <= 4)
 		{
 			// 올드팔 대사 0
 			owner->oldPal_UI->SetOldPalText(0);
 			owner->oldPal_UI->StartOldPal();
+
+			PlayOldPalVoice3(0,0);
 			
 			bOldPalTalk = true;
 
@@ -316,48 +318,54 @@ void UOldPalFSM::TickTalk()
 			}
 		}
 
-		if(bOldPalTalk != false && curTime > 3 && curTime <= 5)
+		if(bOldPalTalk != false && curTime > 4 && curTime <= 7)
 		{
 			// 올드팔 대사 1
 			owner->oldPal_UI->SetOldPalText(1);
 
+			PlayOldPalVoice3(0,1);
+
 			bOldPalTalk = false;
 		}
 
-		if(bOldPalTalk != true && curTime > 5 && curTime <= 7)
+		if(bOldPalTalk != true && curTime > 7 && curTime <= 9)
 		{
 			owner->oldPal_UI->EndOldPal();
 
 			bOldPalTalk = true;
 		}
 
-		if(bPlayerTalk != true && curTime > 7 && curTime <= 9)
+		if(bPlayerTalk != true && curTime > 9 && curTime <= 12)
 		{
 			// 플레이어 대사 0
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(0);
 			player->playerText_UI->StartPlayer();
 
+			PlayPlayerVoice3(0);
+
 			bPlayerTalk = true;
 		}
 
-		if(bPlayerTalk != false && curTime > 9 && curTime <= 11)
+		if(bPlayerTalk != false && curTime > 12 && curTime <= 14)
 		{
 			// 플레이어 대사 1
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(1);
 
+			PlayPlayerVoice3(1);
+
 			bPlayerTalk = false;
 		}
 
-		if(bPlayerTalk != true && curTime > 11 && curTime <= 13)
+		if(bPlayerTalk != true && curTime > 14 && curTime <= 16)
 		{
 			player->playerText_UI->EndPlayer();
 
 			bPlayerTalk = true;
 		}
 
-		if(bOldPalTalk != false && curTime > 13 && curTime <= 15)
+		if(bOldPalTalk != false && curTime > 16 && curTime <= 20)
 		{
 			// 올드팔 대사 2
 			owner->oldPal_UI->SetOldPalText(2);
@@ -376,52 +384,60 @@ void UOldPalFSM::TickTalk()
 			}
 		}
 
-		if(bOldPalTalk != true && curTime > 15 && curTime <= 17)
+		if(bOldPalTalk != true && curTime > 20 && curTime <= 22)
 		{
 			// 올드팔 대사 3
 			owner->oldPal_UI->SetOldPalText(3);
 
+			PlayOldPalVoice3(0,3);
+
 			bOldPalTalk = true;
 		}
 
-		if(bOldPalTalk != false && curTime > 17 && curTime <= 19)
+		if(bOldPalTalk != false && curTime > 22 && curTime <= 24)
 		{
 			owner->oldPal_UI->EndOldPal();
 
 			bOldPalTalk = false;
 		}
 
-		if(bPlayerTalk != false && curTime > 19 && curTime <= 21)
+		if(bPlayerTalk != false && curTime > 24 && curTime <= 26)
 		{
 			// 플레이어 대사 2
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(2);
 			player->playerText_UI->StartPlayer();
 
+			PlayPlayerVoice3(2);
+
 			bPlayerTalk = false;
 		}
 
-		if(bPlayerTalk != true && curTime > 21 && curTime <= 23)
+		if(bPlayerTalk != true && curTime > 26 && curTime <= 28)
 		{
 			// 플레이어 대사 3
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(3);
 
+			PlayPlayerVoice3(3);
+
 			bPlayerTalk = true;
 		}
 
-		if(bPlayerTalk != false && curTime > 23 && curTime <= 25)
+		if(bPlayerTalk != false && curTime > 28 && curTime <= 30)
 		{
 			player->playerText_UI->EndPlayer();
 
 			bPlayerTalk = false;
 		}
 
-		if(bOldPalTalk != true && curTime > 25)
+		if(bOldPalTalk != true && curTime > 29)
 		{
 			// 올드팔 대사 4
 			owner->oldPal_UI->SetOldPalText(4);
 			owner->oldPal_UI->StartOldPal();
+
+			PlayOldPalVoice3(0,4);
 
 			bOldPalTalk = true;
 
@@ -476,46 +492,54 @@ void UOldPalFSM::TickChoice()
 			bOldPalTalk = true;
 		}
 
-		if(bPlayerTalk != true && curTime > 3 && curTime <= 5)
+		if(bPlayerTalk != true && curTime > 3 && curTime <= 6)
 		{
 			// 플레이어 대사 4
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(4);
 			player->playerText_UI->StartPlayer();
 
+			PlayPlayerVoice3(4);
+
 			bPlayerTalk = true;
 		}
 
-		if(bPlayerTalk != false && curTime > 5 && curTime <= 7)
+		if(bPlayerTalk != false && curTime > 6 && curTime <= 9)
 		{
 			// 플레이어 대사 5
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(5);
+			
+			PlayPlayerVoice3(5);
 
 			bPlayerTalk = false;
 		}
 
-		if(bPlayerTalk != true && curTime > 7 && curTime <= 9)
+		if(bPlayerTalk != true && curTime > 9 && curTime <= 12)
 		{
 			// 플레이어 대사 6
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(6);
+			
+			PlayPlayerVoice3(6);
 
 			bPlayerTalk = true;
 		}
 		
-		if(bPlayerTalk != false && curTime > 9 && curTime <= 11)
+		if(bPlayerTalk != false && curTime > 12 && curTime <= 14)
 		{
 			player->playerText_UI->EndPlayer();
 
 			bPlayerTalk = false;
 		}
 
-		if(bOldPalTalk != false && curTime > 11 && curTime <= 13)
+		if(bOldPalTalk != false && curTime > 12 && curTime <= 14)
 		{
 			// 올드팔 대사 5
 			owner->oldPal_UI->SetOldPalText(5);
 			owner->oldPal_UI->StartOldPal();
+
+			PlayOldPalVoice3(0,5);
 
 			bOldPalTalk = false;
 
@@ -528,32 +552,36 @@ void UOldPalFSM::TickChoice()
 			}
 		}
 		
-		if(bOldPalTalk != true && curTime > 13 && curTime <= 15)
+		if(bOldPalTalk != true && curTime > 14 && curTime <= 18)
 		{
 			// 올드팔 대사 6
 			owner->oldPal_UI->SetOldPalText(6);
 
+			PlayOldPalVoice3(0,6);
+
 			bOldPalTalk = true;
 		}
 
-		if(bOldPalTalk != false && curTime > 15 && curTime <= 17)
+		if(bOldPalTalk != false && curTime > 18 && curTime <= 20)
 		{
 			owner->oldPal_UI->EndOldPal();
 
 			bOldPalTalk = false;
 		}
 
-		if(bPlayerTalk != true && curTime > 17 && curTime <= 19)
+		if(bPlayerTalk != true && curTime > 19 && curTime <= 22)
 		{
 			// 플레이어 대사 7
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(7);
 			player->playerText_UI->StartPlayer();
+			
+			PlayPlayerVoice3(7);
 
 			bPlayerTalk = true;
 		}
 
-		if(bPlayerTalk != false && curTime > 19)
+		if(bPlayerTalk != false && curTime > 24)
 		{
 			player->playerText_UI->EndPlayer();
 
@@ -712,6 +740,8 @@ void UOldPalFSM::TickReadyMove()
 				player->playerText_UI->SetPlayerText(8);
 				player->playerText_UI->StartPlayer();
 
+				PlayPlayerVoice3(8);
+
 				bCheckPlayAnim = true;
 			
 				// 다시 일어서는 애니메이션 실행
@@ -743,6 +773,8 @@ void UOldPalFSM::TickReadyMove()
 				player->playerText_UI->SetSwitcher(0);
 				player->playerText_UI->SetPlayerText(9);
 				player->playerText_UI->StartPlayer();
+
+				PlayPlayerVoice3(9);
 
 				bCheckPlayAnim = true;
 			
@@ -955,41 +987,49 @@ void UOldPalFSM::TickLeave()
 			owner->GetCharacterMovement()->MaxWalkSpeed = 0;
 		}
 
-		if(bPlayerTalk != true && curTime > 3 && curTime <= 5)
+		if(bPlayerTalk != true && curTime > 3 && curTime <= 6)
 		{
 			// 플레이어 대사 28
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(28);
 			player->playerText_UI->StartPlayer();
+
+			PlayPlayerVoice3(28);
 			
 			bPlayerTalk = true;
 		}
 		
-		if(bPlayerTalk != false && curTime > 5 && curTime <= 7)
+		if(bPlayerTalk != false && curTime > 6 && curTime <= 8)
 		{
 			// 플레이어 대사 29
 			player->playerText_UI->SetPlayerText(29);
 
+			PlayPlayerVoice3(29);
+
 			bPlayerTalk = false;
 		}
 
-		if(bPlayerTalk != true && curTime > 7 && curTime <= 9)
+		if(bPlayerTalk != true && curTime > 8 && curTime <= 10)
 		{
 			// 플레이어 대사 30
 			player->playerText_UI->SetPlayerText(30);
+			
+			PlayPlayerVoice3(30);
 
 			bPlayerTalk = true;
 		}
 
-		if(bPlayerTalk != false && curTime > 9 && curTime <= 11)
+		if(bPlayerTalk != false && curTime > 10 && curTime <= 12)
 		{
 			// 플레이어 대사 31
 			player->playerText_UI->SetPlayerText(31);
 
+			PlayPlayerVoice3(22);
+
 			bPlayerTalk = false;
 		}
 		
-		if(curTime > 11)
+		if(curTime > 14)
 		{
 			UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 		}
@@ -1070,11 +1110,13 @@ void UOldPalFSM::TickStandby()
 	// 3일
 	else
 	{
-		if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
+		if(bOldPalTalk != true && curTime > 1 && curTime <= 5)
 		{
 			// 올드팔 대사 7
 			owner->oldPal_UI->SetOldPalText(7);
 			owner->oldPal_UI->StartOldPal();
+
+			PlayOldPalVoice3(0,7);
 
 			bOldPalTalk = true;
 
@@ -1087,7 +1129,7 @@ void UOldPalFSM::TickStandby()
 			}
 		}
 
-		if(bOldPalTalk != false && curTime > 3 && curTime <= 5)
+		if(bOldPalTalk != false && curTime > 5 && curTime <= 7)
 		{
 			owner->oldPal_UI->EndOldPal();
 
@@ -1177,6 +1219,8 @@ void UOldPalFSM::TickOrder()
 			// 올드팔 레시피 대사
 			owner->oldPal_UI->SetOldPalRecipe();
 			owner->oldPal_UI->StartOldPal();
+
+			PlayOldPalVoice3(0,8);
 
 			bOldPalTalk = true;
 
@@ -1497,6 +1541,8 @@ void UOldPalFSM::TickOrderJudge()
 			owner->oldPal_UI->text_oldpal2->SetText(FText::FromString(""));
 			owner->oldPal_UI->SetOldPalText(11);
 			owner->oldPal_UI->StartOldPal();
+
+			PlayOldPalVoice3(0,11);
 			
 			bOldPalTalk = true;
 
@@ -1814,7 +1860,7 @@ void UOldPalFSM::TickTasteJudge()
 		{
 			if(spawnManager->orderScore >= 50)
 			{
-				if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
+				if(bOldPalTalk != true && curTime > 1 && curTime <= 5)
 				{
 					bOldPalTalk = true;
 
@@ -1822,11 +1868,13 @@ void UOldPalFSM::TickTasteJudge()
 					owner->oldPal_UI->SetOldPalText(14);
 					owner->oldPal_UI->StartOldPal();
 
+					PlayOldPalVoice3(0,14);
+
 					// 좋아하는 애니메이션 실행
 					owner->oldPalAnim->OnSitAnim(7.34);
 				}
 
-				if(bOldPalTalk != false && curTime > 3 && curTime <= 5)
+				if(bOldPalTalk != false && curTime > 5 && curTime <= 7)
 				{
 					bOldPalTalk = false;
 
@@ -1834,7 +1882,7 @@ void UOldPalFSM::TickTasteJudge()
 					owner->oldPal_UI->EndOldPal();
 				}
 				
-				if(bPlayerTalk != true && curTime > 5 && curTime <= 7)
+				if(bPlayerTalk != true && curTime > 6 && curTime <= 8)
 				{
 					bPlayerTalk = true;
 
@@ -1844,7 +1892,7 @@ void UOldPalFSM::TickTasteJudge()
 					player->playerText_UI->StartPlayer();
 				}
 
-				if(bPlayerTalk != false && curTime > 7 && curTime <= 9)
+				if(bPlayerTalk != false && curTime > 8 && curTime <= 10)
 				{
 					bPlayerTalk = false;
 					
@@ -1852,26 +1900,28 @@ void UOldPalFSM::TickTasteJudge()
 					player->playerText_UI->EndPlayer();
 				}
 				
-				if(bOldPalTalk != true && curTime > 9 && curTime <= 11)
+				if(bOldPalTalk != true && curTime > 9 && curTime <= 12)
 				{
 					bOldPalTalk = true;
 
 					// 올드팔 대사 15
 					owner->oldPal_UI->SetOldPalText(15);
 					owner->oldPal_UI->StartOldPal();
+
+					PlayOldPalVoice3(0,15);
 					
 					// 토크0 애니메이션 실행
 					owner->oldPalAnim->OnSitAnim(0.01);
 				}
 				
-				if(curTime > 11)
+				if(curTime > 12)
 				{
 					SetSitState(EOldPalSitState::ANGRY);
 				}
 			}
 			else
 			{
-				if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
+				if(bOldPalTalk != true && curTime > 1 && curTime <= 4)
 				{
 					bOldPalTalk = true;
 
@@ -1879,11 +1929,13 @@ void UOldPalFSM::TickTasteJudge()
 					owner->oldPal_UI->SetOldPalText(12);
 					owner->oldPal_UI->StartOldPal();
 
+					PlayOldPalVoice3(0,12);
+
 					// 토크1 애니메이션 실행
 					owner->oldPalAnim->OnSitAnim(3.68);
 				}
 
-				if(bOldPalTalk != false && curTime > 3 && curTime <= 5)
+				if(bOldPalTalk != false && curTime > 4 && curTime <= 6)
 				{
 					bOldPalTalk = false;
 
@@ -1908,7 +1960,7 @@ void UOldPalFSM::TickTasteJudge()
 		}
 		else if(spawnManager->aChairs[idx]->bUnSameOrder == true)
 		{
-			if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
+			if(bOldPalTalk != true && curTime > 1 && curTime <= 4)
 			{
 				bOldPalTalk = true;
 
@@ -1916,11 +1968,13 @@ void UOldPalFSM::TickTasteJudge()
 				owner->oldPal_UI->SetOldPalText(13);
 				owner->oldPal_UI->StartOldPal();
 
+				PlayOldPalVoice3(0,13);
+
 				// 화내는 애니메이션 실행
 				owner->oldPalAnim->OnSitAnim(9.24);
 			}
 
-			if(bOldPalTalk != false && curTime > 3 && curTime <= 5)
+			if(bOldPalTalk != false && curTime > 4 && curTime <= 6)
 			{
 				bOldPalTalk = false;
 
@@ -1983,7 +2037,7 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->EndOldPal();
 		}
 
-		if(bPlayerTalk != true && curTime > 3 && curTime <= 5)
+		if(bPlayerTalk != true && curTime > 3 && curTime <= 7)
 		{
 			bPlayerTalk = true;
 
@@ -1991,9 +2045,11 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(11);
 			player->playerText_UI->StartPlayer();
+
+			PlayPlayerVoice3(11);
 		}
 
-		if(bPlayerTalk != false && curTime > 5 && curTime <= 7)
+		if(bPlayerTalk != false && curTime > 7 && curTime <= 9)
 		{
 			bPlayerTalk = false;
 					
@@ -2001,7 +2057,7 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != false && curTime > 7 && curTime <= 9)
+		if(bOldPalTalk != false && curTime > 8 && curTime <= 10)
 		{
 			bOldPalTalk = false;
 
@@ -2009,19 +2065,23 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->SetOldPalText(16);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(0,16);
+
 			// 토크0 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != true && curTime > 9 && curTime <= 11)
+		if(bOldPalTalk != true && curTime > 10 && curTime <= 14)
 		{
 			// 올드팔 대사 17
 			owner->oldPal_UI->SetOldPalText(17);
 
+			PlayOldPalVoice3(0,17);
+
 			bOldPalTalk = true;
 		}
 
-		if(bOldPalTalk != false && curTime > 11 && curTime <= 13)
+		if(bOldPalTalk != false && curTime > 14 && curTime <= 16)
 		{
 			bOldPalTalk = false;
 
@@ -2029,7 +2089,7 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->EndOldPal();
 		}
 
-		if(bOldPalTalk != true && curTime > 17 && curTime <= 19)
+		if(bOldPalTalk != true && curTime > 16 && curTime <= 21)
 		{
 			bOldPalTalk = true;
 
@@ -2037,19 +2097,23 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->SetOldPalText(18);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(0,18);
+
 			// 토크2 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(5.01);
 		}
 
-		if(bOldPalTalk != false && curTime > 19 && curTime <= 21)
+		if(bOldPalTalk != false && curTime > 21 && curTime <= 24)
 		{
 			// 올드팔 대사 19
 			owner->oldPal_UI->SetOldPalText(19);
+			
+			PlayOldPalVoice3(0,19);
 
 			bOldPalTalk = false;
 		}
 
-		if(bOldPalTalk != true && curTime > 21 && curTime <= 23)
+		if(bOldPalTalk != true && curTime > 24 && curTime <= 26)
 		{
 			bOldPalTalk = true;
 
@@ -2057,7 +2121,7 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->EndOldPal();
 		}
 		
-		if(bPlayerTalk != true && curTime > 23 && curTime <= 25)
+		if(bPlayerTalk != true && curTime > 25 && curTime <= 27)
 		{
 			bPlayerTalk = true;
 
@@ -2065,9 +2129,11 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(12);
 			player->playerText_UI->StartPlayer();
+
+			PlayPlayerVoice3(12);
 		}
 
-		if(bPlayerTalk != false && curTime > 25 && curTime <= 27)
+		if(bPlayerTalk != false && curTime > 27 && curTime <= 29)
 		{
 			bPlayerTalk = false;
 					
@@ -2075,7 +2141,7 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != false && curTime > 27 && curTime <= 29)
+		if(bOldPalTalk != false && curTime > 28 && curTime <= 31)
 		{
 			bOldPalTalk = false;
 
@@ -2083,11 +2149,13 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->SetOldPalText(20);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(0,20);
+
 			// 토크0 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != true && curTime > 29 && curTime <= 31)
+		if(bOldPalTalk != true && curTime > 31 && curTime <= 33)
 		{
 			bOldPalTalk = true;
 
@@ -2095,7 +2163,7 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->EndOldPal();
 		}
 
-		if(bPlayerTalk != true && curTime > 31 && curTime <= 33)
+		if(bPlayerTalk != true && curTime > 32 && curTime <= 36)
 		{
 			bPlayerTalk = true;
 
@@ -2103,9 +2171,11 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(13);
 			player->playerText_UI->StartPlayer();
+
+			PlayPlayerVoice3(13);
 		}
 
-		if(bPlayerTalk != false && curTime > 33 && curTime <= 35)
+		if(bPlayerTalk != false && curTime > 36 && curTime <= 38)
 		{
 			bPlayerTalk = false;
 					
@@ -2113,7 +2183,7 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != false && curTime > 35 && curTime <= 37)
+		if(bOldPalTalk != false && curTime > 37 && curTime <= 40)
 		{
 			bOldPalTalk = false;
 
@@ -2121,22 +2191,28 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->SetOldPalText(21);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(0,21);
+
 			// 토크2 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(5.01);
 		}
 
-		if(bOldPalTalk != true && curTime > 37 && curTime <= 39)
+		if(bOldPalTalk != true && curTime > 40 && curTime <= 45)
 		{
 			// 올드팔 대사 22
 			owner->oldPal_UI->SetOldPalText(22);
+
+			PlayOldPalVoice3(0,22);
 			
 			bOldPalTalk = true;
 		}
 
-		if(bCheckPlayAnim != true && curTime > 39 && curTime <= 41)
+		if(bCheckPlayAnim != true && curTime > 45 && curTime <= 48)
 		{
 			// 올드팔 대사 23
 			owner->oldPal_UI->SetOldPalText(23);
+
+			PlayOldPalVoice3(0,23);
 
 			bCheckPlayAnim = true;
 
@@ -2144,7 +2220,7 @@ void UOldPalFSM::TickAngry()
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != false && curTime > 41 && curTime <= 43)
+		if(bOldPalTalk != false && curTime > 48 && curTime <= 50)
 		{
 			bOldPalTalk = false;
 
@@ -2152,7 +2228,7 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->EndOldPal();
 		}
 
-		if(bPlayerTalk != true && curTime > 43 && curTime <= 45)
+		if(bPlayerTalk != true && curTime > 49 && curTime <= 52)
 		{
 			bPlayerTalk = true;
 
@@ -2160,33 +2236,41 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(14);
 			player->playerText_UI->StartPlayer();
+			
+			PlayPlayerVoice3(14);
 		}
 
-		if(bPlayerTalk != false && curTime > 45 && curTime <= 47)
+		if(bPlayerTalk != false && curTime > 52 && curTime <= 57)
 		{
 			// 플레이어 대사 15
 			player->playerText_UI->SetPlayerText(15);
 
+			PlayPlayerVoice3(15);
+
 			bPlayerTalk = false;
 		}
 
-		if(bPlayerTalk != true && curTime > 47 && curTime <= 49)
+		if(bPlayerTalk != true && curTime > 57 && curTime <= 60)
 		{
 			// 플레이어 대사 16
 			player->playerText_UI->SetPlayerText(16);
 
+			PlayPlayerVoice3(16);
+
 			bPlayerTalk = true;
 		}
 
-		if(bPlayerTalk != false && curTime > 49 && curTime <= 51)
+		if(bPlayerTalk != false && curTime > 60 && curTime <= 63)
 		{
 			// 플레이어 대사 17
 			player->playerText_UI->SetPlayerText(17);
 
+			PlayPlayerVoice3(17);
+
 			bPlayerTalk = false;
 		}
 
-		if(bPlayerTalk != true && curTime > 51 && curTime <= 53)
+		if(bPlayerTalk != true && curTime > 63 && curTime <= 65)
 		{
 			bPlayerTalk = true;
 					
@@ -2194,7 +2278,7 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != true && curTime > 53 && curTime <= 55)
+		if(bOldPalTalk != true && curTime > 64 && curTime <= 68)
 		{
 			bOldPalTalk = true;
 
@@ -2202,11 +2286,13 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->SetOldPalText(24);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(0,24);
+
 			// 토크2 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(5.01);
 		}
 
-		if(bOldPalTalk != false && curTime > 55 && curTime <= 57)
+		if(bOldPalTalk != false && curTime > 68 && curTime <= 70)
 		{
 			bOldPalTalk = false;
 
@@ -2214,7 +2300,7 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->EndOldPal();
 		}
 
-		if(bPlayerTalk != false && curTime > 57 && curTime <= 59)
+		if(bPlayerTalk != false && curTime > 69 && curTime <= 71)
 		{
 			bPlayerTalk = false;
 
@@ -2222,9 +2308,11 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(18);
 			player->playerText_UI->StartPlayer();
+
+			PlayPlayerVoice3(18);
 		}
 
-		if(bPlayerTalk != true && curTime > 59 && curTime <= 61)
+		if(bPlayerTalk != true && curTime > 71 && curTime <= 73)
 		{
 			bPlayerTalk = true;
 					
@@ -2232,7 +2320,7 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != true && curTime > 61 && curTime <= 63)
+		if(bOldPalTalk != true && curTime > 72 && curTime <= 77)
 		{
 			bOldPalTalk = true;
 
@@ -2240,87 +2328,26 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->SetOldPalText(25);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(0,25);
+
 			// 토크1 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(3.68);
 		}
 
-		if(bCheckPlayAnim != false && curTime > 63 && curTime <= 65)
+		if(bCheckPlayAnim != false && curTime > 77 && curTime <= 80)
 		{
 			// 올드팔 대사 26
 			owner->oldPal_UI->SetOldPalText(26);
 
+			PlayOldPalVoice3(0,26);
+			
 			bCheckPlayAnim = false;
 
 			// 좋아하는 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(7.34);
 		}
 
-		if(bOldPalTalk != false && curTime > 65 && curTime <= 67)
-		{
-			bOldPalTalk = false;
-
-			// 올드팔 대사 지우기
-			owner->oldPal_UI->EndOldPal();
-		}
-
-		if(bPlayerTalk != false && curTime > 67 && curTime <= 69)
-		{
-			bPlayerTalk = false;
-
-			// 플레이어 대사 19
-			player->playerText_UI->SetSwitcher(0);
-			player->playerText_UI->SetPlayerText(19);
-			player->playerText_UI->StartPlayer();
-		}
-
-		if(bPlayerTalk != true && curTime > 69 && curTime <= 71)
-		{
-			bPlayerTalk = true;
-					
-			// 플레이어 대사 지우기
-			player->playerText_UI->EndPlayer();
-		}
-
-		if(bOldPalTalk != true && curTime > 71 && curTime <= 73)
-		{
-			bOldPalTalk = true;
-
-			// 올드팔 대사 27
-			owner->oldPal_UI->SetOldPalText(27);
-			owner->oldPal_UI->StartOldPal();
-
-			// 토크0 애니메이션 실행
-			owner->oldPalAnim->OnSitAnim(0.01);
-		}
-
-		if(bOldPalTalk != false && curTime > 73 && curTime <= 75)
-		{
-			// 올드팔 대사 28
-			owner->oldPal_UI->SetOldPalText(28);
-
-			bOldPalTalk = false;
-		}
-
-		if(bCheckPlayAnim != true && curTime > 75 && curTime <= 77)
-		{
-			// 올드팔 대사 29
-			owner->oldPal_UI->SetOldPalText(29);
-
-			bCheckPlayAnim = true;
-
-			// 토크2 애니메이션 실행
-			owner->oldPalAnim->OnSitAnim(5.01);
-		}
-
-		if(bOldPalTalk != true && curTime > 77 && curTime <= 79)
-		{
-			// 올드팔 대사 30
-			owner->oldPal_UI->SetOldPalText(30);
-
-			bOldPalTalk = true;
-		}
-
-		if(bOldPalTalk != false && curTime > 79 && curTime <= 81)
+		if(bOldPalTalk != false && curTime > 80 && curTime <= 82)
 		{
 			bOldPalTalk = false;
 
@@ -2332,21 +2359,100 @@ void UOldPalFSM::TickAngry()
 		{
 			bPlayerTalk = false;
 
+			// 플레이어 대사 19
+			player->playerText_UI->SetSwitcher(0);
+			player->playerText_UI->SetPlayerText(19);
+			player->playerText_UI->StartPlayer();
+			
+			PlayPlayerVoice3(19);
+		}
+
+		if(bPlayerTalk != true && curTime > 83 && curTime <= 85)
+		{
+			bPlayerTalk = true;
+					
+			// 플레이어 대사 지우기
+			player->playerText_UI->EndPlayer();
+		}
+
+		if(bOldPalTalk != true && curTime > 84 && curTime <= 87)
+		{
+			bOldPalTalk = true;
+
+			// 올드팔 대사 27
+			owner->oldPal_UI->SetOldPalText(27);
+			owner->oldPal_UI->StartOldPal();
+
+			PlayOldPalVoice3(0,27);
+
+			// 토크0 애니메이션 실행
+			owner->oldPalAnim->OnSitAnim(0.01);
+		}
+
+		if(bOldPalTalk != false && curTime > 87 && curTime <= 91)
+		{
+			// 올드팔 대사 28
+			owner->oldPal_UI->SetOldPalText(28);
+
+			PlayOldPalVoice3(0,28);
+
+			bOldPalTalk = false;
+		}
+
+		if(bCheckPlayAnim != true && curTime > 91 && curTime <= 96)
+		{
+			// 올드팔 대사 29
+			owner->oldPal_UI->SetOldPalText(29);
+
+			PlayOldPalVoice3(0,29);
+
+			bCheckPlayAnim = true;
+
+			// 토크2 애니메이션 실행
+			owner->oldPalAnim->OnSitAnim(5.01);
+		}
+
+		if(bOldPalTalk != true && curTime > 96 && curTime <= 98)
+		{
+			// 올드팔 대사 30
+			owner->oldPal_UI->SetOldPalText(30);
+
+			PlayOldPalVoice3(0,30);
+
+			bOldPalTalk = true;
+		}
+
+		if(bOldPalTalk != false && curTime > 98 && curTime <= 100)
+		{
+			bOldPalTalk = false;
+
+			// 올드팔 대사 지우기
+			owner->oldPal_UI->EndOldPal();
+		}
+
+		if(bPlayerTalk != false && curTime > 99 && curTime <= 102)
+		{
+			bPlayerTalk = false;
+
 			// 플레이어 대사 20
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(20);
 			player->playerText_UI->StartPlayer();
+
+			PlayPlayerVoice3(20);
 		}
 		
-		if(bPlayerTalk != true && curTime > 83 && curTime <= 85)
+		if(bPlayerTalk != true && curTime > 102 && curTime <= 105)
 		{
 			// 플레이어 대사 21
 			player->playerText_UI->SetPlayerText(21);
 
+			PlayPlayerVoice3(21);
+
 			bPlayerTalk = true;
 		}
 
-		if(bPlayerTalk != false && curTime > 85 && curTime <= 87)
+		if(bPlayerTalk != false && curTime > 105 && curTime <= 107)
 		{
 			bPlayerTalk = false;
 					
@@ -2354,30 +2460,36 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != true && curTime > 87 && curTime <= 89)
+		if(bOldPalTalk != true && curTime > 105 && curTime <= 109)
 		{
 			bOldPalTalk = true;
 
 			// 올드팔 대사 31
 			owner->oldPal_UI->SetOldPalText(31);
 			owner->oldPal_UI->StartOldPal();
+			
+			PlayOldPalVoice3(1,31);
 
 			// 토크0 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != false && curTime > 89 && curTime <= 91)
+		if(bOldPalTalk != false && curTime > 109 && curTime <= 115)
 		{
 			// 올드팔 대사 32
 			owner->oldPal_UI->SetOldPalText(32);
 			
+			PlayOldPalVoice3(1,32);
+			
 			bOldPalTalk = false;
 		}
 
-		if(bCheckPlayAnim != false && curTime > 91 && curTime <= 93)
+		if(bCheckPlayAnim != false && curTime > 115 && curTime <= 120)
 		{
 			// 올드팔 대사 33
 			owner->oldPal_UI->SetOldPalText(33);
+
+			PlayOldPalVoice3(1,33);
 
 			bCheckPlayAnim = false;
 
@@ -2385,18 +2497,22 @@ void UOldPalFSM::TickAngry()
 			owner->oldPalAnim->OnSitAnim(5.01);
 		}
 
-		if(bOldPalTalk != true && curTime > 93 && curTime <= 95)
+		if(bOldPalTalk != true && curTime > 120 && curTime <= 123)
 		{
 			// 올드팔 대사 34
 			owner->oldPal_UI->SetOldPalText(34);
 
+			PlayOldPalVoice3(1,34);
+
 			bOldPalTalk = true;
 		}
 
-		if(bCheckPlayAnim != true && curTime > 95 && curTime <= 97)
+		if(bCheckPlayAnim != true && curTime > 123 && curTime <= 126)
 		{
 			// 올드팔 대사 35
 			owner->oldPal_UI->SetOldPalText(35);
+			
+			PlayOldPalVoice3(1,35);
 
 			bCheckPlayAnim = true;
 
@@ -2404,15 +2520,17 @@ void UOldPalFSM::TickAngry()
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 		
-		if(bOldPalTalk != false && curTime > 97 && curTime <= 99)
+		if(bOldPalTalk != false && curTime > 126 && curTime <= 130)
 		{
 			// 올드팔 대사 36
 			owner->oldPal_UI->SetOldPalText(36);
 
+			PlayOldPalVoice3(1,36);
+
 			bOldPalTalk = false;
 		}
 
-		if(bOldPalTalk != true && curTime > 99 && curTime <= 101)
+		if(bOldPalTalk != true && curTime > 130 && curTime <= 132)
 		{
 			bOldPalTalk = true;
 
@@ -2420,7 +2538,7 @@ void UOldPalFSM::TickAngry()
 			owner->oldPal_UI->EndOldPal();
 		}
 
-		if(bPlayerTalk != true && curTime > 101 && curTime <= 103)
+		if(bPlayerTalk != true && curTime > 131 && curTime <= 135)
 		{
 			bPlayerTalk = true;
 
@@ -2430,7 +2548,7 @@ void UOldPalFSM::TickAngry()
 			player->playerText_UI->StartPlayer();
 		}
 
-		if(bPlayerTalk != false && curTime > 103)
+		if(bPlayerTalk != false && curTime > 135)
 		{
 			bPlayerTalk = false;
 					
@@ -2514,6 +2632,8 @@ void UOldPalFSM::TickAwesome()
 				player->playerText_UI->SetPlayerText(23);
 				player->playerText_UI->StartPlayer();
 
+				PlayPlayerVoice3(23);
+
 				SetSitState(EOldPalSitState::READYLEAVE);
 			}
 		}
@@ -2544,6 +2664,8 @@ void UOldPalFSM::TickAwesome()
 				player->playerText_UI->SetSwitcher(0);
 				player->playerText_UI->SetPlayerText(24);
 				player->playerText_UI->StartPlayer();
+
+				PlayPlayerVoice3(24);
 
 				SetSitState(EOldPalSitState::READYLEAVE);
 			}
@@ -2590,7 +2712,7 @@ void UOldPalFSM::TickReadyLeave()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != true && curTime > 3 && curTime <= 5)
+		if(bOldPalTalk != true && curTime > 1 && curTime <= 3)
 		{
 			bOldPalTalk = true;
 
@@ -2598,22 +2720,28 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPal_UI->SetOldPalText(37);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(1,37);
+
 			// 토크0 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != false && curTime > 5 && curTime <= 7)
+		if(bOldPalTalk != false && curTime > 3 && curTime <= 7)
 		{
 			// 올드팔 대사 38
 			owner->oldPal_UI->SetOldPalText(38);
 
+			PlayOldPalVoice3(1,38);
+
 			bOldPalTalk = false;
 		}
 
-		if(bCheckPlayAnim != true && curTime > 7 && curTime <= 9)
+		if(bCheckPlayAnim != true && curTime > 7 && curTime <= 10)
 		{
 			// 올드팔 대사 39
 			owner->oldPal_UI->SetOldPalText(39);
+			
+			PlayOldPalVoice3(1,39);
 
 			bCheckPlayAnim = true;
 
@@ -2621,18 +2749,22 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPalAnim->OnSitAnim(5.01);
 		}
 
-		if(bOldPalTalk != true && curTime > 9 && curTime <= 11)
+		if(bOldPalTalk != true && curTime > 10 && curTime <= 15)
 		{
 			// 올드팔 대사 40
 			owner->oldPal_UI->SetOldPalText(40);
 
+			PlayOldPalVoice3(1,40);
+
 			bOldPalTalk = true;
 		}
 
-		if(bCheckPlayAnim != false && curTime > 11 && curTime <= 13)
+		if(bCheckPlayAnim != false && curTime > 15 && curTime <= 22)
 		{
 			// 올드팔 대사 41
 			owner->oldPal_UI->SetOldPalText(41);
+
+			PlayOldPalVoice3(1,41);
 
 			bCheckPlayAnim = false;
 
@@ -2640,15 +2772,17 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != false && curTime > 13 && curTime <= 15)
+		if(bOldPalTalk != false && curTime > 22 && curTime <= 25)
 		{
 			// 올드팔 대사 42
 			owner->oldPal_UI->SetOldPalText(42);
 
+			PlayOldPalVoice3(1,42);
+
 			bOldPalTalk = false;
 		}
 		
-		if(bOldPalTalk != true && curTime > 15 && curTime <= 17)
+		if(bOldPalTalk != true && curTime > 25 && curTime <= 27)
 		{
 			bOldPalTalk = true;
 
@@ -2656,7 +2790,7 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPal_UI->EndOldPal();
 		}
 
-		if(bPlayerTalk != false && curTime > 17 && curTime <= 19)
+		if(bPlayerTalk != false && curTime > 25 && curTime <= 28)
 		{
 			bPlayerTalk = false;
 
@@ -2664,17 +2798,21 @@ void UOldPalFSM::TickReadyLeave()
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(25);
 			player->playerText_UI->StartPlayer();
+
+			PlayPlayerVoice3(25);
 		}
 
-		if(bPlayerTalk != true && curTime > 19 && curTime <= 21)
+		if(bPlayerTalk != true && curTime > 28 && curTime <= 31)
 		{
 			// 플레이어 대사 26
 			player->playerText_UI->SetPlayerText(26);
 
+			PlayPlayerVoice3(26);
+
 			bPlayerTalk = true;
 		}
 
-		if(bPlayerTalk != false && curTime > 21 && curTime <= 23)
+		if(bPlayerTalk != false && curTime > 31 && curTime <= 33)
 		{
 			bPlayerTalk = false;
 					
@@ -2682,7 +2820,7 @@ void UOldPalFSM::TickReadyLeave()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != false && curTime > 23 && curTime <= 25)
+		if(bOldPalTalk != false && curTime > 32 && curTime <= 35)
 		{
 			bOldPalTalk = false;
 
@@ -2690,22 +2828,28 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPal_UI->SetOldPalText(43);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(1,43);
+
 			// 토크0 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != true && curTime > 25 && curTime <= 27)
+		if(bOldPalTalk != true && curTime > 35 && curTime <= 37)
 		{
 			// 올드팔 대사 44
 			owner->oldPal_UI->SetOldPalText(44);
 
+			PlayOldPalVoice3(1,44);
+
 			bOldPalTalk = true;
 		}
 		
-		if(bCheckPlayAnim != true && curTime > 27 && curTime <= 29)
+		if(bCheckPlayAnim != true && curTime > 37 && curTime <= 42)
 		{
 			// 올드팔 대사 45
 			owner->oldPal_UI->SetOldPalText(45);
+
+			PlayOldPalVoice3(1,45);
 
 			bCheckPlayAnim = true;
 
@@ -2713,7 +2857,7 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPalAnim->OnSitAnim(5.01);
 		}
 
-		if(bOldPalTalk != false && curTime > 29 && curTime <= 31)
+		if(bOldPalTalk != false && curTime > 42 && curTime <= 44)
 		{
 			bOldPalTalk = false;
 
@@ -2721,7 +2865,7 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPal_UI->EndOldPal();
 		}
 		
-		if(bPlayerTalk != true && curTime > 31 && curTime <= 33)
+		if(bPlayerTalk != true && curTime > 42 && curTime <= 44)
 		{
 			bPlayerTalk = true;
 
@@ -2729,9 +2873,11 @@ void UOldPalFSM::TickReadyLeave()
 			player->playerText_UI->SetSwitcher(0);
 			player->playerText_UI->SetPlayerText(27);
 			player->playerText_UI->StartPlayer();
+
+			PlayPlayerVoice3(27);
 		}
 		
-		if(bPlayerTalk != false && curTime > 33 && curTime <= 35)
+		if(bPlayerTalk != false && curTime > 44 && curTime <= 46)
 		{
 			bPlayerTalk = false;
 					
@@ -2739,7 +2885,7 @@ void UOldPalFSM::TickReadyLeave()
 			player->playerText_UI->EndPlayer();
 		}
 
-		if(bOldPalTalk != true && curTime > 35 && curTime <= 37)
+		if(bOldPalTalk != true && curTime > 44 && curTime <= 47)
 		{
 			bOldPalTalk = true;
 
@@ -2747,22 +2893,28 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPal_UI->SetOldPalText(46);
 			owner->oldPal_UI->StartOldPal();
 
+			PlayOldPalVoice3(1,46);
+
 			// 토크0 애니메이션 실행
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != false && curTime > 37 && curTime <= 39)
+		if(bOldPalTalk != false && curTime > 47 && curTime <= 50)
 		{
 			// 올드팔 대사 47
 			owner->oldPal_UI->SetOldPalText(47);
 
+			PlayOldPalVoice3(1,47);
+
 			bOldPalTalk = false;
 		}
 
-		if(bCheckPlayAnim != false && curTime > 39 && curTime <= 41)
+		if(bCheckPlayAnim != false && curTime > 50 && curTime <= 52)
 		{
 			// 올드팔 대사 48
 			owner->oldPal_UI->SetOldPalText(48);
+
+			PlayOldPalVoice3(1,48);
 
 			bCheckPlayAnim = false;
 
@@ -2770,18 +2922,22 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPalAnim->OnSitAnim(5.01);
 		}
 
-		if(bOldPalTalk != true && curTime > 41 && curTime <= 43)
+		if(bOldPalTalk != true && curTime > 52 && curTime <= 57)
 		{
 			// 올드팔 대사 49
 			owner->oldPal_UI->SetOldPalText(49);
+			
+			PlayOldPalVoice3(1,49);
 
 			bOldPalTalk = true;
 		}
 
-		if(bCheckPlayAnim != true && curTime > 43 && curTime <= 45)
+		if(bCheckPlayAnim != true && curTime > 57 && curTime <= 60)
 		{
 			// 올드팔 대사 50
 			owner->oldPal_UI->SetOldPalText(50);
+
+			PlayOldPalVoice3(1,50);
 
 			bCheckPlayAnim = true;
 
@@ -2789,18 +2945,22 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPalAnim->OnSitAnim(7.34);
 		}
 
-		if(bOldPalTalk != false && curTime > 45 && curTime <= 47)
+		if(bOldPalTalk != false && curTime > 60 && curTime <= 63)
 		{
 			// 올드팔 대사 51
 			owner->oldPal_UI->SetOldPalText(51);
 
+			PlayOldPalVoice3(1,51);
+
 			bOldPalTalk = false;
 		}
 
-		if(bCheckPlayAnim != false && curTime > 47 && curTime <= 49)
+		if(bCheckPlayAnim != false && curTime > 63 && curTime <= 66)
 		{
 			// 올드팔 대사 52
 			owner->oldPal_UI->SetOldPalText(52);
+
+			PlayOldPalVoice3(1,52);
 
 			bCheckPlayAnim = false;
 
@@ -2808,15 +2968,17 @@ void UOldPalFSM::TickReadyLeave()
 			owner->oldPalAnim->OnSitAnim(0.01);
 		}
 
-		if(bOldPalTalk != true && curTime > 49 && curTime <= 51)
+		if(bOldPalTalk != true && curTime > 66 && curTime <= 69)
 		{
 			// 올드팔 대사 53
 			owner->oldPal_UI->SetOldPalText(53);
+
+			PlayOldPalVoice3(1,53);
 			
 			bOldPalTalk = true;
 		}
 
-		if(bOldPalTalk != false && curTime > 51 && curTime <= 53)
+		if(bOldPalTalk != false && curTime > 69 && curTime <= 71)
 		{
 			bOldPalTalk = false;
 
@@ -2830,7 +2992,7 @@ void UOldPalFSM::TickReadyLeave()
 			UGameplayStatics::PlaySound2D(GetWorld(), owner->cashSound);
 		}
 		
-		if(bCheckPlayAnim != true && curTime > 53)
+		if(bCheckPlayAnim != true && curTime > 71)
 		{
 			bCheckPlayAnim = true;
 

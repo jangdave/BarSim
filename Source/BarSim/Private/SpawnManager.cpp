@@ -114,7 +114,7 @@ void ASpawnManager::SpawnCustom()
 	if(gi->bCheckArcadeMode != true)
 	{
 		// 날짜가 지난만큼 더 많이 스폰
-		int32 idx = (gi->checkDayCount - 1) * 2; // 스토리 모드 손님 2배수
+		int32 idx = (gi->checkDayCount - 1) * 0; // 스토리 모드 손님 2배수
 		
 		// 전체 손님 수가 지정한 숫자보다 작을때
 		if(checkCustomerNum >= idx)

@@ -85,7 +85,7 @@ void UOldPalOrderWidget::NativeConstruct()
 	oldpalScript3.Emplace(FString::Printf(TEXT("그럴 줄 알았네! 허허"))); // 37
 	oldpalScript3.Emplace(FString::Printf(TEXT("참고로 오늘 자네가 만든 올드팔은 말이지"))); // 38
 	oldpalScript3.Emplace(FString::Printf(TEXT("알다시피 이 바의 이름이지"))); // 39
-	oldpalScript3.Emplace(FString::Printf(TEXT("그건 자네 아버지 조지와 내가 젋었을 때 고른 이름이라네"))); // 40
+	oldpalScript3.Emplace(FString::Printf(TEXT("그건 자네 아버지 조지와 내가 젊었을 때 고른 이름이라네"))); // 40
 	oldpalScript3.Emplace(FString::Printf(TEXT("그리고...나이 먹었을 때 쯤이면 오랜 친구같은 사이가 되었을"))); // 41
 	oldpalScript3.Emplace(FString::Printf(TEXT("자신의 아들을 생각하면서 지은 이름이기도 하네"))); // 42
 	oldpalScript3.Emplace(FString::Printf(TEXT("물론 자네가 조지를 어떻게 생각하는지 알고 있네"))); // 43
