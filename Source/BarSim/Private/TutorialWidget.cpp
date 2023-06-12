@@ -47,14 +47,14 @@ void UTutorialWidget::SetCheckTablet()
 	WidgetSwitcher_Tutorial->SetActiveWidgetIndex(7);
 }
 
+void UTutorialWidget::SetCheckNext()
+{
+	WidgetSwitcher_Tutorial->SetActiveWidgetIndex(8);
+}
+
 void UTutorialWidget::SetFirst1Check()
 {
 	checkFirst1->SetCheckedState(ECheckBoxState::Checked);
-}
-
-void UTutorialWidget::SetFirst1UnCheck()
-{
-	checkFirst1->SetCheckedState(ECheckBoxState::Unchecked);
 }
 
 void UTutorialWidget::SetFirst2Check()

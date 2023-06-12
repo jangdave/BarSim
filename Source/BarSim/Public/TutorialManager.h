@@ -27,13 +27,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY()
-	TArray<ATutorialLight*> allLights = {0, 0, 0, 0, 0};
+	TArray<ATutorialLight*> allLights = {0, 0, 0};
 
 	UPROPERTY()
-	TArray<ATutorialWall*> allWalls;
+	TArray<ATutorialWall*> allWalls = {0, 0};
 
 	UPROPERTY()
-	TArray<ATutorialCheckBox*> allCheckBoxes;
+	TArray<ATutorialCheckBox*> allCheckBoxes = {0, 0};
 	
 	void GetRights();
 
@@ -46,8 +46,4 @@ public:
 	void ClearFirstStage();
 
 	void ClearSecondStage();
-
-	void ClearThirdStage();
-
-	void ClearFourthStage();
 };

@@ -49,6 +49,15 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USoundBase* levelSound;
+
+	FTimerHandle timerFirst;
+
+	FTimerHandle timerSecond;
+
+	FTimerHandle timerThird;
+
+	FTimerHandle timerFourth;
+	
 	UFUNCTION()
 	void StartWelcome();
 	

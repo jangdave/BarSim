@@ -3,6 +3,8 @@
 
 #include "TutorialCheckBox.h"
 #include "CupBase.h"
+#include "HalfSlicedLime.h"
+#include "IceCube.h"
 #include "MixingGlass.h"
 #include "PlayerCharacter.h"
 #include "Shaker.h"
@@ -62,8 +64,7 @@ void ATutorialCheckBox::StartWelcome()
 
 void ATutorialCheckBox::FirstStageStart()
 {
-	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, this, &ATutorialCheckBox::FirstStage, 0.1, true);
+	GetWorldTimerManager().SetTimer(timerFirst, this, &ATutorialCheckBox::FirstStage, 0.1, true);
 }
 
 void ATutorialCheckBox::FirstStage()
@@ -80,7 +81,7 @@ void ATutorialCheckBox::FirstStage()
 	for(FOverlapResult hitInfo: hitsInfo)
 	{
 		auto player = Cast<APlayerCharacter>(hitInfo.GetActor());
-
+		
 		if(player != nullptr && bCheckPlayerOnce != true)
 		{
 			bCheckPlayerOnce = true;
@@ -97,12 +98,6 @@ void ATutorialCheckBox::FirstStage()
 			if(cup->iceCount == 3 && tutorial_UI->checkFirst1->GetCheckedState() != ECheckBoxState::Checked)
 			{
 				tutorial_UI->SetFirst1Check();
-
-				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
-			}
-			else if(cup->iceCount != 3 && tutorial_UI->checkFirst1->GetCheckedState() != ECheckBoxState::Unchecked)
-			{
-				tutorial_UI->SetFirst1UnCheck();
 
 				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
 			}
@@ -133,8 +128,15 @@ void ATutorialCheckBox::FirstStage()
 
 void ATutorialCheckBox::SecondStageStart()
 {
-	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, this, &ATutorialCheckBox::SecondStage, 0.1, true);
+	if(bCheckPlayerOnce != true)
+	{
+		bCheckPlayerOnce = true;
+
+		// 위젯 플레이
+		tutorial_UI->SetSecond();
+	}
+
+	GetWorldTimerManager().SetTimer(timerSecond, this, &ATutorialCheckBox::SecondStage, 0.1, true);
 }
 
 void ATutorialCheckBox::SecondStage()
@@ -150,17 +152,7 @@ void ATutorialCheckBox::SecondStage()
 	GetWorld()->OverlapMultiByObjectType(hitsInfo, centerLoc, centerRot, params, checkShape);
 	for(FOverlapResult hitInfo: hitsInfo)
 	{
-		auto player = Cast<APlayerCharacter>(hitInfo.GetActor());
-		
-		if(player != nullptr && bCheckPlayerOnce != true)
-		{
-			bCheckPlayerOnce = true;
-
-			// 위젯 플레이
-			tutorial_UI->SetSecond();
-		}
-
-		if(hitInfo.GetActor()->GetActorNameOrLabel() == "BP_MixingGlass1")
+		if(hitInfo.GetActor()->GetActorNameOrLabel() == "BP_MixingGlass")
 		{
 			auto mixing = Cast<AMixingGlass>(hitInfo.GetActor());
 
@@ -208,8 +200,15 @@ void ATutorialCheckBox::SecondStage()
 
 void ATutorialCheckBox::ThirdStageStart()
 {
-	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, this, &ATutorialCheckBox::ThirdStage, 0.1, true);
+	if(bCheckPlayerOnce != true)
+	{
+		bCheckPlayerOnce = true;
+
+		// 위젯 플레이
+		tutorial_UI->SetThird();
+	}
+	
+	GetWorldTimerManager().SetTimer(timerThird, this, &ATutorialCheckBox::ThirdStage, 0.1, true);
 }
 
 void ATutorialCheckBox::ThirdStage()
@@ -224,17 +223,7 @@ void ATutorialCheckBox::ThirdStage()
 
 	GetWorld()->OverlapMultiByObjectType(hitsInfo, centerLoc, centerRot, params, checkShape);
 	for(FOverlapResult hitInfo: hitsInfo)
-	{
-		auto player = Cast<APlayerCharacter>(hitInfo.GetActor());
-		
-		if(player != nullptr && bCheckPlayerOnce != true)
-		{
-			bCheckPlayerOnce = true;
-
-			// 위젯 플레이
-			tutorial_UI->SetThird();
-		}
-		
+	{		
 		if(hitInfo.GetActor()->GetActorNameOrLabel() == "BP_ShakerCup")
 		{
 			auto shaker = Cast<AShaker>(hitInfo.GetActor());
@@ -283,8 +272,7 @@ void ATutorialCheckBox::ThirdStage()
 
 void ATutorialCheckBox::FourthStageStart()
 {
-	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, this, &ATutorialCheckBox::FourthStage, 0.1, true);
+	GetWorldTimerManager().SetTimer(timerFourth, this, &ATutorialCheckBox::FourthStage, 0.1, true);
 }
 
 void ATutorialCheckBox::FourthStage()
@@ -368,6 +356,54 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 		if(cup->iceCount == 3 && cup->contents >= 2 && cup->garnishArray[0] == true)
 		{
 			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+
+			GetWorldTimerManager().ClearTimer(timerFirst);
+			
+			bCheckPlayerOnce = false;
+			
+			SecondStageStart();
+			
+			cup->Destroy();
+			cup->iceRef1->Destroy();
+			cup->iceRef2->Destroy();
+			cup->iceRef3->Destroy();
+			cup->halfSlicedLimeRef->Destroy();
+		}
+		else if(cup->bStirred != false && cup->contents >= 2)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+
+			GetWorldTimerManager().ClearTimer(timerSecond);
+			
+			bCheckPlayerOnce = false;
+			
+			ThirdStageStart();
+			
+			cup->Destroy();
+			if(cup->iceRef1)
+			{
+				cup->iceRef1->Destroy();
+			}
+			if(cup->iceRef2)
+			{
+				cup->iceRef2->Destroy();
+			}
+			if(cup->iceRef3)
+			{
+				cup->iceRef3->Destroy();
+			}
+			if(cup->halfSlicedLimeRef)
+			{
+				cup->halfSlicedLimeRef->Destroy();
+			}
+		}
+		else if(cup->bShaked != false && cup->contents >= 2)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+
+			GetWorldTimerManager().ClearTimer(timerThird);
+			
+			tutorial_UI->SetCheckNext();
 			
 			FTimerHandle timer;
 			GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
@@ -377,35 +413,7 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 				bCheckPlayerOnce = false;
 
 				tutorialBox->SetVisibility(false);
-			}), 1.0f, false);
-		}
-		else if(cup->bStirred != false && cup->contents >= 2)
-		{
-			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
-			
-			FTimerHandle timer;
-			GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
-			{
-				tutorialManager->ClearSecondStage();
-
-				bCheckPlayerOnce = false;
-
-				tutorialBox->SetVisibility(false);
-			}), 1.0f, false);
-		}
-		else if(cup->bShaked != false && cup->contents >= 2)
-		{
-			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
-			
-			FTimerHandle timer;
-			GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
-			{
-				tutorialManager->ClearThirdStage();
-
-				bCheckPlayerOnce = false;
-
-				tutorialBox->SetVisibility(false);
-			}), 1.0f, false);
+			}), 3.0f, false);
 		}
 	}
 
@@ -414,14 +422,18 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 		if(tablet->tablet_UI->bCheckTutorialRecipe != false && tablet->tablet_UI->bCheckTutorialMail != false && tablet->tablet_UI->bCheckTutorialClose != false && tablet->tablet_UI->bCheckTutorialInternet != false && tablet->tablet_UI->bCheckTutorialOpen != false)
 		{
 			UGameplayStatics::PlaySound2D(GetWorld(), nextSound);
+
+			GetWorldTimerManager().ClearTimer(timerFourth);
+			
+			tutorial_UI->SetCheckNext();
 			
 			FTimerHandle timer;
 			GetWorldTimerManager().SetTimer(timer, FTimerDelegate::CreateLambda([&]()
 			{
-				tutorialManager->ClearFourthStage();
+				tutorialManager->ClearSecondStage();
 
 				tutorialBox->SetVisibility(false);
-			}), 1.0f, false);
+			}), 3.0f, false);
 		}
 	}
 }
