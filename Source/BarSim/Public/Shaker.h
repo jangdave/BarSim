@@ -116,6 +116,32 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "Shaker")
 	bool bShakeWidgetAnimOn;
+
+	// Player Controller
+	UPROPERTY()
+	class APlayerController* PC;
+
+	UPROPERTY(EditDefaultsOnly, Category="Haptics")
+	class UHapticFeedbackEffect_Curve* HF_Shaking;
+
+	UPROPERTY()
+	bool isGSR = false;
+	UPROPERTY()
+	bool isGSL =false;
+
+	UPROPERTY()
+	bool shakeSoundBoolean=false;
+	UPROPERTY()
+	bool shakeSoundBoolean2=false;
+
+	UPROPERTY()
+	class UAudioComponent* shakingSoundAudioComp;
+
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* shakeSound;
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	class USoundBase* shakeStopSound;
+
 	
 };
 

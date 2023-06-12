@@ -11,6 +11,7 @@
 #include "PlayerDialogWidget.h"
 #include "Tablet.h"
 #include "TabletWidget.h"
+#include "XRLoadingScreenFunctionLibrary.h"
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -240,6 +241,8 @@ void ASpawnManager::SecondDay()
 
 	if(twoTimer >= 10)
 	{
+		UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+		UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 		UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 	}
 }

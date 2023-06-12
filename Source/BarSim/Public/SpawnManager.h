@@ -149,4 +149,7 @@ public:
 
 	void SomethingElse(int32 customerIdx);
 	
+	UPROPERTY(EditAnywhere, Category="Texture")
+	class UTexture* LoadingTexture;
+	
 };
