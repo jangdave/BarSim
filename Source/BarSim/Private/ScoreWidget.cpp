@@ -4,6 +4,7 @@
 #include "ScoreWidget.h"
 
 #include "BarGameInstance.h"
+#include "XRLoadingScreenFunctionLibrary.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
@@ -50,7 +51,9 @@ void UScoreWidget::GoMainMenu()
 	gi->bCheckMenu = false;
 
 	gi->TotalMoney = {0, 0, 0, 0};
-	
+
+	UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1), true, false);
+	UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
 	//메인메뉴로 이동
 	UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
 }
