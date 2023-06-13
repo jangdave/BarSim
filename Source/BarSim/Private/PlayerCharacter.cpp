@@ -1663,10 +1663,10 @@ void APlayerCharacter::PlayerTutoText()
 	playerText_UI->StartPlayerText(1);
 	playerText_UI->StartPlayer();
 
-	playerText_UI->EndPlayer();
+	PlayPlayerSound(0);
 
 	FTimerHandle timer;
-	GetWorldTimerManager().SetTimer(timer, this, &APlayerCharacter::EndText, 5.0f, false);
+	GetWorldTimerManager().SetTimer(timer, this, &APlayerCharacter::EndText, 3.0f, false);
 }
 
 void APlayerCharacter::PlayerStartText()
@@ -1677,6 +1677,8 @@ void APlayerCharacter::PlayerStartText()
 		playerText_UI->SetSwitcher(0);
 		playerText_UI->StartPlayerText(2);
 		playerText_UI->StartPlayer();
+
+		PlayPlayerSound(1);
 	}
 	else if(BarGameInstance->checkDayCount == 2 && UGameplayStatics::GetCurrentLevelName(GetWorld()) == "BarStartMap")
 	{
@@ -1684,6 +1686,8 @@ void APlayerCharacter::PlayerStartText()
 		playerText_UI->SetSwitcher(0);
 		playerText_UI->StartPlayerText(3);
 		playerText_UI->StartPlayer();
+		
+		PlayPlayerSound(2);
 	}
 
 	FTimerHandle timer;
@@ -1704,4 +1708,9 @@ void APlayerCharacter::PlayerMenuText()
 void APlayerCharacter::EndText()
 {
 	playerText_UI->EndPlayer();
+}
+
+void APlayerCharacter::PlayPlayerSound(int32 idx)
+{
+	UGameplayStatics::PlaySound2D(GetWorld(), playerSound[idx]);
 }
