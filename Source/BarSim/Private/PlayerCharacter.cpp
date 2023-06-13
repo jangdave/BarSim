@@ -285,6 +285,7 @@ void APlayerCharacter::CheckGrabbedObjectRight()
 		else if(GrabbedActorRight==barSpoon&&barSpoon!=nullptr)
 		{
 			isGrabbingBarSpoonRight=true;
+			barSpoon->meshComp->SetCollisionProfileName(FName("SpoonGrabbed"));
 		}
 
 		// 잡은 대상이 ShakerLid라면
@@ -465,6 +466,8 @@ void APlayerCharacter::CheckGrabbedObjectLeft()
 	else if(GrabbedActorLeft==barSpoonL&&barSpoonL!=nullptr)
 	{
 		isGrabbingBarSpoonLeft=true;
+		barSpoonL->meshComp->SetCollisionProfileName(FName("SpoonGrabbed"));
+
 	}
 
 	// 잡은 대상이 ShakerLid라면
@@ -641,6 +644,7 @@ void APlayerCharacter::CheckDroppedObjectRight()
 		if(barSpoon!=nullptr)
 		{
 			barSpoon->isDropSoundEnabled=true;
+			barSpoon->meshComp->SetCollisionProfileName(FName("Spoon"));
 		}
 		isGrabbingBarSpoonRight=false;
 	}
@@ -785,6 +789,12 @@ void APlayerCharacter::CheckDroppedObjectLeft()
 		coasterL->SetSimulateAndTickDisable();
 
 		isGrabbingCoasterLeft=false;
+	}
+	else if(isGrabbingBarSpoonLeft&&barSpoonL!=nullptr)
+	{
+		barSpoonL->isDropSoundEnabled=true;
+		barSpoonL->meshComp->SetCollisionProfileName(FName("Spoon"));
+
 	}
 	else if(isGrabbingShakerLeft&&shakerL!=nullptr)
 	{
