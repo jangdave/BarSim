@@ -346,4 +346,10 @@ public:
 
 	UFUNCTION()
 	void EndText();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category=sound)
+	TArray<USoundBase*> playerSound;
+
+	UFUNCTION()
+	void PlayPlayerSound(int32 idx);
 };

@@ -220,23 +220,33 @@ void ASpawnManager::SecondDay()
 {
 	twoTimer += 0.1;
 
-	if(twoTimer > 1 && bCheckTwo != true)
+	if(bCheckTwo != true && twoTimer > 1 && twoTimer <= 4)
 	{
 		player->playerText_UI->SetSwitcher(0);
 		player->playerText_UI->SetPlayerText(0);
 		player->playerText_UI->StartPlayer();
 
+		player->PlayPlayerSound(3);
+		
 		bCheckTwo = true;
 	}
 
-	if(twoTimer >= 4 && twoTimer < 7)
+	if(bCheckTwo != false && twoTimer >= 4 && twoTimer < 7)
 	{
 		player->playerText_UI->SetPlayerText(1);
+
+		player->PlayPlayerSound(4);
+		
+		bCheckTwo = false;
 	}
 
-	if(twoTimer >= 7 && twoTimer < 10)
+	if(bCheckTwo != true && twoTimer >= 7 && twoTimer < 10)
 	{
 		player->playerText_UI->SetPlayerText(2);
+
+		player->PlayPlayerSound(5);
+		
+		bCheckTwo = true;
 	}
 
 	if(twoTimer >= 10)

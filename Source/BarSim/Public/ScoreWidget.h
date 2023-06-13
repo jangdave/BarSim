@@ -59,4 +59,7 @@ public:
 
 	UFUNCTION()
 	void Cancel();
+
+	UPROPERTY(EditAnywhere, Category="Texture")
+	class UTexture* LoadingTexture;
 };
