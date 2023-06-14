@@ -351,7 +351,7 @@ void ATutorialCheckBox::OnCheckOverlap(UPrimitiveComponent* OverlappedComponent,
 	auto cup = Cast<ACupBase>(OtherActor);
 	auto tablet = Cast<ATablet>(OtherActor);
 
-	if(cup != nullptr)
+	if(cup != nullptr && cup->GetActorNameOrLabel() != "BP_MixingGlass" && cup->GetActorNameOrLabel() != "BP_ShakerCup")
 	{
 		if(cup->iceCount == 3 && cup->contents >= 2 && cup->garnishArray[0] == true)
 		{

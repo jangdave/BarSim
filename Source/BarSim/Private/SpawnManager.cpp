@@ -106,16 +106,15 @@ void ASpawnManager::SpawnCustomer()
 	
 	// 시간이 지날때마다 손님을 스폰한다
 	FTimerHandle spawnTime;
-	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 40, true);
+	GetWorldTimerManager().SetTimer(spawnTime, this, &ASpawnManager::SpawnCustom, 80, true);
 }
 
 void ASpawnManager::SpawnCustom()
 {
 	if(gi->bCheckArcadeMode != true)
 	{
-		// 날짜가 지난만큼 더 많이 스폰
-		int32 idx = (gi->checkDayCount - 1) * 2; // 스토리 모드 손님 2배수
-		
+		int32 idx = gi->checkDayCount; // 스토리 모드 손님 명수
+				
 		// 전체 손님 수가 지정한 숫자보다 작을때
 		if(checkCustomerNum >= idx)
 		{
@@ -148,7 +147,7 @@ void ASpawnManager::SpawnCustom()
 	else
 	{
 		// 날짜가 지난만큼 더 많이 스폰
-		int32 idx = (gi->checkDayCount - 1) * 3; // 아케이드 모드 손님 6명
+		int32 idx = (gi->checkDayCount - 1) * 2; // 아케이드 모드 손님 4명
 		
 		// 전체 손님 수가 지정한 숫자보다 작을때
 		if(checkCustomerNum >= idx)
