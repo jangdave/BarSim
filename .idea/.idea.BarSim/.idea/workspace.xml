@@ -16,6 +16,7 @@
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TutorialCheckBox.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TutorialCheckBox.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,9 +113,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686779965050</updated>
-      <workItem from="1686779966144" duration="338000" />
-      <workItem from="1686780575177" duration="267000" />
-      <workItem from="1686780915448" duration="403000" />
+      <workItem from="1686714058830" duration="1090000" />
+      <workItem from="1686746795321" duration="1257000" />
+      <workItem from="1686752444089" duration="975000" />
     </task>
     <servers />
   </component>
