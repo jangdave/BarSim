@@ -10,9 +10,8 @@
     <list default="true" id="00155849-bbd0-4052-b417-0fe27b9ad0d0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/BP_VRCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VRE/Input/VREInputMappingContext.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Input/VREInputMappingContext.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VRE/Core/Character/FPS_VRCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/PlayerCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

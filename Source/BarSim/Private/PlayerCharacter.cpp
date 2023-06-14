@@ -85,8 +85,8 @@ void APlayerCharacter::BeginPlay()
 		}
 	}
 
-	GetCharacterMovement()->bRequestedMoveUseAcceleration=false;
-	GetCharacterMovement()->bNetworkSkipProxyPredictionOnNetUpdate=true;
+	//GetCharacterMovement()->bRequestedMoveUseAcceleration=false;
+	//GetCharacterMovement()->bNetworkSkipProxyPredictionOnNetUpdate=true;
 	
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;	
