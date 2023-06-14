@@ -60,6 +60,8 @@ public:
 	class UInputAction* UseHeldObjectLeft;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputAction* ShowMenu;
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* ShowGuide;
 	
 	// Functions
 	UFUNCTION(BlueprintCallable)
@@ -75,6 +77,8 @@ public:
 	void FireReleasedRight();
 	void FireReleasedLeft();
 	void ShowMenuWidget();
+	void ShowGuideWidget();
+	void HideGuideWidget();
 
 	// Grabbing Boolean
 	bool IsGrabbedLeft = false;
@@ -294,6 +298,12 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="PlayerSounds")
 	class USoundBase* MenuWidgetDisappearSound;
+
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* GuideWidgetAppearSound;
+
+	UPROPERTY(EditAnywhere, Category="PlayerSounds")
+	class USoundBase* GuideWidgetDisappearSound;
 	
 
 	// Lime BP
@@ -352,4 +362,10 @@ public:
 
 	UFUNCTION()
 	void PlayPlayerSound(int32 idx);
+
+	UPROPERTY()
+	class AGuideWidgetActor* GuideWidget;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AGuideWidgetActor> guideFactory;
 };
