@@ -135,17 +135,12 @@ void UOldPalFSM::SetOrderCoctail()
 // idle 상태 설정 함수
 void UOldPalFSM::SetState(EOldPalState next)
 {
-	state = next;
-
 	// 상태가 변경 될 때마다 대기시간 초기화
 	curTime = 0;
 	
 	// 플레이 되는 애니메이션 플레이 체크 초기화
 	bCheckPlayAnim = false;
-
-	// 상태를 anim 클래스에 동기화
-	owner->oldPalAnim->ownerState = next;
-
+	
 	// 시간 초기화
 	bCount = false;
 
@@ -153,6 +148,11 @@ void UOldPalFSM::SetState(EOldPalState next)
 	bPlayerTalk = false;
 
 	bOldPalTalk = false;
+	
+	// 상태를 anim 클래스에 동기화
+	owner->oldPalAnim->ownerState = next;
+	
+	state = next;
 }
 
 void UOldPalFSM::PlayOldPalVoice1(int32 index)
@@ -1040,16 +1040,11 @@ void UOldPalFSM::TickLeave()
 // sit 상태 설정 함수
 void UOldPalFSM::SetSitState(EOldPalSitState next)
 {
-	sitState = next;
-
 	// 상태가 변경 될 때마다 대기시간 초기화
 	curTime = 0;
 
 	// 플레이 되는 애니메이션 플레이 체크 초기화
 	bCheckPlayAnim = false;
-
-	// 상태를 anim 클래스에 동기화
-	owner->oldPalAnim->ownerSitState = next;
 	
 	// 시간 초기화
 	bCount = false;
@@ -1058,6 +1053,11 @@ void UOldPalFSM::SetSitState(EOldPalSitState next)
 	bPlayerTalk = false;
 
 	bOldPalTalk = false;
+	
+	// 상태를 anim 클래스에 동기화
+	owner->oldPalAnim->ownerSitState = next;
+	
+	sitState = next;
 }
 
 void UOldPalFSM::TickStandby()
@@ -3001,7 +3001,6 @@ void UOldPalFSM::TickReadyLeave()
 
 			owner->GetMesh()->SetRelativeLocation(FVector(-35, 0, -3));
 		}
-		
 	}
 }
 
@@ -3009,8 +3008,6 @@ void UOldPalFSM::TickReadyLeave()
 // drink 상태 설정 함수
 void UOldPalFSM::SetDrinkState(EOldPalDrinkState next)
 {
-	drinkState = next;
-
 	// 상태가 변경 될 때마다 대기시간 초기화
 	curTime = 0;
 
@@ -3024,6 +3021,8 @@ void UOldPalFSM::SetDrinkState(EOldPalDrinkState next)
 	bPlayerTalk = false;
 
 	bOldPalTalk = false;
+	
+	drinkState = next;
 }
 
 void UOldPalFSM::TickIdleCup()
