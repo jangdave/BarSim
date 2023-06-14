@@ -1166,7 +1166,7 @@ void UOldPalFSM::TickStandbyWaitLong()
 		}
 		
 		// 코스터가 있으면
-		if(spawnManager->bIsCoaster[idx] != false)
+		if(spawnManager->bIsCoaster[idx] != false && curTime > 3)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -1203,7 +1203,7 @@ void UOldPalFSM::TickOrder()
 			}
 		}
 
-		if(curTime > 8)
+		if(curTime > 4)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -1244,7 +1244,7 @@ void UOldPalFSM::TickWait()
 {
 	if(gi->checkDayCount == 1)
 	{
-		if(bOldPalTalk != true && curTime > 2)
+		if(bOldPalTalk != true && curTime > 1)
 		{
 			owner->oldPal_UI->SetOldPalText(4);
 			owner->oldPal_UI->StartOldPal();
