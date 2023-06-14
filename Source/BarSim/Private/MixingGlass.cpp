@@ -192,28 +192,31 @@ void AMixingGlass::Tick(float DeltaSeconds)
 					FActorSpawnParameters param;
 					param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 					AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")), param);
-					mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
-
-					//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
-				
-					// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
-					mixedDrop->NameArray.Empty();
-					mixedDrop->NameArray = NameArray;
-					mixedDrop->ContentsArray.Empty();
-					mixedDrop->ContentsArray = ContentsArray;
-
-					for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
+					if(mixedDrop)
 					{
-						float mixedPercent = mixedDrop->dropMass / contents;
-						mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-						mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
+						mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
+
+						//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
+					
+						// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
+						mixedDrop->NameArray.Empty();
+						mixedDrop->NameArray = NameArray;
+						mixedDrop->ContentsArray.Empty();
+						mixedDrop->ContentsArray = ContentsArray;
+
+						for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
+						{
+							float mixedPercent = mixedDrop->dropMass / contents;
+							mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
+							mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
+						}
+
+						mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
+
+						contents = contents - mixedDrop->mixedDropMass;
+						LiquorScale();
+						mixedDrop->bStirred = bStirred;
 					}
-
-					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
-
-					contents = contents - mixedDrop->mixedDropMass;
-					LiquorScale();
-					mixedDrop->bStirred = bStirred;
 
 					if(pourSoundBoolean==false)
 					{
@@ -239,27 +242,30 @@ void AMixingGlass::Tick(float DeltaSeconds)
 						FActorSpawnParameters param;
 						param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 						AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, cupComp->GetSocketLocation(FName("Mouth")), cupComp->GetSocketRotation(FName("Mouth")), param);
-						mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
-
-						//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
-
-						// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
-						mixedDrop->NameArray.Empty();
-						mixedDrop->NameArray = NameArray;
-						mixedDrop->ContentsArray.Empty();
-						mixedDrop->ContentsArray = ContentsArray;
-
-						for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
+						if(mixedDrop)
 						{
-							float mixedPercent = mixedDrop->dropMass / contents;
-							mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-							mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
-						}
+							mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
 
-						mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
-						contents = contents - mixedDrop->mixedDropMass;
-						LiquorScale();
-						mixedDrop->bStirred = bStirred;
+							//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
+
+							// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
+							mixedDrop->NameArray.Empty();
+							mixedDrop->NameArray = NameArray;
+							mixedDrop->ContentsArray.Empty();
+							mixedDrop->ContentsArray = ContentsArray;
+
+							for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
+							{
+								float mixedPercent = mixedDrop->dropMass / contents;
+								mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
+								mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
+							}
+
+							mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
+							contents = contents - mixedDrop->mixedDropMass;
+							LiquorScale();
+							mixedDrop->bStirred = bStirred;
+						}
 					}
 				}
 			}

@@ -212,28 +212,31 @@ void AShaker::Tick(float DeltaSeconds)
 					waterStream->SetVariableMaterial(FName("streamMaterial"), liquorComp->GetMaterial(0));
 					//물방울 액터 스폰
 					AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, strainer->streamPoint, GetActorRotation());
-					mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
-					//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
-					
-					// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
-					mixedDrop->NameArray.Empty();
-					mixedDrop->NameArray = NameArray;
-					mixedDrop->ContentsArray.Empty();
-					mixedDrop->ContentsArray = ContentsArray;
-
-					for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++)
+					if(mixedDrop)
 					{
-						float mixedPercent = mixedDrop->dropMass / contents;
-						mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-						mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
+						mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
+						//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
+						
+						// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
+						mixedDrop->NameArray.Empty();
+						mixedDrop->NameArray = NameArray;
+						mixedDrop->ContentsArray.Empty();
+						mixedDrop->ContentsArray = ContentsArray;
+
+						for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++)
+						{
+							float mixedPercent = mixedDrop->dropMass / contents;
+							mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
+							mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
+						}
+
+						mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
+
+						contents = contents - mixedDrop->mixedDropMass;
+						mixedDrop->bStirred = bStirred;
+						mixedDrop->bShaked = bShaked;
+						LiquorScale();
 					}
-
-					mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
-
-					contents = contents - mixedDrop->mixedDropMass;
-					mixedDrop->bStirred = bStirred;
-					mixedDrop->bShaked = bShaked;
-					LiquorScale();
 					
 					if(pourSoundBoolean==false)
 					{
@@ -263,26 +266,29 @@ void AShaker::Tick(float DeltaSeconds)
 						
 						//물방울 액터 스폰
 						AMixedDrop* mixedDrop = GetWorld()->SpawnActor<class AMixedDrop>(streamDrop, strainer->streamPoint, GetActorRotation());
-						mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
-						//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
-
-						// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
-						mixedDrop->NameArray.Empty();
-						mixedDrop->NameArray = NameArray;
-						mixedDrop->ContentsArray.Empty();
-						mixedDrop->ContentsArray = ContentsArray;
-
-						for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
+						if(mixedDrop)
 						{
-							float mixedPercent = mixedDrop->dropMass / contents;
-							mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
-							mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
-							//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
+							mixedDrop->dropMass = 0.05f * streamWidth * DeltaSeconds;
+							//UE_LOG(LogTemp, Warning, TEXT("drop mass is %f"), mixedDrop->dropMass);
+
+							// 새로 스폰시킬 mixedDrop에 있는 배열에 현재 믹싱 글라스에 담긴 배열 그대로 전달
+							mixedDrop->NameArray.Empty();
+							mixedDrop->NameArray = NameArray;
+							mixedDrop->ContentsArray.Empty();
+							mixedDrop->ContentsArray = ContentsArray;
+
+							for(int i = 0; i < mixedDrop->ContentsArray.Num(); i++) 
+							{
+								float mixedPercent = mixedDrop->dropMass / contents;
+								mixedDrop->ContentsArray[i] = mixedDrop->ContentsArray[i] * mixedPercent;
+								mixedDrop->mixedDropMass = mixedDrop->mixedDropMass + mixedDrop->ContentsArray[i];
+								//UE_LOG(LogTemp, Warning, TEXT("%d is %f"), i, mixedDrop->ContentsArray[i]);
+							}
+							mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
+							mixedDrop->bShaked = bShaked;
+							contents = contents - mixedDrop->mixedDropMass;
+							LiquorScale();
 						}
-						mixedDrop->sphereComp->AddForce(mixedDrop->sphereComp->GetUpVector() * 9.135);
-						mixedDrop->bShaked = bShaked;
-						contents = contents - mixedDrop->mixedDropMass;
-						LiquorScale();
 					}
 				}
 			}
@@ -335,10 +341,4 @@ void AShaker::CupStop()
 		this->SetActorRelativeRotation(FRotator(0, cupRotYaw, 0));
 	}
 }
-
-void AShaker::Shake()
-{
-	
-}
-
 
