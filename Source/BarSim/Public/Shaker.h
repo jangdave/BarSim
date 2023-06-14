@@ -80,9 +80,6 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Shaker")
 	bool bLidOn;
-
-	UFUNCTION()
-	void Shake();
 	
 	virtual void CupStop() override;
 

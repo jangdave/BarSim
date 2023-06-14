@@ -159,7 +159,7 @@ void ATutorialCheckBox::SecondStage()
 			if(mixing != nullptr)
 			{
 				// 술의 양 체크
-				if(mixing->contents >= 2 && tutorial_UI->checkSecond1->GetCheckedState() != ECheckBoxState::Checked)
+				if(mixing->contents >= 3 && tutorial_UI->checkSecond1->GetCheckedState() != ECheckBoxState::Checked)
 				{
 					tutorial_UI->SetSecond1Check();
 
@@ -231,7 +231,7 @@ void ATutorialCheckBox::ThirdStage()
 			if(shaker != nullptr)
 			{
 				// 술의 양 체크
-				if(shaker->contents >= 2 && tutorial_UI->checkThird1->GetCheckedState() != ECheckBoxState::Checked)
+				if(shaker->contents >= 3 && tutorial_UI->checkThird1->GetCheckedState() != ECheckBoxState::Checked)
 				{
 					tutorial_UI->SetThird1Check();
 
