@@ -12,6 +12,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GripMotionControllerComponent.h"
+#include "GuideWidgetActor.h"
 #include "HalfSlicedLime.h"
 #include "HalfSlicedLimeVat.h"
 #include "HalfSlicedOrange.h"
@@ -38,6 +39,7 @@
 #include "Components/WidgetInteractionComponent.h"
 #include "Haptics/HapticFeedbackEffect_Curve.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 
@@ -83,8 +85,8 @@ void APlayerCharacter::BeginPlay()
 		}
 	}
 
-	GetCharacterMovement()->bRequestedMoveUseAcceleration=false;
-	GetCharacterMovement()->bNetworkSkipProxyPredictionOnNetUpdate=true;
+	//GetCharacterMovement()->bRequestedMoveUseAcceleration=false;
+	//GetCharacterMovement()->bNetworkSkipProxyPredictionOnNetUpdate=true;
 	
 	widgetInteractionComp->bEnableHitTesting=true;
 	widgetInteractionComp->bShowDebug=false;	
@@ -190,6 +192,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		InputSystem->BindAction(UseHeldObjectLeft, ETriggerEvent::Completed, this, &APlayerCharacter::FireReleasedLeft);
 		InputSystem->BindAction(UseHeldObjectRight, ETriggerEvent::Completed, this, &APlayerCharacter::FireReleasedRight);
 		InputSystem->BindAction(ShowMenu, ETriggerEvent::Started, this, &APlayerCharacter::ShowMenuWidget);
+		InputSystem->BindAction(ShowGuide, ETriggerEvent::Started, this, &APlayerCharacter::ShowGuideWidget);
+		InputSystem->BindAction(ShowGuide, ETriggerEvent::Completed, this, &APlayerCharacter::HideGuideWidget);
 
 	}
 }
@@ -1654,6 +1658,30 @@ void APlayerCharacter::ShowMenuWidget()
 		}
 	}
 
+}
+
+void APlayerCharacter::ShowGuideWidget()
+{
+	UGameplayStatics::PlaySound2D(GetWorld(), GuideWidgetAppearSound, 1, 1, 0);
+
+	FVector rot1 = VRReplicatedCamera->GetComponentLocation();
+	FVector rot2 = VRReplicatedCamera->GetComponentLocation() + VRReplicatedCamera->GetForwardVector() * 80;
+	FRotator rotend = UKismetMathLibrary::FindLookAtRotation(rot1, rot2);
+	FRotator rot = {0, rotend.Yaw - 180, 0};
+	FVector loc1 = VRReplicatedCamera->GetComponentLocation() + VRReplicatedCamera->GetForwardVector() * 150;
+	FVector loc2 = GetActorLocation() + GetActorUpVector() * 130;
+	FVector loc = {loc1.X, loc1.Y, loc2.Z};
+	GuideWidget = GetWorld()->SpawnActor<AGuideWidgetActor>(guideFactory, loc, rot);
+}
+
+void APlayerCharacter::HideGuideWidget()
+{
+	if(GuideWidget!=nullptr)
+	{
+		UGameplayStatics::PlaySound2D(GetWorld(), GuideWidgetDisappearSound, 1, 1, 0);
+
+		GuideWidget->Destroy();
+	}
 }
 
 void APlayerCharacter::PlayerTutoText()
