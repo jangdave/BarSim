@@ -89,33 +89,36 @@ void ATutorialCheckBox::FirstStage()
 			// 위젯 플레이
 			tutorial_UI->SetFirst();
 		}
-		
-		auto cup = Cast<ACupBase>(hitInfo.GetActor());
 
-		if(cup != nullptr)
+		if(hitInfo.GetActor()->GetActorNameOrLabel() != "BP_ShakerCup" && hitInfo.GetActor()->GetActorNameOrLabel() != "BP_MixingGlass")
 		{
-			// 얼음 3개 체크
-			if(cup->iceCount == 3 && tutorial_UI->checkFirst1->GetCheckedState() != ECheckBoxState::Checked)
+			auto cup = Cast<ACupBase>(hitInfo.GetActor());
+
+			if(cup != nullptr)
 			{
-				tutorial_UI->SetFirst1Check();
+				// 얼음 3개 체크
+				if(cup->iceCount == 3 && tutorial_UI->checkFirst1->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetFirst1Check();
 
-				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
-			}
+					UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
+				}
 
-			// 술의 양 체크
-			if(cup->contents >= 2 && tutorial_UI->checkFirst2->GetCheckedState() != ECheckBoxState::Checked)
-			{
-				tutorial_UI->SetFirst2Check();
+				// 술의 양 체크
+				if(cup->contents >= 2 && tutorial_UI->checkFirst2->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetFirst2Check();
 
-				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
-			}
+					UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
+				}
 
-			// 가니쉬 체크
-			if(cup->garnishArray[0] == true && tutorial_UI->checkFirst3->GetCheckedState() != ECheckBoxState::Checked)
-			{
-				tutorial_UI->SetFirst3Check();
+				// 가니쉬 체크
+				if(cup->garnishArray[0] == true && tutorial_UI->checkFirst3->GetCheckedState() != ECheckBoxState::Checked)
+				{
+					tutorial_UI->SetFirst3Check();
 
-				UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
+					UGameplayStatics::PlaySound2D(GetWorld(), checkSound);
+				}
 			}
 		}
 	}

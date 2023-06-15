@@ -55,11 +55,11 @@ void ASpawnManager::CheckChairSit()
 
 		if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair1")
 		{
-			aChairs[1] = chair;
+			aChairs[0] = chair;
 		}
 		else if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair2")
 		{
-			aChairs[0] = chair;
+			aChairs[1] = chair;
 		}
 		else if(chair != nullptr && chair->GetActorNameOrLabel() == "BP_Chair3")
 		{
