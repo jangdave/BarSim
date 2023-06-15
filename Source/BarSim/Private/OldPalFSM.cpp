@@ -456,7 +456,7 @@ void UOldPalFSM::TickChoice()
 {
 	if(gi->checkDayCount == 1)
 	{
-		if(bOldPalTalk != true && curTime > 3)
+		if(bOldPalTalk != true && curTime > 2)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
@@ -464,7 +464,7 @@ void UOldPalFSM::TickChoice()
 			bOldPalTalk = true;
 		}
 		
-		if(bCheckPlayAnim != true && curTime > 6)
+		if(bCheckPlayAnim != true && curTime > 4)
 		{
 			owner->oldPal_UI->SetOldPalText(1);
 			owner->oldPal_UI->StartOldPal();
@@ -477,7 +477,7 @@ void UOldPalFSM::TickChoice()
 			owner->oldPalAnim->OnLeanAnim(4.51);
 		}
 
-		if(curTime > 10)
+		if(curTime > 6)
 		{
 			SetState(EOldPalState::READYMOVE);
 		}
@@ -1091,7 +1091,7 @@ void UOldPalFSM::TickStandby()
 		}
 		
 		// 일정 시간 전에 코스터가 있다면 오더로 상태 변경
-		if(curTime > 6 && curTime <= 10 && spawnManager->bIsCoaster[idx] != false)
+		if(curTime > 6 && curTime < 9 && spawnManager->bIsCoaster[idx] != false)
 		{
 			// 올드팔 대사 지우기
 			owner->oldPal_UI->EndOldPal();
