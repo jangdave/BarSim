@@ -145,14 +145,10 @@ void APlayerCharacter::Tick(float DeltaTime)
 	}*/
 
 	// Tablet Widget Line Trace
-	FVector startPos = widgetInteractionComp->GetComponentLocation();
-	FVector endPos = startPos + widgetInteractionComp->GetForwardVector() * 300.0f;
-	FHitResult traceHit;
 	bool bOverWidget = widgetInteractionComp->IsOverHitTestVisibleWidget();
-	bool bHit = GetWorld()->LineTraceSingleByChannel(traceHit, startPos, endPos, ECC_Visibility);
-	if(bHit&&bOverWidget)
+	if(bOverWidget)
 	{
-		auto hitDist = traceHit.Distance;
+		auto hitDist = widgetInteractionComp->GetLastHitResult().Distance;
 		WidgetTraceRight->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
 		WidgetTraceRight->SetVisibility(true);
 	}
@@ -161,14 +157,10 @@ void APlayerCharacter::Tick(float DeltaTime)
 		WidgetTraceRight->SetVisibility(false);
 	}
 	// Tablet Widget Line Trace Left
-	FVector startPosL = widgetInteractionCompLeft->GetComponentLocation();
-	FVector endPosL = startPosL + widgetInteractionCompLeft->GetForwardVector() * 300.0f;
-	FHitResult traceHitL;
 	bool bOverWidgetLeft = widgetInteractionCompLeft->IsOverHitTestVisibleWidget();
-	bool bHitL = GetWorld()->LineTraceSingleByChannel(traceHitL, startPosL, endPosL, ECC_Visibility);
-	if(bHitL&&bOverWidgetLeft)
+	if(bOverWidgetLeft)
 	{
-		auto hitDist = traceHitL.Distance;
+		auto hitDist = widgetInteractionCompLeft->GetLastHitResult().Distance;
 		WidgetTraceLeft->SetVectorParameter(FName("LaserEnd"), FVector(hitDist-3, 0, 0));
 		WidgetTraceLeft->SetVisibility(true);
 	}
@@ -1475,7 +1467,8 @@ void APlayerCharacter::FireReleasedRight()
 			auto tongCompRef = huchuTong->tongRight;
 			if(isGrabbingIceWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				tongCompRef->SetRelativeRotation(FRotator(0, 0, 0));
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(iceCube!=nullptr)
 				{
 					iceCube->isIceCubeAttachable=true;
@@ -1483,7 +1476,8 @@ void APlayerCharacter::FireReleasedRight()
 			}
 			else if(isGrabbingLimeWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				tongCompRef->SetRelativeRotation(FRotator(0, 0, 0));
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(halfSlicedLime!=nullptr)
 				{
 					halfSlicedLime->isHalfSlicedLimeAttachable=true;
@@ -1495,7 +1489,8 @@ void APlayerCharacter::FireReleasedRight()
 			}
 			else if(isGrabbingOliveWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-12, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				tongCompRef->SetRelativeRotation(FRotator(0, 0, 0));
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-12, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(olivePick!=nullptr)
 				{
 					olivePick->isOliveAttachable = true;
@@ -1503,7 +1498,8 @@ void APlayerCharacter::FireReleasedRight()
 			}
 			else if(isGrabbingOrangeWithTongsRight)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				tongCompRef->SetRelativeRotation(FRotator(0, 0, 0));
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(halfSlicedOrange!=nullptr)
 				{
 					halfSlicedOrange->isHalfSlicedOrangeAttachable=true;
@@ -1568,7 +1564,8 @@ void APlayerCharacter::FireReleasedLeft()
 			auto tongCompRef = huchuTongL->tongRight;
 			if(isGrabbingIceWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				tongCompRef->SetRelativeRotation(FRotator(0, 0, 0));
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-5, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(iceCubeL!=nullptr)
 				{
 					iceCubeL->isIceCubeAttachable=true;
@@ -1576,7 +1573,8 @@ void APlayerCharacter::FireReleasedLeft()
 			}
 			else if(isGrabbingLimeWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				tongCompRef->SetRelativeRotation(FRotator(0, 0, 0));
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(halfSlicedLimeL!=nullptr)
 				{
 					halfSlicedLimeL->isHalfSlicedLimeAttachable=true;
@@ -1588,7 +1586,8 @@ void APlayerCharacter::FireReleasedLeft()
 			}
 			else if(isGrabbingOliveWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-12, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				tongCompRef->SetRelativeRotation(FRotator(0, 0, 0));
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-12, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(olivePickL!=nullptr)
 				{
 					olivePickL->isOliveAttachable=true;
@@ -1596,7 +1595,8 @@ void APlayerCharacter::FireReleasedLeft()
 			}
 			else if(isGrabbingOrangeWithTongsLeft)
 			{
-				UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
+				tongCompRef->SetRelativeRotation(FRotator(0, 0, 0));
+				//UKismetSystemLibrary::MoveComponentTo(tongCompRef, tongCompRef->GetRelativeLocation(), tongCompRef->GetRelativeRotation()+FRotator(-13, 0, 0), false, false, 0.0, false, EMoveComponentAction::Move, LatentInfo);
 				if(halfSlicedOrangeL!=nullptr)
 				{
 					halfSlicedOrangeL->isHalfSlicedOrangeAttachable=true;
