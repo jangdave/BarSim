@@ -21,10 +21,10 @@ void UTabletWidget::NativeConstruct()
 	gi = Cast<UBarGameInstance>(GetGameInstance());
 	
 	// 테블렛 메뉴
-	btn_OpenStore->OnClicked.AddDynamic(this, &UTabletWidget::OpenStore);
-	btn_CloseStore->OnClicked.AddDynamic(this, &UTabletWidget::CloseStore);
-	btn_Recipe->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
-	btn_Internet->OnClicked.AddDynamic(this, &UTabletWidget::OpenInternet);
+	btn_OpenStore->OnPressed.AddDynamic(this, &UTabletWidget::OpenStore);
+	btn_CloseStore->OnPressed.AddDynamic(this, &UTabletWidget::CloseStore);
+	btn_Recipe->OnPressed.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_Internet->OnPressed.AddDynamic(this, &UTabletWidget::OpenInternet);
 
 	if(gi->checkDayCount != 0)
 	{
@@ -39,63 +39,63 @@ void UTabletWidget::NativeConstruct()
 	}
 	
 	// 테블릿 레시피 메뉴
-	btn_BackMenu->OnClicked.AddDynamic(this, &UTabletWidget::OpenMenuPage);
-	btn_OpenGinLime->OnClicked.AddDynamic(this, &UTabletWidget::OpenGinLime);
-	btn_OpenGinLimeVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenGinLimeVideo);
-	btn_OpenMartini->OnClicked.AddDynamic(this, &UTabletWidget::OpenMartini);
-	btn_OpenMartiniVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenMartiniVideo);
-	btn_OpenDaiquiri->OnClicked.AddDynamic(this, &UTabletWidget::OpenDaiquiri);
-	btn_OpenDaiquiriVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenDaiquiriVideo);
-	btn_OpenOldPal->OnClicked.AddDynamic(this, &UTabletWidget::OpenOldPal);
-	btn_OpenOldPalVideo->OnClicked.AddDynamic(this, &UTabletWidget::OpenOldPalVideo);
+	btn_BackMenu->OnPressed.AddDynamic(this, &UTabletWidget::OpenMenuPage);
+	btn_OpenGinLime->OnPressed.AddDynamic(this, &UTabletWidget::OpenGinLime);
+	btn_OpenGinLimeVideo->OnPressed.AddDynamic(this, &UTabletWidget::OpenGinLimeVideo);
+	btn_OpenMartini->OnPressed.AddDynamic(this, &UTabletWidget::OpenMartini);
+	btn_OpenMartiniVideo->OnPressed.AddDynamic(this, &UTabletWidget::OpenMartiniVideo);
+	btn_OpenDaiquiri->OnPressed.AddDynamic(this, &UTabletWidget::OpenDaiquiri);
+	btn_OpenDaiquiriVideo->OnPressed.AddDynamic(this, &UTabletWidget::OpenDaiquiriVideo);
+	btn_OpenOldPal->OnPressed.AddDynamic(this, &UTabletWidget::OpenOldPal);
+	btn_OpenOldPalVideo->OnPressed.AddDynamic(this, &UTabletWidget::OpenOldPalVideo);
 	
 	// 테블릿 진라임 레시피 & 영상
-	btn_BackRecipeMenu0->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
-	btn_BackRecipeMenu1->OnClicked.AddDynamic(this, &UTabletWidget::OpenGinLime);
-	btn_BackRecipeMenu2->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
-	btn_BackRecipeMenu3->OnClicked.AddDynamic(this, &UTabletWidget::OpenMartini);
-	btn_BackRecipeMenu4->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
-	btn_BackRecipeMenu5->OnClicked.AddDynamic(this, &UTabletWidget::OpenDaiquiri);
-	btn_BackRecipeMenu6->OnClicked.AddDynamic(this, &UTabletWidget::OpenRecipePage);
-	btn_BackRecipeMenu7->OnClicked.AddDynamic(this, &UTabletWidget::OpenOldPal);
+	btn_BackRecipeMenu0->OnPressed.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu1->OnPressed.AddDynamic(this, &UTabletWidget::OpenGinLime);
+	btn_BackRecipeMenu2->OnPressed.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu3->OnPressed.AddDynamic(this, &UTabletWidget::OpenMartini);
+	btn_BackRecipeMenu4->OnPressed.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu5->OnPressed.AddDynamic(this, &UTabletWidget::OpenDaiquiri);
+	btn_BackRecipeMenu6->OnPressed.AddDynamic(this, &UTabletWidget::OpenRecipePage);
+	btn_BackRecipeMenu7->OnPressed.AddDynamic(this, &UTabletWidget::OpenOldPal);
 
 	// 메일함
-	btn_Mail->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_Mail->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
 
-	btn_Inbox->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_Outbox->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
-	btn_InMail1->OnClicked.AddDynamic(this, &UTabletWidget::OpenInMail1);
-	btn_InMail2->OnClicked.AddDynamic(this, &UTabletWidget::OpenInMail2);
-	btn_InMail3->OnClicked.AddDynamic(this, &UTabletWidget::OpenInMail3);
+	btn_Inbox->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_Outbox->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_InMail1->OnPressed.AddDynamic(this, &UTabletWidget::OpenInMail1);
+	btn_InMail2->OnPressed.AddDynamic(this, &UTabletWidget::OpenInMail2);
+	btn_InMail3->OnPressed.AddDynamic(this, &UTabletWidget::OpenInMail3);
 
-	btn_BackInMail1->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_BackInMail1_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_BackInMail1_2->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_1->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_2->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
 
-	btn_BackInMail1_3->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_BackInMail1_4->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_BackInMail1_5->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1_3->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_4->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_5->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
 
-	btn_BackInMail1_6->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_BackInMail1_7->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_BackInMail1_8->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1_6->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_7->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_8->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
 
-	btn_Inbox_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_Outbox_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
-	btn_InMail1_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutMail1);
-	btn_InMail2_1->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutMail2);
+	btn_Inbox_1->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_Outbox_1->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_InMail1_1->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutMail1);
+	btn_InMail2_1->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutMail2);
 
-	btn_BackInMail1_9->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
-	btn_BackInMail1_10->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_BackInMail1_11->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1_9->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1_10->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_11->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
 
-	btn_BackInMail1_12->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
-	btn_BackInMail1_13->OnClicked.AddDynamic(this, &UTabletWidget::OpenInbox);
-	btn_BackInMail1_14->OnClicked.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1_12->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
+	btn_BackInMail1_13->OnPressed.AddDynamic(this, &UTabletWidget::OpenInbox);
+	btn_BackInMail1_14->OnPressed.AddDynamic(this, &UTabletWidget::OpenOutbox);
 	
 	// 테블릿 키보드 입력
-	btn_CapsLock->OnClicked.AddDynamic(this, &UTabletWidget::SetCapsLock);
-	btn_Enter->OnClicked.AddDynamic(this, &UTabletWidget::SetEnter);
+	btn_CapsLock->OnPressed.AddDynamic(this, &UTabletWidget::SetCapsLock);
+	btn_Enter->OnPressed.AddDynamic(this, &UTabletWidget::SetEnter);
 
 	// 커서 Visibility 설정
 	CursorRight->SetVisibility(ESlateVisibility::Hidden);

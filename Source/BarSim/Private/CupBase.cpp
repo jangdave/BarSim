@@ -588,9 +588,6 @@ void ACupBase::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherAct
 				}
 				ice->AttachToComponent(cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket3"));
 				iceRef3=ice;
-				iceRef1->iceCubeMesh->SetCollisionProfileName(FName("IceAttached"));
-				iceRef2->iceCubeMesh->SetCollisionProfileName(FName("IceAttached"));
-				iceRef3->iceCubeMesh->SetCollisionProfileName(FName("IceAttached"));
 				iceCount += 1;
 				UE_LOG(LogTemp, Warning, TEXT("Cupbase : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
@@ -765,6 +762,7 @@ void ACupBase::SimulateAndTickDisable()
 		this->DisableComponentsSimulatePhysics();
 		cupComp->SetSimulatePhysics(false);
 		this->SetActorTickEnabled(false);
+		//UE_LOG(LogTemp, Warning, TEXT("SetSimulateAndTickDisalbe"))
 	}
 }
 

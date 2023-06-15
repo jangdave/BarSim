@@ -20,28 +20,28 @@ void UMenuWidget::NativeConstruct()
 	gi = Cast<UBarGameInstance>(GetGameInstance());
 
 	// 0일차 메뉴 버튼 바인드
-	btn_StoryMode->OnClicked.AddDynamic(this, &UMenuWidget::StoryStart);
-	btn_ArcadeMode->OnClicked.AddDynamic(this, &UMenuWidget::ArcadeStart);
-	btn_QuitGame->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceQuit);
+	btn_StoryMode->OnPressed.AddDynamic(this, &UMenuWidget::StoryStart);
+	btn_ArcadeMode->OnPressed.AddDynamic(this, &UMenuWidget::ArcadeStart);
+	btn_QuitGame->OnPressed.AddDynamic(this, &UMenuWidget::ChoiceQuit);
 
 	// 튜토리얼 선택
-	btn_TutorialYes->OnClicked.AddDynamic(this, &UMenuWidget::TutorialMode);
-	btn_TutorialNo->OnClicked.AddDynamic(this, &UMenuWidget::NoTutorialMode);
+	btn_TutorialYes->OnPressed.AddDynamic(this, &UMenuWidget::TutorialMode);
+	btn_TutorialNo->OnPressed.AddDynamic(this, &UMenuWidget::NoTutorialMode);
 
 	// 이후 메뉴 버튼 바인드
-	btn_ResumeGame->OnClicked.AddDynamic(this, &UMenuWidget::ResumeGame);
+	btn_ResumeGame->OnPressed.AddDynamic(this, &UMenuWidget::ResumeGame);
 	// 체크포인트 바인드
-	btn_CheckPoint->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceCheck);
-	btn_CheckPointYes->OnClicked.AddDynamic(this, &UMenuWidget::CheckYes);
-	btn_CheckPointNo->OnClicked.AddDynamic(this, &UMenuWidget::CheckNo);
+	btn_CheckPoint->OnPressed.AddDynamic(this, &UMenuWidget::ChoiceCheck);
+	btn_CheckPointYes->OnPressed.AddDynamic(this, &UMenuWidget::CheckYes);
+	btn_CheckPointNo->OnPressed.AddDynamic(this, &UMenuWidget::CheckNo);
 	// 메인메뉴 바인드
-	btn_ResetGame->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceReset);
-	btn_MainYes->OnClicked.AddDynamic(this, &UMenuWidget::ResetYes);
-	btn_MainNo->OnClicked.AddDynamic(this, &UMenuWidget::ResetNo);
+	btn_ResetGame->OnPressed.AddDynamic(this, &UMenuWidget::ChoiceReset);
+	btn_MainYes->OnPressed.AddDynamic(this, &UMenuWidget::ResetYes);
+	btn_MainNo->OnPressed.AddDynamic(this, &UMenuWidget::ResetNo);
 	// 게임종료 바인드
-	btn_QuitGame1->OnClicked.AddDynamic(this, &UMenuWidget::ChoiceQuit);
-	btn_QuitYes->OnClicked.AddDynamic(this, &UMenuWidget::QuitGameYes);
-	btn_QuitNo->OnClicked.AddDynamic(this, &UMenuWidget::QuitGameNo);
+	btn_QuitGame1->OnPressed.AddDynamic(this, &UMenuWidget::ChoiceQuit);
+	btn_QuitYes->OnPressed.AddDynamic(this, &UMenuWidget::QuitGameYes);
+	btn_QuitNo->OnPressed.AddDynamic(this, &UMenuWidget::QuitGameNo);
 }
 
 void UMenuWidget::StoryStart()

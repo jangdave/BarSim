@@ -53,8 +53,8 @@ void ARockGlass::AddIce(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 				ice->SetActorLocationAndRotation(socketLoc2.GetLocation(), socketLoc2.GetRotation());					
 				ice->AttachToComponent(this->cupComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("IceSocket2"));
 				iceRef2=ice;
-				iceRef1->iceCubeMesh->SetCollisionProfileName(FName("IceAttached"));
-				iceRef2->iceCubeMesh->SetCollisionProfileName(FName("IceAttached"));
+				//iceRef1->iceCubeMesh->SetCollisionProfileName(FName("IceAttached"));
+				//iceRef2->iceCubeMesh->SetCollisionProfileName(FName("IceAttached"));
 				iceCount += 1;
 				UE_LOG(LogTemp, Warning, TEXT("RockGlass : IceCount : %d"), iceCount);
 				//얼음 갯수 하나당 2온스씩 내부 용량 줄이기
