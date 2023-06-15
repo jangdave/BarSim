@@ -7,46 +7,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db4e6a3d-e4f6-410c-a15d-6bbd19cb43de" name="Changes" comment="">
+    <list default="true" id="371b1d14-e552-4ac9-8027-e894f5d4ea3b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/BP_MainLogo_Dissolve.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/Blueprints/Widgets/BP_MainLogo_Dissolve.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BarMainMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarMainMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BarStartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarStartMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalFSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/SpawnManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/TutorialCheckBox.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/TutorialCheckBox.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/PlayerCharacter.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="2RDLz0dlDyti3oRORvha3MDAb7z" />
+  <component name="ProjectId" id="2RDPyJ4hzgRn6TJEjenFmx4Gz0O" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\slapt\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\slapt\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\slapt\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\slapt\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\slapt\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\slapt\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="BarSim" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -108,14 +103,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="db4e6a3d-e4f6-410c-a15d-6bbd19cb43de" name="Changes" comment="" />
-      <created>1686779965050</created>
+      <changelist id="371b1d14-e552-4ac9-8027-e894f5d4ea3b" name="Changes" comment="" />
+      <created>1686781932656</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686779965050</updated>
-      <workItem from="1686714058830" duration="1090000" />
-      <workItem from="1686746795321" duration="1257000" />
-      <workItem from="1686752444089" duration="975000" />
+      <updated>1686781932656</updated>
+      <workItem from="1686781933770" duration="976000" />
     </task>
     <servers />
   </component>
