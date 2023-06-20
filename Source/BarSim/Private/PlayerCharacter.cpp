@@ -116,7 +116,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	// Tongs가 nullptr이 아니면서
-	/*if(huchuTong!=nullptr)
+	if(huchuTong!=nullptr)
 	{
 		// 오른손에 Tongs를 쥐고 있다면
 		if(isGrabbingTongsRight)
@@ -142,7 +142,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 			}
 			
 		}
-	}*/
+	}
 
 	// Tablet Widget Line Trace
 	bool bOverWidget = widgetInteractionComp->IsOverHitTestVisibleWidget();
