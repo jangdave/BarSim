@@ -68,7 +68,7 @@ void UMenuWidget::NoTutorialMode()
 {
 	if(gi != nullptr)
 	{
-		gi->bCheckGameMode = true;
+		gi->bCheckTutorialMode = true;
 	}
 
 	auto parent = Cast<AMenuWidgetActor>(UGameplayStatics::GetActorOfClass(GetWorld(), AMenuWidgetActor::StaticClass()));
@@ -92,7 +92,7 @@ void UMenuWidget::TutorialMode()
 {
 	if(gi != nullptr)
 	{
-		gi->bCheckGameMode = false;
+		gi->bCheckTutorialMode = false;
 	}
 
 	auto parent = Cast<AMenuWidgetActor>(UGameplayStatics::GetActorOfClass(GetWorld(), AMenuWidgetActor::StaticClass()));
@@ -160,7 +160,7 @@ void UMenuWidget::CheckYes()
 		{
 			if(currentMap == "BarStartMap")
 			{
-				gi->bCheckGameMode = false;
+				gi->bCheckTutorialMode = false;
 
 				gi->bCheckMenu = false;
 
@@ -171,7 +171,7 @@ void UMenuWidget::CheckYes()
 			}
 			else if(currentMap == "BarTutorialMap")
 			{
-				gi->bCheckGameMode = false;
+				gi->bCheckTutorialMode = false;
 
 				gi->bCheckMenu = true;
 
@@ -258,7 +258,7 @@ void UMenuWidget::CheckYes()
 		{
 			if(currentMap == "BarStartMap")
 			{
-				gi->bCheckGameMode = false;
+				gi->bCheckTutorialMode = false;
 
 				gi->bCheckArcadeMode = false;
 				
@@ -271,7 +271,7 @@ void UMenuWidget::CheckYes()
 			}
 			else if(currentMap == "BarTutorialMap")
 			{
-				gi->bCheckGameMode = false;
+				gi->bCheckTutorialMode = false;
 
 				gi->bCheckMenu = true;
 
@@ -315,7 +315,7 @@ void UMenuWidget::ResetYes()
 {
 	gi->checkDayCount = 0;
 
-	gi->bCheckGameMode = false;
+	gi->bCheckTutorialMode = false;
 
 	gi->bCheckArcadeMode = false;
 	

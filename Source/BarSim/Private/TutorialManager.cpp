@@ -110,7 +110,7 @@ void ATutorialManager::StartTutorial()
 
 	auto gi = Cast<UBarGameInstance>(GetGameInstance());
 
-	gi->bCheckGameMode = true;
+	gi->bCheckTutorialMode = true;
 }
 
 void ATutorialManager::ClearFirstStage()
