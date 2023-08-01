@@ -2,14 +2,14 @@
 
 구현 클래스
 
-BarGameInstance
-Chair
-Coaster
-CoctailScoreWidget
-CustomerAnimInstance
-CustomerCharacter
-CustomerFSM
-CustomerOrderWidget
+BarGameInstance;
+Chair;
+Coaster;
+CoctailScoreWidget;
+CustomerAnimInstance;
+CustomerCharacter;
+CustomerFSM;
+CustomerOrderWidget;
 GameStartManager
 MenuWidget
 MenuWidgetActor
