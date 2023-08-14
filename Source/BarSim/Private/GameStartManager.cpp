@@ -45,10 +45,11 @@ void AGameStartManager::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 	{
 		UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
 		UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
-		
+
+		// 델리케이트 함수 연결
 		gi->goToMainMapDele.Execute();
 
-		if(gi->bCheckGameMode != false)
+		if(gi->bCheckTutorialMode != false)
 		{
 			UGameplayStatics::OpenLevel(GetWorld(), FName("BarMainMap"));
 		}

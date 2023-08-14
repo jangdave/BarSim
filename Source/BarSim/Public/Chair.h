@@ -134,17 +134,15 @@ public:
 	UFUNCTION()
 	void MoveCup();
 
-	FTimerHandle moveTimer;
-
-	UPROPERTY()
-	float curTime;
-	
+	// 주문 일치 확인 변수
 	UPROPERTY()
 	bool bSameOrder;
 
+	// 주문 불일치 확인 변수
 	UPROPERTY()
 	bool bUnSameOrder;
 
+	// 컵 오버랩 확인 변수
 	bool bOnceOverlap;
 
 };

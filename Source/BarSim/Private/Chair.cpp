@@ -201,6 +201,7 @@ void AChair::ViewScore(int32 score)
 		UGameplayStatics::PlaySound2D(GetWorld(), drinkSound);
 	}
 
+	// 점수 체크
 	if(totalScore >= 80)
 	{
 		score_UI->text_Score->SetText(FText::FromString("Excellent"));

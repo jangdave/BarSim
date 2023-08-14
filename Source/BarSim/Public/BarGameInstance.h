@@ -38,9 +38,9 @@ public:
 	UPROPERTY()
 	bool bCheckArcadeMode; // false
 	
-	// 게임모드 체크 불
+	// 튜토리얼 체크 불
 	UPROPERTY()
-	bool bCheckGameMode; // false
+	bool bCheckTutorialMode; // false
 
 	UPROPERTY()
 	bool bCheckMenu;

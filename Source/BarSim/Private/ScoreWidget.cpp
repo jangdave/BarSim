@@ -46,7 +46,7 @@ void UScoreWidget::GoMainMenu()
 {
 	gi->checkDayCount = 0;
 
-	gi->bCheckGameMode = false;
+	gi->bCheckTutorialMode = false;
 
 	gi->bCheckMenu = false;
 

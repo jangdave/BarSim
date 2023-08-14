@@ -45,7 +45,8 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 	class UAnimMontage* oldPalDrinkMontageFactory;
-	
+
+	// 몽타주 섹션 플레이 함수
 	UFUNCTION()
 	void OnStandAnim(float sectionTime);
 
@@ -58,6 +59,7 @@ public:
 	UFUNCTION()
 	void OnDrinkAnim(float sectionTime);
 
+	// 몽타주 엔딩 연결 함수
 	UFUNCTION(BlueprintCallable)
 	void EndLean();
 
