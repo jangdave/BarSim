@@ -2,6 +2,9 @@
 
 
 #include "MenuWidget.h"
+
+#include <Components/TextBlock.h>
+
 #include "BarGameInstance.h"
 #include "MenuWidgetActor.h"
 #include "PlayerCharacter.h"
@@ -346,11 +349,51 @@ void UMenuWidget::LanguageSettings()
 void UMenuWidget::SetLanguageEnglish()
 {
 	gi->bEnglish=true;
+	text_AskTutorial->SetText(FText::FromString("Do you want to play the tutorial?"));
+	text_TutYes->SetText(FText::FromString("Yes"));
+	text_TutNo->SetText(FText::FromString("No"));
+	text_AskCheckpoint->SetText(FText::FromString("Do you want to return to the checkpoint?"));
+	text_CheckYes->SetText(FText::FromString("Yes"));
+	text_CheckNo->SetText(FText::FromString("No"));
+	text_AskBackToMain->SetText(FText::FromString("Do you want to return to the main menu?"));
+	text_AskYes->SetText(FText::FromString("Yes"));
+	text_AskNo->SetText(FText::FromString("No"));
+	text_AskQuitGame->SetText(FText::FromString("Do you want to exit the game?"));
+	text_QuitYes->SetText(FText::FromString("Yes"));
+	text_QuitNo->SetText(FText::FromString("No"));
+	text_AskLanguage->SetText(FText::FromString("Select Language"));
+	text_LangEng->SetText(FText::FromString("English"));
+	text_LangKor->SetText(FText::FromString("Korean"));
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
 }
 
 void UMenuWidget::SetLanguageKorean()
 {
 	gi->bEnglish=false;
+	KorLanguageArray.Reset();
+	KorLanguageArray.Emplace(FString::Printf(TEXT("네"))); //0
+	KorLanguageArray.Emplace(FString::Printf(TEXT("아니오"))); //1
+	KorLanguageArray.Emplace(FString::Printf(TEXT("튜토리얼을 진행하시겠습니까?"))); //2
+	KorLanguageArray.Emplace(FString::Printf(TEXT("영어"))); //3
+	KorLanguageArray.Emplace(FString::Printf(TEXT("한국어"))); //4
+	KorLanguageArray.Emplace(FString::Printf(TEXT("체크 포인트로 돌아가겠습니까?"))); //5
+	KorLanguageArray.Emplace(FString::Printf(TEXT("메인 메뉴로 돌아가겠습니까?"))); //6
+	KorLanguageArray.Emplace(FString::Printf(TEXT("게임을 종료하겠습니까?"))); //7
+	KorLanguageArray.Emplace(FString::Printf(TEXT("언어를 선택하세요"))); //8
+	text_AskTutorial->SetText(FText::FromString(KorLanguageArray[2]));
+	text_TutYes->SetText(FText::FromString(KorLanguageArray[0]));
+	text_TutNo->SetText(FText::FromString(KorLanguageArray[1]));
+	text_AskCheckpoint->SetText(FText::FromString(KorLanguageArray[5]));
+	text_CheckYes->SetText(FText::FromString(KorLanguageArray[0]));
+	text_CheckNo->SetText(FText::FromString(KorLanguageArray[1]));
+	text_AskBackToMain->SetText(FText::FromString(KorLanguageArray[6]));
+	text_AskYes->SetText(FText::FromString(KorLanguageArray[0]));
+	text_AskNo->SetText(FText::FromString(KorLanguageArray[1]));
+	text_AskQuitGame->SetText(FText::FromString(KorLanguageArray[7]));
+	text_QuitYes->SetText(FText::FromString(KorLanguageArray[0]));
+	text_QuitNo->SetText(FText::FromString(KorLanguageArray[1]));
+	text_AskLanguage->SetText(FText::FromString(KorLanguageArray[8]));
+	text_LangEng->SetText(FText::FromString(KorLanguageArray[3]));
+	text_LangKor->SetText(FText::FromString(KorLanguageArray[4]));
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
 }
