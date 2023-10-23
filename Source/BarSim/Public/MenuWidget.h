@@ -77,6 +77,16 @@ public:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_QuitNo;
+
+	// 언어 선택
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_SettingsMain;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_Settings;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_SetEnglish;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_SetKorean;
 	
 	// 0일차 메뉴 함수
 	UFUNCTION()
@@ -121,6 +131,15 @@ public:
 
 	UFUNCTION()
 	void ResetNo();
+
+	UFUNCTION()
+	void LanguageSettings();
+
+	UFUNCTION()
+	void SetLanguageEnglish();
+
+	UFUNCTION()
+	void SetLanguageKorean();
 
 	UPROPERTY(EditAnywhere, Category="Texture")
 	class UTexture* LoadingTexture;

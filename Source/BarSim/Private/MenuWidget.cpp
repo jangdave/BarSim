@@ -42,6 +42,11 @@ void UMenuWidget::NativeConstruct()
 	btn_QuitGame1->OnPressed.AddDynamic(this, &UMenuWidget::ChoiceQuit);
 	btn_QuitYes->OnPressed.AddDynamic(this, &UMenuWidget::QuitGameYes);
 	btn_QuitNo->OnPressed.AddDynamic(this, &UMenuWidget::QuitGameNo);
+	// 언어 선택 바인드
+	btn_SettingsMain->OnPressed.AddDynamic(this, &UMenuWidget::LanguageSettings);
+	btn_Settings->OnPressed.AddDynamic(this, &UMenuWidget::LanguageSettings);
+	btn_SetEnglish->OnPressed.AddDynamic(this, &UMenuWidget::SetLanguageEnglish);
+	btn_SetKorean->OnPressed.AddDynamic(this, &UMenuWidget::SetLanguageKorean);
 }
 
 void UMenuWidget::StoryStart()
@@ -331,4 +336,21 @@ void UMenuWidget::ResetYes()
 void UMenuWidget::ResetNo()
 {
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
+}
+
+void UMenuWidget::LanguageSettings()
+{
+	WidgetSwitcher_Menu->SetActiveWidgetIndex(6);
+}
+
+void UMenuWidget::SetLanguageEnglish()
+{
+	gi->bEnglish=true;
+	WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
+}
+
+void UMenuWidget::SetLanguageKorean()
+{
+	gi->bEnglish=false;
+	WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
 }

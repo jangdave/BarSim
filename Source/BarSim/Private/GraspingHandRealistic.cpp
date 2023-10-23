@@ -4,6 +4,7 @@
 #include "GraspingHandRealistic.h"
 
 #include "ActorInfoWidget.h"
+#include "BarGameInstance.h"
 #include "BarSpoon.h"
 #include "BottleBase.h"
 #include "Coaster.h"
@@ -51,6 +52,7 @@ void AGraspingHandRealistic::BeginPlay()
 	skeletalHand->OnComponentBeginOverlap.AddDynamic(this, &AGraspingHandRealistic::OnOverlap);
 	
 	actorInfoWidgetComp->SetVisibility(false);
+	BarGameInstance = Cast<UBarGameInstance>(GetWorld()->GetGameInstance());
 }
 
 void AGraspingHandRealistic::Tick(float DeltaTime)
@@ -120,8 +122,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("집게"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Tongs"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT(" Tongs"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("집게"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -140,8 +148,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("바 스푼"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Bar Spoon"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Bar Spoon"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("바 스푼"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -159,8 +173,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("태블릿"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Tablet"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Tablet"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("태블릿"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -178,8 +198,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("코스터"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Coaster"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Coaster"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("코스터"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -197,8 +223,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("스트레이너"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Strainer"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Strainer"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("스트레이너"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -216,8 +248,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커 스트레이너"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Shaker Strainer"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Shaker Strainer"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커 스트레이너"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -235,8 +273,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커 뚜껑"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Shaker Lid"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Shaker Lid"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커 뚜껑"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -254,8 +298,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Shaker"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Shaker"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("쉐이커"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -273,8 +323,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("믹싱 글래스"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Mixing Glass"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Mixing Glass"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("믹싱 글래스"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -292,8 +348,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("얼음"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Ice Cube"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Ice Cube"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("얼음"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -311,8 +373,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Lime"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Lime"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -330,8 +398,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Lime"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Lime"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -349,8 +423,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임 컨테이너"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Lime Container"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Lime Container"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임 컨테이너"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -368,8 +448,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임 컨테이너"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Lime Container"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Lime Container"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("라임 컨테이너"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -387,8 +473,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지 컨테이너"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Orange Container"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Orange Container"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지 컨테이너"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -406,8 +498,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지 컨테이너"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Orange Container"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Orange Container"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지 컨테이너"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -425,8 +523,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Orange"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Orange"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -444,8 +548,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Orange"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Orange"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("오렌지"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -463,8 +573,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("아이스 컨테이너"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Ice Container"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Ice Container"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("아이스 컨테이너"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -482,8 +598,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("마티니 글래스"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Martini Glass"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Martini Glass"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("마티니 글래스"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -501,8 +623,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("온더록 글래스"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Rock Glass"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Rock Glass"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("온더록 글래스"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -520,8 +648,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("하이볼 글래스"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Highball Glass"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Highball Glass"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("하이볼 글래스"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
@@ -539,8 +673,14 @@ void AGraspingHandRealistic::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			actorInfoWidget->StopAnimation(actorInfoWidget->Disappearing);
 		}
-		actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("캔 음료"))));
-		//actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Drink Can"))));
+		if(BarGameInstance&&BarGameInstance->bEnglish==true)
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("Drink Can"))));
+		}
+		else
+		{
+			actorInfoWidget->ActorInfo->SetText(FText::FromString(FString::Printf(TEXT("캔 음료"))));
+		}
 		actorInfoWidgetComp->SetVisibility(true);
 		actorInfoWidget->PlayAnimation(actorInfoWidget->Appearing);
 		GetWorldTimerManager().SetTimer(widgetDestroyHandle, FTimerDelegate::CreateLambda([this]()->void
