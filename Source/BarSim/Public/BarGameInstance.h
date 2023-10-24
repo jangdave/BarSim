@@ -45,7 +45,7 @@ public:
 	UPROPERTY()
 	bool bCheckMenu;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bEnglish; //false
 
 	// 첫째날 / 둘째날 / 셋째날 / 모든날
