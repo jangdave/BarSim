@@ -33,7 +33,9 @@ void AMenuWidgetActor::BeginPlay()
 
 	menu_UI = Cast<UMenuWidget>(menuWidget->GetUserWidgetObject());
 
+	SetLanguage();
 	SetMenu();
+
 }
 
 // Called every frame
@@ -59,6 +61,24 @@ void AMenuWidgetActor::SetMenu()
 		else
 		{
 			menu_UI->WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
+		}
+	}
+}
+
+void AMenuWidgetActor::SetLanguage()
+{
+	if(menu_UI)
+	{
+		if(gi)
+		{
+			if(gi->bEnglish==true)
+			{
+				menu_UI->SetLanguageEnglish();
+			}
+			else
+			{
+				menu_UI->SetLanguageKorean();
+			}
 		}
 	}
 }
