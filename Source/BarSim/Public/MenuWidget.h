@@ -80,6 +80,8 @@ public:
 
 	// 언어 선택
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_SettingsMain;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_Settings;
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_SetEnglish;
@@ -139,6 +141,7 @@ public:
 	UFUNCTION()
 	void SetLanguageKorean();
 
+
 	UPROPERTY()
 	TArray<FString> KorLanguageArray;
 
@@ -175,5 +178,7 @@ public:
 	class UTextBlock* text_LangEng;
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_LangKor;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_CurLang;
 
 };

@@ -14,7 +14,6 @@
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MenuWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MenuWidget.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/MenuWidgetActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/MenuWidgetActor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/MenuWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/MenuWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Public/MenuWidgetActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Public/MenuWidgetActor.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +228,7 @@
       <workItem from="1692087898724" duration="949000" />
       <workItem from="1697896938289" duration="302000" />
       <workItem from="1698049144843" duration="6647000" />
-      <workItem from="1698118162142" duration="5836000" />
+      <workItem from="1698118162142" duration="12042000" />
     </task>
     <servers />
   </component>

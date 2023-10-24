@@ -46,6 +46,7 @@ void UMenuWidget::NativeConstruct()
 	btn_QuitYes->OnPressed.AddDynamic(this, &UMenuWidget::QuitGameYes);
 	btn_QuitNo->OnPressed.AddDynamic(this, &UMenuWidget::QuitGameNo);
 	// 언어 선택 바인드
+	btn_SettingsMain->OnPressed.AddDynamic(this, &UMenuWidget::LanguageSettings);
 	btn_Settings->OnPressed.AddDynamic(this, &UMenuWidget::LanguageSettings);
 	btn_SetEnglish->OnPressed.AddDynamic(this, &UMenuWidget::SetLanguageEnglish);
 	btn_SetKorean->OnPressed.AddDynamic(this, &UMenuWidget::SetLanguageKorean);
@@ -349,8 +350,10 @@ void UMenuWidget::SetLanguageEnglish()
 {
 	if(gi)
 	{
-		gi->bEnglish=true;		
+		gi->bEnglish=true;
 	}
+	text_CurLang->SetText(FText::FromString("Current Language : English"));
+	UE_LOG(LogTemp, Warning, TEXT("LAng Eng"));
 	text_AskTutorial->SetText(FText::FromString("Do you want to play the tutorial?"));
 	text_TutYes->SetText(FText::FromString("Yes"));
 	text_TutNo->SetText(FText::FromString("No"));
@@ -366,7 +369,18 @@ void UMenuWidget::SetLanguageEnglish()
 	text_AskLanguage->SetText(FText::FromString("Select Language"));
 	text_LangEng->SetText(FText::FromString("English"));
 	text_LangKor->SetText(FText::FromString("Korean"));
-	WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
+	if(gi)
+	{
+		if(gi->bCheckMenu != true)
+		{
+			WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
+		}
+		else
+		{
+			WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
+		}
+	}
+	
 }
 
 void UMenuWidget::SetLanguageKorean()
@@ -375,6 +389,8 @@ void UMenuWidget::SetLanguageKorean()
 	{
 		gi->bEnglish=false;
 	}
+	text_CurLang->SetText(FText::FromString("Current Language : Korean"));
+	UE_LOG(LogTemp, Warning, TEXT("LAng Kor"));
 	KorLanguageArray.Emplace(FString::Printf(TEXT("네"))); //0
 	KorLanguageArray.Emplace(FString::Printf(TEXT("아니오"))); //1
 	KorLanguageArray.Emplace(FString::Printf(TEXT("튜토리얼을 진행하시겠습니까?"))); //2
@@ -399,5 +415,17 @@ void UMenuWidget::SetLanguageKorean()
 	text_AskLanguage->SetText(FText::FromString(KorLanguageArray[8]));
 	text_LangEng->SetText(FText::FromString(KorLanguageArray[3]));
 	text_LangKor->SetText(FText::FromString(KorLanguageArray[4]));
-	WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
+	if(gi)
+	{
+		if(gi->bCheckMenu != true)
+		{
+			WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
+		}
+		else
+		{
+			WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
+		}
+	}
+	
+
 }
