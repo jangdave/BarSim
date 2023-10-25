@@ -21,6 +21,12 @@ public:
 	class AMenuWidgetActor* menuActor;
 
 	UPROPERTY()
+	class ATutorialCheckBox* tutoCheckBox;
+	
+	UPROPERTY()
+	class UTutorialWidget* tutoWidget;
+
+	UPROPERTY()
 	class UBarGameInstance* gi;
 	
 	// 위젯스위처
@@ -87,6 +93,10 @@ public:
 	class UButton* btn_SetEnglish;
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UButton* btn_SetKorean;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_LanguageCheckYes;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UButton* btn_LanguageCheckNo;
 	
 	// 0일차 메뉴 함수
 	UFUNCTION()
@@ -122,6 +132,12 @@ public:
 
 	UFUNCTION()
 	void CheckNo();
+
+	UFUNCTION()
+	void LangCheckYes();
+
+	UFUNCTION()
+	void LangCheckNo();
 
 	UFUNCTION()
 	void ChoiceReset();
@@ -180,5 +196,24 @@ public:
 	class UTextBlock* text_LangKor;
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_CurLang;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_LanguageCheck1;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_LanguageCheck2;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_LanguageCheckYes;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_LanguageCheckNo;
 
+	UPROPERTY()
+	bool bSelectEnglish=false;
+
+	UPROPERTY()
+	bool bSelectKorean=false;
+
+	UFUNCTION()
+	void EnglishSelected();
+
+	UFUNCTION()
+	void KoreanSelected();
 };

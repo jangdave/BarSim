@@ -33,11 +33,6 @@ void AMenuWidgetActor::BeginPlay()
 
 	menu_UI = Cast<UMenuWidget>(menuWidget->GetUserWidgetObject());
 
-	if(menu_UI)
-		UE_LOG(LogTemp, Warning, TEXT("Widget Casting"));
-	if(gi)
-		UE_LOG(LogTemp, Warning, TEXT("Gi Casting"));
-
 
 	SetLanguage();
 	SetMenu();

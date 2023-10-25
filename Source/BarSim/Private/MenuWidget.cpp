@@ -4,10 +4,13 @@
 #include "MenuWidget.h"
 
 #include <Components/TextBlock.h>
+#include <Components/WidgetComponent.h>
 
 #include "BarGameInstance.h"
 #include "MenuWidgetActor.h"
 #include "PlayerCharacter.h"
+#include "TutorialCheckBox.h"
+#include "TutorialWidget.h"
 #include "XRLoadingScreenFunctionLibrary.h"
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
@@ -48,8 +51,10 @@ void UMenuWidget::NativeConstruct()
 	// 언어 선택 바인드
 	btn_SettingsMain->OnPressed.AddDynamic(this, &UMenuWidget::LanguageSettings);
 	btn_Settings->OnPressed.AddDynamic(this, &UMenuWidget::LanguageSettings);
-	btn_SetEnglish->OnPressed.AddDynamic(this, &UMenuWidget::SetLanguageEnglish);
-	btn_SetKorean->OnPressed.AddDynamic(this, &UMenuWidget::SetLanguageKorean);
+	btn_SetEnglish->OnPressed.AddDynamic(this, &UMenuWidget::EnglishSelected);
+	btn_SetKorean->OnPressed.AddDynamic(this, &UMenuWidget::KoreanSelected);
+	btn_LanguageCheckYes->OnPressed.AddDynamic(this, &UMenuWidget::LangCheckYes);
+	btn_LanguageCheckNo->OnPressed.AddDynamic(this, &UMenuWidget::LangCheckNo);
 }
 
 void UMenuWidget::StoryStart()
@@ -314,6 +319,185 @@ void UMenuWidget::CheckNo()
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
 }
 
+void UMenuWidget::LangCheckYes()
+{
+	if(bSelectEnglish)
+	{
+		SetLanguageEnglish();
+		bSelectEnglish=false;
+	}
+	if(bSelectKorean)
+	{
+		SetLanguageKorean();
+		bSelectKorean=false;
+	}	
+		auto currentMap = UGameplayStatics::GetCurrentLevelName(GetWorld());
+
+	if(gi->bCheckArcadeMode != true)
+	{
+		// 체크포인트로 보내기
+		if(gi->checkDayCount == 0 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				gi->bCheckTutorialMode = false;
+
+				gi->bCheckMenu = false;
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarTutorialMap")
+			{
+				gi->bCheckTutorialMode = false;
+
+				gi->bCheckMenu = true;
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+			}
+		}
+		else if(gi->checkDayCount == 1 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				gi->TotalMoney = {0, 0, 0, 0};
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
+		}
+		else if(gi->checkDayCount == 2 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				auto oneday = gi->TotalMoney[0];
+
+				auto twoday = gi->TotalMoney[1];
+				
+				auto total = gi->TotalMoney[3];
+
+				auto settotal = total - twoday;
+				
+				gi->TotalMoney = {oneday, 0, 0, settotal};
+				
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
+		}
+		else if(gi->checkDayCount == 3 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				auto oneday = gi->TotalMoney[0];
+
+				auto twoday = gi->TotalMoney[1];
+				
+				auto threeday = gi->TotalMoney[2];
+				
+				auto total = gi->TotalMoney[3];
+
+				auto settotal = total - threeday;
+				
+				gi->TotalMoney = {oneday, twoday, 0, settotal};
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
+		}
+	}
+	else
+	{
+		// 체크포인트로 보내기
+		if(gi->checkDayCount == 0 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				gi->bCheckTutorialMode = false;
+
+				gi->bCheckArcadeMode = false;
+				
+				gi->bCheckMenu = false;
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarTutorialMap")
+			{
+				gi->bCheckTutorialMode = false;
+
+				gi->bCheckMenu = true;
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+
+				UGameplayStatics::OpenLevel(GetWorld(), "BarTutorialMap");
+			}
+		}
+		else if(gi->checkDayCount == 3 && currentMap != "")
+		{
+			if(currentMap == "BarStartMap")
+			{
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarStartMap");
+			}
+			else if(currentMap == "BarMainMap")
+			{
+				gi->TotalMoney = {0, 0, 0, 0};
+
+				UXRLoadingScreenFunctionLibrary::SetLoadingScreen(LoadingTexture, FVector2D(1, 1), FVector(1, 0, 1.5), true, false);
+				UXRLoadingScreenFunctionLibrary::ShowLoadingScreen();
+				UGameplayStatics::OpenLevel(GetWorld(), "BarMainMap");
+			}
+		}
+	}
+}
+
+void UMenuWidget::LangCheckNo()
+{
+	bSelectEnglish=false;
+	bSelectKorean=false;
+	if(gi)
+	{
+		if(gi->bCheckMenu != true)
+		{
+			WidgetSwitcher_Menu->SetActiveWidgetIndex(0);
+		}
+		else
+		{
+			WidgetSwitcher_Menu->SetActiveWidgetIndex(2);
+		}
+	}
+}
+
 void UMenuWidget::ChoiceReset()
 {
 	WidgetSwitcher_Menu->SetActiveWidgetIndex(4);
@@ -353,7 +537,6 @@ void UMenuWidget::SetLanguageEnglish()
 		gi->bEnglish=true;
 	}
 	text_CurLang->SetText(FText::FromString("Current Language : English"));
-	UE_LOG(LogTemp, Warning, TEXT("LAng Eng"));
 	text_AskTutorial->SetText(FText::FromString("Do you want to play the tutorial?"));
 	text_TutYes->SetText(FText::FromString("Yes"));
 	text_TutNo->SetText(FText::FromString("No"));
@@ -369,6 +552,12 @@ void UMenuWidget::SetLanguageEnglish()
 	text_AskLanguage->SetText(FText::FromString("Select Language"));
 	text_LangEng->SetText(FText::FromString("English"));
 	text_LangKor->SetText(FText::FromString("Korean"));
+	text_LanguageCheck1->SetText(FText::FromString("Set up the language, you will return to the checkpoint."));
+	text_LanguageCheck2->SetText(FText::FromString("Would you like to return to the checkpoint now?"));
+	text_LanguageCheckYes->SetText(FText::FromString("Yes"));
+	text_LanguageCheckNo->SetText(FText::FromString("No"));
+
+
 	if(gi)
 	{
 		if(gi->bCheckMenu != true)
@@ -390,7 +579,6 @@ void UMenuWidget::SetLanguageKorean()
 		gi->bEnglish=false;
 	}
 	text_CurLang->SetText(FText::FromString("Current Language : Korean"));
-	UE_LOG(LogTemp, Warning, TEXT("LAng Kor"));
 	KorLanguageArray.Emplace(FString::Printf(TEXT("네"))); //0
 	KorLanguageArray.Emplace(FString::Printf(TEXT("아니오"))); //1
 	KorLanguageArray.Emplace(FString::Printf(TEXT("튜토리얼을 진행하시겠습니까?"))); //2
@@ -400,6 +588,8 @@ void UMenuWidget::SetLanguageKorean()
 	KorLanguageArray.Emplace(FString::Printf(TEXT("메인 메뉴로 돌아가겠습니까?"))); //6
 	KorLanguageArray.Emplace(FString::Printf(TEXT("게임을 종료하겠습니까?"))); //7
 	KorLanguageArray.Emplace(FString::Printf(TEXT("언어를 선택하세요"))); //8
+	KorLanguageArray.Emplace(FString::Printf(TEXT("언어 설정을 하면, 체크 포인트로 돌아가게 됩니다."))); //9
+	KorLanguageArray.Emplace(FString::Printf(TEXT("지금 체크 포인트로 돌아가시겠습니까?"))); //10
 	text_AskTutorial->SetText(FText::FromString(KorLanguageArray[2]));
 	text_TutYes->SetText(FText::FromString(KorLanguageArray[0]));
 	text_TutNo->SetText(FText::FromString(KorLanguageArray[1]));
@@ -415,6 +605,11 @@ void UMenuWidget::SetLanguageKorean()
 	text_AskLanguage->SetText(FText::FromString(KorLanguageArray[8]));
 	text_LangEng->SetText(FText::FromString(KorLanguageArray[3]));
 	text_LangKor->SetText(FText::FromString(KorLanguageArray[4]));
+	text_LanguageCheck1->SetText(FText::FromString(KorLanguageArray[9]));
+	text_LanguageCheck2->SetText(FText::FromString(KorLanguageArray[10]));
+	text_LanguageCheckYes->SetText(FText::FromString(KorLanguageArray[0]));
+	text_LanguageCheckNo->SetText(FText::FromString(KorLanguageArray[1]));
+
 	if(gi)
 	{
 		if(gi->bCheckMenu != true)
@@ -428,4 +623,16 @@ void UMenuWidget::SetLanguageKorean()
 	}
 	
 
+}
+
+void UMenuWidget::EnglishSelected()
+{
+	bSelectEnglish=true;
+	WidgetSwitcher_Menu->SetActiveWidgetIndex(7);
+}
+
+void UMenuWidget::KoreanSelected()
+{
+	bSelectKorean=true;
+	WidgetSwitcher_Menu->SetActiveWidgetIndex(7);
 }
