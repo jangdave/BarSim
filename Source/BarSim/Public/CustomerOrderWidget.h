@@ -20,6 +20,9 @@ public:
 	UFUNCTION()
 	void SetImage(UTexture2D* setTexture);
 
+	UPROPERTY()
+	class UBarGameInstance* gi;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UImage* image_Icon;
 
@@ -85,4 +88,7 @@ public:
 
 	UFUNCTION()
 	void SetMoneyText(float money);
+
+	UFUNCTION()
+	void SetLanguage();
 };

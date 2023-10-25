@@ -94,4 +94,7 @@ public:
 
 	UFUNCTION()
 	void StartPlayerText(int32 idx);
+
+	UFUNCTION()
+	void SetLanguage();
 };
