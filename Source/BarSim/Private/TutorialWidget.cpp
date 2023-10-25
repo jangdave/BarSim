@@ -130,16 +130,16 @@ void UTutorialWidget::SetLanguageEnglish()
 {
 	text_MoveToArea->SetText(FText::FromString("Move into the zone."));
 	text_Quest1->SetText(FText::FromString("Put 3 ice cubes into a cup using tongs."));
-	text_Quest2->SetText(FText::FromString("Grab a bottle and fill a cup with at least 2oz of alcohol."));
+	text_Quest2->SetText(FText::FromString("Grab a bottle and fill a cup with 2oz of alcohol."));
 	text_Quest3->SetText(FText::FromString("Use tongs to place 1 lime slice into a cup."));
-	text_Quest4->SetText(FText::FromString("Grab a bottle and fill the mixing glass with at least 3oz."));
-	text_Quest5->SetText(FText::FromString("Hold bar spoon and stir inside mixing glass 5 times."));
+	text_Quest4->SetText(FText::FromString("Grab a bottle and fill the mixing glass, 3oz."));
+	text_Quest5->SetText(FText::FromString("Hold bar spoon, stir inside mixing glass 5 times."));
 	text_Quest6->SetText(FText::FromString("Fit strainer to mixing glass and fill cup at least 2oz."));
-	text_Quest7->SetText(FText::FromString("Grab a bottle and fill the shaker with at least 3oz of alcohol."));
-	text_Quest8->SetText(FText::FromString("Install the strainer and lid in order and shake for at least 10 seconds."));
-	text_Quest9->SetText(FText::FromString("Remove the lid of the shaker and pour at least 2oz into the cup."));
-	text_Quest10->SetText(FText::FromString("Place the cup in the green area to proceed to the next step."));
-	text_Quest11->SetText(FText::FromString("Fit strainer to mixing glass and fill cup at least 2oz."));
+	text_Quest7->SetText(FText::FromString("Grab a bottle and fill the shaker with 3oz of alcohol."));
+	text_Quest8->SetText(FText::FromString("Install the strainer and lid in order and shake for 10 sec."));
+	text_Quest9->SetText(FText::FromString("Remove the lid of the shaker and pour 2oz into the cup."));
+	text_Quest10->SetText(FText::FromString("Place the cup in the green area to the next step."));
+	text_Quest11->SetText(FText::FromString("Place the tablet in the green area to the next step."));
 	text_Quest12->SetText(FText::FromString("Move to the right."));
 	text_Quest13->SetText(FText::FromString("Run the recipe app."));
 	text_Quest14->SetText(FText::FromString("You can learn the recipes of various cocktails."));
@@ -150,7 +150,7 @@ void UTutorialWidget::SetLanguageEnglish()
 	text_Quest19->SetText(FText::FromString("Press the Start Sales button."));
 	text_Quest20->SetText(FText::FromString("If you press the Start Business button at the bar, the customer will enter."));
 	text_Quest21->SetText(FText::FromString("Press the closing button."));
-	text_Quest22->SetText(FText::FromString("If no more customers come, press the closing button to close the business."));
+	text_Quest22->SetText(FText::FromString("If no more customers come, press the closing button to close the bar."));
 }
 
 void UTutorialWidget::SetLanguageKorean()
@@ -166,7 +166,7 @@ void UTutorialWidget::SetLanguageKorean()
 	KorLanguageArray.Emplace(FString::Printf(TEXT("스트레이너와 뚜껑을 순서대로 장착하고 10초 이상 흔들어주세요."))); //8
 	KorLanguageArray.Emplace(FString::Printf(TEXT("쉐이커의 뚜껑을 분리시키고 컵에 2oz 이상 따르세요."))); //9
 	KorLanguageArray.Emplace(FString::Printf(TEXT("컵을 초록색 영역에 놓으면 다음 단계로 넘어갑니다."))); //10
-	KorLanguageArray.Emplace(FString::Printf(TEXT("믹싱 글래스에 스트레이너를 장착하고 컵에 2oz 이상 채우세요."))); //11
+	KorLanguageArray.Emplace(FString::Printf(TEXT("태블릿을 초록색 영역에 놓으면 다음 단계로 넘어갑니다."))); //11
 	KorLanguageArray.Emplace(FString::Printf(TEXT("오른쪽으로 이동하세요."))); //12
 	KorLanguageArray.Emplace(FString::Printf(TEXT("레시피 앱을 실행하세요."))); //13
 	KorLanguageArray.Emplace(FString::Printf(TEXT("다양한 칵테일의 레시피를 익힐 수 있습니다."))); //14
