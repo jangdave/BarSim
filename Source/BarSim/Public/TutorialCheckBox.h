@@ -41,6 +41,9 @@ public:
 	UPROPERTY()
 	class ATutorialManager* tutorialManager;
 
+	UPROPERTY()
+	class UBarGameInstance* gi;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USoundBase* checkSound;
 	
@@ -84,6 +87,9 @@ public:
 	
 	UFUNCTION()
 	void FourthStage();
+
+	UFUNCTION()
+	void SetLanguage();
 
 	UPROPERTY()
 	bool bCheckPlayerOnce;

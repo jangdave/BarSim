@@ -45,6 +45,9 @@ public:
 	UPROPERTY()
 	bool bCheckMenu;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	bool bEnglish; //false
+
 	// 첫째날 / 둘째날 / 셋째날 / 모든날
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TArray<float> TotalMoney = {0, 0, 0, 0};

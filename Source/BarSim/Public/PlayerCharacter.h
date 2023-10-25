@@ -62,6 +62,8 @@ public:
 	class UInputAction* ShowMenu;
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputAction* ShowGuide;
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* TestInput;
 	
 	// Functions
 	UFUNCTION(BlueprintCallable)
@@ -79,6 +81,7 @@ public:
 	void ShowMenuWidget();
 	void ShowGuideWidget();
 	void HideGuideWidget();
+	void TestInputKey();
 
 	// Grabbing Boolean
 	bool IsGrabbedLeft = false;
