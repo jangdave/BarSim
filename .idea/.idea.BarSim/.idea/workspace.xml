@@ -9,11 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c888e18-d659-4b33-83f4-437f5be1f042" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/UI/WBP_CustomerOrderWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/WBP_CustomerOrderWidget.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Jang/UI/WBP_OldPalOrderWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/WBP_OldPalOrderWidget.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/CustomerOrderWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/CustomerOrderWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BarSim/Private/OldPalOrderWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BarSim/Private/OldPalOrderWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/UI/WBP_PlayerDialogWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/WBP_PlayerDialogWidget.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +233,7 @@
       <workItem from="1695906462106" duration="1307000" />
       <workItem from="1698221321278" duration="4365000" />
       <workItem from="1698282082491" duration="6902000" />
-      <workItem from="1698294577504" duration="2648000" />
+      <workItem from="1698294577504" duration="3388000" />
     </task>
     <servers />
   </component>
