@@ -165,7 +165,7 @@ void UOldPalOrderWidget::SetLanguage()
 			// 셋째날 대화
 			oldpalScript3.Emplace(FString::Printf(TEXT("Long time no see. Mr. Bartender."))); // 0
 			oldpalScript3.Emplace(FString::Printf(TEXT("It's only been two days, but it is......"))); // 1
-			oldpalScript3.Emplace(FString::Printf(TEXT("I won't ask you much. There's a cocktail I really want to drink today."))); // 2
+			oldpalScript3.Emplace(FString::Printf(TEXT("I won't ask you much. There's a cocktail I want to drink today."))); // 2
 			oldpalScript3.Emplace(FString::Printf(TEXT("I'll ask you just one more time."))); // 3
 			oldpalScript3.Emplace(FString::Printf(TEXT("Do you know how to make Old Pal?"))); // 4
 			oldpalScript3.Emplace(FString::Printf(TEXT("Come on... Mr.Bartender."))); // 5
@@ -181,34 +181,34 @@ void UOldPalOrderWidget::SetLanguage()
 			oldpalScript3.Emplace(FString::Printf(TEXT("It tastes just like George's cocktail..."))); // 15
 			oldpalScript3.Emplace(FString::Printf(TEXT("Of course... huh."))); // 16
 			oldpalScript3.Emplace(FString::Printf(TEXT("It's already been more than 30 years since George started this bar."))); // 17
-			oldpalScript3.Emplace(FString::Printf(TEXT("Come to think of it, I'm late to introduce myself... ... I'm sorry."))); // 18
+			oldpalScript3.Emplace(FString::Printf(TEXT("Come to think of it, I'm late to introduce myself ... I'm sorry."))); // 18
 			oldpalScript3.Emplace(FString::Printf(TEXT("Mr.Bartender... No, Brandon..."))); // 19
 			oldpalScript3.Emplace(FString::Printf(TEXT("My name is... Richard."))); // 20
 			oldpalScript3.Emplace(FString::Printf(TEXT("Yeah... I didn't mean to trick you..."))); // 21
 			oldpalScript3.Emplace(FString::Printf(TEXT("As a regular and a friend of your father's, ... I'd like to test it, so..."))); // 22
 			oldpalScript3.Emplace(FString::Printf(TEXT("I apologize if it was unpleasant."))); // 23
-			oldpalScript3.Emplace(FString::Printf(TEXT("Come on... ... Why don't you make a bet with me...? Brandon"))); // 24
-			oldpalScript3.Emplace(FString::Printf(TEXT("In fact, your father said he'd hand this over to you... But it's not everything"))); // 25
+			oldpalScript3.Emplace(FString::Printf(TEXT("Come on...Why don't you make a bet with me...? Brandon"))); // 24
+			oldpalScript3.Emplace(FString::Printf(TEXT("In fact, your father said he'd hand this over to you..."))); // 25
 			oldpalScript3.Emplace(FString::Printf(TEXT("Half of this bar is on me... haha."))); // 26
 			oldpalScript3.Emplace(FString::Printf(TEXT("I won't ask you to do anything difficult..."))); // 27
 			oldpalScript3.Emplace(FString::Printf(TEXT("I'll be back every Sunday for 3 months from now."))); // 28
 			oldpalScript3.Emplace(FString::Printf(TEXT("You get a drink every week a total of 12 cocktails I ask for."))); // 29
 			oldpalScript3.Emplace(FString::Printf(TEXT("Find it and make it perfect for me."))); // 30
 			oldpalScript3.Emplace(FString::Printf(TEXT("If you pass the test every week. I'll give you the next hint."))); // 31
-			oldpalScript3.Emplace(FString::Printf(TEXT("It's good to search. and if you talk to the customers who come to this bar..."))); // 32
+			oldpalScript3.Emplace(FString::Printf(TEXT("It's good to search. and if you talk to the customers who come to this bar"))); // 32
 			oldpalScript3.Emplace(FString::Printf(TEXT("Of course, I won't ask for a difficult one... from the beginning."))); // 33
 			oldpalScript3.Emplace(FString::Printf(TEXT("If you make 12 cocktails perfectly,"))); // 34
 			oldpalScript3.Emplace(FString::Printf(TEXT("I'm gonna give you the half of Old Pal."))); // 35
 			oldpalScript3.Emplace(FString::Printf(TEXT("When that time comes... this old bar, you can do as you want."))); // 36
 			oldpalScript3.Emplace(FString::Printf(TEXT("I knew it! haha!"))); // 37
-			oldpalScript3.Emplace(FString::Printf(TEXT("By the way... ... The Old Pal you made today..."))); // 38
+			oldpalScript3.Emplace(FString::Printf(TEXT("By the way...The Old Pal you made today..."))); // 38
 			oldpalScript3.Emplace(FString::Printf(TEXT("As you know... It's the name of this bar."))); // 39
 			oldpalScript3.Emplace(FString::Printf(TEXT("That's the name your father George and I chose... when we were young..."))); // 40
 			oldpalScript3.Emplace(FString::Printf(TEXT("And...Also, It was named after... who would have been like an Old Pal..."))); // 41
 			oldpalScript3.Emplace(FString::Printf(TEXT("It was named after...... the son."))); // 42
 			oldpalScript3.Emplace(FString::Printf(TEXT("Of course... I know how you think of George."))); // 43
 			oldpalScript3.Emplace(FString::Printf(TEXT("But... maybe that's not all..."))); // 44
-			oldpalScript3.Emplace(FString::Printf(TEXT("It might be helpful to look back on... ... What George thought and felt."))); // 45
+			oldpalScript3.Emplace(FString::Printf(TEXT("It might be helpful to look back on... What George thought and felt."))); // 45
 			oldpalScript3.Emplace(FString::Printf(TEXT("Of course, it's on you."))); // 46
 			oldpalScript3.Emplace(FString::Printf(TEXT("I just keep my word with my Old Pal..."))); // 47
 			oldpalScript3.Emplace(FString::Printf(TEXT("Anyway, that's it for today."))); // 48

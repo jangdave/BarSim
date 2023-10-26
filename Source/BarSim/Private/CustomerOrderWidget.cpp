@@ -595,12 +595,12 @@ void UCustomerOrderWidget::SetLanguage()
 		{
 			// 여성 A
 			// 주문
-			womanScriptA.Emplace(FString::Printf(TEXT("Can I have a cup of Jin lime, please"))); // 0
+			womanScriptA.Emplace(FString::Printf(TEXT("Can I have a cup of Gin lime, please"))); // 0
 			womanScriptA.Emplace(FString::Printf(TEXT("Can I have a cup of Daiquiri, please"))); // 1
 			womanScriptA.Emplace(FString::Printf(TEXT("Can I have a cup of Martini, please"))); // 2
 			womanScriptA.Emplace(FString::Printf(TEXT("Can I have a cup of Negroni, please"))); // 3
 			// 한번
-			womanScriptA.Emplace(FString::Printf(TEXT("Not this... I ordered Jin lime"))); // 4
+			womanScriptA.Emplace(FString::Printf(TEXT("Not this... I ordered Gin lime"))); // 4
 			womanScriptA.Emplace(FString::Printf(TEXT("Not this... I ordered Daiquiri"))); // 5
 			womanScriptA.Emplace(FString::Printf(TEXT("Not this... I ordered Martini"))); // 6
 			womanScriptA.Emplace(FString::Printf(TEXT("Not this... I ordered Negroni"))); // 7
@@ -611,12 +611,12 @@ void UCustomerOrderWidget::SetLanguage()
 	
 			// 여성 B
 			// 주문
-			womanScriptB.Emplace(FString::Printf(TEXT("I'd like a cup of Jin lime, please"))); // 0
+			womanScriptB.Emplace(FString::Printf(TEXT("I'd like a cup of Gin lime, please"))); // 0
 			womanScriptB.Emplace(FString::Printf(TEXT("I'd like a cup of Daiquiri, please"))); // 1
 			womanScriptB.Emplace(FString::Printf(TEXT("I'd like a cup of Martini, please"))); // 2
 			womanScriptB.Emplace(FString::Printf(TEXT("I'd like a cup of Negroni, please"))); // 3
 			// 한번
-			womanScriptB.Emplace(FString::Printf(TEXT("Is it Jin lime?"))); // 4
+			womanScriptB.Emplace(FString::Printf(TEXT("Is it Gin lime?"))); // 4
 			womanScriptB.Emplace(FString::Printf(TEXT("Is it Daiquiri?"))); // 5
 			womanScriptB.Emplace(FString::Printf(TEXT("Is it Martini?"))); // 6
 			womanScriptB.Emplace(FString::Printf(TEXT("Is it Negroni?"))); // 7
@@ -627,12 +627,12 @@ void UCustomerOrderWidget::SetLanguage()
 
 			// 여성 C
 			// 주문
-			womanScriptC.Emplace(FString::Printf(TEXT("Jin lime."))); // 0
+			womanScriptC.Emplace(FString::Printf(TEXT("Gin lime."))); // 0
 			womanScriptC.Emplace(FString::Printf(TEXT("Daiquiri."))); // 1
 			womanScriptC.Emplace(FString::Printf(TEXT("Martini."))); // 2
 			womanScriptC.Emplace(FString::Printf(TEXT("Negroni."))); // 3
 			// 한번
-			womanScriptC.Emplace(FString::Printf(TEXT("Jin lime Please?"))); // 4
+			womanScriptC.Emplace(FString::Printf(TEXT("Gin lime Please?"))); // 4
 			womanScriptC.Emplace(FString::Printf(TEXT("Daiquiri Please?"))); // 5
 			womanScriptC.Emplace(FString::Printf(TEXT("Martini Please?"))); // 6
 			womanScriptC.Emplace(FString::Printf(TEXT("Negroni Please?"))); // 7
@@ -643,12 +643,12 @@ void UCustomerOrderWidget::SetLanguage()
 
 			// 여성 D
 			// 주문
-			womanScriptD.Emplace(FString::Printf(TEXT("Please give me Jin lime."))); // 0
+			womanScriptD.Emplace(FString::Printf(TEXT("Please give me Gin lime."))); // 0
 			womanScriptD.Emplace(FString::Printf(TEXT("Please give me Daiquiri."))); // 1
 			womanScriptD.Emplace(FString::Printf(TEXT("Please give me Martini."))); // 2
 			womanScriptD.Emplace(FString::Printf(TEXT("Please give me Negroni."))); // 3
 			// 한번
-			womanScriptD.Emplace(FString::Printf(TEXT("I don't think it's a Jin lime..."))); // 4
+			womanScriptD.Emplace(FString::Printf(TEXT("I don't think it's a Gin lime..."))); // 4
 			womanScriptD.Emplace(FString::Printf(TEXT("I don't think it's a Daiquiri..."))); // 5
 			womanScriptD.Emplace(FString::Printf(TEXT("I don't think it's a Martini..."))); // 6
 			womanScriptD.Emplace(FString::Printf(TEXT("I don't think it's a Negroni..."))); // 7
@@ -659,12 +659,12 @@ void UCustomerOrderWidget::SetLanguage()
 
 			// 남성 A
 			// 주문
-			manScriptA.Emplace(FString::Printf(TEXT("Jin lime please."))); // 0
+			manScriptA.Emplace(FString::Printf(TEXT("Gin lime please."))); // 0
 			manScriptA.Emplace(FString::Printf(TEXT("Daiquiri please."))); // 1
 			manScriptA.Emplace(FString::Printf(TEXT("Martini please."))); // 2
 			manScriptA.Emplace(FString::Printf(TEXT("Negroni please."))); // 3
 			// 한번
-			manScriptA.Emplace(FString::Printf(TEXT("I don't think it's Jin lime I ordered?"))); // 4
+			manScriptA.Emplace(FString::Printf(TEXT("I don't think it's Gin lime I ordered?"))); // 4
 			manScriptA.Emplace(FString::Printf(TEXT("I don't think it's Daiquiri I ordered?"))); // 5
 			manScriptA.Emplace(FString::Printf(TEXT("I don't think it's Martini I ordered?"))); // 6
 			manScriptA.Emplace(FString::Printf(TEXT("I don't think it's Negroni I ordered?"))); // 7
@@ -675,12 +675,12 @@ void UCustomerOrderWidget::SetLanguage()
 	
 			// 남성 B
 			// 주문
-			manScriptB.Emplace(FString::Printf(TEXT("I'd like a glass of Jin lime, please."))); // 0
+			manScriptB.Emplace(FString::Printf(TEXT("I'd like a glass of Gin lime, please."))); // 0
 			manScriptB.Emplace(FString::Printf(TEXT("I'd like a glass of Daiquiri, please."))); // 1
 			manScriptB.Emplace(FString::Printf(TEXT("I'd like a glass of Martini, please."))); // 2
 			manScriptB.Emplace(FString::Printf(TEXT("I'd like a glass of Negroni, please."))); // 3
 			// 한번
-			manScriptB.Emplace(FString::Printf(TEXT("It's not Jin lime, give what I ordered."))); // 4
+			manScriptB.Emplace(FString::Printf(TEXT("It's not Gin lime, give what I ordered."))); // 4
 			manScriptB.Emplace(FString::Printf(TEXT("It's not Daiquiri, give what I ordered."))); // 5
 			manScriptB.Emplace(FString::Printf(TEXT("It's not Martini, give what I ordered."))); // 6
 			manScriptB.Emplace(FString::Printf(TEXT("It's not Negroni, give what I ordered."))); // 7
@@ -691,12 +691,12 @@ void UCustomerOrderWidget::SetLanguage()
 
 			// 남성 C
 			// 주문
-			manScriptC.Emplace(FString::Printf(TEXT("Bartender, a cup of Jin lime."))); // 0
+			manScriptC.Emplace(FString::Printf(TEXT("Bartender, a cup of Gin lime."))); // 0
 			manScriptC.Emplace(FString::Printf(TEXT("Bartender, a cup of Daiquiri."))); // 1
 			manScriptC.Emplace(FString::Printf(TEXT("Bartender, a cup of Martini."))); // 2
 			manScriptC.Emplace(FString::Printf(TEXT("Bartender, a cup of Negroni."))); // 3
 			// 한번
-			manScriptC.Emplace(FString::Printf(TEXT("Do you think this is Jin lime?"))); // 4
+			manScriptC.Emplace(FString::Printf(TEXT("Do you think this is Gin lime?"))); // 4
 			manScriptC.Emplace(FString::Printf(TEXT("Do you think this is Daiquiri?"))); // 5
 			manScriptC.Emplace(FString::Printf(TEXT("Do you think this is Martini?"))); // 6
 			manScriptC.Emplace(FString::Printf(TEXT("Do you think this is Negroni?"))); // 7
@@ -707,12 +707,12 @@ void UCustomerOrderWidget::SetLanguage()
 
 			// 남성 D
 			// 주문
-			manScriptD.Emplace(FString::Printf(TEXT("Can you make a Jin lime?"))); // 0
+			manScriptD.Emplace(FString::Printf(TEXT("Can you make a Gin lime?"))); // 0
 			manScriptD.Emplace(FString::Printf(TEXT("Can you make a Daiquiri?"))); // 1
 			manScriptD.Emplace(FString::Printf(TEXT("Can you make a Martini?"))); // 2
 			manScriptD.Emplace(FString::Printf(TEXT("Can you make a Negroni?"))); // 3
 			// 한번
-			manScriptD.Emplace(FString::Printf(TEXT("Is that Jin lime...?"))); // 4
+			manScriptD.Emplace(FString::Printf(TEXT("Is that Gin lime...?"))); // 4
 			manScriptD.Emplace(FString::Printf(TEXT("Is that Daiquiri...?"))); // 5
 			manScriptD.Emplace(FString::Printf(TEXT("Is that Martini...?"))); // 6
 			manScriptD.Emplace(FString::Printf(TEXT("Is that Negroni...?"))); // 7
