@@ -166,7 +166,7 @@ void UPlayerDialogWidget::SetLanguage()
 			// 선택지 2
 			playerScript1.Emplace(FString::Printf(TEXT("Please sit down..."))); // 2
 			// 앉고 나서
-			playerScript1.Emplace(FString::Printf(TEXT("(What a strange man... Anyway, we have a customer, so let's give him a coaster.)"))); // 3
+			playerScript1.Emplace(FString::Printf(TEXT("(Let's give him a coaster.)"))); // 3
 			// 칵테일 나옴
 			playerScript1.Emplace(FString::Printf(TEXT("Here is your cocktail."))); // 4
 			playerScript1.Emplace(FString::Printf(TEXT("What a strange man...?"))); // 5
@@ -174,8 +174,8 @@ void UPlayerDialogWidget::SetLanguage()
 			playerScript1.Emplace(FString::Printf(TEXT("Let's go home now."))); // 7
 
 			// 1번째 선택지
-			playerChoice1.Emplace(FString::Printf(TEXT("... All right, sir."))); // 0
-			playerChoice1.Emplace(FString::Printf(TEXT("Please sit down..."))); // 1
+			playerChoice1.Emplace(FString::Printf(TEXT("... All right."))); // 0
+			playerChoice1.Emplace(FString::Printf(TEXT("Please sit..."))); // 1
 
 			// 둘째날 대사
 			playerScript2.Emplace(FString::Printf(TEXT("Ended the day somehow."))); // 0
@@ -196,9 +196,9 @@ void UPlayerDialogWidget::SetLanguage()
 			playerScript3.Emplace(FString::Printf(TEXT("(Such a picky customer...)"))); // 10
 			playerScript3.Emplace(FString::Printf(TEXT("Ah... as expected, you were my father's regular."))); // 11
 			playerScript3.Emplace(FString::Printf(TEXT("Did I... tell you my name...?"))); // 12
-			playerScript3.Emplace(FString::Printf(TEXT("Oh...! The person who sent me the email...? father's friend...?"))); // 13
+			playerScript3.Emplace(FString::Printf(TEXT("Oh...! The person who sent me the email...? Father's friend...?"))); // 13
 			playerScript3.Emplace(FString::Printf(TEXT("No, it's okay... that's possible..."))); // 14
-			playerScript3.Emplace(FString::Printf(TEXT("Actually, we haven't been in touch for a long time, and we haven't been interested in each other"))); // 15
+			playerScript3.Emplace(FString::Printf(TEXT("Actually, we haven't been in touch for a long time."))); // 15
 			playerScript3.Emplace(FString::Printf(TEXT("I'm gonna run the store for a while... and clean it up..."))); // 16
 			playerScript3.Emplace(FString::Printf(TEXT("I'm sorry, sir... um... Richard."))); // 17
 			playerScript3.Emplace(FString::Printf(TEXT("A bet...? for what...?"))); // 18
@@ -227,8 +227,8 @@ void UPlayerDialogWidget::SetLanguage()
 			// 시작 대사
 			playerStartScript.Emplace(FString::Printf(TEXT("Open the door and move to Bar Old Pal."))); // 0
 			playerStartScript.Emplace(FString::Printf(TEXT("This is Old... Pal..."))); // 1
-			playerStartScript.Emplace(FString::Printf(TEXT("The customer who came yesterday won't come today... Let's open the door and go down."))); // 2
-			playerStartScript.Emplace(FString::Printf(TEXT("I'm getting used to it now that it's the third day... Let's open the door and go down."))); // 3
+			playerStartScript.Emplace(FString::Printf(TEXT("Let's open the door and go down."))); // 2
+			playerStartScript.Emplace(FString::Printf(TEXT("Let's open the door and go down."))); // 3
 		}
 	}
 }

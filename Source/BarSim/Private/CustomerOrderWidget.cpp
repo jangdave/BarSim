@@ -16,8 +16,7 @@ void UCustomerOrderWidget::NativeConstruct()
 
 	gi = Cast<UBarGameInstance>(GetGameInstance());
 
-	
-
+	SetLanguage();
 
 }
 
