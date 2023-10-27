@@ -46,4 +46,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void EndOldPal();
+
+	UFUNCTION()
+	void SetLanguage();
 };

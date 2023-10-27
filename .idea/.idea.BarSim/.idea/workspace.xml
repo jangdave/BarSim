@@ -9,15 +9,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c888e18-d659-4b33-83f4-437f5be1f042" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarSim/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Huchu/FX/FX_Stream.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Huchu/FX/FX_Stream.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/BarTutorialMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BasicMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/UI/WBP_OldPalOrderWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/WBP_OldPalOrderWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Jang/UI/WBP_PlayerDialogWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Jang/UI/WBP_PlayerDialogWidget.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://C:/UE_5.1/Engine/Source/Runtime/UMG/Public/Blueprint/UserWidget.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -40,9 +41,9 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\bbssvv\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\bbssvv\\AppData\\Local\\Symbols\\src&quot;
+      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\USER\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\USER\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
 }</component>
@@ -230,6 +231,9 @@
       <workItem from="1692087898724" duration="949000" />
       <workItem from="1695878904015" duration="511000" />
       <workItem from="1695906462106" duration="1307000" />
+      <workItem from="1698221321278" duration="4365000" />
+      <workItem from="1698282082491" duration="6902000" />
+      <workItem from="1698294577504" duration="3388000" />
     </task>
     <servers />
   </component>

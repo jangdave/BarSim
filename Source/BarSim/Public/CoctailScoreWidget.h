@@ -23,6 +23,21 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* text_Score;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_CleanGuide1;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* text_CleanGuide2;
+
+	UPROPERTY()
+	class UBarGameInstance* gi;
+
+	UPROPERTY()
+	TArray<FString> cleanGuideScriptArray;
+
+	UFUNCTION()
+	void SetLanguage();
+	
 	UFUNCTION()
 	void SetScoreSwitcher(int32 idx);
 };

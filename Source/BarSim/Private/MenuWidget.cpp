@@ -582,8 +582,8 @@ void UMenuWidget::SetLanguageKorean()
 	KorLanguageArray.Emplace(FString::Printf(TEXT("네"))); //0
 	KorLanguageArray.Emplace(FString::Printf(TEXT("아니오"))); //1
 	KorLanguageArray.Emplace(FString::Printf(TEXT("튜토리얼을 진행하시겠습니까?"))); //2
-	KorLanguageArray.Emplace(FString::Printf(TEXT("영어"))); //3
-	KorLanguageArray.Emplace(FString::Printf(TEXT("한국어"))); //4
+	KorLanguageArray.Emplace(FString::Printf(TEXT("영어 / English"))); //3
+	KorLanguageArray.Emplace(FString::Printf(TEXT("한국어 / Korean"))); //4
 	KorLanguageArray.Emplace(FString::Printf(TEXT("체크 포인트로 돌아가겠습니까?"))); //5
 	KorLanguageArray.Emplace(FString::Printf(TEXT("메인 메뉴로 돌아가겠습니까?"))); //6
 	KorLanguageArray.Emplace(FString::Printf(TEXT("게임을 종료하겠습니까?"))); //7
