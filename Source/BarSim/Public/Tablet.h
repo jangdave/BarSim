@@ -29,6 +29,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	class UTabletWidget* tablet_UI;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=tabletSettings)
+	TSubclassOf<class UUserWidget> widgetFactory_Kor;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=tabletSettings)
+	TSubclassOf<class UUserWidget> widgetFactory_Eng;
+	
 //class ABarPlayer* player;
 	
 protected:
@@ -65,5 +71,10 @@ public:
 
 	UFUNCTION()
 	void SimulateAndTickDisable();
+
+	UPROPERTY()
+	class UBarGameInstance* gi;
+
+	
 
 };
