@@ -3,6 +3,7 @@
 
 #include "Tablet.h"
 
+#include "BarGameInstance.h"
 #include "TabletStand.h"
 #include "TabletWidget.h"
 #include "Components/BoxComponent.h"
@@ -31,6 +32,20 @@ void ATablet::BeginPlay()
 {
 	Super::BeginPlay();
 
+	gi = Cast<UBarGameInstance>(GetGameInstance());
+	if(gi)
+	{
+		// Language Setting = Korean
+		if(gi->bEnglish==false)
+		{
+			widgetComp->SetWidgetClass(widgetFactory_Kor);
+		}
+		// Language Setting = English
+		else
+		{
+			widgetComp->SetWidgetClass(widgetFactory_Eng);
+		}
+	}
 	tablet_UI = Cast<UTabletWidget>(widgetComp->GetUserWidgetObject());
 }
 

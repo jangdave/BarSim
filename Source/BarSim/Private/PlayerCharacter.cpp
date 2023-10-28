@@ -186,6 +186,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		InputSystem->BindAction(ShowMenu, ETriggerEvent::Started, this, &APlayerCharacter::ShowMenuWidget);
 		InputSystem->BindAction(ShowGuide, ETriggerEvent::Started, this, &APlayerCharacter::ShowGuideWidget);
 		InputSystem->BindAction(ShowGuide, ETriggerEvent::Completed, this, &APlayerCharacter::HideGuideWidget);
+		InputSystem->BindAction(TestInput, ETriggerEvent::Completed, this, &APlayerCharacter::TestInputKey);
 
 	}
 }
@@ -1682,6 +1683,11 @@ void APlayerCharacter::HideGuideWidget()
 
 		GuideWidget->Destroy();
 	}
+}
+
+void APlayerCharacter::TestInputKey()
+{
+	gameMode->SpawnMenu();
 }
 
 void APlayerCharacter::PlayerTutoText()

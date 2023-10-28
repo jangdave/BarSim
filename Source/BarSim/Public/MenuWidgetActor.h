@@ -43,4 +43,7 @@ public:
 
 	UFUNCTION()
 	void SetMenu();
+
+	UFUNCTION()
+	void SetLanguage();
 };

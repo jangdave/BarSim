@@ -2,6 +2,8 @@
 
 
 #include "TutorialCheckBox.h"
+
+#include "BarGameInstance.h"
 #include "CupBase.h"
 #include "HalfSlicedLime.h"
 #include "IceCube.h"
@@ -45,7 +47,11 @@ void ATutorialCheckBox::BeginPlay()
 
 	tutorial_UI = Cast<UTutorialWidget>(tutorialWidget->GetUserWidgetObject());
 
+	gi = Cast<UBarGameInstance>(GetWorld()->GetGameInstance());
+
 	checkBoxComp->OnComponentBeginOverlap.AddDynamic(this, &ATutorialCheckBox::OnCheckOverlap);
+
+	SetLanguage();
 }
 
 // Called every frame
@@ -346,6 +352,25 @@ void ATutorialCheckBox::FourthStage()
 	if(tutorial_UI->checkFourth1->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth2->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth3->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth4->GetCheckedState() == ECheckBoxState::Checked && tutorial_UI->checkFourth5->GetCheckedState() == ECheckBoxState::Checked)
 	{
 		tutorial_UI->SetCheckTablet();
+	}
+}
+
+void ATutorialCheckBox::SetLanguage()
+{
+	tutorial_UI = Cast<UTutorialWidget>(tutorialWidget->GetUserWidgetObject());
+	if(tutorial_UI)
+	{
+		if(gi)
+		{
+			if(gi->bEnglish==true)
+			{
+				tutorial_UI->SetLanguageEnglish();
+			}
+			else
+			{
+				tutorial_UI->SetLanguageKorean();
+			}
+		}
 	}
 }
 
